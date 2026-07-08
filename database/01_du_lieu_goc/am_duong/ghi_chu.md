@@ -1,3 +1,5 @@
 # GHI CHU
 
-Dữ liệu chuẩn Âm Dương của BTE.
+Đây là dữ liệu chuẩn về Âm Dương.
+
+Mọi thuật toán của BTE đều tham chiếu bảng này.
