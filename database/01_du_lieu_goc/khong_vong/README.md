@@ -1,2 +1,1 @@
-
-ma_khong_vong,ten
+ma_khong_vong,ma_tuan_giap,dia_chi_1,dia_chi_2,ghi_chu
