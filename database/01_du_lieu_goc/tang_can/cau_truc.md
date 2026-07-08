@@ -1,7 +1,11 @@
 # CAU TRUC DU LIEU TANG CAN
 
-Mỗi Địa Chi chứa từ 1 đến 3 Tàng Can.
+Tên bảng:
 
-Tổng dữ liệu:
+tang_can
 
-36 bản ghi.
+Mỗi Địa Chi chứa từ 1 đến 3 Thiên Can.
+
+Khóa chính:
+
+ma_tang_can
