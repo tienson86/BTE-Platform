@@ -1,3 +1,9 @@
-# Thien Can
+# THIEN CAN
 
-Lưu dữ liệu 10 Thiên Can của hệ thống BTE.
+Đây là dữ liệu chuẩn của 10 Thiên Can trong hệ thống BTE.
+
+Bao gồm:
+
+- Dữ liệu gốc
+- Cấu trúc dữ liệu
+- Ghi chú học thuật
