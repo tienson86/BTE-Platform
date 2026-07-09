@@ -1,0 +1,8 @@
+rule_tren,rule_duoi,muc_do_uu_tien,hanh_dong,dieu_kien,ly_do,trang_thai,phien_ban,ghi_chu
+HT001,HT006,100,override,than_trung_hoa,Hành sinh ưu tiên hơn đồng hành,Hỷ Thần sinh Dụng Thần được ưu tiên,active,1.0,
+HT006,HT001,100,override,than_nhuoc,Đồng hành ưu tiên khi thân quá yếu,Thân quá nhược cần trợ lực trực tiếp,active,1.0,
+KT001,KT006,100,override,mac_dinh,Hành khắc ưu tiên hơn đồng hành,Kỵ Thần khắc trực tiếp nguy hiểm hơn,active,1.0,
+BT001,HT001,90,merge,,Quy tắc bổ trợ kết hợp Hỷ Thần,Không xung đột chỉ bổ sung khuyến nghị,active,1.0,
+BT003,KT001,90,merge,,Quy tắc hạn chế kết hợp Kỵ Thần,Không xung đột chỉ bổ sung khuyến nghị,active,1.0,
+HT001,KT001,120,ignore,cung_hanh,Một hành không thể vừa là Hỷ vừa là Kỵ trong cùng điều kiện,Loại bỏ kết quả mâu thuẫn,active,1.0,
+HT006,KT006,120,override,so_sanh_than_vuong_than_nhuoc,Kết quả phụ thuộc trạng thái Nhật Chủ,Ưu tiên Rule từ module Thân Vượng/Thân Nhược,active,1.0,
