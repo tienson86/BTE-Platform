@@ -1,0 +1,21 @@
+rule_id,condition_if,condition_and,action,module_target,score,priority,continue
+RE001,Hồng Loan,Thiên Hỷ,Tăng điểm Hôn nhân,09_hon_nhan,40,100,TRUE
+RE002,Hồng Loan,Cô Thần,Giảm điểm Hôn nhân,09_hon_nhan,-20,100,TRUE
+RE003,Hồng Loan,Quả Tú,Giảm điểm Hôn nhân,09_hon_nhan,-20,100,TRUE
+RE004,Chính Quan,Hợp Cung Phu Thê,Tăng điểm Hôn nhân,09_hon_nhan,30,95,TRUE
+RE005,Chính Tài,Hợp Cung Phu Thê,Tăng điểm Hôn nhân,09_hon_nhan,30,95,TRUE
+RE006,Xung Cung Phu Thê,,Giảm điểm Hôn nhân,09_hon_nhan,-30,100,TRUE
+RE007,Cô Thần,Quả Tú,Cảnh báo Hôn nhân Muộn,09_hon_nhan,-40,100,TRUE
+RE008,Quan Sát Hỗn Tạp,,Giảm điểm Hôn nhân,09_hon_nhan,-20,95,TRUE
+RE009,Tài Tinh Hỗn Tạp,,Giảm điểm Hôn nhân,09_hon_nhan,-20,95,TRUE
+RE010,Đào Hoa,Hồng Loan,Tăng sức hút,09_hon_nhan,15,85,TRUE
+RE011,Dụng Thần,Hỗ trợ Hôn nhân,Tăng điểm Hôn nhân,09_hon_nhan,15,85,TRUE
+RE012,Kỵ Thần,Tác động Cung Phu Thê,Giảm điểm Hôn nhân,09_hon_nhan,-15,85,TRUE
+RE013,Điểm >= 80,,Kết luận Rất Tốt,REPORT,0,100,FALSE
+RE014,Điểm >= 60,,Kết luận Tốt,REPORT,0,95,FALSE
+RE015,Điểm >= 40,,Kết luận Trung Bình,REPORT,0,90,FALSE
+RE016,Điểm < 40,,Kết luận Cần Thận Trọng,REPORT,0,100,FALSE
+RE017,Hồng Loan + Thiên Hỷ,,Sinh Giải Thích,REPORT,0,90,TRUE
+RE018,Cô Thần + Quả Tú,,Sinh Khuyến Nghị,REPORT,0,90,TRUE
+RE019,Xung Cung Phu Thê,,Sinh Cảnh Báo,REPORT,0,95,TRUE
+RE020,Hoàn thành đánh giá,,Xuất Báo Cáo Tổng Hợp,REPORT,0,100,FALSE
