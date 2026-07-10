@@ -1,1 +1,48 @@
+rule_id,nhom_rule,uu_tien,dieu_kien,ket_qua,ghi_chu
+KVR001,GIOI_TINH,100,GioiTinh=Nam,NAM,Xác định giới tính nam
+KVR002,GIOI_TINH,100,GioiTinh=Nu,NU,Xác định giới tính nữ
 
+KVR003,AM_DUONG,100,CanNam=Giap,Duong,Thiên can Giáp thuộc Dương
+KVR004,AM_DUONG,100,CanNam=At,Am,Thiên can Ất thuộc Âm
+KVR005,AM_DUONG,100,CanNam=Binh,Duong,Thiên can Bính thuộc Dương
+KVR006,AM_DUONG,100,CanNam=Dinh,Am,Thiên can Đinh thuộc Âm
+KVR007,AM_DUONG,100,CanNam=Mau,Duong,Thiên can Mậu thuộc Dương
+KVR008,AM_DUONG,100,CanNam=Ky,Am,Thiên can Kỷ thuộc Âm
+KVR009,AM_DUONG,100,CanNam=Canh,Duong,Thiên can Canh thuộc Dương
+KVR010,AM_DUONG,100,CanNam=Tan,Am,Thiên can Tân thuộc Âm
+KVR011,AM_DUONG,100,CanNam=Nham,Duong,Thiên can Nhâm thuộc Dương
+KVR012,AM_DUONG,100,CanNam=Quy,Am,Thiên can Quý thuộc Âm
+
+KVR013,THUAN_NGHICH,100,GioiTinh=Nam&CanNamDuong=true,Thuan,Nam Dương đi thuận
+KVR014,THUAN_NGHICH,100,GioiTinh=Nam&CanNamAm=true,Nghich,Nam Âm đi nghịch
+KVR015,THUAN_NGHICH,100,GioiTinh=Nu&CanNamAm=true,Thuan,Nữ Âm đi thuận
+KVR016,THUAN_NGHICH,100,GioiTinh=Nu&CanNamDuong=true,Nghich,Nữ Dương đi nghịch
+
+KVR017,HUONG_DEM,95,ThuanNghich=Thuan,DemTietKeTiep,Đếm đến tiết khí kế tiếp
+KVR018,HUONG_DEM,95,ThuanNghich=Nghich,DemTietTruoc,Đếm về tiết khí trước
+
+KVR019,QUY_DOI,90,SoNgay>=1,SoNgay/3,3 ngày đổi 1 tuổi
+KVR020,QUY_DOI,90,SoGio>=1,SoGio/72,72 giờ đổi 1 tuổi
+
+KVR021,KHOI_VAN,90,TuoiKhoiVan<1,0,Khởi vận sơ sinh
+KVR022,KHOI_VAN,90,TuoiKhoiVan>=1&TuoiKhoiVan<2,1,Bắt đầu 1 tuổi
+KVR023,KHOI_VAN,90,TuoiKhoiVan>=2&TuoiKhoiVan<3,2,Bắt đầu 2 tuổi
+KVR024,KHOI_VAN,90,TuoiKhoiVan>=3&TuoiKhoiVan<4,3,Bắt đầu 3 tuổi
+KVR025,KHOI_VAN,90,TuoiKhoiVan>=4&TuoiKhoiVan<5,4,Bắt đầu 4 tuổi
+KVR026,KHOI_VAN,90,TuoiKhoiVan>=5&TuoiKhoiVan<6,5,Bắt đầu 5 tuổi
+KVR027,KHOI_VAN,90,TuoiKhoiVan>=6&TuoiKhoiVan<7,6,Bắt đầu 6 tuổi
+KVR028,KHOI_VAN,90,TuoiKhoiVan>=7&TuoiKhoiVan<8,7,Bắt đầu 7 tuổi
+KVR029,KHOI_VAN,90,TuoiKhoiVan>=8&TuoiKhoiVan<9,8,Bắt đầu 8 tuổi
+KVR030,KHOI_VAN,90,TuoiKhoiVan>=9&TuoiKhoiVan<10,9,Bắt đầu 9 tuổi
+KVR031,KHOI_VAN,90,TuoiKhoiVan>=10,10,Bắt đầu từ 10 tuổi trở lên
+
+KVR032,KIEM_TRA,80,NgaySinhHopLe=true,OK,Ngày sinh hợp lệ
+KVR033,KIEM_TRA,80,GioSinhHopLe=true,OK,Giờ sinh hợp lệ
+KVR034,KIEM_TRA,80,TietKhiTonTai=true,OK,Có dữ liệu tiết khí
+KVR035,KIEM_TRA,80,NgayAmHopLe=true,OK,Dữ liệu lịch âm hợp lệ
+
+KVR036,OUTPUT,70,KhongLoi=true,ChoPhepTinh,Dữ liệu đủ điều kiện tính
+KVR037,OUTPUT,70,ThieuTietKhi=true,BaoLoi,Thiếu dữ liệu tiết khí
+KVR038,OUTPUT,70,ThieuGioSinh=true,BaoLoi,Thiếu giờ sinh
+KVR039,OUTPUT,70,ThieuNgaySinh=true,BaoLoi,Thiếu ngày sinh
+KVR040,OUTPUT,70,ThieuCanNam=true,BaoLoi,Thiếu thiên can năm sinh
