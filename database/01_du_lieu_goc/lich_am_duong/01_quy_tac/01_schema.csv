@@ -1,6 +1,23 @@
-field_name,data_type,length,required,source,description
-calendar_id,TEXT,20,YES,Generator,Mã dữ liệu
-solar_date,DATE,,YES,Generator,Ngày dương
-solar_year,INT,,YES,solar_date,Năm dương
-solar_month,INT,,YES,solar_date,Tháng dương
-...
+field_order,field_name,field_name_vi,data_type,length,required,default_value,source_module,source_table,calculation_rule,description,example,status
+1,calendar_id,Mã lịch,TEXT,20,YES,,Generator,,,Mã định danh duy nhất,CAL0000001,ACTIVE
+2,solar_date,Ngày dương,DATE,10,YES,,Generator,,,Ngày dương lịch,2026-01-01,ACTIVE
+3,solar_year,Năm dương,INT,4,YES,,solar_date,,YEAR(solar_date),Năm dương lịch,2026,ACTIVE
+4,solar_month,Tháng dương,INT,2,YES,,solar_date,,MONTH(solar_date),Tháng dương lịch,1,ACTIVE
+5,solar_day,Ngày dương,INT,2,YES,,solar_date,,DAY(solar_date),Ngày dương lịch,1,ACTIVE
+6,lunar_date,Ngày âm,TEXT,10,YES,,CalendarEngine,,ConvertSolarToLunar,Ngày âm lịch,2025-11-13,ACTIVE
+7,lunar_year,Năm âm,INT,4,YES,,CalendarEngine,,ExtractLunarYear,Năm âm lịch,2025,ACTIVE
+8,lunar_month,Tháng âm,INT,2,YES,,CalendarEngine,,ExtractLunarMonth,Tháng âm lịch,11,ACTIVE
+9,lunar_day,Ngày âm,INT,2,YES,,CalendarEngine,,ExtractLunarDay,Ngày âm lịch,13,ACTIVE
+10,is_leap_month,Tháng nhuận,BOOLEAN,1,YES,FALSE,CalendarEngine,,IsLeapMonth,Cờ tháng nhuận,FALSE,ACTIVE
+11,weekday,Thứ,TEXT,10,YES,,CalendarEngine,,Weekday,Tên thứ trong tuần,Thursday,ACTIVE
+12,jdn,Julian_Day_Number,INT,10,YES,,CalendarEngine,,JulianDay,Julian Day Number,2461042,ACTIVE
+13,jdn_mod60,JDN_Mod_60,INT,2,YES,,jdn,,MOD(jdn,60),Giá trị JDN modulo 60,49,ACTIVE
+14,year_ganzhi,Can Chi năm,TEXT,20,YES,,CalendarEngine,,CalcYearGanZhi,Can Chi năm,Bính Ngọ,ACTIVE
+15,month_ganzhi,Can Chi tháng,TEXT,20,YES,,04_can_thang.csv,,LookupMonthGanZhi,Can Chi tháng,Mậu Tý,ACTIVE
+16,day_ganzhi,Can Chi ngày,TEXT,20,YES,,06_jdn_can_chi_ngay.csv,,LookupDayGanZhi,Can Chi ngày,Canh Thìn,ACTIVE
+17,month_branch,Địa Chi tháng,TEXT,10,YES,,CalendarEngine,,CalcMonthBranch,Địa Chi tháng,Tý,ACTIVE
+18,solar_term,Tiết khí,TEXT,30,YES,,01_tiet_khi.csv,,LookupSolarTerm,Tiết khí hiện hành,Đông Chí,ACTIVE
+19,hour_start,Can giờ Tý,TEXT,20,YES,,05_can_gio.csv,,LookupHourStem,Can bắt đầu giờ Tý,Giáp Tý,ACTIVE
+20,status,Trạng thái,TEXT,10,YES,ACTIVE,System,,,Trạng thái bản ghi,ACTIVE,ACTIVE
+21,version,Phiên bản,TEXT,10,YES,BTE_1.0,System,,,Phiên bản dữ liệu,BTE_1.0,ACTIVE
+22,note,Ghi chú,TEXT,255,NO,,Manual,,,Ghi chú bổ sung,,ACTIVE
