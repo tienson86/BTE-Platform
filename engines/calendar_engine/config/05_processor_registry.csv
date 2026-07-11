@@ -1,0 +1,16 @@
+processor_id,processor_code,processor_name,class_name,step_order,enabled,input_type,output_type,status,description
+PRC001,P001,Input Validator,InputValidator,1,true,RawInput,ValidatedInput,ACTIVE,Kiểm tra dữ liệu đầu vào
+PRC002,P002,Timezone Processor,TimezoneProcessor,2,true,ValidatedInput,NormalizedTime,ACTIVE,Chuẩn hóa múi giờ
+PRC003,P003,Julian Day Processor,JulianDayProcessor,3,true,NormalizedTime,JulianDay,ACTIVE,Tính Julian Day Number
+PRC004,P004,Lunar Converter,LunarConverter,4,true,JulianDay,LunarDate,ACTIVE,Đổi lịch dương sang âm
+PRC005,P005,Ganzhi Year,GanzhiYearProcessor,5,true,LunarDate,YearGanzhi,ACTIVE,Tính Can Chi năm
+PRC006,P006,Solar Term,JieQiProcessor,6,true,GregorianDate,SolarTerm,ACTIVE,Tính Tiết Khí
+PRC007,P007,Ganzhi Month,GanzhiMonthProcessor,7,true,SolarTerm,MonthGanzhi,ACTIVE,Tính Can Chi tháng
+PRC008,P008,Ganzhi Day,GanzhiDayProcessor,8,true,JulianDay,DayGanzhi,ACTIVE,Tính Can Chi ngày
+PRC009,P009,Ganzhi Hour,GanzhiHourProcessor,9,true,DayGanzhi,HourGanzhi,ACTIVE,Tính Can Chi giờ
+PRC010,P010,Nap Am,NapAmProcessor,10,true,Ganzhi,NapAm,ACTIVE,Tra Nạp Âm
+PRC011,P011,Day Officer,ZhiRiProcessor,11,true,Ganzhi,DayOfficer,ACTIVE,Tính Trực ngày
+PRC012,P012,Huang Dao,HuangDaoProcessor,12,true,Ganzhi,HuangDao,ACTIVE,Tính Hoàng Đạo
+PRC013,P013,Result Validator,ResultValidator,13,true,CalendarData,ValidatedResult,ACTIVE,Kiểm tra kết quả
+PRC014,P014,CSV Exporter,CSVExporter,14,true,ValidatedResult,CSVFile,ACTIVE,Ghi dữ liệu CSV
+PRC015,P015,Logger,LoggerProcessor,15,true,SystemLog,LogFile,ACTIVE,Ghi nhật ký hệ thống
