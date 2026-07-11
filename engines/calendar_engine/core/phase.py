@@ -1,29 +1,53 @@
 """
-phase.py
-=================================
+============================================================
+BTE - Calendar Engine
+------------------------------------------------------------
+File        : phase.py
+Module      : calendar_engine.moon
+Version     : 1.0.0
+Author      : BTE Project
+Encoding    : UTF-8
+Python      : >=3.11
+------------------------------------------------------------
 
-Tính pha Mặt Trăng.
+Moon Phase Engine
 
-Thuật toán:
-Jean Meeus
-Astronomical Algorithms
+Tính:
 
-Trả về:
+    • Moon Age
+    • Phase Angle
+    • Illumination
+    • Waxing / Waning
+    • Phase Name
 
-- tuổi trăng
-- pha
-- góc pha
-- illumination
+Dựa trên:
+
+    Jean Meeus
+    Astronomical Algorithms
+
+============================================================
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import cos, pi
+from math import cos
+
+from .constants import (
+    RAD,
+    MEAN_SYNODIC_MONTH,
+)
+
+from .arguments import (
+    MoonArgumentsEngine,
+)
+
+from ..core.solar import SolarEngine
 
 
-SYNODIC_MONTH = 29.530588853
-
+# ==========================================================
+# DATA CLASS
+# ==========================================================
 
 @dataclass(slots=True)
 class MoonPhase:
@@ -34,57 +58,160 @@ class MoonPhase:
 
     illumination: float
 
+    waxing: bool
+
     phase_name: str
 
 
-PHASES = [
+# ==========================================================
+# ENGINE
+# ==========================================================
 
-    (1.84566, "New Moon"),
+class MoonPhaseEngine:
 
-    (5.53699, "Waxing Crescent"),
+    """
+    Moon Phase Engine
+    """
 
-    (9.22831, "First Quarter"),
+    # ------------------------------------------------------
 
-    (12.91963, "Waxing Gibbous"),
+    @staticmethod
+    def phase_angle(jdn: float) -> float:
+        """
+        Góc pha Mặt Trăng.
+        """
 
-    (16.61096, "Full Moon"),
+        solar = SolarEngine.solar_longitude(jdn)
 
-    (20.30228, "Waning Gibbous"),
+        moon = MoonArgumentsEngine.calculate(jdn)
 
-    (23.99361, "Last Quarter"),
+        angle = moon.L_prime - solar
 
-    (27.68493, "Waning Crescent"),
+        angle %= 360.0
 
-]
+        return angle
+
+    # ------------------------------------------------------
+
+    @classmethod
+    def moon_age(cls, jdn: float) -> float:
+        """
+        Tuổi Mặt Trăng.
+        """
+
+        angle = cls.phase_angle(jdn)
+
+        return (
+            angle / 360.0
+        ) * MEAN_SYNODIC_MONTH
+
+    # ------------------------------------------------------
+
+    @classmethod
+    def illumination(cls, jdn: float) -> float:
+        """
+        Độ sáng (%)
+        """
+
+        angle = cls.phase_angle(jdn)
+
+        k = (1 - cos(angle * RAD)) / 2
+
+        return k * 100.0
+
+    # ------------------------------------------------------
+
+    @classmethod
+    def is_waxing(cls, jdn: float) -> bool:
+        """
+        True nếu đang trăng lên.
+        """
+
+        angle = cls.phase_angle(jdn)
+
+        return angle < 180.0
+
+    # ------------------------------------------------------
+
+    @classmethod
+    def phase_name(cls, jdn: float) -> str:
+
+        age = cls.moon_age(jdn)
+
+        if age < 1.0:
+            return "New Moon"
+
+        if age < 6.4:
+            return "Waxing Crescent"
+
+        if age < 8.4:
+            return "First Quarter"
+
+        if age < 13.8:
+            return "Waxing Gibbous"
+
+        if age < 15.8:
+            return "Full Moon"
+
+        if age < 21.1:
+            return "Waning Gibbous"
+
+        if age < 23.1:
+            return "Last Quarter"
+
+        if age < 28.5:
+            return "Waning Crescent"
+
+        return "New Moon"
+
+    # ------------------------------------------------------
+
+    @classmethod
+    def calculate(cls, jdn: float) -> MoonPhase:
+
+        return MoonPhase(
+
+            age=cls.moon_age(jdn),
+
+            angle=cls.phase_angle(jdn),
+
+            illumination=cls.illumination(jdn),
+
+            waxing=cls.is_waxing(jdn),
+
+            phase_name=cls.phase_name(jdn),
+
+        )
 
 
-def phase_name(age: float) -> str:
+# ==========================================================
+# TEST
+# ==========================================================
 
-    for limit, name in PHASES:
+if __name__ == "__main__":
 
-        if age < limit:
+    from ..core.julian import JulianEngine
 
-            return name
-
-    return "New Moon"
-
-
-def moon_phase(jd: float, jd_new_moon: float) -> MoonPhase:
-
-    age = (jd - jd_new_moon) % SYNODIC_MONTH
-
-    angle = age / SYNODIC_MONTH * 360.0
-
-    illumination = (1 - cos(angle * pi / 180)) / 2
-
-    return MoonPhase(
-
-        age=age,
-
-        angle=angle,
-
-        illumination=illumination,
-
-        phase_name=phase_name(age),
-
+    jdn = JulianEngine.solar_to_jdn(
+        2026,
+        7,
+        11,
     )
+
+    phase = MoonPhaseEngine.calculate(jdn)
+
+    print("=" * 60)
+
+    print("Moon Phase")
+
+    print("=" * 60)
+
+    print("Age          :", phase.age)
+
+    print("Angle        :", phase.angle)
+
+    print("Light (%)    :", phase.illumination)
+
+    print("Waxing       :", phase.waxing)
+
+    print("Phase        :", phase.phase_name)
