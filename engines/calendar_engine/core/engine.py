@@ -1,87 +1,52 @@
 """
-=========================================================
-BTE PLATFORM
-Calendar Engine
+engine.py
+==============================
 
-File:
-    engine.py
+Moon Engine
 
-Version:
-    1.0
-
-Author:
-    BTE Platform
-
-Description:
-    Calendar Engine Entry Point
-
-=========================================================
+API dùng cho toàn bộ hệ thống.
 """
 
-from core.loader import Loader
-from core.executor import Executor
-from core.exporter import Exporter
+from dataclasses import dataclass
+
+from .newmoon import nearest_new_moon
+
+from .phase import moon_phase
 
 
-class CalendarEngine:
-    """
-    Calendar Engine
-    """
+@dataclass(slots=True)
+class MoonInfo:
 
-    def __init__(self, config_path):
-        self.config_path = config_path
+    jd_new_moon: float
 
-        self.loader = Loader(config_path)
+    age: float
 
-        self.executor = Executor()
+    angle: float
 
-        self.exporter = Exporter()
+    illumination: float
 
-
-    def initialize(self):
-        """
-        Khởi tạo Engine
-        """
-
-        self.loader.load_configuration()
-
-        self.loader.load_mapping()
-
-        self.loader.load_formula()
-
-        self.loader.load_workflow()
+    phase: str
 
 
-    def execute(self, input_data):
-        """
-        Chạy Calendar Engine
-        """
+class MoonEngine:
 
-        context = self.executor.run(
-            input_data=input_data,
-            loader=self.loader
+    @staticmethod
+    def calculate(jd: float) -> MoonInfo:
+
+        nm = nearest_new_moon(jd)
+
+        p = moon_phase(jd, nm)
+
+        return MoonInfo(
+
+            jd_new_moon=nm,
+
+            age=p.age,
+
+            angle=p.angle,
+
+            illumination=p.illumination,
+
+            phase=p.phase_name,
+
         )
-
-        return context
-
-
-    def export(self, context):
-        """
-        Xuất dữ liệu
-        """
-
-        self.exporter.export(context)
-
-
-    def run(self, input_data):
-        """
-        Quy trình đầy đủ
-        """
-
-        self.initialize()
-
-        result = self.execute(input_data)
-
-        self.export(result)
-
-        return result
