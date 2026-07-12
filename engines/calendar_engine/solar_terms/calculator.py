@@ -38,8 +38,6 @@ from typing import Optional
 from .models import (
     LiChunResult,
     MonthBranchResult,
-    SolarLongitude,
-    SolarTerm,
     SolarTermContext,
     SolarTermResult,
 )
