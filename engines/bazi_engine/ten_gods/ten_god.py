@@ -263,3 +263,228 @@ __all__ = [
     "TenGodChart",
 
 ]
+# =============================================================================
+# ADVANCED HELPERS
+# =============================================================================
+
+    def get_all(
+        self,
+    ) -> List[TenGodResult]:
+        """
+        Trả về toàn bộ Thập Thần.
+
+        Bao gồm:
+            - 4 Thiên Can
+            - Tất cả Tàng Can
+        """
+
+        result = []
+
+        result.extend(
+            self.heavenly_stems
+        )
+
+        for values in self.hidden_stems.values():
+
+            result.extend(values)
+
+        return result
+
+    # -----------------------------------------------------------------
+
+    def find_by_name(
+        self,
+        name: str,
+    ) -> List[TenGodResult]:
+        """
+        Tìm theo tên Thập Thần.
+        """
+
+        return [
+
+            item
+
+            for item in self.get_all()
+
+            if item.name == name
+
+        ]
+
+    # -----------------------------------------------------------------
+
+    def find_by_code(
+        self,
+        code: str,
+    ) -> List[TenGodResult]:
+        """
+        Tìm theo mã.
+        """
+
+        return [
+
+            item
+
+            for item in self.get_all()
+
+            if item.code == code
+
+        ]
+
+    # -----------------------------------------------------------------
+
+    def count_by_name(
+        self,
+        name: str,
+    ) -> int:
+        """
+        Đếm số lượng một Thập Thần.
+        """
+
+        return len(
+
+            self.find_by_name(
+                name
+            )
+
+        )
+
+    # -----------------------------------------------------------------
+
+    def count_by_code(
+        self,
+        code: str,
+    ) -> int:
+        """
+        Đếm theo mã.
+        """
+
+        return len(
+
+            self.find_by_code(
+                code
+            )
+
+        )
+
+    # -----------------------------------------------------------------
+
+    def contains(
+        self,
+        name: str,
+    ) -> bool:
+        """
+        Có tồn tại Thập Thần này không.
+        """
+
+        return self.count_by_name(
+            name
+        ) > 0
+
+    # -----------------------------------------------------------------
+
+    def frequency(
+        self,
+    ) -> Dict[str, int]:
+        """
+        Thống kê tần suất.
+        """
+
+        result: Dict[str, int] = {}
+
+        for item in self.get_all():
+
+            result.setdefault(
+                item.name,
+                0,
+            )
+
+            result[item.name] += 1
+
+        return result
+
+    # -----------------------------------------------------------------
+
+    def unique_names(
+        self,
+    ) -> List[str]:
+        """
+        Danh sách Thập Thần không trùng.
+        """
+
+        return sorted(
+
+            self.frequency().keys()
+
+        )
+
+    # -----------------------------------------------------------------
+
+    def clear(
+        self,
+    ) -> None:
+        """
+        Xóa toàn bộ dữ liệu.
+        """
+
+        self.year_stem = None
+
+        self.month_stem = None
+
+        self.day_stem = None
+
+        self.hour_stem = None
+
+        self.hidden_stems.clear()
+
+        self.metadata.clear()
+
+    # -----------------------------------------------------------------
+
+    def summary(
+        self,
+    ) -> Dict[str, object]:
+        """
+        Tóm tắt nhanh.
+        """
+
+        return {
+
+            "heavenly_stems":
+                len(
+                    self.heavenly_stems
+                ),
+
+            "hidden_stems":
+                self.hidden_count,
+
+            "total":
+                self.total_count,
+
+            "frequency":
+                self.frequency(),
+
+        }
+
+    # -----------------------------------------------------------------
+
+    @property
+    def is_empty(
+        self,
+    ) -> bool:
+        """
+        Kiểm tra Chart rỗng.
+        """
+
+        return self.total_count == 0
+
+    # -----------------------------------------------------------------
+
+    @property
+    def has_hidden(
+        self,
+    ) -> bool:
+        """
+        Có dữ liệu Tàng Can hay không.
+        """
+
+        return self.hidden_count > 0
