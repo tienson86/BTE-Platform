@@ -40,3 +40,21 @@ class InterpretationReport:
     def total_rules(self):
 
         return len(self.rule_results)
+@dataclass(slots=True)
+class ReportParagraph:
+
+    title: str
+
+    sentences: list[str] = field(default_factory=list)
+
+    rule_count: int = 0
+
+
+@dataclass(slots=True)
+class ReportSection:
+
+    title: str
+
+    paragraphs: list[ReportParagraph] = field(default_factory=list)
+
+    rule_count: int = 0
