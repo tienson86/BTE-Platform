@@ -1,82 +1,208 @@
+"""
+engine.py
+=========
 
-from .rule_loader import RuleLoader
-from .rule_matcher import RuleMatcher
-from .rule_scoring import RuleScoring
-from .interpretation_builder import InterpretationBuilder
-from .sentence_generator import SentenceGenerator
+Interpretation Engine
 
+Điểm vào chính của Interpretation Engine.
+
+Pipeline:
+
+InterpretationContext
+        │
+        ▼
+InterpretationEngine
+        │
+        ▼
+InterpretationService
+        │
+        ▼
+InterpretationReport
+        │
+        ▼
+ReportService
+        │
+        ▼
+ExportService
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Iterable
+
+from .models.context import InterpretationContext
+from .models.report import InterpretationReport
+from .models.rule import Rule
+
+from .services.interpretation_service import InterpretationService
+from .services.report_service import ReportService
+from .services.export_service import ExportService
 
 
 class InterpretationEngine:
+    """
+    Engine chính của Interpretation Engine.
 
+    Đây là API mà các module khác sử dụng.
+    """
 
+    def __init__(
+        self,
+        interpretation_service: InterpretationService | None = None,
+        report_service: ReportService | None = None,
+        export_service: ExportService | None = None,
+    ) -> None:
 
-    def __init__(self):
+        self.interpretation_service = (
+            interpretation_service
+            or InterpretationService()
+        )
 
-        self.loader = RuleLoader()
+        self.report_service = (
+            report_service
+            or ReportService()
+        )
 
-        self.matcher = RuleMatcher()
+        self.export_service = (
+            export_service
+            or ExportService(
+                self.report_service
+            )
+        )
 
-        self.scoring = RuleScoring()
+    # =====================================================
+    # Interpretation
+    # =====================================================
 
-        self.builder = InterpretationBuilder()
+    def interpret(
+        self,
+        context: InterpretationContext,
+        rules: Iterable[Rule],
+    ) -> InterpretationReport:
+        """
+        Chạy diễn giải từ danh sách Rule.
+        """
 
-        self.generator = SentenceGenerator()
+        return self.interpretation_service.run(
+            context=context,
+            rules=rules,
+        )
 
+    # =====================================================
+    # Database
+    # =====================================================
 
+    def interpret_database(
+        self,
+        context: InterpretationContext,
+        database: str | Path,
+    ) -> InterpretationReport:
+        """
+        Chạy diễn giải từ Rule Database.
+        """
+
+        return self.interpretation_service.run_from_database(
+            context=context,
+            database_path=database,
+        )
+
+    # =====================================================
+    # Markdown
+    # =====================================================
+
+    def to_markdown(
+        self,
+        report: InterpretationReport,
+    ) -> str:
+
+        return self.report_service.to_markdown(
+            report
+        )
+
+    # =====================================================
+    # HTML
+    # =====================================================
+
+    def to_html(
+        self,
+        report: InterpretationReport,
+    ) -> str:
+
+        return self.report_service.to_html(
+            report
+        )
+
+    # =====================================================
+    # TEXT
+    # =====================================================
+
+    def to_text(
+        self,
+        report: InterpretationReport,
+    ) -> str:
+
+        return self.report_service.to_text(
+            report
+        )
+
+    # =====================================================
+    # JSON
+    # =====================================================
+
+    def to_json(
+        self,
+        report: InterpretationReport,
+    ) -> str:
+
+        return self.report_service.to_json(
+            report
+        )
+
+    # =====================================================
+    # Export
+    # =====================================================
+
+    def export(
+        self,
+        report: InterpretationReport,
+        output: str | Path,
+    ) -> Path:
+
+        return self.export_service.export(
+            report,
+            output,
+        )
+
+    def export_all(
+        self,
+        report: InterpretationReport,
+        output_dir: str | Path,
+        prefix: str = "report",
+    ) -> list[Path]:
+
+        return self.export_service.export_all(
+            report=report,
+            output_dir=output_dir,
+            prefix=prefix,
+        )
+
+    # =====================================================
+    # Shortcut
+    # =====================================================
 
     def run(
         self,
-        rule_file,
-        chart_data
-    ):
+        context: InterpretationContext,
+        database: str | Path,
+    ) -> InterpretationReport:
+        """
+        API rút gọn.
 
+        Đây sẽ là hàm được gọi nhiều nhất.
+        """
 
-        #1 Load CSV
-
-        rules = self.loader.load_csv(
-            rule_file
+        return self.interpret_database(
+            context=context,
+            database=database,
         )
-
-
-
-        #2 Match
-
-        matched = self.matcher.match_rules(
-            rules,
-            chart_data
-        )
-
-
-
-        #3 Score
-
-        scored = self.scoring.scoring_rules(
-            matched
-        )
-
-
-
-        #4 Build
-
-        grouped = self.builder.build(
-            scored
-        )
-
-
-
-        #5 Generate
-
-        result=self.generator.generate(
-            grouped
-        )
-
-
-
-        return {
-
-            "matched_rules": scored,
-
-            "interpretation": result
-
-        }
