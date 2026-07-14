@@ -1,95 +1,97 @@
 """
 rule.py
-========
+=======
 
-Định nghĩa Rule Model.
-
-Mọi Rule trong Rule Database sau khi đọc từ CSV
-đều được chuyển thành Rule object.
-
-Interpretation Engine chỉ làm việc với Rule,
-không làm việc trực tiếp với dict.
+Định nghĩa Rule của Interpretation Engine.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Any
+from typing import Any
 
 
 @dataclass(slots=True)
 class Rule:
+    """
+    Rule diễn giải.
 
-    # -----------------------------
+    Một Rule đại diện cho một quy tắc trong Rule Database.
+    """
+
+    # =====================================================
     # Định danh
-    # -----------------------------
-    rule_id: str
+    # =====================================================
 
-    module: str
+    id: str
 
-    category: str
+    name: str
 
-    sub_category: str = ""
+    description: str = ""
 
-    # -----------------------------
+    # =====================================================
+    # Phân loại
+    # =====================================================
+
+    module: str = ""
+    # Ví dụ:
+    # useful_god
+    # ten_gods
+    # shensha
+    # marriage
+
+    category: str = ""
+    # Ví dụ:
+    # Mệnh cục
+    # Thần sát
+    # Hôn nhân
+    # Tài vận
+
+    topic: str = ""
+    # Ví dụ:
+    # Dụng thần
+    # Thiên Ất
+    # Phối ngẫu
+
+    section: str = ""
+    # Tiêu đề hiển thị trong báo cáo
+
+    tags: list[str] = field(default_factory=list)
+
+    # =====================================================
     # Điều kiện
-    # -----------------------------
+    # =====================================================
+
     condition: str = ""
 
-    # -----------------------------
-    # Nội dung
-    # -----------------------------
-    result: str = ""
+    priority: int = 100
 
-    template_id: str = ""
-
-    # -----------------------------
-    # Đánh giá
-    # -----------------------------
-    priority: int = 0
-
-    weight: float = 0.0
-
-    score: float = 0.0
-
-    # -----------------------------
-    # Metadata
-    # -----------------------------
-    version: str = "1.0"
+    weight: float = 1.0
 
     enabled: bool = True
 
-    tags: List[str] = field(default_factory=list)
+    # =====================================================
+    # Kết quả
+    # =====================================================
 
-    author: str = ""
+    result: str = ""
+
+    recommendation: str = ""
 
     note: str = ""
 
-    # -----------------------------
-    # Runtime
-    # -----------------------------
-    matched: bool = False
+    # =====================================================
+    # Metadata
+    # =====================================================
 
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    source: str = ""
 
-    # ======================================
+    school: str = ""
+    # Tử Bình
+    # Manh Phái
+    # Tân Phái
+    # ...
 
-    def mark_matched(self):
-        self.matched = True
+    version: str = "1.0"
 
-    def mark_unmatched(self):
-        self.matched = False
-
-    def add_score(self, value: float):
-        self.score += value
-
-    def reset_score(self):
-        self.score = 0.0
-
-    @property
-    def is_enabled(self):
-        return self.enabled
-
-    @property
-    def is_matched(self):
-        return self.matched
+    metadata: dict[str, Any] = field(default_factory=dict)
