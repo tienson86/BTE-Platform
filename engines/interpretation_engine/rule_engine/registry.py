@@ -4,25 +4,26 @@ registry.py
 
 Operator Registry.
 
-Quản lý toàn bộ Operator của Rule Engine.
+Tự động phát hiện và đăng ký Operator.
 
-RuleMatcher không tạo Operator trực tiếp,
-mà luôn lấy từ Registry.
+Chỉ cần tạo thêm file trong operators/
+là Registry sẽ tự nạp.
 """
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+import importlib
+import inspect
+import pkgutil
+from pathlib import Path
+from typing import Dict, Iterable
 
 from .operators.base import BaseOperator
 
 
 class OperatorRegistry:
-    """
-    Registry quản lý Operator.
-    """
 
-    def __init__(self) -> None:
+    def __init__(self):
 
         self._operators: Dict[str, BaseOperator] = {}
 
@@ -30,66 +31,124 @@ class OperatorRegistry:
     # Register
     # =====================================================
 
-    def register(self, operator: BaseOperator) -> None:
-        """
-        Đăng ký một Operator.
-        """
+    def register(
+        self,
+        operator: BaseOperator,
+    ):
 
         name = operator.operator
 
         if name in self._operators:
+
             raise ValueError(
                 f"Operator '{name}' đã tồn tại."
             )
 
         self._operators[name] = operator
 
-    def unregister(self, name: str) -> None:
+    def unregister(self, name: str):
 
         self._operators.pop(name, None)
+
+    # =====================================================
+    # Auto Discovery
+    # =====================================================
+
+    def load_builtin(self):
+
+        package = importlib.import_module(
+            "engines.interpretation_engine.rule_engine.operators"
+        )
+
+        self.load_package(package)
+
+    def load_package(
+        self,
+        package,
+    ):
+
+        for _, module_name, _ in pkgutil.iter_modules(
+            package.__path__
+        ):
+
+            if module_name.startswith("_"):
+                continue
+
+            module = importlib.import_module(
+                f"{package.__name__}.{module_name}"
+            )
+
+            self.load_module(module)
+
+    def load_module(
+        self,
+        module,
+    ):
+
+        for _, cls in inspect.getmembers(
+            module,
+            inspect.isclass,
+        ):
+
+            if cls is BaseOperator:
+                continue
+
+            if not issubclass(cls, BaseOperator):
+                continue
+
+            operator = cls()
+
+            self.register(operator)
 
     # =====================================================
     # Query
     # =====================================================
 
-    def get(self, name: str) -> Optional[BaseOperator]:
+    def get(
+        self,
+        name: str,
+    ) -> BaseOperator:
 
-        return self._operators.get(name)
+        if name not in self._operators:
+
+            raise KeyError(
+                f"Không tìm thấy Operator '{name}'."
+            )
+
+        return self._operators[name]
 
     def has(self, name: str) -> bool:
 
         return name in self._operators
 
-    def all(self) -> Iterable[BaseOperator]:
+    def all(self):
 
         return self._operators.values()
 
-    def names(self) -> list[str]:
+    def names(self):
 
-        return sorted(self._operators.keys())
+        return sorted(
+            self._operators.keys()
+        )
 
-    def clear(self) -> None:
+    def clear(self):
 
         self._operators.clear()
 
-    # =====================================================
-    # Metadata
-    # =====================================================
-
     @property
-    def count(self) -> int:
+    def count(self):
 
         return len(self._operators)
 
-    def __len__(self) -> int:
+    def __len__(self):
 
         return len(self._operators)
 
-    def __contains__(self, name: str) -> bool:
+    def __contains__(self, item):
 
-        return self.has(name)
+        return item in self._operators
 
-    def __repr__(self) -> str:
+    def __repr__(self):
 
         return (
             f"OperatorRegistry("
