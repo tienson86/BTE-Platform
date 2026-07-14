@@ -1,18 +1,14 @@
 """
 Interpretation Engine
+=====================
 
-Module xử lý:
-- đọc rule CSV
-- kiểm tra điều kiện
-- chấm điểm
-- xây dựng luận giải
-- sinh câu văn
-
+Engine diễn giải Bát Tự.
 """
 
 from .engine import InterpretationEngine
 
+__version__ = "1.0.0"
 
 __all__ = [
-    "InterpretationEngine"
+    "InterpretationEngine",
 ]
