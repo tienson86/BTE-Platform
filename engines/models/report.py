@@ -18,43 +18,18 @@ class InterpretationReport:
 
     title: str = ""
 
+    subtitle: str = ""
+
     summary: str = ""
 
-    sections: List[str] = field(default_factory=list)
+    sections: list[ReportSection] = field(default_factory=list)
 
-    rule_results: List[RuleResult] = field(default_factory=list)
+    appendix: list[str] = field(default_factory=list)
 
-    score: float = 0.0
+    statistics: dict = field(default_factory=dict)
 
-    version: str = "1.0"
+    metadata: dict = field(default_factory=dict)
 
-    def add_section(self, text: str):
+    version: str = ""
 
-        self.sections.append(text)
-
-    def add_result(self, result: RuleResult):
-
-        self.rule_results.append(result)
-
-    @property
-    def total_rules(self):
-
-        return len(self.rule_results)
-@dataclass(slots=True)
-class ReportParagraph:
-
-    title: str
-
-    sentences: list[str] = field(default_factory=list)
-
-    rule_count: int = 0
-
-
-@dataclass(slots=True)
-class ReportSection:
-
-    title: str
-
-    paragraphs: list[ReportParagraph] = field(default_factory=list)
-
-    rule_count: int = 0
+    generated_at: datetime | None = None
