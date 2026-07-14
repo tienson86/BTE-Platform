@@ -2,19 +2,24 @@
 report.py
 =========
 
-Model kết quả cuối cùng của Interpretation Engine.
+Interpretation Report Model.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List
+from datetime import datetime
+from typing import Any
 
-from .rule_result import RuleResult
+from .section import ReportSection
+from .statistics import ReportStatistics
 
 
 @dataclass(slots=True)
 class InterpretationReport:
+    """
+    Báo cáo diễn giải hoàn chỉnh.
+    """
 
     title: str = ""
 
@@ -26,10 +31,25 @@ class InterpretationReport:
 
     appendix: list[str] = field(default_factory=list)
 
-    statistics: dict = field(default_factory=dict)
+    statistics: ReportStatistics = field(
+        default_factory=ReportStatistics
+    )
 
-    metadata: dict = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
-    version: str = ""
+    version: str = "1.0"
 
-    generated_at: datetime | None = None
+    generated_at: datetime = field(
+        default_factory=datetime.now
+    )
+
+    @property
+    def section_count(self) -> int:
+        return len(self.sections)
+
+    def add_section(
+        self,
+        section: ReportSection,
+    ) -> None:
+
+        self.sections.append(section)
