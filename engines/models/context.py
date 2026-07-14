@@ -2,232 +2,254 @@
 context.py
 ==========
 
-Định nghĩa InterpretationContext.
+Interpretation Context
 
-Đây là đối tượng trung tâm của Interpretation Engine.
+Lưu toàn bộ dữ liệu đã tính toán để Rule Engine,
+Sentence Generator và Report Builder sử dụng.
 
-Toàn bộ dữ liệu từ Bazi Engine sẽ được chuẩn hóa thành
-InterpretationContext trước khi đưa vào Rule Engine.
-
-Luồng xử lý:
-
-Bazi Engine
-      │
-      ▼
-InterpretationContext
-      │
-      ├── Rule Loader
-      ├── Rule Matcher
-      ├── Conflict Resolver
-      ├── Rule Scoring
-      ├── Interpretation Builder
-      └── Formatter
+Đây là Data Hub của Interpretation Engine.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
-
-# ==========================================================
-# Tứ Trụ
-# ==========================================================
-
-@dataclass(slots=True)
-class Pillar:
-
-    heavenly_stem: str
-    earthly_branch: str
-
-    hidden_stems: List[str] = field(default_factory=list)
-
-    ten_gods: List[str] = field(default_factory=list)
-
-    na_yin: Optional[str] = None
-
-    stage_of_life: Optional[str] = None
-
-
-# ==========================================================
-# Đại Vận
-# ==========================================================
-
-@dataclass(slots=True)
-class LuckPillar:
-
-    stem: str
-
-    branch: str
-
-    start_age: int
-
-    end_age: int
-
-    start_year: int
-
-    end_year: int
-
-
-# ==========================================================
-# Lưu Niên
-# ==========================================================
-
-@dataclass(slots=True)
-class AnnualLuck:
-
-    year: int
-
-    stem: str
-
-    branch: str
-
-
-# ==========================================================
-# Metadata
-# ==========================================================
-
-@dataclass(slots=True)
-class Metadata:
-
-    version: str = "1.0"
-
-    school: str = "Tu Binh"
-
-    language: str = "vi"
-
-    created_at: Optional[str] = None
-
-
-# ==========================================================
-# Interpretation Context
-# ==========================================================
 
 @dataclass(slots=True)
 class InterpretationContext:
     """
-    Đối tượng chuẩn truyền giữa các module.
+    Context dùng trong toàn bộ Interpretation Engine.
 
-    Đây là model duy nhất mà Interpretation Engine làm việc.
+    Dữ liệu được lưu dưới dạng key-value.
+
+    Ví dụ:
+
+        bazi.day_master
+
+        bazi.month_branch
+
+        strength.level
+
+        useful_god.primary
+
+        shensha.names
+
+        pattern.name
+
+        luck.current
     """
 
-    # --------------------------------------------------
-    # Thông tin cơ bản
-    # --------------------------------------------------
+    # ======================================================
+    # Main Data
+    # ======================================================
 
-    gender: str
+    data: dict[str, Any] = field(default_factory=dict)
 
-    solar_datetime: str
+    # ======================================================
+    # Metadata
+    # ======================================================
 
-    lunar_datetime: str
+    metadata: dict[str, Any] = field(default_factory=dict)
 
-    timezone: str = "Asia/Ho_Chi_Minh"
+    # ======================================================
+    # Runtime Cache
+    # ======================================================
 
-    location: Optional[str] = None
+    cache: dict[str, Any] = field(default_factory=dict)
 
-    # --------------------------------------------------
-    # Tứ Trụ
-    # --------------------------------------------------
+    # ======================================================
+    # Basic API
+    # ======================================================
 
-    year: Optional[Pillar] = None
+    def set(
+        self,
+        key: str,
+        value: Any,
+    ) -> None:
 
-    month: Optional[Pillar] = None
+        self.data[key] = value
 
-    day: Optional[Pillar] = None
+        self.cache.pop(key, None)
 
-    hour: Optional[Pillar] = None
+    # ------------------------------------------------------
 
-    # --------------------------------------------------
-    # Nhật Chủ
-    # --------------------------------------------------
+    def get(
+        self,
+        key: str,
+        default: Any = None,
+    ) -> Any:
 
-    day_master: Optional[str] = None
+        value = self.resolve(key)
 
-    # --------------------------------------------------
-    # Phân tích mệnh
-    # --------------------------------------------------
+        if value is None:
+            return default
 
-    strength: Optional[str] = None
+        return value
 
-    pattern: Optional[str] = None
+    # ------------------------------------------------------
 
-    useful_god: Optional[str] = None
+    def exists(
+        self,
+        key: str,
+    ) -> bool:
 
-    favorable_gods: List[str] = field(default_factory=list)
+        return self.resolve(key) is not None
 
-    unfavorable_gods: List[str] = field(default_factory=list)
+    # ======================================================
+    # Resolve
+    # ======================================================
 
-    # --------------------------------------------------
-    # Quan hệ
-    # --------------------------------------------------
-
-    combinations: List[str] = field(default_factory=list)
-
-    clashes: List[str] = field(default_factory=list)
-
-    harms: List[str] = field(default_factory=list)
-
-    punishments: List[str] = field(default_factory=list)
-
-    destructions: List[str] = field(default_factory=list)
-
-    # --------------------------------------------------
-    # Thần sát
-    # --------------------------------------------------
-
-    shensha: List[str] = field(default_factory=list)
-
-    # --------------------------------------------------
-    # Đại vận
-    # --------------------------------------------------
-
-    current_luck: Optional[LuckPillar] = None
-
-    luck_cycles: List[LuckPillar] = field(default_factory=list)
-
-    # --------------------------------------------------
-    # Lưu niên
-    # --------------------------------------------------
-
-    current_annual: Optional[AnnualLuck] = None
-
-    # --------------------------------------------------
-    # Điểm số
-    # --------------------------------------------------
-
-    scores: Dict[str, float] = field(default_factory=dict)
-
-    # --------------------------------------------------
-    # Dữ liệu mở rộng
-    # --------------------------------------------------
-
-    metadata: Metadata = field(default_factory=Metadata)
-
-    extra: Dict[str, Any] = field(default_factory=dict)
-
-    # ==================================================
-    # Helper Methods
-    # ==================================================
-
-    def has_useful_god(self) -> bool:
-        return bool(self.useful_god)
-
-    def has_pattern(self) -> bool:
-        return bool(self.pattern)
-
-    def has_shensha(self, name: str) -> bool:
-        return name in self.shensha
-
-    def get_score(self, key: str, default: float = 0.0) -> float:
-        return self.scores.get(key, default)
-
-    def set_score(self, key: str, value: float) -> None:
-        self.scores[key] = value
-
-    def to_dict(self) -> Dict[str, Any]:
+    def resolve(
+        self,
+        path: str,
+    ) -> Any:
         """
-        Chuyển Context thành dict.
-        Hữu ích khi export JSON hoặc ghi log.
+        Resolve theo đường dẫn.
+
+        Ví dụ:
+
+            bazi.day_master
+
+            useful_god.primary
+
+            pattern.name
         """
-        from dataclasses import asdict
-        return asdict(self)
+
+        if path in self.cache:
+            return self.cache[path]
+
+        parts = path.split(".")
+
+        current: Any = self.data
+
+        for part in parts:
+
+            if current is None:
+                return None
+
+            if isinstance(current, dict):
+
+                current = current.get(part)
+
+            else:
+
+                current = getattr(
+                    current,
+                    part,
+                    None,
+                )
+
+        self.cache[path] = current
+
+        return current
+
+    # ======================================================
+    # Metadata
+    # ======================================================
+
+    def set_metadata(
+        self,
+        key: str,
+        value: Any,
+    ) -> None:
+
+        self.metadata[key] = value
+
+    def get_metadata(
+        self,
+        key: str,
+        default: Any = None,
+    ) -> Any:
+
+        return self.metadata.get(
+            key,
+            default,
+        )
+
+    # ======================================================
+    # Update
+    # ======================================================
+
+    def update(
+        self,
+        values: dict[str, Any],
+    ) -> None:
+
+        self.data.update(values)
+
+        self.cache.clear()
+
+    # ======================================================
+    # Remove
+    # ======================================================
+
+    def remove(
+        self,
+        key: str,
+    ) -> None:
+
+        self.data.pop(
+            key,
+            None,
+        )
+
+        self.cache.clear()
+
+    # ======================================================
+    # Clear
+    # ======================================================
+
+    def clear(self) -> None:
+
+        self.data.clear()
+
+        self.cache.clear()
+
+        self.metadata.clear()
+
+    # ======================================================
+    # Export
+    # ======================================================
+
+    def to_dict(self) -> dict[str, Any]:
+
+        return dict(self.data)
+
+    # ======================================================
+    # Magic Methods
+    # ======================================================
+
+    def __getitem__(
+        self,
+        key: str,
+    ) -> Any:
+
+        return self.resolve(key)
+
+    def __setitem__(
+        self,
+        key: str,
+        value: Any,
+    ) -> None:
+
+        self.set(key, value)
+
+    def __contains__(
+        self,
+        key: str,
+    ) -> bool:
+
+        return self.exists(key)
+
+    def __len__(self) -> int:
+
+        return len(self.data)
+
+    def __repr__(self) -> str:
+
+        return (
+            f"InterpretationContext("
+            f"keys={len(self.data)}, "
+            f"metadata={len(self.metadata)})"
+        )
