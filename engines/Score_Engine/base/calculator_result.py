@@ -1,69 +1,132 @@
+"""
+Calculator Result
+
+Đối tượng chuẩn lưu kết quả của một Calculator.
+"""
+
 from dataclasses import dataclass, field
-from typing import Any, Dict, List
+from datetime import datetime
+from typing import Any
 
 
 @dataclass
 class CalculatorResult:
-    """
-    Kết quả trả về của từng Calculator.
 
-    Ví dụ:
-        - WuxingScoreCalculator
-        - StrengthScoreCalculator
-        - PatternScoreCalculator
-    """
+    # =========================
+    # Metadata
+    # =========================
 
-    # Tổng điểm của Calculator
-    score: float = 0.0
-
-    # Trọng số áp dụng
-    weight: float = 1.0
-
-    # Điểm sau khi nhân trọng số
-    weighted_score: float = 0.0
-
-    # Tên module
     module: str = ""
 
-    # Danh sách Rule đã áp dụng
-    matched_rules: List[Dict[str, Any]] = field(default_factory=list)
+    dimension: str = ""
 
-    # Chi tiết diễn giải
-    details: Dict[str, Any] = field(default_factory=dict)
-
-    # Có lỗi hay không
     success: bool = True
 
     message: str = ""
 
-    def calculate(self) -> None:
-        """
-        Tính điểm sau trọng số.
-        """
-        self.weighted_score = self.score * self.weight
+    # =========================
+    # Score
+    # =========================
 
-    def add_rule(
-        self,
-        rule_code: str,
-        score: float,
-        description: str = ""
-    ) -> None:
+    score: float = 0.0
 
-        self.matched_rules.append({
-            "rule_code": rule_code,
-            "score": score,
-            "description": description,
-        })
+    weighted_score: float = 0.0
 
-    def to_dict(self) -> Dict[str, Any]:
+    weight: float = 1.0
+
+    # =========================
+    # Rule
+    # =========================
+
+    matched_rules: list = field(default_factory=list)
+
+    history: list = field(default_factory=list)
+
+    # =========================
+    # Extra
+    # =========================
+
+    warnings: list = field(default_factory=list)
+
+    errors: list = field(default_factory=list)
+
+    details: dict = field(default_factory=dict)
+
+    metadata: dict = field(default_factory=dict)
+
+    execution_time: float = 0.0
+
+    created_at: datetime = field(
+        default_factory=datetime.utcnow
+    )
+
+    # =========================
+
+    @property
+    def rule_count(self):
+
+        return len(self.matched_rules)
+
+    def add_warning(self, text):
+
+        self.warnings.append(text)
+
+    def add_error(self, text):
+
+        self.errors.append(text)
+
+        self.success = False
+
+    def set_detail(self, key, value):
+
+        self.details[key] = value
+
+    def get_detail(self, key, default=None):
+
+        return self.details.get(key, default)
+
+    def to_dict(self):
 
         return {
+
             "module": self.module,
-            "score": self.score,
-            "weight": self.weight,
-            "weighted_score": self.weighted_score,
-            "matched_rules": self.matched_rules,
-            "details": self.details,
+
+            "dimension": self.dimension,
+
             "success": self.success,
-            "message": self.message,
+
+            "score": self.score,
+
+            "weighted_score": self.weighted_score,
+
+            "weight": self.weight,
+
+            "matched_rules": self.matched_rules,
+
+            "history": self.history,
+
+            "warnings": self.warnings,
+
+            "errors": self.errors,
+
+            "details": self.details,
+
+            "metadata": self.metadata,
+
+            "execution_time": self.execution_time,
+
+            "created_at": self.created_at.isoformat(),
+
         }
+
+    def __repr__(self):
+
+        return (
+
+            f"<CalculatorResult "
+
+            f"{self.module} "
+
+            f"score={self.score}>"
+
+        )
