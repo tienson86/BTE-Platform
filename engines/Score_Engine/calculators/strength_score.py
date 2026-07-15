@@ -1,40 +1,30 @@
 """
-Strength Score Calculator
+Thân Vượng Nhược Score Calculator
+
+Đánh giá:
+
+- Đắc lệnh
+- Đắc địa
+- Đắc thế
+- Có gốc
+- Có trợ
 """
 
-from ..base import BaseCalculator
+from ..base.generic_score_calculator import GenericScoreCalculator
 
 
-class StrengthScoreCalculator(BaseCalculator):
+class StrengthScoreCalculator(GenericScoreCalculator):
 
-    module_name = "strength"
+    MODULE_NAME = "strength"
 
-    RULE_FILES = [
-        "03_strength/01_month_power.csv",
-        "03_strength/02_root_power.csv",
-        "03_strength/03_support_power.csv",
-        "03_strength/04_control_power.csv",
-        "03_strength/05_follow_pattern.csv",
-        "03_strength/06_special_case.csv",
-        "03_strength/07_strength_level.csv",
-    ]
+    RULE_FOLDER = "03_strength"
 
-    def calculate(self, context):
+    DIMENSION_NAME = "Thân vượng nhược"
 
-        result = self.create_result()
+    DESCRIPTION = (
+        "Đánh giá độ mạnh yếu của Nhật chủ."
+    )
 
-        total_score = 0.0
-        loaded_rules = 0
-
-        for file_name in self.RULE_FILES:
-            df = self.load_rules(file_name)
-            loaded_rules += len(df)
-
-        result.score = self.normalize(total_score)
-
-        result.details = {
-            "rule_files": self.RULE_FILES,
-            "loaded_rules": loaded_rules,
-        }
+    def post_process(self, result, context):
 
         return result
