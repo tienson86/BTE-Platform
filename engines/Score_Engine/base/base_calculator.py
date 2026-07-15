@@ -43,7 +43,7 @@ class BaseCalculator(ABC):
         """
         raise NotImplementedError
 
-    def load_rules(self, relative_path):
+    def load_rule_group(self, folder_name: str):
         """
         Đọc Rule từ CSV.
         """
