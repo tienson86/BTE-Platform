@@ -1,39 +1,22 @@
 """
-Useful God Score Calculator
+Dụng Thần Score Calculator
 """
 
-from ..base import BaseCalculator
+from ..base.generic_score_calculator import GenericScoreCalculator
 
 
-class UsefulGodScoreCalculator(BaseCalculator):
+class UsefulGodScoreCalculator(GenericScoreCalculator):
 
-    module_name = "useful_god"
+    MODULE_NAME = "useful_god"
 
-    RULE_FILES = [
-        "06_useful_god/01_useful_present.csv",
-        "06_useful_god/02_useful_support.csv",
-        "06_useful_god/03_useful_destroy.csv",
-        "06_useful_god/04_joy_god.csv",
-        "06_useful_god/05_enemy_god.csv",
-        "06_useful_god/06_priority.csv",
-    ]
+    RULE_FOLDER = "06_useful_god"
 
-    def calculate(self, context):
+    DIMENSION_NAME = "Dụng thần"
 
-        result = self.create_result()
+    DESCRIPTION = (
+        "Đánh giá Dụng thần - Hỷ thần - Kỵ thần."
+    )
 
-        total_score = 0.0
-        loaded_rules = 0
-
-        for file_name in self.RULE_FILES:
-            df = self.load_rules(file_name)
-            loaded_rules += len(df)
-
-        result.score = self.normalize(total_score)
-
-        result.details = {
-            "rule_files": self.RULE_FILES,
-            "loaded_rules": loaded_rules,
-        }
+    def post_process(self, result, context):
 
         return result
