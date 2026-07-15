@@ -1,35 +1,33 @@
 """
 Final Score Calculator
+
+Tổng hợp toàn bộ điểm của Score Engine.
 """
 
-from ..base import BaseCalculator
+from ..base.generic_score_calculator import GenericScoreCalculator
 
 
-class FinalScoreCalculator(BaseCalculator):
+class FinalScoreCalculator(GenericScoreCalculator):
 
-    module_name = "final_score"
+    MODULE_NAME = "final_score"
 
-    def calculate(self, context):
+    RULE_FOLDER = "09_final_score"
 
-        result = self.create_result()
+    DIMENSION_NAME = "Điểm tổng"
 
-        # TODO:
-        # Nhận điểm từ:
-        # - wuxing
-        # - strength
-        # - ten_gods
-        # - pattern
-        # - useful_god
-        # - shensha
-        # - luck
-        #
-        # Áp dụng trọng số trong:
-        # 09_final_score/04_dimension_weight.csv
-        #
-        # Sinh:
-        # total_score
-        # grade
-        # confidence
-        # recommendation
+    DESCRIPTION = (
+        "Tổng hợp và xếp hạng toàn bộ Score Engine."
+    )
+
+    def post_process(self, result, context):
+        """
+        Hook dành cho xử lý đặc biệt.
+
+        V2:
+            - Xếp hạng A/B/C/S
+            - Confidence
+            - Recommendation
+            - Risk Level
+        """
 
         return result
