@@ -1,42 +1,18 @@
 """
 Generic Score Calculator
 
-Lớp cơ sở dùng chung cho hầu hết Calculator của Score Engine.
-
-Pipeline chuẩn:
-
-    Load Rules
-        ↓
-    Validate
-        ↓
-    Match
-        ↓
-    Score
-        ↓
-    Normalize
-        ↓
-    Build Result
-
-Các Calculator cụ thể chỉ cần khai báo:
-
-    MODULE_NAME
-    RULE_FOLDER
+Template Method cho các Score Calculator.
 """
-
-from abc import ABC
 
 from .base_calculator import BaseCalculator
 
+from ..matcher.matcher import RuleMatcher
 from ..utils.validator import ScoreValidator
 from ..utils.scorer import RuleScorer
 from ..utils.normalizer import ScoreNormalizer
 
-from ..matcher.matcher import RuleMatcher
 
-
-class GenericScoreCalculator(BaseCalculator, ABC):
-
-    MODULE_NAME = ""
+class GenericScoreCalculator(BaseCalculator):
 
     RULE_FOLDER = ""
 
@@ -48,157 +24,141 @@ class GenericScoreCalculator(BaseCalculator, ABC):
 
         self.validator = ScoreValidator()
 
-        self.normalizer = ScoreNormalizer()
-
         self.scorer = RuleScorer()
 
-    # =====================================================
+        self.normalizer = ScoreNormalizer()
 
-    # Main Pipeline
+    # ==================================================
 
-    # =====================================================
+    def load_rules(self):
 
-    def calculate(self, context):
-
-        result = self.create_result()
-
-        #
-        # Reset scorer
-        #
-
-        self.scorer.reset()
-
-        #
-        # Load toàn bộ Rule trong thư mục
-        #
-
-        groups = self.loader.load_group(
+        return self.loader.load_group(
             self.RULE_FOLDER
         )
 
-        loaded_files = []
+    def validate_rules(self, dataframe):
 
-        matched_rules = []
-
-        #
-        # Duyệt từng file
-        #
-
-        for file_name, dataframe in groups.items():
-
-            loaded_files.append(file_name)
-
-            #
-            # Validate CSV
-            #
-
-            self.validator.validate_dataframe(
-                dataframe
-            )
-
-            #
-            # Match Rule
-            #
-
-            rules = self.matcher.match(
-                dataframe,
-                context,
-            )
-
-            #
-            # Score
-            #
-
-            for rule in rules:
-
-                score = float(
-                    rule.get(
-                        "score",
-                        0
-                    )
-                )
-
-                rule_code = rule.get(
-                    "rule_code",
-                    ""
-                )
-
-                description = rule.get(
-                    "description",
-                    ""
-                )
-
-                if score >= 0:
-
-                    self.scorer.add(
-                        score,
-                        rule_code,
-                        description,
-                    )
-
-                else:
-
-                    self.scorer.subtract(
-                        abs(score),
-                        rule_code,
-                        description,
-                    )
-
-                matched_rules.append(rule)
-
-        #
-        # Normalize
-        #
-
-        final_score = self.normalizer.clamp(
-            self.scorer.score
+        self.validator.validate_dataframe(
+            dataframe
         )
 
-        #
-        # Result
-        #
+    def match_rules(
+        self,
+        dataframe,
+        context
+    ):
 
-        result.module = self.MODULE_NAME
+        return self.matcher.match(
+            dataframe,
+            context
+        )
 
-        result.score = final_score
+    def calculate_score(
+        self,
+        matched_rules
+    ):
 
-        result.weighted_score = final_score
+        self.scorer.reset()
+
+        for rule in matched_rules:
+
+            score = float(
+                rule.get("score", 0)
+            )
+
+            if score >= 0:
+
+                self.scorer.add(
+                    score,
+                    rule.get("rule_code", ""),
+                    rule.get("description", ""),
+                )
+
+            else:
+
+                self.scorer.subtract(
+                    abs(score),
+                    rule.get("rule_code", ""),
+                    rule.get("description", ""),
+                )
+
+        return self.scorer.score
+
+    def normalize_score(
+        self,
+        score
+    ):
+
+        return self.normalizer.clamp(score)
+
+    def build_result(
+        self,
+        result,
+        matched_rules,
+        score
+    ):
+
+        result.score = score
+
+        result.weighted_score = score
+
+        result.weight = 1.0
 
         result.matched_rules = matched_rules
 
-        result.details = {
-
-            "rule_folder": self.RULE_FOLDER,
-
-            "loaded_files": loaded_files,
-
-            "matched_rule_count": len(
-                matched_rules
-            ),
-
-            "history": self.scorer.history,
-
-        }
+        result.history = self.scorer.history
 
         return result
 
-    # =====================================================
+    def post_process(
+        self,
+        result,
+        context
+    ):
 
-    # Helper
+        return result
 
-    # =====================================================
+    # ==================================================
 
-    def get_rule_folder(self):
+    def calculate(
+        self,
+        context
+    ):
 
-        return self.RULE_FOLDER
+        result = self.create_result()
 
-    def get_module_name(self):
+        groups = self.load_rules()
 
-        return self.MODULE_NAME
+        matched = []
 
-    def __repr__(self):
+        for _, dataframe in groups.items():
 
-        return (
-            f"<{self.__class__.__name__}"
-            f" module={self.MODULE_NAME}>"
+            self.validate_rules(dataframe)
+
+            matched.extend(
+
+                self.match_rules(
+                    dataframe,
+                    context
+                )
+
+            )
+
+        score = self.calculate_score(
+            matched
+        )
+
+        score = self.normalize_score(
+            score
+        )
+
+        result = self.build_result(
+            result,
+            matched,
+            score
+        )
+
+        return self.post_process(
+            result,
+            context
         )
