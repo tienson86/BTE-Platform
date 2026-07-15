@@ -1,5 +1,7 @@
 """
-Normalize Score
+Score Normalizer
+
+Chuẩn hóa điểm của từng Dimension.
 """
 
 
@@ -10,31 +12,57 @@ class ScoreNormalizer:
         score: float,
         minimum: float = 0,
         maximum: float = 100
-    ):
+    ) -> float:
 
-        if score < minimum:
-            return minimum
-
-        if score > maximum:
-            return maximum
-
-        return score
+        return max(
+            minimum,
+            min(maximum, score)
+        )
 
     @staticmethod
     def percentage(
-        value,
-        total
-    ):
+        value: float,
+        total: float
+    ) -> float:
 
         if total == 0:
-            return 0
+            return 0.0
 
-        return value / total * 100
+        return round(
+            value / total * 100,
+            2
+        )
 
     @staticmethod
     def weighted(
-        score,
-        weight
-    ):
+        score: float,
+        weight: float
+    ) -> float:
 
-        return score * weight
+        return round(
+            score * weight,
+            2
+        )
+
+    @staticmethod
+    def normalize_range(
+        score: float,
+        source_min: float,
+        source_max: float,
+        target_min: float = 0,
+        target_max: float = 100
+    ) -> float:
+
+        if source_max == source_min:
+            return target_min
+
+        value = (
+            (score - source_min)
+            / (source_max - source_min)
+        )
+
+        result = target_min + (
+            value * (target_max - target_min)
+        )
+
+        return round(result, 2)
