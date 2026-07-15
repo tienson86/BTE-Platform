@@ -1,114 +1,110 @@
+"""
+Base Calculator
+
+Lớp cha của toàn bộ Calculator.
+"""
+
+import time
 from abc import ABC, abstractmethod
 
 from .calculator_result import CalculatorResult
 
 
 class BaseCalculator(ABC):
-    """
-    Base class cho toàn bộ Calculator.
 
-    Các Calculator đều kế thừa class này.
+    MODULE_NAME = ""
 
-    Luồng chuẩn:
+    DIMENSION_NAME = ""
 
-        load_rules()
-
-            ↓
-
-        match_rules()
-
-            ↓
-
-        calculate()
-
-            ↓
-
-        normalize()
-
-            ↓
-
-        return CalculatorResult
-    """
-
-    module_name = "base"
+    DESCRIPTION = ""
 
     def __init__(self, loader):
 
         self.loader = loader
 
-    @abstractmethod
-    def calculate(self, context) -> CalculatorResult:
-        """
-        Hàm bắt buộc phải override.
-        """
-        raise NotImplementedError
+    # =====================================
 
-    def load_rule_group(self, folder_name: str):
-        """
-        Đọc Rule từ CSV.
-        """
-        return self.loader.load_csv(relative_path)
-
-    def normalize(
-        self,
-        score: float,
-        minimum: float = 0,
-        maximum: float = 100
-    ) -> float:
-        """
-        Chuẩn hóa điểm.
-        """
-
-        if score < minimum:
-            return minimum
-
-        if score > maximum:
-            return maximum
-
-        return score
-
-    def create_result(self) -> CalculatorResult:
-        """
-        Tạo đối tượng kết quả mặc định.
-        """
+    def create_result(self):
 
         result = CalculatorResult()
 
-        result.module = self.module_name
+        result.module = self.MODULE_NAME
+
+        result.dimension = self.DIMENSION_NAME
 
         return result
 
-    def apply_weight(
+    # =====================================
+
+    def before_execute(
         self,
-        result: CalculatorResult,
-        weight: float
-    ) -> CalculatorResult:
-        """
-        Áp dụng trọng số.
-        """
+        context
+    ):
 
-        result.weight = weight
-        result.calculate()
+        pass
+
+    def after_execute(
+        self,
+        result,
+        context
+    ):
 
         return result
 
-    def safe_execute(self, context) -> CalculatorResult:
-        """
-        Thực thi an toàn.
+    # =====================================
 
-        Không để Calculator làm dừng toàn bộ Engine.
-        """
+    def safe_execute(
+        self,
+        context
+    ):
+
+        start = time.perf_counter()
+
+        result = self.create_result()
 
         try:
 
-            return self.calculate(context)
+            self.before_execute(context)
+
+            result = self.calculate(context)
+
+            result.success = True
 
         except Exception as ex:
 
-            result = self.create_result()
-
             result.success = False
 
-            result.message = str(ex)
+            result.add_error(str(ex))
 
-            return result
+        end = time.perf_counter()
+
+        result.execution_time = round(
+            end - start,
+            6
+        )
+
+        return self.after_execute(
+            result,
+            context
+        )
+
+    # =====================================
+
+    @abstractmethod
+    def calculate(
+        self,
+        context
+    ):
+
+        raise NotImplementedError
+
+    # =====================================
+
+    def __repr__(self):
+
+        return (
+
+            f"<{self.__class__.__name__}"
+
+            f" module={self.MODULE_NAME}>"
+        )
