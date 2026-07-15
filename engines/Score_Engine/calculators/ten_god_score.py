@@ -1,39 +1,22 @@
 """
-Ten God Score Calculator
+Thập Thần Score Calculator
 """
 
-from ..base import BaseCalculator
+from ..base.generic_score_calculator import GenericScoreCalculator
 
 
-class TenGodScoreCalculator(BaseCalculator):
+class TenGodScoreCalculator(GenericScoreCalculator):
 
-    module_name = "ten_gods"
+    MODULE_NAME = "ten_gods"
 
-    RULE_FILES = [
-        "04_ten_gods/01_positive_score.csv",
-        "04_ten_gods/02_negative_score.csv",
-        "04_ten_gods/03_combination_score.csv",
-        "04_ten_gods/04_structure_score.csv",
-        "04_ten_gods/05_special_case.csv",
-        "04_ten_gods/06_priority.csv",
-    ]
+    RULE_FOLDER = "04_ten_gods"
 
-    def calculate(self, context):
+    DIMENSION_NAME = "Thập thần"
 
-        result = self.create_result()
+    DESCRIPTION = (
+        "Đánh giá cấu trúc Thập thần."
+    )
 
-        total_score = 0.0
-        loaded_rules = 0
-
-        for file_name in self.RULE_FILES:
-            df = self.load_rules(file_name)
-            loaded_rules += len(df)
-
-        result.score = self.normalize(total_score)
-
-        result.details = {
-            "rule_files": self.RULE_FILES,
-            "loaded_rules": loaded_rules,
-        }
+    def post_process(self, result, context):
 
         return result
