@@ -1,264 +1,259 @@
 """
-===============================================================================
-BTE Platform - Core Enums
-===============================================================================
+BTE Platform
+Core Enums
 
-Định nghĩa các Enum dùng chung cho toàn bộ Framework.
-
-Không chứa dữ liệu nghiệp vụ chi tiết.
-Chỉ định nghĩa các kiểu dữ liệu chuẩn.
-
-Author : BTE Platform
-Version: 1.0.0
-===============================================================================
+Định nghĩa toàn bộ Enum dùng chung cho các Engine.
 """
 
-from enum import Enum, IntEnum, auto
+from __future__ import annotations
+
+from enum import Enum, IntEnum
 
 
-# =============================================================================
-# Framework
-# =============================================================================
+# ==========================================================
+# Ngũ Hành
+# ==========================================================
 
-class EngineType(Enum):
-    CALENDAR = "calendar"
-    BAZI = "bazi"
-    INTERPRETATION = "interpretation"
-    REPORT = "report"
-    EXPORT = "export"
-    FENGSHUI = "fengshui"
+class Element(str, Enum):
 
-
-class Status(Enum):
-    SUCCESS = "SUCCESS"
-    WARNING = "WARNING"
-    ERROR = "ERROR"
-    PENDING = "PENDING"
-
-
-# =============================================================================
-# Basic
-# =============================================================================
-
-class Gender(Enum):
-    MALE = "Nam"
-    FEMALE = "Nữ"
-
-
-class YinYang(Enum):
-    YANG = "Dương"
-    YIN = "Âm"
-
-
-# =============================================================================
-# Five Elements
-# =============================================================================
-
-class Element(Enum):
     WOOD = "Mộc"
+
     FIRE = "Hỏa"
+
     EARTH = "Thổ"
+
     METAL = "Kim"
+
     WATER = "Thủy"
 
 
-# =============================================================================
-# Heavenly Stem
-# =============================================================================
+# ==========================================================
+# Âm Dương
+# ==========================================================
 
-class HeavenlyStem(Enum):
-    GIAP = "Giáp"
-    AT = "Ất"
-    BINH = "Bính"
-    DINH = "Đinh"
-    MAU = "Mậu"
-    KY = "Kỷ"
-    CANH = "Canh"
-    TAN = "Tân"
-    NHAM = "Nhâm"
-    QUY = "Quý"
+class YinYang(str, Enum):
+
+    YANG = "Dương"
+
+    YIN = "Âm"
 
 
-# =============================================================================
-# Earthly Branch
-# =============================================================================
+# ==========================================================
+# Thiên Can
+# ==========================================================
 
-class EarthlyBranch(Enum):
-    TY = "Tý"
-    SUU = "Sửu"
-    DAN = "Dần"
-    MAO = "Mão"
-    THIN = "Thìn"
-    TY2 = "Tỵ"
-    NGO = "Ngọ"
-    MUI = "Mùi"
-    THAN = "Thân"
-    DAU = "Dậu"
-    TUAT = "Tuất"
-    HOI = "Hợi"
+class HeavenlyStem(IntEnum):
 
-
-# =============================================================================
-# Ten Gods
-# =============================================================================
-
-class TenGod(Enum):
-    BIEN_TAI = "Thiên Tài"
-    CHINH_TAI = "Chính Tài"
-
-    THAT_SAT = "Thất Sát"
-    CHINH_QUAN = "Chính Quan"
-
-    THUC_THAN = "Thực Thần"
-    THUONG_QUAN = "Thương Quan"
-
-    THIEN_AN = "Thiên Ấn"
-    CHINH_AN = "Chính Ấn"
-
-    TY_KIEN = "Tỷ Kiên"
-    KIEP_TAI = "Kiếp Tài"
+    GIAP = 1
+    AT = 2
+    BINH = 3
+    DINH = 4
+    MAU = 5
+    KY = 6
+    CANH = 7
+    TAN = 8
+    NHAM = 9
+    QUY = 10
 
 
-# =============================================================================
-# Luck
-# =============================================================================
+# ==========================================================
+# Địa Chi
+# ==========================================================
 
-class LuckType(Enum):
-    NATAL = "Mệnh Cục"
-    MAJOR = "Đại Vận"
-    YEAR = "Lưu Niên"
-    MONTH = "Lưu Nguyệt"
-    DAY = "Lưu Nhật"
-    HOUR = "Lưu Thời"
+class EarthlyBranch(IntEnum):
 
-
-# =============================================================================
-# Direction
-# =============================================================================
-
-class Direction(Enum):
-    NORTH = "Bắc"
-    SOUTH = "Nam"
-    EAST = "Đông"
-    WEST = "Tây"
-
-    NORTHEAST = "Đông Bắc"
-    NORTHWEST = "Tây Bắc"
-
-    SOUTHEAST = "Đông Nam"
-    SOUTHWEST = "Tây Nam"
+    TY = 1
+    SUU = 2
+    DAN = 3
+    MAO = 4
+    THIN = 5
+    TY_RAN = 6
+    NGO = 7
+    MUI = 8
+    THAN = 9
+    DAU = 10
+    TUAT = 11
+    HOI = 12
 
 
-# =============================================================================
-# Season
-# =============================================================================
+# ==========================================================
+# Trụ
+# ==========================================================
 
-class Season(Enum):
-    SPRING = "Xuân"
-    SUMMER = "Hạ"
-    AUTUMN = "Thu"
-    WINTER = "Đông"
+class PillarType(str, Enum):
 
+    YEAR = "year"
 
-# =============================================================================
-# Moon Phase
-# =============================================================================
+    MONTH = "month"
 
-class MoonPhase(Enum):
-    NEW_MOON = "Sóc"
-    FIRST_QUARTER = "Thượng Huyền"
-    FULL_MOON = "Vọng"
-    LAST_QUARTER = "Hạ Huyền"
+    DAY = "day"
+
+    HOUR = "hour"
 
 
-# =============================================================================
-# Report
-# =============================================================================
+# ==========================================================
+# Giới tính
+# ==========================================================
 
-class ReportFormat(Enum):
-    PDF = "pdf"
-    DOCX = "docx"
-    XLSX = "xlsx"
-    HTML = "html"
-    JSON = "json"
+class Gender(str, Enum):
+
+    MALE = "Nam"
+
+    FEMALE = "Nữ"
 
 
-# =============================================================================
-# Rule
-# =============================================================================
+# ==========================================================
+# Calendar
+# ==========================================================
 
-class RuleCategory(Enum):
-    BASIC = "basic"
+class CalendarType(str, Enum):
 
-    DAY_MASTER = "day_master"
+    SOLAR = "solar"
 
-    FIVE_ELEMENTS = "five_elements"
+    LUNAR = "lunar"
+
+
+# ==========================================================
+# Operation
+# ==========================================================
+
+class Operation(str, Enum):
+
+    BUILD_CHART = "build_chart"
+
+    FOUR_PILLARS = "four_pillars"
+
+    HIDDEN_STEMS = "hidden_stems"
 
     TEN_GODS = "ten_gods"
 
+    STRENGTH = "strength"
+
     USEFUL_GOD = "useful_god"
 
-    CAREER = "career"
+    PATTERN = "pattern"
 
-    WEALTH = "wealth"
+    SHENSHA = "shensha"
 
-    MARRIAGE = "marriage"
+    DAI_VAN = "dai_van"
 
-    HEALTH = "health"
+    LUU_NIEN = "luu_nien"
 
-    LUCK = "luck"
-
-    FENGSHUI = "fengshui"
+    FULL_ANALYSIS = "full_analysis"
 
 
-# =============================================================================
-# Relationship
-# =============================================================================
+# ==========================================================
+# Engine Status
+# ==========================================================
 
-class RelationType(Enum):
-    GENERATE = "Sinh"
+class EngineStatus(str, Enum):
 
-    CONTROL = "Khắc"
+    CREATED = "created"
 
-    COMBINATION = "Hợp"
+    INITIALIZED = "initialized"
 
-    CLASH = "Xung"
+    LOADING = "loading"
 
-    HARM = "Hại"
+    READY = "ready"
 
-    PUNISHMENT = "Hình"
+    RUNNING = "running"
 
-    DESTRUCTION = "Phá"
+    FINISHED = "finished"
 
-
-# =============================================================================
-# Calendar
-# =============================================================================
-
-class CalendarType(Enum):
-    SOLAR = "Dương lịch"
-    LUNAR = "Âm lịch"
+    ERROR = "error"
 
 
-# =============================================================================
-# Score
-# =============================================================================
+# ==========================================================
+# Thân Vượng
+# ==========================================================
 
-class ScoreLevel(IntEnum):
-    VERY_LOW = 20
-    LOW = 40
-    NORMAL = 60
-    HIGH = 80
-    EXCELLENT = 100
+class StrengthLevel(str, Enum):
+
+    VERY_WEAK = "Rất nhược"
+
+    WEAK = "Nhược"
+
+    BALANCED = "Trung hòa"
+
+    STRONG = "Vượng"
+
+    VERY_STRONG = "Rất vượng"
 
 
-# =============================================================================
-# Log
-# =============================================================================
+# ==========================================================
+# Cách Cục
+# ==========================================================
 
-class LogLevel(Enum):
-    DEBUG = auto()
-    INFO = auto()
-    WARNING = auto()
-    ERROR = auto()
-    CRITICAL = auto()
+class PatternCategory(str, Enum):
+
+    NORMAL = "Chính cách"
+
+    SPECIAL = "Đặc cách"
+
+    FOLLOW = "Tòng cách"
+
+    TRANSFORM = "Hóa cách"
+
+
+# ==========================================================
+# Dụng Thần
+# ==========================================================
+
+class UsefulGodMethod(str, Enum):
+
+    STRENGTH = "strength"
+
+    SEASON = "season"
+
+    TEMPERATURE = "temperature"
+
+    PATTERN = "pattern"
+
+    FOLLOW = "follow"
+
+
+# ==========================================================
+# Thần Sát
+# ==========================================================
+
+class ShenShaType(str, Enum):
+
+    AUSPICIOUS = "Cát"
+
+    INAUSPICIOUS = "Hung"
+
+    NEUTRAL = "Trung tính"
+
+
+# ==========================================================
+# Đầu ra Report
+# ==========================================================
+
+class ReportFormat(str, Enum):
+
+    PDF = "pdf"
+
+    HTML = "html"
+
+    WORD = "docx"
+
+    EXCEL = "xlsx"
+
+    JSON = "json"
+
+
+# ==========================================================
+# Log Level
+# ==========================================================
+
+class LogLevel(str, Enum):
+
+    DEBUG = "DEBUG"
+
+    INFO = "INFO"
+
+    WARNING = "WARNING"
+
+    ERROR = "ERROR"
+
+    CRITICAL = "CRITICAL"
