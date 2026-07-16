@@ -1,93 +1,143 @@
 """
-===============================================================================
-BTE Platform - Core Registry
-===============================================================================
+Engine Registry.
 
-Registry quản lý toàn bộ thành phần của Framework.
-
-Author : BTE Platform
-Version: 1.0.0
-===============================================================================
+Quản lý đăng ký và khởi tạo các Engine trong BTE Platform.
 """
 
-from .exceptions import (
-    DuplicateRegistrationError,
-    ComponentNotFoundError,
-)
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Callable
 
 
-class Registry:
+@dataclass(frozen=True)
+class RegistryItem:
     """
-    Registry dùng chung.
+    Thông tin một Engine đã đăng ký.
+    """
+
+    name: str
+    engine_class: type
+    version: str = "1.0.0"
+    description: str = ""
+    singleton: bool = True
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+class EngineRegistry:
+    """
+    Registry quản lý toàn bộ Engine.
     """
 
     def __init__(self):
 
-        self._items = {}
+        self._items: dict[str, RegistryItem] = {}
 
-    def register(self, name, obj):
+        self._instances: dict[str, Any] = {}
+
+    # =========================================================
+    # Register
+    # =========================================================
+
+    def register(
+        self,
+        name: str,
+        engine_class: type,
+        *,
+        version: str = "1.0.0",
+        description: str = "",
+        singleton: bool = True,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
 
         if name in self._items:
-
-            raise DuplicateRegistrationError(
-                f"{name} already registered."
+            raise ValueError(
+                f"Engine '{name}' đã được đăng ký."
             )
 
-        self._items[name] = obj
+        self._items[name] = RegistryItem(
+            name=name,
+            engine_class=engine_class,
+            version=version,
+            description=description,
+            singleton=singleton,
+            metadata=metadata or {},
+        )
 
-    def unregister(self, name):
+    # =========================================================
+    # Remove
+    # =========================================================
 
-        if name in self._items:
+    def unregister(self, name: str) -> None:
 
-            del self._items[name]
+        self._items.pop(name, None)
+        self._instances.pop(name, None)
 
-    def get(self, name):
+    # =========================================================
+    # Query
+    # =========================================================
 
-        if name not in self._items:
-
-            raise ComponentNotFoundError(
-                f"{name} not found."
-            )
-
-        return self._items[name]
-
-    def exists(self, name):
+    def exists(self, name: str) -> bool:
 
         return name in self._items
 
-    def names(self):
+    def list(self) -> list[str]:
 
-        return list(self._items.keys())
+        return sorted(self._items.keys())
 
-    def objects(self):
+    def count(self) -> int:
 
-        return list(self._items.values())
+        return len(self._items)
+
+    def metadata(self, name: str) -> RegistryItem:
+
+        return self._items[name]
+
+    # =========================================================
+    # Create / Get
+    # =========================================================
+
+    def create(self, name: str):
+
+        if name not in self._items:
+            raise KeyError(
+                f"Không tìm thấy Engine '{name}'."
+            )
+
+        item = self._items[name]
+
+        return item.engine_class()
+
+    def get(self, name: str):
+
+        if name not in self._items:
+            raise KeyError(
+                f"Không tìm thấy Engine '{name}'."
+            )
+
+        item = self._items[name]
+
+        if not item.singleton:
+            return item.engine_class()
+
+        if name not in self._instances:
+            self._instances[name] = item.engine_class()
+
+        return self._instances[name]
+
+    # =========================================================
+    # Maintenance
+    # =========================================================
 
     def clear(self):
 
         self._items.clear()
+        self._instances.clear()
 
-    def __len__(self):
+    def reset(self):
 
-        return len(self._items)
-
-    def __contains__(self, item):
-
-        return item in self._items
+        self._instances.clear()
 
 
-# =============================================================================
-# Global Registries
-# =============================================================================
-
-EngineRegistry = Registry()
-
-RuleRegistry = Registry()
-
-TemplateRegistry = Registry()
-
-ExporterRegistry = Registry()
-
-ParserRegistry = Registry()
-
-PluginRegistry = Registry()
+# Singleton Registry dùng chung toàn hệ thống
+registry = EngineRegistry()
