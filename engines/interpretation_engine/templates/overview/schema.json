@@ -1,0 +1,216 @@
+{
+    "schema_version": "1.0.0",
+
+    "module": "overview",
+
+    "encoding": "utf-8",
+
+    "files": {
+
+        "templates.csv": {
+
+            "primary_key": "template_id",
+
+            "required": true,
+
+            "columns": {
+
+                "template_id": {
+                    "type": "string",
+                    "required": true,
+                    "unique": true
+                },
+
+                "title": {
+                    "type": "string",
+                    "required": true
+                },
+
+                "paragraph_id": {
+                    "type": "string",
+                    "required": true,
+                    "foreign_key": "paragraphs.csv.paragraph_id"
+                },
+
+                "priority": {
+                    "type": "integer",
+                    "default": 0
+                },
+
+                "enabled": {
+                    "type": "boolean",
+                    "default": true
+                },
+
+                "tags": {
+                    "type": "string"
+                },
+
+                "version": {
+                    "type": "string",
+                    "default": "1.0"
+                },
+
+                "description": {
+                    "type": "string"
+                }
+
+            }
+
+        },
+
+        "sentences.csv": {
+
+            "primary_key": "sentence_id",
+
+            "required": true,
+
+            "columns": {
+
+                "sentence_id": {
+                    "type": "string",
+                    "required": true,
+                    "unique": true
+                },
+
+                "text": {
+                    "type": "string",
+                    "required": true
+                },
+
+                "variables": {
+                    "type": "list"
+                },
+
+                "style": {
+                    "type": "string",
+                    "enum": [
+                        "normal",
+                        "highlight",
+                        "warning",
+                        "important"
+                    ]
+                },
+
+                "enabled": {
+                    "type": "boolean",
+                    "default": true
+                }
+
+            }
+
+        },
+
+        "paragraphs.csv": {
+
+            "primary_key": "paragraph_id",
+
+            "required": true,
+
+            "columns": {
+
+                "paragraph_id": {
+                    "type": "string",
+                    "required": true,
+                    "unique": true
+                },
+
+                "title": {
+                    "type": "string",
+                    "required": true
+                },
+
+                "sentence_ids": {
+                    "type": "list",
+                    "required": true,
+                    "foreign_key": "sentences.csv.sentence_id"
+                },
+
+                "order": {
+                    "type": "integer",
+                    "default": 1
+                }
+
+            }
+
+        },
+
+        "glossary.csv": {
+
+            "primary_key": "term",
+
+            "required": false,
+
+            "columns": {
+
+                "term": {
+                    "type": "string",
+                    "required": true,
+                    "unique": true
+                },
+
+                "definition": {
+                    "type": "string",
+                    "required": true
+                }
+
+            }
+
+        },
+
+        "chapter.json": {
+
+            "required": true,
+
+            "fields": {
+
+                "chapter_id": "string",
+
+                "title": "string",
+
+                "order": "integer",
+
+                "paragraphs": "list"
+
+            }
+
+        }
+
+    },
+
+    "variables": [
+
+        "day_master",
+
+        "month_branch",
+
+        "day_branch",
+
+        "hour_branch",
+
+        "strength",
+
+        "season",
+
+        "temperature",
+
+        "pattern",
+
+        "useful_god",
+
+        "favorable_element",
+
+        "unfavorable_element",
+
+        "ten_god",
+
+        "hidden_stems",
+
+        "shensha",
+
+        "luck_cycle",
+
+        "annual_luck"
+
+    ]
+}
