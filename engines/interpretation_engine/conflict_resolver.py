@@ -1,280 +1,197 @@
 """
-report_engine/conflict_resolver.py
+Conflict Resolver
+=================
 
-Conflict Resolver.
+Xử lý các Rule mâu thuẫn.
 
-Nhiệm vụ:
-- Phát hiện xung đột giữa các kết quả diễn giải.
-- Điều chỉnh score.
-- Thêm ghi chú cân bằng.
+Ví dụ:
 
-Không tính toán Bát Tự.
+- Rule tốt + Rule xấu cùng xuất hiện.
+- Dụng thần có lợi nhưng bị phá.
+- Đại vận tốt nhưng lưu niên xấu.
+
+Không tự kết luận.
+Chỉ phát hiện xung đột.
 """
 
 
-from __future__ import annotations
+from typing import List, Dict
+
+
 
 
 
 class ConflictResolver:
-    """
-    Bộ xử lý xung đột diễn giải.
-    """
-
-    name = "ConflictResolver"
 
 
 
-    CONFLICT_RULES = [
+    def __init__(self):
 
-        {
-
-            "positive":
-                "TAI_TINH_HIEN",
-
-            "negative":
-                "THAN_NHUOC_KY_TAI",
-
-            "adjust":
-                -10,
-
-            "message":
-                "Tài vận có tiềm năng nhưng cần tăng cường năng lực quản lý trước khi mở rộng."
-
-        },
+        pass
 
 
-        {
-
-            "positive":
-                "DAO_HOA",
-
-            "negative":
-                "CO_THAN",
-
-            "adjust":
-                -5,
-
-            "message":
-                "Có sức hút trong giao tiếp nhưng xu hướng nội tâm có thể tạo khoảng cách tình cảm."
-
-        },
 
 
-        {
 
-            "positive":
-                "HONG_LOAN",
-
-            "negative":
-                "QUA_TU",
-
-            "adjust":
-                -5,
-
-            "message":
-                "Có duyên tình cảm nhưng cần chú trọng sự chia sẻ và kết nối."
-
-        },
+    def analyze(
+        self,
+        rules: List[Dict]
+    ):
 
 
-        {
-
-            "positive":
-                "DUNG_THAN_GAP_VAN",
-
-            "negative":
-                "KY_THAN_GAP_VAN",
-
-            "adjust":
-                -15,
-
-            "message":
-                "Vận trình có cơ hội nhưng vẫn tồn tại yếu tố thử thách cần cân bằng."
-
-        },
+        result = {
 
 
-        {
+            "rules": rules,
 
-            "positive":
-                "THIEN_TAI_MANH",
 
-            "negative":
-                "TY_KIEP_DOAT_TAI",
+            "positive": [],
 
-            "adjust":
-                -10,
 
-            "message":
-                "Có khả năng tạo cơ hội tài chính nhưng cần chú ý hợp tác và quản lý nguồn lực."
+            "negative": [],
+
+
+            "conflicts": []
 
         }
 
-    ]
+
+
+        sections = {}
+
+
+
+        for rule in rules:
+
+
+            polarity = rule.get(
+
+                "polarity",
+
+                "neutral"
+
+            )
+
+
+
+            if polarity == "positive":
+
+                result["positive"].append(
+                    rule
+                )
+
+
+            elif polarity == "negative":
+
+                result["negative"].append(
+                    rule
+                )
+
+
+
+            section = rule.get(
+
+                "section",
+
+                "tong_quan"
+
+            )
+
+
+            sections.setdefault(
+
+                section,
+
+                []
+
+            ).append(rule)
+
+
+
+
+
+        for section, items in sections.items():
+
+
+            positive = any(
+
+                r.get(
+
+                    "polarity"
+
+                ) == "positive"
+
+                for r in items
+
+            )
+
+
+            negative = any(
+
+                r.get(
+
+                    "polarity"
+
+                ) == "negative"
+
+                for r in items
+
+            )
+
+
+
+            if positive and negative:
+
+
+                result["conflicts"].append({
+
+                    "section": section,
+
+
+                    "type": "polarity_conflict",
+
+
+                    "message":
+
+                    "Có đồng thời yếu tố thuận lợi và bất lợi"
+
+                })
+
+
+
+        return result
+
+
 
 
 
     def resolve(
         self,
-        interpretation_result
+        rules
     ):
-        """
-        Xử lý toàn bộ danh sách kết quả.
-        """
 
 
-        items = [
-
-            item.copy()
-
-            for item in interpretation_result
-
-        ]
-
-
-
-        codes = {
-
-            item.get(
-                "code"
-            )
-
-            for item in items
-
-        }
-
-
-
-        warnings = []
-
-
-
-        for rule in self.CONFLICT_RULES:
-
-
-            if (
-
-                rule["positive"]
-                in
-                codes
-
-                and
-
-                rule["negative"]
-                in
-                codes
-
-            ):
-
-
-                self.adjust_score(
-
-                    items,
-
-                    rule
-
-                )
-
-
-                warnings.append(
-
-                    rule["message"]
-
-                )
-
-
-
-        return items + self.create_warning_items(
-            warnings
+        data = self.analyze(
+            rules
         )
 
 
-
-    def adjust_score(
-        self,
-        items,
-        rule
-    ):
-        """
-        Điều chỉnh điểm khi có xung đột.
-        """
-
-
-        for item in items:
-
-
-            if item.get(
-                "code"
-            ) == rule["positive"]:
-
-
-                old_score = item.get(
-                    "score",
-                    0
-                )
-
-
-                item["score"] = (
-
-                    old_score
-                    +
-                    rule["adjust"]
-
-                )
+        return data
 
 
 
-    def create_warning_items(
-        self,
-        warnings
-    ):
-        """
-        Tạo mục cảnh báo cân bằng.
-        """
 
 
-        result = []
+def resolve_conflict(
+    rules
+):
 
 
-
-        for index, text in enumerate(
-            warnings,
-            start=1
-        ):
+    resolver = ConflictResolver()
 
 
-            result.append(
+    return resolver.resolve(
 
-                {
+        rules
 
-                    "section":
-                        "summary",
-
-
-                    "code":
-                        f"WARNING_{index}",
-
-
-                    "title":
-                        "Lưu ý cân bằng",
-
-
-                    "content":
-                        text,
-
-
-                    "score":
-                        0,
-
-
-                    "priority":
-                        100
-
-                }
-
-            )
-
-
-
-        return result
+    )
