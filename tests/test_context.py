@@ -4,7 +4,7 @@ Tests for InterpretationContext
 
 import pytest
 
-from interpretation_engine.context import InterpretationContext
+from engines.interpretation_engine.context import InterpretationContext
 
 
 def test_create_context():
