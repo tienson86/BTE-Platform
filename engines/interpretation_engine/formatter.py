@@ -1,49 +1,542 @@
 """
-interpretation_engine/formatter.py
+Formatter
+=========
 
-Ghép toàn bộ InterpretationItem thành báo cáo.
+Chuẩn hóa kết quả luận giải.
+
+Flow:
+
+Interpretation Builder
+        ↓
+Sentence Generator
+        ↓
+Formatter
+        ↓
+Report Engine
+
+
+Chức năng:
+
+- Chuyển dữ liệu luận giải thành các định dạng đầu ra.
+- Chuẩn bị cho:
+    + API
+    + Web
+    + PDF Report
+    + Markdown
 """
 
-from __future__ import annotations
 
-from .context import InterpretationItem
+from typing import Dict, List, Any
+
+import json
+
+
+
+# =====================================================
+# FORMAT TYPE
+# =====================================================
+
+
+FORMAT_TYPES = [
+
+    "dict",
+
+    "json",
+
+    "text",
+
+    "markdown"
+
+]
+
+
+
+
+
+# =====================================================
+# CLASS FORMATTER
+# =====================================================
 
 
 class Formatter:
 
-    SECTION_TITLE = {
-        "overview": "I. Tổng quan",
-        "personality": "II. Tính cách",
-        "five_elements": "III. Ngũ hành",
-        "career": "IV. Công việc",
-        "wealth": "V. Tài vận",
-        "marriage": "VI. Hôn nhân",
-        "health": "VII. Sức khỏe",
-        "children": "VIII. Tử tức",
-        "luck": "IX. Đại vận",
-        "fengshui": "X. Phong thủy",
-        "summary": "XI. Tổng kết",
-    }
 
-    def build(
+
+    def __init__(self):
+
+        pass
+
+
+
+
+    # =================================================
+    # MAIN FORMAT
+    # =================================================
+
+
+    def format(
         self,
-        groups: dict[str, list[InterpretationItem]],
-    ) -> str:
+        data,
+        output_type="dict"
+    ):
 
-        lines: list[str] = []
 
-        for section in self.SECTION_TITLE:
+        if output_type == "dict":
 
-            if section not in groups:
-                continue
+            return self.to_dict(data)
 
-            lines.append(self.SECTION_TITLE[section])
+
+
+        elif output_type == "json":
+
+            return self.to_json(data)
+
+
+
+        elif output_type == "text":
+
+            return self.to_text(data)
+
+
+
+        elif output_type == "markdown":
+
+            return self.to_markdown(data)
+
+
+
+        else:
+
+            raise ValueError(
+
+                "Unsupported format type"
+
+            )
+
+
+
+
+
+    # =================================================
+    # TO DICT
+    # =================================================
+
+
+    def to_dict(
+        self,
+        data
+    ):
+
+
+        if isinstance(
+            data,
+            dict
+        ):
+
+            return data
+
+
+
+        result = {
+
+
+
+            "summary":
+
+                getattr(
+
+                    data,
+
+                    "summary",
+
+                    ""
+
+                ),
+
+
+
+            "confidence":
+
+                getattr(
+
+                    data,
+
+                    "confidence",
+
+                    0
+
+                ),
+
+
+
+            "sections":{},
+
+
+
+            "strengths":
+
+                getattr(
+
+                    data,
+
+                    "strengths",
+
+                    []
+
+                ),
+
+
+
+            "weaknesses":
+
+                getattr(
+
+                    data,
+
+                    "weaknesses",
+
+                    []
+
+                ),
+
+
+
+            "warnings":
+
+                getattr(
+
+                    data,
+
+                    "warnings",
+
+                    []
+
+                )
+
+        }
+
+
+
+        sections = getattr(
+
+            data,
+
+            "sections",
+
+            {}
+
+        )
+
+
+
+        for name, section in sections.items():
+
+
+            result["sections"][name] = {
+
+
+                "score":
+
+                    section.score,
+
+
+
+                "rules":
+
+                    section.rules,
+
+
+
+                "positive":
+
+                    section.positive_rules,
+
+
+
+                "negative":
+
+                    section.negative_rules
+
+
+            }
+
+
+
+        return result
+
+
+
+
+
+    # =================================================
+    # TO JSON
+    # =================================================
+
+
+    def to_json(
+        self,
+        data
+    ):
+
+
+        dictionary = self.to_dict(
+            data
+        )
+
+
+        return json.dumps(
+
+            dictionary,
+
+            ensure_ascii=False,
+
+            indent=4
+
+        )
+
+
+
+
+
+    # =================================================
+    # TO TEXT
+    # =================================================
+
+
+    def to_text(
+        self,
+        data
+    ):
+
+
+        obj = self.to_dict(
+            data
+        )
+
+
+        lines=[]
+
+
+
+        lines.append(
+
+            "KET QUA LUAN GIAI"
+
+        )
+
+
+        lines.append(
+
+            ""
+
+        )
+
+
+        lines.append(
+
+            obj.get(
+
+                "summary",
+
+                ""
+
+            )
+
+        )
+
+
+
+        lines.append(
+
+            ""
+
+        )
+
+
+        for name, section in obj["sections"].items():
+
+
+            lines.append(
+
+                "== "
+
+                +
+
+                name
+
+                +
+
+                " =="
+
+            )
+
+
+
+            for rule in section["rules"]:
+
+
+                description = rule.get(
+
+                    "description",
+
+                    ""
+
+                )
+
+
+                if description:
+
+
+                    lines.append(
+
+                        "- "
+
+                        +
+
+                        description
+
+                    )
+
+
+
             lines.append("")
 
-            for item in groups[section]:
 
-                lines.append(f"### {item.title}")
-                lines.append(item.content)
-                lines.append("")
 
         return "\n".join(lines)
+
+
+
+
+
+    # =================================================
+    # MARKDOWN
+    # =================================================
+
+
+    def to_markdown(
+        self,
+        data
+    ):
+
+
+        obj = self.to_dict(
+            data
+        )
+
+
+        lines=[]
+
+
+
+        lines.append(
+
+            "# Kết quả luận giải"
+
+        )
+
+
+        lines.append("")
+
+
+
+        lines.append(
+
+            obj.get(
+
+                "summary",
+
+                ""
+
+            )
+
+        )
+
+
+
+        lines.append("")
+
+
+
+        for name, section in obj["sections"].items():
+
+
+            lines.append(
+
+                "## "
+
+                +
+
+                name
+
+            )
+
+
+
+            lines.append("")
+
+
+
+            for rule in section["rules"]:
+
+
+                desc = rule.get(
+
+                    "description",
+
+                    ""
+
+                )
+
+
+                if desc:
+
+
+                    lines.append(
+
+                        "- "
+
+                        +
+
+                        desc
+
+                    )
+
+
+
+            lines.append("")
+
+
+
+        return "\n".join(lines)
+
+
+
+
+
+
+# =====================================================
+# SERVICE FUNCTION
+# =====================================================
+
+
+def format_result(
+
+    data,
+
+    output_type="dict"
+
+):
+
+
+    formatter = Formatter()
+
+
+
+    return formatter.format(
+
+        data,
+
+        output_type
+
+    )
