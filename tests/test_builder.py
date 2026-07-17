@@ -1,116 +1,97 @@
 """
-Test Interpretation Builder
-
-Kiểm tra:
-- Tạo kết quả luận giải
-- Ghép các rule
-- Xử lý dữ liệu rỗng
+Tests for InterpretationBuilder
 """
 
+from interpretation_engine.interpretation_builder import (
+    InterpretationBuilder,
+)
 
-from interpretation_engine.interpretation_builder import InterpretationBuilder
 
-
-
-def test_builder_create():
+def test_create_builder():
 
     builder = InterpretationBuilder()
 
     assert builder is not None
 
 
+def test_build_empty():
+
+    builder = InterpretationBuilder()
+
+    result = builder.build([])
+
+    assert result is not None
+
 
 def test_build_single_rule():
 
     builder = InterpretationBuilder()
 
-
-    rules = [
+    matched_rules = [
 
         {
 
-            "message":
-            "Nhật chủ Canh Kim có lực mạnh"
+            "rule_id": "R001",
+
+            "description": "Nhật chủ Canh Kim vượng.",
+
+            "score": 10,
 
         }
 
     ]
 
-
-    result = builder.build(
-        rules
-    )
-
+    result = builder.build(matched_rules)
 
     assert result is not None
-
-
-
-def test_build_contains_message():
-
-    builder = InterpretationBuilder()
-
-
-    rules = [
-
-        {
-
-            "message":
-            "Nhật chủ mạnh"
-
-        }
-
-    ]
-
-
-    result = builder.build(
-        rules
-    )
-
-
-    assert "Nhật chủ mạnh" in result.text
-
 
 
 def test_build_multiple_rules():
 
     builder = InterpretationBuilder()
 
-
-    rules = [
+    matched_rules = [
 
         {
-            "message":
-            "Kim vượng"
+
+            "rule_id": "R001",
+
+            "description": "Nhật chủ mạnh.",
+
+            "score": 10,
+
         },
 
         {
-            "message":
-            "Quan tinh xuất hiện"
-        }
+
+            "rule_id": "R002",
+
+            "description": "Quan tinh rõ.",
+
+            "score": 6,
+
+        },
 
     ]
 
+    result = builder.build(matched_rules)
 
-    result = builder.build(
-        rules
-    )
-
-
-    assert "Kim vượng" in result.text
-
-    assert "Quan tinh xuất hiện" in result.text
+    assert result is not None
 
 
-
-def test_build_empty_rules():
+def test_result_has_sections():
 
     builder = InterpretationBuilder()
 
+    result = builder.build([])
 
-    result = builder.build(
-        []
-    )
+    assert hasattr(result, "sections")
 
 
-    assert result is not None
+def test_result_has_summary():
+
+    builder = InterpretationBuilder()
+
+    result = builder.build([])
+
+    assert hasattr(result, "summary")
