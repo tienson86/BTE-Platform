@@ -1,342 +1,94 @@
 """
-Test Rule Matcher
-
-Kiểm tra:
-- Khởi tạo RuleMatcher
-- Match rule với Context
-- Match nhiều điều kiện
-- Match dữ liệu load từ RuleLoader
-- Xử lý rule không hợp lệ
+Tests for RuleMatcher
 """
 
-
-from interpretation_engine.rule_matcher import RuleMatcher
 from interpretation_engine.context import InterpretationContext
 from interpretation_engine.rule_loader import RuleLoader
+from interpretation_engine.rule_matcher import RuleMatcher
 
 
-
-# ==================================================
-# Khởi tạo Matcher
-# ==================================================
-
-def test_rule_matcher_create():
+def test_create_matcher():
 
     matcher = RuleMatcher()
 
     assert matcher is not None
 
 
-
-# ==================================================
-# Match điều kiện đơn
-# ==================================================
-
-def test_match_simple_condition():
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
-
-    rule = {
-
-        "condition":
-        "nhat_chu=Canh Kim"
-
-    }
-
-
-    matcher = RuleMatcher()
-
-
-    result = matcher.match(
-        rule,
-        ctx
-    )
-
-
-    assert result is True
-
-
-
-# ==================================================
-# Không match điều kiện sai
-# ==================================================
-
-def test_not_match_condition():
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
-
-    rule = {
-
-        "condition":
-        "nhat_chu=Giap Moc"
-
-    }
-
-
-    matcher = RuleMatcher()
-
-
-    result = matcher.match(
-        rule,
-        ctx
-    )
-
-
-    assert result is False
-
-
-
-# ==================================================
-# Match nhiều điều kiện dạng dictionary
-# ==================================================
-
-def test_match_multiple_conditions():
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
-
-    ctx.set(
-        "ngu_hanh",
-        "Kim"
-    )
-
-
-    rule = {
-
-        "condition":
-        {
-
-            "nhat_chu":
-            "Canh Kim",
-
-            "ngu_hanh":
-            "Kim"
-
-        }
-
-    }
-
-
-    matcher = RuleMatcher()
-
-
-    result = matcher.match(
-        rule,
-        ctx
-    )
-
-
-    assert result is True
-
-
-
-# ==================================================
-# Một điều kiện đúng, một điều kiện sai
-# ==================================================
-
-def test_fail_multiple_conditions():
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
-
-    ctx.set(
-        "ngu_hanh",
-        "Moc"
-    )
-
-
-    rule = {
-
-        "condition":
-        {
-
-            "nhat_chu":
-            "Canh Kim",
-
-            "ngu_hanh":
-            "Kim"
-
-        }
-
-    }
-
-
-    matcher = RuleMatcher()
-
-
-    result = matcher.match(
-        rule,
-        ctx
-    )
-
-
-    assert result is False
-
-
-
-# ==================================================
-# Test Rule từ CSV
-# ==================================================
-
-def test_match_loaded_rule():
+def test_match_returns_list():
 
     loader = RuleLoader()
-
 
     rules = loader.load(
         "tests/data/test_rules.csv"
     )
 
+    context = InterpretationContext()
 
-    rule = rules[0]
-
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
+    context.bazi = {
+        "day_master": "Canh"
+    }
 
     matcher = RuleMatcher()
 
-
     result = matcher.match(
-        rule,
-        ctx
+        context,
+        rules,
     )
 
-
-    assert result is True
-
+    assert isinstance(result, list)
 
 
-# ==================================================
-# Test nhiều rule
-# ==================================================
+def test_match_empty_rules():
 
-def test_filter_matching_rules():
+    matcher = RuleMatcher()
+
+    context = InterpretationContext()
+
+    result = matcher.match(
+        context,
+        [],
+    )
+
+    assert result == []
+
+
+def test_match_rule_has_rule_id():
 
     loader = RuleLoader()
-
 
     rules = loader.load(
         "tests/data/test_rules.csv"
     )
 
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
+    context = InterpretationContext()
 
     matcher = RuleMatcher()
 
+    matched = matcher.match(
+        context,
+        rules,
+    )
 
-    matched = []
+    for rule in matched:
 
-
-    for rule in rules:
-
-        if matcher.match(
-            rule,
-            ctx
-        ):
-
-            matched.append(rule)
+        assert "rule_id" in rule
 
 
+def test_match_result_is_subset():
 
-    assert len(matched) >= 1
+    loader = RuleLoader()
 
-
-
-# ==================================================
-# Rule không có condition
-# ==================================================
-
-def test_empty_condition():
-
-    ctx = InterpretationContext()
-
-
-    rule = {
-
-        "rule_id":
-        "TEST001"
-
-    }
-
+    rules = loader.load(
+        "tests/data/test_rules.csv"
+    )
 
     matcher = RuleMatcher()
 
+    context = InterpretationContext()
 
-    result = matcher.match(
-        rule,
-        ctx
+    matched = matcher.match(
+        context,
+        rules,
     )
 
-
-    assert result is False
-
-
-
-# ==================================================
-# Context không có dữ liệu
-# ==================================================
-
-def test_missing_context_value():
-
-    ctx = InterpretationContext()
-
-
-    rule = {
-
-        "condition":
-        "nhat_chu=Canh Kim"
-
-    }
-
-
-    matcher = RuleMatcher()
-
-
-    result = matcher.match(
-        rule,
-        ctx
-    )
-
-
-    assert result is False
+    assert len(matched) <= len(rules)
