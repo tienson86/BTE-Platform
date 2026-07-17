@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "template_schema.json",
+  "title": "BTE Template Schema",
+  "description": "Schema cho templates.csv",
+  "type": "object",
+
+  "required": [
+    "template_id",
+    "title",
+    "paragraph_id",
+    "priority",
+    "enabled"
+  ],
+
+  "properties": {
+
+    "template_id": {
+      "$ref": "common_schema.json#/$defs/id"
+    },
+
+    "title": {
+      "$ref": "common_schema.json#/$defs/name"
+    },
+
+    "paragraph_id": {
+      "$ref": "common_schema.json#/$defs/id"
+    },
+
+    "priority": {
+      "$ref": "common_schema.json#/$defs/priority"
+    },
+
+    "enabled": {
+      "$ref": "common_schema.json#/$defs/enabled"
+    },
+
+    "tags": {
+      "$ref": "common_schema.json#/$defs/tags"
+    },
+
+    "version": {
+      "$ref": "common_schema.json#/$defs/version"
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "author": {
+      "type": "string"
+    },
+
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "updated": {
+      "type": "string",
+      "format": "date"
+    }
+
+  },
+
+  "additionalProperties": false
+}
