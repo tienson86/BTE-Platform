@@ -1,8 +1,8 @@
 from pathlib import Path
 
 from .context import ScoreContext
-from .score_engine import ScoreEngine
-from .score_loader import ScoreLoader
+from .engine import ScoreEngine
+from .loader import ScoreLoader
 
 
 class ScoreService:
