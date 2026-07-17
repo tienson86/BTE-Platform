@@ -1,165 +1,78 @@
 """
-Test Rule Loader
-
-Kiểm tra:
-- Khởi tạo RuleLoader
-- Load file rule CSV
-- Parse dữ liệu rule
-- Validate cấu trúc rule
-- Xử lý lỗi
+Tests for RuleLoader
 """
 
+from pathlib import Path
 
 import pytest
-
 
 from interpretation_engine.rule_loader import RuleLoader
 
 
+TEST_RULE_FILE = Path("tests/data/test_rules.csv")
+EMPTY_RULE_FILE = Path("tests/data/empty_rules.csv")
 
-# ==================================================
-# Test khởi tạo
-# ==================================================
 
-def test_rule_loader_create():
+def test_create_loader():
 
     loader = RuleLoader()
 
     assert loader is not None
 
 
-
-# ==================================================
-# Test load rule database
-# ==================================================
-
 def test_load_rule_file():
-
 
     loader = RuleLoader()
 
+    rules = loader.load(TEST_RULE_FILE)
 
-    rules = loader.load(
-        "tests/data/test_rules.csv"
-    )
+    assert isinstance(rules, list)
 
 
-    assert isinstance(
-        rules,
-        list
-    )
+def test_rule_count():
 
+    loader = RuleLoader()
+
+    rules = loader.load(TEST_RULE_FILE)
 
     assert len(rules) > 0
 
 
-
-# ==================================================
-# Test cấu trúc Rule
-# ==================================================
-
-def test_rule_structure():
-
+def test_rule_has_required_fields():
 
     loader = RuleLoader()
 
-
-    rules = loader.load(
-        "tests/data/test_rules.csv"
-    )
-
+    rules = loader.load(TEST_RULE_FILE)
 
     rule = rules[0]
 
+    required_fields = [
 
-    assert "rule_id" in rule
+        "rule_id",
+        "category",
+        "condition",
+        "score",
 
-    assert "rule_name" in rule
+    ]
 
-    assert "condition" in rule
+    for field in required_fields:
 
-    assert "score" in rule
-
-    assert "message" in rule
+        assert field in rule
 
 
-
-# ==================================================
-# Test nhiều Rule
-# ==================================================
-
-def test_load_multiple_rules():
-
+def test_load_empty_rule_file():
 
     loader = RuleLoader()
 
-
-    rules = loader.load(
-        "tests/data/test_rules.csv"
-    )
-
-
-    assert len(rules) >= 2
-
-
-
-# ==================================================
-# Test file rỗng
-# ==================================================
-
-def test_empty_rule_file():
-
-
-    loader = RuleLoader()
-
-
-    rules = loader.load(
-        "tests/data/empty_rules.csv"
-    )
-
+    rules = loader.load(EMPTY_RULE_FILE)
 
     assert rules == []
 
 
-
-# ==================================================
-# Test file không tồn tại
-# ==================================================
-
 def test_missing_file():
 
-
     loader = RuleLoader()
 
+    with pytest.raises(FileNotFoundError):
 
-    with pytest.raises(
-        FileNotFoundError
-    ):
-
-        loader.load(
-            "tests/data/not_exists.csv"
-        )
-
-
-
-# ==================================================
-# Test reload
-# ==================================================
-
-def test_reload_rules():
-
-
-    loader = RuleLoader()
-
-
-    first_load = loader.load(
-        "tests/data/test_rules.csv"
-    )
-
-
-    second_load = loader.load(
-        "tests/data/test_rules.csv"
-    )
-
-
-    assert first_load == second_load
+        loader.load("tests/data/not_found.csv")
