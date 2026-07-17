@@ -1,184 +1,531 @@
 """
-rule_matcher.py
-===============
+Rule Matcher
+============
 
-Bộ máy so khớp Rule của Interpretation Engine.
+Kiểm tra điều kiện Rule với dữ liệu lá số.
 
-Nhiệm vụ
---------
-- Phân tích điều kiện Rule
-- Đối chiếu với InterpretationContext
-- Trả về RuleResult
+Flow:
 
-Không thực hiện:
-- Chấm điểm
-- Sắp xếp ưu tiên
-- Sinh câu luận
+Context
+    ↓
+Rule Database
+    ↓
+Rule Matcher
+    ↓
+Matched Rules
+    ↓
+Rule Scoring
+
+
+Chức năng:
+
+- Đọc điều kiện của Rule.
+- So sánh với Context.
+- Trả về Rule được kích hoạt.
+
+Không chứa:
+- Chấm điểm.
+- Sinh câu luận giải.
+- Kiến thức Bát Tự trực tiếp.
 """
 
-from __future__ import annotations
 
-from typing import Iterable, List
+from typing import Dict, List, Any
 
-from .models.context import InterpretationContext
-from .models.rule import Rule
-from .models.rule_result import RuleResult
+
+
+
+
+# =====================================================
+# OPERATOR DATABASE
+# =====================================================
+
+
+SUPPORTED_OPERATORS = [
+
+    "eq",
+
+    "neq",
+
+    "in",
+
+    "not_in",
+
+    "contains",
+
+    "exists",
+
+    "gt",
+
+    "lt"
+
+]
+
+
+
+
+
+# =====================================================
+# CLASS
+# =====================================================
 
 
 class RuleMatcher:
-    """
-    Bộ máy so khớp Rule.
-    """
 
-    # =====================================================
-    # Public API
-    # =====================================================
+
+
+    def __init__(self):
+
+        pass
+
+
+
+
+    # =================================================
+    # MAIN MATCH
+    # =================================================
+
 
     def match(
         self,
-        context: InterpretationContext,
-        rules: Iterable[Rule],
-    ) -> List[RuleResult]:
+        context: Dict[str, Any],
+        rules: List[Dict[str, Any]]
+    ):
 
-        results: List[RuleResult] = []
+
+        matched = []
+
+
 
         for rule in rules:
 
-            matched = self.evaluate(
-                rule.condition,
+
+            condition = rule.get(
+
+                "condition",
+
+                {}
+
+            )
+
+
+
+            if self.check_condition(
+
                 context,
-            )
 
-            result = RuleResult(
-                rule=rule,
-                matched=matched,
-                priority=rule.priority,
-                score=rule.weight if matched else 0.0,
-                text=rule.result if matched else "",
-            )
+                condition
 
-            results.append(result)
+            ):
 
-        return results
 
-    # =====================================================
-    # Evaluate
-    # =====================================================
+                matched_rule = rule.copy()
 
-    def evaluate(
+
+
+                matched_rule["matched"] = True
+
+
+
+                matched.append(
+
+                    matched_rule
+
+                )
+
+
+
+        return matched
+
+
+
+
+
+    # =================================================
+    # CHECK CONDITION
+    # =================================================
+
+
+    def check_condition(
         self,
-        condition: str,
-        context: InterpretationContext,
-    ) -> bool:
+        context,
+        condition
+    ):
+
 
         if not condition:
-            return True
 
-        tokens = [
-            t.strip()
-            for t in condition.split("AND")
-            if t.strip()
-        ]
 
-        for token in tokens:
+            return False
 
-            if not self.evaluate_expression(
-                token,
+
+
+        for key, requirement in condition.items():
+
+
+            value = self.get_context_value(
+
                 context,
+
+                key
+
+            )
+
+
+
+            if not self.compare(
+
+                value,
+
+                requirement
+
             ):
+
+
                 return False
+
+
 
         return True
 
-    # =====================================================
-    # Expression
-    # =====================================================
 
-    def evaluate_expression(
+
+
+
+    # =================================================
+    # GET VALUE
+    # =================================================
+
+
+    def get_context_value(
         self,
-        expression: str,
-        context: InterpretationContext,
-    ) -> bool:
+        context,
+        key
+    ):
 
-        # ==
-        if "==" in expression:
 
-            left, right = expression.split("==", 1)
+        parts = key.split(".")
 
-            return self.compare(
-                context.resolve(left.strip()),
-                right.strip(),
-            )
+        value = context
 
-        # !=
-        if "!=" in expression:
 
-            left, right = expression.split("!=", 1)
 
-            return (
-                context.resolve(left.strip())
-                != right.strip()
-            )
+        for part in parts:
 
-        # contains
 
-        if "contains" in expression:
+            if isinstance(
 
-            left, right = expression.split(
-                "contains",
-                1,
-            )
+                value,
 
-            return self.contains(
-                context.resolve(left.strip()),
-                right.strip(),
-            )
+                dict
 
-        # exists
+            ):
 
-        if expression.endswith("exists"):
 
-            field = expression.replace(
-                "exists",
-                "",
-            ).strip()
+                value = value.get(
 
-            return context.resolve(field) is not None
+                    part
 
-        raise ValueError(
-            f"Không hiểu biểu thức: {expression}"
-        )
+                )
 
-    # =====================================================
-    # Compare
-    # =====================================================
+
+
+            else:
+
+
+                return None
+
+
+
+        return value
+
+
+
+
+
+    # =================================================
+    # COMPARE
+    # =================================================
+
 
     def compare(
         self,
-        left,
-        right,
-    ) -> bool:
+        value,
+        requirement
+    ):
 
-        if left is None:
-            return False
 
-        return str(left) == str(right)
+        if isinstance(
+            requirement,
+            dict
+        ):
 
-    def contains(
+
+            operator = requirement.get(
+
+                "operator",
+
+                "eq"
+
+            )
+
+
+            target = requirement.get(
+
+                "value"
+
+            )
+
+
+            return self.compare_operator(
+
+                value,
+
+                operator,
+
+                target
+
+            )
+
+
+
+        else:
+
+
+            return value == requirement
+
+
+
+
+
+    # =================================================
+    # OPERATOR PROCESS
+    # =================================================
+
+
+    def compare_operator(
         self,
-        left,
-        right,
-    ) -> bool:
+        value,
+        operator,
+        target
+    ):
 
-        if left is None:
+
+
+        if operator == "eq":
+
+
+            return value == target
+
+
+
+
+        elif operator == "neq":
+
+
+            return value != target
+
+
+
+
+        elif operator == "in":
+
+
+            if isinstance(
+
+                target,
+
+                list
+
+            ):
+
+
+                return value in target
+
+
+
             return False
 
-        if isinstance(left, str):
 
-            return right in left
 
-        if isinstance(left, list):
 
-            return right in left
+
+        elif operator == "not_in":
+
+
+            if isinstance(
+
+                target,
+
+                list
+
+            ):
+
+
+                return value not in target
+
+
+
+            return False
+
+
+
+
+
+        elif operator == "contains":
+
+
+            if isinstance(
+
+                value,
+
+                list
+
+            ):
+
+
+                return target in value
+
+
+
+            if isinstance(
+
+                value,
+
+                str
+
+            ):
+
+
+                return target in value
+
+
+
+            return False
+
+
+
+
+
+        elif operator == "exists":
+
+
+            return value is not None
+
+
+
+
+        elif operator == "gt":
+
+
+            return value > target
+
+
+
+
+        elif operator == "lt":
+
+
+            return value < target
+
+
+
+
 
         return False
+
+
+
+
+
+    # =================================================
+    # DEBUG MATCH
+    # =================================================
+
+
+    def explain_match(
+        self,
+        context,
+        rule
+    ):
+
+
+        condition = rule.get(
+
+            "condition",
+
+            {}
+
+        )
+
+
+        result = {}
+
+
+
+        for key, requirement in condition.items():
+
+
+            value = self.get_context_value(
+
+                context,
+
+                key
+
+            )
+
+
+            result[key] = {
+
+
+                "actual": value,
+
+
+                "required": requirement,
+
+
+                "matched":
+
+                    self.compare(
+
+                        value,
+
+                        requirement
+
+                    )
+
+            }
+
+
+
+        return result
+
+
+
+
+
+# =====================================================
+# SERVICE FUNCTION
+# =====================================================
+
+
+def match_rules(
+
+    context,
+
+    rules
+
+):
+
+
+    matcher = RuleMatcher()
+
+
+
+    return matcher.match(
+
+        context,
+
+        rules
+
+    )
