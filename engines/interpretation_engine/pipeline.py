@@ -1,82 +1,64 @@
 """
-pipeline.py
-===========
+Interpretation Pipeline
 
-Điều phối toàn bộ Interpretation Engine.
-
-Luồng xử lý:
-
-Validator
-    ↓
-Context
-    ↓
-Rule Loader
-    ↓
-Rule Matcher
-    ↓
-Rule Scoring
-    ↓
-Priority
-    ↓
-Interpretation Builder
-    ↓
-Formatter
+Điều phối toàn bộ quy trình sinh báo cáo.
 """
 
-from .validators import InterpretationValidator
+from __future__ import annotations
 
 
 class InterpretationPipeline:
 
     def __init__(
         self,
-        context_builder,
-        rule_loader,
-        rule_matcher,
-        rule_scoring,
-        priority,
-        interpretation_builder,
-        formatter,
+        schema_loader,
+        validator,
+        registry,
+        plugin_manager,
+        engine_validator
     ):
 
-        self.context_builder = context_builder
-        self.rule_loader = rule_loader
-        self.rule_matcher = rule_matcher
-        self.rule_scoring = rule_scoring
-        self.priority = priority
-        self.interpretation_builder = interpretation_builder
-        self.formatter = formatter
+        self.schema_loader = schema_loader
+        self.validator = validator
+        self.registry = registry
+        self.plugin_manager = plugin_manager
+        self.engine_validator = engine_validator
 
-    def run(self, chart):
+    def initialize(self):
 
-        # 1. Xây dựng context
-        context = self.context_builder.build(chart)
+        """
+        Khởi tạo Engine.
+        """
 
-        # 2. Kiểm tra dữ liệu
-        InterpretationValidator.validate(context)
+        return True
 
-        # 3. Nạp Rule
-        rules = self.rule_loader.load_all()
+    def validate(self):
 
-        # 4. So khớp Rule
-        matched = self.rule_matcher.match(
-            context=context,
-            rules=rules,
-        )
+        """
+        Kiểm tra Database.
+        """
 
-        # 5. Chấm điểm
-        scored = self.rule_scoring.score(matched)
+        return self.engine_validator
 
-        # 6. Sắp xếp ưu tiên
-        ordered = self.priority.sort(scored)
+    def execute(
+        self,
+        chart
+    ):
 
-        # 7. Xây dựng diễn giải
-        interpretation = self.interpretation_builder.build(
-            ordered,
-            context,
-        )
+        """
+        Điều phối toàn bộ quá trình diễn giải.
 
-        # 8. Định dạng kết quả
-        return self.formatter.format(
-            interpretation
-        )
+        1. Match Rule
+
+        2. Chọn Template
+
+        3. Sinh Sentence
+
+        4. Ghép Paragraph
+
+        5. Ghép Chapter
+
+        6. Trả Report
+        """
+
+        return chart
