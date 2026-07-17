@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "metadata_schema.json",
+
+  "title": "Metadata Schema",
+
+  "type": "object",
+
+  "required": [
+
+    "module",
+
+    "module_name",
+
+    "version",
+
+    "language",
+
+    "author"
+
+  ],
+
+  "properties": {
+
+    "module": {
+      "type": "string"
+    },
+
+    "module_name": {
+      "type": "string"
+    },
+
+    "version": {
+      "$ref": "common_schema.json#/$defs/version"
+    },
+
+    "status": {
+
+      "type": "string",
+
+      "enum": [
+        "development",
+        "testing",
+        "stable",
+        "deprecated"
+      ]
+
+    },
+
+    "language": {
+      "type": "string"
+    },
+
+    "author": {
+      "type": "string"
+    },
+
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "dependencies": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      }
+
+    },
+
+    "supported_variables": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      }
+
+    },
+
+    "description": {
+      "type": "string"
+    }
+
+  },
+
+  "additionalProperties": false
+}
