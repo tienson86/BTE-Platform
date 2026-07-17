@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "glossary_schema.json",
+
+  "title": "Glossary Schema",
+
+  "type": "object",
+
+  "required": [
+
+    "term",
+
+    "definition"
+
+  ],
+
+  "properties": {
+
+    "term": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "definition": {
+
+      "type": "string",
+
+      "minLength": 1
+
+    },
+
+    "category": {
+
+      "type": "string"
+
+    },
+
+    "alias": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      }
+
+    },
+
+    "enabled": {
+
+      "type": "boolean",
+
+      "default": true
+
+    }
+
+  },
+
+  "additionalProperties": false
+}
