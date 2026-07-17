@@ -2,183 +2,613 @@
 rule_matcher.py
 ===============
 
-Bộ máy so khớp Rule của Interpretation Engine.
+Rule Matcher cho BTE Platform V1.0
 
-Nhiệm vụ
---------
-- Phân tích điều kiện Rule
-- Đối chiếu với InterpretationContext
-- Trả về RuleResult
+Nhiệm vụ:
 
-Không thực hiện:
-- Chấm điểm
-- Sắp xếp ưu tiên
-- Sinh câu luận
+- Nhận danh sách Rule từ RuleLoader
+- Kiểm tra điều kiện Rule
+- Trả về danh sách Rule phù hợp
+
+RuleMatcher KHÔNG thực hiện luận giải.
+Nó chỉ xác định Rule nào được kích hoạt.
 """
 
 from __future__ import annotations
 
-from typing import Iterable, List
-
-from .models.context import InterpretationContext
-from .models.rule import Rule
-from .models.rule_result import RuleResult
+from typing import Any
+from typing import Dict
+from typing import List
+from typing import Optional
 
 
 class RuleMatcher:
     """
-    Bộ máy so khớp Rule.
+    Rule Matcher.
+
+    Chịu trách nhiệm:
+
+    - lọc Rule
+    - kiểm tra điều kiện
+    - trả về Rule hợp lệ
     """
 
-    # =====================================================
-    # Public API
-    # =====================================================
+    def __init__(self, strict: bool = False):
+
+        # strict=True:
+        # thiếu dữ liệu -> False
+        #
+        # strict=False:
+        # thiếu dữ liệu -> bỏ qua
+
+        self.strict = strict
+
+    # ---------------------------------------------------------
+    # Public
+    # ---------------------------------------------------------
 
     def match(
         self,
-        context: InterpretationContext,
-        rules: Iterable[Rule],
-    ) -> List[RuleResult]:
+        context: Any,
+        rules: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """
+        Match toàn bộ Rule.
 
-        results: List[RuleResult] = []
+        Parameters
+        ----------
+        context
+            InterpretationContext
+
+        rules
+            Danh sách Rule từ RuleLoader
+
+        Returns
+        -------
+        List[dict]
+            Danh sách Rule đã match.
+        """
+
+        matched: List[Dict[str, Any]] = []
+
+        if not rules:
+            return matched
 
         for rule in rules:
 
-            matched = self.evaluate(
-                rule.condition,
-                context,
-            )
+            if not isinstance(rule, dict):
+                continue
 
-            result = RuleResult(
-                rule=rule,
-                matched=matched,
-                priority=rule.priority,
-                score=rule.weight if matched else 0.0,
-                text=rule.result if matched else "",
-            )
+            condition = rule.get("condition")
 
-            results.append(result)
+            if self.check_condition(
+                context=context,
+                condition=condition,
+            ):
+                matched.append(rule)
 
-        return results
+        matched = self.sort_by_priority(matched)
 
-    # =====================================================
-    # Evaluate
-    # =====================================================
+        return matched
 
-    def evaluate(
+    # ---------------------------------------------------------
+    # Condition
+    # ---------------------------------------------------------
+
+    def check_condition(
         self,
-        condition: str,
-        context: InterpretationContext,
+        context: Any,
+        condition: Any,
     ) -> bool:
+        """
+        Part 2 sẽ triển khai.
+        """
+        raise NotImplementedError
+
+    def normalize_condition(
+        self,
+        condition: Any,
+    ) -> Dict[str, Any]:
+        """
+        Part 2 sẽ triển khai.
+        """
+        raise NotImplementedError
+
+    # ---------------------------------------------------------
+    # Context
+    # ---------------------------------------------------------
+
+    def get_context_value(
+        self,
+        context: Any,
+        path: str,
+    ) -> Any:
+        """
+        Part 3 sẽ triển khai.
+        """
+        raise NotImplementedError
+
+    def compare_value(
+        self,
+        actual: Any,
+        expected: Any,
+    ) -> bool:
+        """
+        Part 3 sẽ triển khai.
+        """
+        raise NotImplementedError
+
+    # ---------------------------------------------------------
+    # Filter
+    # ---------------------------------------------------------
+
+    def filter_by_category(
+        self,
+        rules: List[Dict[str, Any]],
+        category: Optional[str],
+    ) -> List[Dict[str, Any]]:
+
+        if not category:
+            return rules
+
+        return [
+            rule
+            for rule in rules
+            if rule.get("category") == category
+        ]
+
+    def filter_by_layer(
+        self,
+        rules: List[Dict[str, Any]],
+        layer: Optional[str],
+    ) -> List[Dict[str, Any]]:
+
+        if not layer:
+            return rules
+
+        return [
+            rule
+            for rule in rules
+            if rule.get("layer") == layer
+        ]
+
+    # ---------------------------------------------------------
+    # Sort
+    # ---------------------------------------------------------
+
+    def sort_by_priority(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """
+        Sắp xếp Rule theo priority giảm dần.
+        """
+
+        return sorted(
+            rules,
+            key=lambda x: x.get("priority", 0),
+            reverse=True,
+        )
+            # ---------------------------------------------------------
+    # Condition
+    # ---------------------------------------------------------
+
+    def normalize_condition(
+        self,
+        condition: Any,
+    ) -> Dict[str, Any]:
+        """
+        Chuẩn hóa condition về dict.
+
+        Hỗ trợ:
+
+        - dict
+        - JSON string
+        - key=value
+        - key=value;key2=value2
+        """
+
+        if condition is None:
+            return {}
+
+        if isinstance(condition, dict):
+            return condition
+
+        if not isinstance(condition, str):
+            return {}
+
+        condition = condition.strip()
+
+        if condition == "":
+            return {}
+
+        # ----------------------------
+        # JSON
+        # ----------------------------
+
+        if condition.startswith("{"):
+
+            import json
+
+            try:
+                data = json.loads(condition)
+
+                if isinstance(data, dict):
+                    return data
+
+            except Exception:
+                return {}
+
+        # ----------------------------
+        # key=value
+        # ----------------------------
+
+        result = {}
+
+        parts = [
+            p.strip()
+            for p in condition.split(";")
+            if p.strip()
+        ]
+
+        for item in parts:
+
+            if "=" not in item:
+                continue
+
+            key, value = item.split("=", 1)
+
+            result[key.strip()] = value.strip()
+
+        return result
+
+    def check_condition(
+        self,
+        context: Any,
+        condition: Any,
+    ) -> bool:
+        """
+        Kiểm tra Rule condition.
+        """
+
+        condition = self.normalize_condition(condition)
 
         if not condition:
             return True
 
-        tokens = [
-            t.strip()
-            for t in condition.split("AND")
-            if t.strip()
-        ]
+        for key, expected in condition.items():
 
-        for token in tokens:
+            actual = self.get_context_value(
+                context=context,
+                path=key,
+            )
 
-            if not self.evaluate_expression(
-                token,
-                context,
+            if actual is None:
+
+                if self.strict:
+                    return False
+
+                continue
+
+            if not self.compare_value(
+                actual,
+                expected,
             ):
                 return False
 
         return True
+            # ---------------------------------------------------------
+    # Context
+    # ---------------------------------------------------------
 
-    # =====================================================
-    # Expression
-    # =====================================================
-
-    def evaluate_expression(
+    def get_context_value(
         self,
-        expression: str,
-        context: InterpretationContext,
+        context: Any,
+        path: str,
+    ) -> Any:
+        """
+        Lấy giá trị trong InterpretationContext.
+
+        Ví dụ:
+
+            bazi.day_master
+            score.strength
+            pattern.name
+            elements.fire
+        """
+
+        if context is None:
+            return None
+
+        if not path:
+            return None
+
+        current = context
+
+        for part in path.split("."):
+
+            if current is None:
+                return None
+
+            # dict
+            if isinstance(current, dict):
+                current = current.get(part)
+                continue
+
+            # object
+            if hasattr(current, part):
+                current = getattr(current, part)
+                continue
+
+            return None
+
+        return current
+
+    def compare_value(
+        self,
+        actual: Any,
+        expected: Any,
     ) -> bool:
+        """
+        So sánh actual và expected.
 
-        # ==
-        if "==" in expression:
+        Hỗ trợ:
 
-            left, right = expression.split("==", 1)
+        value
+        !=value
+        >value
+        <value
+        >=value
+        <=value
+        in:a,b,c
+        not in:a,b,c
+        """
 
-            return self.compare(
-                context.resolve(left.strip()),
-                right.strip(),
-            )
+        if expected is None:
+            return actual is None
 
+        expected = str(expected).strip()
+
+        # ------------------------
+        # not in
+        # ------------------------
+
+        if expected.startswith("not in:"):
+
+            values = [
+                x.strip()
+                for x in expected[7:].split(",")
+                if x.strip()
+            ]
+
+            return str(actual) not in values
+
+        # ------------------------
+        # in
+        # ------------------------
+
+        if expected.startswith("in:"):
+
+            values = [
+                x.strip()
+                for x in expected[3:].split(",")
+                if x.strip()
+            ]
+
+            return str(actual) in values
+
+        # ------------------------
         # !=
-        if "!=" in expression:
+        # ------------------------
 
-            left, right = expression.split("!=", 1)
+        if expected.startswith("!="):
 
-            return (
-                context.resolve(left.strip())
-                != right.strip()
-            )
+            return str(actual) != expected[2:].strip()
 
-        # contains
+        # ------------------------
+        # >=
+        # ------------------------
 
-        if "contains" in expression:
+        if expected.startswith(">="):
 
-            left, right = expression.split(
-                "contains",
-                1,
-            )
+            try:
+                return float(actual) >= float(expected[2:].strip())
+            except Exception:
+                return False
 
-            return self.contains(
-                context.resolve(left.strip()),
-                right.strip(),
-            )
+        # ------------------------
+        # <=
+        # ------------------------
 
-        # exists
+        if expected.startswith("<="):
 
-        if expression.endswith("exists"):
+            try:
+                return float(actual) <= float(expected[2:].strip())
+            except Exception:
+                return False
 
-            field = expression.replace(
-                "exists",
-                "",
-            ).strip()
+        # ------------------------
+        # >
+        # ------------------------
 
-            return context.resolve(field) is not None
+        if expected.startswith(">"):
 
-        raise ValueError(
-            f"Không hiểu biểu thức: {expression}"
+            try:
+                return float(actual) > float(expected[1:].strip())
+            except Exception:
+                return False
+
+        # ------------------------
+        # <
+        # ------------------------
+
+        if expected.startswith("<"):
+
+            try:
+                return float(actual) < float(expected[1:].strip())
+            except Exception:
+                return False
+
+        # ------------------------
+        # bool
+        # ------------------------
+
+        if expected.lower() == "true":
+            return bool(actual) is True
+
+        if expected.lower() == "false":
+            return bool(actual) is False
+
+        # ------------------------
+        # number
+        # ------------------------
+
+        try:
+
+            actual_number = float(actual)
+            expected_number = float(expected)
+
+            return actual_number == expected_number
+
+        except Exception:
+            pass
+
+        # ------------------------
+        # string
+        # ------------------------
+
+        return str(actual).strip() == expected
+            # ---------------------------------------------------------
+    # Filter
+    # ---------------------------------------------------------
+
+    def filter_by_category(
+        self,
+        rules: List[Dict[str, Any]],
+        category: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Lọc Rule theo category.
+        """
+
+        if not category:
+            return list(rules)
+
+        return [
+            rule
+            for rule in rules
+            if rule.get("category") == category
+        ]
+
+    def filter_by_layer(
+        self,
+        rules: List[Dict[str, Any]],
+        layer: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Lọc Rule theo layer.
+        """
+
+        if not layer:
+            return list(rules)
+
+        return [
+            rule
+            for rule in rules
+            if rule.get("layer") == layer
+        ]
+
+    # ---------------------------------------------------------
+    # Sort
+    # ---------------------------------------------------------
+
+    def sort_by_priority(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """
+        Sắp xếp Rule theo priority giảm dần.
+        Nếu priority không tồn tại sẽ mặc định bằng 0.
+        """
+
+        return sorted(
+            rules,
+            key=lambda rule: int(rule.get("priority", 0)),
+            reverse=True,
         )
 
-    # =====================================================
-    # Compare
-    # =====================================================
+    # ---------------------------------------------------------
+    # Helper
+    # ---------------------------------------------------------
 
-    def compare(
+    def validate_rule(
         self,
-        left,
-        right,
+        rule: Dict[str, Any],
     ) -> bool:
+        """
+        Kiểm tra Rule có hợp lệ hay không.
+        """
 
-        if left is None:
+        if not isinstance(rule, dict):
             return False
 
-        return str(left) == str(right)
-
-    def contains(
-        self,
-        left,
-        right,
-    ) -> bool:
-
-        if left is None:
+        if "condition" not in rule:
             return False
 
-        if isinstance(left, str):
+        return True
 
-            return right in left
+    def match_one(
+        self,
+        context: Any,
+        rule: Dict[str, Any],
+    ) -> bool:
+        """
+        Match một Rule.
+        """
 
-        if isinstance(left, list):
+        if not self.validate_rule(rule):
+            return False
 
-            return right in left
+        return self.check_condition(
+            context=context,
+            condition=rule.get("condition"),
+        )
 
-        return False
+    def match_all(
+        self,
+        context: Any,
+        rules: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """
+        Alias của match() để tương thích các module khác.
+        """
+
+        return self.match(
+            context=context,
+            rules=rules,
+        )
+
+    # ---------------------------------------------------------
+    # Magic
+    # ---------------------------------------------------------
+
+    def __call__(
+        self,
+        context: Any,
+        rules: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """
+        Cho phép gọi trực tiếp:
+            matcher(context, rules)
+        """
+
+        return self.match(
+            context=context,
+            rules=rules,
+        )
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}"
+            f"(strict={self.strict})"
+        )
