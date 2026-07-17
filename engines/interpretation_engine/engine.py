@@ -1,112 +1,52 @@
 """
-BTE Platform
 Interpretation Engine
 
-Engine điều phối toàn bộ Interpretation Engine.
+Engine trung tâm.
 """
 
 from __future__ import annotations
 
-import time
-
-from .config import (
-    DEFAULT_CONFIG,
-    InterpretationConfig,
-)
-
-from .models import (
-    InterpretationContext,
-    InterpretationResult,
-    InterpretationState,
-)
-
-from .service import InterpretationService
-
 
 class InterpretationEngine:
-    """
-    Engine chính của Interpretation.
-    """
+
+    VERSION = "1.0.0"
 
     def __init__(
+
         self,
-        config: InterpretationConfig | None = None,
-    ) -> None:
 
-        self.config = config or DEFAULT_CONFIG
+        pipeline
 
-        self.state = InterpretationState()
+    ):
 
-        self.service = InterpretationService(
-            self.config
-        )
+        self.pipeline = pipeline
 
-        self.initialize()
+    def startup(self):
 
-    # ======================================================
-    # Initialize
-    # ======================================================
+        """
+        Khởi động Engine.
+        """
 
-    def initialize(self) -> None:
+        self.pipeline.initialize()
 
-        self.state.initialized = True
+    def validate(self):
 
-    # ======================================================
-    # Execute
-    # ======================================================
+        """
+        Kiểm tra Database.
+        """
 
-    def execute(
+        return self.pipeline.validate()
+
+    def interpret(
+
         self,
-        context: InterpretationContext,
-    ) -> InterpretationResult:
 
-        start = time.perf_counter()
+        chart
 
-        result = self.service.interpret(
-            context
-        )
+    ):
 
-        self.state.rendered = True
+        """
+        Diễn giải một lá số.
+        """
 
-        self.state.elapsed_time = (
-            time.perf_counter() - start
-        )
-
-        return result
-
-    # ======================================================
-    # Reload
-    # ======================================================
-
-    def reload(self) -> None:
-
-        self.service.reload()
-
-    # ======================================================
-    # Reset
-    # ======================================================
-
-    def reset(self) -> None:
-
-        self.state = InterpretationState()
-
-        self.initialize()
-
-    # ======================================================
-    # Properties
-    # ======================================================
-
-    @property
-    def version(self):
-
-        return self.config.engine_version
-
-    @property
-    def name(self):
-
-        return self.config.engine_name
-
-    @property
-    def cache(self):
-
-        return self.service.cache
+        return self.pipeline.execute(chart)
