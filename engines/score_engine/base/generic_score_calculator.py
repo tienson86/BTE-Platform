@@ -6,7 +6,7 @@ Template Method cho các Score Calculator.
 
 from .base_calculator import BaseCalculator
 
-from ..matcher.matcher import RuleMatcher
+from ..matcher import RuleMatcher
 from ..utils.validator import ScoreValidator
 from ..utils.scorer import RuleScorer
 from ..utils.normalizer import ScoreNormalizer
