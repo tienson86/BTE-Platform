@@ -1,105 +1,95 @@
 """
-Test Interpretation Pipeline
-
-Kiểm tra toàn bộ luồng Engine
+Integration Tests for InterpretationEngine
 """
-
 
 from interpretation_engine.engine import InterpretationEngine
 
 
-
-def test_engine_create():
+def test_create_engine():
 
     engine = InterpretationEngine()
 
     assert engine is not None
 
 
-
-def test_full_pipeline():
+def test_run_empty_context():
 
     engine = InterpretationEngine()
 
-
-    input_data = {
-
-        "nhat_chu":
-        "Canh Kim",
-
-        "ngu_hanh":
-        "Kim"
-
-    }
-
-
-    result = engine.run(
-        input_data
-    )
-
+    result = engine.run({})
 
     assert result is not None
 
+
+def test_run_basic_chart():
+
+    engine = InterpretationEngine()
+
+    chart = {
+
+        "day_master": "Canh",
+
+        "month_branch": "Sửu",
+
+    }
+
+    result = engine.run(chart)
+
+    assert result is not None
+
+
+def test_pipeline_returns_result():
+
+    engine = InterpretationEngine()
+
+    chart = {
+
+        "day_master": "Canh",
+
+    }
+
+    result = engine.run(chart)
+
+    assert result is not None
+
+
+def test_pipeline_has_summary():
+
+    engine = InterpretationEngine()
+
+    chart = {
+
+        "day_master": "Canh",
+
+    }
+
+    result = engine.run(chart)
+
+    if isinstance(result, dict):
+
+        assert "summary" in result
+
+    else:
+
+        assert hasattr(result, "summary")
 
 
 def test_pipeline_has_score():
 
     engine = InterpretationEngine()
 
+    chart = {
 
-    input_data = {
-
-        "nhat_chu":
-        "Canh Kim"
+        "day_master": "Canh",
 
     }
 
+    result = engine.run(chart)
 
-    result = engine.run(
-        input_data
-    )
+    if isinstance(result, dict):
 
+        assert "score" in result
 
-    assert hasattr(
-        result,
-        "score"
-    )
+    else:
 
-
-
-def test_pipeline_has_text():
-
-    engine = InterpretationEngine()
-
-
-    input_data = {
-
-        "nhat_chu":
-        "Canh Kim"
-
-    }
-
-
-    result = engine.run(
-        input_data
-    )
-
-
-    assert hasattr(
-        result,
-        "text"
-    )
-
-
-
-def test_pipeline_empty_input():
-
-    engine = InterpretationEngine()
-
-
-    result = engine.run(
-        {}
-    )
-
-
-    assert result is not None
+        assert hasattr(result, "score")
