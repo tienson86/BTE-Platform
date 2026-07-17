@@ -2,9 +2,9 @@
 Rule Loader
 ===========
 
-Nạp dữ liệu Rule Database cho Interpretation Engine.
+Nạp Rule Database cho Interpretation Engine.
 
-Flow:
+Pipeline:
 
 Rule Database
       ↓
@@ -15,417 +15,207 @@ Rule Matcher
 Rule Scoring
       ↓
 Interpretation Builder
-
-
-Chức năng:
-
-- Đọc dữ liệu rule.
-- Chuẩn hóa rule.
-- Lọc rule theo module.
-- Cache dữ liệu rule.
-
-Không chứa:
-- Logic luận giải.
-- Điều kiện Bát Tự.
-- Chấm điểm.
 """
 
-
-import os
+from __future__ import annotations
 
 import csv
-
 import json
-
-from typing import List, Dict, Any, Optional
-
-
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 
-
-# =====================================================
-# CONSTANT
-# =====================================================
-
-
-SUPPORTED_FORMAT = [
-
-    "csv",
-
-    "json"
-
-]
-
-
-
-
-
-# =====================================================
-# CLASS
-# =====================================================
+SUPPORTED_FORMAT = {"csv", "json"}
 
 
 class RuleLoader:
+    """
+    Đọc và chuẩn hóa Rule Database.
+    """
 
-
-
-    def __init__(
-        self,
-        rule_path: Optional[str] = None
-    ):
-
+    def __init__(self, rule_path: Optional[str] = None):
 
         self.rule_path = rule_path
+        self.cache: List[Dict[str, Any]] = []
 
+    # ==========================================================
+    # Main
+    # ==========================================================
 
-        self.cache = []
-
-
-
-
-
-    # =================================================
-    # MAIN LOAD
-    # =================================================
-
-
-    def load(
-        self,
-        path=None
-    ) -> List[Dict[str, Any]]:
-
+    def load(self, path: Optional[str] = None) -> List[Dict[str, Any]]:
 
         file_path = path or self.rule_path
 
-
-
         if not file_path:
-
-
             return []
 
-
-
         if self.cache:
-
-
             return self.cache
 
+        extension = Path(file_path).suffix.lower().replace(".", "")
 
-
-
-        extension = (
-
-            os.path.splitext(
-
-                file_path
-
-            )[1]
-
-            .replace(
-                ".",
-                ""
-            )
-
-            .lower()
-
-        )
-
-
+        if extension not in SUPPORTED_FORMAT:
+            raise ValueError(f"Unsupported rule format: {extension}")
 
         if extension == "csv":
-
-
-            rules = self.load_csv(
-
-                file_path
-
-            )
-
-
-
-        elif extension == "json":
-
-
-            rules = self.load_json(
-
-                file_path
-
-            )
-
-
-
+            rules = self.load_csv(file_path)
         else:
+            rules = self.load_json(file_path)
 
-
-            raise ValueError(
-
-                "Unsupported rule format"
-
-            )
-
-
-
-        self.cache = self.normalize_rules(
-
-            rules
-
-        )
-
-
+        self.cache = self.normalize_rules(rules)
 
         return self.cache
 
+    # ==========================================================
+    # CSV
+    # ==========================================================
 
+    def load_csv(self, file_path: str) -> List[Dict[str, Any]]:
 
+        with open(file_path, encoding="utf-8") as f:
 
+            reader = csv.DictReader(f)
 
-    # =================================================
-    # LOAD CSV
-    # =================================================
+            return [dict(row) for row in reader]
 
+    # ==========================================================
+    # JSON
+    # ==========================================================
 
-    def load_csv(
-        self,
-        file_path
-    ):
+    def load_json(self, file_path: str) -> List[Dict[str, Any]]:
 
+        with open(file_path, encoding="utf-8") as f:
 
-        rules = []
+            return json.load(f)
 
-
-
-        with open(
-
-            file_path,
-
-            "r",
-
-            encoding="utf-8"
-
-        ) as file:
-
-
-
-            reader = csv.DictReader(
-                file
-            )
-
-
-
-            for row in reader:
-
-
-                rules.append(
-
-                    dict(row)
-
-                )
-
-
-
-        return rules
-
-
-
-
-
-    # =================================================
-    # LOAD JSON
-    # =================================================
-
-
-    def load_json(
-        self,
-        file_path
-    ):
-
-
-        with open(
-
-            file_path,
-
-            "r",
-
-            encoding="utf-8"
-
-        ) as file:
-
-
-            return json.load(file)
-
-
-
-
-
-    # =================================================
-    # NORMALIZE
-    # =================================================
-
+    # ==========================================================
+    # Normalize
+    # ==========================================================
 
     def normalize_rules(
         self,
-        rules
-    ):
-
+        rules: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
 
         result = []
 
-
-
         for rule in rules:
 
-
-            item = {
-
-
-
-                "rule_id":
-
-                    rule.get(
-
-                        "rule_id",
-
-                        ""
-
-                    ),
-
-
-
-                "rule_name":
-
-                    rule.get(
-
-                        "rule_name",
-
-                        ""
-
-                    ),
-
-
-
-                "category":
-
-                    rule.get(
-
-                        "category",
-
-                        ""
-
-                    ),
-
-
-
-                "layer":
-
-                    rule.get(
-
-                        "layer",
-
-                        "mac_dinh"
-
-                    ),
-
-
-
-                "section":
-
-                    rule.get(
-
-                        "section",
-
-                        "tong_quan"
-
-                    ),
-
-
-
-                "condition":
-
-                    rule.get(
-
-                        "condition",
-
-                        {}
-
-                    ),
-
-
-
-                "description":
-
-                    rule.get(
-
-                        "description",
-
-                        ""
-
-                    ),
-
-
-
-                "polarity":
-
-                    rule.get(
-
-                        "polarity",
-
-                        "neutral"
-
-                    ),
-
-
-
-                "priority":
-
-                    self.convert_number(
-
-                        rule.get(
-
-                            "priority",
-
-                            99
-
-                        )
-
-                    ),
-
-
-
-                "score":
-
-                    self.convert_number(
-
-                        rule.get(
-
-                            "score",
-
-                            0
-
-                        )
-
-                    )
-
-            }
-
-
-
             result.append(
-                item
+
+                {
+                    "rule_id": rule.get("rule_id", "").strip(),
+
+                    "rule_name": rule.get("rule_name", "").strip(),
+
+                    "category": rule.get("category", "").strip(),
+
+                    "layer": rule.get("layer", "default").strip(),
+
+                    "section": rule.get("section", "general").strip(),
+
+                    "condition": self.parse_condition(
+                        rule.get("condition", "")
+                    ),
+
+                    "description": rule.get(
+                        "description",
+                        ""
+                    ).strip(),
+
+                    "polarity": rule.get(
+                        "polarity",
+                        "neutral"
+                    ).strip(),
+
+                    "priority": self.convert_number(
+                        rule.get("priority", 99)
+                    ),
+
+                    "score": self.convert_number(
+                        rule.get("score", 0)
+                    ),
+
+                    "tags": self.parse_tags(
+                        rule.get("tags", "")
+                    )
+                }
+
             )
-
-
 
         return result
 
+    # ==========================================================
+    # Parse Condition
+    # ==========================================================
 
+    def parse_condition(
+        self,
+        value: Any
+    ) -> Dict[str, Any]:
 
+        """
+        Hỗ trợ:
 
+        nhat_chu=Canh Kim
 
-    # =================================================
-    # FILTER
-    # =================================================
+        season=Xuan;strength=manh
 
+        than=Ty;chi=Suu
+        """
+
+        if not value:
+            return {}
+
+        if isinstance(value, dict):
+            return value
+
+        result = {}
+
+        for item in str(value).split(";"):
+
+            item = item.strip()
+
+            if not item:
+                continue
+
+            if "=" not in item:
+                continue
+
+            key, val = item.split("=", 1)
+
+            result[key.strip()] = val.strip()
+
+        return result
+
+    # ==========================================================
+    # Parse Tags
+    # ==========================================================
+
+    def parse_tags(
+        self,
+        value: Any
+    ) -> List[str]:
+
+        if not value:
+            return []
+
+        if isinstance(value, list):
+            return value
+
+        return [
+
+            x.strip()
+
+            for x in str(value).split(",")
+
+            if x.strip()
+
+        ]
+
+    # ==========================================================
+    # Filter
+    # ==========================================================
 
     def filter_by_category(
         self,
@@ -433,24 +223,15 @@ class RuleLoader:
         category
     ):
 
-
         return [
 
             r
 
             for r in rules
 
-            if r.get(
-
-                "category"
-
-            ) == category
+            if r["category"] == category
 
         ]
-
-
-
-
 
     def filter_by_layer(
         self,
@@ -458,89 +239,52 @@ class RuleLoader:
         layer
     ):
 
-
         return [
 
             r
 
             for r in rules
 
-            if r.get(
-
-                "layer"
-
-            ) == layer
+            if r["layer"] == layer
 
         ]
 
+    # ==========================================================
+    # Cache
+    # ==========================================================
 
-
-
-
-    # =================================================
-    # CLEAR CACHE
-    # =================================================
-
-
-    def clear_cache(
-        self
-    ):
-
+    def clear_cache(self):
 
         self.cache = []
 
-
-
-
-
-    # =================================================
-    # NUMBER CONVERT
-    # =================================================
-
+    # ==========================================================
+    # Number
+    # ==========================================================
 
     def convert_number(
         self,
-        value
+        value: Any
     ):
 
+        if value in ("", None):
+            return 0
 
         try:
-
             return int(value)
 
-
-        except:
-
+        except (ValueError, TypeError):
 
             try:
-
                 return float(value)
 
-
-            except:
-
-
+            except (ValueError, TypeError):
                 return 0
 
 
+# ==============================================================
+# Service
+# ==============================================================
 
+def load_rules(rule_path: str):
 
-
-# =====================================================
-# SERVICE FUNCTION
-# =====================================================
-
-
-def load_rules(
-    rule_path
-):
-
-
-    loader = RuleLoader(
-
-        rule_path
-
-    )
-
-
-    return loader.load()
+    return RuleLoader(rule_path).load()
