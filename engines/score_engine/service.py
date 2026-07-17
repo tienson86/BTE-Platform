@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .score_context import ScoreContext
+from .context import ScoreContext
 from .score_engine import ScoreEngine
 from .score_loader import ScoreLoader
 
