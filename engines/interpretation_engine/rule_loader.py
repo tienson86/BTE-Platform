@@ -1,205 +1,546 @@
 """
-rule_loader.py
-==============
+Rule Loader
+===========
 
-Quản lý và nạp Rule Database cho Interpretation Engine.
+Nạp dữ liệu Rule Database cho Interpretation Engine.
+
+Flow:
+
+Rule Database
+      ↓
+Rule Loader
+      ↓
+Rule Matcher
+      ↓
+Rule Scoring
+      ↓
+Interpretation Builder
+
 
 Chức năng:
 
-- Đọc Rule từ Database
-- Cache Rule
-- Kiểm tra schema
-- Trả về Rule theo module/category/id
+- Đọc dữ liệu rule.
+- Chuẩn hóa rule.
+- Lọc rule theo module.
+- Cache dữ liệu rule.
 
-Không thực hiện:
-- Match Rule
-- Scoring
-- Interpretation
-
-Các chức năng đó thuộc các module khác.
+Không chứa:
+- Logic luận giải.
+- Điều kiện Bát Tự.
+- Chấm điểm.
 """
 
-from __future__ import annotations
+
+import os
 
 import csv
-from pathlib import Path
-from typing import Dict, List, Optional
+
+import json
+
+from typing import List, Dict, Any, Optional
+
+
+
+
+
+# =====================================================
+# CONSTANT
+# =====================================================
+
+
+SUPPORTED_FORMAT = [
+
+    "csv",
+
+    "json"
+
+]
+
+
+
+
+
+# =====================================================
+# CLASS
+# =====================================================
 
 
 class RuleLoader:
 
-    """
-    Rule Repository.
-    """
 
-    REQUIRED_COLUMNS = {
-        "rule_id",
-        "module",
-        "category",
-        "condition",
-        "priority",
-        "weight",
-        "enabled",
-    }
 
-    def __init__(self, database_root: Path):
+    def __init__(
+        self,
+        rule_path: Optional[str] = None
+    ):
 
-        self.database_root = Path(database_root)
 
-        self._cache: Dict[str, List[dict]] = {}
+        self.rule_path = rule_path
 
-    # =====================================================
-    # Public API
-    # =====================================================
 
-    def load_all(self) -> List[dict]:
-        """
-        Đọc toàn bộ Rule Database.
-        """
+        self.cache = []
 
-        rules = []
 
-        for csv_file in self.database_root.rglob("*.csv"):
 
-            rules.extend(
-                self.load_file(csv_file)
+
+
+    # =================================================
+    # MAIN LOAD
+    # =================================================
+
+
+    def load(
+        self,
+        path=None
+    ) -> List[Dict[str, Any]]:
+
+
+        file_path = path or self.rule_path
+
+
+
+        if not file_path:
+
+
+            return []
+
+
+
+        if self.cache:
+
+
+            return self.cache
+
+
+
+
+        extension = (
+
+            os.path.splitext(
+
+                file_path
+
+            )[1]
+
+            .replace(
+                ".",
+                ""
             )
 
-        return rules
+            .lower()
 
-    def load_module(self, module: str) -> List[dict]:
-        """
-        Đọc toàn bộ Rule của một module.
+        )
 
-        Ví dụ:
 
-        03_dung_than
-        """
 
-        path = self.database_root / module
+        if extension == "csv":
 
-        rules = []
 
-        for csv_file in path.glob("*.csv"):
+            rules = self.load_csv(
 
-            rules.extend(
-                self.load_file(csv_file)
+                file_path
+
             )
 
-        return rules
 
-    def load_category(
+
+        elif extension == "json":
+
+
+            rules = self.load_json(
+
+                file_path
+
+            )
+
+
+
+        else:
+
+
+            raise ValueError(
+
+                "Unsupported rule format"
+
+            )
+
+
+
+        self.cache = self.normalize_rules(
+
+            rules
+
+        )
+
+
+
+        return self.cache
+
+
+
+
+
+    # =================================================
+    # LOAD CSV
+    # =================================================
+
+
+    def load_csv(
         self,
-        module: str,
-        category: str,
-    ) -> List[dict]:
+        file_path
+    ):
 
-        rules = self.load_module(module)
-
-        return [
-            r
-            for r in rules
-            if r.get("category") == category
-        ]
-
-    def load_rule(
-        self,
-        rule_id: str,
-    ) -> Optional[dict]:
-
-        for rule in self.load_all():
-
-            if rule["rule_id"] == rule_id:
-                return rule
-
-        return None
-
-    def clear_cache(self):
-
-        self._cache.clear()
-
-    # =====================================================
-    # Internal
-    # =====================================================
-
-    def load_file(
-        self,
-        file_path: Path,
-    ) -> List[dict]:
-
-        key = str(file_path)
-
-        if key in self._cache:
-            return self._cache[key]
 
         rules = []
+
+
 
         with open(
+
             file_path,
-            encoding="utf-8-sig",
-        ) as f:
 
-            reader = csv.DictReader(f)
+            "r",
 
-            self.validate_columns(reader.fieldnames)
+            encoding="utf-8"
+
+        ) as file:
+
+
+
+            reader = csv.DictReader(
+                file
+            )
+
+
 
             for row in reader:
 
-                if (
-                    row.get("enabled", "true")
-                    .lower()
-                    != "true"
-                ):
-                    continue
 
-                rules.append(row)
+                rules.append(
 
-        self._cache[key] = rules
+                    dict(row)
+
+                )
+
+
 
         return rules
 
-    def validate_columns(
+
+
+
+
+    # =================================================
+    # LOAD JSON
+    # =================================================
+
+
+    def load_json(
         self,
-        columns,
+        file_path
     ):
 
-        if columns is None:
-            raise ValueError("CSV không có header.")
 
-        missing = (
-            self.REQUIRED_COLUMNS
-            - set(columns)
-        )
+        with open(
 
-        if missing:
+            file_path,
 
-            raise ValueError(
-                "Thiếu cột: "
-                + ", ".join(sorted(missing))
+            "r",
+
+            encoding="utf-8"
+
+        ) as file:
+
+
+            return json.load(file)
+
+
+
+
+
+    # =================================================
+    # NORMALIZE
+    # =================================================
+
+
+    def normalize_rules(
+        self,
+        rules
+    ):
+
+
+        result = []
+
+
+
+        for rule in rules:
+
+
+            item = {
+
+
+
+                "rule_id":
+
+                    rule.get(
+
+                        "rule_id",
+
+                        ""
+
+                    ),
+
+
+
+                "rule_name":
+
+                    rule.get(
+
+                        "rule_name",
+
+                        ""
+
+                    ),
+
+
+
+                "category":
+
+                    rule.get(
+
+                        "category",
+
+                        ""
+
+                    ),
+
+
+
+                "layer":
+
+                    rule.get(
+
+                        "layer",
+
+                        "mac_dinh"
+
+                    ),
+
+
+
+                "section":
+
+                    rule.get(
+
+                        "section",
+
+                        "tong_quan"
+
+                    ),
+
+
+
+                "condition":
+
+                    rule.get(
+
+                        "condition",
+
+                        {}
+
+                    ),
+
+
+
+                "description":
+
+                    rule.get(
+
+                        "description",
+
+                        ""
+
+                    ),
+
+
+
+                "polarity":
+
+                    rule.get(
+
+                        "polarity",
+
+                        "neutral"
+
+                    ),
+
+
+
+                "priority":
+
+                    self.convert_number(
+
+                        rule.get(
+
+                            "priority",
+
+                            99
+
+                        )
+
+                    ),
+
+
+
+                "score":
+
+                    self.convert_number(
+
+                        rule.get(
+
+                            "score",
+
+                            0
+
+                        )
+
+                    )
+
+            }
+
+
+
+            result.append(
+                item
             )
 
-    # =====================================================
-    # Statistics
-    # =====================================================
 
-    def statistics(self):
 
-        total = 0
+        return result
 
-        modules = {}
 
-        for rule in self.load_all():
 
-            total += 1
 
-            module = rule["module"]
 
-            modules[module] = (
-                modules.get(module, 0)
-                + 1
-            )
+    # =================================================
+    # FILTER
+    # =================================================
 
-        return {
-            "total_rules": total,
-            "modules": modules,
-        }
+
+    def filter_by_category(
+        self,
+        rules,
+        category
+    ):
+
+
+        return [
+
+            r
+
+            for r in rules
+
+            if r.get(
+
+                "category"
+
+            ) == category
+
+        ]
+
+
+
+
+
+    def filter_by_layer(
+        self,
+        rules,
+        layer
+    ):
+
+
+        return [
+
+            r
+
+            for r in rules
+
+            if r.get(
+
+                "layer"
+
+            ) == layer
+
+        ]
+
+
+
+
+
+    # =================================================
+    # CLEAR CACHE
+    # =================================================
+
+
+    def clear_cache(
+        self
+    ):
+
+
+        self.cache = []
+
+
+
+
+
+    # =================================================
+    # NUMBER CONVERT
+    # =================================================
+
+
+    def convert_number(
+        self,
+        value
+    ):
+
+
+        try:
+
+            return int(value)
+
+
+        except:
+
+
+            try:
+
+                return float(value)
+
+
+            except:
+
+
+                return 0
+
+
+
+
+
+# =====================================================
+# SERVICE FUNCTION
+# =====================================================
+
+
+def load_rules(
+    rule_path
+):
+
+
+    loader = RuleLoader(
+
+        rule_path
+
+    )
+
+
+    return loader.load()
