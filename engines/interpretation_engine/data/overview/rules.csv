@@ -1,0 +1,11 @@
+rule_id,chapter,section,priority,enabled,condition_type,condition_json,template_id,score,tags,author,version,description
+OVR001,overview,basic,100,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""day_master"",""operator"":""exists""}]}",TMP_OVR001,10,"overview,basic",BTE,1.0,Tạo phần mở đầu cho mọi lá số
+OVR002,overview,strength,95,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""strength"",""operator"":""eq"",""value"":""Strong""}]}",TMP_OVR002,9,"strength,strong",BTE,1.0,Nhật chủ thân vượng
+OVR003,overview,strength,95,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""strength"",""operator"":""eq"",""value"":""Weak""}]}",TMP_OVR003,9,"strength,weak",BTE,1.0,Nhật chủ thân nhược
+OVR004,overview,season,90,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""season"",""operator"":""exists""}]}",TMP_OVR004,8,"season",BTE,1.0,Mô tả ảnh hưởng mùa sinh
+OVR005,overview,pattern,85,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""pattern"",""operator"":""exists""}]}",TMP_OVR005,8,"pattern",BTE,1.0,Mô tả cách cục
+OVR006,overview,useful_god,85,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""useful_god"",""operator"":""exists""}]}",TMP_OVR006,8,"useful_god",BTE,1.0,Mô tả dụng thần
+OVR007,overview,favorable,80,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""favorable_element"",""operator"":""exists""}]}",TMP_OVR007,7,"favorable",BTE,1.0,Ngũ hành có lợi
+OVR008,overview,unfavorable,80,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""unfavorable_element"",""operator"":""exists""}]}",TMP_OVR008,7,"unfavorable",BTE,1.0,Ngũ hành bất lợi
+OVR009,overview,summary,70,true,json,"{""operator"":""AND"",""conditions"":[{""field"":""day_master"",""operator"":""exists""},{""field"":""useful_god"",""operator"":""exists""}]}",TMP_OVR009,6,"summary",BTE,1.0,Tổng kết tổng quan
+OVR010,overview,footer,10,true,json,"{""operator"":""AND"",""conditions"":[]}",TMP_OVR010,1,"footer",BTE,1.0,Kết thúc phần tổng quan
