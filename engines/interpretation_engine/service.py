@@ -1,102 +1,51 @@
 """
-BTE Platform
 Interpretation Service
 
-Lớp Service cung cấp API công khai cho
-Interpretation Engine.
+API công khai cho BTE Platform.
 """
 
 from __future__ import annotations
 
-from .calculator import InterpretationCalculator
-from .config import DEFAULT_CONFIG, InterpretationConfig
-from .loader import InterpretationLoader
-from .models import (
-    InterpretationContext,
-    InterpretationResult,
-)
-from .validator import InterpretationValidator
+from pathlib import Path
+
+from .bootstrap import Bootstrap
 
 
 class InterpretationService:
+
     """
-    Public Service của Interpretation Engine.
+    API duy nhất mà các Engine khác sử dụng.
     """
 
     def __init__(
+
         self,
-        config: InterpretationConfig | None = None,
-    ) -> None:
 
-        self.config = config or DEFAULT_CONFIG
+        root_directory
 
-        self.loader = InterpretationLoader(
-            self.config
-        )
+    ):
 
-        self.validator = (
-            InterpretationValidator()
-        )
+        self.engine = Bootstrap(
+            root_directory
+        ).build()
 
-        self.calculator = (
-            InterpretationCalculator(
-                loader=self.loader,
-                validator=self.validator,
-            )
-        )
-
-    # ======================================================
-    # Main
-    # ======================================================
+        self.engine.startup()
 
     def interpret(
+
         self,
-        context: InterpretationContext,
-    ) -> InterpretationResult:
-        """
-        Thực hiện diễn giải Bát Tự.
-        """
 
-        return self.calculator.calculate(
-            context
-        )
+        chart
 
-    # ======================================================
-    # Reload
-    # ======================================================
+    ):
 
-    def reload(self) -> None:
-        """
-        Xóa cache và nạp lại dữ liệu.
-        """
+        return self.engine.interpret(chart)
 
-        self.loader.clear_cache()
+    def validate(self):
 
-        self.loader.load_all()
-
-    # ======================================================
-    # Cache
-    # ======================================================
-
-    def clear_cache(self) -> None:
-
-        self.loader.clear_cache()
-
-    @property
-    def cache(self):
-
-        return self.loader.cache
-
-    # ======================================================
-    # Information
-    # ======================================================
+        return self.engine.validate()
 
     @property
     def version(self):
 
-        return self.config.engine_version
-
-    @property
-    def name(self):
-
-        return self.config.engine_name
+        return self.engine.VERSION
