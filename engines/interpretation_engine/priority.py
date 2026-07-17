@@ -1,92 +1,168 @@
 """
-interpretation_engine/priority.py
+Priority Resolver
+=================
 
-Quản lý ưu tiên, loại bỏ trùng lặp và sắp xếp
-các InterpretationItem.
+Xử lý thứ tự ưu tiên của Rule.
+
+Nguyên tắc:
+
+Cách cục
+    ↓
+Dụng thần
+    ↓
+Hỷ Kỵ
+    ↓
+Đại vận
+    ↓
+Lưu niên
+    ↓
+Thần sát
 """
 
-from __future__ import annotations
 
-from collections import defaultdict
-
-from .context import InterpretationItem
+from typing import List, Dict
 
 
-class PriorityManager:
-    """
-    Quản lý ưu tiên các đoạn diễn giải.
-    """
 
-    def __init__(self) -> None:
-        self._items: list[InterpretationItem] = []
 
-    def add(self, item: InterpretationItem) -> None:
-        self._items.append(item)
 
-    def extend(self, items: list[InterpretationItem]) -> None:
-        self._items.extend(items)
+PRIORITY_LEVEL = {
 
-    def clear(self) -> None:
-        self._items.clear()
 
-    def build(self) -> list[InterpretationItem]:
-        """
-        Trả về danh sách đã:
-            - bỏ trùng
-            - sắp xếp theo priority
-            - gom theo section
-        """
+    "cach_cuc": 1,
 
-        unique = self._remove_duplicate(self._items)
 
-        unique.sort(
-            key=lambda x: (
-                x.section,
-                -x.priority,
-                -x.score,
-                x.title,
-            )
+    "dung_than": 2,
+
+
+    "hy_than_ky_than": 3,
+
+
+    "dai_van": 4,
+
+
+    "luu_nien": 5,
+
+
+    "su_nghiep": 6,
+
+
+    "tai_van": 7,
+
+
+    "hon_nhan": 8,
+
+
+    "suc_khoe": 9,
+
+
+    "than_sat": 10,
+
+
+    "mac_dinh": 99
+
+}
+
+
+
+
+
+class PriorityResolver:
+
+
+
+    def __init__(self):
+
+        self.priority = PRIORITY_LEVEL
+
+
+
+
+    def get_priority(
+        self,
+        rule
+    ):
+
+
+        layer = rule.get(
+
+            "layer",
+
+            "mac_dinh"
+
         )
 
-        return unique
 
-    @staticmethod
-    def _remove_duplicate(
-        items: list[InterpretationItem],
-    ) -> list[InterpretationItem]:
+        return self.priority.get(
 
-        result: dict[str, InterpretationItem] = {}
+            layer,
 
-        for item in items:
+            99
 
-            key = f"{item.section}:{item.code}"
+        )
 
-            if key not in result:
-                result[key] = item
-                continue
 
-            old = result[key]
 
-            if item.priority > old.priority:
-                result[key] = item
-                continue
 
-            if (
-                item.priority == old.priority
-                and item.score > old.score
-            ):
-                result[key] = item
 
-        return list(result.values())
+    def sort(
+        self,
+        rules: List[Dict]
+    ):
 
-    @staticmethod
-    def group_by_section(
-        items: list[InterpretationItem],
-    ) -> dict[str, list[InterpretationItem]]:
 
-        groups = defaultdict(list)
+        return sorted(
 
-        for item in items:
-            groups[item.section].append(item)
+            rules,
 
-        return dict(groups)
+            key=lambda r:(
+
+                self.get_priority(r),
+
+                -
+
+                r.get(
+
+                    "score",
+
+                    0
+
+                )
+
+            )
+
+        )
+
+
+
+
+
+    def top_rules(
+        self,
+        rules,
+        limit=10
+    ):
+
+
+        return self.sort(
+
+            rules
+
+        )[:limit]
+
+
+
+
+def sort_rules(
+    rules
+):
+
+
+    resolver = PriorityResolver()
+
+
+    return resolver.sort(
+
+        rules
+
+    )
