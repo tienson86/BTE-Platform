@@ -1,96 +1,184 @@
-def check_condition(
-    self,
-    context,
-    condition,
-):
+"""
+rule_matcher.py
+===============
+
+Bộ máy so khớp Rule của Interpretation Engine.
+
+Nhiệm vụ
+--------
+- Phân tích điều kiện Rule
+- Đối chiếu với InterpretationContext
+- Trả về RuleResult
+
+Không thực hiện:
+- Chấm điểm
+- Sắp xếp ưu tiên
+- Sinh câu luận
+"""
+
+from __future__ import annotations
+
+from typing import Iterable, List
+
+from .models.context import InterpretationContext
+from .models.rule import Rule
+from .models.rule_result import RuleResult
+
+
+class RuleMatcher:
     """
-    Kiểm tra một điều kiện Rule.
-
-    Hỗ trợ:
-
-    - dict
-    - JSON string
-    - key=value
-    - chuỗi đơn
+    Bộ máy so khớp Rule.
     """
 
-    if condition is None:
-        return True
+    # =====================================================
+    # Public API
+    # =====================================================
 
-    if condition == "":
-        return True
+    def match(
+        self,
+        context: InterpretationContext,
+        rules: Iterable[Rule],
+    ) -> List[RuleResult]:
 
-    # ------------------------------
-    # String
-    # ------------------------------
+        results: List[RuleResult] = []
 
-    if isinstance(condition, str):
+        for rule in rules:
 
-        condition = condition.strip()
+            matched = self.evaluate(
+                rule.condition,
+                context,
+            )
 
-        if condition == "":
+            result = RuleResult(
+                rule=rule,
+                matched=matched,
+                priority=rule.priority,
+                score=rule.weight if matched else 0.0,
+                text=rule.result if matched else "",
+            )
+
+            results.append(result)
+
+        return results
+
+    # =====================================================
+    # Evaluate
+    # =====================================================
+
+    def evaluate(
+        self,
+        condition: str,
+        context: InterpretationContext,
+    ) -> bool:
+
+        if not condition:
             return True
 
-        # JSON
-        if condition.startswith("{"):
+        tokens = [
+            t.strip()
+            for t in condition.split("AND")
+            if t.strip()
+        ]
 
-            import json
+        for token in tokens:
 
-            try:
-                condition = json.loads(condition)
-
-            except Exception:
+            if not self.evaluate_expression(
+                token,
+                context,
+            ):
                 return False
 
-        # key=value
-        elif "=" in condition:
+        return True
 
-            key, value = condition.split("=", 1)
+    # =====================================================
+    # Expression
+    # =====================================================
 
-            condition = {
-                key.strip(): value.strip()
-            }
+    def evaluate_expression(
+        self,
+        expression: str,
+        context: InterpretationContext,
+    ) -> bool:
 
-        else:
+        # ==
+        if "==" in expression:
 
-            return False
+            left, right = expression.split("==", 1)
 
-    # ------------------------------
-    # Dict
-    # ------------------------------
+            return self.compare(
+                context.resolve(left.strip()),
+                right.strip(),
+            )
 
-    if not isinstance(condition, dict):
-        return False
+        # !=
+        if "!=" in expression:
 
-    # ------------------------------
+            left, right = expression.split("!=", 1)
+
+            return (
+                context.resolve(left.strip())
+                != right.strip()
+            )
+
+        # contains
+
+        if "contains" in expression:
+
+            left, right = expression.split(
+                "contains",
+                1,
+            )
+
+            return self.contains(
+                context.resolve(left.strip()),
+                right.strip(),
+            )
+
+        # exists
+
+        if expression.endswith("exists"):
+
+            field = expression.replace(
+                "exists",
+                "",
+            ).strip()
+
+            return context.resolve(field) is not None
+
+        raise ValueError(
+            f"Không hiểu biểu thức: {expression}"
+        )
+
+    # =====================================================
     # Compare
-    # ------------------------------
+    # =====================================================
 
-    for key, expected in condition.items():
+    def compare(
+        self,
+        left,
+        right,
+    ) -> bool:
 
-        actual = None
-
-        # tra trong bazi
-        if hasattr(context, "bazi"):
-
-            actual = context.bazi.get(key)
-
-        # tra trong elements
-        if actual is None and hasattr(context, "elements"):
-
-            actual = context.elements.get(key)
-
-        # tra trong ten_gods
-        if actual is None and hasattr(context, "ten_gods"):
-
-            actual = context.ten_gods.get(key)
-
-        # tra trong pattern
-        if actual is None and hasattr(context, "patterns"):
-
-            actual = context.patterns.get(key)
-
-        if str(actual) != str(expected):
+        if left is None:
             return False
 
-    return True
+        return str(left) == str(right)
+
+    def contains(
+        self,
+        left,
+        right,
+    ) -> bool:
+
+        if left is None:
+            return False
+
+        if isinstance(left, str):
+
+            return right in left
+
+        if isinstance(left, list):
+
+            return right in left
+
+        return False
