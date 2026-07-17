@@ -1,3 +1,12 @@
+"""
+BTE Platform
+Interpretation Engine
+
+Schema Loader
+
+Quản lý toàn bộ JSON Schema dùng trong Interpretation Engine.
+"""
+
 from __future__ import annotations
 
 import json
@@ -5,22 +14,27 @@ from pathlib import Path
 from typing import Any
 
 
+class SchemaNotFoundError(FileNotFoundError):
+    """Không tìm thấy schema."""
+
+
 class SchemaLoader:
     """
-    Quản lý và nạp các JSON Schema của Interpretation Engine.
+    Nạp và cache toàn bộ JSON Schema.
     """
 
     def __init__(self, schema_dir: str | Path):
+
         self.schema_dir = Path(schema_dir)
+
         self._cache: dict[str, dict[str, Any]] = {}
 
-    def load(self, name: str) -> dict[str, Any]:
-        """
-        Nạp một schema theo tên.
-        Ví dụ:
-            load("rule_schema")
-        """
-        filename = f"{name}.json"
+    def load(self, schema_name: str) -> dict:
+
+        filename = schema_name
+
+        if not filename.endswith(".json"):
+            filename += ".json"
 
         if filename in self._cache:
             return self._cache[filename]
@@ -28,7 +42,7 @@ class SchemaLoader:
         path = self.schema_dir / filename
 
         if not path.exists():
-            raise FileNotFoundError(f"Không tìm thấy schema: {filename}")
+            raise SchemaNotFoundError(str(path))
 
         with open(path, "r", encoding="utf-8") as f:
             schema = json.load(f)
@@ -37,11 +51,36 @@ class SchemaLoader:
 
         return schema
 
+    def exists(self, schema_name: str) -> bool:
+
+        filename = schema_name
+
+        if not filename.endswith(".json"):
+            filename += ".json"
+
+        return (self.schema_dir / filename).exists()
+
+    def list(self):
+
+        return sorted(
+
+            file.stem
+
+            for file in self.schema_dir.glob("*.json")
+
+        )
+
     def clear_cache(self):
+
         self._cache.clear()
 
-    def list_schemas(self):
-        return sorted(
-            p.stem
-            for p in self.schema_dir.glob("*.json")
-        )
+    def reload(self, schema_name: str):
+
+        filename = schema_name
+
+        if not filename.endswith(".json"):
+            filename += ".json"
+
+        self._cache.pop(filename, None)
+
+        return self.load(filename)
