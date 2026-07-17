@@ -3,22 +3,21 @@ Test Rule Matcher
 
 Kiểm tra:
 - Khởi tạo RuleMatcher
-- So khớp điều kiện rule với Context
-- Xử lý nhiều điều kiện
-- Xử lý rule lỗi
+- Match rule với Context
+- Match nhiều điều kiện
+- Match dữ liệu load từ RuleLoader
+- Xử lý rule không hợp lệ
 """
-
-
-import pytest
 
 
 from interpretation_engine.rule_matcher import RuleMatcher
 from interpretation_engine.context import InterpretationContext
+from interpretation_engine.rule_loader import RuleLoader
 
 
 
 # ==================================================
-# Test khởi tạo
+# Khởi tạo Matcher
 # ==================================================
 
 def test_rule_matcher_create():
@@ -30,7 +29,7 @@ def test_rule_matcher_create():
 
 
 # ==================================================
-# Test match điều kiện đơn giản
+# Match điều kiện đơn
 # ==================================================
 
 def test_match_simple_condition():
@@ -66,7 +65,7 @@ def test_match_simple_condition():
 
 
 # ==================================================
-# Test không match
+# Không match điều kiện sai
 # ==================================================
 
 def test_not_match_condition():
@@ -102,7 +101,7 @@ def test_not_match_condition():
 
 
 # ==================================================
-# Test nhiều điều kiện
+# Match nhiều điều kiện dạng dictionary
 # ==================================================
 
 def test_match_multiple_conditions():
@@ -126,11 +125,13 @@ def test_match_multiple_conditions():
 
         "condition":
         {
+
             "nhat_chu":
             "Canh Kim",
 
             "ngu_hanh":
             "Kim"
+
         }
 
     }
@@ -150,7 +151,7 @@ def test_match_multiple_conditions():
 
 
 # ==================================================
-# Test nhiều điều kiện nhưng sai một phần
+# Một điều kiện đúng, một điều kiện sai
 # ==================================================
 
 def test_fail_multiple_conditions():
@@ -174,11 +175,13 @@ def test_fail_multiple_conditions():
 
         "condition":
         {
+
             "nhat_chu":
             "Canh Kim",
 
             "ngu_hanh":
             "Kim"
+
         }
 
     }
@@ -198,7 +201,90 @@ def test_fail_multiple_conditions():
 
 
 # ==================================================
-# Test rule không có condition
+# Test Rule từ CSV
+# ==================================================
+
+def test_match_loaded_rule():
+
+    loader = RuleLoader()
+
+
+    rules = loader.load(
+        "tests/data/test_rules.csv"
+    )
+
+
+    rule = rules[0]
+
+
+    ctx = InterpretationContext()
+
+
+    ctx.set(
+        "nhat_chu",
+        "Canh Kim"
+    )
+
+
+    matcher = RuleMatcher()
+
+
+    result = matcher.match(
+        rule,
+        ctx
+    )
+
+
+    assert result is True
+
+
+
+# ==================================================
+# Test nhiều rule
+# ==================================================
+
+def test_filter_matching_rules():
+
+    loader = RuleLoader()
+
+
+    rules = loader.load(
+        "tests/data/test_rules.csv"
+    )
+
+
+    ctx = InterpretationContext()
+
+
+    ctx.set(
+        "nhat_chu",
+        "Canh Kim"
+    )
+
+
+    matcher = RuleMatcher()
+
+
+    matched = []
+
+
+    for rule in rules:
+
+        if matcher.match(
+            rule,
+            ctx
+        ):
+
+            matched.append(rule)
+
+
+
+    assert len(matched) >= 1
+
+
+
+# ==================================================
+# Rule không có condition
 # ==================================================
 
 def test_empty_condition():
@@ -209,7 +295,7 @@ def test_empty_condition():
     rule = {
 
         "rule_id":
-        "R001"
+        "TEST001"
 
     }
 
@@ -228,7 +314,7 @@ def test_empty_condition():
 
 
 # ==================================================
-# Test context thiếu dữ liệu
+# Context không có dữ liệu
 # ==================================================
 
 def test_missing_context_value():
