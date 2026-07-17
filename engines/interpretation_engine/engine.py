@@ -1,208 +1,112 @@
 """
-engine.py
-=========
-
+BTE Platform
 Interpretation Engine
 
-Điểm vào chính của Interpretation Engine.
-
-Pipeline:
-
-InterpretationContext
-        │
-        ▼
-InterpretationEngine
-        │
-        ▼
-InterpretationService
-        │
-        ▼
-InterpretationReport
-        │
-        ▼
-ReportService
-        │
-        ▼
-ExportService
+Engine điều phối toàn bộ Interpretation Engine.
 """
 
 from __future__ import annotations
 
-from pathlib import Path
-from typing import Iterable
+import time
 
-from .models.context import InterpretationContext
-from .models.report import InterpretationReport
-from .models.rule import Rule
+from .config import (
+    DEFAULT_CONFIG,
+    InterpretationConfig,
+)
 
-from .services.interpretation_service import InterpretationService
-from .services.report_service import ReportService
-from .services.export_service import ExportService
+from .models import (
+    InterpretationContext,
+    InterpretationResult,
+    InterpretationState,
+)
+
+from .service import InterpretationService
 
 
 class InterpretationEngine:
     """
-    Engine chính của Interpretation Engine.
-
-    Đây là API mà các module khác sử dụng.
+    Engine chính của Interpretation.
     """
 
     def __init__(
         self,
-        interpretation_service: InterpretationService | None = None,
-        report_service: ReportService | None = None,
-        export_service: ExportService | None = None,
+        config: InterpretationConfig | None = None,
     ) -> None:
 
-        self.interpretation_service = (
-            interpretation_service
-            or InterpretationService()
+        self.config = config or DEFAULT_CONFIG
+
+        self.state = InterpretationState()
+
+        self.service = InterpretationService(
+            self.config
         )
 
-        self.report_service = (
-            report_service
-            or ReportService()
-        )
+        self.initialize()
 
-        self.export_service = (
-            export_service
-            or ExportService(
-                self.report_service
-            )
-        )
+    # ======================================================
+    # Initialize
+    # ======================================================
 
-    # =====================================================
-    # Interpretation
-    # =====================================================
+    def initialize(self) -> None:
 
-    def interpret(
+        self.state.initialized = True
+
+    # ======================================================
+    # Execute
+    # ======================================================
+
+    def execute(
         self,
         context: InterpretationContext,
-        rules: Iterable[Rule],
-    ) -> InterpretationReport:
-        """
-        Chạy diễn giải từ danh sách Rule.
-        """
+    ) -> InterpretationResult:
 
-        return self.interpretation_service.run(
-            context=context,
-            rules=rules,
+        start = time.perf_counter()
+
+        result = self.service.interpret(
+            context
         )
 
-    # =====================================================
-    # Database
-    # =====================================================
+        self.state.rendered = True
 
-    def interpret_database(
-        self,
-        context: InterpretationContext,
-        database: str | Path,
-    ) -> InterpretationReport:
-        """
-        Chạy diễn giải từ Rule Database.
-        """
-
-        return self.interpretation_service.run_from_database(
-            context=context,
-            database_path=database,
+        self.state.elapsed_time = (
+            time.perf_counter() - start
         )
 
-    # =====================================================
-    # Markdown
-    # =====================================================
+        return result
 
-    def to_markdown(
-        self,
-        report: InterpretationReport,
-    ) -> str:
+    # ======================================================
+    # Reload
+    # ======================================================
 
-        return self.report_service.to_markdown(
-            report
-        )
+    def reload(self) -> None:
 
-    # =====================================================
-    # HTML
-    # =====================================================
+        self.service.reload()
 
-    def to_html(
-        self,
-        report: InterpretationReport,
-    ) -> str:
+    # ======================================================
+    # Reset
+    # ======================================================
 
-        return self.report_service.to_html(
-            report
-        )
+    def reset(self) -> None:
 
-    # =====================================================
-    # TEXT
-    # =====================================================
+        self.state = InterpretationState()
 
-    def to_text(
-        self,
-        report: InterpretationReport,
-    ) -> str:
+        self.initialize()
 
-        return self.report_service.to_text(
-            report
-        )
+    # ======================================================
+    # Properties
+    # ======================================================
 
-    # =====================================================
-    # JSON
-    # =====================================================
+    @property
+    def version(self):
 
-    def to_json(
-        self,
-        report: InterpretationReport,
-    ) -> str:
+        return self.config.engine_version
 
-        return self.report_service.to_json(
-            report
-        )
+    @property
+    def name(self):
 
-    # =====================================================
-    # Export
-    # =====================================================
+        return self.config.engine_name
 
-    def export(
-        self,
-        report: InterpretationReport,
-        output: str | Path,
-    ) -> Path:
+    @property
+    def cache(self):
 
-        return self.export_service.export(
-            report,
-            output,
-        )
-
-    def export_all(
-        self,
-        report: InterpretationReport,
-        output_dir: str | Path,
-        prefix: str = "report",
-    ) -> list[Path]:
-
-        return self.export_service.export_all(
-            report=report,
-            output_dir=output_dir,
-            prefix=prefix,
-        )
-
-    # =====================================================
-    # Shortcut
-    # =====================================================
-
-    def run(
-        self,
-        context: InterpretationContext,
-        database: str | Path,
-    ) -> InterpretationReport:
-        """
-        API rút gọn.
-
-        Đây sẽ là hàm được gọi nhiều nhất.
-        """
-
-        return self.interpret_database(
-            context=context,
-            database=database,
-        )
+        return self.service.cache
