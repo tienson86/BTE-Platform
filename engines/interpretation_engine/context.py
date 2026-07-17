@@ -1,233 +1,134 @@
 """
-context.py
-==========
+Interpretation Context
+=====================
 
-Định nghĩa InterpretationContext.
+Quản lý dữ liệu đầu vào cho Interpretation Engine.
 
-Đây là đối tượng trung tâm của Interpretation Engine.
+Nhiệm vụ:
 
-Toàn bộ dữ liệu từ Bazi Engine sẽ được chuẩn hóa thành
-InterpretationContext trước khi đưa vào Rule Engine.
+- Lưu thông tin lá số.
+- Chuẩn hóa context.
+- Cung cấp dữ liệu cho Rule Engine.
 
-Luồng xử lý:
-
-Bazi Engine
-      │
-      ▼
-InterpretationContext
-      │
-      ├── Rule Loader
-      ├── Rule Matcher
-      ├── Conflict Resolver
-      ├── Rule Scoring
-      ├── Interpretation Builder
-      └── Formatter
+Không chứa logic luận giải.
 """
 
-from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Dict, Any, Optional
 
 
-# ==========================================================
-# Tứ Trụ
-# ==========================================================
-
-@dataclass(slots=True)
-class Pillar:
-
-    heavenly_stem: str
-    earthly_branch: str
-
-    hidden_stems: List[str] = field(default_factory=list)
-
-    ten_gods: List[str] = field(default_factory=list)
-
-    na_yin: Optional[str] = None
-
-    stage_of_life: Optional[str] = None
 
 
-# ==========================================================
-# Đại Vận
-# ==========================================================
 
-@dataclass(slots=True)
-class LuckPillar:
-
-    stem: str
-
-    branch: str
-
-    start_age: int
-
-    end_age: int
-
-    start_year: int
-
-    end_year: int
-
-
-# ==========================================================
-# Lưu Niên
-# ==========================================================
-
-@dataclass(slots=True)
-class AnnualLuck:
-
-    year: int
-
-    stem: str
-
-    branch: str
-
-
-# ==========================================================
-# Metadata
-# ==========================================================
-
-@dataclass(slots=True)
-class Metadata:
-
-    version: str = "1.0"
-
-    school: str = "Tu Binh"
-
-    language: str = "vi"
-
-    created_at: Optional[str] = None
-
-
-# ==========================================================
-# Interpretation Context
-# ==========================================================
-
-@dataclass(slots=True)
+@dataclass
 class InterpretationContext:
-    """
-    Đối tượng chuẩn truyền giữa các module.
 
-    Đây là model duy nhất mà Interpretation Engine làm việc.
-    """
 
-    # --------------------------------------------------
-    # Thông tin cơ bản
-    # --------------------------------------------------
+    # dữ liệu tứ trụ
 
-    gender: str
+    bazi: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    solar_datetime: str
 
-    lunar_datetime: str
+    # ngũ hành
 
-    timezone: str = "Asia/Ho_Chi_Minh"
+    elements: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    location: Optional[str] = None
 
-    # --------------------------------------------------
-    # Tứ Trụ
-    # --------------------------------------------------
+    # thập thần
 
-    year: Optional[Pillar] = None
+    ten_gods: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    month: Optional[Pillar] = None
 
-    day: Optional[Pillar] = None
+    # cách cục
 
-    hour: Optional[Pillar] = None
+    patterns: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    # --------------------------------------------------
-    # Nhật Chủ
-    # --------------------------------------------------
 
-    day_master: Optional[str] = None
+    # dụng thần
 
-    # --------------------------------------------------
-    # Phân tích mệnh
-    # --------------------------------------------------
+    useful_god: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    strength: Optional[str] = None
 
-    pattern: Optional[str] = None
+    # đại vận
 
-    useful_god: Optional[str] = None
+    luck_cycles: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    favorable_gods: List[str] = field(default_factory=list)
 
-    unfavorable_gods: List[str] = field(default_factory=list)
+    # lưu niên
 
-    # --------------------------------------------------
-    # Quan hệ
-    # --------------------------------------------------
+    annual_cycles: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    combinations: List[str] = field(default_factory=list)
 
-    clashes: List[str] = field(default_factory=list)
+    # thần sát
 
-    harms: List[str] = field(default_factory=list)
+    shen_sha: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    punishments: List[str] = field(default_factory=list)
 
-    destructions: List[str] = field(default_factory=list)
+    # dữ liệu mở rộng
 
-    # --------------------------------------------------
-    # Thần sát
-    # --------------------------------------------------
+    extra: Dict[str, Any] = field(
+        default_factory=dict
+    )
 
-    shensha: List[str] = field(default_factory=list)
 
-    # --------------------------------------------------
-    # Đại vận
-    # --------------------------------------------------
 
-    current_luck: Optional[LuckPillar] = None
+    def to_dict(self):
 
-    luck_cycles: List[LuckPillar] = field(default_factory=list)
+        return {
 
-    # --------------------------------------------------
-    # Lưu niên
-    # --------------------------------------------------
+            "bazi": self.bazi,
 
-    current_annual: Optional[AnnualLuck] = None
+            "elements": self.elements,
 
-    # --------------------------------------------------
-    # Điểm số
-    # --------------------------------------------------
+            "ten_gods": self.ten_gods,
 
-    scores: Dict[str, float] = field(default_factory=dict)
+            "patterns": self.patterns,
 
-    # --------------------------------------------------
-    # Dữ liệu mở rộng
-    # --------------------------------------------------
+            "useful_god": self.useful_god,
 
-    metadata: Metadata = field(default_factory=Metadata)
+            "luck_cycles": self.luck_cycles,
 
-    extra: Dict[str, Any] = field(default_factory=dict)
+            "annual_cycles": self.annual_cycles,
 
-    # ==================================================
-    # Helper Methods
-    # ==================================================
+            "shen_sha": self.shen_sha,
 
-    def has_useful_god(self) -> bool:
-        return bool(self.useful_god)
+            "extra": self.extra
 
-    def has_pattern(self) -> bool:
-        return bool(self.pattern)
+        }
 
-    def has_shensha(self, name: str) -> bool:
-        return name in self.shensha
 
-    def get_score(self, key: str, default: float = 0.0) -> float:
-        return self.scores.get(key, default)
 
-    def set_score(self, key: str, value: float) -> None:
-        self.scores[key] = value
 
-    def to_dict(self) -> Dict[str, Any]:
-        """
-        Chuyển Context thành dict.
-        Hữu ích khi export JSON hoặc ghi log.
-        """
-        from dataclasses import asdict
-        return asdict(self)
+def create_context(
+    data: Optional[Dict[str,Any]]=None
+):
+
+
+    if data is None:
+
+        return InterpretationContext()
+
+
+
+    return InterpretationContext(
+
+        **data
+
+    )
