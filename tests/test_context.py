@@ -1,17 +1,10 @@
 """
-Test Interpretation Context
-
-Kiểm tra:
-- Khởi tạo context
-- Lưu dữ liệu
-- Truy xuất dữ liệu
-- Cập nhật dữ liệu
-- Metadata
+Tests for InterpretationContext
 """
 
+import pytest
 
 from interpretation_engine.context import InterpretationContext
-
 
 
 def test_create_context():
@@ -21,75 +14,48 @@ def test_create_context():
     assert ctx is not None
 
 
-
-def test_set_and_get_value():
-
-    ctx = InterpretationContext()
-
-
-    ctx.set(
-        "nhat_chu",
-        "Canh Kim"
-    )
-
-
-    result = ctx.get(
-        "nhat_chu"
-    )
-
-
-    assert result == "Canh Kim"
-
-
-
-def test_update_value():
+def test_default_values():
 
     ctx = InterpretationContext()
 
-
-    ctx.set(
-        "ngu_hanh",
-        "Kim"
-    )
-
-
-    ctx.set(
-        "ngu_hanh",
-        "Thuy"
-    )
+    assert ctx.bazi is not None
+    assert ctx.elements is not None
+    assert ctx.ten_gods is not None
+    assert ctx.patterns is not None
+    assert ctx.useful_god is not None
 
 
-    assert ctx.get(
-        "ngu_hanh"
-    ) == "Thuy"
-
-
-
-def test_missing_value():
+def test_assign_bazi():
 
     ctx = InterpretationContext()
 
+    ctx.bazi = {
+        "day_master": "Canh",
+        "month_branch": "Sửu",
+    }
 
-    result = ctx.get(
-        "khong_ton_tai"
-    )
-
-
-    assert result is None
-
+    assert ctx.bazi["day_master"] == "Canh"
 
 
-def test_context_contains():
+def test_assign_elements():
 
     ctx = InterpretationContext()
 
+    ctx.elements = {
+        "Kim": 5,
+        "Mộc": 1,
+    }
 
-    ctx.set(
-        "thang_lenh",
-        "Sửu"
-    )
+    assert ctx.elements["Kim"] == 5
 
 
-    assert ctx.has(
-        "thang_lenh"
-    )
+def test_assign_ten_gods():
+
+    ctx = InterpretationContext()
+
+    ctx.ten_gods = {
+        "Chính Quan": 2,
+        "Thiên Tài": 1,
+    }
+
+    assert "Chính Quan" in ctx.ten_gods
