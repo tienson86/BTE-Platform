@@ -957,3 +957,921 @@ class RuleMatcher:
     # =====================================================
     # End of Part 1
     # =====================================================
+    # =====================================================
+    # Match Engine
+    # =====================================================
+
+    def match(
+        self,
+        chart: dict[str, Any],
+        use_cache: bool = True,
+    ) -> list[MatchResult]:
+        """
+        Match toàn bộ Rule từ Chart.
+        """
+
+        context = self.build_context(chart)
+
+        return self.match_context(
+            context=context,
+            use_cache=use_cache,
+        )
+
+    def match_context(
+        self,
+        context: MatchContext,
+        use_cache: bool = True,
+    ) -> list[MatchResult]:
+        """
+        Match từ MatchContext.
+        """
+
+        self.before_match(context)
+
+        cache_key = self.make_cache_key(context)
+
+        if use_cache and self.has_cache(cache_key):
+
+            return self.get_cache(cache_key)
+
+        matched: list[MatchResult] = []
+
+        for rule in self.iter_enabled_rules():
+
+            result = self.match_one(
+                rule=rule,
+                context=context,
+            )
+
+            if result.matched:
+
+                matched.append(result)
+
+        matched = self._priority.resolve(
+            matched
+        )
+
+        matched = self._conflict.resolve(
+            matched
+        )
+
+        if use_cache:
+
+            self.put_cache(
+                cache_key,
+                matched,
+            )
+
+        self.after_match(
+            context,
+            matched,
+        )
+
+        return matched
+
+    # =====================================================
+    # Match One Rule
+    # =====================================================
+
+    def match_one(
+        self,
+        rule: dict[str, Any],
+        context: MatchContext,
+    ) -> MatchResult:
+        """
+        Match một Rule.
+        """
+
+        self.before_rule(
+            rule,
+            context,
+        )
+
+        matched = self._evaluator.evaluate_rule(
+            rule,
+            context,
+        )
+
+        result = MatchResult(
+
+            matched=matched,
+
+            score=float(
+                rule.get(
+                    "score",
+                    0.0,
+                )
+            ),
+
+            priority=int(
+                rule.get(
+                    "priority",
+                    0,
+                )
+            ),
+
+            rule_id=rule.get(
+                "rule_id",
+                "",
+            ),
+
+            template_id=rule.get(
+                "template_id",
+                "",
+            ),
+
+            reason=rule.get(
+                "description",
+                "",
+            ),
+
+            data=rule,
+
+        )
+
+        self.after_rule(
+            rule,
+            result,
+        )
+
+        return result
+
+    # =====================================================
+    # Batch Match
+    # =====================================================
+
+    def match_many(
+        self,
+        charts: Iterable[
+            dict[str, Any]
+        ],
+        use_cache: bool = True,
+    ) -> list[list[MatchResult]]:
+        """
+        Match nhiều lá số.
+        """
+
+        output = []
+
+        for chart in charts:
+
+            output.append(
+
+                self.match(
+                    chart,
+                    use_cache,
+                )
+
+            )
+
+        return output
+
+    # =====================================================
+    # Match Helpers
+    # =====================================================
+
+    def first_match(
+        self,
+        chart: dict[str, Any],
+    ) -> MatchResult | None:
+        """
+        Rule đầu tiên sau khi Resolve.
+        """
+
+        results = self.match(chart)
+
+        if not results:
+
+            return None
+
+        return results[0]
+
+    def has_match(
+        self,
+        chart: dict[str, Any],
+    ) -> bool:
+        """
+        Có Rule Match hay không.
+        """
+
+        return len(
+            self.match(chart)
+        ) > 0
+
+    def count_match(
+        self,
+        chart: dict[str, Any],
+    ) -> int:
+        """
+        Đếm số Rule Match.
+        """
+
+        return len(
+            self.match(chart)
+        )
+            # =====================================================
+    # Match Filters
+    # =====================================================
+
+    def match_chapter(
+        self,
+        chart: dict[str, Any],
+        chapter: str,
+    ) -> list[MatchResult]:
+        """
+        Chỉ Match Rule của một Chapter.
+        """
+
+        context = self.build_context(chart)
+
+        rules = self.get_rules_by_chapter(
+            chapter
+        )
+
+        return self._match_rules(
+            rules,
+            context,
+        )
+
+    def match_template(
+        self,
+        chart: dict[str, Any],
+        template_id: str,
+    ) -> list[MatchResult]:
+        """
+        Chỉ Match Rule của Template.
+        """
+
+        context = self.build_context(chart)
+
+        rules = self.get_rules_by_template(
+            template_id
+        )
+
+        return self._match_rules(
+            rules,
+            context,
+        )
+
+    def match_tag(
+        self,
+        chart: dict[str, Any],
+        tag: str,
+    ) -> list[MatchResult]:
+        """
+        Chỉ Match Rule theo Tag.
+        """
+
+        context = self.build_context(chart)
+
+        rules = self.get_rules_by_tag(
+            tag
+        )
+
+        return self._match_rules(
+            rules,
+            context,
+        )
+
+    # =====================================================
+    # Internal Match
+    # =====================================================
+
+    def _match_rules(
+        self,
+        rules: Iterable[dict[str, Any]],
+        context: MatchContext,
+    ) -> list[MatchResult]:
+        """
+        Match một tập Rule.
+        """
+
+        matched: list[MatchResult] = []
+
+        for rule in rules:
+
+            if not rule.get(
+                "enabled",
+                True,
+            ):
+                continue
+
+            result = self.match_one(
+                rule,
+                context,
+            )
+
+            if result.matched:
+
+                matched.append(result)
+
+        matched = self._priority.resolve(
+            matched
+        )
+
+        matched = self._conflict.resolve(
+            matched
+        )
+
+        return matched
+
+    # =====================================================
+    # Profiling
+    # =====================================================
+
+    def profile(
+        self,
+        chart: dict[str, Any],
+    ) -> dict[str, Any]:
+        """
+        Hồ sơ Match.
+        """
+
+        results = self.match(chart)
+
+        return {
+
+            "matched_rules": len(results),
+
+            "statistics": self.statistics,
+
+            "cache": len(self.cache),
+
+        }
+
+    # =====================================================
+    # Trace
+    # =====================================================
+
+    def trace(
+        self,
+        chart: dict[str, Any],
+    ) -> list[dict[str, Any]]:
+        """
+        Theo dõi quá trình Match.
+        """
+
+        context = self.build_context(chart)
+
+        traces = []
+
+        for rule in self.iter_enabled_rules():
+
+            matched = self._evaluator.evaluate_rule(
+                rule,
+                context,
+            )
+
+            traces.append({
+
+                "rule_id":
+                    rule.get("rule_id"),
+
+                "matched":
+                    matched,
+
+                "priority":
+                    rule.get("priority"),
+
+                "template":
+                    rule.get("template_id"),
+
+            })
+
+        return traces
+
+    # =====================================================
+    # Explain
+    # =====================================================
+
+    def explain(
+        self,
+        chart: dict[str, Any],
+    ) -> dict[str, Any]:
+        """
+        Giải thích quá trình Match.
+        """
+
+        return {
+
+            "profile":
+                self.profile(chart),
+
+            "trace":
+                self.trace(chart),
+
+            "matched":
+                self.match(chart),
+
+        }
+
+    # =====================================================
+    # Early Stop
+    # =====================================================
+
+    def first(
+        self,
+        chart: dict[str, Any],
+    ) -> MatchResult | None:
+        """
+        Match Rule đầu tiên.
+        """
+
+        context = self.build_context(chart)
+
+        for rule in self.iter_enabled_rules():
+
+            result = self.match_one(
+                rule,
+                context,
+            )
+
+            if result.matched:
+
+                return result
+
+        return None
+            # =====================================================
+    # Search API
+    # =====================================================
+
+    def find_rule(
+        self,
+        rule_id: str,
+    ) -> MatchResult | None:
+        """
+        Match Rule theo Rule ID.
+        """
+
+        rule = self.get_rule(rule_id)
+
+        if rule is None:
+            return None
+
+        context = MatchContext(
+            chart={},
+            variables={},
+            metadata={},
+        )
+
+        return self.match_one(
+            rule,
+            context,
+        )
+
+    def find_priority(
+        self,
+        minimum: int,
+    ) -> list[dict[str, Any]]:
+        """
+        Lấy Rule có Priority >= minimum.
+        """
+
+        return [
+
+            rule
+
+            for rule in self.iter_enabled_rules()
+
+            if rule.get(
+                "priority",
+                0,
+            ) >= minimum
+
+        ]
+
+    def find_template(
+        self,
+        template_id: str,
+    ) -> list[dict[str, Any]]:
+
+        return self.get_rules_by_template(
+            template_id
+        )
+
+    def find_tag(
+        self,
+        tag: str,
+    ) -> list[dict[str, Any]]:
+
+        return self.get_rules_by_tag(
+            tag
+        )
+
+    # =====================================================
+    # Batch Utilities
+    # =====================================================
+
+    def match_ids(
+        self,
+        chart: dict[str, Any],
+        rule_ids: Iterable[str],
+    ) -> list[MatchResult]:
+        """
+        Chỉ Match các Rule được chỉ định.
+        """
+
+        context = self.build_context(chart)
+
+        output = []
+
+        for rule_id in rule_ids:
+
+            rule = self.get_rule(rule_id)
+
+            if rule is None:
+                continue
+
+            result = self.match_one(
+                rule,
+                context,
+            )
+
+            if result.matched:
+
+                output.append(result)
+
+        return self._conflict.resolve(
+
+            self._priority.resolve(
+                output
+            )
+
+        )
+
+    def match_until(
+        self,
+        chart: dict[str, Any],
+        limit: int,
+    ) -> list[MatchResult]:
+        """
+        Match cho tới khi đủ số lượng.
+        """
+
+        context = self.build_context(chart)
+
+        output = []
+
+        for rule in self.iter_enabled_rules():
+
+            result = self.match_one(
+                rule,
+                context,
+            )
+
+            if result.matched:
+
+                output.append(result)
+
+            if len(output) >= limit:
+
+                break
+
+        return self._priority.resolve(
+            output
+        )
+
+    # =====================================================
+    # Cache Utilities
+    # =====================================================
+
+    def warmup_cache(
+        self,
+        charts: Iterable[
+            dict[str, Any]
+        ],
+    ) -> None:
+        """
+        Khởi tạo Cache.
+        """
+
+        for chart in charts:
+
+            self.match(
+                chart,
+                use_cache=True,
+            )
+
+    def invalidate_cache(
+        self,
+        chart: dict[str, Any],
+    ) -> None:
+        """
+        Xóa Cache của một Chart.
+        """
+
+        context = self.build_context(
+            chart
+        )
+
+        key = self.make_cache_key(
+            context
+        )
+
+        if self.has_cache(key):
+
+            self.cache.remove(key)
+
+    # =====================================================
+    # Benchmark
+    # =====================================================
+
+    def benchmark(
+        self,
+        charts: Iterable[
+            dict[str, Any]
+        ],
+    ) -> dict[str, Any]:
+        """
+        Benchmark đơn giản.
+        """
+
+        processed = 0
+
+        matched = 0
+
+        for chart in charts:
+
+            processed += 1
+
+            matched += len(
+                self.match(chart)
+            )
+
+        return {
+
+            "processed":
+                processed,
+
+            "matched":
+                matched,
+
+            "average":
+                (
+                    matched / processed
+                    if processed
+                    else 0
+                ),
+
+        }
+
+    # =====================================================
+    # Rule Statistics
+    # =====================================================
+
+    def statistics_by_chapter(
+        self,
+    ) -> dict[str, int]:
+
+        result = {}
+
+        for chapter, rules in self._chapter_index.items():
+
+            result[chapter] = len(rules)
+
+        return result
+
+    def statistics_by_template(
+        self,
+    ) -> dict[str, int]:
+
+        result = {}
+
+        for template, rules in self._template_index.items():
+
+            result[template] = len(rules)
+
+        return result
+
+    def statistics_by_tag(
+        self,
+    ) -> dict[str, int]:
+
+        result = {}
+
+        for tag, rules in self._tag_index.items():
+
+            result[tag] = len(rules)
+
+        return result
+            # =====================================================
+    # Validation
+    # =====================================================
+
+    def validate(self) -> bool:
+        """
+        Kiểm tra toàn bộ Rule trước khi Match.
+        """
+
+        for rule in self._rules:
+
+            if not self.validate_rule(rule):
+
+                return False
+
+        return True
+
+    def validate_or_raise(self) -> None:
+        """
+        Validate và phát sinh Exception nếu lỗi.
+        """
+
+        for rule in self._rules:
+
+            if not self.validate_rule(rule):
+
+                raise ValueError(
+
+                    f"Rule không hợp lệ: "
+
+                    f"{rule.get('rule_id','UNKNOWN')}"
+
+                )
+
+    # =====================================================
+    # Logging
+    # =====================================================
+
+    def enable_debug(
+        self,
+    ) -> None:
+
+        self._debug = True
+
+    def disable_debug(
+        self,
+    ) -> None:
+
+        self._debug = False
+
+    def debug(
+        self,
+        message: str,
+    ) -> None:
+
+        if getattr(
+            self,
+            "_debug",
+            False,
+        ):
+
+            print(
+                "[RuleMatcher]",
+                message,
+            )
+
+    # =====================================================
+    # Metrics
+    # =====================================================
+
+    def metrics(
+        self,
+    ) -> dict[str, Any]:
+        """
+        Thống kê Runtime.
+        """
+
+        return {
+
+            "rules":
+
+                len(self._rules),
+
+            "cache":
+
+                len(self._cache),
+
+            "chapters":
+
+                len(
+                    self._chapter_index
+                ),
+
+            "templates":
+
+                len(
+                    self._template_index
+                ),
+
+            "tags":
+
+                len(
+                    self._tag_index
+                ),
+
+            "statistics":
+
+                self.statistics,
+
+        }
+
+    # =====================================================
+    # Export
+    # =====================================================
+
+    def export_statistics(
+        self,
+    ) -> dict:
+
+        return {
+
+            "matcher":
+
+                self.metrics(),
+
+            "priority":
+
+                self._priority.statistics,
+
+            "conflict":
+
+                self._conflict.statistics,
+
+            "condition":
+
+                self._evaluator.statistics,
+
+        }
+
+    # =====================================================
+    # Maintenance
+    # =====================================================
+
+    def reload(
+        self,
+        rules: Iterable[dict],
+    ) -> None:
+        """
+        Reload toàn bộ Rule.
+        """
+
+        self.clear()
+
+        self.load_rules(
+            rules
+        )
+
+        self.initialize()
+
+    def optimize_storage(
+        self,
+    ) -> None:
+        """
+        Chuẩn hóa bộ nhớ.
+        """
+
+        self.sort_by_priority()
+
+        self.rebuild_indexes()
+
+    # =====================================================
+    # Integrity
+    # =====================================================
+
+    def check_integrity(
+        self,
+    ) -> bool:
+        """
+        Kiểm tra tính toàn vẹn.
+        """
+
+        if len(self._rules) != len(
+            self._rule_index
+        ):
+
+            return False
+
+        return True
+
+    # =====================================================
+    # Pipeline
+    # =====================================================
+
+    def pipeline(
+        self,
+    ) -> list[str]:
+        """
+        Pipeline hiện tại.
+        """
+
+        return [
+
+            "ConditionEvaluator",
+
+            "PriorityResolver",
+
+            "ConflictResolver",
+
+            "MatchResult",
+
+        ]
+
+    # =====================================================
+    # End
+    # =====================================================
+
+    def close(
+        self,
+    ) -> None:
+
+        self.shutdown()
