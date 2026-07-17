@@ -132,3 +132,148 @@ class RuleMatcher:
             return False
 
         return True
+    # =====================================================
+    # Filter
+    # =====================================================
+
+    def filter_by_category(
+        self,
+        rules: List[Dict[str, Any]],
+        category: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Lọc Rule theo category.
+        """
+
+        if not category:
+            return list(rules)
+
+        return [
+            rule
+            for rule in rules
+            if rule.get("category") == category
+        ]
+
+    def filter_by_layer(
+        self,
+        rules: List[Dict[str, Any]],
+        layer: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Lọc Rule theo layer.
+        """
+
+        if not layer:
+            return list(rules)
+
+        return [
+            rule
+            for rule in rules
+            if rule.get("layer") == layer
+        ]
+
+    # =====================================================
+    # Group
+    # =====================================================
+
+    def group_by_category(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> Dict[str, List[Dict[str, Any]]]:
+
+        groups: Dict[str, List[Dict[str, Any]]] = {}
+
+        for rule in rules:
+
+            category = rule.get("category", "default")
+
+            groups.setdefault(category, []).append(rule)
+
+        return groups
+
+    def group_by_layer(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> Dict[str, List[Dict[str, Any]]]:
+
+        groups: Dict[str, List[Dict[str, Any]]] = {}
+
+        for rule in rules:
+
+            layer = rule.get("layer", "default")
+
+            groups.setdefault(layer, []).append(rule)
+
+        return groups
+
+    # =====================================================
+    # Sort
+    # =====================================================
+
+    def sort_by_priority(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """
+        Sắp xếp theo priority giảm dần.
+        """
+
+        return sorted(
+            rules,
+            key=lambda r: int(r.get("priority", 0)),
+            reverse=True,
+        )
+
+    # =====================================================
+    # Statistics
+    # =====================================================
+
+    def count(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> int:
+        """
+        Đếm số Rule.
+        """
+
+        return len(rules)
+
+    def is_empty(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> bool:
+        """
+        Kiểm tra danh sách Rule rỗng.
+        """
+
+        return len(rules) == 0
+
+    # =====================================================
+    # Utility
+    # =====================================================
+
+    def first(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Lấy Rule đầu tiên.
+        """
+
+        if not rules:
+            return None
+
+        return rules[0]
+
+    def last(
+        self,
+        rules: List[Dict[str, Any]],
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Lấy Rule cuối cùng.
+        """
+
+        if not rules:
+            return None
+
+        return rules[-1]
