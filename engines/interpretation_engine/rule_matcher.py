@@ -146,7 +146,7 @@ class RuleMatcher:
     # =================================================
 
 
-    def check_condition(
+   (
         self,
         context,
         condition
