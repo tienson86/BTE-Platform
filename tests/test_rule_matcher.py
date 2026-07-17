@@ -2,7 +2,7 @@
 Tests for RuleMatcher
 """
 
-from interpretation_engine.context import InterpretationContext
+from engines.interpretation_engine.context import InterpretationContext
 from interpretation_engine.rule_loader import RuleLoader
 from interpretation_engine.rule_matcher import RuleMatcher
 
