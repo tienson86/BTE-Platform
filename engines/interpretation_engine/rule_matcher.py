@@ -1,531 +1,96 @@
-"""
-Rule Matcher
-============
-
-Kiểm tra điều kiện Rule với dữ liệu lá số.
-
-Flow:
-
-Context
-    ↓
-Rule Database
-    ↓
-Rule Matcher
-    ↓
-Matched Rules
-    ↓
-Rule Scoring
-
-
-Chức năng:
-
-- Đọc điều kiện của Rule.
-- So sánh với Context.
-- Trả về Rule được kích hoạt.
-
-Không chứa:
-- Chấm điểm.
-- Sinh câu luận giải.
-- Kiến thức Bát Tự trực tiếp.
-"""
-
-
-from typing import Dict, List, Any
-
-
-
-
-
-# =====================================================
-# OPERATOR DATABASE
-# =====================================================
-
-
-SUPPORTED_OPERATORS = [
-
-    "eq",
-
-    "neq",
-
-    "in",
-
-    "not_in",
-
-    "contains",
-
-    "exists",
-
-    "gt",
-
-    "lt"
-
-]
-
-
-
-
-
-# =====================================================
-# CLASS
-# =====================================================
-
-
-class RuleMatcher:
-
-
-
-    def __init__(self):
-
-        pass
-
-
-
-
-    # =================================================
-    # MAIN MATCH
-    # =================================================
-
-
-    def match(
-        self,
-        context: Dict[str, Any],
-        rules: List[Dict[str, Any]]
-    ):
-
-
-        matched = []
-
-
-
-        for rule in rules:
-
-
-            condition = rule.get(
-
-                "condition",
-
-                {}
-
-            )
-
-
-
-            if self.check_condition(
-
-                context,
-
-                condition
-
-            ):
-
-
-                matched_rule = rule.copy()
-
-
-
-                matched_rule["matched"] = True
-
-
-
-                matched.append(
-
-                    matched_rule
-
-                )
-
-
-
-        return matched
-
-
-
-
-
-    # =================================================
-    # CHECK CONDITION
-    # =================================================
-
-
-   (
-        self,
-        context,
-        condition
-    ):
-
-
-        if not condition:
-
-
-            return False
-
-
-
-        for key, requirement in condition.items():
-
-
-            value = self.get_context_value(
-
-                context,
-
-                key
-
-            )
-
-
-
-            if not self.compare(
-
-                value,
-
-                requirement
-
-            ):
-
-
-                return False
-
-
-
+def check_condition(
+    self,
+    context,
+    condition,
+):
+    """
+    Kiểm tra một điều kiện Rule.
+
+    Hỗ trợ:
+
+    - dict
+    - JSON string
+    - key=value
+    - chuỗi đơn
+    """
+
+    if condition is None:
         return True
 
+    if condition == "":
+        return True
 
+    # ------------------------------
+    # String
+    # ------------------------------
 
+    if isinstance(condition, str):
 
+        condition = condition.strip()
 
-    # =================================================
-    # GET VALUE
-    # =================================================
+        if condition == "":
+            return True
 
+        # JSON
+        if condition.startswith("{"):
 
-    def get_context_value(
-        self,
-        context,
-        key
-    ):
+            import json
 
+            try:
+                condition = json.loads(condition)
 
-        parts = key.split(".")
+            except Exception:
+                return False
 
-        value = context
+        # key=value
+        elif "=" in condition:
 
+            key, value = condition.split("=", 1)
 
-
-        for part in parts:
-
-
-            if isinstance(
-
-                value,
-
-                dict
-
-            ):
-
-
-                value = value.get(
-
-                    part
-
-                )
-
-
-
-            else:
-
-
-                return None
-
-
-
-        return value
-
-
-
-
-
-    # =================================================
-    # COMPARE
-    # =================================================
-
-
-    def compare(
-        self,
-        value,
-        requirement
-    ):
-
-
-        if isinstance(
-            requirement,
-            dict
-        ):
-
-
-            operator = requirement.get(
-
-                "operator",
-
-                "eq"
-
-            )
-
-
-            target = requirement.get(
-
-                "value"
-
-            )
-
-
-            return self.compare_operator(
-
-                value,
-
-                operator,
-
-                target
-
-            )
-
-
+            condition = {
+                key.strip(): value.strip()
+            }
 
         else:
 
-
-            return value == requirement
-
-
-
-
-
-    # =================================================
-    # OPERATOR PROCESS
-    # =================================================
-
-
-    def compare_operator(
-        self,
-        value,
-        operator,
-        target
-    ):
-
-
-
-        if operator == "eq":
-
-
-            return value == target
-
-
-
-
-        elif operator == "neq":
-
-
-            return value != target
-
-
-
-
-        elif operator == "in":
-
-
-            if isinstance(
-
-                target,
-
-                list
-
-            ):
-
-
-                return value in target
-
-
-
             return False
 
+    # ------------------------------
+    # Dict
+    # ------------------------------
 
-
-
-
-        elif operator == "not_in":
-
-
-            if isinstance(
-
-                target,
-
-                list
-
-            ):
-
-
-                return value not in target
-
-
-
-            return False
-
-
-
-
-
-        elif operator == "contains":
-
-
-            if isinstance(
-
-                value,
-
-                list
-
-            ):
-
-
-                return target in value
-
-
-
-            if isinstance(
-
-                value,
-
-                str
-
-            ):
-
-
-                return target in value
-
-
-
-            return False
-
-
-
-
-
-        elif operator == "exists":
-
-
-            return value is not None
-
-
-
-
-        elif operator == "gt":
-
-
-            return value > target
-
-
-
-
-        elif operator == "lt":
-
-
-            return value < target
-
-
-
-
-
+    if not isinstance(condition, dict):
         return False
 
+    # ------------------------------
+    # Compare
+    # ------------------------------
 
+    for key, expected in condition.items():
 
+        actual = None
 
+        # tra trong bazi
+        if hasattr(context, "bazi"):
 
-    # =================================================
-    # DEBUG MATCH
-    # =================================================
+            actual = context.bazi.get(key)
 
+        # tra trong elements
+        if actual is None and hasattr(context, "elements"):
 
-    def explain_match(
-        self,
-        context,
-        rule
-    ):
+            actual = context.elements.get(key)
 
+        # tra trong ten_gods
+        if actual is None and hasattr(context, "ten_gods"):
 
-        condition = rule.get(
+            actual = context.ten_gods.get(key)
 
-            "condition",
+        # tra trong pattern
+        if actual is None and hasattr(context, "patterns"):
 
-            {}
+            actual = context.patterns.get(key)
 
-        )
+        if str(actual) != str(expected):
+            return False
 
-
-        result = {}
-
-
-
-        for key, requirement in condition.items():
-
-
-            value = self.get_context_value(
-
-                context,
-
-                key
-
-            )
-
-
-            result[key] = {
-
-
-                "actual": value,
-
-
-                "required": requirement,
-
-
-                "matched":
-
-                    self.compare(
-
-                        value,
-
-                        requirement
-
-                    )
-
-            }
-
-
-
-        return result
-
-
-
-
-
-# =====================================================
-# SERVICE FUNCTION
-# =====================================================
-
-
-def match_rules(
-
-    context,
-
-    rules
-
-):
-
-
-    matcher = RuleMatcher()
-
-
-
-    return matcher.match(
-
-        context,
-
-        rules
-
-    )
+    return True
