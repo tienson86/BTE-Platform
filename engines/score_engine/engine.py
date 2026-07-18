@@ -27,6 +27,7 @@ ScoreResult
 """
 
 from .result import ScoreResult
+from .loader import ScoreLoader
 
 from .calculators import (
     WuxingScoreCalculator,
@@ -45,9 +46,11 @@ class ScoreEngine:
     Engine chính của Score Engine.
     """
 
-    def __init__(self, loader):
+    def __init__(self, loader=None):
 
-        self.loader = loader
+        self.loader = loader or ScoreLoader(
+            "database/15_score_engine"
+        )
 
         self.calculators = self._build_pipeline()
 
@@ -80,7 +83,8 @@ class ScoreEngine:
 
     def calculate(self, context):
 
-        context.validate()
+        if hasattr(context, "validate"):
+            context.validate()
 
         result = ScoreResult()
 
