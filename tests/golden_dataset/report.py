@@ -88,10 +88,10 @@ def export_markdown(
 
                 f.write("### Validation Errors\n\n")
 
-                for err in report.validation_errors:
+               for err in report.validation_errors:
 
                     f.write(
-                        f"- {err.field}: {err.message} ({err.value})\n"
+                        f"- {err.path}: {err.message} ({err.value})\n"
                     )
 
                 f.write("\n")
