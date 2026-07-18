@@ -3,16 +3,15 @@
   "$id": "https://bte-platform/schema/golden_dataset/input_schema.json",
 
   "title": "BTE Golden Dataset Input Schema",
-  "description": "Schema for input test cases of BTE Platform.",
+  "description": "Input schema for BTE Platform Golden Dataset.",
 
   "type": "object",
-
   "additionalProperties": false,
 
   "required": [
     "case_id",
     "description",
-    "chart"
+    "birth"
   ],
 
   "properties": {
@@ -20,7 +19,7 @@
     "case_id": {
       "type": "string",
       "pattern": "^case_[0-9]{4}$",
-      "description": "Unique Golden Dataset case id."
+      "description": "Unique test case identifier."
     },
 
     "description": {
@@ -29,115 +28,84 @@
     },
 
     "tags": {
-
       "type": "array",
-
+      "description": "Optional labels for grouping test cases.",
       "items": {
         "type": "string"
       },
-
       "default": []
-
     },
 
-    "chart": {
+    "birth": {
 
       "type": "object",
-
       "additionalProperties": false,
 
       "required": [
-
         "gender",
-
-        "year",
-
-        "month",
-
-        "day",
-
-        "hour"
-
+        "solar_datetime",
+        "timezone",
+        "location"
       ],
 
       "properties": {
 
         "gender": {
-
           "type": "string",
-
           "enum": [
-
             "male",
-
             "female"
-
           ]
-
         },
 
-        "year": {
-
-          "$ref": "#/$defs/pillar"
-
+        "solar_datetime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gregorian birth datetime."
         },
 
-        "month": {
-
-          "$ref": "#/$defs/pillar"
-
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone name."
         },
 
-        "day": {
-
-          "$ref": "#/$defs/pillar"
-
-        },
-
-        "hour": {
-
-          "$ref": "#/$defs/pillar"
-
-        },
-
-        "birth": {
+        "location": {
 
           "type": "object",
-
           "additionalProperties": false,
+
+          "required": [
+            "country",
+            "province",
+            "district",
+            "latitude",
+            "longitude"
+          ],
 
           "properties": {
 
-            "solar_datetime": {
-
-              "type": "string",
-
-              "format": "date-time"
-
-            },
-
-            "timezone": {
-
+            "country": {
               "type": "string"
-
             },
 
-            "longitude": {
+            "province": {
+              "type": "string"
+            },
 
-              "type": "number"
-
+            "district": {
+              "type": "string"
             },
 
             "latitude": {
-
-              "type": "number"
-
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
             },
 
-            "place": {
-
-              "type": "string"
-
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
             }
 
           }
@@ -146,89 +114,73 @@
 
       }
 
-    }
+    },
 
-  },
-
-  "$defs": {
-
-    "pillar": {
+    "options": {
 
       "type": "object",
-
       "additionalProperties": false,
-
-      "required": [
-
-        "stem",
-
-        "branch"
-
-      ],
 
       "properties": {
 
-        "stem": {
+        "calendar": {
 
-          "type": "string",
+          "type": "object",
+          "additionalProperties": false,
 
-          "enum": [
+          "properties": {
 
-            "giap",
+            "calendar_type": {
+              "type": "string",
+              "enum": [
+                "solar",
+                "lunar"
+              ],
+              "default": "solar"
+            },
 
-            "at",
+            "use_true_solar_time": {
+              "type": "boolean",
+              "default": true
+            },
 
-            "binh",
+            "use_dst": {
+              "type": "boolean",
+              "default": false
+            }
 
-            "dinh",
-
-            "mau",
-
-            "ky",
-
-            "canh",
-
-            "tan",
-
-            "nham",
-
-            "quy"
-
-          ]
+          }
 
         },
 
-        "branch": {
+        "engine": {
 
-          "type": "string",
+          "type": "object",
+          "additionalProperties": false,
 
-          "enum": [
+          "properties": {
 
-            "ty",
+            "language": {
+              "type": "string",
+              "default": "vi"
+            },
 
-            "suu",
+            "rule_database": {
+              "type": "string",
+              "default": "v1.0"
+            },
 
-            "dan",
+            "output_format": {
+              "type": "string",
+              "enum": [
+                "json",
+                "markdown",
+                "html"
+              ],
+              "default": "json"
+            }
 
-            "mao",
-
-            "thin",
-
-            "ti",
-
-            "ngo",
-
-            "mui",
-
-            "than",
-
-            "dau",
-
-            "tuat",
-
-            "hoi"
-
-          ]
+          }
 
         }
 
