@@ -1,30 +1,138 @@
 {
-    "version": "1.0",
-    "engine": "pattern_engine",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/snapshots/pattern_engine/schema.json",
 
-    "required": [
+  "title": "Pattern Engine Snapshot",
 
-        "strength",
+  "type": "object",
 
-        "pattern",
+  "additionalProperties": false,
 
-        "useful_god"
+  "required": [
 
-    ],
+    "case_id",
 
-    "properties": {
+    "strength",
 
-        "strength": "object",
+    "pattern",
 
-        "pattern": "object",
+    "useful_god"
 
-        "follow_pattern": "boolean",
+  ],
 
-        "useful_god": "object",
+  "properties": {
 
-        "favorable_elements": "array",
+    "case_id": {
 
-        "unfavorable_elements": "array"
+      "type": "string"
+
+    },
+
+    "strength": {
+
+      "type": "object",
+
+      "properties": {
+
+        "level": {
+
+          "type": "string"
+
+        },
+
+        "score": {
+
+          "type": "integer"
+
+        }
+
+      }
+
+    },
+
+    "pattern": {
+
+      "type": "object",
+
+      "properties": {
+
+        "primary": {
+
+          "type": "string"
+
+        },
+
+        "secondary": {
+
+          "type": [
+            "string",
+            "null"
+          ]
+
+        },
+
+        "follow_pattern": {
+
+          "type": "boolean"
+
+        }
+
+      }
+
+    },
+
+    "useful_god": {
+
+      "type": "object",
+
+      "properties": {
+
+        "primary": {
+
+          "type": "string"
+
+        },
+
+        "secondary": {
+
+          "type": "array",
+
+          "items": {
+
+            "type": "string"
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "favorable_elements": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string"
+
+      }
+
+    },
+
+    "unfavorable_elements": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string"
+
+      }
 
     }
+
+  }
+
 }
