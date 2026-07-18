@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bte-platform/schema/golden_dataset/input_schema.json",
 
-  "title": "BTE Golden Dataset Input Schema",
-  "description": "Input schema for BTE Platform Golden Dataset.",
+  "title": "BTE Platform Golden Dataset Input Schema",
+  "description": "Input schema for BTE Platform Golden Dataset. Contains only source birth information and engine configuration.",
 
   "type": "object",
   "additionalProperties": false,
@@ -19,7 +19,7 @@
     "case_id": {
       "type": "string",
       "pattern": "^case_[0-9]{4}$",
-      "description": "Unique test case identifier."
+      "description": "Unique Golden Dataset case identifier."
     },
 
     "description": {
@@ -29,7 +29,6 @@
 
     "tags": {
       "type": "array",
-      "description": "Optional labels for grouping test cases.",
       "items": {
         "type": "string"
       },
@@ -43,7 +42,8 @@
 
       "required": [
         "gender",
-        "solar_datetime",
+        "calendar",
+        "datetime",
         "timezone",
         "location"
       ],
@@ -58,20 +58,30 @@
           ]
         },
 
-        "solar_datetime": {
+        "calendar": {
+          "type": "string",
+          "enum": [
+            "solar",
+            "lunar"
+          ],
+          "default": "solar"
+        },
+
+        "datetime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gregorian birth datetime."
+          "description": "Birth datetime."
         },
 
         "timezone": {
           "type": "string",
-          "description": "IANA timezone name."
+          "description": "IANA timezone."
         },
 
         "location": {
 
           "type": "object",
+
           "additionalProperties": false,
 
           "required": [
@@ -119,32 +129,25 @@
     "options": {
 
       "type": "object",
+
       "additionalProperties": false,
 
       "properties": {
 
-        "calendar": {
+        "calendar_engine": {
 
           "type": "object",
+
           "additionalProperties": false,
 
           "properties": {
-
-            "calendar_type": {
-              "type": "string",
-              "enum": [
-                "solar",
-                "lunar"
-              ],
-              "default": "solar"
-            },
 
             "use_true_solar_time": {
               "type": "boolean",
               "default": true
             },
 
-            "use_dst": {
+            "use_daylight_saving": {
               "type": "boolean",
               "default": false
             }
@@ -153,9 +156,10 @@
 
         },
 
-        "engine": {
+        "interpretation_engine": {
 
           "type": "object",
+
           "additionalProperties": false,
 
           "properties": {
@@ -168,20 +172,79 @@
             "rule_database": {
               "type": "string",
               "default": "v1.0"
-            },
-
-            "output_format": {
-              "type": "string",
-              "enum": [
-                "json",
-                "markdown",
-                "html"
-              ],
-              "default": "json"
             }
 
           }
 
+        },
+
+        "report_engine": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "properties": {
+
+            "output_format": {
+
+              "type": "array",
+
+              "items": {
+
+                "type": "string",
+
+                "enum": [
+                  "json",
+                  "markdown",
+                  "html",
+                  "pdf"
+                ]
+
+              },
+
+              "default": [
+                "json"
+              ]
+
+            }
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "metadata": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "author": {
+          "type": "string"
+        },
+
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "dataset_version": {
+          "type": "string"
+        },
+
+        "notes": {
+          "type": "string"
         }
 
       }
