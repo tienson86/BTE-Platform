@@ -1,119 +1,241 @@
 {
-    "version": "1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/golden_dataset/input_schema.json",
 
-    "type": "object",
+  "title": "BTE Golden Dataset Input Schema",
+  "description": "Schema for input test cases of BTE Platform.",
 
-    "required": [
-        "case_id",
-        "description",
-        "chart"
-    ],
+  "type": "object",
 
-    "properties": {
+  "additionalProperties": false,
 
-        "case_id": {
-            "type": "string"
-        },
+  "required": [
+    "case_id",
+    "description",
+    "chart"
+  ],
 
-        "description": {
-            "type": "string"
-        },
+  "properties": {
 
-        "chart": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^case_[0-9]{4}$",
+      "description": "Unique Golden Dataset case id."
+    },
 
-            "type": "object",
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
 
-            "required": [
-                "gender",
-                "year",
-                "month",
-                "day",
-                "hour"
-            ],
+    "tags": {
 
-            "properties": {
+      "type": "array",
 
-                "gender": {
-                    "type": "string",
-                    "enum": [
-                        "male",
-                        "female"
-                    ]
-                },
+      "items": {
+        "type": "string"
+      },
 
-                "year": {
-                    "$ref": "#/definitions/pillar"
-                },
-
-                "month": {
-                    "$ref": "#/definitions/pillar"
-                },
-
-                "day": {
-                    "$ref": "#/definitions/pillar"
-                },
-
-                "hour": {
-                    "$ref": "#/definitions/pillar"
-                }
-
-            }
-
-        }
+      "default": []
 
     },
 
-    "definitions": {
+    "chart": {
 
-        "pillar": {
+      "type": "object",
 
-            "type": "object",
+      "additionalProperties": false,
 
-            "required": [
-                "stem",
-                "branch"
-            ],
+      "required": [
 
-            "properties": {
+        "gender",
 
-                "stem": {
-                    "type": "string",
-                    "enum": [
-                        "giap",
-                        "at",
-                        "binh",
-                        "dinh",
-                        "mau",
-                        "ky",
-                        "canh",
-                        "tan",
-                        "nham",
-                        "quy"
-                    ]
-                },
+        "year",
 
-                "branch": {
-                    "type": "string",
-                    "enum": [
-                        "ty",
-                        "suu",
-                        "dan",
-                        "mao",
-                        "thin",
-                        "ty2",
-                        "ngo",
-                        "mui",
-                        "than",
-                        "dau",
-                        "tuat",
-                        "hoi"
-                    ]
-                }
+        "month",
+
+        "day",
+
+        "hour"
+
+      ],
+
+      "properties": {
+
+        "gender": {
+
+          "type": "string",
+
+          "enum": [
+
+            "male",
+
+            "female"
+
+          ]
+
+        },
+
+        "year": {
+
+          "$ref": "#/$defs/pillar"
+
+        },
+
+        "month": {
+
+          "$ref": "#/$defs/pillar"
+
+        },
+
+        "day": {
+
+          "$ref": "#/$defs/pillar"
+
+        },
+
+        "hour": {
+
+          "$ref": "#/$defs/pillar"
+
+        },
+
+        "birth": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "properties": {
+
+            "solar_datetime": {
+
+              "type": "string",
+
+              "format": "date-time"
+
+            },
+
+            "timezone": {
+
+              "type": "string"
+
+            },
+
+            "longitude": {
+
+              "type": "number"
+
+            },
+
+            "latitude": {
+
+              "type": "number"
+
+            },
+
+            "place": {
+
+              "type": "string"
 
             }
 
+          }
+
         }
 
+      }
+
     }
+
+  },
+
+  "$defs": {
+
+    "pillar": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+
+        "stem",
+
+        "branch"
+
+      ],
+
+      "properties": {
+
+        "stem": {
+
+          "type": "string",
+
+          "enum": [
+
+            "giap",
+
+            "at",
+
+            "binh",
+
+            "dinh",
+
+            "mau",
+
+            "ky",
+
+            "canh",
+
+            "tan",
+
+            "nham",
+
+            "quy"
+
+          ]
+
+        },
+
+        "branch": {
+
+          "type": "string",
+
+          "enum": [
+
+            "ty",
+
+            "suu",
+
+            "dan",
+
+            "mao",
+
+            "thin",
+
+            "ti",
+
+            "ngo",
+
+            "mui",
+
+            "than",
+
+            "dau",
+
+            "tuat",
+
+            "hoi"
+
+          ]
+
+        }
+
+      }
+
+    }
+
+  }
 
 }
