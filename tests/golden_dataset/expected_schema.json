@@ -4,19 +4,12 @@
     "type": "object",
 
     "required": [
-
         "case_id",
-
         "strength",
-
         "pattern",
-
         "useful_god",
-
         "score",
-
-        "sentences"
-
+        "interpretation"
     ],
 
     "properties": {
@@ -37,12 +30,7 @@
             "properties": {
 
                 "level": {
-                    "type": "string",
-                    "enum": [
-                        "than_vuong",
-                        "than_nhuoc",
-                        "than_can_bang"
-                    ]
+                    "type": "string"
                 },
 
                 "score": {
@@ -91,14 +79,7 @@
             "properties": {
 
                 "primary": {
-                    "type": "string",
-                    "enum": [
-                        "kim",
-                        "moc",
-                        "thuy",
-                        "hoa",
-                        "tho"
-                    ]
+                    "type": "string"
                 },
 
                 "secondary": {
@@ -106,14 +87,7 @@
                     "type": "array",
 
                     "items": {
-                        "type": "string",
-                        "enum": [
-                            "kim",
-                            "moc",
-                            "thuy",
-                            "hoa",
-                            "tho"
-                        ]
+                        "type": "string"
                     }
 
                 }
@@ -123,17 +97,225 @@
         },
 
         "score": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 100
+
+            "type": "object",
+
+            "properties": {
+
+                "total": {
+                    "type": "integer"
+                },
+
+                "strength": {
+                    "type": "integer"
+                },
+
+                "pattern": {
+                    "type": "integer"
+                },
+
+                "useful_god": {
+                    "type": "integer"
+                },
+
+                "ten_gods": {
+                    "type": "integer"
+                },
+
+                "shen_sha": {
+                    "type": "integer"
+                }
+
+            }
+
         },
 
-        "sentences": {
+        "five_elements": {
+
+            "type": "object",
+
+            "properties": {
+
+                "kim": {
+                    "type": "integer"
+                },
+
+                "moc": {
+                    "type": "integer"
+                },
+
+                "thuy": {
+                    "type": "integer"
+                },
+
+                "hoa": {
+                    "type": "integer"
+                },
+
+                "tho": {
+                    "type": "integer"
+                }
+
+            }
+
+        },
+
+        "ten_gods": {
+
+            "type": "object",
+
+            "properties": {
+
+                "day_master": {
+                    "type": "string"
+                },
+
+                "dominant": {
+                    "type": "string"
+                },
+
+                "distribution": {
+                    "type": "object"
+                }
+
+            }
+
+        },
+
+        "hidden_stems": {
 
             "type": "array",
 
             "items": {
+
+                "type": "object"
+
+            }
+
+        },
+
+        "combinations": {
+
+            "type": "object",
+
+            "properties": {
+
+                "heavenly_stems": {
+                    "type": "array"
+                },
+
+                "earthly_branches": {
+                    "type": "array"
+                }
+
+            }
+
+        },
+
+        "conflicts": {
+
+            "type": "object",
+
+            "properties": {
+
+                "clash": {
+                    "type": "array"
+                },
+
+                "punishment": {
+                    "type": "array"
+                },
+
+                "harm": {
+                    "type": "array"
+                },
+
+                "destruction": {
+                    "type": "array"
+                }
+
+            }
+
+        },
+
+        "shen_sha": {
+
+            "type": "array",
+
+            "items": {
+
                 "type": "string"
+
+            }
+
+        },
+
+        "luck": {
+
+            "type": "object",
+
+            "properties": {
+
+                "yong_shen": {
+                    "type": "string"
+                },
+
+                "xi_shen": {
+                    "type": "array"
+                },
+
+                "ji_shen": {
+                    "type": "array"
+                }
+
+            }
+
+        },
+
+        "interpretation": {
+
+            "type": "object",
+
+            "properties": {
+
+                "summary": {
+                    "type": "string"
+                },
+
+                "career": {
+                    "type": "string"
+                },
+
+                "wealth": {
+                    "type": "string"
+                },
+
+                "marriage": {
+                    "type": "string"
+                },
+
+                "health": {
+                    "type": "string"
+                },
+
+                "children": {
+                    "type": "string"
+                },
+
+                "personality": {
+                    "type": "string"
+                },
+
+                "notes": {
+
+                    "type": "array",
+
+                    "items": {
+                        "type": "string"
+                    }
+
+                }
+
             }
 
         }
