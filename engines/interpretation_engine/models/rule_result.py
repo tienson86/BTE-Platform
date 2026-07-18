@@ -8,3 +8,15 @@ class RuleResult:
     score: float = 0
     @property
     def priority(self): return self.rule.priority
+
+    @property
+    def topic(self): return self.rule.topic
+
+    @property
+    def section(self): return self.rule.section
+
+    @property
+    def category(self): return self.rule.category
+
+    @property
+    def text(self): return self.rule.result

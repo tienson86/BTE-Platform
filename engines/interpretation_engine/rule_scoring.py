@@ -140,6 +140,19 @@ class RuleScoring:
         rules: List[Dict[str,Any]],
         context=None
     ):
+        return self.calculate_total(
+            self.score_rules(
+                rules,
+                context
+            )
+        )
+
+
+    def score_rules(
+        self,
+        rules: List[Dict[str,Any]],
+        context=None
+    ):
 
 
         result = []
@@ -491,7 +504,7 @@ def score_rules(
 
 
 
-    return scorer.score(
+    return scorer.score_rules(
 
         rules,
 

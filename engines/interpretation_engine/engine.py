@@ -185,7 +185,7 @@ class InterpretationEngine:
         # ---------------------------------------------
 
 
-        scored_rules = self.rule_scoring.score(
+        scored_rules = self.rule_scoring.score_rules(
 
             matched_rules,
 

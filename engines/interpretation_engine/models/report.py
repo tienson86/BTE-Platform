@@ -4,11 +4,13 @@ from dataclasses import dataclass, field
 class ReportParagraph:
     title: str = ""
     sentences: list = field(default_factory=list)
+    rule_count: int = 0
 
 @dataclass
 class ReportSection:
     title: str = ""
     paragraphs: list = field(default_factory=list)
+    rule_count: int = 0
 
 @dataclass
 class InterpretationReport:

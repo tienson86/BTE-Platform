@@ -168,6 +168,19 @@ class Formatter:
                 ),
 
 
+            "score":
+
+                getattr(
+
+                    data,
+
+                    "score",
+
+                    0
+
+                ),
+
+
 
             "sections":{},
 
