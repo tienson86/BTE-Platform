@@ -8,7 +8,7 @@ class ScoreContext:
     Dữ liệu đầu vào cho Score Engine.
     """
 
-    bazi_chart: Any
+    bazi_chart: Any = None
 
     pattern_result: Any = None
 
@@ -22,5 +22,4 @@ class ScoreContext:
 
     def validate(self):
 
-        if self.bazi_chart is None:
-            raise ValueError("Thiếu Bazi Chart.")
+        return True

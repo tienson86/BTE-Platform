@@ -18,6 +18,16 @@ from .luck import (
     AnnualLuck,
     MonthlyLuck,
 )
+from dataclasses import dataclass, field
+from typing import Any
+
+
+@dataclass(slots=True)
+class BaziResult:
+    """Compatibility result model used by the interpretation layer."""
+    success: bool = True
+    chart: Any = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 __all__ = [
 
@@ -32,5 +42,6 @@ __all__ = [
     "AnnualLuck",
 
     "MonthlyLuck",
+    "BaziResult",
 
 ]

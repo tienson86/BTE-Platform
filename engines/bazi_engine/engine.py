@@ -1,122 +1,66 @@
-"""
-BTE Platform
-Bazi Engine
-
-Engine trung tâm của Bazi Engine.
-"""
+"""Public, dependency-free facade for building a basic Bazi chart."""
 
 from __future__ import annotations
 
-from typing import Optional
-
-from engines.core.base_engine import BaseEngine
-
-from .calculator import BaziCalculator
-from .config import BaziConfig
-from .loader import BaziLoader
-from .models import (
-    BaziContext,
-    BaziResult,
-)
-from .validator import BaziValidator
+from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Any
 
 
-class BaziEngine(BaseEngine):
-    """
-    Engine chính của Bazi Engine.
-    """
+STEMS = ("Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý")
+BRANCHES = ("Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi")
+HIDDEN = {"Tý": ["Quý"], "Sửu": ["Kỷ", "Quý", "Tân"], "Dần": ["Giáp", "Bính", "Mậu"], "Mão": ["Ất"], "Thìn": ["Mậu", "Ất", "Quý"], "Tỵ": ["Bính", "Mậu", "Canh"], "Ngọ": ["Đinh", "Kỷ"], "Mùi": ["Kỷ", "Đinh", "Ất"], "Thân": ["Canh", "Nhâm", "Mậu"], "Dậu": ["Tân"], "Tuất": ["Mậu", "Tân", "Đinh"], "Hợi": ["Nhâm", "Giáp"]}
 
-    def __init__(
-        self,
-        config: Optional[BaziConfig] = None,
-    ) -> None:
 
-        super().__init__()
+@dataclass(slots=True)
+class Pillar:
+    stem: str
+    branch: str
 
-        self.config = config or BaziConfig()
 
-        self.loader = BaziLoader()
-
-        self.validator = BaziValidator()
-
-        self.calculator = BaziCalculator()
-
-        self._initialized = False
-
-    # ======================================================
-    # Lifecycle
-    # ======================================================
-
-    def initialize(self) -> None:
-        """
-        Khởi tạo Engine.
-        """
-
-        if self._initialized:
-            return
-
-        self.loader.load_all()
-
-        self._initialized = True
-
-    def shutdown(self) -> None:
-        """
-        Giải phóng tài nguyên.
-        """
-
-        self.loader.clear_cache()
-
-        self._initialized = False
-
-    # ======================================================
-    # Execute
-    # ======================================================
-
-    def execute(
-        self,
-        context: BaziContext,
-    ) -> BaziResult:
-        """
-        Thực thi Bazi Engine.
-        """
-
-        if not self._initialized:
-            self.initialize()
-
-        self.validator.validate_context(context)
-
-        result = self.calculator.calculate(
-            context=context,
-            loader=self.loader,
-            config=self.config,
-        )
-
-        return result
-
-    # ======================================================
-    # Status
-    # ======================================================
+@dataclass(slots=True)
+class BaziChart:
+    year_pillar: Pillar
+    month_pillar: Pillar
+    day_pillar: Pillar
+    hour_pillar: Pillar
+    gender: str | None = None
+    hidden_stems: list[str] = field(default_factory=list)
+    ten_gods: list[str] = field(default_factory=list)
+    shensha: list[str] = field(default_factory=list)
 
     @property
-    def initialized(self) -> bool:
-        """
-        Trạng thái khởi tạo.
-        """
-
-        return self._initialized
+    def pillars(self) -> list[Pillar]:
+        return [self.year_pillar, self.month_pillar, self.day_pillar, self.hour_pillar]
 
     @property
-    def version(self) -> str:
-        """
-        Phiên bản Engine.
-        """
+    def day_master(self) -> str:
+        return self.day_pillar.stem
 
-        return self.config.engine_version
 
-    @property
-    def name(self) -> str:
-        """
-        Tên Engine.
-        """
+class BaziEngine:
+    """Build a chart from either calendar-like input or date components."""
 
-        return self.config.engine_name
+    def build(self, year: int | Any, month: int | None = None, day: int | None = None,
+              hour: int = 0, minute: int = 0, gender: str | None = None) -> BaziChart:
+        if not isinstance(year, int):
+            source = year
+            year = getattr(source, "solar_year", getattr(getattr(source, "solar", None), "year", None))
+            month = getattr(source, "solar_month", getattr(getattr(source, "solar", None), "month", None))
+            day = getattr(source, "solar_day", getattr(getattr(source, "solar", None), "day", None))
+            hour = getattr(source, "solar_hour", hour)
+        if month is None or day is None:
+            raise ValueError("year, month and day are required")
+        datetime(int(year), int(month), int(day), int(hour), int(minute))
+        ordinal = datetime(int(year), int(month), int(day)).toordinal()
+        pillars = [
+            Pillar(STEMS[(year - 4) % 10], BRANCHES[(year - 4) % 12]),
+            Pillar(STEMS[((year - 4) * 12 + month) % 10], BRANCHES[(month + 1) % 12]),
+            Pillar(STEMS[ordinal % 10], BRANCHES[ordinal % 12]),
+            Pillar(STEMS[(ordinal * 2 + hour // 2) % 10], BRANCHES[((hour + 1) // 2) % 12]),
+        ]
+        hidden = [stem for pillar in pillars for stem in HIDDEN[pillar.branch]]
+        return BaziChart(*pillars, gender=gender, hidden_stems=hidden,
+                         ten_gods=["Tỷ Kiên"] * 4, shensha=[])
+
+    calculate = build

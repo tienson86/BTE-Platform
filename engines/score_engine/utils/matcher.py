@@ -31,6 +31,16 @@ class RuleMatcher:
         context
     ) -> List[Dict[str, Any]]:
 
+        if rules is None:
+            return []
+
+        if isinstance(rules, list):
+            return [
+                rule
+                for rule in rules
+                if self.evaluate(rule, context)
+            ]
+
         matched = []
 
         for _, rule in rules.iterrows():

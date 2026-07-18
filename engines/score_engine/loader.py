@@ -23,9 +23,32 @@ class ScoreLoader:
 
     def __init__(self, database_path):
 
-        self.database_path = Path(database_path)
+        requested_path = Path(database_path)
+
+        self.requested_path = requested_path
+        self.database_path = self._resolve_database_path(
+            requested_path
+        )
 
         self.cache: Dict[str, pd.DataFrame] = {}
+
+    def _resolve_database_path(self, requested_path: Path) -> Path:
+
+        if requested_path.name == "13_score_engine":
+            replacement = requested_path.parent / "15_score_engine"
+
+            if replacement.exists():
+                requested_path.mkdir(
+                    parents=True,
+                    exist_ok=True
+                )
+
+                return replacement
+
+        if requested_path.exists():
+            return requested_path
+
+        return requested_path
 
     # =====================================================
     # Load một file

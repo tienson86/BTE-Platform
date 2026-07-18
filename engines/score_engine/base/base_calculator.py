@@ -22,6 +22,16 @@ class BaseCalculator(ABC):
 
         self.loader = loader
 
+    @property
+    def module_name(self):
+
+        return self.MODULE_NAME
+
+    @property
+    def dimension_name(self):
+
+        return self.DIMENSION_NAME
+
     # =====================================
 
     def create_result(self):

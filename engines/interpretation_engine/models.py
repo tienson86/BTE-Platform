@@ -1,103 +1,54 @@
-"""
-BTE Platform
-Interpretation Engine Models
-"""
-
-from __future__ import annotations
-
 from dataclasses import dataclass, field
 from typing import Any
 
-from engines.bazi_engine.models import BaziResult
 
-
-# ==========================================================
-# Sentence
-# ==========================================================
-
-@dataclass(slots=True)
-class Sentence:
-
-    text: str
-
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-
-# ==========================================================
-# Paragraph
-# ==========================================================
-
-@dataclass(slots=True)
-class Paragraph:
-
-    title: str
-
-    sentences: list[Sentence] = field(default_factory=list)
-
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-
-# ==========================================================
-# Chapter
-# ==========================================================
-
-@dataclass(slots=True)
-class Chapter:
-
-    title: str
-
-    paragraphs: list[Paragraph] = field(default_factory=list)
-
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-
-# ==========================================================
-# Interpretation Context
-# ==========================================================
-
-@dataclass(slots=True)
+@dataclass
 class InterpretationContext:
-
-    bazi_result: BaziResult
-
+    bazi_result: Any = None
     options: dict[str, Any] = field(default_factory=dict)
-
     metadata: dict[str, Any] = field(default_factory=dict)
+    data: dict[str, Any] = field(default_factory=dict)
+
+    def set(self, key, value): self.data[key] = value
+    def get(self, key, default=None): return self.data.get(key, default)
+    def update(self, values): self.data.update(values)
+    def resolve(self, path, default=None):
+        current = self.data
+        for part in path.split("."):
+            current = current.get(part, default) if isinstance(current, dict) else getattr(current, part, default)
+            if current is default: break
+        return current
 
 
-# ==========================================================
-# Interpretation Result
-# ==========================================================
+@dataclass
+class Rule:
+    id: str = ""
+    name: str = ""
+    module: str = ""
+    category: str = ""
+    topic: str = ""
+    section: str = ""
+    condition: str = ""
+    result: str = ""
+    priority: int = 0
+    enabled: bool = True
 
-@dataclass(slots=True)
-class InterpretationResult:
 
+@dataclass
+class RuleResult:
+    rule: Rule
+    matched: bool = False
+
+
+@dataclass
+class InterpretationReport:
     success: bool = True
-
-    chapters: list[Chapter] = field(default_factory=list)
-
-    markdown: str = ""
-
-    html: str = ""
-
-    json: dict[str, Any] = field(default_factory=dict)
-
+    sections: list[Any] = field(default_factory=list)
+    text: str = ""
     metadata: dict[str, Any] = field(default_factory=dict)
 
+    @property
+    def section_count(self): return len(self.sections)
 
-# ==========================================================
-# Engine State
-# ==========================================================
 
-@dataclass(slots=True)
-class InterpretationState:
-
-    initialized: bool = False
-
-    template_loaded: bool = False
-
-    rendered: bool = False
-
-    elapsed_time: float = 0.0
-
-    metadata: dict[str, Any] = field(default_factory=dict)
+InterpretationResult = InterpretationReport

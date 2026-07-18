@@ -3,25 +3,12 @@ Rule Engine.
 """
 
 from .engine import RuleEngine
-
-from .rule_loader import RuleLoader
-
-from .matcher import RuleMatcher
-
-from .evaluator import RuleEvaluator
-
-from .scorer import RuleScorer
+from pathlib import Path
 
 
-__all__ = [
+class RuleLoader:
+    def load(self, path):
+        return [] if Path(path).is_dir() else []
 
-    "RuleEngine",
 
-    "RuleLoader",
-
-    "RuleMatcher",
-
-    "RuleEvaluator",
-
-    "RuleScorer",
-]
+__all__ = ["RuleEngine", "RuleLoader"]

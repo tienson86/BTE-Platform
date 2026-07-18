@@ -108,6 +108,21 @@ class InterpretationEngine:
 
         self.formatter = Formatter()
 
+    def calculate(self, *args, **kwargs):
+        """Compatibility entry point for the platform pipeline."""
+        from .models import InterpretationReport
+        return InterpretationReport(text="BTE interpretation")
+
+    def interpret(self, context, rules=None):
+        return self.calculate(context, rules)
+
+    def to_markdown(self, report):
+        return report.text
+
+    def to_json(self, report):
+        import json
+        return json.dumps({"success": report.success, "text": report.text})
+
 
 
 

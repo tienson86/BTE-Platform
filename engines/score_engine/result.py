@@ -25,9 +25,17 @@ class ScoreResult:
 
     details: Dict[str, Any] = field(default_factory=dict)
 
+    success: bool = True
+
+    @property
+    def modules(self):
+
+        return list(self.details.keys())
+
     def to_dict(self):
 
         return {
+            "success": self.success,
             "wuxing_score": self.wuxing_score,
             "strength_score": self.strength_score,
             "ten_god_score": self.ten_god_score,
@@ -39,5 +47,6 @@ class ScoreResult:
             "grade": self.grade,
             "confidence": self.confidence,
             "recommendation": self.recommendation,
+            "modules": self.modules,
             "details": self.details
         }

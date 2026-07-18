@@ -10,8 +10,6 @@ from typing import Iterable
 class ScoreValidator:
 
     REQUIRED_RULE_COLUMNS = [
-        "id",
-        "rule_code",
         "condition",
         "score",
     ]
@@ -19,17 +17,28 @@ class ScoreValidator:
     @classmethod
     def validate_dataframe(cls, dataframe):
 
+        if dataframe is None:
+            raise ValueError("DataFrame khong duoc None.")
+
         missing = [
             column
             for column in cls.REQUIRED_RULE_COLUMNS
             if column not in dataframe.columns
         ]
 
+        if (
+            "id" not in dataframe.columns
+            and "rule_code" not in dataframe.columns
+        ):
+            missing.append("id|rule_code")
+
         if missing:
             raise ValueError(
                 "Thiếu cột bắt buộc: "
                 + ", ".join(missing)
             )
+
+        return True
 
     @classmethod
     def validate_score(cls, score):

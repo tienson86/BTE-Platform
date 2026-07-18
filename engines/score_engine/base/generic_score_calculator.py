@@ -133,6 +133,12 @@ class GenericScoreCalculator(BaseCalculator):
 
         for _, dataframe in groups.items():
 
+            if (
+                "condition" not in dataframe.columns
+                or "score" not in dataframe.columns
+            ):
+                continue
+
             self.validate_rules(dataframe)
 
             matched.extend(

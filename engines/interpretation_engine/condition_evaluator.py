@@ -44,12 +44,10 @@ class ConditionEvaluator:
     # Public
     # ======================================================
 
-   def evaluate(...):
-
-    if not self.validate(nodes):
-        raise ValueError("Invalid condition AST")
-
-    ...,
+    def evaluate(
+        self,
+        context: Any,
+        nodes: List[ASTNode],
     ) -> bool:
         """
         Đánh giá toàn bộ AST.
@@ -62,6 +60,9 @@ class ConditionEvaluator:
 
         NOT sẽ bổ sung ở phiên bản tiếp theo.
         """
+
+        if not self.validate(nodes):
+            raise ValueError("Invalid condition AST")
 
         if not nodes:
             return True
