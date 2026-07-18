@@ -1,38 +1,103 @@
 {
-    "version": "1.0",
-    "engine": "bazi_engine",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/snapshots/bazi_engine/schema.json",
 
-    "required": [
+  "title": "Bazi Engine Snapshot",
 
-        "pillars",
+  "type": "object",
 
-        "day_master",
+  "additionalProperties": false,
 
-        "hidden_stems",
+  "required": [
 
-        "five_elements",
+    "case_id",
 
-        "ten_gods"
+    "pillars",
 
-    ],
+    "day_master",
 
-    "properties": {
+    "hidden_stems",
 
-        "pillars": "object",
+    "five_elements",
 
-        "day_master": "string",
+    "ten_gods"
 
-        "hidden_stems": "object",
+  ],
 
-        "five_elements": "object",
+  "properties": {
 
-        "ten_gods": "object",
+    "case_id": {
 
-        "nayin": "object",
+      "type": "string"
 
-        "twelve_growth": "object",
+    },
 
-        "empty_void": "array"
+    "pillars": {
+
+      "type": "object"
+
+    },
+
+    "day_master": {
+
+      "type": "string"
+
+    },
+
+    "hidden_stems": {
+
+      "type": "object"
+
+    },
+
+    "five_elements": {
+
+      "type": "object"
+
+    },
+
+    "ten_gods": {
+
+      "type": "object"
+
+    },
+
+    "nayin": {
+
+      "type": "object"
+
+    },
+
+    "twelve_growth": {
+
+      "type": "object"
+
+    },
+
+    "empty_void": {
+
+      "type": "array",
+
+      "items": {
+
+        "type": "string"
+
+      }
+
+    },
+
+    "combinations": {
+
+      "type": "object"
+
+    },
+
+    "conflicts": {
+
+      "type": "object"
 
     }
+
+  }
+
 }
