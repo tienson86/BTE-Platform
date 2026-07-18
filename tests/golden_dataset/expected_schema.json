@@ -1,0 +1,143 @@
+{
+    "version": "1.0",
+
+    "type": "object",
+
+    "required": [
+
+        "case_id",
+
+        "strength",
+
+        "pattern",
+
+        "useful_god",
+
+        "score",
+
+        "sentences"
+
+    ],
+
+    "properties": {
+
+        "case_id": {
+            "type": "string"
+        },
+
+        "strength": {
+
+            "type": "object",
+
+            "required": [
+                "level",
+                "score"
+            ],
+
+            "properties": {
+
+                "level": {
+                    "type": "string",
+                    "enum": [
+                        "than_vuong",
+                        "than_nhuoc",
+                        "than_can_bang"
+                    ]
+                },
+
+                "score": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                }
+
+            }
+
+        },
+
+        "pattern": {
+
+            "type": "object",
+
+            "required": [
+                "primary"
+            ],
+
+            "properties": {
+
+                "primary": {
+                    "type": "string"
+                },
+
+                "secondary": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+
+            }
+
+        },
+
+        "useful_god": {
+
+            "type": "object",
+
+            "required": [
+                "primary"
+            ],
+
+            "properties": {
+
+                "primary": {
+                    "type": "string",
+                    "enum": [
+                        "kim",
+                        "moc",
+                        "thuy",
+                        "hoa",
+                        "tho"
+                    ]
+                },
+
+                "secondary": {
+
+                    "type": "array",
+
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "kim",
+                            "moc",
+                            "thuy",
+                            "hoa",
+                            "tho"
+                        ]
+                    }
+
+                }
+
+            }
+
+        },
+
+        "score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+
+        "sentences": {
+
+            "type": "array",
+
+            "items": {
+                "type": "string"
+            }
+
+        }
+
+    }
+
+}
