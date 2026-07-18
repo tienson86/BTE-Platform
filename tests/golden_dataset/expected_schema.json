@@ -1,325 +1,246 @@
 {
-    "version": "1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/golden_dataset/expected_schema.json",
 
-    "type": "object",
+  "title": "BTE Golden Dataset Expected Output Schema",
+  "description": "Schema for final expected output of the BTE Platform.",
 
-    "required": [
-        "case_id",
-        "strength",
-        "pattern",
-        "useful_god",
-        "score",
-        "interpretation"
-    ],
+  "type": "object",
 
-    "properties": {
+  "additionalProperties": false,
 
-        "case_id": {
-            "type": "string"
-        },
+  "required": [
+    "case_id",
+    "strength",
+    "pattern",
+    "useful_god",
+    "score",
+    "interpretation"
+  ],
 
-        "strength": {
+  "properties": {
 
-            "type": "object",
+    "case_id": {
+      "type": "string",
+      "pattern": "^case_[0-9]{4}$"
+    },
 
-            "required": [
-                "level",
-                "score"
-            ],
+    "strength": {
 
-            "properties": {
+      "type": "object",
 
-                "level": {
-                    "type": "string"
-                },
+      "additionalProperties": false,
 
-                "score": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 100
-                }
+      "required": [
+        "level",
+        "score"
+      ],
 
-            }
+      "properties": {
 
-        },
+        "level": {
 
-        "pattern": {
+          "type": "string",
 
-            "type": "object",
-
-            "required": [
-                "primary"
-            ],
-
-            "properties": {
-
-                "primary": {
-                    "type": "string"
-                },
-
-                "secondary": {
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-
-            }
-
-        },
-
-        "useful_god": {
-
-            "type": "object",
-
-            "required": [
-                "primary"
-            ],
-
-            "properties": {
-
-                "primary": {
-                    "type": "string"
-                },
-
-                "secondary": {
-
-                    "type": "array",
-
-                    "items": {
-                        "type": "string"
-                    }
-
-                }
-
-            }
+          "enum": [
+            "than_vuong",
+            "than_nhuoc",
+            "than_can_bang"
+          ]
 
         },
 
         "score": {
 
-            "type": "object",
+          "type": "integer",
 
-            "properties": {
+          "minimum": 0,
 
-                "total": {
-                    "type": "integer"
-                },
-
-                "strength": {
-                    "type": "integer"
-                },
-
-                "pattern": {
-                    "type": "integer"
-                },
-
-                "useful_god": {
-                    "type": "integer"
-                },
-
-                "ten_gods": {
-                    "type": "integer"
-                },
-
-                "shen_sha": {
-                    "type": "integer"
-                }
-
-            }
-
-        },
-
-        "five_elements": {
-
-            "type": "object",
-
-            "properties": {
-
-                "kim": {
-                    "type": "integer"
-                },
-
-                "moc": {
-                    "type": "integer"
-                },
-
-                "thuy": {
-                    "type": "integer"
-                },
-
-                "hoa": {
-                    "type": "integer"
-                },
-
-                "tho": {
-                    "type": "integer"
-                }
-
-            }
-
-        },
-
-        "ten_gods": {
-
-            "type": "object",
-
-            "properties": {
-
-                "day_master": {
-                    "type": "string"
-                },
-
-                "dominant": {
-                    "type": "string"
-                },
-
-                "distribution": {
-                    "type": "object"
-                }
-
-            }
-
-        },
-
-        "hidden_stems": {
-
-            "type": "array",
-
-            "items": {
-
-                "type": "object"
-
-            }
-
-        },
-
-        "combinations": {
-
-            "type": "object",
-
-            "properties": {
-
-                "heavenly_stems": {
-                    "type": "array"
-                },
-
-                "earthly_branches": {
-                    "type": "array"
-                }
-
-            }
-
-        },
-
-        "conflicts": {
-
-            "type": "object",
-
-            "properties": {
-
-                "clash": {
-                    "type": "array"
-                },
-
-                "punishment": {
-                    "type": "array"
-                },
-
-                "harm": {
-                    "type": "array"
-                },
-
-                "destruction": {
-                    "type": "array"
-                }
-
-            }
-
-        },
-
-        "shen_sha": {
-
-            "type": "array",
-
-            "items": {
-
-                "type": "string"
-
-            }
-
-        },
-
-        "luck": {
-
-            "type": "object",
-
-            "properties": {
-
-                "yong_shen": {
-                    "type": "string"
-                },
-
-                "xi_shen": {
-                    "type": "array"
-                },
-
-                "ji_shen": {
-                    "type": "array"
-                }
-
-            }
-
-        },
-
-        "interpretation": {
-
-            "type": "object",
-
-            "properties": {
-
-                "summary": {
-                    "type": "string"
-                },
-
-                "career": {
-                    "type": "string"
-                },
-
-                "wealth": {
-                    "type": "string"
-                },
-
-                "marriage": {
-                    "type": "string"
-                },
-
-                "health": {
-                    "type": "string"
-                },
-
-                "children": {
-                    "type": "string"
-                },
-
-                "personality": {
-                    "type": "string"
-                },
-
-                "notes": {
-
-                    "type": "array",
-
-                    "items": {
-                        "type": "string"
-                    }
-
-                }
-
-            }
+          "maximum": 100
 
         }
 
+      }
+
+    },
+
+    "pattern": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "primary"
+      ],
+
+      "properties": {
+
+        "primary": {
+          "type": "string"
+        },
+
+        "secondary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+
+      }
+
+    },
+
+    "useful_god": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "primary"
+      ],
+
+      "properties": {
+
+        "primary": {
+
+          "type": "string",
+
+          "enum": [
+            "kim",
+            "moc",
+            "thuy",
+            "hoa",
+            "tho"
+          ]
+
+        },
+
+        "secondary": {
+
+          "type": "array",
+
+          "items": {
+
+            "type": "string",
+
+            "enum": [
+              "kim",
+              "moc",
+              "thuy",
+              "hoa",
+              "tho"
+            ]
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "score": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "total"
+      ],
+
+      "properties": {
+
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+
+        "strength": {
+          "type": "integer"
+        },
+
+        "pattern": {
+          "type": "integer"
+        },
+
+        "useful_god": {
+          "type": "integer"
+        },
+
+        "ten_gods": {
+          "type": "integer"
+        },
+
+        "shen_sha": {
+          "type": "integer"
+        }
+
+      }
+
+    },
+
+    "interpretation": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "summary"
+      ],
+
+      "properties": {
+
+        "summary": {
+          "type": "string"
+        },
+
+        "personality": {
+          "type": "string"
+        },
+
+        "career": {
+          "type": "string"
+        },
+
+        "wealth": {
+          "type": "string"
+        },
+
+        "marriage": {
+          "type": "string"
+        },
+
+        "health": {
+          "type": "string"
+        },
+
+        "children": {
+          "type": "string"
+        },
+
+        "luck": {
+          "type": "string"
+        },
+
+        "notes": {
+
+          "type": "array",
+
+          "items": {
+            "type": "string"
+          }
+
+        }
+
+      }
+
     }
+
+  }
 
 }
