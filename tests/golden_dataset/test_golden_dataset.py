@@ -1,23 +1,20 @@
 """
-Golden Dataset Test
+Golden Dataset Integration Test
 
-Quy trình:
+Pipeline
 
+Inputs
+    ↓
 Runner
-↓
-
+    ↓
+Snapshots
+    ↓
 Validator
-
-↓
-
+    ↓
 Comparator
-
-↓
-
+    ↓
 Report
-
-↓
-
+    ↓
 Pytest
 """
 
@@ -25,47 +22,86 @@ from __future__ import annotations
 
 import pytest
 
+from engines.interpretation.engine import InterpretationEngine
+
 from tests.golden_dataset.runner import run_all_cases
-from tests.golden_dataset.validator import validate_files
+from tests.golden_dataset.validator import DirectoryValidator
 from tests.golden_dataset.compare import compare_all_cases
 from tests.golden_dataset.report import (
     CaseReport,
+    export_markdown,
     export_csv,
     export_html,
-    export_markdown,
 )
 
-from engines.interpretation.engine import InterpretationEngine
 
+def test_golden_dataset() -> None:
+    """
+    Chạy toàn bộ Golden Dataset.
+    """
 
-def test_golden_dataset():
+    # ======================================================
+    # Run Engine
+    # ======================================================
 
     engine = InterpretationEngine()
 
-    output_files = run_all_cases(engine)
+    run_all_cases(engine)
 
-    validation_result = validate_files(
-        output_files
-    )
+    # ======================================================
+    # Validate Dataset
+    # ======================================================
 
-    compare_result = compare_all_cases()
+    validator = DirectoryValidator()
 
-    reports = []
+    validation_summary = validator.validate_directory()
+
+    validation_errors = {}
+
+    for result in validation_summary.results:
+
+        case_name = result.file.stem
+
+        validation_errors[case_name] = result.errors
+
+    # ======================================================
+    # Compare
+    # ======================================================
+
+    compare_results = compare_all_cases()
+
+    # ======================================================
+    # Build Report
+    # ======================================================
+
+    reports: list[CaseReport] = []
 
     failed = False
 
-    for case_name in sorted(compare_result.keys()):
+    case_names = sorted(
+
+        set(compare_results.keys())
+
+        | set(validation_errors.keys())
+
+    )
+
+    for case_name in case_names:
 
         report = CaseReport(
+
             case_name=case_name,
-            validation_errors=validation_result.get(
+
+            validation_errors=validation_errors.get(
                 case_name,
                 [],
             ),
-            differences=compare_result.get(
+
+            differences=compare_results.get(
                 case_name,
                 [],
             ),
+
         )
 
         reports.append(report)
@@ -74,9 +110,19 @@ def test_golden_dataset():
 
             failed = True
 
+    # ======================================================
+    # Export Report
+    # ======================================================
+
     export_markdown(reports)
+
     export_csv(reports)
+
     export_html(reports)
+
+    # ======================================================
+    # Pytest
+    # ======================================================
 
     if failed:
 
