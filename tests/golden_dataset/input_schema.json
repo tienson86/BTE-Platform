@@ -1,0 +1,119 @@
+{
+    "version": "1.0",
+
+    "type": "object",
+
+    "required": [
+        "case_id",
+        "description",
+        "chart"
+    ],
+
+    "properties": {
+
+        "case_id": {
+            "type": "string"
+        },
+
+        "description": {
+            "type": "string"
+        },
+
+        "chart": {
+
+            "type": "object",
+
+            "required": [
+                "gender",
+                "year",
+                "month",
+                "day",
+                "hour"
+            ],
+
+            "properties": {
+
+                "gender": {
+                    "type": "string",
+                    "enum": [
+                        "male",
+                        "female"
+                    ]
+                },
+
+                "year": {
+                    "$ref": "#/definitions/pillar"
+                },
+
+                "month": {
+                    "$ref": "#/definitions/pillar"
+                },
+
+                "day": {
+                    "$ref": "#/definitions/pillar"
+                },
+
+                "hour": {
+                    "$ref": "#/definitions/pillar"
+                }
+
+            }
+
+        }
+
+    },
+
+    "definitions": {
+
+        "pillar": {
+
+            "type": "object",
+
+            "required": [
+                "stem",
+                "branch"
+            ],
+
+            "properties": {
+
+                "stem": {
+                    "type": "string",
+                    "enum": [
+                        "giap",
+                        "at",
+                        "binh",
+                        "dinh",
+                        "mau",
+                        "ky",
+                        "canh",
+                        "tan",
+                        "nham",
+                        "quy"
+                    ]
+                },
+
+                "branch": {
+                    "type": "string",
+                    "enum": [
+                        "ty",
+                        "suu",
+                        "dan",
+                        "mao",
+                        "thin",
+                        "ty2",
+                        "ngo",
+                        "mui",
+                        "than",
+                        "dau",
+                        "tuat",
+                        "hoi"
+                    ]
+                }
+
+            }
+
+        }
+
+    }
+
+}
