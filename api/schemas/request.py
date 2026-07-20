@@ -9,170 +9,73 @@ Version: 1.0
 
 from __future__ import annotations
 
-from enum import Enum
-from typing import Any
+from pydantic import Field
 
-from pydantic import BaseModel, Field
-
-
-# ==========================================================
-# Enum
-# ==========================================================
-
-class Gender(str, Enum):
-    """
-    Giới tính.
-    """
-
-    MALE = "male"
-
-    FEMALE = "female"
-
-
-class CalendarType(str, Enum):
-    """
-    Loại lịch.
-    """
-
-    SOLAR = "solar"
-
-    LUNAR = "lunar"
-
-
-class Language(str, Enum):
-    """
-    Ngôn ngữ.
-    """
-
-    VI = "vi"
-
-    EN = "en"
+from .common import (
+    AnalysisOptions,
+    BaseRequest,
+    BirthInfo,
+)
 
 
 # ==========================================================
-# Location
-# ==========================================================
-
-class LocationRequest(BaseModel):
-    """
-    Thông tin vị trí.
-    """
-
-    latitude: float | None = None
-
-    longitude: float | None = None
-
-    timezone: str = "Asia/Ho_Chi_Minh"
-
-    place: str | None = None
-
-
-# ==========================================================
-# Birth
-# ==========================================================
-
-class BirthRequest(BaseModel):
-    """
-    Thông tin ngày giờ sinh.
-    """
-
-    date: str = Field(
-        ...,
-        description="YYYY-MM-DD",
-    )
-
-    time: str = Field(
-        ...,
-        description="HH:MM",
-    )
-
-    gender: Gender
-
-    calendar: CalendarType = CalendarType.SOLAR
-
-    location: LocationRequest = Field(
-        default_factory=LocationRequest
-    )
-
-
-# ==========================================================
-# Analysis Options
-# ==========================================================
-
-class AnalysisOptions(BaseModel):
-    """
-    Tùy chọn phân tích.
-    """
-
-    calculate_calendar: bool = True
-
-    calculate_bazi: bool = True
-
-    calculate_pattern: bool = True
-
-    calculate_score: bool = True
-
-    calculate_interpretation: bool = True
-
-    generate_report: bool = True
-
-    report_format: str = "markdown"
-
-    language: Language = Language.VI
-
-
-# ==========================================================
-# Base Request
-# ==========================================================
-
-class BaseRequest(BaseModel):
-    """
-    Request cơ sở.
-    """
-
-    request_id: str | None = None
-
-    client: str | None = None
-
-    metadata: dict[str, Any] = Field(
-        default_factory=dict
-    )
-
-
-# ==========================================================
-# Calendar
+# Calendar Request
 # ==========================================================
 
 class CalendarRequest(BaseRequest):
+    """
+    Request cho Calendar Engine.
+    """
 
-    birth: BirthRequest
+    birth: BirthInfo
 
 
 # ==========================================================
-# Bazi
+# Bazi Request
 # ==========================================================
 
 class BaziRequest(BaseRequest):
+    """
+    Request cho Bazi Engine.
+    """
 
-    birth: BirthRequest
+    birth: BirthInfo
 
 
 # ==========================================================
-# Score
+# Pattern Request
+# ==========================================================
+
+class PatternRequest(BaseRequest):
+    """
+    Request cho Pattern Engine.
+    """
+
+    birth: BirthInfo
+
+
+# ==========================================================
+# Score Request
 # ==========================================================
 
 class ScoreRequest(BaseRequest):
+    """
+    Request cho Score Engine.
+    """
 
-    birth: BirthRequest
+    birth: BirthInfo
 
 
 # ==========================================================
-# Interpretation
+# Interpretation Request
 # ==========================================================
 
 class InterpretationRequest(BaseRequest):
+    """
+    Request cho Interpretation Engine.
+    """
 
-    birth: BirthRequest
+    birth: BirthInfo
 
     options: AnalysisOptions = Field(
         default_factory=AnalysisOptions
@@ -180,12 +83,15 @@ class InterpretationRequest(BaseRequest):
 
 
 # ==========================================================
-# Report
+# Report Request
 # ==========================================================
 
 class ReportRequest(BaseRequest):
+    """
+    Request cho Report Engine.
+    """
 
-    birth: BirthRequest
+    birth: BirthInfo
 
     options: AnalysisOptions = Field(
         default_factory=AnalysisOptions
@@ -193,15 +99,15 @@ class ReportRequest(BaseRequest):
 
 
 # ==========================================================
-# Full Pipeline
+# Full Analysis Request
 # ==========================================================
 
 class AnalysisRequest(BaseRequest):
     """
-    Chạy toàn bộ Engine Pipeline.
+    Request chạy toàn bộ Engine Pipeline.
     """
 
-    birth: BirthRequest
+    birth: BirthInfo
 
     options: AnalysisOptions = Field(
         default_factory=AnalysisOptions
