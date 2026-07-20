@@ -22,7 +22,7 @@ from __future__ import annotations
 
 import pytest
 
-from engines.interpretation.engine import InterpretationEngine
+from engines.interpretation_engine.engine import InterpretationEngine
 
 from tests.golden_dataset.runner import run_all_cases
 from tests.golden_dataset.validator import DirectoryValidator
