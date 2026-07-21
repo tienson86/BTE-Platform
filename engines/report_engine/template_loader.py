@@ -37,6 +37,24 @@ class TemplateLoader:
 
         return self.template_dir / f"{name}.md"
 
+    def list(self) -> list[str]:
+        """
+        Trả về danh sách tên các template hiện có.
+        """
+
+        if not self.template_dir.exists():
+            return []
+
+        templates = []
+
+        for path in self.template_dir.iterdir():
+            if path.is_file():
+                templates.append(path.stem)
+
+        templates.sort()
+
+        return templates
+
     # =====================================================
     # Exists
     # =====================================================
