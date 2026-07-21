@@ -1,0 +1,450 @@
+---
+description: BTE Platform Architecture Rules
+alwaysApply: true
+---
+
+# BTE Architecture Rules
+
+Version: 1.0
+
+Mọi AI Agent làm việc trên BTE Platform phải tuân thủ các quy tắc dưới đây.
+
+---
+
+# 1. Primary Objective
+
+Mục tiêu cao nhất là giữ cho kiến trúc của BTE ổn định.
+
+Không được vì sửa một lỗi nhỏ mà làm thay đổi kiến trúc.
+
+---
+
+# 2. Think Before Coding
+
+Trước khi sửa code phải thực hiện:
+
+1. Xác định module đang lỗi.
+
+2. Xác định nguyên nhân gốc (Root Cause).
+
+3. Kiểm tra ảnh hưởng tới các Engine khác.
+
+4. Chỉ sau đó mới sửa.
+
+Không sửa theo kiểu Trial & Error.
+
+---
+
+# 3. Root Cause First
+
+Nếu có nhiều test fail
+
+↓
+
+Tìm nguyên nhân gốc.
+
+Không sửa từng test.
+
+Ví dụ
+
+Sai API
+
+↓
+
+Sửa API
+
+Không sửa 20 test.
+
+---
+
+# 4. Respect Module Boundaries
+
+Mỗi Engine là độc lập.
+
+Không được để
+
+Report Engine
+
+↓
+
+import
+
+Score Engine
+
+Ví dụ đúng
+
+Report
+
+↓
+
+Interpretation
+
+↓
+
+Score
+
+---
+
+# 5. Layer Direction
+
+Pipeline luôn là
+
+Input
+
+↓
+
+Calendar
+
+↓
+
+Bazi
+
+↓
+
+Score
+
+↓
+
+Pattern
+
+↓
+
+Interpretation
+
+↓
+
+Report
+
+Không được import ngược.
+
+---
+
+# 6. Public API
+
+Mỗi Engine chỉ được giao tiếp bằng Public API.
+
+Không import
+
+internal module
+
+private class
+
+private function
+
+---
+
+# 7. Minimal Changes
+
+Ưu tiên sửa ít nhất có thể.
+
+Không refactor toàn bộ project.
+
+Không đổi kiến trúc nếu không được yêu cầu.
+
+---
+
+# 8. Backward Compatibility
+
+Không được làm hỏng
+
+Public API.
+
+Nếu cần thay đổi
+
+↓
+
+thêm Wrapper.
+
+Không xóa API cũ.
+
+---
+
+# 9. Database
+
+Database là nguồn dữ liệu.
+
+Không Engine nào được:
+
+Write
+
+Update
+
+Delete
+
+Database.
+
+Chỉ Read.
+
+---
+
+# 10. Rule Database
+
+Rule Database
+
+là dữ liệu.
+
+Không hard-code Rule.
+
+Nếu cần bổ sung
+
+↓
+
+thêm vào Database.
+
+Không thêm if/else trong code.
+
+---
+
+# 11. Golden Dataset
+
+Golden Dataset
+
+là chuẩn kiểm thử.
+
+Không sửa
+
+Expected
+
+Snapshot
+
+Input
+
+chỉ để test pass.
+
+---
+
+# 12. Test Strategy
+
+Khi sửa
+
+↓
+
+chạy đúng module.
+
+Ví dụ
+
+Report
+
+↓
+
+pytest tests/report -q
+
+Không chạy toàn bộ project.
+
+Chỉ chạy full pytest khi người dùng yêu cầu.
+
+---
+
+# 13. Engine Responsibility
+
+Calendar
+
+↓
+
+Calendar Only
+
+Bazi
+
+↓
+
+Chart Only
+
+Score
+
+↓
+
+Scoring Only
+
+Pattern
+
+↓
+
+Pattern Only
+
+Interpretation
+
+↓
+
+Interpretation Only
+
+Report
+
+↓
+
+Formatting Only
+
+Không trộn trách nhiệm.
+
+---
+
+# 14. Dependency Injection
+
+Ưu tiên truyền dependency.
+
+Không tạo singleton toàn cục.
+
+Không import chéo.
+
+---
+
+# 15. Error Handling
+
+Không che lỗi.
+
+Không dùng
+
+except:
+
+Không return None để che bug.
+
+Lỗi phải rõ ràng.
+
+---
+
+# 16. Performance
+
+Không tối ưu sớm.
+
+Ưu tiên
+
+Correctness
+
+↓
+
+Maintainability
+
+↓
+
+Performance
+
+---
+
+# 17. Refactoring
+
+Chỉ Refactor khi
+
+• có yêu cầu
+
+hoặc
+
+• giúp giảm độ phức tạp.
+
+Không Refactor vì sở thích.
+
+---
+
+# 18. New Feature
+
+Tính năng mới
+
+↓
+
+không sửa Engine cũ nếu không cần.
+
+Ưu tiên mở rộng.
+
+Không phá kiến trúc.
+
+---
+
+# 19. Code Review Checklist
+
+Trước khi kết thúc
+
+AI phải tự kiểm tra
+
+□ Có sửa ngoài phạm vi không?
+
+□ Có đổi Public API không?
+
+□ Có tạo Circular Import không?
+
+□ Có sửa Test không?
+
+□ Có sửa Database không?
+
+□ Có sửa Snapshot không?
+
+□ Có chạy đúng test module không?
+
+Nếu có
+
+↓
+
+Báo cho người dùng.
+
+---
+
+# 20. Final Report
+
+Sau khi hoàn thành
+
+AI phải báo
+
+Files changed
+
+Reason
+
+Impact
+
+Tests executed
+
+Remaining failures
+
+Không kết thúc mà không báo cáo.
+
+---
+
+# 21. Commercial Quality
+
+BTE Platform là sản phẩm thương mại.
+
+Mọi thay đổi phải hướng tới:
+
+• Stable
+
+• Predictable
+
+• Modular
+
+• Testable
+
+• Maintainable
+
+• Extensible
+
+Không được tạo Technical Debt.
+
+---
+
+# 22. Architecture Principle
+
+Ưu tiên
+
+Stability
+
+>
+
+Features
+
+Ưu tiên
+
+Consistency
+
+>
+
+Shortcuts
+
+Ưu tiên
+
+Long-term Maintainability
+
+>
+
+Quick Fix
+
+Đây là nguyên tắc cao nhất.
+
+---
+
+END
