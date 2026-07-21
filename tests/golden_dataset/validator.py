@@ -78,7 +78,7 @@ class ValidationResult:
     Kết quả validate một file.
     """
 
-    file: str
+    file: Path
 
     schema: str
 
@@ -249,13 +249,13 @@ class JsonValidator:
             elapsed = (time.perf_counter() - start) * 1000
 
             return ValidationResult(
-                file=str(json_file),
+                file=json_file,
                 schema="UNKNOWN",
                 valid=False,
                 elapsed_ms=elapsed,
                 errors=[
                     ValidationError(
-                        file=str(json_file),
+                        file=json_file,
                         schema="UNKNOWN",
                         path="<root>",
                         message="Cannot detect schema.",
@@ -290,7 +290,7 @@ class JsonValidator:
 
                 ValidationError(
 
-                    file=str(json_file),
+                    file=json_file,
 
                     schema=schema_name,
 
@@ -308,7 +308,7 @@ class JsonValidator:
 
         return ValidationResult(
 
-            file=str(json_file),
+            file=json_file,
 
             schema=schema_name,
 
