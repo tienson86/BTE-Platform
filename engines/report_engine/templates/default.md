@@ -1,0 +1,3 @@
+# Default Report Template
+
+{{content}}
