@@ -1,7 +1,15 @@
 """
-interpretation_engine/template_loader.py
+Template Loader
+===============
 
-Nạp template diễn giải từ JSON.
+Chịu trách nhiệm nạp các template luận giải từ thư mục templates/.
+
+TemplateLoader KHÔNG sinh câu.
+
+Chỉ:
+    - đọc template
+    - cache template
+    - trả template theo topic
 """
 
 from __future__ import annotations
@@ -12,18 +20,39 @@ from pathlib import Path
 
 class TemplateLoader:
 
-    def __init__(self, template_root: Path):
+    def __init__(
+        self,
+        template_dir: str | Path,
+    ):
 
-        self.root = Path(template_root)
+        self.template_dir = Path(template_dir)
 
-        self.cache: dict[str, dict] = {}
+        self._cache: dict[str, dict] = {}
 
-    def load(self, filename: str) -> dict:
+    # -------------------------------------------------
 
-        if filename in self.cache:
-            return self.cache[filename]
+    def load(
+        self,
+        topic: str,
+    ) -> dict:
 
-        path = self.root / filename
+        """
+        Load template theo topic.
+
+        Ví dụ:
+
+            than_vuong_nhuoc.json
+        """
+
+        if topic in self._cache:
+
+            return self._cache[topic]
+
+        path = self.template_dir / f"{topic}.json"
+
+        if not path.exists():
+
+            return {}
 
         with open(
             path,
@@ -33,16 +62,38 @@ class TemplateLoader:
 
             data = json.load(f)
 
-        self.cache[filename] = data
+        self._cache[topic] = data
 
         return data
 
-    def lookup(
+    # -------------------------------------------------
+
+    def clear_cache(self):
+
+        self._cache.clear()
+
+    # -------------------------------------------------
+
+    def exists(
         self,
-        filename: str,
-        code: str,
-    ) -> dict | None:
+        topic: str,
+    ) -> bool:
 
-        data = self.load(filename)
+        return (
+            self.template_dir /
+            f"{topic}.json"
+        ).exists()
 
-        return data.get(code)
+    # -------------------------------------------------
+
+    def available_topics(
+        self,
+    ) -> list[str]:
+
+        return sorted(
+
+            file.stem
+
+            for file in self.template_dir.glob("*.json")
+
+        )
