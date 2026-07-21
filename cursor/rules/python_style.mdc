@@ -1,0 +1,162 @@
+---
+description: Python Coding Standard
+alwaysApply: true
+---
+
+# Python Style
+
+## Naming
+
+Class
+
+PascalCase
+
+Function
+
+snake_case
+
+Variable
+
+snake_case
+
+Constant
+
+UPPER_CASE
+
+---
+
+## Type Hint
+
+Luôn sử dụng type hints.
+
+Ví dụ
+
+def calculate(chart: BaziChart) -> ScoreResult:
+
+---
+
+## Docstring
+
+Mọi public function phải có docstring.
+
+---
+
+## Dataclass
+
+Ưu tiên dùng
+
+@dataclass(slots=True)
+
+cho Result Models.
+
+---
+
+## Imports
+
+Thứ tự
+
+1 Standard Library
+
+2 Third Party
+
+3 Internal
+
+---
+
+## Exceptions
+
+Không dùng
+
+except:
+
+Luôn chỉ rõ Exception.
+
+---
+
+## Logging
+
+Không dùng print()
+
+Dùng logging.
+
+---
+
+## Magic Number
+
+Không hard-code.
+
+Đưa vào constants.
+
+---
+
+## Comments
+
+Comment giải thích
+
+WHY
+
+không comment
+
+WHAT
+
+---
+
+## Public API
+
+Không đổi tên.
+
+Nếu cần
+
+tạo wrapper.
+
+---
+
+## Complexity
+
+Ưu tiên
+
+Simple
+
+Readable
+
+Maintainable
+
+---
+
+## Function Length
+
+Khuyến nghị
+
+<50 dòng
+
+---
+
+## File Length
+
+Khuyến nghị
+
+<500 dòng
+
+---
+
+## Circular Import
+
+Không được tạo Circular Import.
+
+---
+
+## Dependency Injection
+
+Ưu tiên truyền dependency qua constructor.
+
+---
+
+## Result Objects
+
+Không trả tuple.
+
+Ưu tiên dataclass.
+
+---
+
+END
