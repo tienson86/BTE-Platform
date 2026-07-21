@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/golden_dataset/input_schema.json",
+
+  "title": "BTE Platform Golden Dataset Input Schema",
+  "description": "Input schema for BTE Platform Golden Dataset. Contains only source birth information and engine configuration.",
+
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "case_id",
+    "description",
+    "birth"
+  ],
+
+  "properties": {
+
+    "case_id": {
+      "type": "string",
+      "pattern": "^case_[0-9]{4}$",
+      "description": "Unique Golden Dataset case identifier."
+    },
+
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+
+    "birth": {
+
+      "type": "object",
+      "additionalProperties": false,
+
+      "required": [
+        "gender",
+        "calendar",
+        "datetime",
+        "timezone",
+        "location"
+      ],
+
+      "properties": {
+
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female"
+          ]
+        },
+
+        "calendar": {
+          "type": "string",
+          "enum": [
+            "solar",
+            "lunar"
+          ],
+          "default": "solar"
+        },
+
+        "datetime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Birth datetime."
+        },
+
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone."
+        },
+
+        "location": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "required": [
+            "country",
+            "province",
+            "district",
+            "latitude",
+            "longitude"
+          ],
+
+          "properties": {
+
+            "country": {
+              "type": "string"
+            },
+
+            "province": {
+              "type": "string"
+            },
+
+            "district": {
+              "type": "string"
+            },
+
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            }
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "options": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "calendar_engine": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "properties": {
+
+            "use_true_solar_time": {
+              "type": "boolean",
+              "default": true
+            },
+
+            "use_daylight_saving": {
+              "type": "boolean",
+              "default": false
+            }
+
+          }
+
+        },
+
+        "interpretation_engine": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "properties": {
+
+            "language": {
+              "type": "string",
+              "default": "vi"
+            },
+
+            "rule_database": {
+              "type": "string",
+              "default": "v1.0"
+            }
+
+          }
+
+        },
+
+        "report_engine": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "properties": {
+
+            "output_format": {
+
+              "type": "array",
+
+              "items": {
+
+                "type": "string",
+
+                "enum": [
+                  "json",
+                  "markdown",
+                  "html",
+                  "pdf"
+                ]
+
+              },
+
+              "default": [
+                "json"
+              ]
+
+            }
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "metadata": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "author": {
+          "type": "string"
+        },
+
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "dataset_version": {
+          "type": "string"
+        },
+
+        "notes": {
+          "type": "string"
+        }
+
+      }
+
+    }
+
+  }
+
+}

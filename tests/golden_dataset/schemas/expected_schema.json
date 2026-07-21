@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/golden_dataset/expected_schema.json",
+
+  "title": "BTE Golden Dataset Expected Output Schema",
+  "description": "Schema for final expected output of the BTE Platform.",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+    "case_id",
+    "strength",
+    "pattern",
+    "useful_god",
+    "score",
+    "interpretation"
+  ],
+
+  "properties": {
+
+    "case_id": {
+      "type": "string",
+      "pattern": "^case_[0-9]{4}$"
+    },
+
+    "strength": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "level",
+        "score"
+      ],
+
+      "properties": {
+
+        "level": {
+
+          "type": "string",
+
+          "enum": [
+            "than_vuong",
+            "than_nhuoc",
+            "than_can_bang"
+          ]
+
+        },
+
+        "score": {
+
+          "type": "integer",
+
+          "minimum": 0,
+
+          "maximum": 100
+
+        }
+
+      }
+
+    },
+
+    "pattern": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "primary"
+      ],
+
+      "properties": {
+
+        "primary": {
+          "type": "string"
+        },
+
+        "secondary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+
+      }
+
+    },
+
+    "useful_god": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "primary"
+      ],
+
+      "properties": {
+
+        "primary": {
+
+          "type": "string",
+
+          "enum": [
+            "kim",
+            "moc",
+            "thuy",
+            "hoa",
+            "tho"
+          ]
+
+        },
+
+        "secondary": {
+
+          "type": "array",
+
+          "items": {
+
+            "type": "string",
+
+            "enum": [
+              "kim",
+              "moc",
+              "thuy",
+              "hoa",
+              "tho"
+            ]
+
+          }
+
+        }
+
+      }
+
+    },
+
+    "score": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "total"
+      ],
+
+      "properties": {
+
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+
+        "strength": {
+          "type": "integer"
+        },
+
+        "pattern": {
+          "type": "integer"
+        },
+
+        "useful_god": {
+          "type": "integer"
+        },
+
+        "ten_gods": {
+          "type": "integer"
+        },
+
+        "shen_sha": {
+          "type": "integer"
+        }
+
+      }
+
+    },
+
+    "interpretation": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "summary"
+      ],
+
+      "properties": {
+
+        "summary": {
+          "type": "string"
+        },
+
+        "personality": {
+          "type": "string"
+        },
+
+        "career": {
+          "type": "string"
+        },
+
+        "wealth": {
+          "type": "string"
+        },
+
+        "marriage": {
+          "type": "string"
+        },
+
+        "health": {
+          "type": "string"
+        },
+
+        "children": {
+          "type": "string"
+        },
+
+        "luck": {
+          "type": "string"
+        },
+
+        "notes": {
+
+          "type": "array",
+
+          "items": {
+            "type": "string"
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
