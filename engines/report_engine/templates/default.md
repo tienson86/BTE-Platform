@@ -1,3 +1,3 @@
-# Default Report Template
+# BTE Report
 
-{{content}}
+{content}

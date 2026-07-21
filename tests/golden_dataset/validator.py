@@ -20,6 +20,8 @@ from jsonschema import Draft202012Validator
 # Constants
 # ==========================================================
 
+DEFAULT_DATASET_ROOT = Path(__file__).parent
+
 SCHEMA_FOLDER = "schemas"
 
 INPUT_SCHEMA = "input_schema.json"
@@ -331,12 +333,15 @@ class DirectoryValidator:
 
     def __init__(
         self,
-        dataset_root: Path,
+        dataset_root: Path | None = None,
     ) -> None:
 
-        self.dataset_root = dataset_root
+        if dataset_root is None:
+            self.dataset_root = DEFAULT_DATASET_ROOT
+        else:
+            self.dataset_root = dataset_root
 
-        self.schema_root = dataset_root / SCHEMA_FOLDER
+        self.schema_root = self.dataset_root / SCHEMA_FOLDER
 
         self.registry = SchemaRegistry(self.schema_root)
 

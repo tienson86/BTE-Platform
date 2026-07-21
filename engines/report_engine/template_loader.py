@@ -16,12 +16,17 @@ class TemplateLoader:
     Quản lý template của Report Engine.
     """
 
+    _DEFAULT_TEMPLATE_DIR: Path = Path(__file__).parent / "templates"
+
     def __init__(
         self,
-        template_dir: str | Path = "templates",
+        template_dir: str | Path | None = None,
     ) -> None:
 
-        self.template_dir = Path(template_dir)
+        if template_dir is None:
+            self.template_dir = self._DEFAULT_TEMPLATE_DIR
+        else:
+            self.template_dir = Path(template_dir)
 
     # =====================================================
     # Path
