@@ -22,7 +22,12 @@ from jsonschema import Draft202012Validator
 
 DEFAULT_DATASET_ROOT = Path(__file__).parent
 
+INPUTS_FOLDER = "inputs"
+EXPECTED_FOLDER = "expected"
+ACTUAL_FOLDER = "actual"
+REPORTS_FOLDER = "reports"
 SCHEMA_FOLDER = "schemas"
+SNAPSHOTS_FOLDER = "snapshots"
 
 INPUT_SCHEMA = "input_schema.json"
 
@@ -199,11 +204,11 @@ class SchemaRegistry:
 
         parts = json_file.parts
 
-        if "input" in parts:
+        if INPUTS_FOLDER in parts:
 
             return INPUT_SCHEMA
 
-        if "expected" in parts:
+        if EXPECTED_FOLDER in parts:
 
             return EXPECTED_SCHEMA
 
@@ -393,7 +398,7 @@ class DirectoryValidator:
     ) -> ValidationSummary:
 
         return self._validate_subfolder(
-            "input"
+            INPUTS_FOLDER
         )
 
     # ------------------------------------------------------
@@ -403,7 +408,7 @@ class DirectoryValidator:
     ) -> ValidationSummary:
 
         return self._validate_subfolder(
-            "expected"
+            EXPECTED_FOLDER
         )
 
     # ------------------------------------------------------
@@ -414,7 +419,7 @@ class DirectoryValidator:
     ) -> ValidationSummary:
 
         return self._validate_subfolder(
-            f"snapshots/{engine_name}"
+            f"{SNAPSHOTS_FOLDER}/{engine_name}"
         )
 
     # ------------------------------------------------------

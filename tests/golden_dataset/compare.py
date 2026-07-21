@@ -24,8 +24,15 @@ from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
 
-EXPECTED_DIR = BASE_DIR / "expected"
-ACTUAL_DIR = BASE_DIR / "actual"
+INPUTS_FOLDER = "inputs"
+EXPECTED_FOLDER = "expected"
+ACTUAL_FOLDER = "actual"
+REPORTS_FOLDER = "reports"
+SCHEMAS_FOLDER = "schemas"
+SNAPSHOTS_FOLDER = "snapshots"
+
+EXPECTED_DIR = BASE_DIR / EXPECTED_FOLDER
+ACTUAL_DIR = BASE_DIR / ACTUAL_FOLDER
 
 
 # ==========================================================

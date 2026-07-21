@@ -25,7 +25,15 @@ from .validator import ValidationError
 # ==========================================================
 
 BASE_DIR = Path(__file__).resolve().parent
-REPORT_DIR = BASE_DIR / "reports"
+
+INPUTS_FOLDER = "inputs"
+EXPECTED_FOLDER = "expected"
+ACTUAL_FOLDER = "actual"
+REPORTS_FOLDER = "reports"
+SCHEMAS_FOLDER = "schemas"
+SNAPSHOTS_FOLDER = "snapshots"
+
+REPORT_DIR = BASE_DIR / REPORTS_FOLDER
 
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
 

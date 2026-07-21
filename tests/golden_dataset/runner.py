@@ -2,7 +2,7 @@
 Golden Dataset Runner
 
 Chức năng:
-- Đọc các test case trong thư mục input/
+- Đọc các test case trong thư mục inputs/
 - Chạy Interpretation Engine
 - Ghi kết quả vào thư mục actual/
 
@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import logging
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Protocol
 
@@ -29,8 +30,15 @@ logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
 
-INPUT_DIR = BASE_DIR / "input"
-ACTUAL_DIR = BASE_DIR / "actual"
+INPUTS_FOLDER = "inputs"
+EXPECTED_FOLDER = "expected"
+ACTUAL_FOLDER = "actual"
+REPORTS_FOLDER = "reports"
+SCHEMAS_FOLDER = "schemas"
+SNAPSHOTS_FOLDER = "snapshots"
+
+INPUT_DIR = BASE_DIR / INPUTS_FOLDER
+ACTUAL_DIR = BASE_DIR / ACTUAL_FOLDER
 
 INPUT_DIR.mkdir(parents=True, exist_ok=True)
 ACTUAL_DIR.mkdir(parents=True, exist_ok=True)
@@ -64,6 +72,19 @@ class InterpretationEngineProtocol(Protocol):
 # Helpers
 # ==========================================================
 
+def _ensure_input_dir_exists() -> None:
+    """Đảm bảo thư mục inputs tồn tại trước khi liệt kê case."""
+
+    INPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _clear_actual_json_outputs() -> None:
+    """Xóa mọi file *.json trong actual/ để tránh output cũ."""
+
+    for output_file in ACTUAL_DIR.glob("*.json"):
+        output_file.unlink()
+
+
 def list_cases() -> List[str]:
     """
     Lấy danh sách tên case.
@@ -72,6 +93,8 @@ def list_cases() -> List[str]:
     -------
     list[str]
     """
+
+    _ensure_input_dir_exists()
 
     return sorted(file.stem for file in INPUT_DIR.glob("*.json"))
 
@@ -158,18 +181,31 @@ def run_case(
         File output.
     """
 
-    logger.info("Running case: %s", case_name)
+    logger.info("[%s] Running", case_name)
 
     chart = load_input(case_name)
 
-    result = engine.interpret(chart)
+    try:
+        result = engine.interpret(chart)
+    except Exception as exc:
+        logger.exception("[%s] interpret failed", case_name)
+        result = {
+            "status": "error",
+            "message": str(exc),
+        }
+
+    output_payload: Dict[str, Any]
+    if is_dataclass(result):
+        output_payload = asdict(result)
+    else:
+        output_payload = result
 
     output = save_output(
         case_name,
-        result,
+        output_payload,
     )
 
-    logger.info("Finished: %s", case_name)
+    logger.info("[%s] Finished", case_name)
 
     return output
 
@@ -189,11 +225,21 @@ def run_all_cases(
     list[Path]
     """
 
-    outputs: List[Path] = []
+    _ensure_input_dir_exists()
+    _clear_actual_json_outputs()
 
     cases = list_cases()
 
+    if not cases:
+        logger.warning(
+            "No golden dataset cases found in %s.",
+            INPUT_DIR,
+        )
+        return []
+
     logger.info("Found %d cases.", len(cases))
+
+    outputs: List[Path] = []
 
     for case_name in cases:
 
