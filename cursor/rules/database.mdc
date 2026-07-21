@@ -1,0 +1,332 @@
+---
+description: BTE Database Rules
+alwaysApply: true
+---
+
+# BTE Database Rules
+
+Version: 1.0
+
+Mọi AI Agent làm việc với Database của BTE phải tuân thủ các quy tắc sau.
+
+---
+
+# 1. Database First
+
+Database là nguồn tri thức của hệ thống.
+
+Business Rules phải nằm trong Database.
+
+Không hard-code Rule trong Python.
+
+---
+
+# 2. Read Only
+
+Engine
+
+↓
+
+Read Database
+
+Không được
+
+Write
+
+Update
+
+Delete
+
+Database.
+
+---
+
+# 3. Rule Driven
+
+Mọi luận giải phải lấy từ Rule Database.
+
+Không viết
+
+if...
+
+elif...
+
+else...
+
+để thay thế dữ liệu Rule.
+
+---
+
+# 4. CSV First
+
+Ưu tiên
+
+CSV
+
+↓
+
+JSON
+
+↓
+
+YAML
+
+Không dùng SQLite nếu chưa được yêu cầu.
+
+---
+
+# 5. Stable Schema
+
+Không tự ý đổi tên cột.
+
+Không đổi thứ tự cột.
+
+Không đổi kiểu dữ liệu.
+
+Nếu cần mở rộng
+
+↓
+
+Thêm cột mới.
+
+Không sửa cột cũ.
+
+---
+
+# 6. Vietnamese Naming
+
+Database sử dụng
+
+Tiếng Việt
+
+Không dấu
+
+snake_case
+
+Ví dụ
+
+ngu_hanh.csv
+
+thap_than.csv
+
+khong dùng
+
+five_elements.csv
+
+---
+
+# 7. File Naming
+
+01_calendar/
+
+02_bazi/
+
+03_score/
+
+...
+
+Tên thư mục phải ổn định.
+
+Không đổi tên.
+
+---
+
+# 8. One Purpose
+
+Một file
+
+↓
+
+Một loại dữ liệu.
+
+Không trộn nhiều loại Rule.
+
+Ví dụ
+
+strength_rules.csv
+
+không chứa
+
+pattern_rules.
+
+---
+
+# 9. No Duplicate Data
+
+Nếu Rule đã tồn tại
+
+↓
+
+Không tạo bản sao.
+
+Ưu tiên Reference.
+
+---
+
+# 10. Rule Priority
+
+Nếu nhiều Rule cùng áp dụng
+
+↓
+
+Xử lý theo
+
+priority
+
+Không phụ thuộc
+
+thứ tự đọc file.
+
+---
+
+# 11. Immutable Data
+
+Golden Dataset
+
+↓
+
+Không sửa.
+
+Snapshot
+
+↓
+
+Không sửa.
+
+Expected
+
+↓
+
+Không sửa.
+
+---
+
+# 12. Database Version
+
+Mọi thay đổi lớn
+
+↓
+
+Update Version.
+
+Ví dụ
+
+database_version
+
+1.0
+
+1.1
+
+2.0
+
+---
+
+# 13. Backward Compatibility
+
+Không xóa file dữ liệu.
+
+Không đổi đường dẫn.
+
+Nếu thay đổi
+
+↓
+
+Giữ Compatibility Layer.
+
+---
+
+# 14. Validation
+
+Mọi CSV phải kiểm tra
+
+- duplicate key
+
+- missing value
+
+- invalid enum
+
+- invalid reference
+
+trước khi sử dụng.
+
+---
+
+# 15. Foreign Keys
+
+Nếu một Rule tham chiếu Rule khác
+
+↓
+
+phải kiểm tra tồn tại.
+
+Không dùng chuỗi tự do.
+
+---
+
+# 16. Enumerations
+
+Enum phải được định nghĩa tập trung.
+
+Không hard-code.
+
+Ví dụ
+
+element
+
+yin_yang
+
+ten_god
+
+---
+
+# 17. Database Loader
+
+Engine chỉ đọc Database thông qua Loader.
+
+Không đọc CSV trực tiếp trong Business Logic.
+
+---
+
+# 18. Cache
+
+Nếu cần Cache
+
+↓
+
+Cache trong Loader.
+
+Không Cache trong Rule.
+
+---
+
+# 19. Error Handling
+
+Nếu thiếu dữ liệu
+
+↓
+
+Báo lỗi rõ ràng.
+
+Không trả None.
+
+Không bỏ qua.
+
+---
+
+# 20. AI Responsibilities
+
+AI không được
+
+- đổi cấu trúc Database
+
+- xóa dữ liệu
+
+- sửa Golden Dataset
+
+- đổi schema
+
+nếu chưa được người dùng yêu cầu.
+
+---
+
+END
