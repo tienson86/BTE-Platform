@@ -1,0 +1,336 @@
+---
+description: BTE Engine Design Rules
+alwaysApply: true
+---
+
+# BTE Engine Design Rules
+
+Version: 1.0
+
+Đây là chuẩn thiết kế cho mọi Engine trong BTE Platform.
+
+---
+
+# 1. One Engine One Responsibility
+
+Mỗi Engine chỉ có một nhiệm vụ.
+
+Calendar
+
+↓
+
+Calendar
+
+Score
+
+↓
+
+Score
+
+Report
+
+↓
+
+Report
+
+Không trộn trách nhiệm.
+
+---
+
+# 2. Standard Structure
+
+Mỗi Engine nên có cấu trúc
+
+engine.py
+
+service.py
+
+models.py
+
+exceptions.py
+
+loader.py
+
+validators.py
+
+calculator.py
+
+formatter.py
+
+utils.py
+
+Không bắt buộc đầy đủ.
+
+Chỉ tạo khi cần.
+
+---
+
+# 3. Public API
+
+Mỗi Engine chỉ export
+
+Service
+
+Engine
+
+Models
+
+Không export internal modules.
+
+---
+
+# 4. Engine Result
+
+Mọi Engine trả về Result Object.
+
+Không trả tuple.
+
+Không trả dict nếu có thể dùng dataclass.
+
+---
+
+# 5. Engine Context
+
+Engine giao tiếp qua
+
+Result Objects
+
+hoặc
+
+EngineContext.
+
+Không truyền dữ liệu rời rạc.
+
+---
+
+# 6. Dependency Direction
+
+Engine chỉ được phụ thuộc
+
+↓
+
+Engine phía trước.
+
+Không import ngược.
+
+---
+
+# 7. Validation
+
+Validate Input
+
+↓
+
+Calculate
+
+↓
+
+Validate Output
+
+↓
+
+Return Result
+
+---
+
+# 8. Exceptions
+
+Engine phải có Exception riêng.
+
+Ví dụ
+
+ScoreEngineError
+
+PatternEngineError
+
+Không dùng Exception chung.
+
+---
+
+# 9. Logging
+
+Mọi Engine dùng logging.
+
+Không dùng print().
+
+---
+
+# 10. Stateless
+
+Engine nên Stateless.
+
+Không lưu State toàn cục.
+
+---
+
+# 11. Dependency Injection
+
+Ưu tiên truyền
+
+Loader
+
+Config
+
+Repository
+
+qua Constructor.
+
+Không tạo Singleton.
+
+---
+
+# 12. Service Layer
+
+Business Logic
+
+↓
+
+Service
+
+Engine
+
+↓
+
+Orchestration
+
+Không đảo ngược.
+
+---
+
+# 13. Rule Loader
+
+Rule Loader
+
+↓
+
+chỉ đọc Rule.
+
+Không xử lý Logic.
+
+---
+
+# 14. Calculator
+
+Calculator
+
+↓
+
+chỉ tính toán.
+
+Không ghi Database.
+
+Không Format.
+
+---
+
+# 15. Formatter
+
+Formatter
+
+↓
+
+chỉ định dạng.
+
+Không tính toán.
+
+---
+
+# 16. Backward Compatibility
+
+Không xóa API.
+
+Nếu cần
+
+↓
+
+Wrapper.
+
+---
+
+# 17. Performance
+
+Không tối ưu sớm.
+
+Đúng
+
+↓
+
+Đơn giản
+
+↓
+
+Nhanh
+
+---
+
+# 18. Testability
+
+Mọi Engine phải có thể
+
+Unit Test
+
+Integration Test
+
+Golden Dataset Test
+
+---
+
+# 19. Extensibility
+
+Engine phải dễ mở rộng.
+
+Không sửa Core khi thêm Feature.
+
+Ưu tiên
+
+Plugin
+
+Strategy
+
+Rule Database
+
+---
+
+# 20. AI Development Workflow
+
+Trước khi sửa Engine
+
+AI phải
+
+1. Đọc Specification
+
+2. Đọc Rules
+
+3. Phân tích Root Cause
+
+4. Sửa tối thiểu
+
+5. Chạy Test Module
+
+6. Báo cáo kết quả
+
+Không được bỏ qua quy trình này.
+
+---
+
+# 21. Commercial Standard
+
+Engine phải đạt
+
+- Stable
+
+- Modular
+
+- Reusable
+
+- Maintainable
+
+- Testable
+
+- Extensible
+
+Đây là tiêu chuẩn mặc định của BTE Platform.
+
+---
+
+END
