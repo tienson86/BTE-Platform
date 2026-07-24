@@ -2,18 +2,26 @@
 
 from __future__ import annotations
 
+from applications.customer_portal.i18n import DEFAULT_LOCALE, load_catalog, t
 
-def stage_tabs() -> str:
-    """Result stage tab buttons."""
-    stages = [
+
+def stage_tabs(locale: str = DEFAULT_LOCALE) -> str:
+    """Result stage tab buttons (labels from i18n)."""
+    catalog = load_catalog(locale)
+    stages = (
         "calendar",
         "bazi",
         "pattern",
         "score",
         "interpretation",
         "narrative",
-    ]
-    return "".join(
-        f'<button type="button" class="tab" data-stage="{s}">{s.title()}</button>'
-        for s in stages
     )
+    parts: list[str] = []
+    for index, stage in enumerate(stages):
+        active = " active" if index == 0 else ""
+        label = t(catalog, f"stages.{stage}")
+        parts.append(
+            f'<button type="button" class="tab{active}" data-stage="{stage}" '
+            f'data-i18n="stages.{stage}">{label}</button>'
+        )
+    return "".join(parts)

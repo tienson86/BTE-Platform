@@ -5,6 +5,10 @@
 (function (global) {
   const MISSING = "--";
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   function esc(value) {
     return String(value)
       .replace(/&/g, "&amp;")
@@ -66,8 +70,8 @@
   function formatLeap(cal) {
     const lunar = cal && typeof cal.lunar === "object" ? cal.lunar : null;
     if (!lunar || lunar.leap === null || lunar.leap === undefined) return MISSING;
-    if (lunar.leap === true) return "Yes";
-    if (lunar.leap === false) return "No";
+    if (lunar.leap === true) return t("common.yes");
+    if (lunar.leap === false) return t("common.no");
     return present(lunar.leap);
   }
 
@@ -128,22 +132,24 @@
           ? calendar
           : {};
       const leap = formatLeap(cal);
+      const yes = t("common.yes");
+      const no = t("common.no");
       const leapHint =
-        leap === "Yes" ? "Tháng nhuận" : leap === "No" ? "Không nhuận" : "";
+        leap === yes ? t("calendar.leap_yes_hint") : leap === no ? t("calendar.leap_no_hint") : "";
 
       return (
-        '<section class="bte-calendar" aria-label="Calendar">' +
+        '<section class="bte-calendar" aria-label="' + esc(t("calendar.title")) + '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>Calendar</h2>" +
-        '<p class="bte-calendar-sub">Solar · Lunar · Solar term</p>' +
+        "<h2>" + esc(t("calendar.title")) + "</h2>" +
+        '<p class="bte-calendar-sub">' + esc(t("calendar.subtitle")) + "</p>" +
         "</header>" +
         '<div class="bte-card-grid">' +
-        card("Ngày dương", formatSolar(cal), "Solar date") +
-        card("Ngày âm", formatLunar(cal), "Lunar date") +
-        card("Tiết khí", formatSolarTerm(cal), "Solar term") +
-        card("Julian Day", formatJulian(cal), "JD") +
-        card("Timezone", formatTimezone(cal, options), "IANA / local") +
-        card("Leap month", leap, leapHint) +
+        card(t("calendar.solar"), formatSolar(cal), t("calendar.hint_solar")) +
+        card(t("calendar.lunar"), formatLunar(cal), t("calendar.hint_lunar")) +
+        card(t("calendar.solar_term"), formatSolarTerm(cal), t("calendar.hint_term")) +
+        card(t("calendar.julian"), formatJulian(cal), t("calendar.hint_jd")) +
+        card(t("calendar.timezone"), formatTimezone(cal, options), t("calendar.hint_tz")) +
+        card(t("calendar.leap_month"), leap, leapHint) +
         "</div>" +
         "</section>"
       );
@@ -151,12 +157,12 @@
       return (
         '<section class="bte-calendar">' +
         '<div class="bte-card-grid">' +
-        card("Ngày dương", MISSING) +
-        card("Ngày âm", MISSING) +
-        card("Tiết khí", MISSING) +
-        card("Julian Day", MISSING) +
-        card("Timezone", MISSING) +
-        card("Leap month", MISSING) +
+        card(t("calendar.solar"), MISSING) +
+        card(t("calendar.lunar"), MISSING) +
+        card(t("calendar.solar_term"), MISSING) +
+        card(t("calendar.julian"), MISSING) +
+        card(t("calendar.timezone"), MISSING) +
+        card(t("calendar.leap_month"), MISSING) +
         "</div>" +
         "</section>"
       );

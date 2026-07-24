@@ -5,6 +5,10 @@
 (function (global) {
   const MISSING = "--";
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   const STEM_META = {
     Giáp: { element: "Mộc", yinYang: "Dương" },
     Ất: { element: "Mộc", yinYang: "Âm" },
@@ -316,9 +320,9 @@
 
       var summary =
         '<div class="bte-card-grid bte-bazi-summary-grid">' +
-        summaryCard("Day Master", dm, dmMeta.element) +
-        summaryCard("Ngũ hành", dmMeta.element, dmMeta.element) +
-        summaryCard("Âm Dương", dmMeta.yinYang) +
+        summaryCard(t("bazi.day_master"), dm, dmMeta.element) +
+        summaryCard(t("bazi.element"), dmMeta.element, dmMeta.element) +
+        summaryCard(t("bazi.yin_yang"), dmMeta.yinYang) +
         "</div>";
 
       var pillarsHtml =
@@ -334,10 +338,10 @@
         "</div>";
 
       return (
-        '<section class="bte-bazi" aria-label="Bazi">' +
+        '<section class="bte-bazi" aria-label="' + esc(t("bazi.title")) + '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>Bazi</h2>" +
-        '<p class="bte-calendar-sub">Four Pillars · Day Master</p>' +
+        "<h2>" + esc(t("bazi.title")) + "</h2>" +
+        '<p class="bte-calendar-sub">' + esc(t("bazi.subtitle")) + "</p>" +
         "</header>" +
         summary +
         pillarsHtml +
@@ -347,9 +351,9 @@
       return (
         '<section class="bte-bazi">' +
         '<div class="bte-card-grid">' +
-        summaryCard("Day Master", MISSING) +
-        summaryCard("Ngũ hành", MISSING) +
-        summaryCard("Âm Dương", MISSING) +
+        summaryCard(t("bazi.day_master"), MISSING) +
+        summaryCard(t("bazi.element"), MISSING) +
+        summaryCard(t("bazi.yin_yang"), MISSING) +
         "</div>" +
         '<div class="bte-pillar-grid">' +
         PILLARS.map(function (spec) {

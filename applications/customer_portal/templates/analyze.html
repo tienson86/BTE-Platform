@@ -1,23 +1,23 @@
 <div class="panel">
-  <h1>Analyze</h1>
-  <p class="muted">Runs the full BTE pipeline via <code>POST /backend/api/v1/analyze</code> → API <code>/api/v1/analyze</code>.</p>
+  <h1 data-i18n="analyze.title"></h1>
+  <p class="muted" data-i18n-html="analyze.hint"></p>
   <form id="analyzeForm" class="form-grid" method="post" action="#" novalidate>
-    <label>Year<input id="year" name="year" type="number" value="1990" required /></label>
-    <label>Month<input id="month" name="month" type="number" value="5" min="1" max="12" required /></label>
-    <label>Day<input id="day" name="day" type="number" value="15" min="1" max="31" required /></label>
-    <label>Hour<input id="hour" name="hour" type="number" value="10" min="0" max="23" /></label>
-    <label>Minute<input id="minute" name="minute" type="number" value="30" min="0" max="59" /></label>
-    <label>Gender
+    <label><span data-i18n="analyze.year"></span><input id="year" name="year" type="number" value="1990" required /></label>
+    <label><span data-i18n="analyze.month"></span><input id="month" name="month" type="number" value="5" min="1" max="12" required /></label>
+    <label><span data-i18n="analyze.day"></span><input id="day" name="day" type="number" value="15" min="1" max="31" required /></label>
+    <label><span data-i18n="analyze.hour"></span><input id="hour" name="hour" type="number" value="10" min="0" max="23" /></label>
+    <label><span data-i18n="analyze.minute"></span><input id="minute" name="minute" type="number" value="30" min="0" max="59" /></label>
+    <label><span data-i18n="analyze.gender"></span>
       <select id="gender" name="gender">
-        <option value="male">male</option>
-        <option value="female">female</option>
-        <option value="">unspecified</option>
+        <option value="male" data-i18n="analyze.gender_male"></option>
+        <option value="female" data-i18n="analyze.gender_female"></option>
+        <option value="" data-i18n="analyze.gender_unspecified"></option>
       </select>
     </label>
-    <label class="full">Timezone<input id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" /></label>
+    <label class="full"><span data-i18n="analyze.timezone"></span><input id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" /></label>
     <div class="full toolbar">
       <!-- type=button so click always fires (HTML5 validation cannot swallow it) -->
-      <button type="button" id="btnAnalyze">Run analyze</button>
+      <button type="button" id="btnAnalyze" data-i18n="analyze.run"></button>
     </div>
   </form>
 </div>

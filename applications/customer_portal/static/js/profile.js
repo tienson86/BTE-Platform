@@ -1,10 +1,14 @@
 (function () {
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   const flash = document.getElementById("globalFlash");
   const view = document.getElementById("profileView");
 
   async function load() {
     if (!BtePortal.getToken()) {
-      view.textContent = "Not signed in.";
+      view.textContent = t("profile.not_signed_in");
       return;
     }
     try {

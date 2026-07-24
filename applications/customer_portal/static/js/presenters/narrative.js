@@ -5,6 +5,10 @@
 (function (global) {
   const MISSING = "--";
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   function esc(value) {
     return String(value)
       .replace(/&/g, "&amp;")
@@ -21,7 +25,7 @@
   }
 
   function slugify(text, index) {
-    var base = String(text || "section")
+    var base = String(text || t("narrative.section"))
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -192,7 +196,7 @@
             ">" +
             '<button type="button" class="bte-narr-toggle secondary" data-narr-toggle="' +
             esc(id) +
-            '" aria-expanded="true">Collapse</button>' +
+            '" aria-expanded="true">' + esc(t("common.collapse")) + "</button>" +
             "</header>" +
             '<div class="bte-narr-section-body" data-narr-body="' +
             esc(id) +
@@ -271,7 +275,7 @@
       while (i < children.length) {
         var node = children[i];
         if (node.nodeType === 1 && /^H[2-4]$/i.test(node.tagName)) {
-          var title = node.textContent || "Section";
+          var title = node.textContent || t("narrative.section");
           var id = slugify(title, sectionIndex++);
           var bodyNodes = [];
           i += 1;
@@ -301,7 +305,7 @@
               ">" +
               '<button type="button" class="bte-narr-toggle secondary" data-narr-toggle="' +
               esc(id) +
-              '" aria-expanded="true">Collapse</button>' +
+              '" aria-expanded="true">' + esc(t("common.collapse")) + "</button>" +
               "</header>" +
               '<div class="bte-narr-section-body" data-narr-body="' +
               esc(id) +
@@ -340,8 +344,8 @@
       })
       .join("");
     return (
-      '<nav class="bte-card bte-narr-toc" aria-label="Muc luc">' +
-      "<h3>Mục lục</h3>" +
+      '<nav class="bte-card bte-narr-toc" aria-label="' + esc(t("narrative.toc")) + '">' +
+      "<h3>" + esc(t("narrative.toc")) + "</h3>" +
       "<ol>" +
       items +
       "</ol>" +
@@ -352,10 +356,10 @@
   function toolbarHtml() {
     return (
       '<div class="bte-narr-toolbar no-print">' +
-      '<button type="button" class="secondary" data-narr-action="copy">Copy</button>' +
-      '<button type="button" class="secondary" data-narr-action="print">Print</button>' +
-      '<button type="button" class="secondary" data-narr-action="collapse-all">Collapse all</button>' +
-      '<button type="button" class="secondary" data-narr-action="expand-all">Expand all</button>' +
+      '<button type="button" class="secondary" data-narr-action="copy">' + esc(t("common.copy")) + "</button>" +
+      '<button type="button" class="secondary" data-narr-action="print">' + esc(t("common.print")) + "</button>" +
+      '<button type="button" class="secondary" data-narr-action="collapse-all">' + esc(t("common.collapse_all")) + "</button>" +
+      '<button type="button" class="secondary" data-narr-action="expand-all">' + esc(t("common.expand_all")) + "</button>" +
       "</div>"
     );
   }
@@ -364,8 +368,8 @@
     var bits = [];
     if (tone) {
       bits.push(
-        '<span class="bte-badge bte-badge-neutral">Tone ' +
-          esc(present(tone)) +
+        '<span class="bte-badge bte-badge-neutral">' +
+          esc(t("narrative.tone", { value: present(tone) })) +
           "</span>"
       );
     }
@@ -374,7 +378,7 @@
         if (metrics[key] != null) {
           bits.push(
             '<span class="bte-badge bte-badge-pattern">' +
-              esc(key.replace(/_/g, " ")) +
+              esc(t("narrative.metric_" + key)) +
               " " +
               esc(present(metrics[key])) +
               "</span>"
@@ -464,13 +468,13 @@
       }
 
       return (
-        '<section class="bte-narr" aria-label="Narrative">' +
+        '<section class="bte-narr" aria-label="' + esc(t("narrative.title")) + '">' +
         '<textarea class="bte-narr-copy-source" hidden readonly>' +
         esc(copySource) +
         "</textarea>" +
         '<header class="bte-calendar-head">' +
-        "<h2>Narrative</h2>" +
-        '<p class="bte-calendar-sub">Báo cáo hoàn chỉnh</p>' +
+        "<h2>" + esc(t("narrative.title")) + "</h2>" +
+        '<p class="bte-calendar-sub">' + esc(t("narrative.subtitle")) + "</p>" +
         "</header>" +
         toolbarHtml() +
         metricsBar(source.metrics, source.tone) +
@@ -498,7 +502,7 @@
     section.classList.toggle("is-collapsed", !expanded);
     body.hidden = !expanded;
     btn.setAttribute("aria-expanded", expanded ? "true" : "false");
-    btn.textContent = expanded ? "Collapse" : "Expand";
+    btn.textContent = expanded ? t("common.collapse") : t("common.expand");
   }
 
   function fallbackCopy(text) {
@@ -549,9 +553,9 @@
           (host.querySelector(".bte-narr-report") || host).innerText ||
           "";
         var done = function () {
-          actionBtn.textContent = "Copied";
+          actionBtn.textContent = t("common.copied");
           setTimeout(function () {
-            actionBtn.textContent = "Copy";
+            actionBtn.textContent = t("common.copy");
           }, 1200);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {

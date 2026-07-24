@@ -5,6 +5,10 @@
 (function (global) {
   const MISSING = "--";
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   /** Preferred section order (shown only when API provides data). */
   const KNOWN_SECTIONS = [
     {
@@ -92,7 +96,7 @@
   function present(value) {
     if (value === null || value === undefined || value === "") return MISSING;
     if (typeof value === "number" && Number.isNaN(value)) return MISSING;
-    if (typeof value === "boolean") return value ? "Yes" : "No";
+    if (typeof value === "boolean") return value ? t("common.yes") : t("common.no");
     return String(value);
   }
 
@@ -305,7 +309,7 @@
     if (data.sections && typeof data.sections === "object") {
       if (Array.isArray(data.sections)) {
         data.sections.forEach(function (item, idx) {
-          var n = normalizeNode(item, "Mục " + (idx + 1));
+          var n = normalizeNode(item, t("interpretation.section_n", { n: idx + 1 }));
           if (!n) return;
           var id = String((item && (item.id || item.section || item.name)) || "sections_" + idx);
           if (used[id] || used[n.title]) return;
@@ -348,19 +352,19 @@
   function metaBar(data) {
     var bits = [];
     if (Object.prototype.hasOwnProperty.call(data, "confidence")) {
-      bits.push(badgeHtml("Confidence " + present(data.confidence), "follow"));
+      bits.push(badgeHtml(t("interpretation.confidence", { value: present(data.confidence) }), "follow"));
     }
     if (Object.prototype.hasOwnProperty.call(data, "section_count")) {
-      bits.push(badgeHtml("Sections " + present(data.section_count), "pattern"));
+      bits.push(badgeHtml(t("interpretation.sections", { value: present(data.section_count) }), "pattern"));
     }
     if (Object.prototype.hasOwnProperty.call(data, "sentence_count")) {
-      bits.push(badgeHtml("Sentences " + present(data.sentence_count), "useful"));
+      bits.push(badgeHtml(t("interpretation.sentences", { value: present(data.sentence_count) }), "useful"));
     }
     if (Object.prototype.hasOwnProperty.call(data, "matched_rule_count")) {
-      bits.push(badgeHtml("Matched " + present(data.matched_rule_count), "neutral"));
+      bits.push(badgeHtml(t("interpretation.matched", { value: present(data.matched_rule_count) }), "neutral"));
     }
     if (Object.prototype.hasOwnProperty.call(data, "resolved_rule_count")) {
-      bits.push(badgeHtml("Resolved " + present(data.resolved_rule_count), "climate"));
+      bits.push(badgeHtml(t("interpretation.resolved", { value: present(data.resolved_rule_count) }), "climate"));
     }
     if (!bits.length) return "";
     return '<div class="bte-interp-status">' + bits.join("") + "</div>";
@@ -409,10 +413,10 @@
           "</div></article>";
 
       return (
-        '<section class="bte-interp" aria-label="Interpretation">' +
+        '<section class="bte-interp" aria-label="' + esc(t("interpretation.title")) + '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>Interpretation</h2>" +
-        '<p class="bte-calendar-sub">Tổng quan · Sự nghiệp · Tài vận · Hôn nhân · Sức khỏe · Vận hạn</p>' +
+        "<h2>" + esc(t("interpretation.title")) + "</h2>" +
+        '<p class="bte-calendar-sub">' + esc(t("interpretation.subtitle")) + "</p>" +
         "</header>" +
         metaBar(data) +
         '<div class="bte-interp-stack">' +

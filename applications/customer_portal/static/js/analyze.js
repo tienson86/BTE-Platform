@@ -1,4 +1,8 @@
 (function () {
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   function boot() {
     const flash = document.getElementById("globalFlash");
     const form = document.getElementById("analyzeForm");
@@ -6,13 +10,13 @@
 
     if (!window.BtePortal) {
       if (flash) {
-        flash.textContent = "Portal API client failed to load (api.js).";
+        flash.textContent = t("common.api_client_failed_api_js");
         flash.className = "flash show error";
       }
       return;
     }
     if (!form || !btn) {
-      BtePortal.showFlash(flash, "Analyze form not found in page.", "error");
+      BtePortal.showFlash(flash, t("analyze.form_missing"), "error");
       return;
     }
 
@@ -29,12 +33,12 @@
     }
 
     function validate(input) {
-      if (!Number.isFinite(input.year) || input.year < 1) return "Year is required.";
+      if (!Number.isFinite(input.year) || input.year < 1) return t("analyze.year_required");
       if (!Number.isFinite(input.month) || input.month < 1 || input.month > 12) {
-        return "Month must be 1–12.";
+        return t("analyze.month_range");
       }
       if (!Number.isFinite(input.day) || input.day < 1 || input.day > 31) {
-        return "Day must be 1–31.";
+        return t("analyze.day_range");
       }
       return "";
     }
@@ -49,23 +53,23 @@
       }
 
       btn.disabled = true;
-      btn.textContent = "Analyzing...";
-      BtePortal.showFlash(flash, "Calling POST /backend/api/v1/analyze ...", "success");
+      btn.textContent = t("analyze.analyzing");
+      BtePortal.showFlash(flash, t("analyze.calling"), "success");
 
       try {
         const res = await BtePortal.post("/api/v1/analyze", input);
         const data = res && res.data != null ? res.data : res;
         if (!data || typeof data !== "object") {
-          throw new Error("Analyze response missing data payload.");
+          throw new Error(t("analyze.missing_payload"));
         }
         BtePortal.saveLastResult({ input: input, data: data });
-        BtePortal.showFlash(flash, "Analyze complete — opening Result", "success");
+        BtePortal.showFlash(flash, t("analyze.complete"), "success");
         window.location.assign("/result");
       } catch (err) {
-        const message = (err && err.message) || "Analyze failed";
+        const message = (err && err.message) || t("analyze.failed");
         BtePortal.showFlash(flash, message, "error");
         btn.disabled = false;
-        btn.textContent = "Run analyze";
+        btn.textContent = t("analyze.run");
       }
     }
 

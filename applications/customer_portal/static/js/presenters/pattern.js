@@ -5,6 +5,10 @@
 (function (global) {
   const MISSING = "--";
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   /** Display labels for known pattern codes (presentation only). */
   const PATTERN_LABELS = {
     chinh_quan: "Chính Quan",
@@ -102,7 +106,7 @@
   function present(value) {
     if (value === null || value === undefined || value === "") return MISSING;
     if (typeof value === "number" && Number.isNaN(value)) return MISSING;
-    if (typeof value === "boolean") return value ? "Yes" : "No";
+    if (typeof value === "boolean") return value ? t("common.yes") : t("common.no");
     if (Array.isArray(value)) {
       var parts = value
         .map(function (v) {
@@ -299,7 +303,7 @@
   }
 
   function toneLabel(tone, value) {
-    if (value === MISSING) return "N/A";
+    if (value === MISSING) return t("pattern.na");
     if (tone === "strong") return "Vượng";
     if (tone === "weak") return "Nhược";
     if (tone === "balanced") return "Hòa";
@@ -310,7 +314,7 @@
     if (tone === "pattern") return "Cách";
     if (tone === "follow") return "Tòng";
     if (tone === "neutral") return "Thân";
-    return "Info";
+    return t("pattern.info");
   }
 
   function statusBar(data) {
@@ -320,20 +324,24 @@
       data.priority != null && data.priority !== ""
         ? present(data.priority)
         : MISSING;
-    var ok =
-      data.success === true ? "OK" : data.success === false ? "Fail" : MISSING;
+    var okDisplay =
+      data.success === true
+        ? t("pattern.status_ok")
+        : data.success === false
+          ? t("pattern.status_fail")
+          : MISSING;
     return (
       '<div class="bte-pattern-status">' +
       '<span class="bte-badge bte-badge-' +
-      (ok === "OK" ? "strong" : ok === "Fail" ? "avoid" : "muted") +
-      '">Status ' +
-      esc(ok) +
+      (data.success === true ? "strong" : data.success === false ? "avoid" : "muted") +
+      '">' +
+      esc(okDisplay) +
       "</span>" +
-      '<span class="bte-badge bte-badge-pattern">Score ' +
-      esc(score) +
+      '<span class="bte-badge bte-badge-pattern">' +
+      esc(t("pattern.score", { value: score })) +
       "</span>" +
-      '<span class="bte-badge bte-badge-follow">Priority ' +
-      esc(priority) +
+      '<span class="bte-badge bte-badge-follow">' +
+      esc(t("pattern.priority", { value: priority })) +
       "</span>" +
       "</div>"
     );
@@ -357,9 +365,9 @@
       }).join("");
 
       return (
-        '<section class="bte-pattern" aria-label="Pattern">' +
+        '<section class="bte-pattern" aria-label="' + esc(t("pattern.title")) + '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>Pattern</h2>" +
+        "<h2>" + esc(t("pattern.title")) + "</h2>" +
         '<p class="bte-calendar-sub">Cách cục · Thân · Thần sát dụng</p>' +
         "</header>" +
         statusBar(data) +

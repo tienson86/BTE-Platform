@@ -1,38 +1,38 @@
 <div class="panel reports-center">
   <header class="reports-hero">
     <div>
-      <h1>Report Center</h1>
-      <p class="muted">Browse, preview, and export reports from analyze results.</p>
+      <h1 data-i18n="reports.title"></h1>
+      <p class="muted" data-i18n="reports.subtitle"></p>
     </div>
     <div class="reports-hero-actions no-print">
-      <a class="btn secondary" href="/analyze">New analyze</a>
-      <a class="btn secondary" href="/history">History</a>
+      <a class="btn secondary" href="/analyze" data-i18n="common.new_analyze"></a>
+      <a class="btn secondary" href="/history" data-i18n="nav.history"></a>
     </div>
   </header>
 
   <div class="reports-toolbar no-print">
-    <input id="reportSearch" type="search" placeholder="Search reports…" aria-label="Search reports" />
-    <select id="reportFilter" aria-label="Filter by type">
-      <option value="all">All types</option>
-      <option value="narrative">Narrative</option>
-      <option value="report">Report</option>
-      <option value="html">HTML</option>
-      <option value="markdown">Markdown</option>
-      <option value="pdf">PDF</option>
+    <input id="reportSearch" type="search" data-i18n-placeholder="reports.search_placeholder" data-i18n-aria-label="reports.search_aria" />
+    <select id="reportFilter" data-i18n-aria-label="reports.filter_aria">
+      <option value="all" data-i18n="reports.all_types"></option>
+      <option value="narrative" data-i18n="reports.type_narrative"></option>
+      <option value="report" data-i18n="reports.type_report"></option>
+      <option value="html" data-i18n="common.html"></option>
+      <option value="markdown" data-i18n="common.markdown"></option>
+      <option value="pdf" data-i18n="common.pdf"></option>
     </select>
-    <select id="reportSort" aria-label="Sort reports">
-      <option value="date_desc">Newest first</option>
-      <option value="date_asc">Oldest first</option>
-      <option value="name_asc">Name A–Z</option>
-      <option value="name_desc">Name Z–A</option>
+    <select id="reportSort" data-i18n-aria-label="reports.sort_aria">
+      <option value="date_desc" data-i18n="reports.newest_first"></option>
+      <option value="date_asc" data-i18n="reports.oldest_first"></option>
+      <option value="name_asc" data-i18n="reports.name_asc"></option>
+      <option value="name_desc" data-i18n="reports.name_desc"></option>
     </select>
   </div>
 
   <div class="reports-layout">
-    <section class="reports-list-pane" aria-label="Report list">
+    <section class="reports-list-pane" data-i18n-aria-label="reports.list_aria">
       <div class="reports-list-head">
-        <h2>Reports</h2>
-        <span class="muted" id="reportCount">Loading…</span>
+        <h2 data-i18n="reports.list_heading"></h2>
+        <span class="muted" id="reportCount" data-i18n="common.loading"></span>
       </div>
       <div id="reportList" class="reports-list">
         <div class="bte-card skeleton-card"></div>
@@ -40,13 +40,13 @@
         <div class="bte-card skeleton-card"></div>
       </div>
       <div class="reports-table-wrap no-print">
-        <table class="reports-table" aria-label="Reports table">
+        <table class="reports-table" data-i18n-aria-label="reports.table_aria">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Created</th>
-              <th>Type</th>
-              <th>Status</th>
+              <th data-i18n="common.name"></th>
+              <th data-i18n="common.created"></th>
+              <th data-i18n="common.type"></th>
+              <th data-i18n="common.status"></th>
             </tr>
           </thead>
           <tbody id="reportTableBody">
@@ -56,26 +56,26 @@
       </div>
     </section>
 
-    <section class="reports-preview-pane" aria-label="Report preview">
+    <section class="reports-preview-pane" data-i18n-aria-label="reports.preview_aria">
       <div class="reports-preview-head">
-        <h2 id="previewTitle">Preview</h2>
+        <h2 id="previewTitle" data-i18n="common.preview"></h2>
         <div class="reports-preview-actions no-print" id="previewActions" hidden>
-          <button type="button" class="secondary" data-action="open">Open</button>
-          <button type="button" class="secondary" data-action="print">Print</button>
-          <button type="button" class="secondary" data-action="copy">Copy</button>
-          <button type="button" class="secondary" data-action="download">Download</button>
-          <button type="button" class="secondary" data-action="share" title="Coming soon">Share</button>
+          <button type="button" class="secondary" data-action="open" data-i18n="common.open"></button>
+          <button type="button" class="secondary" data-action="print" data-i18n="common.print"></button>
+          <button type="button" class="secondary" data-action="copy" data-i18n="common.copy"></button>
+          <button type="button" class="secondary" data-action="download" data-i18n="common.download"></button>
+          <button type="button" class="secondary" data-action="share" data-i18n="common.share" data-i18n-title="common.coming_soon"></button>
         </div>
       </div>
       <div class="reports-format-tabs no-print" id="formatTabs" hidden>
-        <button type="button" class="tab active" data-format="html">HTML</button>
-        <button type="button" class="tab" data-format="markdown">Markdown</button>
-        <button type="button" class="tab" data-format="pdf" id="tabPdf" disabled>PDF</button>
+        <button type="button" class="tab active" data-format="html" data-i18n="common.html"></button>
+        <button type="button" class="tab" data-format="markdown" data-i18n="common.markdown"></button>
+        <button type="button" class="tab" data-format="pdf" id="tabPdf" disabled data-i18n="common.pdf"></button>
       </div>
-      <div id="previewEmpty" class="reports-empty bte-card">No report available</div>
-      <iframe id="previewHtml" class="reports-preview-frame" title="Report HTML preview" hidden></iframe>
+      <div id="previewEmpty" class="reports-empty bte-card" data-i18n="reports.empty"></div>
+      <iframe id="previewHtml" class="reports-preview-frame" data-i18n-title="reports.preview_iframe" hidden></iframe>
       <pre id="previewMd" class="reports-preview-md pre" hidden></pre>
-      <div id="previewPdf" class="reports-empty bte-card" hidden>PDF not available</div>
+      <div id="previewPdf" class="reports-empty bte-card" hidden data-i18n="reports.pdf_unavailable"></div>
     </section>
   </div>
 </div>

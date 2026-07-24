@@ -42,7 +42,10 @@
       data = { raw: text };
     }
     if (!res.ok) {
-      let detail = (data && (data.message || data.detail)) || res.statusText || "Request failed";
+      let detail =
+        (data && (data.message || data.detail)) ||
+        res.statusText ||
+        (window.BteI18n ? BteI18n.t("common.request_failed") : "Request failed");
       if (typeof detail === "object") {
         try {
           detail = JSON.stringify(detail);
@@ -87,7 +90,7 @@
       input: payload.input || {},
       summary:
         (interp && (interp.summary || interp.interpretation_summary)) ||
-        "Analyze result",
+        (window.BteI18n ? BteI18n.t("api.analyze_result") : "Analyze result"),
       data: payload.data,
     });
     persist(HISTORY_KEY, hist.slice(0, 30));

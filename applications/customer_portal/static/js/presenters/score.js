@@ -5,28 +5,32 @@
 (function (global) {
   const MISSING = "--";
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   const SUMMARY = [
     {
       id: "overall",
-      label: "Overall Score",
+      labelKey: "score.overall",
       keys: ["total_score", "overall_score", "overall", "final_score", "score"],
       tone: "overall",
     },
     {
       id: "than",
-      label: "Thân Score",
+      labelKey: "score.than",
       keys: ["strength_score", "than_score", "body_score", "strength"],
       tone: "strength",
     },
     {
       id: "pattern",
-      label: "Pattern Score",
+      labelKey: "score.pattern",
       keys: ["pattern_score", "cach_cuc_score", "pattern"],
       tone: "pattern",
     },
     {
       id: "interpretation",
-      label: "Interpretation Score",
+      labelKey: "score.interpretation",
       keys: [
         "interpretation_score",
         "interp_score",
@@ -67,7 +71,7 @@
   function present(value) {
     if (value === null || value === undefined || value === "") return MISSING;
     if (typeof value === "number" && Number.isNaN(value)) return MISSING;
-    if (typeof value === "boolean") return value ? "Yes" : "No";
+    if (typeof value === "boolean") return value ? t("common.yes") : t("common.no");
     if (Array.isArray(value)) {
       var parts = value
         .map(function (v) {
@@ -343,9 +347,9 @@
     var deg = -90 + (needle / 100) * 180;
     return (
       '<article class="bte-card bte-score-gauge-card">' +
-      '<div class="bte-card-label">Strength</div>' +
-      '<div class="bte-gauge" role="img" aria-label="Strength ' +
-      esc(shown) +
+      '<div class="bte-card-label">' + esc(t("score.strength")) + "</div>" +
+      '<div class="bte-gauge" role="img" aria-label="' +
+      esc(t("score.strength_aria", { value: shown })) +
       '">' +
       '<div class="bte-gauge-arc"></div>' +
       '<div class="bte-gauge-needle" style="transform:rotate(' +
@@ -388,9 +392,9 @@
     var priority = findPriority(data);
     return (
       '<div class="bte-score-status">' +
-      badge("Grade " + grade, "pattern") +
-      badge("Confidence " + confidence, "follow") +
-      badge("Priority " + priority, priority === MISSING ? "muted" : "useful") +
+      badge(t("score.grade", { value: grade }), "pattern") +
+      badge(t("score.confidence", { value: confidence }), "follow") +
+      badge(t("score.priority", { value: priority }), priority === MISSING ? "muted" : "useful") +
       (recommendation !== MISSING
         ? '<span class="bte-score-rec">' + esc(recommendation) + "</span>"
         : "") +
@@ -415,7 +419,7 @@
           if (raw && typeof raw === "object" && raw.score == null && asNumber(raw) === null) {
             raw = null;
           }
-          return summaryCard(item.label, raw, item.tone);
+          return summaryCard(t(item.labelKey), raw, item.tone);
         }).join("") +
         "</div>";
 
@@ -425,21 +429,21 @@
       var hasStrength = strengthVal !== null && strengthVal !== undefined;
 
       var extras =
-        (wuxing ? sectionBars("Ngũ hành", wuxing, true) : "") +
-        (tenGods ? sectionBars("Thập thần", tenGods, false) : "") +
+        (wuxing ? sectionBars(t("score.wuxing"), wuxing, true) : "") +
+        (tenGods ? sectionBars(t("score.ten_god"), tenGods, false) : "") +
         (hasStrength ? gaugeHtml(strengthVal) : "");
 
       return (
-        '<section class="bte-score" aria-label="Score">' +
+        '<section class="bte-score" aria-label="' + esc(t("score.title")) + '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>Score</h2>" +
-        '<p class="bte-calendar-sub">Overall · Thân · Pattern · Interpretation</p>' +
+        "<h2>" + esc(t("score.title")) + "</h2>" +
+        '<p class="bte-calendar-sub">' + esc(t("score.subtitle")) + "</p>" +
         "</header>" +
         headerMeta(data) +
         summary +
         '<div class="bte-score-extras">' +
         (extras ||
-          '<p class="muted">No additional Ngũ hành / Thập thần / Strength series in payload.</p>') +
+          '<p class="muted">' + esc(t("score.empty_extras")) + "</p>") +
         "</div>" +
         "</section>"
       );
@@ -448,7 +452,7 @@
         '<section class="bte-score">' +
         '<div class="bte-card-grid bte-score-summary-grid">' +
         SUMMARY.map(function (item) {
-          return summaryCard(item.label, MISSING, item.tone);
+          return summaryCard(t(item.labelKey), MISSING, item.tone);
         }).join("") +
         "</div>" +
         "</section>"

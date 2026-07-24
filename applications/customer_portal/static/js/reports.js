@@ -6,6 +6,10 @@
   const MISSING = "--";
   const flash = document.getElementById("globalFlash");
 
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   /** @type {Array<object>} */
   let allReports = [];
   /** @type {object|null} */
@@ -26,9 +30,16 @@
     return String(value);
   }
 
+  function formatStatus(status) {
+    if (status === "ready") return t("reports.status_ready");
+    if (status === "empty") return t("reports.status_empty");
+    if (status === "unknown") return t("reports.status_unknown");
+    return present(status);
+  }
+
   function boot() {
     if (!window.BtePortal) {
-      setEmpty("Portal API client failed to load.");
+      setEmpty(t("common.api_client_failed"));
       return;
     }
     showSkeleton();
@@ -37,7 +48,7 @@
     bindControls();
     refreshList();
     if (allReports.length) selectReport(allReports[0].id);
-    else setEmpty("No report available");
+    else setEmpty(t("reports.empty"));
   }
 
   function showSkeleton() {
@@ -65,14 +76,13 @@
       narrative.pdf ||
       narrative.pdf_url ||
       null;
+    const chartDate = [input.year, input.month, input.day].filter(Boolean).join("-");
     const title =
       raw.title ||
       narrative.title ||
       report.title ||
-      ([input.year, input.month, input.day].filter(Boolean).join("-")
-        ? "Chart " + [input.year, input.month, input.day].join("-")
-        : null) ||
-      "BTE Report";
+      (chartDate ? t("reports.chart_title", { date: chartDate }) : null) ||
+      t("reports.default_title");
     const created =
       raw.created_at || raw.saved_at || raw.created || raw.timestamp || null;
     const type =
@@ -146,7 +156,7 @@
           narrative: last.data.narrative,
           data: last.data,
           source: "last",
-          summary: "Latest analyze",
+          summary: t("reports.latest_summary"),
         },
         "last-result"
       );
@@ -191,7 +201,7 @@
         if (action === "copy") copyReport(selected);
         if (action === "download") downloadReport(selected);
         if (action === "share") {
-          BtePortal.showFlash(flash, "Share is a placeholder — coming soon", "success");
+          BtePortal.showFlash(flash, t("reports.share_placeholder"), "success");
         }
       });
     }
@@ -237,7 +247,7 @@
   function refreshList() {
     const rows = filteredSorted();
     const count = document.getElementById("reportCount");
-    if (count) count.textContent = rows.length + " report(s)";
+    if (count) count.textContent = t("reports.count", { n: rows.length });
 
     const list = document.getElementById("reportList");
     const tbody = document.getElementById("reportTableBody");
@@ -245,11 +255,11 @@
     if (!rows.length) {
       if (list) {
         list.innerHTML =
-          '<p class="muted dash-empty">No report available</p>';
+          '<p class="muted dash-empty">' + esc(t("reports.empty")) + "</p>";
       }
       if (tbody) {
         tbody.innerHTML =
-          '<tr><td colspan="4" class="muted">No report available</td></tr>';
+          '<tr><td colspan="4" class="muted">' + esc(t("reports.empty")) + "</td></tr>";
       }
       return;
     }
@@ -273,13 +283,13 @@
             esc(present(r.type)) +
             "</div>" +
             '<div class="reports-item-flags">' +
-            flag("HTML", r.has_html) +
-            flag("Markdown", r.has_markdown) +
-            flag("PDF", r.has_pdf) +
+            flag(t("common.html"), r.has_html) +
+            flag(t("common.markdown"), r.has_markdown) +
+            flag(t("common.pdf"), r.has_pdf) +
             '<span class="bte-badge bte-badge-' +
             (r.status === "ready" ? "strong" : "muted") +
             '">' +
-            esc(present(r.status)) +
+            esc(formatStatus(r.status)) +
             "</span></div></div></article>"
           );
         })
@@ -312,7 +322,7 @@
             esc(present(r.type)) +
             "</td>" +
             "<td>" +
-            esc(present(r.status)) +
+            esc(formatStatus(r.status)) +
             "</td></tr>"
           );
         })
@@ -352,7 +362,7 @@
     const actions = document.getElementById("previewActions");
     const tabs = document.getElementById("formatTabs");
     const title = document.getElementById("previewTitle");
-    if (title) title.textContent = "Preview";
+    if (title) title.textContent = t("common.preview");
     if (actions) actions.hidden = true;
     if (tabs) tabs.hidden = true;
     if (html) html.hidden = true;
@@ -360,13 +370,13 @@
     if (pdf) pdf.hidden = true;
     if (empty) {
       empty.hidden = false;
-      empty.textContent = message || "No report available";
+      empty.textContent = message || t("reports.empty");
     }
   }
 
   function renderPreview() {
     if (!selected) {
-      setEmpty("No report available");
+      setEmpty(t("reports.empty"));
       return;
     }
 
@@ -379,13 +389,13 @@
     const title = document.getElementById("previewTitle");
     const tabPdf = document.getElementById("tabPdf");
 
-    if (title) title.textContent = selected.name || "Preview";
+    if (title) title.textContent = selected.name || t("common.preview");
     if (actions) actions.hidden = false;
     if (tabs) tabs.hidden = false;
     if (tabPdf) tabPdf.disabled = !selected.has_pdf;
 
     if (!selected.has_html && !selected.has_markdown && !selected.has_pdf) {
-      setEmpty("No report available");
+      setEmpty(t("reports.empty"));
       return;
     }
 
@@ -408,7 +418,7 @@
     if (htmlView) {
       htmlView.hidden = format !== "html";
       if (format === "html") {
-        htmlView.srcdoc = selected.html || "<p>No report available</p>";
+        htmlView.srcdoc = selected.html || "<p>" + esc(t("reports.empty")) + "</p>";
       }
     }
     if (mdView) {
@@ -424,11 +434,13 @@
           pdfView.innerHTML =
             '<p><a href="' +
             esc(selected.pdf) +
-            '" target="_blank" rel="noopener">Open PDF</a></p>';
+            '" target="_blank" rel="noopener">' +
+            esc(t("reports.open_pdf")) +
+            "</a></p>";
         } else if (selected.has_pdf) {
-          pdfView.textContent = "PDF reference available: " + present(selected.pdf);
+          pdfView.textContent = t("reports.pdf_ref", { ref: present(selected.pdf) });
         } else {
-          pdfView.textContent = "PDF not available";
+          pdfView.textContent = t("reports.pdf_unavailable");
         }
       }
     }
@@ -449,21 +461,21 @@
     if (report.has_html) {
       const w = window.open("", "_blank");
       if (!w) {
-        BtePortal.showFlash(flash, "Popup blocked", "error");
+        BtePortal.showFlash(flash, t("reports.popup_blocked"), "error");
         return;
       }
       w.document.write(report.html);
       w.document.close();
       return;
     }
-    BtePortal.showFlash(flash, "Nothing to open", "error");
+    BtePortal.showFlash(flash, t("reports.nothing_to_open"), "error");
   }
 
   function printReport(report) {
     const html = report.html || "<pre>" + esc(report.markdown || MISSING) + "</pre>";
     const w = window.open("", "_blank");
     if (!w) {
-      BtePortal.showFlash(flash, "Popup blocked", "error");
+      BtePortal.showFlash(flash, t("reports.popup_blocked"), "error");
       return;
     }
     w.document.write(html);
@@ -479,7 +491,7 @@
       stripHtml(report.html) ||
       MISSING;
     const done = function () {
-      BtePortal.showFlash(flash, "Copied to clipboard", "success");
+      BtePortal.showFlash(flash, t("reports.copied"), "success");
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done).catch(function () {
@@ -522,11 +534,7 @@
         window.open(report.pdf, "_blank", "noopener");
         return;
       }
-      BtePortal.showFlash(
-        flash,
-        "PDF download not available (no PDF from API)",
-        "error"
-      );
+      BtePortal.showFlash(flash, t("reports.pdf_download_unavailable"), "error");
       return;
     }
 
@@ -557,7 +565,7 @@
       return;
     }
 
-    BtePortal.showFlash(flash, "Nothing to download", "error");
+    BtePortal.showFlash(flash, t("reports.nothing_to_download"), "error");
   }
 
   function safeFilename(name) {

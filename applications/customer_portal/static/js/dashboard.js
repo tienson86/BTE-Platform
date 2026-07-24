@@ -1,8 +1,12 @@
 /**
- * Customer Portal Dashboard (Sprint 7) — presentation only.
+ * Customer Portal Dashboard — presentation only (UI strings via BteI18n).
  */
 (function () {
   const MISSING = "--";
+
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
 
   function esc(value) {
     return String(value)
@@ -22,16 +26,20 @@
   function boot() {
     if (!window.BtePortal) {
       const recent = document.getElementById("dashRecent");
-      if (recent) recent.innerHTML = '<p class="muted">Portal API client failed to load.</p>';
+      if (recent) {
+        recent.innerHTML =
+          '<p class="muted">' + esc(t("common.api_client_failed")) + "</p>";
+      }
       return;
     }
 
     const user = BtePortal.getUser();
     const greet = document.getElementById("dashGreeting");
     if (greet) {
-      greet.textContent = user && user.username
-        ? "Signed in as " + user.username
-        : "Welcome to BTE Customer Portal";
+      greet.textContent =
+        user && user.username
+          ? t("dashboard.signed_in_as", { username: user.username })
+          : t("dashboard.welcome");
     }
 
     renderRecentSkeletonDone();
@@ -44,16 +52,21 @@
     if (!host) return;
     const hist = (BtePortal.getHistory() || []).slice(0, 10);
     if (!hist.length) {
-      host.innerHTML = '<p class="muted dash-empty">No recent charts</p>';
+      host.innerHTML =
+        '<p class="muted dash-empty">' + esc(t("dashboard.no_recent")) + "</p>";
       return;
     }
     host.innerHTML = hist
       .map(function (item, idx) {
         const input = item.input || {};
         const label =
-          [input.year, input.month, input.day].filter(function (v) {
-            return v != null && v !== "";
-          }).join("-") || item.id || "Chart";
+          [input.year, input.month, input.day]
+            .filter(function (v) {
+              return v != null && v !== "";
+            })
+            .join("-") ||
+          item.id ||
+          t("dashboard.chart_fallback");
         const when = item.saved_at ? String(item.saved_at) : MISSING;
         const summary = item.summary ? String(item.summary) : MISSING;
         return (
@@ -69,7 +82,9 @@
           "</div></div>" +
           '<button type="button" class="secondary" data-recent-idx="' +
           idx +
-          '">Open</button>' +
+          '">' +
+          esc(t("common.open")) +
+          "</button>" +
           "</article>"
         );
       })
@@ -123,12 +138,11 @@
       var first = hist[0];
       last = present(first.saved_at || first.created_at || first.timestamp);
     }
-    // Average score is not available from local history alone.
     host.innerHTML =
-      statCard("Total Charts", total) +
-      statCard("Charts Today", today) +
-      statCard("Average Score", MISSING) +
-      statCard("Last Analyze Time", last);
+      statCard(t("dashboard.total_charts"), total) +
+      statCard(t("dashboard.charts_today"), today) +
+      statCard(t("dashboard.average_score"), MISSING) +
+      statCard(t("dashboard.last_analyze"), last);
   }
 
   function statusRow(label, value, ok) {
@@ -164,40 +178,42 @@
       const portal = await fetch("/healthz", { headers: { Accept: "application/json" } });
       if (portal.ok) {
         portalOk = true;
-        portalLabel = "Running";
+        portalLabel = t("common.running");
         const body = await portal.json();
         if (body && body.status) health = String(body.status);
       } else {
         portalOk = false;
-        portalLabel = "Down";
+        portalLabel = t("common.down");
       }
     } catch (_) {
       portalOk = false;
-      portalLabel = "Down";
+      portalLabel = t("common.down");
     }
 
     try {
       const api = await BtePortal.get("/api/v1/health");
       apiOk = true;
-      apiLabel = "Running";
+      apiLabel = t("common.running");
       const data = api && api.data ? api.data : api;
       if (data && data.version) version = String(data.version);
       else if (api && api.version) version = String(api.version);
       if (health === MISSING && data && data.status) health = String(data.status);
     } catch (_) {
       apiOk = false;
-      apiLabel = "Down";
+      apiLabel = t("common.down");
     }
 
     try {
       const lic = await BtePortal.get("/api/v1/license/status");
       const ld = lic && lic.data ? lic.data : lic;
       if (ld && (ld.status != null || ld.state != null || ld.valid != null)) {
-        license = present(ld.status != null ? ld.status : ld.state != null ? ld.state : ld.valid);
+        license = present(
+          ld.status != null ? ld.status : ld.state != null ? ld.state : ld.valid
+        );
       } else if (lic && lic.message) {
         license = present(lic.message);
       } else {
-        license = "Available";
+        license = t("common.available");
       }
     } catch (_) {
       license = MISSING;
@@ -207,35 +223,47 @@
 
     if (systemHost) {
       systemHost.innerHTML =
-        statusRow("API", apiLabel, apiOk) +
-        statusRow("Portal", portalLabel, portalOk) +
-        statusRow("Version", version, null) +
-        statusRow("License", license, license !== MISSING) +
-        statusRow("Health", health, health === "ok" || health === "healthy");
+        statusRow(t("common.api"), apiLabel, apiOk) +
+        statusRow(t("common.portal"), portalLabel, portalOk) +
+        statusRow(t("common.version"), version, null) +
+        statusRow(t("common.license"), license, license !== MISSING) +
+        statusRow(
+          t("common.health"),
+          health,
+          health === "ok" || health === "healthy"
+        );
     }
 
     if (productHost) {
       productHost.innerHTML =
-        '<div class="dash-product-name">BTE Platform</div>' +
-        '<div class="dash-status-row"><span>Version</span><strong>' +
+        '<div class="dash-product-name">' +
+        esc(t("brand.platform")) +
+        "</div>" +
+        '<div class="dash-status-row"><span>' +
+        esc(t("common.version")) +
+        "</span><strong>" +
         esc(version) +
         "</strong></div>" +
-        '<div class="dash-status-row"><span>Release</span><strong>v' +
+        '<div class="dash-status-row"><span>' +
+        esc(t("common.release")) +
+        "</span><strong>v" +
         esc(version) +
         "</strong></div>" +
-        '<div class="muted">Customer Portal presentation layer</div>';
+        '<div class="muted">' +
+        esc(t("dashboard.product_blurb")) +
+        "</div>";
     }
 
     if (hero) {
       hero.innerHTML =
         '<span class="bte-badge bte-badge-' +
         (apiOk ? "strong" : "avoid") +
-        '">API ' +
-        esc(apiLabel) +
+        '">' +
+        esc(t("dashboard.hero_api", { status: apiLabel })) +
         '</span><span class="bte-badge bte-badge-' +
         (portalOk ? "strong" : "avoid") +
-        '">Portal ' +
-        esc(portalLabel) +
+        '">' +
+        esc(t("dashboard.hero_portal", { status: portalLabel })) +
         "</span>";
     }
   }

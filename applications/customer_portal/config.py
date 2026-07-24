@@ -21,7 +21,7 @@ class PortalSettings(BaseModel):
     )
     host: str = "127.0.0.1"
     port: int = 8081
-    title: str = "BTE Customer Portal"
+    title: str = "BTE Portal"
 
 
 settings = PortalSettings()

@@ -1,11 +1,15 @@
 (function () {
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   const list = document.getElementById("historyList");
   const flash = document.getElementById("globalFlash");
 
   function render() {
     const items = BtePortal.getHistory();
     if (!items.length) {
-      list.innerHTML = '<p class="muted">No local history yet.</p>';
+      list.innerHTML = '<p class="muted">' + t("history.empty") + "</p>";
       return;
     }
     list.innerHTML = items
@@ -25,7 +29,9 @@
           "</div></div>" +
           '<button type="button" data-idx="' +
           idx +
-          '">Open result</button>' +
+          '">' +
+          t("history.open_result") +
+          "</button>" +
           "</div>"
         );
       })
@@ -35,8 +41,6 @@
       btn.addEventListener("click", () => {
         const item = items[Number(btn.getAttribute("data-idx"))];
         BtePortal.saveLastResult({ input: item.input, data: item.data });
-        // saveLastResult also prepends history — trim duplicate by rewriting without double push
-        // Overwrite last only:
         sessionStorage.setItem(
           "bte_portal_last_result",
           JSON.stringify({ input: item.input, data: item.data })
@@ -48,7 +52,7 @@
 
   document.getElementById("btnClearHist").addEventListener("click", () => {
     sessionStorage.removeItem("bte_portal_history");
-    BtePortal.showFlash(flash, "History cleared", "success");
+    BtePortal.showFlash(flash, t("history.cleared"), "success");
     render();
   });
 

@@ -1,127 +1,81 @@
 (function () {
+  function t(key, vars) {
+    return window.BteI18n ? BteI18n.t(key, vars) : key;
+  }
+
   function boot() {
     const meta = document.getElementById("resultMeta");
     const view = document.getElementById("stageView");
     const flash = document.getElementById("globalFlash");
 
     if (!window.BtePortal) {
-      if (meta) meta.textContent = "Portal API client failed to load (api.js).";
+      if (meta) meta.textContent = t("common.api_client_failed_api_js");
       if (view) view.textContent = "{}";
       return;
     }
 
     const last = BtePortal.getLastResult();
     if (!last || !last.data) {
-      meta.textContent = "No result yet — run Analyze first.";
-      view.innerHTML =
-        '<p class="muted">No result yet — run Analyze first.</p>';
+      meta.textContent = t("result.empty");
+      view.innerHTML = '<p class="muted">' + t("result.empty") + "</p>";
       return;
     }
 
     const data = last.data;
     const input = last.input || {};
-    meta.textContent =
-      "Birth " +
-      [input.year, input.month, input.day].join("-") +
-      " " +
-      String(input.hour ?? 0).padStart(2, "0") +
-      ":" +
-      String(input.minute ?? 0).padStart(2, "0") +
-      " · pipeline: " +
-      ((data.pipeline || []).join(" → ") || "analyze");
+    meta.textContent = t("result.birth_meta", {
+      date: [input.year, input.month, input.day].join("-"),
+      time:
+        String(input.hour ?? 0).padStart(2, "0") +
+        ":" +
+        String(input.minute ?? 0).padStart(2, "0"),
+      pipeline: (data.pipeline || []).join(" → ") || t("result.pipeline_fallback"),
+    });
 
     function show(stage) {
-      document.querySelectorAll(".tab").forEach((t) => {
-        t.classList.toggle("active", t.getAttribute("data-stage") === stage);
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.classList.toggle("active", tab.getAttribute("data-stage") === stage);
       });
       const payload = data[stage];
+      const presenters = window.BtePresenters || {};
 
-      if (stage === "calendar") {
+      const map = {
+        calendar: presenters.calendar,
+        bazi: presenters.bazi,
+        pattern: presenters.pattern,
+        score: presenters.score,
+        interpretation: presenters.interpretation,
+        narrative: presenters.narrative,
+      };
+
+      if (map[stage]) {
         view.classList.remove("pre");
         view.classList.add("stage-view");
-        const render =
-          (window.BtePresenters && window.BtePresenters.calendar) || null;
-        if (render) {
-          view.innerHTML = render(payload, {
+        if (stage === "calendar") {
+          view.innerHTML = map[stage](payload, {
             timezone: input.timezone || null,
           });
         } else {
-          view.innerHTML =
-            '<p class="muted">Calendar presenter failed to load.</p>';
+          view.innerHTML = map[stage](payload);
+        }
+        if (stage === "narrative" && presenters.bindNarrative) {
+          presenters.bindNarrative(view);
         }
         return;
       }
 
-      if (stage === "bazi") {
+      if (
+        stage === "calendar" ||
+        stage === "bazi" ||
+        stage === "pattern" ||
+        stage === "score" ||
+        stage === "interpretation" ||
+        stage === "narrative"
+      ) {
         view.classList.remove("pre");
         view.classList.add("stage-view");
-        const render =
-          (window.BtePresenters && window.BtePresenters.bazi) || null;
-        if (render) {
-          view.innerHTML = render(payload);
-        } else {
-          view.innerHTML =
-            '<p class="muted">Bazi presenter failed to load.</p>';
-        }
-        return;
-      }
-
-      if (stage === "pattern") {
-        view.classList.remove("pre");
-        view.classList.add("stage-view");
-        const render =
-          (window.BtePresenters && window.BtePresenters.pattern) || null;
-        if (render) {
-          view.innerHTML = render(payload);
-        } else {
-          view.innerHTML =
-            '<p class="muted">Pattern presenter failed to load.</p>';
-        }
-        return;
-      }
-
-      if (stage === "score") {
-        view.classList.remove("pre");
-        view.classList.add("stage-view");
-        const render =
-          (window.BtePresenters && window.BtePresenters.score) || null;
-        if (render) {
-          view.innerHTML = render(payload);
-        } else {
-          view.innerHTML =
-            '<p class="muted">Score presenter failed to load.</p>';
-        }
-        return;
-      }
-
-      if (stage === "interpretation") {
-        view.classList.remove("pre");
-        view.classList.add("stage-view");
-        const render =
-          (window.BtePresenters && window.BtePresenters.interpretation) || null;
-        if (render) {
-          view.innerHTML = render(payload);
-        } else {
-          view.innerHTML =
-            '<p class="muted">Interpretation presenter failed to load.</p>';
-        }
-        return;
-      }
-
-      if (stage === "narrative") {
-        view.classList.remove("pre");
-        view.classList.add("stage-view");
-        const render =
-          (window.BtePresenters && window.BtePresenters.narrative) || null;
-        if (render) {
-          view.innerHTML = render(payload);
-          if (window.BtePresenters.bindNarrative) {
-            BtePresenters.bindNarrative(view);
-          }
-        } else {
-          view.innerHTML =
-            '<p class="muted">Narrative presenter failed to load.</p>';
-        }
+        view.innerHTML =
+          '<p class="muted">' + t("result.presenter_failed." + stage) + "</p>";
         return;
       }
 
@@ -129,7 +83,7 @@
       view.classList.remove("stage-view");
       view.textContent =
         payload === undefined
-          ? "No data for stage: " + stage
+          ? t("result.no_stage_data", { stage: stage })
           : BtePortal.fmt(payload);
     }
 
@@ -137,7 +91,7 @@
       btn.addEventListener("click", () => show(btn.getAttribute("data-stage")));
     });
     show("calendar");
-    BtePortal.showFlash(flash, "Showing latest analyze result", "success");
+    BtePortal.showFlash(flash, t("result.showing_latest"), "success");
   }
 
   if (document.readyState === "loading") {

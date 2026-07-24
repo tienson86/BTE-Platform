@@ -40,7 +40,7 @@ def create_app() -> FastAPI:
     """Create Customer Portal FastAPI app."""
     app = FastAPI(
         title=settings.title,
-        description="BTE Customer Portal — REST-only UI.",
+        description="BTE Portal — REST-only UI.",
         version="1.0.0",
         docs_url=None,
         redoc_url=None,
