@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel
+import os
+from pathlib import Path
+
+from pydantic import BaseModel, Field
 
 
 class APISettings(BaseModel):
@@ -17,7 +20,36 @@ class APISettings(BaseModel):
     default_timezone: str = "Asia/Ho_Chi_Minh"
     request_id_header: str = "X-Request-ID"
     elapsed_header: str = "X-Elapsed-Ms"
+    api_key_header: str = "X-API-Key"
     log_level: str = "INFO"
+
+    # JWT (secret from env when set; otherwise development default)
+    jwt_secret: str = Field(
+        default_factory=lambda: os.getenv(
+            "BTE_JWT_SECRET",
+            "bte-dev-jwt-secret-change-me",
+        )
+    )
+    jwt_algorithm: str = "HS256"
+    jwt_issuer: str = "bte-applications-api"
+    jwt_audience: str = "bte-clients"
+    access_token_expire_minutes: int = 30
+    refresh_token_expire_days: int = 7
+
+    # Password hashing
+    password_hash_iterations: int = 120_000
+    password_salt_bytes: int = 16
+
+    # WP11 JSON data root (override with BTE_DATA_DIR)
+    data_dir: str = Field(
+        default_factory=lambda: os.getenv(
+            "BTE_DATA_DIR",
+            str(
+                Path(__file__).resolve().parents[1]
+                / "data"
+            ),
+        )
+    )
 
 
 settings = APISettings()
