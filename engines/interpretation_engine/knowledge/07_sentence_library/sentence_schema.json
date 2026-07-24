@@ -38,6 +38,20 @@
       "required": true,
       "description": "Nhóm phân loại bên trong module."
     },
+    "sentence_family": {
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "enum_ref": "sentence_families",
+      "description": "Nhóm phong cách diễn đạt của sentence."
+    },
+    "complexity": {
+      "type": "string",
+      "required": false,
+      "default": "standard",
+      "enum_ref": "complexity_levels",
+      "description": "Mức độ chuyên sâu của sentence."
+    },
     "intent": {
       "type": "string",
       "required": true,
@@ -137,11 +151,15 @@
       },
       "description": "Danh sách placeholder được thay thế lúc compose câu."
     },
-    "variables": {
+    "render_config": {
       "type": "object",
       "required": false,
       "default": {},
-      "description": "Biến cấu hình tĩnh của sentence. Không chứa nội dung luận giải."
+      "description": "Cấu hình render của sentence (max_length, style, ...). Không chứa nội dung luận giải. Thay thế field cũ 'variables'.",
+      "known_keys": [
+        "max_length",
+        "style"
+      ]
     },
     "sentence_pattern": {
       "type": "string",
@@ -296,6 +314,8 @@
     "module must exist in module_ids",
     "intent must exist in intents",
     "tone must exist in tones",
+    "complexity must exist in complexity_levels when present",
+    "sentence_family must exist in sentence_families when present",
     "label_ref must be a logical label_code when present",
     "condition_group defaults to AND; OR reserved for V2 readiness",
     "placeholders.key must match {{snake_case}} pattern",
@@ -340,5 +360,20 @@
         "{{career}}"
       ]
     }
-  }
+  },
+  "sentence_families": [
+    "default",
+    "professional",
+    "friendly",
+    "expert",
+    "vip",
+    "children",
+    "academic"
+  ],
+  "complexity_levels": [
+    "basic",
+    "standard",
+    "advanced",
+    "expert"
+  ]
 }

@@ -128,15 +128,22 @@ Mỗi module con:
 Schema chuẩn cho **mọi** sentence:
 
 - `sentence_id`, `sentence_name`, `module`, `category`
+- `sentence_family`, `complexity`
 - `intent`, `tone`, `priority`
 - `condition_group`, `conditions`
-- `placeholders`, `variables`, `sentence_pattern`
+- `placeholders`, `render_config`, `sentence_pattern`
 - `language`, `enabled`, `schema_version`
 - `created_at`, `updated_at`, `author`, `notes`, `extensions`
 
 **Intent:** introduce, describe, explain, compare, warn, recommend, summarize, transition, conclude
 
 **Tone:** neutral, positive, negative, professional, friendly, serious
+
+**Sentence family:** default, professional, friendly, expert, vip, children, academic
+
+**Complexity:** basic, standard, advanced, expert
+
+**Render config:** cấu hình render (`max_length`, `style`, ...) — thay thế `variables`
 
 **Quy tắc:**
 
