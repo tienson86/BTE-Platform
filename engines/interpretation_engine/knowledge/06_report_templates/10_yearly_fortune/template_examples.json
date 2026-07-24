@@ -1,0 +1,125 @@
+{
+  "module_id": "10_yearly_fortune",
+  "examples_version": "1.0.0",
+  "schema_ref": "../template_schema.json",
+  "description": "Example minh họa schema. Không phải nội dung luận giải thật.",
+  "examples": [
+    {
+      "id": "YRFX001",
+      "example_code": "schema_illustration_001",
+      "purpose": "illustrate_template_schema",
+      "is_real_content": false,
+      "template": {
+        "template_id": "yearly_fortune_000",
+        "template_name": "yearly_fortune_schema_example",
+        "module": "10_yearly_fortune",
+        "category": "yearly_fortune",
+        "title": "[SCHEMA EXAMPLE] Vận Hạn Năm",
+        "description": "Ví dụ cấu trúc template. Placeholder only.",
+        "version": "1.0.0",
+        "priority": 50,
+        "conditions": [
+          {
+            "condition_id": "C001",
+            "field": "interpretation.module_ready",
+            "operator": "eq",
+            "value": true
+          }
+        ],
+        "placeholders": [
+          {
+            "key": "{{subject_name}}",
+            "source": "report_context.subject_name",
+            "fallback": ""
+          },
+          {
+            "key": "{{section_key}}",
+            "source": "interpretation.yearly_fortune.section_key",
+            "fallback": "yearly_fortune"
+          }
+        ],
+        "variables": {
+          "layout": "standard",
+          "max_blocks": 20
+        },
+        "sections": [
+          {
+            "section_id": "S001",
+            "section_key": "intro",
+            "title": "Intro",
+            "order": 1,
+            "enabled": true,
+            "blocks": [
+              "B001",
+              "B002"
+            ]
+          },
+          {
+            "section_id": "S002",
+            "section_key": "body",
+            "title": "Body",
+            "order": 2,
+            "enabled": true,
+            "blocks": [
+              "B003",
+              "B004"
+            ]
+          }
+        ],
+        "blocks": [
+          {
+            "block_id": "B001",
+            "block_type": "title",
+            "label_ref": "YRFL001",
+            "order": 1,
+            "content_ref": "interpretation.yearly_fortune.title",
+            "style": {
+              "weight": "bold"
+            },
+            "enabled": true
+          },
+          {
+            "block_id": "B002",
+            "block_type": "summary",
+            "label_ref": "YRFL004",
+            "order": 2,
+            "content_ref": "interpretation.yearly_fortune.summary",
+            "style": {},
+            "enabled": true
+          },
+          {
+            "block_id": "B003",
+            "block_type": "paragraph",
+            "label_ref": "YRFL003",
+            "order": 3,
+            "content_ref": "interpretation.yearly_fortune.body",
+            "style": {},
+            "enabled": true
+          },
+          {
+            "block_id": "B004",
+            "block_type": "recommendation",
+            "label_ref": "YRFL007",
+            "order": 4,
+            "content_ref": "interpretation.yearly_fortune.recommendation",
+            "style": {},
+            "enabled": true
+          }
+        ],
+        "tags": [
+          "schema_example",
+          "framework",
+          "yearly_fortune"
+        ],
+        "language": "vi",
+        "enabled": false,
+        "schema_version": "1.0.0",
+        "created_at": "2026-07-24",
+        "updated_at": "2026-07-24",
+        "author": "BTE Platform",
+        "notes": "enabled=false vì đây chỉ là example schema, không dùng để render báo cáo thật.",
+        "extensions": {}
+      }
+    }
+  ]
+}

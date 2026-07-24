@@ -1,0 +1,125 @@
+{
+  "module_id": "05_relationship",
+  "examples_version": "1.0.0",
+  "schema_ref": "../template_schema.json",
+  "description": "Example minh họa schema. Không phải nội dung luận giải thật.",
+  "examples": [
+    {
+      "id": "RELX001",
+      "example_code": "schema_illustration_001",
+      "purpose": "illustrate_template_schema",
+      "is_real_content": false,
+      "template": {
+        "template_id": "relationship_000",
+        "template_name": "relationship_schema_example",
+        "module": "05_relationship",
+        "category": "relationship",
+        "title": "[SCHEMA EXAMPLE] Quan Hệ",
+        "description": "Ví dụ cấu trúc template. Placeholder only.",
+        "version": "1.0.0",
+        "priority": 50,
+        "conditions": [
+          {
+            "condition_id": "C001",
+            "field": "interpretation.module_ready",
+            "operator": "eq",
+            "value": true
+          }
+        ],
+        "placeholders": [
+          {
+            "key": "{{subject_name}}",
+            "source": "report_context.subject_name",
+            "fallback": ""
+          },
+          {
+            "key": "{{section_key}}",
+            "source": "interpretation.relationship.section_key",
+            "fallback": "relationship"
+          }
+        ],
+        "variables": {
+          "layout": "standard",
+          "max_blocks": 20
+        },
+        "sections": [
+          {
+            "section_id": "S001",
+            "section_key": "intro",
+            "title": "Intro",
+            "order": 1,
+            "enabled": true,
+            "blocks": [
+              "B001",
+              "B002"
+            ]
+          },
+          {
+            "section_id": "S002",
+            "section_key": "body",
+            "title": "Body",
+            "order": 2,
+            "enabled": true,
+            "blocks": [
+              "B003",
+              "B004"
+            ]
+          }
+        ],
+        "blocks": [
+          {
+            "block_id": "B001",
+            "block_type": "title",
+            "label_ref": "RELL001",
+            "order": 1,
+            "content_ref": "interpretation.relationship.title",
+            "style": {
+              "weight": "bold"
+            },
+            "enabled": true
+          },
+          {
+            "block_id": "B002",
+            "block_type": "summary",
+            "label_ref": "RELL004",
+            "order": 2,
+            "content_ref": "interpretation.relationship.summary",
+            "style": {},
+            "enabled": true
+          },
+          {
+            "block_id": "B003",
+            "block_type": "paragraph",
+            "label_ref": "RELL003",
+            "order": 3,
+            "content_ref": "interpretation.relationship.body",
+            "style": {},
+            "enabled": true
+          },
+          {
+            "block_id": "B004",
+            "block_type": "recommendation",
+            "label_ref": "RELL007",
+            "order": 4,
+            "content_ref": "interpretation.relationship.recommendation",
+            "style": {},
+            "enabled": true
+          }
+        ],
+        "tags": [
+          "schema_example",
+          "framework",
+          "relationship"
+        ],
+        "language": "vi",
+        "enabled": false,
+        "schema_version": "1.0.0",
+        "created_at": "2026-07-24",
+        "updated_at": "2026-07-24",
+        "author": "BTE Platform",
+        "notes": "enabled=false vì đây chỉ là example schema, không dùng để render báo cáo thật.",
+        "extensions": {}
+      }
+    }
+  ]
+}

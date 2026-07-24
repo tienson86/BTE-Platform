@@ -1,0 +1,47 @@
+{
+  "module_id": "04_wealth",
+  "index_version": "1.0.0",
+  "schema_ref": "../template_schema.json",
+  "description": "Index của module 04_wealth. Chỉ chứa entry nhẹ để lookup. Không chứa nội dung luận giải.",
+  "entry_schema": {
+    "template_id": {
+      "type": "string",
+      "required": true,
+      "description": "ID duy nhất của template."
+    },
+    "template_name": {
+      "type": "string",
+      "required": true,
+      "description": "Tên kỹ thuật (snake_case)."
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "description": "Nhóm phân loại trong module."
+    },
+    "priority": {
+      "type": "integer",
+      "required": true,
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Độ ưu tiên render."
+    },
+    "version": {
+      "type": "string",
+      "required": true,
+      "description": "Phiên bản template."
+    },
+    "enabled": {
+      "type": "boolean",
+      "required": true,
+      "description": "Trạng thái bật/tắt."
+    },
+    "file_ref": {
+      "type": "string",
+      "required": false,
+      "description": "Đường dẫn tương đối tới file template (khi có template thật)."
+    }
+  },
+  "templates": [],
+  "notes": "V1.0: mảng templates để trống. Khi thêm template thật, cập nhật entry tại đây."
+}
