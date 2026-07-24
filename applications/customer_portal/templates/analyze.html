@@ -1,22 +1,23 @@
 <div class="panel">
   <h1>Analyze</h1>
-  <p class="muted">Runs the full BTE pipeline via <code>POST /api/v1/analyze</code>.</p>
-  <form id="analyzeForm" class="form-grid">
-    <label>Year<input id="year" type="number" value="1990" required /></label>
-    <label>Month<input id="month" type="number" value="5" min="1" max="12" required /></label>
-    <label>Day<input id="day" type="number" value="15" min="1" max="31" required /></label>
-    <label>Hour<input id="hour" type="number" value="10" min="0" max="23" /></label>
-    <label>Minute<input id="minute" type="number" value="30" min="0" max="59" /></label>
+  <p class="muted">Runs the full BTE pipeline via <code>POST /backend/api/v1/analyze</code> → API <code>/api/v1/analyze</code>.</p>
+  <form id="analyzeForm" class="form-grid" method="post" action="#" novalidate>
+    <label>Year<input id="year" name="year" type="number" value="1990" required /></label>
+    <label>Month<input id="month" name="month" type="number" value="5" min="1" max="12" required /></label>
+    <label>Day<input id="day" name="day" type="number" value="15" min="1" max="31" required /></label>
+    <label>Hour<input id="hour" name="hour" type="number" value="10" min="0" max="23" /></label>
+    <label>Minute<input id="minute" name="minute" type="number" value="30" min="0" max="59" /></label>
     <label>Gender
-      <select id="gender">
+      <select id="gender" name="gender">
         <option value="male">male</option>
         <option value="female">female</option>
         <option value="">unspecified</option>
       </select>
     </label>
-    <label class="full">Timezone<input id="timezone" value="Asia/Ho_Chi_Minh" /></label>
+    <label class="full">Timezone<input id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" /></label>
     <div class="full toolbar">
-      <button type="submit" id="btnAnalyze">Run analyze</button>
+      <!-- type=button so click always fires (HTML5 validation cannot swallow it) -->
+      <button type="button" id="btnAnalyze">Run analyze</button>
     </div>
   </form>
 </div>

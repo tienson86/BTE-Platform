@@ -28,6 +28,7 @@
     const token = getToken();
     if (token) headers.Authorization = "Bearer " + token;
     if (body !== undefined) headers["Content-Type"] = "application/json";
+    // Portal proxies Applications API under /backend/*
     const res = await fetch("/backend" + path, {
       method,
       headers,
@@ -41,9 +42,15 @@
       data = { raw: text };
     }
     if (!res.ok) {
-      const err = new Error(
-        (data && (data.message || data.detail)) || res.statusText || "Request failed"
-      );
+      let detail = (data && (data.message || data.detail)) || res.statusText || "Request failed";
+      if (typeof detail === "object") {
+        try {
+          detail = JSON.stringify(detail);
+        } catch (_) {
+          detail = String(detail);
+        }
+      }
+      const err = new Error(detail);
       err.status = res.status;
       err.payload = data;
       throw err;
@@ -51,37 +58,48 @@
     return data;
   }
 
-  function saveLastResult(payload) {
-    sessionStorage.setItem(LAST_KEY, JSON.stringify(payload));
-    const hist = getHistory();
-    hist.unshift({
-      id: "local-" + Date.now(),
-      saved_at: new Date().toISOString(),
-      input: payload.input || {},
-      summary:
-        (payload.data &&
-          payload.data.interpretation &&
-          payload.data.interpretation.summary) ||
-        "Analyze result",
-      data: payload.data,
-    });
-    sessionStorage.setItem(HISTORY_KEY, JSON.stringify(hist.slice(0, 30)));
+  function persist(key, value) {
+    const raw = JSON.stringify(value);
+    sessionStorage.setItem(key, raw);
+    try {
+      localStorage.setItem(key, raw);
+    } catch (_) {
+      /* private mode / quota — sessionStorage is enough for same-tab Result */
+    }
   }
 
-  function getLastResult() {
+  function readPersist(key) {
     try {
-      return JSON.parse(sessionStorage.getItem(LAST_KEY) || "null");
+      const raw = sessionStorage.getItem(key) || localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : null;
     } catch (_) {
       return null;
     }
   }
 
+  function saveLastResult(payload) {
+    persist(LAST_KEY, payload);
+    const hist = getHistory();
+    const interp = payload.data && payload.data.interpretation;
+    hist.unshift({
+      id: "local-" + Date.now(),
+      saved_at: new Date().toISOString(),
+      input: payload.input || {},
+      summary:
+        (interp && (interp.summary || interp.interpretation_summary)) ||
+        "Analyze result",
+      data: payload.data,
+    });
+    persist(HISTORY_KEY, hist.slice(0, 30));
+  }
+
+  function getLastResult() {
+    return readPersist(LAST_KEY);
+  }
+
   function getHistory() {
-    try {
-      return JSON.parse(sessionStorage.getItem(HISTORY_KEY) || "[]");
-    } catch (_) {
-      return [];
-    }
+    const hist = readPersist(HISTORY_KEY);
+    return Array.isArray(hist) ? hist : [];
   }
 
   function showFlash(el, message, type) {
