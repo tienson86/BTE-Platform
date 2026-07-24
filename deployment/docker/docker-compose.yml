@@ -1,0 +1,92 @@
+# BTE Platform — Docker Compose (WP17)
+# Run from repository root:
+#   docker compose -f deployment/docker/docker-compose.yml up --build
+
+name: bte-platform
+
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.api
+    container_name: bte-api
+    env_file:
+      - ../env/production.env
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      BTE_API_BASE_URL: "http://api:8000"
+      BTE_STORAGE_BACKEND: "${BTE_STORAGE_BACKEND:-json}"
+      BTE_DATA_DIR: "/app/applications/data"
+      BTE_LICENSE_PATH: "/app/applications/data/licenses.json"
+      BTE_REPORT_PATH: "/app/reports"
+      BTE_LOG_LEVEL: "${BTE_LOG_LEVEL:-INFO}"
+    ports:
+      - "8000:8000"
+    volumes:
+      # Engine knowledge bases live under engines/*/knowledge
+      - ../../engines:/app/engines:ro
+      - ../../applications/data:/app/applications/data
+      - ../../logs:/app/logs
+      - ../../reports:/app/reports
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    restart: unless-stopped
+
+  web_admin:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.web_admin
+    container_name: bte-web-admin
+    env_file:
+      - ../env/production.env
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8080"
+      BTE_API_BASE_URL: "http://api:8000"
+      BTE_LOG_LEVEL: "${BTE_LOG_LEVEL:-INFO}"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../../logs:/app/logs
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+  customer_portal:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.customer_portal
+    container_name: bte-customer-portal
+    env_file:
+      - ../env/production.env
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8081"
+      BTE_API_BASE_URL: "http://api:8000"
+      BTE_LOG_LEVEL: "${BTE_LOG_LEVEL:-INFO}"
+    ports:
+      - "8081:8081"
+    volumes:
+      - ../../logs:/app/logs
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8081/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
