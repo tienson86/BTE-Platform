@@ -1,12 +1,82 @@
-<div class="panel">
-  <h1>Reports</h1>
-  <p class="muted">Views HTML / Markdown from the latest analyze narrative &amp; report payloads.</p>
-  <div class="toolbar">
-    <button type="button" id="btnHtml">HTML</button>
-    <button type="button" class="secondary" id="btnMd">Markdown</button>
-    <button type="button" class="secondary" id="btnPdf">PDF (print)</button>
+<div class="panel reports-center">
+  <header class="reports-hero">
+    <div>
+      <h1>Report Center</h1>
+      <p class="muted">Browse, preview, and export reports from analyze results.</p>
+    </div>
+    <div class="reports-hero-actions no-print">
+      <a class="btn secondary" href="/analyze">New analyze</a>
+      <a class="btn secondary" href="/history">History</a>
+    </div>
+  </header>
+
+  <div class="reports-toolbar no-print">
+    <input id="reportSearch" type="search" placeholder="Search reports…" aria-label="Search reports" />
+    <select id="reportFilter" aria-label="Filter by type">
+      <option value="all">All types</option>
+      <option value="narrative">Narrative</option>
+      <option value="report">Report</option>
+      <option value="html">HTML</option>
+      <option value="markdown">Markdown</option>
+      <option value="pdf">PDF</option>
+    </select>
+    <select id="reportSort" aria-label="Sort reports">
+      <option value="date_desc">Newest first</option>
+      <option value="date_asc">Oldest first</option>
+      <option value="name_asc">Name A–Z</option>
+      <option value="name_desc">Name Z–A</option>
+    </select>
   </div>
-  <iframe id="htmlView" class="viewer" title="Report HTML"></iframe>
-  <div id="mdView" class="pre" style="display:none"></div>
+
+  <div class="reports-layout">
+    <section class="reports-list-pane" aria-label="Report list">
+      <div class="reports-list-head">
+        <h2>Reports</h2>
+        <span class="muted" id="reportCount">Loading…</span>
+      </div>
+      <div id="reportList" class="reports-list">
+        <div class="bte-card skeleton-card"></div>
+        <div class="bte-card skeleton-card"></div>
+        <div class="bte-card skeleton-card"></div>
+      </div>
+      <div class="reports-table-wrap no-print">
+        <table class="reports-table" aria-label="Reports table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Created</th>
+              <th>Type</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="reportTableBody">
+            <tr><td colspan="4"><div class="skeleton-line"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="reports-preview-pane" aria-label="Report preview">
+      <div class="reports-preview-head">
+        <h2 id="previewTitle">Preview</h2>
+        <div class="reports-preview-actions no-print" id="previewActions" hidden>
+          <button type="button" class="secondary" data-action="open">Open</button>
+          <button type="button" class="secondary" data-action="print">Print</button>
+          <button type="button" class="secondary" data-action="copy">Copy</button>
+          <button type="button" class="secondary" data-action="download">Download</button>
+          <button type="button" class="secondary" data-action="share" title="Coming soon">Share</button>
+        </div>
+      </div>
+      <div class="reports-format-tabs no-print" id="formatTabs" hidden>
+        <button type="button" class="tab active" data-format="html">HTML</button>
+        <button type="button" class="tab" data-format="markdown">Markdown</button>
+        <button type="button" class="tab" data-format="pdf" id="tabPdf" disabled>PDF</button>
+      </div>
+      <div id="previewEmpty" class="reports-empty bte-card">No report available</div>
+      <iframe id="previewHtml" class="reports-preview-frame" title="Report HTML preview" hidden></iframe>
+      <pre id="previewMd" class="reports-preview-md pre" hidden></pre>
+      <div id="previewPdf" class="reports-empty bte-card" hidden>PDF not available</div>
+    </section>
+  </div>
 </div>
 <script src="/static/js/reports.js"></script>
