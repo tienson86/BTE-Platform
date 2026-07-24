@@ -1,0 +1,662 @@
+[
+    {
+      "id": "PO001",
+      "stage": 1,
+      "priority_rule": "PR001",
+      "rule_type": "special_case",
+      "execution_group": "special_case",
+      "execution_mode": "exclusive",
+      "continue_on_success": false,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Thực thi ưu tiên kiểm tra Tòng Vượng. Nếu khớp thì kết thúc toàn bộ Pipeline."
+    },
+    {
+      "id": "PO002",
+      "stage": 2,
+      "priority_rule": "PR002",
+      "rule_type": "special_case",
+      "execution_group": "special_case",
+      "execution_mode": "exclusive",
+      "continue_on_success": false,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Kiểm tra Tòng Nhược."
+    },
+    {
+      "id": "PO003",
+      "stage": 3,
+      "priority_rule": "PR003",
+      "rule_type": "special_case",
+      "execution_group": "special_case",
+      "execution_mode": "exclusive",
+      "continue_on_success": false,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Kiểm tra Tòng Tài."
+    },
+    {
+      "id": "PO004",
+      "stage": 4,
+      "priority_rule": "PR004",
+      "rule_type": "special_case",
+      "execution_group": "special_case",
+      "execution_mode": "exclusive",
+      "continue_on_success": false,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Kiểm tra Tòng Sát."
+    },
+    {
+      "id": "PO005",
+      "stage": 5,
+      "priority_rule": "PR005",
+      "rule_type": "special_case",
+      "execution_group": "special_case",
+      "execution_mode": "exclusive",
+      "continue_on_success": false,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Kiểm tra Hóa Khí."
+    },
+    {
+      "id": "PO006",
+      "stage": 6,
+      "priority_rule": "PR006",
+      "rule_type": "follow_pattern",
+      "execution_group": "follow_pattern",
+      "execution_mode": "dependent",
+      "depends_on": [
+        "PR001"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Áp dụng quy tắc Theo Tòng Vượng sau khi PR001 được xác nhận."
+    },
+    {
+      "id": "PO007",
+      "stage": 7,
+      "priority_rule": "PR007",
+      "rule_type": "follow_pattern",
+      "execution_group": "follow_pattern",
+      "execution_mode": "dependent",
+      "depends_on": [
+        "PR002"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Áp dụng quy tắc Theo Tòng Nhược."
+    },
+    {
+      "id": "PO008",
+      "stage": 8,
+      "priority_rule": "PR008",
+      "rule_type": "follow_pattern",
+      "execution_group": "follow_pattern",
+      "execution_mode": "dependent",
+      "depends_on": [
+        "PR003"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Áp dụng quy tắc Theo Tòng Tài."
+    },
+    {
+      "id": "PO009",
+      "stage": 9,
+      "priority_rule": "PR009",
+      "rule_type": "follow_pattern",
+      "execution_group": "follow_pattern",
+      "execution_mode": "dependent",
+      "depends_on": [
+        "PR004"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Áp dụng quy tắc Theo Tòng Sát."
+    },
+    {
+      "id": "PO010",
+      "stage": 10,
+      "priority_rule": "PR010",
+      "rule_type": "follow_pattern",
+      "execution_group": "follow_pattern",
+      "execution_mode": "dependent",
+      "depends_on": [
+        "PR005"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Áp dụng quy tắc Theo Hóa Khí."
+    }
+  ]
+  [
+    {
+      "id": "PO011",
+      "stage": 11,
+      "priority_rule": "PR011",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Thiên Can Hợp."
+    },
+    {
+      "id": "PO012",
+      "stage": 12,
+      "priority_rule": "PR012",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Địa Chi Lục Hợp."
+    },
+    {
+      "id": "PO013",
+      "stage": 13,
+      "priority_rule": "PR013",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Tam Hợp."
+    },
+    {
+      "id": "PO014",
+      "stage": 14,
+      "priority_rule": "PR014",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Tam Hội."
+    },
+    {
+      "id": "PO015",
+      "stage": 15,
+      "priority_rule": "PR015",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Bán Hợp."
+    },
+    {
+      "id": "PO016",
+      "stage": 16,
+      "priority_rule": "PR016",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Bán Hội."
+    },
+    {
+      "id": "PO017",
+      "stage": 17,
+      "priority_rule": "PR017",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Xung."
+    },
+    {
+      "id": "PO018",
+      "stage": 18,
+      "priority_rule": "PR018",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Hại."
+    },
+    {
+      "id": "PO019",
+      "stage": 19,
+      "priority_rule": "PR019",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Hình."
+    },
+    {
+      "id": "PO020",
+      "stage": 20,
+      "priority_rule": "PR020",
+      "rule_type": "combination",
+      "execution_group": "combination",
+      "execution_mode": "parallel",
+      "depends_on": [],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Thực thi kiểm tra Phá."
+    }
+  ]
+  [
+    {
+      "id": "PO021",
+      "stage": 21,
+      "priority_rule": "PR021",
+      "rule_type": "strength",
+      "execution_group": "strength",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO011",
+        "PO012",
+        "PO013",
+        "PO014",
+        "PO015",
+        "PO016",
+        "PO017",
+        "PO018",
+        "PO019",
+        "PO020"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Thân Vượng sau khi hoàn tất phân tích các tổ hợp."
+    },
+    {
+      "id": "PO022",
+      "stage": 22,
+      "priority_rule": "PR022",
+      "rule_type": "strength",
+      "execution_group": "strength",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO021"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Thân Nhược."
+    },
+    {
+      "id": "PO023",
+      "stage": 23,
+      "priority_rule": "PR023",
+      "rule_type": "strength",
+      "execution_group": "strength",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO022"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá trạng thái Thân Cân Bằng."
+    },
+    {
+      "id": "PO024",
+      "stage": 24,
+      "priority_rule": "PR024",
+      "rule_type": "strength",
+      "execution_group": "strength",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO023"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Thân Cực Vượng."
+    },
+    {
+      "id": "PO025",
+      "stage": 25,
+      "priority_rule": "PR025",
+      "rule_type": "strength",
+      "execution_group": "strength",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO024"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Thân Cực Nhược."
+    },
+    {
+      "id": "PO026",
+      "stage": 26,
+      "priority_rule": "PR026",
+      "rule_type": "season",
+      "execution_group": "season",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO025"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích ảnh hưởng của mùa Xuân."
+    },
+    {
+      "id": "PO027",
+      "stage": 27,
+      "priority_rule": "PR027",
+      "rule_type": "season",
+      "execution_group": "season",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO026"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích ảnh hưởng của mùa Hạ."
+    },
+    {
+      "id": "PO028",
+      "stage": 28,
+      "priority_rule": "PR028",
+      "rule_type": "season",
+      "execution_group": "season",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO027"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích ảnh hưởng của mùa Thu."
+    },
+    {
+      "id": "PO029",
+      "stage": 29,
+      "priority_rule": "PR029",
+      "rule_type": "season",
+      "execution_group": "season",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO028"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích ảnh hưởng của mùa Đông."
+    },
+    {
+      "id": "PO030",
+      "stage": 30,
+      "priority_rule": "PR030",
+      "rule_type": "season",
+      "execution_group": "season",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO029"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích ảnh hưởng của giai đoạn Tứ Quý Thổ (giao mùa)."
+    }
+  ]
+  [
+    {
+      "id": "PO031",
+      "stage": 31,
+      "priority_rule": "PR031",
+      "rule_type": "temperature",
+      "execution_group": "temperature",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO030"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích Hàn cục sau khi hoàn tất đánh giá mùa sinh."
+    },
+    {
+      "id": "PO032",
+      "stage": 32,
+      "priority_rule": "PR032",
+      "rule_type": "temperature",
+      "execution_group": "temperature",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO031"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích Nhiệt cục."
+    },
+    {
+      "id": "PO033",
+      "stage": 33,
+      "priority_rule": "PR033",
+      "rule_type": "temperature",
+      "execution_group": "temperature",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO032"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích Táo cục."
+    },
+    {
+      "id": "PO034",
+      "stage": 34,
+      "priority_rule": "PR034",
+      "rule_type": "temperature",
+      "execution_group": "temperature",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO033"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Phân tích Thấp cục."
+    },
+    {
+      "id": "PO035",
+      "stage": 35,
+      "priority_rule": "PR035",
+      "rule_type": "pattern",
+      "execution_group": "pattern",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO034"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Chính Cách."
+    },
+    {
+      "id": "PO036",
+      "stage": 36,
+      "priority_rule": "PR036",
+      "rule_type": "pattern",
+      "execution_group": "pattern",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO035"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Biến Cách hoặc Cách Cục đặc biệt."
+    },
+    {
+      "id": "PO037",
+      "stage": 37,
+      "priority_rule": "PR037",
+      "rule_type": "pattern",
+      "execution_group": "pattern",
+      "execution_mode": "sequential",
+      "depends_on": [
+        "PO036"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Đánh giá Cách Cục phụ và các Pattern hỗ trợ."
+    },
+    {
+      "id": "PO038",
+      "stage": 38,
+      "priority_rule": "PR038",
+      "rule_type": "fallback",
+      "execution_group": "fallback",
+      "execution_mode": "conditional",
+      "depends_on": [
+        "PO037"
+      ],
+      "continue_on_success": true,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": false,
+      "terminate_pipeline": false,
+      "enabled": true,
+      "description": "Áp dụng quy tắc mặc định nếu không có Priority Rule nào phù hợp."
+    },
+    {
+      "id": "PO039",
+      "stage": 39,
+      "priority_rule": "PR039",
+      "rule_type": "fallback",
+      "execution_group": "fallback",
+      "execution_mode": "conditional",
+      "depends_on": [
+        "PO038"
+      ],
+      "continue_on_success": false,
+      "continue_on_failure": true,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Chuyển sang chế độ kiểm tra thủ công khi có xung đột hoặc dữ liệu không nhất quán."
+    },
+    {
+      "id": "PO040",
+      "stage": 40,
+      "priority_rule": "PR040",
+      "rule_type": "fallback",
+      "execution_group": "fallback",
+      "execution_mode": "terminal",
+      "depends_on": [
+        "PO039"
+      ],
+      "continue_on_success": false,
+      "continue_on_failure": false,
+      "skip_remaining_same_group": true,
+      "terminate_pipeline": true,
+      "enabled": true,
+      "description": "Điểm kết thúc cuối cùng của Pipeline khi gặp trường hợp chưa được định nghĩa trong Rule Database."
+    }
+  ]
