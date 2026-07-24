@@ -6,6 +6,7 @@ from typing import Any, Literal
 
 from engines.bazi_engine.engine import BaziEngine
 from engines.calendar_engine.engine import CalendarEngine
+from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError
 from engines.interpretation_engine.engine import InterpretationEngine
 from engines.narrative_engine.engine import NarrativeEngine
 from engines.pattern_engine.context import PatternContext
@@ -50,6 +51,7 @@ class OrchestratorService:
     def __init__(self) -> None:
         self.calendar_engine = CalendarEngine()
         self.bazi_engine = BaziEngine()
+        self.feng_shui_engine = FengShuiEngine()
         self.pattern_engine = PatternEngine()
         self.score_engine = ScoreEngine()
         self.interpretation_engine = InterpretationEngine()
@@ -140,6 +142,18 @@ class OrchestratorService:
         bazi = self.bazi_engine.build(calendar, gender=gender)
         completed.append("bazi")
         payload["bazi"] = to_jsonable(bazi)
+
+        # Feng Shui V1: Cung Phi only — does not alter Bazi / other engines.
+        # Prefer lunar year when calendar provides it; else solar birth year.
+        lunar = getattr(calendar, "lunar", None)
+        feng_year = getattr(lunar, "year", None) or year
+        try:
+            feng = self.feng_shui_engine.calculate(year=int(feng_year), gender=gender)
+            payload["feng_shui"] = feng.to_dict()
+        except FengShuiEngineError:
+            # Missing/invalid gender → omit block; Portal shows "--".
+            payload["feng_shui"] = None
+
         if stop_index == 1:
             payload["pipeline"] = completed
             return payload

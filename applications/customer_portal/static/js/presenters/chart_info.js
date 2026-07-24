@@ -139,10 +139,11 @@
    */
   function resolveBatTrach(data) {
     var payload = data && typeof data === "object" ? data : {};
+    // Prefer engine output (feng_shui) over client metadata echoes.
     var sources = [
+      payload.feng_shui,
       payload.bat_trach,
       payload.batrach,
-      payload.feng_shui,
       payload.bazi && payload.bazi.bat_trach,
       payload.customer &&
         payload.customer.metadata &&
@@ -157,8 +158,21 @@
     }
     src = src || {};
 
-    var cungPhi = pick(src, ["cung_phi", "cungPhi", "flying_star", "phi_cung"]);
-    var menhQuai = pick(src, ["menh_quai", "menhQuai", "ming_gua", "gua", "quai"]);
+    var cungPhi = pick(src, [
+      "cung_phi",
+      "cungPhi",
+      "gua_name",
+      "flying_star",
+      "phi_cung",
+    ]);
+    var menhQuai = pick(src, [
+      "menh_quai",
+      "menhQuai",
+      "ming_gua",
+      "gua_name",
+      "gua",
+      "quai",
+    ]);
     var nhom =
       pick(src, [
         "nhom_trach",
@@ -234,7 +248,7 @@
    */
   function renderBatTrach(data) {
     var bt = resolveBatTrach(data);
-    var title = t("chart.bat_trach_title");
+    var title = t("chart.feng_shui_title");
     return (
       '<section class="bte-bat-trach bte-exec-section" aria-label="' +
       esc(title) +
@@ -242,6 +256,17 @@
       "<h3>" +
       esc(title) +
       "</h3>" +
+      '<div class="bte-cung-phi-hero">' +
+      '<div class="bte-exec-k">' +
+      esc(t("chart.cung_phi")) +
+      "</div>" +
+      '<div class="bte-cung-phi-name">' +
+      esc(show(bt.cung_phi !== MISSING ? bt.cung_phi : bt.menh_quai)) +
+      "</div>" +
+      '<div class="bte-cung-phi-group">' +
+      esc(show(bt.nhom_trach)) +
+      "</div>" +
+      "</div>" +
       '<div class="bte-exec-grid">' +
       kv(t("chart.cung_phi"), bt.cung_phi) +
       kv(t("chart.menh_quai"), bt.menh_quai) +
