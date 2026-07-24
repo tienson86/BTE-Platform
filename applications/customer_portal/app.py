@@ -54,13 +54,18 @@ def create_app() -> FastAPI:
 
     @app.get("/", include_in_schema=False)
     def root() -> RedirectResponse:
-        """Default landing → analyze."""
-        return RedirectResponse(url="/analyze", status_code=302)
+        """Default landing → dashboard."""
+        return RedirectResponse(url="/dashboard", status_code=302)
 
     @app.get(LOGIN_ITEM.path, response_class=HTMLResponse)
     def login_page() -> HTMLResponse:
         """Login page."""
         return page("login", LOGIN_ITEM.template)
+
+    @app.get("/dashboard", response_class=HTMLResponse)
+    def dashboard_page() -> HTMLResponse:
+        """Dashboard home."""
+        return page("dashboard", "dashboard.html")
 
     @app.get("/analyze", response_class=HTMLResponse)
     def analyze_page() -> HTMLResponse:

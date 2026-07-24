@@ -16,6 +16,7 @@ class NavItem:
 
 
 NAV_ITEMS: tuple[NavItem, ...] = (
+    NavItem("dashboard", "Dashboard", "/dashboard", "dashboard.html"),
     NavItem("analyze", "Analyze", "/analyze", "analyze.html"),
     NavItem("result", "Result", "/result", "result.html"),
     NavItem("reports", "Reports", "/reports", "reports.html"),

@@ -80,6 +80,51 @@
         return;
       }
 
+      if (stage === "score") {
+        view.classList.remove("pre");
+        view.classList.add("stage-view");
+        const render =
+          (window.BtePresenters && window.BtePresenters.score) || null;
+        if (render) {
+          view.innerHTML = render(payload);
+        } else {
+          view.innerHTML =
+            '<p class="muted">Score presenter failed to load.</p>';
+        }
+        return;
+      }
+
+      if (stage === "interpretation") {
+        view.classList.remove("pre");
+        view.classList.add("stage-view");
+        const render =
+          (window.BtePresenters && window.BtePresenters.interpretation) || null;
+        if (render) {
+          view.innerHTML = render(payload);
+        } else {
+          view.innerHTML =
+            '<p class="muted">Interpretation presenter failed to load.</p>';
+        }
+        return;
+      }
+
+      if (stage === "narrative") {
+        view.classList.remove("pre");
+        view.classList.add("stage-view");
+        const render =
+          (window.BtePresenters && window.BtePresenters.narrative) || null;
+        if (render) {
+          view.innerHTML = render(payload);
+          if (window.BtePresenters.bindNarrative) {
+            BtePresenters.bindNarrative(view);
+          }
+        } else {
+          view.innerHTML =
+            '<p class="muted">Narrative presenter failed to load.</p>';
+        }
+        return;
+      }
+
       view.classList.add("pre");
       view.classList.remove("stage-view");
       view.textContent =

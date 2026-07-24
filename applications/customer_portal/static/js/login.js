@@ -17,7 +17,7 @@
       BtePortal.showFlash(flash, "Login successful", "success");
       status.textContent =
         "Signed in as " + (data.user && data.user.username ? data.user.username : "");
-      setTimeout(() => (window.location.href = "/analyze"), 400);
+      setTimeout(() => (window.location.href = "/dashboard"), 400);
     } catch (err) {
       BtePortal.showFlash(flash, err.message, "error");
     }

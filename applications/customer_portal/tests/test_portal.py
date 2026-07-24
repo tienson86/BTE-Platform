@@ -14,6 +14,7 @@ def test_required_pages_registered() -> None:
     keys = {item.key for item in NAV_ITEMS} | {LOGIN_ITEM.key}
     assert keys == {
         "login",
+        "dashboard",
         "analyze",
         "result",
         "reports",
@@ -44,6 +45,7 @@ def test_healthz() -> None:
     client = TestClient(create_app())
     body = client.get("/healthz").json()
     assert body["status"] == "ok"
+    assert "/dashboard" in body["pages"]
     assert "/analyze" in body["pages"]
 
 
