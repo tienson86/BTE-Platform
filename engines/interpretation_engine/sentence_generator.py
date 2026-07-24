@@ -46,8 +46,23 @@ class SentenceGenerator:
 
     def generate(
         self,
-        blocks: list[SemanticBlock],
-    ) -> list[GeneratedSentence]:
+        blocks: list[SemanticBlock] | Any,
+    ) -> list[GeneratedSentence] | Any:
+        """
+        Sinh câu từ danh sách SemanticBlock.
+
+        WP0B compatibility: InterpretationResult (đã compose) được
+        pass-through. Bridge SemanticBlock ↔ Result làm ở WP1.
+        """
+
+        # Late import avoids circular dependency with engine/legacy_builder
+        from .legacy_builder import InterpretationResult
+
+        if isinstance(blocks, InterpretationResult):
+            return blocks
+
+        if not isinstance(blocks, list):
+            return []
 
         sentences = []
 

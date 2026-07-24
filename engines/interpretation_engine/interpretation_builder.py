@@ -18,6 +18,11 @@ SentenceGenerator
 Builder KHÔNG sinh câu.
 Builder KHÔNG tạo report.
 Builder KHÔNG quyết định cách diễn đạt.
+
+.. deprecated:: WP0B
+    Không dùng cho InterpretationEngine.run().
+    Active builder: ``legacy_builder.InterpretationBuilder`` → InterpretationResult.
+    SemanticBlock path giữ lại; bridge sang SentenceGenerator ở WP1.
 """
 
 from __future__ import annotations

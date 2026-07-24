@@ -1,10 +1,9 @@
-from dataclasses import dataclass
+"""
+Compatibility facade.
 
-@dataclass
-class PatternResult:
-    success: bool = True
-    pattern: str = "default"
-    score: float = 0.0
+Delegates to ``engines.pattern_engine.engine`` (WP1 Pattern Recovery).
+"""
 
-class PatternEngine:
-    def calculate(self, context): return PatternResult()
+from engines.pattern_engine.engine import PatternEngine, PatternResult
+
+__all__ = ["PatternEngine", "PatternResult"]

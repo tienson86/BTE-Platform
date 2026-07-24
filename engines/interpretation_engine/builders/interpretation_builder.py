@@ -19,6 +19,9 @@ SentenceGenerator
 Formatter
     ↓
 InterpretationReport
+
+.. deprecated:: WP0B
+    Alternate builders path. Active: ``legacy_builder`` via ``engine.run()``.
 """
 
 from __future__ import annotations

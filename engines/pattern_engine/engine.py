@@ -4,11 +4,21 @@ Pattern Engine.
 Điểm vào chính của Pattern Engine.
 """
 
-from dataclasses import dataclass
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from pathlib import Path
 from typing import List, Optional
 
 from .context import PatternContext
 from .service import PatternService
+
+
+# Repo root: engines/pattern_engine/engine.py → parents[2]
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+
+# Canonical Pattern Rule Database (WP1)
+DEFAULT_DATABASE_PATH = str(_REPO_ROOT / "database" / "14_pattern")
 
 
 @dataclass
@@ -22,23 +32,27 @@ class PatternResult:
 
     priority: int = 0
 
-    matched_rules: List[str] = None
+    matched_rules: List[str] = field(default_factory=list)
 
     error: Optional[str] = None
 
 
 class PatternEngine:
 
-    def __init__(self,
-                 database_path="database/04_pattern"):
+    def __init__(
+        self,
+        database_path: str | None = None,
+    ):
+
+        self.database_path = database_path or DEFAULT_DATABASE_PATH
 
         self.service = PatternService(
-            database_path
+            self.database_path
         )
 
     def calculate(
         self,
-        context: PatternContext
+        context: PatternContext,
     ) -> PatternResult:
 
         data = self.service.analyze(
@@ -69,7 +83,7 @@ class PatternEngine:
             matched_rules=data.get(
                 "matched_rules",
                 []
-            ),
+            ) or [],
 
             error=data.get(
                 "error"

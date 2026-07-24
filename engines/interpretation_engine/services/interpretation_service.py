@@ -24,6 +24,10 @@ InterpretationBuilder
         │
         ▼
 InterpretationReport
+
+.. deprecated:: WP0B
+    Alternate pipeline. Active entry: ``engine.InterpretationEngine.run()``.
+    Giữ lại để tương thích; unify ở WP1.
 """
 
 from __future__ import annotations

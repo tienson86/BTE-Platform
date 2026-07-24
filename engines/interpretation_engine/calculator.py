@@ -3,6 +3,11 @@ BTE Platform
 Interpretation Engine Calculator
 
 Điều phối toàn bộ quá trình diễn giải Bát Tự.
+
+.. deprecated:: WP0B
+    Không dùng cho InterpretationEngine.run().
+    Active pipeline nằm ở ``engine.InterpretationEngine``.
+    Giữ lại để tương thích; refactor ở WP1.
 """
 
 from __future__ import annotations
