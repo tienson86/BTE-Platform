@@ -1186,3 +1186,186 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
     max-height: none !important;
   }
 }
+
+/* —— Executive Summary (Tổng Quan Lá Số) —— */
+.bte-exec {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.bte-exec-hero {
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(3, 105, 161, 0.08));
+  border: 1px solid var(--line);
+}
+.bte-exec-eyebrow {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.bte-exec-hero h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.55rem;
+}
+.bte-exec-sub {
+  margin: 0;
+  color: var(--muted);
+}
+.bte-exec-section {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem;
+}
+.bte-exec-section h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.02rem;
+}
+.bte-exec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.65rem;
+}
+.bte-exec-kv,
+.bte-exec-chip {
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--brand) 8%, transparent);
+}
+.bte-exec-k {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+.bte-exec-v,
+.bte-exec-chip-v {
+  font-weight: 650;
+  color: var(--card-value);
+  word-break: break-word;
+}
+.bte-exec-highlight {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.65rem;
+}
+.bte-exec-chip {
+  border: 1px solid color-mix(in srgb, var(--brand) 28%, var(--line));
+}
+.bte-exec-table-wrap {
+  overflow: auto;
+}
+.bte-exec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.bte-exec-table th,
+.bte-exec-table td {
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.55rem;
+  text-align: center;
+}
+.bte-exec-table th[scope="row"] {
+  text-align: left;
+  background: color-mix(in srgb, var(--brand) 8%, transparent);
+  white-space: nowrap;
+}
+.bte-exec-bars {
+  display: grid;
+  gap: 0.45rem;
+}
+.bte-exec-bar-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr 3.5rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+.bte-exec-bar-label {
+  font-size: 0.85rem;
+}
+.bte-exec-bar-track {
+  height: 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  overflow: hidden;
+}
+.bte-exec-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+}
+.bte-exec-bar-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+}
+.bte-exec-list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.bte-exec-poem {
+  margin-top: 0.75rem;
+}
+.bte-exec-poem-body {
+  margin-top: 0.35rem;
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+.bte-exec-empty {
+  margin: 0;
+  color: var(--muted);
+}
+.bte-exec-page-break {
+  page-break-after: always;
+  break-after: page;
+  border: 0;
+  height: 0;
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .bte-exec-bar-row {
+    grid-template-columns: 1fr;
+  }
+  .bte-exec-bar-value {
+    text-align: left;
+  }
+}
+
+@media print {
+  .bte-exec {
+    page-break-after: always;
+    break-after: page;
+    box-shadow: none;
+  }
+  .bte-exec-section,
+  .bte-exec-hero {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}
+
+.bte-chart-header {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0 0 1rem;
+}
+.bte-chart-info,
+.bte-bat-trach {
+  margin: 0;
+}
+.form-grid .req {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.result-meta-friendly {
+  white-space: pre-line;
+  line-height: 1.55;
+}

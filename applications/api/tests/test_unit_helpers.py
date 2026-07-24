@@ -14,6 +14,24 @@ def test_birth_request_defaults() -> None:
     assert body.hour == 0
     assert body.minute == 0
     assert body.timezone == "Asia/Ho_Chi_Minh"
+    assert body.full_name is None
+    assert body.birth_place is None
+
+
+def test_birth_request_customer_metadata() -> None:
+    body = BirthRequest(
+        year=1990,
+        month=5,
+        day=15,
+        full_name="Nguyễn Văn A",
+        birth_place="Hà Nội",
+        customer_id="cust-1",
+        metadata={"bat_trach": {"cung_phi": "Khảm", "menh_quai": "Khảm", "nhom_trach": "dong"}},
+    )
+    assert body.full_name == "Nguyễn Văn A"
+    assert body.birth_place == "Hà Nội"
+    assert body.customer_id == "cust-1"
+    assert body.metadata["bat_trach"]["cung_phi"] == "Khảm"
 
 
 def test_to_jsonable_nested() -> None:

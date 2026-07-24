@@ -3,6 +3,36 @@
     return window.BteI18n ? BteI18n.t(key, vars) : key;
   }
 
+  function pad2(n) {
+    return String(Number(n) || 0).padStart(2, "0");
+  }
+
+  function genderLabel(raw) {
+    if (raw == null || raw === "") return t("analyze.gender_unspecified");
+    var key = String(raw).toLowerCase();
+    if (key === "male" || key === "nam" || key === "m") return t("analyze.gender_male");
+    if (key === "female" || key === "nu" || key === "nữ" || key === "f") {
+      return t("analyze.gender_female");
+    }
+    return String(raw);
+  }
+
+  function formatBirthMeta(input) {
+    var date =
+      pad2(input.day) + "/" + pad2(input.month) + "/" + String(input.year || "");
+    var time = pad2(input.hour ?? 0) + ":" + pad2(input.minute ?? 0);
+    var datetime = date + " " + time;
+    var line1 = t("result.birth_meta_line", {
+      date_label: t("result.birth_date_label"),
+      datetime: datetime,
+    });
+    var line2 = t("result.birth_meta_gender", {
+      gender_label: t("result.gender_label"),
+      gender: genderLabel(input.gender),
+    });
+    return line1 + "\n" + line2;
+  }
+
   function boot() {
     const meta = document.getElementById("resultMeta");
     const view = document.getElementById("stageView");
@@ -10,7 +40,7 @@
 
     if (!window.BtePortal) {
       if (meta) meta.textContent = t("common.api_client_failed_api_js");
-      if (view) view.textContent = "{}";
+      if (view) view.textContent = "";
       return;
     }
 
@@ -23,14 +53,19 @@
 
     const data = last.data;
     const input = last.input || {};
-    meta.textContent = t("result.birth_meta", {
-      date: [input.year, input.month, input.day].join("-"),
-      time:
-        String(input.hour ?? 0).padStart(2, "0") +
-        ":" +
-        String(input.minute ?? 0).padStart(2, "0"),
-      pipeline: (data.pipeline || []).join(" → ") || t("result.pipeline_fallback"),
-    });
+    if (meta) {
+      meta.textContent = formatBirthMeta(input);
+      meta.classList.add("result-meta-friendly");
+    }
+
+    const chartHost = document.getElementById("chartInfoHost");
+    if (chartHost && window.BtePresenters && BtePresenters.chartHeader) {
+      chartHost.hidden = false;
+      chartHost.innerHTML = BtePresenters.chartHeader(data, {
+        input: input,
+        titleKey: "chart.info_title",
+      });
+    }
 
     function show(stage) {
       document.querySelectorAll(".tab").forEach((tab) => {
@@ -55,6 +90,20 @@
           view.innerHTML = map[stage](payload, {
             timezone: input.timezone || null,
           });
+        } else if (stage === "narrative") {
+          var narrativeHtml = map[stage](payload);
+          var execHtml =
+            presenters.executive && data
+              ? presenters.executive(data, {
+                  input: input,
+                  chartTitleKey: "executive.basic",
+                  includeLunar: true,
+                })
+              : "";
+          view.innerHTML =
+            (execHtml || "") +
+            (execHtml ? '<hr class="bte-exec-page-break" />' : "") +
+            narrativeHtml;
         } else {
           view.innerHTML = map[stage](payload);
         }
@@ -79,12 +128,9 @@
         return;
       }
 
-      view.classList.add("pre");
-      view.classList.remove("stage-view");
-      view.textContent =
-        payload === undefined
-          ? t("result.no_stage_data", { stage: stage })
-          : BtePortal.fmt(payload);
+      view.classList.remove("pre");
+      view.classList.add("stage-view");
+      view.innerHTML = '<p class="muted">' + t("result.no_stage_data") + "</p>";
     }
 
     document.querySelectorAll(".tab").forEach((btn) => {

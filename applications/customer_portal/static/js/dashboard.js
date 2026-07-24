@@ -222,14 +222,17 @@
     if (version === MISSING) version = "1.0.0";
 
     if (systemHost) {
+      var healthLabel = health;
+      if (health === "ok" || health === "healthy") healthLabel = t("common.health_ok");
+      else if (health === MISSING) healthLabel = MISSING;
       systemHost.innerHTML =
-        statusRow(t("common.api"), apiLabel, apiOk) +
-        statusRow(t("common.portal"), portalLabel, portalOk) +
+        statusRow(t("common.system"), apiLabel, apiOk) +
+        statusRow(t("common.app"), portalLabel, portalOk) +
         statusRow(t("common.version"), version, null) +
         statusRow(t("common.license"), license, license !== MISSING) +
         statusRow(
           t("common.health"),
-          health,
+          healthLabel,
           health === "ok" || health === "healthy"
         );
     }

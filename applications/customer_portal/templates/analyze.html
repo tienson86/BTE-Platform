@@ -1,7 +1,13 @@
 <div class="panel">
   <h1 data-i18n="analyze.title"></h1>
-  <p class="muted" data-i18n-html="analyze.hint"></p>
+  <p class="muted" data-i18n="analyze.hint"></p>
   <form id="analyzeForm" class="form-grid" method="post" action="#" novalidate>
+    <label class="full"><span data-i18n="analyze.full_name"></span><span class="req" aria-hidden="true"> *</span>
+      <input id="full_name" name="full_name" type="text" autocomplete="name" required />
+    </label>
+    <label class="full"><span data-i18n="analyze.birth_place"></span><span class="req" aria-hidden="true"> *</span>
+      <input id="birth_place" name="birth_place" type="text" autocomplete="address-level2" required />
+    </label>
     <label><span data-i18n="analyze.year"></span><input id="year" name="year" type="number" value="1990" required /></label>
     <label><span data-i18n="analyze.month"></span><input id="month" name="month" type="number" value="5" min="1" max="12" required /></label>
     <label><span data-i18n="analyze.day"></span><input id="day" name="day" type="number" value="15" min="1" max="31" required /></label>

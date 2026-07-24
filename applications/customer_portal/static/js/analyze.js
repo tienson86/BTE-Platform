@@ -22,6 +22,8 @@
 
     function readInput() {
       return {
+        full_name: String(document.getElementById("full_name").value || "").trim(),
+        birth_place: String(document.getElementById("birth_place").value || "").trim(),
         year: Number(document.getElementById("year").value),
         month: Number(document.getElementById("month").value),
         day: Number(document.getElementById("day").value),
@@ -33,6 +35,8 @@
     }
 
     function validate(input) {
+      if (!input.full_name) return t("analyze.full_name_required");
+      if (!input.birth_place) return t("analyze.birth_place_required");
       if (!Number.isFinite(input.year) || input.year < 1) return t("analyze.year_required");
       if (!Number.isFinite(input.month) || input.month < 1 || input.month > 12) {
         return t("analyze.month_range");
@@ -41,6 +45,24 @@
         return t("analyze.day_range");
       }
       return "";
+    }
+
+    function startFriendlyLoading() {
+      var steps = [
+        "analyze.loading_chart",
+        "analyze.loading_bazi",
+        "analyze.loading_narrative",
+      ];
+      var index = 0;
+      function showStep() {
+        var key = steps[Math.min(index, steps.length - 1)];
+        var text = t(key);
+        btn.textContent = text;
+        BtePortal.showFlash(flash, text, "success");
+        index += 1;
+      }
+      showStep();
+      return setInterval(showStep, 900);
     }
 
     async function runAnalyze(event) {
@@ -53,8 +75,7 @@
       }
 
       btn.disabled = true;
-      btn.textContent = t("analyze.analyzing");
-      BtePortal.showFlash(flash, t("analyze.calling"), "success");
+      var loadingTimer = startFriendlyLoading();
 
       try {
         const res = await BtePortal.post("/api/v1/analyze", input);
@@ -62,10 +83,13 @@
         if (!data || typeof data !== "object") {
           throw new Error(t("analyze.missing_payload"));
         }
+        clearInterval(loadingTimer);
+        btn.textContent = t("analyze.loading_done");
+        BtePortal.showFlash(flash, t("analyze.loading_done"), "success");
         BtePortal.saveLastResult({ input: input, data: data });
-        BtePortal.showFlash(flash, t("analyze.complete"), "success");
         window.location.assign("/result");
       } catch (err) {
+        clearInterval(loadingTimer);
         const message = (err && err.message) || t("analyze.failed");
         BtePortal.showFlash(flash, message, "error");
         btn.disabled = false;

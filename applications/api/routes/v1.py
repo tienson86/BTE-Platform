@@ -5,7 +5,7 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends, Request
 
 from applications.api.dependencies import get_orchestrator
-from applications.api.routes._helpers import run_birth_stage
+from applications.api.routes._helpers import attach_presentation_metadata, run_birth_stage
 from applications.api.schemas.common import APIResponse, BirthRequest
 from applications.api.services.orchestrator import OrchestratorService
 
@@ -143,6 +143,6 @@ def analyze_endpoint(
     return APIResponse(
         success=True,
         message="Analyze OK",
-        data=data,
+        data=attach_presentation_metadata(data, body),
         request_id=getattr(request.state, "request_id", None),
     )

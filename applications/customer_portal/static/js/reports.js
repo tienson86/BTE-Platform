@@ -37,6 +37,39 @@
     return present(status);
   }
 
+  function composeHtmlDocument(report) {
+    var body = report && report.html ? String(report.html) : "";
+    var execHtml = "";
+    if (
+      report &&
+      report.data &&
+      window.BtePresenters &&
+      typeof BtePresenters.executive === "function"
+    ) {
+      execHtml = BtePresenters.executive(report.data, {
+        input: report.input || {},
+        chartTitleKey: "chart.info_title",
+        includeLunar: false,
+      });
+    }
+    if (window.BtePresenters && typeof BtePresenters.composeExecutiveReport === "function") {
+      return BtePresenters.composeExecutiveReport(execHtml, body);
+    }
+    return (
+      "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /></head><body>" +
+      execHtml +
+      body +
+      "</body></html>"
+    );
+  }
+
+  function composeMarkdownDocument(report) {
+    var execTitle = t("executive.title");
+    var md = report && report.markdown ? String(report.markdown) : "";
+    // Page 1 marker only — detailed executive stays in HTML preview/print.
+    return "# " + execTitle + "\n\n---\n\n" + md;
+  }
+
   function boot() {
     if (!window.BtePortal) {
       setEmpty(t("common.api_client_failed"));
@@ -418,13 +451,17 @@
     if (htmlView) {
       htmlView.hidden = format !== "html";
       if (format === "html") {
-        htmlView.srcdoc = selected.html || "<p>" + esc(t("reports.empty")) + "</p>";
+        htmlView.srcdoc = selected.has_html || (selected.data && window.BtePresenters)
+          ? composeHtmlDocument(selected)
+          : "<p>" + esc(t("reports.empty")) + "</p>";
       }
     }
     if (mdView) {
       mdView.hidden = format !== "markdown";
       if (format === "markdown") {
-        mdView.textContent = selected.markdown || MISSING;
+        mdView.textContent = selected.has_markdown
+          ? composeMarkdownDocument(selected)
+          : MISSING;
       }
     }
     if (pdfView) {
@@ -458,13 +495,13 @@
       window.location.href = "/result";
       return;
     }
-    if (report.has_html) {
+    if (report.has_html || report.data) {
       const w = window.open("", "_blank");
       if (!w) {
         BtePortal.showFlash(flash, t("reports.popup_blocked"), "error");
         return;
       }
-      w.document.write(report.html);
+      w.document.write(composeHtmlDocument(report));
       w.document.close();
       return;
     }
@@ -472,7 +509,7 @@
   }
 
   function printReport(report) {
-    const html = report.html || "<pre>" + esc(report.markdown || MISSING) + "</pre>";
+    const html = composeHtmlDocument(report);
     const w = window.open("", "_blank");
     if (!w) {
       BtePortal.showFlash(flash, t("reports.popup_blocked"), "error");
@@ -541,7 +578,7 @@
     if (viewFormat === "markdown" && report.has_markdown) {
       triggerDownload(
         safeFilename(report.name) + ".md",
-        report.markdown,
+        composeMarkdownDocument(report),
         "text/markdown;charset=utf-8"
       );
       return;
@@ -550,7 +587,7 @@
     if (report.has_html) {
       triggerDownload(
         safeFilename(report.name) + ".html",
-        report.html,
+        composeHtmlDocument(report),
         "text/html;charset=utf-8"
       );
       return;
@@ -559,7 +596,7 @@
     if (report.has_markdown) {
       triggerDownload(
         safeFilename(report.name) + ".md",
-        report.markdown,
+        composeMarkdownDocument(report),
         "text/markdown;charset=utf-8"
       );
       return;
