@@ -41,8 +41,12 @@ from .engine import (
 
 from .interpretation_builder import (
     InterpretationBuilder,
+)
+
+# Compatibility aliases — symbols live in legacy_builder
+from .legacy_builder import (
     InterpretationResult,
-    InterpretationSection
+    InterpretationSection,
 )
 
 
