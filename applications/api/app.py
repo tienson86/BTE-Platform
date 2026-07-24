@@ -17,12 +17,14 @@ from fastapi import FastAPI
 from applications.api.config import settings
 from applications.api.exceptions import register_exception_handlers
 from applications.api.middleware import register_middleware
+from applications.api.routes import admin as admin_router
 from applications.api.routes import auth as auth_router
 from applications.api.routes import cases as cases_router
 from applications.api.routes import customers as customers_router
 from applications.api.routes import health as health_router
 from applications.api.routes import user as user_router
 from applications.api.routes import v1 as v1_router
+from applications.monitoring import register_ops_middleware
 
 
 def _configure_logging() -> None:
@@ -53,16 +55,19 @@ def create_app() -> FastAPI:
         {"name": "Users", "description": "Current user profile & RBAC demos"},
         {"name": "Customers", "description": "Customer management (WP11)"},
         {"name": "Cases", "description": "Case / analysis history (WP11)"},
+        {"name": "Admin", "description": "Administration & operations (WP13)"},
         {"name": "engines", "description": "Engine orchestration endpoints"},
         {"name": "health", "description": "Liveness"},
     ]
     register_middleware(app)
+    register_ops_middleware(app)
     register_exception_handlers(app)
     app.include_router(health_router.router)
     app.include_router(auth_router.router, prefix=settings.api_prefix)
     app.include_router(user_router.router, prefix=settings.api_prefix)
     app.include_router(customers_router.router, prefix=settings.api_prefix)
     app.include_router(cases_router.router, prefix=settings.api_prefix)
+    app.include_router(admin_router.router, prefix=settings.api_prefix)
     app.include_router(v1_router.router, prefix=settings.api_prefix)
 
     def custom_openapi():
