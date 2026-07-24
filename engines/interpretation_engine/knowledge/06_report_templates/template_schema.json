@@ -1,0 +1,330 @@
+{
+  "schema_id": "report_template_schema",
+  "schema_name": "BTE Report Template Schema",
+  "schema_version": "1.0.0",
+  "encoding": "UTF-8",
+  "language": "vi",
+  "description": "Schema chuẩn dùng chung cho toàn bộ Report Template trong Knowledge Base 06_report_templates. Report Engine dựa vào schema này để load, validate và render báo cáo. Không chứa nội dung luận giải.",
+  "status": "active",
+  "compatibility": {
+    "min_engine_version": "1.0.0",
+    "forward_compatible": true,
+    "designed_for": ["V1", "V2"]
+  },
+  "field_definitions": {
+    "template_id": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "pattern": "^[a-z]+_[0-9]{3,}$",
+      "description": "Định danh duy nhất của template. Ví dụ: summary_001, career_012."
+    },
+    "template_name": {
+      "type": "string",
+      "required": true,
+      "description": "Tên kỹ thuật của template (snake_case)."
+    },
+    "module": {
+      "type": "string",
+      "required": true,
+      "enum_ref": "module_ids",
+      "description": "Module sở hữu template. Phải khớp module_id trong metadata.json."
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "description": "Nhóm phân loại bên trong module. Ví dụ: overview, detail, recommendation."
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Tiêu đề hiển thị của template."
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "description": "Mô tả ngắn về mục đích sử dụng template."
+    },
+    "version": {
+      "type": "string",
+      "required": true,
+      "default": "1.0.0",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Phiên bản semantic của template."
+    },
+    "priority": {
+      "type": "integer",
+      "required": true,
+      "minimum": 0,
+      "maximum": 100,
+      "default": 50,
+      "description": "Độ ưu tiên render trong cùng module. Số lớn hơn được ưu tiên trước."
+    },
+    "conditions": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "item_schema": {
+        "condition_id": {
+          "type": "string",
+          "required": true
+        },
+        "field": {
+          "type": "string",
+          "required": true,
+          "description": "Trường dữ liệu từ Interpretation/Priority result."
+        },
+        "operator": {
+          "type": "string",
+          "required": true,
+          "enum": ["eq", "neq", "in", "not_in", "gt", "gte", "lt", "lte", "exists", "not_exists"]
+        },
+        "value": {
+          "type": ["string", "number", "boolean", "array", "null"],
+          "required": false
+        }
+      },
+      "description": "Điều kiện kích hoạt template. Report Engine chỉ render khi tất cả conditions thỏa (AND)."
+    },
+    "placeholders": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "item_schema": {
+        "key": {
+          "type": "string",
+          "required": true,
+          "pattern": "^\\{\\{[a-z0-9_]+\\}\\}$",
+          "description": "Placeholder token. Ví dụ: {{day_master}}."
+        },
+        "source": {
+          "type": "string",
+          "required": true,
+          "description": "Đường dẫn dữ liệu nguồn. Ví dụ: interpretation.day_master."
+        },
+        "fallback": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Giá trị thay thế khi thiếu dữ liệu nguồn."
+        }
+      },
+      "description": "Danh sách placeholder được thay thế lúc render."
+    },
+    "variables": {
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Biến cấu hình tĩnh của template. Không chứa nội dung luận giải."
+    },
+    "sections": {
+      "type": "array",
+      "required": true,
+      "min_items": 1,
+      "item_schema": {
+        "section_id": {
+          "type": "string",
+          "required": true
+        },
+        "section_key": {
+          "type": "string",
+          "required": true,
+          "description": "Khóa section. Ví dụ: intro, body, conclusion."
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "order": {
+          "type": "integer",
+          "required": true,
+          "minimum": 1
+        },
+        "enabled": {
+          "type": "boolean",
+          "required": true,
+          "default": true
+        },
+        "blocks": {
+          "type": "array",
+          "required": true,
+          "description": "Danh sách block_id thuộc section."
+        }
+      },
+      "description": "Cấu trúc phân đoạn của template."
+    },
+    "blocks": {
+      "type": "array",
+      "required": true,
+      "min_items": 1,
+      "item_schema": {
+        "block_id": {
+          "type": "string",
+          "required": true
+        },
+        "block_type": {
+          "type": "string",
+          "required": true,
+          "enum_ref": "block_types",
+          "description": "Loại block. Tham chiếu template_labels.json."
+        },
+        "label_ref": {
+          "type": "string",
+          "required": false,
+          "description": "Tham chiếu label_code trong template_labels.json."
+        },
+        "order": {
+          "type": "integer",
+          "required": true,
+          "minimum": 1
+        },
+        "content_ref": {
+          "type": "string",
+          "required": false,
+          "description": "Tham chiếu nội dung từ Interpretation Engine. Không chứa text luận giải trong template."
+        },
+        "style": {
+          "type": "object",
+          "required": false,
+          "description": "Gợi ý style render (V2-ready)."
+        },
+        "enabled": {
+          "type": "boolean",
+          "required": true,
+          "default": true
+        }
+      },
+      "description": "Các khối nội dung cấu thành template."
+    },
+    "tags": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "item_type": "string",
+      "description": "Nhãn phân loại phụ trợ cho tìm kiếm và lọc."
+    },
+    "language": {
+      "type": "string",
+      "required": true,
+      "default": "vi",
+      "description": "Mã ngôn ngữ của template."
+    },
+    "enabled": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "description": "Bật/tắt template trong Report Engine."
+    },
+    "schema_version": {
+      "type": "string",
+      "required": true,
+      "default": "1.0.0",
+      "description": "Phiên bản schema mà template tuân thủ."
+    },
+    "created_at": {
+      "type": "string",
+      "required": false,
+      "format": "date",
+      "description": "Ngày tạo (YYYY-MM-DD)."
+    },
+    "updated_at": {
+      "type": "string",
+      "required": false,
+      "format": "date",
+      "description": "Ngày cập nhật gần nhất (YYYY-MM-DD)."
+    },
+    "author": {
+      "type": "string",
+      "required": false,
+      "default": "BTE Platform",
+      "description": "Tác giả hoặc đội sở hữu template."
+    },
+    "notes": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Ghi chú kỹ thuật. Không dùng để chứa luận giải."
+    }
+  },
+  "module_ids": [
+    "01_summary",
+    "02_personality",
+    "03_career",
+    "04_wealth",
+    "05_relationship",
+    "06_health",
+    "07_children",
+    "08_useful_god",
+    "09_luck_cycle",
+    "10_yearly_fortune"
+  ],
+  "block_types": [
+    "title",
+    "subtitle",
+    "paragraph",
+    "summary",
+    "important",
+    "warning",
+    "recommendation",
+    "quote",
+    "table",
+    "list",
+    "note",
+    "divider",
+    "header",
+    "footer",
+    "callout"
+  ],
+  "index_entry_fields": [
+    "template_id",
+    "template_name",
+    "category",
+    "priority",
+    "version",
+    "enabled"
+  ],
+  "metadata_fields": [
+    "module_id",
+    "module_name",
+    "module_title",
+    "description",
+    "version",
+    "status",
+    "language",
+    "encoding",
+    "author",
+    "created_at",
+    "updated_at",
+    "schema_version"
+  ],
+  "extension_hooks": {
+    "description": "Điểm mở rộng dành cho V2. Không thay đổi cấu trúc V1 khi thêm field mới.",
+    "allowed_extensions": [
+      "layout",
+      "theme",
+      "i18n",
+      "render_hints",
+      "access_control",
+      "analytics"
+    ],
+    "rule": "Mọi field mở rộng phải đặt trong object 'extensions' của template. Không sửa field_definitions đã ổn định."
+  },
+  "validation_rules": [
+    "template_id must be unique across all modules",
+    "module must exist in module_ids",
+    "every block_id referenced in sections.blocks must exist in blocks",
+    "block_type must exist in block_types or module template_labels",
+    "conditions use AND logic by default",
+    "disabled templates must remain in index but are skipped by Report Engine",
+    "templates must not embed interpretation text; content comes via content_ref and placeholders"
+  ],
+  "template_file_naming": {
+    "pattern": "{module_short}_{nnn}.json",
+    "examples": [
+      "summary_001.json",
+      "career_012.json",
+      "luck_cycle_003.json"
+    ],
+    "note": "V1.0 chỉ định nghĩa quy tắc đặt tên. Không tạo file template thực tế trong framework này."
+  }
+}
