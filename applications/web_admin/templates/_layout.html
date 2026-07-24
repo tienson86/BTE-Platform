@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BTE Web Admin</title>
+  <link rel="stylesheet" href="/static/css/admin.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">BTE Admin</div>
+      <div class="brand-sub">Applications Web Console</div>
+      {{NAV}}
+    </aside>
+    <main class="main">
+      <button class="btn secondary menu-toggle" id="menuToggle" type="button">Menu</button>
+      <div id="globalFlash" class="flash"></div>
+      <div class="topbar">
+        <h1 id="pageTitle">Admin</h1>
+        <div class="auth-box">
+          <span class="muted" id="userLabel">Not signed in</span>
+          <button type="button" id="loginBtn">Sign in</button>
+          <button type="button" class="secondary" id="logoutBtn" style="display:none">Sign out</button>
+        </div>
+      </div>
+      {{CONTENT}}
+    </main>
+  </div>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/chrome.js"></script>
+</body>
+</html>
