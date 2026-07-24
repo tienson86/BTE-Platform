@@ -52,6 +52,34 @@
         return;
       }
 
+      if (stage === "bazi") {
+        view.classList.remove("pre");
+        view.classList.add("stage-view");
+        const render =
+          (window.BtePresenters && window.BtePresenters.bazi) || null;
+        if (render) {
+          view.innerHTML = render(payload);
+        } else {
+          view.innerHTML =
+            '<p class="muted">Bazi presenter failed to load.</p>';
+        }
+        return;
+      }
+
+      if (stage === "pattern") {
+        view.classList.remove("pre");
+        view.classList.add("stage-view");
+        const render =
+          (window.BtePresenters && window.BtePresenters.pattern) || null;
+        if (render) {
+          view.innerHTML = render(payload);
+        } else {
+          view.innerHTML =
+            '<p class="muted">Pattern presenter failed to load.</p>';
+        }
+        return;
+      }
+
       view.classList.add("pre");
       view.classList.remove("stage-view");
       view.textContent =
