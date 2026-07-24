@@ -22,6 +22,7 @@ from applications.api.routes import auth as auth_router
 from applications.api.routes import cases as cases_router
 from applications.api.routes import customers as customers_router
 from applications.api.routes import health as health_router
+from applications.api.routes import license as license_router
 from applications.api.routes import user as user_router
 from applications.api.routes import v1 as v1_router
 from applications.monitoring import register_ops_middleware
@@ -56,6 +57,7 @@ def create_app() -> FastAPI:
         {"name": "Customers", "description": "Customer management (WP11)"},
         {"name": "Cases", "description": "Case / analysis history (WP11)"},
         {"name": "Admin", "description": "Administration & operations (WP13)"},
+        {"name": "License", "description": "Licensing & product editions (WP14)"},
         {"name": "engines", "description": "Engine orchestration endpoints"},
         {"name": "health", "description": "Liveness"},
     ]
@@ -68,6 +70,7 @@ def create_app() -> FastAPI:
     app.include_router(customers_router.router, prefix=settings.api_prefix)
     app.include_router(cases_router.router, prefix=settings.api_prefix)
     app.include_router(admin_router.router, prefix=settings.api_prefix)
+    app.include_router(license_router.router, prefix=settings.api_prefix)
     app.include_router(v1_router.router, prefix=settings.api_prefix)
 
     def custom_openapi():
