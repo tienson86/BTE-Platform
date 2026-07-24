@@ -1,0 +1,344 @@
+{
+  "schema_id": "sentence_library_schema",
+  "schema_name": "BTE Sentence Library Schema",
+  "schema_version": "1.0.0",
+  "encoding": "UTF-8",
+  "language": "vi",
+  "description": "Schema chuẩn dùng chung cho toàn bộ Sentence trong Knowledge Base 07_sentence_library. Interpretation Engine dựa vào schema này để load, validate và chọn câu mẫu. Không chứa nội dung luận giải thật.",
+  "status": "active",
+  "compatibility": {
+    "min_engine_version": "1.0.0",
+    "forward_compatible": true,
+    "designed_for": [
+      "V1",
+      "V2"
+    ]
+  },
+  "field_definitions": {
+    "sentence_id": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "pattern": "^[a-z_]+_[0-9]{3,}$",
+      "description": "Định danh duy nhất của sentence. Ví dụ: intro_001, career_012."
+    },
+    "sentence_name": {
+      "type": "string",
+      "required": true,
+      "description": "Tên kỹ thuật của sentence (snake_case)."
+    },
+    "module": {
+      "type": "string",
+      "required": true,
+      "enum_ref": "module_ids",
+      "description": "Module sở hữu sentence. Phải khớp module_id trong metadata.json."
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "description": "Nhóm phân loại bên trong module."
+    },
+    "intent": {
+      "type": "string",
+      "required": true,
+      "enum_ref": "intents",
+      "description": "Mục đích của câu (introduce, describe, warn, ...)."
+    },
+    "tone": {
+      "type": "string",
+      "required": true,
+      "enum_ref": "tones",
+      "default": "neutral",
+      "description": "Phong cách diễn đạt (neutral, positive, professional, ...)."
+    },
+    "priority": {
+      "type": "integer",
+      "required": true,
+      "minimum": 0,
+      "maximum": 100,
+      "default": 50,
+      "description": "Độ ưu tiên chọn sentence trong cùng module. Số lớn hơn được ưu tiên trước."
+    },
+    "condition_group": {
+      "type": "string",
+      "required": false,
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "default": "AND",
+      "description": "Cách kết hợp conditions. Mặc định AND. Dự phòng cho V2."
+    },
+    "conditions": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "item_schema": {
+        "condition_id": {
+          "type": "string",
+          "required": true
+        },
+        "field": {
+          "type": "string",
+          "required": true,
+          "description": "Trường dữ liệu từ Rule / Interpretation context."
+        },
+        "operator": {
+          "type": "string",
+          "required": true,
+          "enum": [
+            "eq",
+            "neq",
+            "in",
+            "not_in",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "exists",
+            "not_exists"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "array",
+            "null"
+          ],
+          "required": false
+        }
+      },
+      "description": "Điều kiện kích hoạt sentence. Kết hợp theo condition_group."
+    },
+    "placeholders": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "item_schema": {
+        "key": {
+          "type": "string",
+          "required": true,
+          "pattern": "^\\{\\{[a-z0-9_]+\\}\\}$",
+          "description": "Placeholder token. Ví dụ: {{day_master}}."
+        },
+        "source": {
+          "type": "string",
+          "required": true,
+          "description": "Đường dẫn dữ liệu nguồn. Ví dụ: context.day_master."
+        },
+        "fallback": {
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Giá trị thay thế khi thiếu dữ liệu nguồn."
+        }
+      },
+      "description": "Danh sách placeholder được thay thế lúc compose câu."
+    },
+    "variables": {
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Biến cấu hình tĩnh của sentence. Không chứa nội dung luận giải."
+    },
+    "sentence_pattern": {
+      "type": "string",
+      "required": true,
+      "description": "Mẫu câu với placeholder. Ví dụ schema: '{{day_master}} gặp {{pattern_name}}...'. Không chứa thư viện câu thật trong Framework V1.0."
+    },
+    "label_ref": {
+      "type": "string",
+      "required": false,
+      "enum_ref": "label_codes",
+      "description": "Logical reference tới label_code trong sentence_labels.json."
+    },
+    "language": {
+      "type": "string",
+      "required": true,
+      "default": "vi",
+      "description": "Mã ngôn ngữ của sentence."
+    },
+    "enabled": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "description": "Bật/tắt sentence trong Interpretation Engine."
+    },
+    "schema_version": {
+      "type": "string",
+      "required": true,
+      "default": "1.0.0",
+      "description": "Phiên bản schema mà sentence tuân thủ."
+    },
+    "created_at": {
+      "type": "string",
+      "required": false,
+      "format": "date",
+      "description": "Ngày tạo (YYYY-MM-DD)."
+    },
+    "updated_at": {
+      "type": "string",
+      "required": false,
+      "format": "date",
+      "description": "Ngày cập nhật gần nhất (YYYY-MM-DD)."
+    },
+    "author": {
+      "type": "string",
+      "required": false,
+      "default": "BTE Platform",
+      "description": "Tác giả hoặc đội sở hữu sentence."
+    },
+    "notes": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Ghi chú kỹ thuật. Không dùng để chứa luận giải."
+    },
+    "extensions": {
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Điểm mở rộng V2. Field mới đặt tại đây."
+    }
+  },
+  "module_ids": [
+    "01_intro",
+    "02_transition",
+    "03_strength",
+    "04_pattern",
+    "05_useful_god",
+    "06_personality",
+    "07_career",
+    "08_wealth",
+    "09_relationship",
+    "10_health",
+    "11_children",
+    "12_luck_cycle",
+    "13_yearly",
+    "14_conclusion"
+  ],
+  "intents": [
+    "introduce",
+    "describe",
+    "explain",
+    "compare",
+    "warn",
+    "recommend",
+    "summarize",
+    "transition",
+    "conclude"
+  ],
+  "tones": [
+    "neutral",
+    "positive",
+    "negative",
+    "professional",
+    "friendly",
+    "serious"
+  ],
+  "label_codes": [
+    "intro",
+    "transition",
+    "description",
+    "analysis",
+    "comparison",
+    "recommendation",
+    "warning",
+    "summary",
+    "conclusion",
+    "emphasis",
+    "neutral",
+    "positive",
+    "negative"
+  ],
+  "index_entry_fields": [
+    "sentence_id",
+    "sentence_name",
+    "category",
+    "priority",
+    "version",
+    "enabled",
+    "file_ref"
+  ],
+  "metadata_fields": [
+    "module_id",
+    "module_name",
+    "module_title",
+    "description",
+    "version",
+    "status",
+    "language",
+    "encoding",
+    "author",
+    "created_at",
+    "updated_at",
+    "schema_version",
+    "render_version",
+    "dependencies",
+    "supported_output"
+  ],
+  "extension_hooks": {
+    "description": "Điểm mở rộng dành cho V2. Không thay đổi cấu trúc V1 khi thêm field mới.",
+    "allowed_extensions": [
+      "i18n",
+      "style_hints",
+      "length_limit",
+      "audience",
+      "access_control",
+      "analytics"
+    ],
+    "rule": "Mọi field mở rộng phải đặt trong object 'extensions' của sentence. Không sửa field_definitions đã ổn định."
+  },
+  "validation_rules": [
+    "sentence_id must be unique across all modules",
+    "module must exist in module_ids",
+    "intent must exist in intents",
+    "tone must exist in tones",
+    "label_ref must be a logical label_code when present",
+    "condition_group defaults to AND; OR reserved for V2 readiness",
+    "placeholders.key must match {{snake_case}} pattern",
+    "sentence_pattern may reference placeholders but Framework V1.0 stores only schema examples",
+    "disabled sentences must remain in index but are skipped by Interpretation Engine",
+    "sentences must not embed hard-coded Bazi / Ten God / Useful God rules"
+  ],
+  "sentence_file_naming": {
+    "pattern": "{module_short}_{nnn}.json",
+    "examples": [
+      "intro_001.json",
+      "career_012.json",
+      "luck_cycle_003.json"
+    ],
+    "note": "V1.0 chỉ định nghĩa quy tắc đặt tên. Không tạo file sentence thực tế trong framework này."
+  },
+  "naming_conventions": {
+    "sentence_id": {
+      "pattern": "{module_short}_{nnn}",
+      "examples": [
+        "intro_001",
+        "strength_012",
+        "conclusion_001"
+      ]
+    },
+    "label_ref": {
+      "pattern": "{label_code}",
+      "examples": [
+        "intro",
+        "analysis",
+        "recommendation",
+        "warning"
+      ]
+    },
+    "placeholder_key": {
+      "pattern": "{{snake_case}}",
+      "examples": [
+        "{{day_master}}",
+        "{{pattern_name}}",
+        "{{useful_god}}",
+        "{{score}}",
+        "{{career}}"
+      ]
+    }
+  }
+}

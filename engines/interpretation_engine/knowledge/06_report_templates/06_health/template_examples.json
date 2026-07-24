@@ -18,6 +18,7 @@
         "description": "Ví dụ cấu trúc template. Placeholder only.",
         "version": "1.0.0",
         "priority": 50,
+        "condition_group": "AND",
         "conditions": [
           {
             "condition_id": "C001",
@@ -38,71 +39,72 @@
             "fallback": "health"
           }
         ],
-        "variables": {
+        "render_config": {
           "layout": "standard",
-          "max_blocks": 20
+          "max_blocks": 20,
+          "theme": "default"
         },
         "sections": [
           {
-            "section_id": "S001",
+            "section_id": "health_intro",
             "section_key": "intro",
             "title": "Intro",
             "order": 1,
             "enabled": true,
             "blocks": [
-              "B001",
-              "B002"
+              "health_B001",
+              "health_B002"
             ]
           },
           {
-            "section_id": "S002",
+            "section_id": "health_body",
             "section_key": "body",
             "title": "Body",
             "order": 2,
             "enabled": true,
             "blocks": [
-              "B003",
-              "B004"
+              "health_B003",
+              "health_B004"
             ]
           }
         ],
         "blocks": [
           {
-            "block_id": "B001",
+            "block_id": "health_B001",
             "block_type": "title",
-            "label_ref": "HEAL001",
+            "label_ref": "title",
             "order": 1,
             "content_ref": "interpretation.health.title",
-            "style": {
+            "render_style": {
               "weight": "bold"
             },
             "enabled": true
           },
           {
-            "block_id": "B002",
+            "block_id": "health_B002",
             "block_type": "summary",
-            "label_ref": "HEAL004",
+            "label_ref": "summary",
             "order": 2,
             "content_ref": "interpretation.health.summary",
-            "style": {},
+            "render_style": {},
             "enabled": true
           },
           {
-            "block_id": "B003",
+            "block_id": "health_B003",
             "block_type": "paragraph",
-            "label_ref": "HEAL003",
+            "label_ref": "paragraph",
             "order": 3,
             "content_ref": "interpretation.health.body",
-            "style": {},
+            "render_style": {},
             "enabled": true
           },
           {
-            "block_id": "B004",
+            "block_id": "health_B004",
             "block_type": "recommendation",
-            "label_ref": "HEAL007",
+            "label_ref": "recommendation",
             "order": 4,
             "content_ref": "interpretation.health.recommendation",
-            "style": {},
+            "render_style": {},
             "enabled": true
           }
         ],

@@ -60,6 +60,13 @@
       "default": 50,
       "description": "Độ ưu tiên render trong cùng module. Số lớn hơn được ưu tiên trước."
     },
+    "condition_group": {
+      "type": "string",
+      "required": false,
+      "enum": ["AND", "OR"],
+      "default": "AND",
+      "description": "Cách kết hợp các phần tử trong conditions. Mặc định AND. Dự phòng cho V2; V1 không đổi logic hiện tại."
+    },
     "conditions": {
       "type": "array",
       "required": false,
@@ -84,7 +91,7 @@
           "required": false
         }
       },
-      "description": "Điều kiện kích hoạt template. Report Engine chỉ render khi tất cả conditions thỏa (AND)."
+      "description": "Điều kiện kích hoạt template. Kết hợp theo condition_group (mặc định AND)."
     },
     "placeholders": {
       "type": "array",
@@ -111,11 +118,12 @@
       },
       "description": "Danh sách placeholder được thay thế lúc render."
     },
-    "variables": {
+    "render_config": {
       "type": "object",
       "required": false,
       "default": {},
-      "description": "Biến cấu hình tĩnh của template. Không chứa nội dung luận giải."
+      "description": "Cấu hình render của template (layout, max_blocks, theme, ...). Không chứa nội dung luận giải. Thay thế field cũ 'variables'.",
+      "known_keys": ["layout", "max_blocks", "theme"]
     },
     "sections": {
       "type": "array",
@@ -124,7 +132,9 @@
       "item_schema": {
         "section_id": {
           "type": "string",
-          "required": true
+          "required": true,
+          "pattern": "^[a-z]+_[a-z_]+$",
+          "description": "ID semantic của section. Ví dụ: summary_intro, career_analysis. Không dùng số thứ tự làm định danh chính."
         },
         "section_key": {
           "type": "string",
@@ -160,7 +170,9 @@
       "item_schema": {
         "block_id": {
           "type": "string",
-          "required": true
+          "required": true,
+          "pattern": "^[a-z]+_B[0-9]{3,}$",
+          "description": "ID semantic của block. Ví dụ: summary_B001, career_B002. Tránh trùng ID giữa module."
         },
         "block_type": {
           "type": "string",
@@ -171,7 +183,8 @@
         "label_ref": {
           "type": "string",
           "required": false,
-          "description": "Tham chiếu label_code trong template_labels.json."
+          "enum_ref": "block_types",
+          "description": "Logical reference tới label_code (title, paragraph, warning, ...). Không dùng ID kỹ thuật như SUML001."
         },
         "order": {
           "type": "integer",
@@ -183,10 +196,10 @@
           "required": false,
           "description": "Tham chiếu nội dung từ Interpretation Engine. Không chứa text luận giải trong template."
         },
-        "style": {
+        "render_style": {
           "type": "object",
           "required": false,
-          "description": "Gợi ý style render (V2-ready)."
+          "description": "Gợi ý style render theo output (PDF, HTML, Markdown, Word, ...). Thay thế field cũ 'style'."
         },
         "enabled": {
           "type": "boolean",
@@ -295,7 +308,10 @@
     "author",
     "created_at",
     "updated_at",
-    "schema_version"
+    "schema_version",
+    "dependencies",
+    "supported_output",
+    "render_version"
   ],
   "extension_hooks": {
     "description": "Điểm mở rộng dành cho V2. Không thay đổi cấu trúc V1 khi thêm field mới.",
@@ -312,9 +328,12 @@
   "validation_rules": [
     "template_id must be unique across all modules",
     "module must exist in module_ids",
+    "section_id must be semantic ({module_short}_{section_key})",
+    "block_id must be semantic ({module_short}_B{nnn})",
     "every block_id referenced in sections.blocks must exist in blocks",
     "block_type must exist in block_types or module template_labels",
-    "conditions use AND logic by default",
+    "label_ref must be a logical label_code (not technical label id)",
+    "condition_group defaults to AND; OR reserved for V2 readiness",
     "disabled templates must remain in index but are skipped by Report Engine",
     "templates must not embed interpretation text; content comes via content_ref and placeholders"
   ],
@@ -326,5 +345,19 @@
       "luck_cycle_003.json"
     ],
     "note": "V1.0 chỉ định nghĩa quy tắc đặt tên. Không tạo file template thực tế trong framework này."
+  },
+  "naming_conventions": {
+    "section_id": {
+      "pattern": "{module_short}_{section_key}",
+      "examples": ["summary_intro", "summary_body", "career_analysis", "career_result"]
+    },
+    "block_id": {
+      "pattern": "{module_short}_B{nnn}",
+      "examples": ["summary_B001", "career_B001", "wealth_B002"]
+    },
+    "label_ref": {
+      "pattern": "{label_code}",
+      "examples": ["title", "paragraph", "recommendation", "warning"]
+    }
   }
 }

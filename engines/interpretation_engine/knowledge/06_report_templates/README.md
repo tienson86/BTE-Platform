@@ -93,10 +93,26 @@ File quan trọng nhất của Framework.
 
 - `template_id`, `template_name`, `module`, `category`
 - `title`, `description`, `version`, `priority`
-- `conditions`, `placeholders`, `variables`
+- `condition_group`, `conditions`, `placeholders`, `render_config`
 - `sections`, `blocks`
 - `tags`, `language`, `enabled`
 - `schema_version`, metadata phụ trợ
+
+**Quy ước ID:**
+
+| Field | Quy ước | Ví dụ |
+|-------|---------|-------|
+| `section_id` | `{module_short}_{section_key}` | `summary_intro`, `career_analysis` |
+| `block_id` | `{module_short}_B{nnn}` | `summary_B001`, `wealth_B002` |
+| `label_ref` | logical `label_code` | `title`, `paragraph`, `warning` |
+
+**Render fields:**
+
+| Field | Mục đích |
+|-------|----------|
+| `condition_group` | `AND` (mặc định) hoặc `OR` — sẵn sàng V2 |
+| `render_config` | Cấu hình render (`layout`, `max_blocks`, `theme`) |
+| `render_style` | Style theo output (PDF / HTML / Markdown / Word) |
 
 **Quy tắc:**
 
@@ -104,6 +120,7 @@ File quan trọng nhất của Framework.
 - Không copy schema vào từng module
 - Mọi template tương lai phải tuân thủ schema này
 - Thiết kế hướng V2 qua `extension_hooks`
+- `schema_version` giữ `1.0.0` (không bump trong đợt freeze tweak này)
 
 ---
 
@@ -117,6 +134,9 @@ Bao gồm:
 - `description`, `version`, `status`
 - `language`, `encoding`, `author`
 - `created_at`, `updated_at`, `schema_version`
+- `dependencies` — engine phụ thuộc (`interpretation_engine`, `priority_engine`, `report_engine`)
+- `supported_output` — định dạng đầu ra (`pdf`, `html`, `markdown`, `json`)
+- `render_version` — phiên bản render contract (`1.0.0`), **không** thay `schema_version`
 
 Dùng để Report Engine nhận diện module và kiểm tra compatibility.
 
@@ -145,11 +165,14 @@ Khi mở rộng lên hàng nghìn template, Report Engine chỉ cần đọc ind
 
 Dictionary kiểu hiển thị của module.
 
-Ví dụ các loại label:
+Ví dụ các loại label (`label_code`):
 
 - `title`, `subtitle`, `paragraph`
 - `summary`, `important`, `warning`
-- `recommendation`, `quote`, `table`, `note`
+- `recommendation`, `quote`, `table`, `list`, `note`
+- `divider`, `header`, `footer`, `callout`
+
+`label_ref` trong block tham chiếu **logical** `label_code`, không dùng ID kỹ thuật (`SUML001`, ...).
 
 Labels mô tả **cách render block**, không chứa luận giải.
 
@@ -164,6 +187,14 @@ Mục đích:
 - Giúp developer hiểu cấu trúc
 - Dùng cho validation / smoke test
 - Không phải nội dung báo cáo thật
+
+Example tuân thủ:
+
+- semantic `section_id` / `block_id`
+- logical `label_ref`
+- `condition_group`
+- `render_config`
+- `render_style`
 
 ---
 
@@ -181,7 +212,8 @@ Mục đích:
    → chọn template phù hợp theo module / conditions / priority
    → validate theo template_schema.json
    → bind placeholders từ Interpretation Result
-   → render sections / blocks theo labels
+   → render sections / blocks theo labels + render_style
+   → xuất theo supported_output
 
 4. Final Report
    → báo cáo hoàn chỉnh cho người dùng
@@ -198,7 +230,9 @@ Mục đích:
 5. Thêm template mới = thêm file JSON + cập nhật `template_index.json`.
 6. Không đổi tên field đã ổn định; mở rộng qua `extensions` (V2).
 7. Encoding UTF-8, JSON hợp lệ.
-8. Giữ backward compatibility.
+8. Giữ backward compatibility trong phạm vi freeze V1.0.
+9. `section_id` / `block_id` phải semantic theo module.
+10. `label_ref` dùng logical `label_code`.
 
 ---
 
@@ -223,7 +257,8 @@ V1.0 chỉ định nghĩa quy tắc. **Không** tạo các file template thực 
 Framework V1.0 đã chuẩn bị:
 
 - `extension_hooks` trong schema
-- `style` / `render_hints` sẵn sàng trên block
+- `condition_group` (`AND` / `OR`)
+- `render_config` / `render_style` sẵn sàng multi-output
 - Index tách khỏi nội dung template
 - Module isolation (thêm module mới không phá module cũ)
 
@@ -241,7 +276,8 @@ Khi scale lên hàng nghìn template:
 |-----|---------|
 | Framework version | 1.0.0 |
 | Schema version | 1.0.0 |
-| Status | active |
+| Render version | 1.0.0 |
+| Status | active (pre-freeze) |
 | Encoding | UTF-8 |
 | Language | vi |
 

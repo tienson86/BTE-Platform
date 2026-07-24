@@ -1,0 +1,73 @@
+{
+  "module_id": "05_useful_god",
+  "examples_version": "1.0.0",
+  "schema_ref": "../sentence_schema.json",
+  "description": "Example minh họa schema. Không phải câu luận giải thật.",
+  "examples": [
+    {
+      "id": "UGDX001",
+      "example_code": "schema_illustration_001",
+      "purpose": "illustrate_sentence_schema",
+      "is_real_content": false,
+      "sentence": {
+        "sentence_id": "useful_god_000",
+        "sentence_name": "useful_god_schema_example",
+        "module": "05_useful_god",
+        "category": "useful_god",
+        "intent": "recommend",
+        "tone": "neutral",
+        "priority": 50,
+        "condition_group": "AND",
+        "conditions": [
+          {
+            "condition_id": "C001",
+            "field": "context.module_ready",
+            "operator": "eq",
+            "value": true
+          }
+        ],
+        "placeholders": [
+          {
+            "key": "{{day_master}}",
+            "source": "context.day_master",
+            "fallback": ""
+          },
+          {
+            "key": "{{pattern_name}}",
+            "source": "context.pattern_name",
+            "fallback": ""
+          },
+          {
+            "key": "{{useful_god}}",
+            "source": "context.useful_god",
+            "fallback": ""
+          },
+          {
+            "key": "{{score}}",
+            "source": "context.score",
+            "fallback": ""
+          },
+          {
+            "key": "{{career}}",
+            "source": "context.career",
+            "fallback": ""
+          }
+        ],
+        "variables": {
+          "max_length": 240,
+          "style": "standard"
+        },
+        "sentence_pattern": "[SCHEMA EXAMPLE] {{day_master}} / {{pattern_name}} / {{useful_god}} / {{score}} / {{career}} ...",
+        "label_ref": "description",
+        "language": "vi",
+        "enabled": false,
+        "schema_version": "1.0.0",
+        "created_at": "2026-07-24",
+        "updated_at": "2026-07-24",
+        "author": "BTE Platform",
+        "notes": "enabled=false vì đây chỉ là example schema, không dùng để compose luận giải thật.",
+        "extensions": {}
+      }
+    }
+  ]
+}

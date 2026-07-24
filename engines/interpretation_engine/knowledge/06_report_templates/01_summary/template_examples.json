@@ -18,6 +18,7 @@
         "description": "Ví dụ cấu trúc template. Placeholder only.",
         "version": "1.0.0",
         "priority": 50,
+        "condition_group": "AND",
         "conditions": [
           {
             "condition_id": "C001",
@@ -38,71 +39,72 @@
             "fallback": "overview"
           }
         ],
-        "variables": {
+        "render_config": {
           "layout": "standard",
-          "max_blocks": 20
+          "max_blocks": 20,
+          "theme": "default"
         },
         "sections": [
           {
-            "section_id": "S001",
+            "section_id": "summary_intro",
             "section_key": "intro",
             "title": "Intro",
             "order": 1,
             "enabled": true,
             "blocks": [
-              "B001",
-              "B002"
+              "summary_B001",
+              "summary_B002"
             ]
           },
           {
-            "section_id": "S002",
+            "section_id": "summary_body",
             "section_key": "body",
             "title": "Body",
             "order": 2,
             "enabled": true,
             "blocks": [
-              "B003",
-              "B004"
+              "summary_B003",
+              "summary_B004"
             ]
           }
         ],
         "blocks": [
           {
-            "block_id": "B001",
+            "block_id": "summary_B001",
             "block_type": "title",
-            "label_ref": "SUML001",
+            "label_ref": "title",
             "order": 1,
             "content_ref": "interpretation.summary.title",
-            "style": {
+            "render_style": {
               "weight": "bold"
             },
             "enabled": true
           },
           {
-            "block_id": "B002",
+            "block_id": "summary_B002",
             "block_type": "summary",
-            "label_ref": "SUML004",
+            "label_ref": "summary",
             "order": 2,
             "content_ref": "interpretation.summary.summary",
-            "style": {},
+            "render_style": {},
             "enabled": true
           },
           {
-            "block_id": "B003",
+            "block_id": "summary_B003",
             "block_type": "paragraph",
-            "label_ref": "SUML003",
+            "label_ref": "paragraph",
             "order": 3,
             "content_ref": "interpretation.summary.body",
-            "style": {},
+            "render_style": {},
             "enabled": true
           },
           {
-            "block_id": "B004",
+            "block_id": "summary_B004",
             "block_type": "recommendation",
-            "label_ref": "SUML007",
+            "label_ref": "recommendation",
             "order": 4,
             "content_ref": "interpretation.summary.recommendation",
-            "style": {},
+            "render_style": {},
             "enabled": true
           }
         ],

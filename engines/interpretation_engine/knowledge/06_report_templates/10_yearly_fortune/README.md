@@ -54,6 +54,23 @@ Schema dùng chung nằm ở:
 
 ---
 
+## Quy ước ID (Architecture Review)
+
+- `section_id`: semantic — ví dụ `yearly_fortune_intro`, `yearly_fortune_body`
+- `block_id`: semantic — ví dụ `yearly_fortune_B001`, `yearly_fortune_B002`
+- `label_ref`: logical `label_code` — ví dụ `title`, `paragraph`, `recommendation`
+- `condition_group`: `AND` (mặc định) hoặc `OR` (V2-ready)
+- `render_config`: cấu hình render (`layout`, `max_blocks`, `theme`)
+- `render_style`: style theo output (PDF / HTML / Markdown / ...)
+
+Metadata bổ sung:
+
+- `dependencies`: interpretation_engine, priority_engine, report_engine
+- `supported_output`: pdf, html, markdown, json
+- `render_version`: 1.0.0 (không thay `schema_version`)
+
+---
+
 ## Quy tắc đặt template (tương lai)
 
 ```text
@@ -92,6 +109,8 @@ Khi thêm template thật:
 | module_title | Vận Hạn Năm |
 | version | 1.0.0 |
 | schema_version | 1.0.0 |
+| render_version | 1.0.0 |
+| supported_output | pdf, html, markdown, json |
 | status | active |
 | language | vi |
 
