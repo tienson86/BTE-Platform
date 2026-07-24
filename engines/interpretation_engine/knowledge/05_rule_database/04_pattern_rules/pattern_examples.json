@@ -1,0 +1,1457 @@
+[
+    {
+      "id": "PEX001",
+      "example_name": "Chính Quan Cách cơ bản",
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "pattern_code": "zheng_guan_pattern",
+        "pattern_strength": "strong",
+        "confidence": "high"
+      }
+    },
+  
+    {
+      "id": "PEX002",
+      "example_name": "Chính Tài Cách cơ bản",
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai"
+        ],
+        "supported_ten_gods": [
+          "zheng_cai"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "pattern_code": "zheng_cai_pattern",
+        "pattern_strength": "strong",
+        "confidence": "high"
+      }
+    },
+  
+    {
+      "id": "PEX003",
+      "example_name": "Chính Ấn Cách cơ bản",
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "weak"
+      },
+  
+      "expected": {
+        "pattern_code": "zheng_yin_pattern",
+        "pattern_strength": "strong",
+        "confidence": "high"
+      }
+    },
+  
+    {
+      "id": "PEX004",
+      "example_name": "Thực Thần Cách cơ bản",
+  
+      "input": {
+        "month_commander_ten_god": "shi_shen",
+        "visible_ten_gods": [
+          "shi_shen"
+        ],
+        "supported_ten_gods": [
+          "shi_shen"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "strong"
+      },
+  
+      "expected": {
+        "pattern_code": "shi_shen_pattern",
+        "pattern_strength": "strong",
+        "confidence": "high"
+      }
+    },
+  
+    {
+      "id": "PEX005",
+      "example_name": "Tỷ Kiên Cách cơ bản",
+  
+      "input": {
+        "month_commander_ten_god": "bi_jian",
+        "visible_ten_gods": [
+          "bi_jian"
+        ],
+        "supported_ten_gods": [
+          "bi_jian"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "strong"
+      },
+  
+      "expected": {
+        "pattern_code": "bi_jian_pattern",
+        "pattern_strength": "moderate",
+        "confidence": "medium"
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX006",
+      "example_name": "Chính Quan và Chính Ấn cùng xuất hiện",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "zheng_yin_pattern"
+        ],
+        "final_pattern": "zheng_guan_pattern",
+        "selection_reason": "month_commander_match"
+      }
+    },
+  
+    {
+      "id": "PEX007",
+      "example_name": "Chính Tài và Thiên Tài đồng thời xuất hiện",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai",
+          "pian_cai"
+        ],
+        "supported_ten_gods": [
+          "zheng_cai"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_cai_pattern",
+          "pian_cai_pattern"
+        ],
+        "final_pattern": "zheng_cai_pattern",
+        "selection_reason": "higher_score"
+      }
+    },
+  
+    {
+      "id": "PEX008",
+      "example_name": "Thực Thần và Thương Quan cạnh tranh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "shi_shen",
+        "visible_ten_gods": [
+          "shi_shen",
+          "shang_guan"
+        ],
+        "supported_ten_gods": [
+          "shi_shen"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "strong"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "shi_shen_pattern",
+          "shang_guan_pattern"
+        ],
+        "final_pattern": "shi_shen_pattern",
+        "selection_reason": "month_commander_match"
+      }
+    },
+  
+    {
+      "id": "PEX009",
+      "example_name": "Hai ứng viên cùng điểm",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin",
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin",
+          "zheng_guan"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_yin_pattern",
+          "zheng_guan_pattern"
+        ],
+        "tie_break_applied": true,
+        "final_pattern": "zheng_yin_pattern",
+        "selection_reason": "candidate_order"
+      }
+    },
+  
+    {
+      "id": "PEX010",
+      "example_name": "Ba ứng viên hợp lệ",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai",
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_cai",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_cai_pattern",
+          "zheng_guan_pattern",
+          "zheng_yin_pattern"
+        ],
+        "final_pattern": "zheng_cai_pattern",
+        "selection_reason": "highest_priority"
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX011",
+      "example_name": "Chính Quan bị phá cách",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan"
+        ],
+        "destroyed_ten_gods": [
+          "zheng_guan"
+        ],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern"
+        ],
+        "final_pattern": "zheng_guan_pattern",
+        "pattern_strength": "weak",
+        "confidence": "medium",
+        "expected_reason_codes": [
+          "month_commander_match",
+          "pattern_destroyed"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX012",
+      "example_name": "Chính Tài bị xung phá",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai"
+        ],
+        "supported_ten_gods": [
+          "zheng_cai"
+        ],
+        "destroyed_ten_gods": [
+          "zheng_cai"
+        ],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_cai_pattern"
+        ],
+        "final_pattern": "zheng_cai_pattern",
+        "pattern_strength": "weak",
+        "confidence": "medium",
+        "expected_reason_codes": [
+          "pattern_destroyed"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX013",
+      "example_name": "Thực Thần bị Thương Quan làm giảm lực",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "shi_shen",
+        "visible_ten_gods": [
+          "shi_shen",
+          "shang_guan"
+        ],
+        "supported_ten_gods": [
+          "shi_shen"
+        ],
+        "destroyed_ten_gods": [
+          "shi_shen"
+        ],
+        "day_master_strength": "strong"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "shi_shen_pattern"
+        ],
+        "final_pattern": "shi_shen_pattern",
+        "pattern_strength": "moderate",
+        "confidence": "medium",
+        "expected_reason_codes": [
+          "pattern_destroyed",
+          "high_visibility"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX014",
+      "example_name": "Hai cách cục cùng bị phá",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "zheng_yin_pattern"
+        ],
+        "tie_break_applied": true,
+        "final_pattern": "zheng_guan_pattern",
+        "pattern_strength": "weak",
+        "confidence": "low",
+        "expected_reason_codes": [
+          "multiple_pattern_destroyed",
+          "month_commander_match"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX015",
+      "example_name": "Không còn cách cục hợp lệ sau khi phá cách",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [
+          "zheng_guan"
+        ],
+        "day_master_strength": "weak"
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "pattern_strength": "invalid",
+        "confidence": "very_low",
+        "expected_reason_codes": [
+          "pattern_destroyed",
+          "no_valid_pattern"
+        ]
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX016",
+      "example_name": "Tòng Vượng Cách chuẩn",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "bi_jian",
+        "visible_ten_gods": [
+          "bi_jian",
+          "jie_cai"
+        ],
+        "supported_ten_gods": [
+          "bi_jian",
+          "jie_cai"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "extremely_strong",
+        "special_flags": [
+          "cong_qiang"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "cong_ge_pattern"
+        ],
+        "final_pattern": "cong_ge_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "expected_reason_codes": [
+          "follow_pattern_confirmed",
+          "strong_root",
+          "high_consistency"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX017",
+      "example_name": "Tòng Nhược Cách chuẩn",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai",
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "extremely_weak",
+        "special_flags": [
+          "cong_ruo"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "cong_ge_pattern"
+        ],
+        "final_pattern": "cong_ge_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "expected_reason_codes": [
+          "follow_pattern_confirmed",
+          "high_consistency"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX018",
+      "example_name": "Giả Tòng do còn một gốc trợ thân",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai"
+        ],
+        "supported_ten_gods": [
+          "bi_jian"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "weak",
+        "special_flags": [
+          "jia_se"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "jia_se_pattern"
+        ],
+        "final_pattern": "jia_se_pattern",
+        "pattern_strength": "moderate",
+        "confidence": "medium",
+        "expected_reason_codes": [
+          "follow_pattern_incomplete"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX019",
+      "example_name": "Tòng Cách bị phá",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "bi_jian",
+        "visible_ten_gods": [
+          "bi_jian",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "bi_jian"
+        ],
+        "destroyed_ten_gods": [
+          "bi_jian"
+        ],
+        "day_master_strength": "strong",
+        "special_flags": [
+          "cong_qiang"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "cong_ge_pattern"
+        ],
+        "final_pattern": "cong_ge_pattern",
+        "pattern_strength": "weak",
+        "confidence": "low",
+        "expected_reason_codes": [
+          "pattern_destroyed",
+          "follow_pattern_weakened"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX020",
+      "example_name": "Tòng Cách và Chính Quan cùng tồn tại",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "bi_jian"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "extremely_strong",
+        "special_flags": [
+          "cong_qiang"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "cong_ge_pattern"
+        ],
+        "final_pattern": "cong_ge_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "expected_reason_codes": [
+          "follow_pattern_confirmed",
+          "override_pattern_detected"
+        ]
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX021",
+      "example_name": "Hóa Khí Cách hoàn chỉnh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "hua_qi_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "expected_reason_codes": [
+          "transformation_pattern_confirmed",
+          "complete_pattern_structure",
+          "special_pattern_bonus"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX022",
+      "example_name": "Hóa Khí chưa hoàn chỉnh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "hua_qi_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "pattern_strength": "moderate",
+        "confidence": "medium",
+        "expected_reason_codes": [
+          "transformation_pattern_confirmed"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX023",
+      "example_name": "Hóa Khí bị phá",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [
+          "zheng_yin"
+        ],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "hua_qi_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "pattern_strength": "weak",
+        "confidence": "low",
+        "expected_reason_codes": [
+          "pattern_destroyed",
+          "transformation_pattern_confirmed"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX024",
+      "example_name": "Hóa Khí và Chính Quan cùng tồn tại",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "hua_qi_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "expected_reason_codes": [
+          "transformation_pattern_confirmed",
+          "override_pattern_detected"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX025",
+      "example_name": "Hóa Khí và Tòng Cách cạnh tranh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "bi_jian",
+        "visible_ten_gods": [
+          "bi_jian",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "bi_jian",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "extremely_strong",
+        "special_flags": [
+          "hua_qi",
+          "cong_qiang"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "hua_qi_pattern",
+          "cong_ge_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "expected_reason_codes": [
+          "transformation_pattern_confirmed",
+          "override_pattern_detected",
+          "highest_priority"
+        ]
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX026",
+      "example_name": "Ưu tiên Hóa Khí hơn Chính Cách",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "hua_qi_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "priority_level": "level_5",
+        "expected_reason_codes": [
+          "override_pattern_detected",
+          "highest_priority"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX027",
+      "example_name": "Ưu tiên Tòng Cách hơn Chính Cách",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai",
+          "bi_jian"
+        ],
+        "supported_ten_gods": [
+          "bi_jian"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "extremely_strong",
+        "special_flags": [
+          "cong_qiang"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_cai_pattern",
+          "cong_ge_pattern"
+        ],
+        "final_pattern": "cong_ge_pattern",
+        "priority_level": "level_4",
+        "expected_reason_codes": [
+          "follow_pattern_confirmed",
+          "highest_priority"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX028",
+      "example_name": "Hai Chính Cách cùng mức ưu tiên",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "zheng_yin_pattern"
+        ],
+        "tie_break_applied": true,
+        "final_pattern": "zheng_guan_pattern",
+        "priority_level": "level_3",
+        "expected_reason_codes": [
+          "month_commander_match",
+          "candidate_order"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX029",
+      "example_name": "Ưu tiên theo điểm số",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "shi_shen",
+        "visible_ten_gods": [
+          "shi_shen",
+          "shang_guan"
+        ],
+        "supported_ten_gods": [
+          "shi_shen"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "strong"
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "shi_shen_pattern",
+          "shang_guan_pattern"
+        ],
+        "final_pattern": "shi_shen_pattern",
+        "priority_level": "level_3",
+        "expected_reason_codes": [
+          "higher_score"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX030",
+      "example_name": "Không có ứng viên hợp lệ",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "unknown",
+        "visible_ten_gods": [],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "priority_level": null,
+        "expected_reason_codes": [
+          "no_valid_pattern"
+        ]
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX031",
+      "example_name": "Thiếu Nguyệt lệnh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": null,
+        "visible_ten_gods": [
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "pattern_strength": "invalid",
+        "confidence": "very_low",
+        "expected_reason_codes": [
+          "missing_month_commander"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX032",
+      "example_name": "Không có Thập thần khả dụng",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "pattern_strength": "invalid",
+        "confidence": "very_low",
+        "expected_reason_codes": [
+          "no_visible_pattern"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX033",
+      "example_name": "Thập thần không khớp với Nguyệt lệnh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_cai"
+        ],
+        "supported_ten_gods": [
+          "zheng_cai"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "pattern_strength": "invalid",
+        "confidence": "low",
+        "expected_reason_codes": [
+          "pattern_not_matched"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX034",
+      "example_name": "Dữ liệu đặc biệt mâu thuẫn",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi",
+          "cong_qiang",
+          "cong_ruo"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "pattern_strength": "invalid",
+        "confidence": "very_low",
+        "expected_reason_codes": [
+          "conflicting_special_flags"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX035",
+      "example_name": "Ứng viên hợp lệ nhưng độ tin cậy không đạt ngưỡng",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "shi_shen",
+        "visible_ten_gods": [
+          "shi_shen"
+        ],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [
+          "shi_shen"
+        ],
+        "day_master_strength": "weak",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "shi_shen_pattern"
+        ],
+        "final_pattern": null,
+        "pattern_strength": "weak",
+        "confidence": "very_low",
+        "expected_reason_codes": [
+          "confidence_below_threshold"
+        ]
+      }
+    }
+  ]
+  [
+    {
+      "id": "PEX036",
+      "example_name": "Chính Quan Cách hoàn chỉnh",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine",
+        "interpretation_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_guan",
+        "visible_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "supported_ten_gods": [
+          "zheng_guan",
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_guan_pattern",
+          "zheng_yin_pattern"
+        ],
+        "final_pattern": "zheng_guan_pattern",
+        "pattern_strength": "strong",
+        "confidence": "high",
+        "priority_level": "level_3",
+        "expected_reason_codes": [
+          "month_commander_match",
+          "strong_root",
+          "high_visibility"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX037",
+      "example_name": "Tòng Vượng ghi đè Chính Cách",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine",
+        "interpretation_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "bi_jian",
+        "visible_ten_gods": [
+          "bi_jian",
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [
+          "bi_jian"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "extremely_strong",
+        "special_flags": [
+          "cong_qiang"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "cong_ge_pattern",
+          "zheng_guan_pattern"
+        ],
+        "final_pattern": "cong_ge_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "priority_level": "level_4",
+        "expected_reason_codes": [
+          "follow_pattern_confirmed",
+          "override_pattern_detected"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX038",
+      "example_name": "Hóa Khí ghi đè toàn bộ",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine",
+        "interpretation_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_yin",
+        "visible_ten_gods": [
+          "zheng_yin",
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [
+          "zheng_yin"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": [
+          "hua_qi"
+        ]
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "hua_qi_pattern",
+          "zheng_yin_pattern",
+          "zheng_guan_pattern"
+        ],
+        "final_pattern": "hua_qi_pattern",
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "priority_level": "level_5",
+        "expected_reason_codes": [
+          "transformation_pattern_confirmed",
+          "override_pattern_detected",
+          "highest_priority"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX039",
+      "example_name": "Không xác định được Cách cục",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine",
+        "interpretation_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": null,
+        "visible_ten_gods": [],
+        "supported_ten_gods": [],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [],
+        "final_pattern": null,
+        "pattern_strength": "invalid",
+        "confidence": "very_low",
+        "priority_level": null,
+        "expected_reason_codes": [],
+        "expected_error_codes": [
+          "missing_month_commander",
+          "no_valid_pattern"
+        ]
+      }
+    },
+  
+    {
+      "id": "PEX040",
+      "example_name": "Tích hợp đầy đủ với Tie-break",
+  
+      "validation_targets": [
+        "pattern_engine",
+        "pattern_score_engine",
+        "pattern_priority_engine",
+        "interpretation_engine"
+      ],
+  
+      "input": {
+        "month_commander_ten_god": "zheng_cai",
+        "visible_ten_gods": [
+          "zheng_cai",
+          "pian_cai",
+          "zheng_guan"
+        ],
+        "supported_ten_gods": [
+          "zheng_cai",
+          "zheng_guan"
+        ],
+        "destroyed_ten_gods": [],
+        "day_master_strength": "balanced",
+        "special_flags": []
+      },
+  
+      "expected": {
+        "candidate_patterns": [
+          "zheng_cai_pattern",
+          "pian_cai_pattern",
+          "zheng_guan_pattern"
+        ],
+        "final_pattern": "zheng_cai_pattern",
+        "pattern_strength": "strong",
+        "confidence": "high",
+        "priority_level": "level_3",
+        "tie_break_applied": true,
+        "expected_reason_codes": [
+          "month_commander_match",
+          "higher_score",
+          "candidate_order"
+        ]
+      }
+    }
+  ]

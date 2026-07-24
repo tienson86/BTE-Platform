@@ -1,0 +1,1877 @@
+[
+    {
+      "id": "FEX001",
+      "ma_example": "follow_example_001",
+      "ten": "Global Pattern Match",
+      "pattern": "global",
+      "description": "Kiem tra Rule Engine phat hien mot Pattern hop le.",
+      "input": {
+        "chart_type": "sample_001"
+      },
+      "expected_rules": [
+        "FPR001"
+      ],
+      "expected_conditions": [
+        "FPC001"
+      ],
+      "expected_priority": [
+        "FPP001"
+      ],
+      "expected_labels": [
+        "FLB001"
+      ],
+      "expected_result": "pattern_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX002",
+      "ma_example": "follow_example_002",
+      "ten": "No Pattern",
+      "pattern": "global",
+      "description": "Khong co Pattern nao hop le.",
+      "input": {
+        "chart_type": "sample_002"
+      },
+      "expected_rules": [],
+      "expected_conditions": [],
+      "expected_priority": [],
+      "expected_labels": [
+        "FLB002"
+      ],
+      "expected_result": "no_pattern",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX003",
+      "ma_example": "follow_example_003",
+      "ten": "Pattern Confirmed",
+      "pattern": "global",
+      "description": "Pattern duoc xac nhan sau khi kiem tra.",
+      "input": {
+        "chart_type": "sample_003"
+      },
+      "expected_rules": [
+        "FPR003"
+      ],
+      "expected_conditions": [
+        "FPC003"
+      ],
+      "expected_priority": [
+        "FPP003"
+      ],
+      "expected_labels": [
+        "FLB003"
+      ],
+      "expected_result": "confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX004",
+      "ma_example": "follow_example_004",
+      "ten": "Pattern Rejected",
+      "pattern": "global",
+      "description": "Pattern bi loai bo sau khi danh gia.",
+      "input": {
+        "chart_type": "sample_004"
+      },
+      "expected_rules": [
+        "FPR004"
+      ],
+      "expected_conditions": [
+        "FPC004"
+      ],
+      "expected_priority": [
+        "FPP004"
+      ],
+      "expected_labels": [
+        "FLB004"
+      ],
+      "expected_result": "rejected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX005",
+      "ma_example": "follow_example_005",
+      "ten": "Broken Pattern",
+      "pattern": "global",
+      "description": "Pattern bi pha.",
+      "input": {
+        "chart_type": "sample_005"
+      },
+      "expected_rules": [
+        "FPR005"
+      ],
+      "expected_conditions": [
+        "FPC005"
+      ],
+      "expected_priority": [
+        "FPP005"
+      ],
+      "expected_labels": [
+        "FLB005"
+      ],
+      "expected_result": "broken",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX006",
+      "ma_example": "follow_example_006",
+      "ten": "Pattern Restored",
+      "pattern": "global",
+      "description": "Pattern duoc khoi phuc.",
+      "input": {
+        "chart_type": "sample_006"
+      },
+      "expected_rules": [
+        "FPR006"
+      ],
+      "expected_conditions": [
+        "FPC006"
+      ],
+      "expected_priority": [
+        "FPP006"
+      ],
+      "expected_labels": [
+        "FLB006"
+      ],
+      "expected_result": "restored",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX007",
+      "ma_example": "follow_example_007",
+      "ten": "Pattern Conflict",
+      "pattern": "global",
+      "description": "Xuat hien nhieu Pattern.",
+      "input": {
+        "chart_type": "sample_007"
+      },
+      "expected_rules": [
+        "FPR007",
+        "FPR008"
+      ],
+      "expected_conditions": [
+        "FPC007"
+      ],
+      "expected_priority": [
+        "FPP081"
+      ],
+      "expected_labels": [
+        "FLB007"
+      ],
+      "expected_result": "conflict",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX008",
+      "ma_example": "follow_example_008",
+      "ten": "Pattern Selected",
+      "pattern": "global",
+      "description": "Rule Engine lua chon Pattern.",
+      "input": {
+        "chart_type": "sample_008"
+      },
+      "expected_rules": [
+        "FPR008"
+      ],
+      "expected_conditions": [
+        "FPC008"
+      ],
+      "expected_priority": [
+        "FPP087"
+      ],
+      "expected_labels": [
+        "FLB008"
+      ],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX009",
+      "ma_example": "follow_example_009",
+      "ten": "Workflow Completed",
+      "pattern": "global",
+      "description": "Follow Pattern hoan tat.",
+      "input": {
+        "chart_type": "sample_009"
+      },
+      "expected_rules": [
+        "FPR009"
+      ],
+      "expected_conditions": [
+        "FPC091"
+      ],
+      "expected_priority": [
+        "FPP100"
+      ],
+      "expected_labels": [
+        "FLB100"
+      ],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX010",
+      "ma_example": "follow_example_010",
+      "ten": "Ready For Interpretation",
+      "pattern": "global",
+      "description": "Du lieu san sang cho Interpretation Engine.",
+      "input": {
+        "chart_type": "sample_010"
+      },
+      "expected_rules": [
+        "FPR010"
+      ],
+      "expected_conditions": [
+        "FPC100"
+      ],
+      "expected_priority": [
+        "FPP099"
+      ],
+      "expected_labels": [
+        "FLB010"
+      ],
+      "expected_result": "ready_for_interpretation",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX011",
+      "ma_example": "follow_example_011",
+      "ten": "Tong Cach duoc phat hien",
+      "pattern": "tong_cach",
+      "description": "Kiem tra Rule Engine phat hien Tong Cach.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "strength": "vuong"
+      },
+      "expected_rules": ["FPR011"],
+      "expected_conditions": ["FPC011"],
+      "expected_priority": ["FPP011"],
+      "expected_labels": ["FLB011"],
+      "expected_result": "tong_pattern_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX012",
+      "ma_example": "follow_example_012",
+      "ten": "Tong Vuong thanh cach",
+      "pattern": "tong_cach",
+      "description": "Tong Vuong dat dieu kien thanh cach.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "tong_type": "tong_vuong"
+      },
+      "expected_rules": ["FPR012"],
+      "expected_conditions": ["FPC012"],
+      "expected_priority": ["FPP012"],
+      "expected_labels": ["FLB012"],
+      "expected_result": "tong_vuong_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX013",
+      "ma_example": "follow_example_013",
+      "ten": "Tong Nhuoc thanh cach",
+      "pattern": "tong_cach",
+      "description": "Tong Nhuoc dat dieu kien thanh cach.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "tong_type": "tong_nhuoc"
+      },
+      "expected_rules": ["FPR013"],
+      "expected_conditions": ["FPC013"],
+      "expected_priority": ["FPP013"],
+      "expected_labels": ["FLB013"],
+      "expected_result": "tong_nhuoc_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX014",
+      "ma_example": "follow_example_014",
+      "ten": "Tong Cach manh",
+      "pattern": "tong_cach",
+      "description": "Tong Cach co suc manh cao.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "strength": "high"
+      },
+      "expected_rules": ["FPR014"],
+      "expected_conditions": ["FPC014"],
+      "expected_priority": ["FPP014"],
+      "expected_labels": ["FLB014"],
+      "expected_result": "high_strength",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX015",
+      "ma_example": "follow_example_015",
+      "ten": "Tong Cach can bang",
+      "pattern": "tong_cach",
+      "description": "Tong Cach duy tri duoc can bang.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "balance": "good"
+      },
+      "expected_rules": ["FPR015"],
+      "expected_conditions": ["FPC015"],
+      "expected_priority": ["FPP017"],
+      "expected_labels": ["FLB015"],
+      "expected_result": "balanced",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX016",
+      "ma_example": "follow_example_016",
+      "ten": "Tong Cach chua on dinh",
+      "pattern": "tong_cach",
+      "description": "Tong Cach ton tai yeu to bat on.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "stability": "low"
+      },
+      "expected_rules": ["FPR016"],
+      "expected_conditions": ["FPC016"],
+      "expected_priority": ["FPP018"],
+      "expected_labels": ["FLB016"],
+      "expected_result": "unstable",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX017",
+      "ma_example": "follow_example_017",
+      "ten": "Tong Cach bi pha",
+      "pattern": "tong_cach",
+      "description": "Tong Cach mat dieu kien thanh cach.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "broken": true
+      },
+      "expected_rules": ["FPR017"],
+      "expected_conditions": ["FPC017"],
+      "expected_priority": ["FPP019"],
+      "expected_labels": ["FLB017"],
+      "expected_result": "broken",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX018",
+      "ma_example": "follow_example_018",
+      "ten": "Tong Cach diem cao",
+      "pattern": "tong_cach",
+      "description": "Tong Cach dat diem danh gia cao.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "score": 95
+      },
+      "expected_rules": ["FPR018"],
+      "expected_conditions": ["FPC018"],
+      "expected_priority": ["FPP019"],
+      "expected_labels": ["FLB018"],
+      "expected_result": "high_score",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX019",
+      "ma_example": "follow_example_019",
+      "ten": "Tong Cach duoc chon",
+      "pattern": "tong_cach",
+      "description": "Tong Cach chien thang sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "selected": true
+      },
+      "expected_rules": ["FPR019"],
+      "expected_conditions": ["FPC019"],
+      "expected_priority": ["FPP087"],
+      "expected_labels": ["FLB019"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX020",
+      "ma_example": "follow_example_020",
+      "ten": "Tong Cach hoan tat",
+      "pattern": "tong_cach",
+      "description": "Hoan tat quy trinh Tong Cach.",
+      "input": {
+        "pattern_candidate": "tong_cach",
+        "completed": true
+      },
+      "expected_rules": ["FPR020"],
+      "expected_conditions": ["FPC020"],
+      "expected_priority": ["FPP020"],
+      "expected_labels": ["FLB020"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX021",
+      "ma_example": "follow_example_021",
+      "ten": "Quan Sat Cach duoc phat hien",
+      "pattern": "quan_sat",
+      "description": "Kiem tra Rule Engine phat hien Quan Cach hoac That Sat Cach.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "quan_sat_present": true
+      },
+      "expected_rules": ["FPR021"],
+      "expected_conditions": ["FPC021"],
+      "expected_priority": ["FPP021"],
+      "expected_labels": ["FLB021"],
+      "expected_result": "quan_sat_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX022",
+      "ma_example": "follow_example_022",
+      "ten": "Chinh Quan thanh cach",
+      "pattern": "quan_sat",
+      "description": "La so dat dieu kien hinh thanh Chinh Quan Cach.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "pattern_type": "chinh_quan"
+      },
+      "expected_rules": ["FPR022"],
+      "expected_conditions": ["FPC022"],
+      "expected_priority": ["FPP022"],
+      "expected_labels": ["FLB022"],
+      "expected_result": "chinh_quan_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX023",
+      "ma_example": "follow_example_023",
+      "ten": "That Sat thanh cach",
+      "pattern": "quan_sat",
+      "description": "La so dat dieu kien hinh thanh That Sat Cach.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "pattern_type": "that_sat"
+      },
+      "expected_rules": ["FPR023"],
+      "expected_conditions": ["FPC023"],
+      "expected_priority": ["FPP023"],
+      "expected_labels": ["FLB023"],
+      "expected_result": "that_sat_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX024",
+      "ma_example": "follow_example_024",
+      "ten": "Quan Sat manh",
+      "pattern": "quan_sat",
+      "description": "Quan tinh hoac Sat tinh co suc manh cao.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "strength": "high"
+      },
+      "expected_rules": ["FPR024"],
+      "expected_conditions": ["FPC024"],
+      "expected_priority": ["FPP024"],
+      "expected_labels": ["FLB024"],
+      "expected_result": "high_strength",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX025",
+      "ma_example": "follow_example_025",
+      "ten": "Tai sinh Quan",
+      "pattern": "quan_sat",
+      "description": "Tai tinh sinh tro Quan tinh.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "relation": "tai_sinh_quan"
+      },
+      "expected_rules": ["FPR025"],
+      "expected_conditions": ["FPC025"],
+      "expected_priority": ["FPP024"],
+      "expected_labels": ["FLB025"],
+      "expected_result": "tai_sinh_quan",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX026",
+      "ma_example": "follow_example_026",
+      "ten": "An hoa Sat",
+      "pattern": "quan_sat",
+      "description": "An tinh hoa giai That Sat.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "relation": "an_hoa_sat"
+      },
+      "expected_rules": ["FPR026"],
+      "expected_conditions": ["FPC026"],
+      "expected_priority": ["FPP025"],
+      "expected_labels": ["FLB026"],
+      "expected_result": "an_hoa_sat",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX027",
+      "ma_example": "follow_example_027",
+      "ten": "Thuong Quan kien Quan",
+      "pattern": "quan_sat",
+      "description": "Thuong Quan xung khac Quan tinh.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "relation": "thuong_quan_kien_quan"
+      },
+      "expected_rules": ["FPR027"],
+      "expected_conditions": ["FPC027"],
+      "expected_priority": ["FPP026"],
+      "expected_labels": ["FLB027"],
+      "expected_result": "thuong_quan_kien_quan",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX028",
+      "ma_example": "follow_example_028",
+      "ten": "Thuc Than che Sat",
+      "pattern": "quan_sat",
+      "description": "Thuc Than tiet che Sat tinh.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "relation": "thuc_than_che_sat"
+      },
+      "expected_rules": ["FPR028"],
+      "expected_conditions": ["FPC028"],
+      "expected_priority": ["FPP027"],
+      "expected_labels": ["FLB028"],
+      "expected_result": "thuc_than_che_sat",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX029",
+      "ma_example": "follow_example_029",
+      "ten": "Quan Sat duoc lua chon",
+      "pattern": "quan_sat",
+      "description": "Quan Cach hoac That Sat Cach chien thang sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "selected": true
+      },
+      "expected_rules": ["FPR029"],
+      "expected_conditions": ["FPC029"],
+      "expected_priority": ["FPP029"],
+      "expected_labels": ["FLB029"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX030",
+      "ma_example": "follow_example_030",
+      "ten": "Hoan tat Quan Sat Cach",
+      "pattern": "quan_sat",
+      "description": "Ket thuc quy trinh danh gia Quan Cach va That Sat Cach.",
+      "input": {
+        "pattern_candidate": "quan_sat",
+        "completed": true
+      },
+      "expected_rules": ["FPR030"],
+      "expected_conditions": ["FPC030"],
+      "expected_priority": ["FPP030"],
+      "expected_labels": ["FLB030"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX031",
+      "ma_example": "follow_example_031",
+      "ten": "Tai Cach duoc phat hien",
+      "pattern": "tai_cach",
+      "description": "Kiem tra Rule Engine phat hien Tai Cach.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "tai_present": true
+      },
+      "expected_rules": ["FPR031"],
+      "expected_conditions": ["FPC031"],
+      "expected_priority": ["FPP031"],
+      "expected_labels": ["FLB031"],
+      "expected_result": "tai_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX032",
+      "ma_example": "follow_example_032",
+      "ten": "Tai Cach thanh cach",
+      "pattern": "tai_cach",
+      "description": "La so dat dieu kien hinh thanh Tai Cach.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "confirmed": true
+      },
+      "expected_rules": ["FPR032"],
+      "expected_conditions": ["FPC032"],
+      "expected_priority": ["FPP032"],
+      "expected_labels": ["FLB032"],
+      "expected_result": "tai_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX033",
+      "ma_example": "follow_example_033",
+      "ten": "Tai Cach manh",
+      "pattern": "tai_cach",
+      "description": "Tai Cach co suc manh cao.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "strength": "high"
+      },
+      "expected_rules": ["FPR033"],
+      "expected_conditions": ["FPC033"],
+      "expected_priority": ["FPP033"],
+      "expected_labels": ["FLB033"],
+      "expected_result": "high_strength",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX034",
+      "ma_example": "follow_example_034",
+      "ten": "Than tro Tai",
+      "pattern": "tai_cach",
+      "description": "Than du manh de ganh Tai tinh.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "relation": "than_support_tai"
+      },
+      "expected_rules": ["FPR034"],
+      "expected_conditions": ["FPC034"],
+      "expected_priority": ["FPP034"],
+      "expected_labels": ["FLB034"],
+      "expected_result": "than_support_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX035",
+      "ma_example": "follow_example_035",
+      "ten": "Thuc Than sinh Tai",
+      "pattern": "tai_cach",
+      "description": "Thuc Than sinh tro Tai tinh.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "relation": "thuc_than_sinh_tai"
+      },
+      "expected_rules": ["FPR035"],
+      "expected_conditions": ["FPC035"],
+      "expected_priority": ["FPP035"],
+      "expected_labels": ["FLB035"],
+      "expected_result": "thuc_than_sinh_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX036",
+      "ma_example": "follow_example_036",
+      "ten": "Ty Kiep doat Tai",
+      "pattern": "tai_cach",
+      "description": "Ty Kiep tranh doat Tai tinh.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "relation": "ty_kiep_doat_tai"
+      },
+      "expected_rules": ["FPR036"],
+      "expected_conditions": ["FPC036"],
+      "expected_priority": ["FPP036"],
+      "expected_labels": ["FLB036"],
+      "expected_result": "ty_kiep_doat_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX037",
+      "ma_example": "follow_example_037",
+      "ten": "Quan bao ve Tai",
+      "pattern": "tai_cach",
+      "description": "Quan tinh bao ve Tai tinh.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "relation": "quan_protect_tai"
+      },
+      "expected_rules": ["FPR037"],
+      "expected_conditions": ["FPC037"],
+      "expected_priority": ["FPP037"],
+      "expected_labels": ["FLB037"],
+      "expected_result": "quan_protect_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX038",
+      "ma_example": "follow_example_038",
+      "ten": "Tai Cach can bang",
+      "pattern": "tai_cach",
+      "description": "Tai Cach duy tri su can bang tong the.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "balance": "good"
+      },
+      "expected_rules": ["FPR038"],
+      "expected_conditions": ["FPC038"],
+      "expected_priority": ["FPP038"],
+      "expected_labels": ["FLB038"],
+      "expected_result": "balanced",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX039",
+      "ma_example": "follow_example_039",
+      "ten": "Tai Cach duoc lua chon",
+      "pattern": "tai_cach",
+      "description": "Tai Cach duoc giu lai sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "selected": true
+      },
+      "expected_rules": ["FPR039"],
+      "expected_conditions": ["FPC039"],
+      "expected_priority": ["FPP039"],
+      "expected_labels": ["FLB039"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX040",
+      "ma_example": "follow_example_040",
+      "ten": "Hoan tat Tai Cach",
+      "pattern": "tai_cach",
+      "description": "Hoan tat quy trinh danh gia Tai Cach.",
+      "input": {
+        "pattern_candidate": "tai_cach",
+        "completed": true
+      },
+      "expected_rules": ["FPR040"],
+      "expected_conditions": ["FPC040"],
+      "expected_priority": ["FPP040"],
+      "expected_labels": ["FLB040"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX041",
+      "ma_example": "follow_example_041",
+      "ten": "Xuat Cach duoc phat hien",
+      "pattern": "xuat_cach",
+      "description": "Kiem tra Rule Engine phat hien Xuat Cach.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "xuat_present": true
+      },
+      "expected_rules": ["FPR041"],
+      "expected_conditions": ["FPC041"],
+      "expected_priority": ["FPP041"],
+      "expected_labels": ["FLB041"],
+      "expected_result": "xuat_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX042",
+      "ma_example": "follow_example_042",
+      "ten": "Thuc Than thanh cach",
+      "pattern": "xuat_cach",
+      "description": "La so dat dieu kien hinh thanh Thuc Than Cach.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "pattern_type": "thuc_than"
+      },
+      "expected_rules": ["FPR042"],
+      "expected_conditions": ["FPC042"],
+      "expected_priority": ["FPP042"],
+      "expected_labels": ["FLB042"],
+      "expected_result": "thuc_than_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX043",
+      "ma_example": "follow_example_043",
+      "ten": "Thuong Quan thanh cach",
+      "pattern": "xuat_cach",
+      "description": "La so dat dieu kien hinh thanh Thuong Quan Cach.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "pattern_type": "thuong_quan"
+      },
+      "expected_rules": ["FPR043"],
+      "expected_conditions": ["FPC043"],
+      "expected_priority": ["FPP043"],
+      "expected_labels": ["FLB043"],
+      "expected_result": "thuong_quan_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX044",
+      "ma_example": "follow_example_044",
+      "ten": "Xuat Cach manh",
+      "pattern": "xuat_cach",
+      "description": "Xuat Cach co suc manh cao.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "strength": "high"
+      },
+      "expected_rules": ["FPR044"],
+      "expected_conditions": ["FPC044"],
+      "expected_priority": ["FPP044"],
+      "expected_labels": ["FLB044"],
+      "expected_result": "high_strength",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX045",
+      "ma_example": "follow_example_045",
+      "ten": "Thuc Than sinh Tai",
+      "pattern": "xuat_cach",
+      "description": "Thuc Than sinh Tai trong Xuat Cach.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "relation": "thuc_than_sinh_tai"
+      },
+      "expected_rules": ["FPR045"],
+      "expected_conditions": ["FPC045"],
+      "expected_priority": ["FPP045"],
+      "expected_labels": ["FLB045"],
+      "expected_result": "thuc_than_sinh_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX046",
+      "ma_example": "follow_example_046",
+      "ten": "Thuong Quan kien Quan",
+      "pattern": "xuat_cach",
+      "description": "Thuong Quan khac Quan tinh.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "relation": "thuong_quan_kien_quan"
+      },
+      "expected_rules": ["FPR046"],
+      "expected_conditions": ["FPC046"],
+      "expected_priority": ["FPP046"],
+      "expected_labels": ["FLB046"],
+      "expected_result": "thuong_quan_kien_quan",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX047",
+      "ma_example": "follow_example_047",
+      "ten": "An che Thuong Quan",
+      "pattern": "xuat_cach",
+      "description": "An tinh tiet che Thuong Quan.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "relation": "an_che_thuong_quan"
+      },
+      "expected_rules": ["FPR047"],
+      "expected_conditions": ["FPC047"],
+      "expected_priority": ["FPP047"],
+      "expected_labels": ["FLB047"],
+      "expected_result": "an_che_thuong_quan",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX048",
+      "ma_example": "follow_example_048",
+      "ten": "Xuat Cach can bang",
+      "pattern": "xuat_cach",
+      "description": "Xuat Cach duy tri su can bang.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "balance": "good"
+      },
+      "expected_rules": ["FPR048"],
+      "expected_conditions": ["FPC048"],
+      "expected_priority": ["FPP048"],
+      "expected_labels": ["FLB048"],
+      "expected_result": "balanced",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX049",
+      "ma_example": "follow_example_049",
+      "ten": "Xuat Cach duoc lua chon",
+      "pattern": "xuat_cach",
+      "description": "Xuat Cach duoc giu lai sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "selected": true
+      },
+      "expected_rules": ["FPR049"],
+      "expected_conditions": ["FPC049"],
+      "expected_priority": ["FPP049"],
+      "expected_labels": ["FLB049"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX050",
+      "ma_example": "follow_example_050",
+      "ten": "Hoan tat Xuat Cach",
+      "pattern": "xuat_cach",
+      "description": "Hoan tat quy trinh danh gia Xuat Cach.",
+      "input": {
+        "pattern_candidate": "xuat_cach",
+        "completed": true
+      },
+      "expected_rules": ["FPR050"],
+      "expected_conditions": ["FPC050"],
+      "expected_priority": ["FPP050"],
+      "expected_labels": ["FLB050"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX051",
+      "ma_example": "follow_example_051",
+      "ten": "An Cach duoc phat hien",
+      "pattern": "an_cach",
+      "description": "Kiem tra Rule Engine phat hien An Cach.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "an_present": true
+      },
+      "expected_rules": ["FPR051"],
+      "expected_conditions": ["FPC051"],
+      "expected_priority": ["FPP051"],
+      "expected_labels": ["FLB051"],
+      "expected_result": "an_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX052",
+      "ma_example": "follow_example_052",
+      "ten": "Chinh An thanh cach",
+      "pattern": "an_cach",
+      "description": "La so dat dieu kien hinh thanh Chinh An Cach.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "pattern_type": "chinh_an"
+      },
+      "expected_rules": ["FPR052"],
+      "expected_conditions": ["FPC052"],
+      "expected_priority": ["FPP052"],
+      "expected_labels": ["FLB052"],
+      "expected_result": "chinh_an_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX053",
+      "ma_example": "follow_example_053",
+      "ten": "Thien An thanh cach",
+      "pattern": "an_cach",
+      "description": "La so dat dieu kien hinh thanh Thien An Cach.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "pattern_type": "thien_an"
+      },
+      "expected_rules": ["FPR053"],
+      "expected_conditions": ["FPC053"],
+      "expected_priority": ["FPP053"],
+      "expected_labels": ["FLB053"],
+      "expected_result": "thien_an_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX054",
+      "ma_example": "follow_example_054",
+      "ten": "An Cach manh",
+      "pattern": "an_cach",
+      "description": "An Cach co suc manh cao.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "strength": "high"
+      },
+      "expected_rules": ["FPR054"],
+      "expected_conditions": ["FPC054"],
+      "expected_priority": ["FPP054"],
+      "expected_labels": ["FLB054"],
+      "expected_result": "high_strength",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX055",
+      "ma_example": "follow_example_055",
+      "ten": "An sinh Than",
+      "pattern": "an_cach",
+      "description": "An tinh sinh tro Nhat Chu.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "relation": "an_support_daymaster"
+      },
+      "expected_rules": ["FPR055"],
+      "expected_conditions": ["FPC055"],
+      "expected_priority": ["FPP055"],
+      "expected_labels": ["FLB055"],
+      "expected_result": "an_support_daymaster",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX056",
+      "ma_example": "follow_example_056",
+      "ten": "An hoa Sat",
+      "pattern": "an_cach",
+      "description": "An tinh hoa giai Sat tinh.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "relation": "an_transform_sat"
+      },
+      "expected_rules": ["FPR056"],
+      "expected_conditions": ["FPC056"],
+      "expected_priority": ["FPP056"],
+      "expected_labels": ["FLB056"],
+      "expected_result": "an_transform_sat",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX057",
+      "ma_example": "follow_example_057",
+      "ten": "An bao ve Quan",
+      "pattern": "an_cach",
+      "description": "An tinh bao ve Quan tinh.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "relation": "an_protect_quan"
+      },
+      "expected_rules": ["FPR057"],
+      "expected_conditions": ["FPC057"],
+      "expected_priority": ["FPP057"],
+      "expected_labels": ["FLB057"],
+      "expected_result": "an_protect_quan",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX058",
+      "ma_example": "follow_example_058",
+      "ten": "Thien An doat Thuc",
+      "pattern": "an_cach",
+      "description": "Thien An uc che Thuc Than.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "relation": "thien_an_doat_thuc"
+      },
+      "expected_rules": ["FPR058"],
+      "expected_conditions": ["FPC058"],
+      "expected_priority": ["FPP058"],
+      "expected_labels": ["FLB058"],
+      "expected_result": "thien_an_doat_thuc",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX059",
+      "ma_example": "follow_example_059",
+      "ten": "An Cach duoc lua chon",
+      "pattern": "an_cach",
+      "description": "An Cach duoc giu lai sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "selected": true
+      },
+      "expected_rules": ["FPR059"],
+      "expected_conditions": ["FPC059"],
+      "expected_priority": ["FPP059"],
+      "expected_labels": ["FLB059"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX060",
+      "ma_example": "follow_example_060",
+      "ten": "Hoan tat An Cach",
+      "pattern": "an_cach",
+      "description": "Hoan tat quy trinh danh gia An Cach.",
+      "input": {
+        "pattern_candidate": "an_cach",
+        "completed": true
+      },
+      "expected_rules": ["FPR060"],
+      "expected_conditions": ["FPC060"],
+      "expected_priority": ["FPP060"],
+      "expected_labels": ["FLB060"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX061",
+      "ma_example": "follow_example_061",
+      "ten": "Ty Kiep Cach duoc phat hien",
+      "pattern": "ty_kiep_cach",
+      "description": "Kiem tra Rule Engine phat hien Ty Kiep Cach.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "ty_kiep_present": true
+      },
+      "expected_rules": ["FPR061"],
+      "expected_conditions": ["FPC061"],
+      "expected_priority": ["FPP061"],
+      "expected_labels": ["FLB061"],
+      "expected_result": "ty_kiep_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX062",
+      "ma_example": "follow_example_062",
+      "ten": "Ty Kien thanh cach",
+      "pattern": "ty_kiep_cach",
+      "description": "La so dat dieu kien hinh thanh Ty Kien Cach.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "pattern_type": "ty_kien"
+      },
+      "expected_rules": ["FPR062"],
+      "expected_conditions": ["FPC062"],
+      "expected_priority": ["FPP062"],
+      "expected_labels": ["FLB062"],
+      "expected_result": "ty_kien_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX063",
+      "ma_example": "follow_example_063",
+      "ten": "Kiep Tai thanh cach",
+      "pattern": "ty_kiep_cach",
+      "description": "La so dat dieu kien hinh thanh Kiep Tai Cach.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "pattern_type": "kiep_tai"
+      },
+      "expected_rules": ["FPR063"],
+      "expected_conditions": ["FPC063"],
+      "expected_priority": ["FPP063"],
+      "expected_labels": ["FLB063"],
+      "expected_result": "kiep_tai_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX064",
+      "ma_example": "follow_example_064",
+      "ten": "Ty Kiep Cach manh",
+      "pattern": "ty_kiep_cach",
+      "description": "Ty Kiep Cach co suc manh cao.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "strength": "high"
+      },
+      "expected_rules": ["FPR064"],
+      "expected_conditions": ["FPC064"],
+      "expected_priority": ["FPP064"],
+      "expected_labels": ["FLB064"],
+      "expected_result": "high_strength",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX065",
+      "ma_example": "follow_example_065",
+      "ten": "Ty Kiep tro Than",
+      "pattern": "ty_kiep_cach",
+      "description": "Ty Kiep tro luc cho Nhat Chu.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "relation": "ty_kiep_support_daymaster"
+      },
+      "expected_rules": ["FPR065"],
+      "expected_conditions": ["FPC065"],
+      "expected_priority": ["FPP065"],
+      "expected_labels": ["FLB065"],
+      "expected_result": "ty_kiep_support_daymaster",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX066",
+      "ma_example": "follow_example_066",
+      "ten": "Ty Kiep doat Tai",
+      "pattern": "ty_kiep_cach",
+      "description": "Ty Kiep tranh doat Tai tinh.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "relation": "ty_kiep_compete_tai"
+      },
+      "expected_rules": ["FPR066"],
+      "expected_conditions": ["FPC066"],
+      "expected_priority": ["FPP066"],
+      "expected_labels": ["FLB066"],
+      "expected_result": "ty_kiep_compete_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX067",
+      "ma_example": "follow_example_067",
+      "ten": "Ty Kiep ho Tai",
+      "pattern": "ty_kiep_cach",
+      "description": "Ty Kiep ho tro Tai Cach trong dieu kien phu hop.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "relation": "ty_kiep_support_tai"
+      },
+      "expected_rules": ["FPR067"],
+      "expected_conditions": ["FPC067"],
+      "expected_priority": ["FPP067"],
+      "expected_labels": ["FLB067"],
+      "expected_result": "ty_kiep_support_tai",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX068",
+      "ma_example": "follow_example_068",
+      "ten": "Ty Kiep tranh Quan",
+      "pattern": "ty_kiep_cach",
+      "description": "Ty Kiep gay bat loi cho Quan tinh.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "relation": "ty_kiep_compete_quan"
+      },
+      "expected_rules": ["FPR068"],
+      "expected_conditions": ["FPC068"],
+      "expected_priority": ["FPP068"],
+      "expected_labels": ["FLB068"],
+      "expected_result": "ty_kiep_compete_quan",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX069",
+      "ma_example": "follow_example_069",
+      "ten": "Ty Kiep Cach duoc lua chon",
+      "pattern": "ty_kiep_cach",
+      "description": "Ty Kiep Cach duoc giu lai sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "selected": true
+      },
+      "expected_rules": ["FPR069"],
+      "expected_conditions": ["FPC069"],
+      "expected_priority": ["FPP069"],
+      "expected_labels": ["FLB069"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX070",
+      "ma_example": "follow_example_070",
+      "ten": "Hoan tat Ty Kiep Cach",
+      "pattern": "ty_kiep_cach",
+      "description": "Hoan tat quy trinh danh gia Ty Kiep Cach.",
+      "input": {
+        "pattern_candidate": "ty_kiep_cach",
+        "completed": true
+      },
+      "expected_rules": ["FPR070"],
+      "expected_conditions": ["FPC070"],
+      "expected_priority": ["FPP070"],
+      "expected_labels": ["FLB070"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX071",
+      "ma_example": "follow_example_071",
+      "ten": "Special Pattern duoc phat hien",
+      "pattern": "special_pattern",
+      "description": "Kiem tra Rule Engine phat hien mot Special Pattern.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "special_pattern_present": true
+      },
+      "expected_rules": ["FPR071"],
+      "expected_conditions": ["FPC071"],
+      "expected_priority": ["FPP071"],
+      "expected_labels": ["FLB071"],
+      "expected_result": "special_pattern_detected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX072",
+      "ma_example": "follow_example_072",
+      "ten": "Special Pattern thanh cach",
+      "pattern": "special_pattern",
+      "description": "Special Pattern dat dieu kien thanh cach.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "confirmed": true
+      },
+      "expected_rules": ["FPR072"],
+      "expected_conditions": ["FPC072"],
+      "expected_priority": ["FPP072"],
+      "expected_labels": ["FLB072"],
+      "expected_result": "special_pattern_confirmed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX073",
+      "ma_example": "follow_example_073",
+      "ten": "Xac dinh loai Special Pattern",
+      "pattern": "special_pattern",
+      "description": "Rule Engine xac dinh chinh xac loai Special Pattern.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "pattern_type": "tong_vuong"
+      },
+      "expected_rules": ["FPR073"],
+      "expected_conditions": ["FPC073"],
+      "expected_priority": ["FPP073"],
+      "expected_labels": ["FLB073"],
+      "expected_result": "pattern_type_identified",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX074",
+      "ma_example": "follow_example_074",
+      "ten": "Special Pattern thanh cach cao",
+      "pattern": "special_pattern",
+      "description": "Special Pattern dat muc do thanh cach cao.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "established": true
+      },
+      "expected_rules": ["FPR074"],
+      "expected_conditions": ["FPC074"],
+      "expected_priority": ["FPP074"],
+      "expected_labels": ["FLB074"],
+      "expected_result": "pattern_established",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX075",
+      "ma_example": "follow_example_075",
+      "ten": "Special Pattern bi pha",
+      "pattern": "special_pattern",
+      "description": "Special Pattern mat dieu kien thanh cach.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "broken": true
+      },
+      "expected_rules": ["FPR075"],
+      "expected_conditions": ["FPC075"],
+      "expected_priority": ["FPP075"],
+      "expected_labels": ["FLB075"],
+      "expected_result": "pattern_broken",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX076",
+      "ma_example": "follow_example_076",
+      "ten": "Special Pattern can bang",
+      "pattern": "special_pattern",
+      "description": "Special Pattern duy tri su can bang.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "balance": "good"
+      },
+      "expected_rules": ["FPR076"],
+      "expected_conditions": ["FPC076"],
+      "expected_priority": ["FPP076"],
+      "expected_labels": ["FLB076"],
+      "expected_result": "balanced",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX077",
+      "ma_example": "follow_example_077",
+      "ten": "Special Pattern on dinh",
+      "pattern": "special_pattern",
+      "description": "Special Pattern co tinh on dinh cao.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "stable": true
+      },
+      "expected_rules": ["FPR077"],
+      "expected_conditions": ["FPC077"],
+      "expected_priority": ["FPP077"],
+      "expected_labels": ["FLB077"],
+      "expected_result": "stable",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX078",
+      "ma_example": "follow_example_078",
+      "ten": "Special Pattern diem cao",
+      "pattern": "special_pattern",
+      "description": "Special Pattern dat diem danh gia cao.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "score": 98
+      },
+      "expected_rules": ["FPR078"],
+      "expected_conditions": ["FPC078"],
+      "expected_priority": ["FPP078"],
+      "expected_labels": ["FLB078"],
+      "expected_result": "high_score",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX079",
+      "ma_example": "follow_example_079",
+      "ten": "Special Pattern duoc lua chon",
+      "pattern": "special_pattern",
+      "description": "Special Pattern chien thang sau Conflict Resolution.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "selected": true
+      },
+      "expected_rules": ["FPR079"],
+      "expected_conditions": ["FPC079"],
+      "expected_priority": ["FPP079"],
+      "expected_labels": ["FLB079"],
+      "expected_result": "selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX080",
+      "ma_example": "follow_example_080",
+      "ten": "Hoan tat Special Pattern",
+      "pattern": "special_pattern",
+      "description": "Hoan tat quy trinh danh gia Special Pattern.",
+      "input": {
+        "pattern_candidate": "special_pattern",
+        "completed": true
+      },
+      "expected_rules": ["FPR080"],
+      "expected_conditions": ["FPC080"],
+      "expected_priority": ["FPP080"],
+      "expected_labels": ["FLB080"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX081",
+      "ma_example": "follow_example_081",
+      "ten": "Lua chon Pattern cuoi cung",
+      "pattern": "global",
+      "description": "Conflict Resolution lua chon Pattern tot nhat.",
+      "input": {
+        "candidate_patterns": [
+          "tai_cach",
+          "quan_sat",
+          "an_cach"
+        ],
+        "selected_pattern": "quan_sat"
+      },
+      "expected_rules": ["FPR081"],
+      "expected_conditions": ["FPC081"],
+      "expected_priority": ["FPP081"],
+      "expected_labels": ["FLB081"],
+      "expected_result": "best_pattern_selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX082",
+      "ma_example": "follow_example_082",
+      "ten": "Nhieu Pattern hop le",
+      "pattern": "global",
+      "description": "Nhieu Pattern cung dat dieu kien va duoc giu lai.",
+      "input": {
+        "candidate_patterns": [
+          "tai_cach",
+          "quan_sat"
+        ]
+      },
+      "expected_rules": ["FPR082"],
+      "expected_conditions": ["FPC082"],
+      "expected_priority": ["FPP082"],
+      "expected_labels": ["FLB082"],
+      "expected_result": "multiple_patterns",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX083",
+      "ma_example": "follow_example_083",
+      "ten": "Loai bo Pattern",
+      "pattern": "global",
+      "description": "Pattern khong dat dieu kien bi loai bo.",
+      "input": {
+        "removed_pattern": "tai_cach"
+      },
+      "expected_rules": ["FPR083"],
+      "expected_conditions": ["FPC083"],
+      "expected_priority": ["FPP083"],
+      "expected_labels": ["FLB083"],
+      "expected_result": "pattern_removed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX084",
+      "ma_example": "follow_example_084",
+      "ten": "Pattern diem thap",
+      "pattern": "global",
+      "description": "Pattern bi loai do diem duoi nguong.",
+      "input": {
+        "pattern": "xuat_cach",
+        "score": 42
+      },
+      "expected_rules": ["FPR084"],
+      "expected_conditions": ["FPC084"],
+      "expected_priority": ["FPP084"],
+      "expected_labels": ["FLB084"],
+      "expected_result": "low_score_removed",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX085",
+      "ma_example": "follow_example_085",
+      "ten": "Pattern diem cao",
+      "pattern": "global",
+      "description": "Pattern dat diem cao nhat trong cac ung vien.",
+      "input": {
+        "pattern": "quan_sat",
+        "score": 96
+      },
+      "expected_rules": ["FPR085"],
+      "expected_conditions": ["FPC085"],
+      "expected_priority": ["FPP085"],
+      "expected_labels": ["FLB085"],
+      "expected_result": "high_score_selected",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX086",
+      "ma_example": "follow_example_086",
+      "ten": "Giai quyet xung dot",
+      "pattern": "global",
+      "description": "Tat ca xung dot giua cac Pattern da duoc xu ly.",
+      "input": {
+        "conflict": true,
+        "resolved": true
+      },
+      "expected_rules": ["FPR086"],
+      "expected_conditions": ["FPC086"],
+      "expected_priority": ["FPP086"],
+      "expected_labels": ["FLB086"],
+      "expected_result": "conflict_resolved",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX087",
+      "ma_example": "follow_example_087",
+      "ten": "San sang sinh luan giai",
+      "pattern": "global",
+      "description": "Ket qua da san sang cho Interpretation Engine.",
+      "input": {
+        "selected_pattern": "quan_sat",
+        "ready": true
+      },
+      "expected_rules": ["FPR087"],
+      "expected_conditions": ["FPC087"],
+      "expected_priority": ["FPP087"],
+      "expected_labels": ["FLB087"],
+      "expected_result": "ready_for_interpretation",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX088",
+      "ma_example": "follow_example_088",
+      "ten": "Ket qua da chot",
+      "pattern": "global",
+      "description": "Conflict Resolution da hoan tat va ket qua duoc khoa.",
+      "input": {
+        "finalized": true
+      },
+      "expected_rules": ["FPR088"],
+      "expected_conditions": ["FPC088"],
+      "expected_priority": ["FPP088"],
+      "expected_labels": ["FLB088"],
+      "expected_result": "finalized",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX089",
+      "ma_example": "follow_example_089",
+      "ten": "San sang xuat du lieu",
+      "pattern": "global",
+      "description": "Ket qua da san sang gui sang module tiep theo.",
+      "input": {
+        "export_ready": true
+      },
+      "expected_rules": ["FPR089"],
+      "expected_conditions": ["FPC089"],
+      "expected_priority": ["FPP089"],
+      "expected_labels": ["FLB089"],
+      "expected_result": "export_ready",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX090",
+      "ma_example": "follow_example_090",
+      "ten": "Hoan tat Conflict Resolution",
+      "pattern": "global",
+      "description": "Ket thuc toan bo quy trinh Conflict Resolution.",
+      "input": {
+        "completed": true
+      },
+      "expected_rules": ["FPR090"],
+      "expected_conditions": ["FPC090"],
+      "expected_priority": ["FPP090"],
+      "expected_labels": ["FLB090"],
+      "expected_result": "completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "FEX091",
+      "ma_example": "follow_example_091",
+      "ten": "Khoi dong Follow Pattern",
+      "pattern": "workflow",
+      "description": "Khoi tao quy trinh Follow Pattern.",
+      "input": {
+        "workflow_state": "started"
+      },
+      "expected_rules": ["FPR091"],
+      "expected_conditions": ["FPC091"],
+      "expected_priority": ["FPP091"],
+      "expected_labels": ["FLB091"],
+      "expected_result": "workflow_started",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX092",
+      "ma_example": "follow_example_092",
+      "ten": "Kiem tra du lieu dau vao",
+      "pattern": "workflow",
+      "description": "Tat ca du lieu dau vao hop le.",
+      "input": {
+        "workflow_state": "input_validated"
+      },
+      "expected_rules": ["FPR092"],
+      "expected_conditions": ["FPC092"],
+      "expected_priority": ["FPP092"],
+      "expected_labels": ["FLB092"],
+      "expected_result": "input_validated",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX093",
+      "ma_example": "follow_example_093",
+      "ten": "Nap Rule",
+      "pattern": "workflow",
+      "description": "Tat ca Rule da duoc nap vao bo xu ly.",
+      "input": {
+        "workflow_state": "rules_loaded"
+      },
+      "expected_rules": ["FPR093"],
+      "expected_conditions": ["FPC093"],
+      "expected_priority": ["FPP093"],
+      "expected_labels": ["FLB093"],
+      "expected_result": "rules_loaded",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX094",
+      "ma_example": "follow_example_094",
+      "ten": "Nap Condition",
+      "pattern": "workflow",
+      "description": "Tat ca Condition da duoc nap.",
+      "input": {
+        "workflow_state": "conditions_loaded"
+      },
+      "expected_rules": ["FPR094"],
+      "expected_conditions": ["FPC094"],
+      "expected_priority": ["FPP094"],
+      "expected_labels": ["FLB094"],
+      "expected_result": "conditions_loaded",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX095",
+      "ma_example": "follow_example_095",
+      "ten": "Rule Matching",
+      "pattern": "workflow",
+      "description": "Qua trinh Rule Matching hoan tat.",
+      "input": {
+        "workflow_state": "rule_matched"
+      },
+      "expected_rules": ["FPR095"],
+      "expected_conditions": ["FPC095"],
+      "expected_priority": ["FPP095"],
+      "expected_labels": ["FLB095"],
+      "expected_result": "rule_matched",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX096",
+      "ma_example": "follow_example_096",
+      "ten": "Tinh diem",
+      "pattern": "workflow",
+      "description": "Tat ca Pattern da duoc cham diem.",
+      "input": {
+        "workflow_state": "score_calculated"
+      },
+      "expected_rules": ["FPR096"],
+      "expected_conditions": ["FPC096"],
+      "expected_priority": ["FPP096"],
+      "expected_labels": ["FLB096"],
+      "expected_result": "score_calculated",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX097",
+      "ma_example": "follow_example_097",
+      "ten": "Xu ly xung dot",
+      "pattern": "workflow",
+      "description": "Conflict Resolution hoan tat.",
+      "input": {
+        "workflow_state": "conflict_resolved"
+      },
+      "expected_rules": ["FPR097"],
+      "expected_conditions": ["FPC097"],
+      "expected_priority": ["FPP097"],
+      "expected_labels": ["FLB097"],
+      "expected_result": "conflict_resolved",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX098",
+      "ma_example": "follow_example_098",
+      "ten": "Tong hop ket qua",
+      "pattern": "workflow",
+      "description": "Da tao ket qua cuoi cung cua Follow Pattern.",
+      "input": {
+        "workflow_state": "result_built"
+      },
+      "expected_rules": ["FPR098"],
+      "expected_conditions": ["FPC098"],
+      "expected_priority": ["FPP098"],
+      "expected_labels": ["FLB098"],
+      "expected_result": "result_built",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX099",
+      "ma_example": "follow_example_099",
+      "ten": "Chuyen sang Interpretation Engine",
+      "pattern": "workflow",
+      "description": "Ket qua da duoc gui sang Interpretation Engine.",
+      "input": {
+        "workflow_state": "sent_to_interpreter"
+      },
+      "expected_rules": ["FPR099"],
+      "expected_conditions": ["FPC099"],
+      "expected_priority": ["FPP099"],
+      "expected_labels": ["FLB099"],
+      "expected_result": "sent_to_interpreter",
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FEX100",
+      "ma_example": "follow_example_100",
+      "ten": "Hoan tat Follow Pattern",
+      "pattern": "workflow",
+      "description": "Ket thuc thanh cong toan bo quy trinh Follow Pattern.",
+      "input": {
+        "workflow_state": "completed"
+      },
+      "expected_rules": ["FPR100"],
+      "expected_conditions": ["FPC100"],
+      "expected_priority": ["FPP100"],
+      "expected_labels": ["FLB100"],
+      "expected_result": "workflow_completed",
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]

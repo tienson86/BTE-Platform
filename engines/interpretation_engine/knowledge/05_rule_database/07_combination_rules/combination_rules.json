@@ -1,0 +1,1567 @@
+[
+    {
+      "id": "CBR001",
+      "ma_rule": "combination_rule_001",
+      "ten": "Than vuong ho tro Cach Cuc",
+      "combination": "strength_pattern",
+      "description": "Than vuong va Cach Cuc tuong ho, tao nen to hop tot.",
+      "required_conditions": [
+        "strength_vuong",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "support_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR002",
+      "ma_rule": "combination_rule_002",
+      "ten": "Than nhuoc ho tro Cach Cuc",
+      "combination": "strength_pattern",
+      "description": "Than nhuoc van co the thanh Cach neu du dieu kien.",
+      "required_conditions": [
+        "strength_nhuoc",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "conditional_support",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR003",
+      "ma_rule": "combination_rule_003",
+      "ten": "Than vuong khong co Cach",
+      "combination": "strength_pattern",
+      "description": "Than vuong nhung khong hinh thanh Cach Cuc.",
+      "required_conditions": [
+        "strength_vuong",
+        "pattern_missing"
+      ],
+      "excluded_conditions": [],
+      "action": "no_pattern",
+      "priority": 90,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR004",
+      "ma_rule": "combination_rule_004",
+      "ten": "Than nhuoc khong co Cach",
+      "combination": "strength_pattern",
+      "description": "Than nhuoc va khong xac lap duoc Cach Cuc.",
+      "required_conditions": [
+        "strength_nhuoc",
+        "pattern_missing"
+      ],
+      "excluded_conditions": [],
+      "action": "weak_chart",
+      "priority": 88,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR005",
+      "ma_rule": "combination_rule_005",
+      "ten": "Than can bang va Cach thanh",
+      "combination": "strength_pattern",
+      "description": "Than can bang ket hop Cach Cuc on dinh.",
+      "required_conditions": [
+        "strength_balanced",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "balanced_pattern",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR006",
+      "ma_rule": "combination_rule_006",
+      "ten": "Than vuong lam tang gia tri Cach",
+      "combination": "strength_pattern",
+      "description": "Than vuong lam gia tang muc do thanh Cach.",
+      "required_conditions": [
+        "strength_vuong",
+        "pattern_high_score"
+      ],
+      "excluded_conditions": [],
+      "action": "enhance_pattern",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR007",
+      "ma_rule": "combination_rule_007",
+      "ten": "Than nhuoc lam giam gia tri Cach",
+      "combination": "strength_pattern",
+      "description": "Than nhuoc lam giam muc do thanh Cach.",
+      "required_conditions": [
+        "strength_nhuoc",
+        "pattern_low_score"
+      ],
+      "excluded_conditions": [],
+      "action": "reduce_pattern",
+      "priority": 85,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR008",
+      "ma_rule": "combination_rule_008",
+      "ten": "Than va Cach xung dot",
+      "combination": "strength_pattern",
+      "description": "Than va Cach Cuc khong tuong thich.",
+      "required_conditions": [
+        "strength_pattern_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_detected",
+      "priority": 80,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR009",
+      "ma_rule": "combination_rule_009",
+      "ten": "Than va Cach phoi hop",
+      "combination": "strength_pattern",
+      "description": "Than va Cach Cuc phoi hop tot.",
+      "required_conditions": [
+        "strength_pattern_support"
+      ],
+      "excluded_conditions": [],
+      "action": "strong_combination",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR010",
+      "ma_rule": "combination_rule_010",
+      "ten": "Hoan tat danh gia Strength va Pattern",
+      "combination": "strength_pattern",
+      "description": "Ket thuc danh gia to hop Than va Cach Cuc.",
+      "required_conditions": [
+        "strength_pattern_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR011",
+      "ma_rule": "combination_rule_011",
+      "ten": "Than vuong gap Dung Than",
+      "combination": "strength_useful_god",
+      "description": "Than vuong va Dung Than phoi hop, tang gia tri la so.",
+      "required_conditions": [
+        "strength_vuong",
+        "useful_god_found"
+      ],
+      "excluded_conditions": [],
+      "action": "support_useful_god",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR012",
+      "ma_rule": "combination_rule_012",
+      "ten": "Than nhuoc gap Dung Than",
+      "combination": "strength_useful_god",
+      "description": "Than nhuoc duoc Dung Than bo tro.",
+      "required_conditions": [
+        "strength_nhuoc",
+        "useful_god_found"
+      ],
+      "excluded_conditions": [],
+      "action": "recover_strength",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR013",
+      "ma_rule": "combination_rule_013",
+      "ten": "Than vuong gap Ky Than",
+      "combination": "strength_useful_god",
+      "description": "Than vuong nhung bi Ky Than tac dong.",
+      "required_conditions": [
+        "strength_vuong",
+        "harmful_god_present"
+      ],
+      "excluded_conditions": [],
+      "action": "harmful_effect",
+      "priority": 92,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR014",
+      "ma_rule": "combination_rule_014",
+      "ten": "Than nhuoc gap Ky Than",
+      "combination": "strength_useful_god",
+      "description": "Than nhuoc tiep tuc bi Ky Than lam suy yeu.",
+      "required_conditions": [
+        "strength_nhuoc",
+        "harmful_god_present"
+      ],
+      "excluded_conditions": [],
+      "action": "serious_weakness",
+      "priority": 90,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR015",
+      "ma_rule": "combination_rule_015",
+      "ten": "Dung Than phat huy toi da",
+      "combination": "strength_useful_god",
+      "description": "Dung Than duoc kich hoat trong dieu kien ly tuong.",
+      "required_conditions": [
+        "strength_balanced",
+        "useful_god_active"
+      ],
+      "excluded_conditions": [],
+      "action": "maximize_useful_god",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR016",
+      "ma_rule": "combination_rule_016",
+      "ten": "Dung Than bi uc che",
+      "combination": "strength_useful_god",
+      "description": "Dung Than ton tai nhung khong phat huy tac dung.",
+      "required_conditions": [
+        "useful_god_blocked"
+      ],
+      "excluded_conditions": [],
+      "action": "useful_god_blocked",
+      "priority": 88,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR017",
+      "ma_rule": "combination_rule_017",
+      "ten": "Dung Than duoc sinh tro",
+      "combination": "strength_useful_god",
+      "description": "Dung Than nhan duoc su sinh tro tu ngu hanh.",
+      "required_conditions": [
+        "useful_god_supported"
+      ],
+      "excluded_conditions": [],
+      "action": "useful_god_strengthened",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR018",
+      "ma_rule": "combination_rule_018",
+      "ten": "Dung Than bi khac che",
+      "combination": "strength_useful_god",
+      "description": "Dung Than bi han che boi ngu hanh khac.",
+      "required_conditions": [
+        "useful_god_controlled"
+      ],
+      "excluded_conditions": [],
+      "action": "useful_god_weakened",
+      "priority": 89,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR019",
+      "ma_rule": "combination_rule_019",
+      "ten": "Than va Dung Than can bang",
+      "combination": "strength_useful_god",
+      "description": "Than va Dung Than dat trang thai can bang.",
+      "required_conditions": [
+        "strength_useful_god_balanced"
+      ],
+      "excluded_conditions": [],
+      "action": "balanced_combination",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR020",
+      "ma_rule": "combination_rule_020",
+      "ten": "Hoan tat danh gia Strength va Dung Than",
+      "combination": "strength_useful_god",
+      "description": "Ket thuc danh gia to hop Than va Dung Than.",
+      "required_conditions": [
+        "strength_useful_god_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR021",
+      "ma_rule": "combination_rule_021",
+      "ten": "Cach Cuc duoc mua sinh tro",
+      "combination": "season_pattern",
+      "description": "Khi mua hien tai sinh tro cho Cach Cuc, gia tri Cach duoc nang cao.",
+      "required_conditions": [
+        "season_support_pattern",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "season_support_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR022",
+      "ma_rule": "combination_rule_022",
+      "ten": "Cach Cuc bi mua khac che",
+      "combination": "season_pattern",
+      "description": "Khi mua hien tai khac che Cach Cuc, suc manh Cach giam.",
+      "required_conditions": [
+        "season_control_pattern",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "season_reduce_pattern",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR023",
+      "ma_rule": "combination_rule_023",
+      "ten": "Cach Cuc dat lenh mua",
+      "combination": "season_pattern",
+      "description": "Ngu hanh cua Cach Cuc dang nam trong lenh mua.",
+      "required_conditions": [
+        "pattern_in_season"
+      ],
+      "excluded_conditions": [],
+      "action": "pattern_in_command",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR024",
+      "ma_rule": "combination_rule_024",
+      "ten": "Cach Cuc mat lenh mua",
+      "combination": "season_pattern",
+      "description": "Ngu hanh cua Cach Cuc khong duoc lenh mua ho tro.",
+      "required_conditions": [
+        "pattern_out_of_season"
+      ],
+      "excluded_conditions": [],
+      "action": "pattern_out_of_command",
+      "priority": 92,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR025",
+      "ma_rule": "combination_rule_025",
+      "ten": "Mua va Cach Cuc can bang",
+      "combination": "season_pattern",
+      "description": "Mua va Cach Cuc tao trang thai can bang.",
+      "required_conditions": [
+        "season_pattern_balanced"
+      ],
+      "excluded_conditions": [],
+      "action": "balanced_pattern",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR026",
+      "ma_rule": "combination_rule_026",
+      "ten": "Mua tang cuong Cach Cuc",
+      "combination": "season_pattern",
+      "description": "Khong chi sinh tro ma con lam tang suc manh Cach Cuc.",
+      "required_conditions": [
+        "season_strengthen_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "enhance_pattern",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR027",
+      "ma_rule": "combination_rule_027",
+      "ten": "Mua lam suy Cach Cuc",
+      "combination": "season_pattern",
+      "description": "Khong khi mua lam suy giam Cach Cuc.",
+      "required_conditions": [
+        "season_weaken_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "weaken_pattern",
+      "priority": 91,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR028",
+      "ma_rule": "combination_rule_028",
+      "ten": "Mua va Cach Cuc xung dot",
+      "combination": "season_pattern",
+      "description": "Tinh chat mua va Cach Cuc mau thuan.",
+      "required_conditions": [
+        "season_pattern_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_detected",
+      "priority": 90,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR029",
+      "ma_rule": "combination_rule_029",
+      "ten": "Mua va Cach Cuc tuong hop",
+      "combination": "season_pattern",
+      "description": "Mua va Cach Cuc ket hop tot.",
+      "required_conditions": [
+        "season_pattern_support"
+      ],
+      "excluded_conditions": [],
+      "action": "strong_combination",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR030",
+      "ma_rule": "combination_rule_030",
+      "ten": "Hoan tat danh gia Season va Pattern",
+      "combination": "season_pattern",
+      "description": "Ket thuc danh gia to hop Khi Mua va Cach Cuc.",
+      "required_conditions": [
+        "season_pattern_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR031",
+      "ma_rule": "combination_rule_031",
+      "ten": "Nhiet do ho tro Cach Cuc",
+      "combination": "temperature_pattern",
+      "description": "Trang thai han nhiet phu hop voi Cach Cuc.",
+      "required_conditions": [
+        "temperature_support_pattern",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "temperature_support_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR032",
+      "ma_rule": "combination_rule_032",
+      "ten": "Nhiet do khac che Cach Cuc",
+      "combination": "temperature_pattern",
+      "description": "Trang thai han nhiet lam suy giam Cach Cuc.",
+      "required_conditions": [
+        "temperature_control_pattern",
+        "pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "temperature_reduce_pattern",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR033",
+      "ma_rule": "combination_rule_033",
+      "ten": "Han can duoc dieu hoa",
+      "combination": "temperature_pattern",
+      "description": "La so han duoc dieu hoa nen Cach Cuc on dinh.",
+      "required_conditions": [
+        "chart_cold",
+        "temperature_balanced"
+      ],
+      "excluded_conditions": [],
+      "action": "cold_balanced",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR034",
+      "ma_rule": "combination_rule_034",
+      "ten": "Nhiet can duoc dieu hoa",
+      "combination": "temperature_pattern",
+      "description": "La so nhiet duoc dieu hoa nen Cach Cuc on dinh.",
+      "required_conditions": [
+        "chart_hot",
+        "temperature_balanced"
+      ],
+      "excluded_conditions": [],
+      "action": "hot_balanced",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR035",
+      "ma_rule": "combination_rule_035",
+      "ten": "Han qua muc",
+      "combination": "temperature_pattern",
+      "description": "La so qua han lam anh huong den Cach Cuc.",
+      "required_conditions": [
+        "temperature_excess_cold"
+      ],
+      "excluded_conditions": [],
+      "action": "cold_excess",
+      "priority": 92,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR036",
+      "ma_rule": "combination_rule_036",
+      "ten": "Nhiet qua muc",
+      "combination": "temperature_pattern",
+      "description": "La so qua nhiet lam anh huong den Cach Cuc.",
+      "required_conditions": [
+        "temperature_excess_hot"
+      ],
+      "excluded_conditions": [],
+      "action": "hot_excess",
+      "priority": 92,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR037",
+      "ma_rule": "combination_rule_037",
+      "ten": "Nhiet do can bang",
+      "combination": "temperature_pattern",
+      "description": "Han nhiet dat trang thai can bang voi Cach Cuc.",
+      "required_conditions": [
+        "temperature_pattern_balanced"
+      ],
+      "excluded_conditions": [],
+      "action": "balanced_temperature_pattern",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR038",
+      "ma_rule": "combination_rule_038",
+      "ten": "Nhiet do va Cach Cuc xung dot",
+      "combination": "temperature_pattern",
+      "description": "Tinh chat han nhiet mau thuan voi Cach Cuc.",
+      "required_conditions": [
+        "temperature_pattern_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "temperature_conflict",
+      "priority": 90,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR039",
+      "ma_rule": "combination_rule_039",
+      "ten": "Nhiet do tang cuong Cach Cuc",
+      "combination": "temperature_pattern",
+      "description": "Dieu kien han nhiet giup Cach Cuc phat huy toi da.",
+      "required_conditions": [
+        "temperature_enhance_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "enhance_pattern",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR040",
+      "ma_rule": "combination_rule_040",
+      "ten": "Hoan tat danh gia Temperature va Pattern",
+      "combination": "temperature_pattern",
+      "description": "Ket thuc danh gia to hop Han Nhiet va Cach Cuc.",
+      "required_conditions": [
+        "temperature_pattern_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR041",
+      "ma_rule": "combination_rule_041",
+      "ten": "Hai Cach Cuc tuong sinh",
+      "combination": "pattern_pattern",
+      "description": "Hai Cach Cuc ho tro lan nhau va co the dong thoi ton tai.",
+      "required_conditions": [
+        "multiple_patterns",
+        "patterns_support"
+      ],
+      "excluded_conditions": [],
+      "action": "support_combination",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR042",
+      "ma_rule": "combination_rule_042",
+      "ten": "Hai Cach Cuc tuong khac",
+      "combination": "pattern_pattern",
+      "description": "Hai Cach Cuc mau thuan va khong nen dong thoi giu lai.",
+      "required_conditions": [
+        "multiple_patterns",
+        "patterns_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_combination",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR043",
+      "ma_rule": "combination_rule_043",
+      "ten": "Pattern chinh va Pattern phu",
+      "combination": "pattern_pattern",
+      "description": "Xac dinh Pattern chinh va Pattern bo tro.",
+      "required_conditions": [
+        "primary_pattern_found",
+        "secondary_pattern_found"
+      ],
+      "excluded_conditions": [],
+      "action": "primary_secondary_pattern",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR044",
+      "ma_rule": "combination_rule_044",
+      "ten": "Pattern trung lap",
+      "combination": "pattern_pattern",
+      "description": "Loai bo cac Pattern trung lap.",
+      "required_conditions": [
+        "duplicate_patterns"
+      ],
+      "excluded_conditions": [],
+      "action": "remove_duplicate_pattern",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR045",
+      "ma_rule": "combination_rule_045",
+      "ten": "Pattern ho tro lan nhau",
+      "combination": "pattern_pattern",
+      "description": "Cac Pattern ket hop lam tang gia tri tong the.",
+      "required_conditions": [
+        "patterns_mutual_support"
+      ],
+      "excluded_conditions": [],
+      "action": "enhance_combination",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR046",
+      "ma_rule": "combination_rule_046",
+      "ten": "Pattern can bang",
+      "combination": "pattern_pattern",
+      "description": "Nhieu Pattern dat trang thai can bang.",
+      "required_conditions": [
+        "patterns_balanced"
+      ],
+      "excluded_conditions": [],
+      "action": "balanced_patterns",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR047",
+      "ma_rule": "combination_rule_047",
+      "ten": "Pattern can Conflict Resolution",
+      "combination": "pattern_pattern",
+      "description": "Can ap dung bo giai quyet xung dot giua cac Pattern.",
+      "required_conditions": [
+        "patterns_need_resolution"
+      ],
+      "excluded_conditions": [],
+      "action": "resolve_patterns",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR048",
+      "ma_rule": "combination_rule_048",
+      "ten": "Chi con mot Pattern hop le",
+      "combination": "pattern_pattern",
+      "description": "Sau khi danh gia chi con mot Pattern duoc giu lai.",
+      "required_conditions": [
+        "single_pattern_remaining"
+      ],
+      "excluded_conditions": [],
+      "action": "single_pattern_selected",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR049",
+      "ma_rule": "combination_rule_049",
+      "ten": "Pattern cuoi cung duoc xac nhan",
+      "combination": "pattern_pattern",
+      "description": "Pattern cuoi cung da duoc xac nhan sau khi danh gia.",
+      "required_conditions": [
+        "final_pattern_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "confirm_final_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR050",
+      "ma_rule": "combination_rule_050",
+      "ten": "Hoan tat danh gia Pattern va Pattern",
+      "combination": "pattern_pattern",
+      "description": "Ket thuc danh gia to hop giua cac Cach Cuc.",
+      "required_conditions": [
+        "pattern_pattern_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR051",
+      "ma_rule": "combination_rule_051",
+      "ten": "Special Case ho tro Cach Cuc",
+      "combination": "pattern_special_case",
+      "description": "Truong hop dac biet giup tang gia tri cua Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_support"
+      ],
+      "excluded_conditions": [],
+      "action": "support_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR052",
+      "ma_rule": "combination_rule_052",
+      "ten": "Special Case lam suy Cach Cuc",
+      "combination": "pattern_special_case",
+      "description": "Truong hop dac biet lam giam gia tri cua Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_weaken"
+      ],
+      "excluded_conditions": [],
+      "action": "weaken_pattern",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR053",
+      "ma_rule": "combination_rule_053",
+      "ten": "Special Case vo hieu Cach Cuc",
+      "combination": "pattern_special_case",
+      "description": "Truong hop dac biet lam Cach Cuc khong con hop le.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_invalid"
+      ],
+      "excluded_conditions": [],
+      "action": "invalidate_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR054",
+      "ma_rule": "combination_rule_054",
+      "ten": "Special Case kich hoat Cach Cuc",
+      "combination": "pattern_special_case",
+      "description": "Ngoai le kich hoat mot Cach Cuc truoc do chua du dieu kien.",
+      "required_conditions": [
+        "pattern_candidate",
+        "special_case_activate"
+      ],
+      "excluded_conditions": [],
+      "action": "activate_pattern",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR055",
+      "ma_rule": "combination_rule_055",
+      "ten": "Special Case thay doi muc uu tien",
+      "combination": "pattern_special_case",
+      "description": "Dieu chinh thu tu uu tien cua Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_priority_change"
+      ],
+      "excluded_conditions": [],
+      "action": "adjust_priority",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR056",
+      "ma_rule": "combination_rule_056",
+      "ten": "Special Case bo sung dieu kien",
+      "combination": "pattern_special_case",
+      "description": "Them dieu kien danh gia cho Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_extra_condition"
+      ],
+      "excluded_conditions": [],
+      "action": "extend_conditions",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR057",
+      "ma_rule": "combination_rule_057",
+      "ten": "Special Case bo qua dieu kien",
+      "combination": "pattern_special_case",
+      "description": "Cho phep bo qua mot so dieu kien thong thuong.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_override"
+      ],
+      "excluded_conditions": [],
+      "action": "override_conditions",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR058",
+      "ma_rule": "combination_rule_058",
+      "ten": "Special Case xung dot voi Cach Cuc",
+      "combination": "pattern_special_case",
+      "description": "Ngoai le mau thuan voi Cach Cuc hien tai.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_detected",
+      "priority": 94,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR059",
+      "ma_rule": "combination_rule_059",
+      "ten": "Special Case duoc xac nhan",
+      "combination": "pattern_special_case",
+      "description": "Ngoai le da duoc ap dung thanh cong vao Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "special_case_applied"
+      ],
+      "excluded_conditions": [],
+      "action": "special_case_confirmed",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR060",
+      "ma_rule": "combination_rule_060",
+      "ten": "Hoan tat danh gia Pattern va Special Case",
+      "combination": "pattern_special_case",
+      "description": "Ket thuc danh gia to hop giua Cach Cuc va cac truong hop dac biet.",
+      "required_conditions": [
+        "pattern_special_case_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR061",
+      "ma_rule": "combination_rule_061",
+      "ten": "Pattern phu hop Follow Pattern",
+      "combination": "pattern_follow_pattern",
+      "description": "Pattern va Follow Pattern hoan toan tuong thich.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "follow_pattern_confirmed",
+        "pattern_follow_match"
+      ],
+      "excluded_conditions": [],
+      "action": "confirm_follow_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR062",
+      "ma_rule": "combination_rule_062",
+      "ten": "Follow Pattern nang cao gia tri Pattern",
+      "combination": "pattern_follow_pattern",
+      "description": "Follow Pattern giup tang do tin cay cua Pattern.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "follow_pattern_support"
+      ],
+      "excluded_conditions": [],
+      "action": "enhance_pattern",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR063",
+      "ma_rule": "combination_rule_063",
+      "ten": "Follow Pattern bo sung Pattern",
+      "combination": "pattern_follow_pattern",
+      "description": "Follow Pattern bo sung thong tin cho Pattern hien tai.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "follow_pattern_extend"
+      ],
+      "excluded_conditions": [],
+      "action": "extend_pattern",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR064",
+      "ma_rule": "combination_rule_064",
+      "ten": "Follow Pattern dieu chinh Pattern",
+      "combination": "pattern_follow_pattern",
+      "description": "Follow Pattern dieu chinh cach danh gia Pattern.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "follow_pattern_adjust"
+      ],
+      "excluded_conditions": [],
+      "action": "adjust_pattern",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR065",
+      "ma_rule": "combination_rule_065",
+      "ten": "Follow Pattern vo hieu Pattern",
+      "combination": "pattern_follow_pattern",
+      "description": "Follow Pattern lam Pattern hien tai khong con hop le.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "follow_pattern_override"
+      ],
+      "excluded_conditions": [],
+      "action": "invalidate_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR066",
+      "ma_rule": "combination_rule_066",
+      "ten": "Pattern va Follow Pattern mau thuan",
+      "combination": "pattern_follow_pattern",
+      "description": "Hai ket qua danh gia xung dot voi nhau.",
+      "required_conditions": [
+        "pattern_follow_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_detected",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR067",
+      "ma_rule": "combination_rule_067",
+      "ten": "Pattern va Follow Pattern can giai quyet",
+      "combination": "pattern_follow_pattern",
+      "description": "Can kich hoat bo xu ly Conflict Resolution.",
+      "required_conditions": [
+        "pattern_follow_need_resolution"
+      ],
+      "excluded_conditions": [],
+      "action": "resolve_pattern_follow",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR068",
+      "ma_rule": "combination_rule_068",
+      "ten": "Follow Pattern duoc chon",
+      "combination": "pattern_follow_pattern",
+      "description": "Follow Pattern chien thang sau khi so sanh voi Pattern.",
+      "required_conditions": [
+        "follow_pattern_selected"
+      ],
+      "excluded_conditions": [],
+      "action": "select_follow_pattern",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR069",
+      "ma_rule": "combination_rule_069",
+      "ten": "Pattern cuoi cung duoc xac nhan",
+      "combination": "pattern_follow_pattern",
+      "description": "Sau khi doi chieu Follow Pattern, Pattern cuoi cung duoc chap nhan.",
+      "required_conditions": [
+        "final_pattern_selected"
+      ],
+      "excluded_conditions": [],
+      "action": "confirm_final_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR070",
+      "ma_rule": "combination_rule_070",
+      "ten": "Hoan tat danh gia Pattern va Follow Pattern",
+      "combination": "pattern_follow_pattern",
+      "description": "Ket thuc danh gia to hop giua Pattern va Follow Pattern.",
+      "required_conditions": [
+        "pattern_follow_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR071",
+      "ma_rule": "combination_rule_071",
+      "ten": "Dai Van ho tro Cach Cuc",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van hien tai ho tro va lam tang gia tri cua Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "luck_cycle_support_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "support_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR072",
+      "ma_rule": "combination_rule_072",
+      "ten": "Dai Van lam suy Cach Cuc",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van hien tai lam giam suc manh cua Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "luck_cycle_weaken_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "weaken_pattern",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR073",
+      "ma_rule": "combination_rule_073",
+      "ten": "Dai Van kich hoat Cach Cuc",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van kich hoat Cach Cuc truoc do chua phat huy.",
+      "required_conditions": [
+        "pattern_candidate",
+        "luck_cycle_activate_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "activate_pattern",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR074",
+      "ma_rule": "combination_rule_074",
+      "ten": "Dai Van vo hieu Cach Cuc",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van lam Cach Cuc mat gia tri.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "luck_cycle_invalidate_pattern"
+      ],
+      "excluded_conditions": [],
+      "action": "invalidate_pattern",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR075",
+      "ma_rule": "combination_rule_075",
+      "ten": "Dai Van thay doi muc uu tien",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van dieu chinh thu tu uu tien cua Cach Cuc.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "luck_cycle_adjust_priority"
+      ],
+      "excluded_conditions": [],
+      "action": "adjust_priority",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR076",
+      "ma_rule": "combination_rule_076",
+      "ten": "Dai Van bo sung dieu kien",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van bo sung cac dieu kien danh gia moi.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "luck_cycle_extend_conditions"
+      ],
+      "excluded_conditions": [],
+      "action": "extend_conditions",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR077",
+      "ma_rule": "combination_rule_077",
+      "ten": "Dai Van va Cach Cuc xung dot",
+      "combination": "pattern_luck_cycle",
+      "description": "Dai Van va Cach Cuc co su mau thuan.",
+      "required_conditions": [
+        "pattern_confirmed",
+        "luck_cycle_pattern_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_detected",
+      "priority": 94,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR078",
+      "ma_rule": "combination_rule_078",
+      "ten": "Dai Van can Conflict Resolution",
+      "combination": "pattern_luck_cycle",
+      "description": "Can xu ly xung dot giua Dai Van va Cach Cuc.",
+      "required_conditions": [
+        "luck_cycle_need_resolution"
+      ],
+      "excluded_conditions": [],
+      "action": "resolve_luck_cycle",
+      "priority": 96,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR079",
+      "ma_rule": "combination_rule_079",
+      "ten": "Dai Van duoc xac nhan",
+      "combination": "pattern_luck_cycle",
+      "description": "Anh huong cua Dai Van da duoc xac nhan vao ket qua cuoi cung.",
+      "required_conditions": [
+        "luck_cycle_applied"
+      ],
+      "excluded_conditions": [],
+      "action": "confirm_luck_cycle",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR080",
+      "ma_rule": "combination_rule_080",
+      "ten": "Hoan tat danh gia Pattern va Dai Van",
+      "combination": "pattern_luck_cycle",
+      "description": "Ket thuc danh gia to hop giua Cach Cuc va Dai Van.",
+      "required_conditions": [
+        "pattern_luck_cycle_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR081",
+      "ma_rule": "combination_rule_081",
+      "ten": "Tat ca dieu kien deu ho tro",
+      "combination": "multiple_combination",
+      "description": "Tat ca cac module deu danh gia tich cuc va ho tro Cach Cuc.",
+      "required_conditions": [
+        "strength_support",
+        "season_support",
+        "temperature_support",
+        "pattern_confirmed",
+        "useful_god_support"
+      ],
+      "excluded_conditions": [],
+      "action": "maximum_support",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR082",
+      "ma_rule": "combination_rule_082",
+      "ten": "Nhieu dieu kien ho tro",
+      "combination": "multiple_combination",
+      "description": "Phan lon cac module deu ho tro Cach Cuc.",
+      "required_conditions": [
+        "majority_support"
+      ],
+      "excluded_conditions": [],
+      "action": "strong_support",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR083",
+      "ma_rule": "combination_rule_083",
+      "ten": "Ho tro va xung dot dong thoi",
+      "combination": "multiple_combination",
+      "description": "Dong thoi ton tai yeu to ho tro va yeu to bat loi.",
+      "required_conditions": [
+        "mixed_support_conflict"
+      ],
+      "excluded_conditions": [],
+      "action": "mixed_result",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR084",
+      "ma_rule": "combination_rule_084",
+      "ten": "Nhieu xung dot",
+      "combination": "multiple_combination",
+      "description": "Nhieu module dua ra ket qua mau thuan.",
+      "required_conditions": [
+        "multiple_conflicts"
+      ],
+      "excluded_conditions": [],
+      "action": "high_conflict",
+      "priority": 95,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR085",
+      "ma_rule": "combination_rule_085",
+      "ten": "Can kich hoat Conflict Resolution",
+      "combination": "multiple_combination",
+      "description": "Can xu ly xung dot tong hop giua cac module.",
+      "required_conditions": [
+        "global_resolution_required"
+      ],
+      "excluded_conditions": [],
+      "action": "start_conflict_resolution",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR086",
+      "ma_rule": "combination_rule_086",
+      "ten": "Da giai quyet xung dot",
+      "combination": "multiple_combination",
+      "description": "Tat ca xung dot da duoc xu ly thanh cong.",
+      "required_conditions": [
+        "conflict_resolved"
+      ],
+      "excluded_conditions": [],
+      "action": "conflict_resolved",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR087",
+      "ma_rule": "combination_rule_087",
+      "ten": "Ket qua tong hop on dinh",
+      "combination": "multiple_combination",
+      "description": "Sau khi tong hop, ket qua dat trang thai on dinh.",
+      "required_conditions": [
+        "combination_stable"
+      ],
+      "excluded_conditions": [],
+      "action": "stable_result",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR088",
+      "ma_rule": "combination_rule_088",
+      "ten": "Ket qua tong hop khong hop le",
+      "combination": "multiple_combination",
+      "description": "Khong the dua ra ket qua do mau thuan qua lon.",
+      "required_conditions": [
+        "combination_invalid"
+      ],
+      "excluded_conditions": [],
+      "action": "invalid_result",
+      "priority": 94,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR089",
+      "ma_rule": "combination_rule_089",
+      "ten": "Ket qua tong hop duoc xac nhan",
+      "combination": "multiple_combination",
+      "description": "Tat ca dieu kien da duoc xac nhan va thong nhat.",
+      "required_conditions": [
+        "combination_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "confirm_combination",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR090",
+      "ma_rule": "combination_rule_090",
+      "ten": "Hoan tat Multiple Combination",
+      "combination": "multiple_combination",
+      "description": "Ket thuc danh gia tong hop nhieu module.",
+      "required_conditions": [
+        "multiple_combination_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]
+  [
+    {
+      "id": "CBR091",
+      "ma_rule": "combination_rule_091",
+      "ten": "Xac nhan ket qua cuoi cung",
+      "combination": "final_combination",
+      "description": "Tat ca cac buoc danh gia da hoan tat va san sang xac nhan ket qua cuoi cung.",
+      "required_conditions": [
+        "combination_confirmed"
+      ],
+      "excluded_conditions": [],
+      "action": "confirm_final_result",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR092",
+      "ma_rule": "combination_rule_092",
+      "ten": "Tinh diem tong hop",
+      "combination": "final_combination",
+      "description": "Tong hop diem tu tat ca cac module de tao diem danh gia cuoi cung.",
+      "required_conditions": [
+        "score_calculation_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "calculate_final_score",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR093",
+      "ma_rule": "combination_rule_093",
+      "ten": "Xac dinh muc do tin cay",
+      "combination": "final_combination",
+      "description": "Tinh toan muc do tin cay cua ket qua sau khi tong hop.",
+      "required_conditions": [
+        "confidence_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "calculate_confidence",
+      "priority": 99,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR094",
+      "ma_rule": "combination_rule_094",
+      "ten": "Gan nhan ket qua",
+      "combination": "final_combination",
+      "description": "Gan cac nhan tong hop cho ket qua cuoi cung.",
+      "required_conditions": [
+        "label_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "assign_labels",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR095",
+      "ma_rule": "combination_rule_095",
+      "ten": "Sinh metadata",
+      "combination": "final_combination",
+      "description": "Sinh metadata phuc vu Interpretation Engine va Report Engine.",
+      "required_conditions": [
+        "metadata_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "generate_metadata",
+      "priority": 98,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR096",
+      "ma_rule": "combination_rule_096",
+      "ten": "Kiem tra tinh day du",
+      "combination": "final_combination",
+      "description": "Dam bao tat ca du lieu can thiet da duoc tao.",
+      "required_conditions": [
+        "validation_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "validate_final_result",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR097",
+      "ma_rule": "combination_rule_097",
+      "ten": "Dong goi ket qua",
+      "combination": "final_combination",
+      "description": "Dong goi ket qua theo cau truc chuan de truyen sang cac Engine tiep theo.",
+      "required_conditions": [
+        "result_packaging_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "package_result",
+      "priority": 97,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR098",
+      "ma_rule": "combination_rule_098",
+      "ten": "San sang cho Interpretation Engine",
+      "combination": "final_combination",
+      "description": "Ket qua da san sang de dua vao Interpretation Engine.",
+      "required_conditions": [
+        "interpretation_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "send_to_interpretation_engine",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR099",
+      "ma_rule": "combination_rule_099",
+      "ten": "San sang cho Report Engine",
+      "combination": "final_combination",
+      "description": "Ket qua da san sang de sinh bao cao.",
+      "required_conditions": [
+        "report_ready"
+      ],
+      "excluded_conditions": [],
+      "action": "send_to_report_engine",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "CBR100",
+      "ma_rule": "combination_rule_100",
+      "ten": "Hoan tat Final Combination",
+      "combination": "final_combination",
+      "description": "Hoan tat toan bo qua trinh tong hop va ket luan Rule Engine.",
+      "required_conditions": [
+        "final_combination_completed"
+      ],
+      "excluded_conditions": [],
+      "action": "completed",
+      "priority": 100,
+      "active": true,
+      "ghi_chu": ""
+    }
+  ]

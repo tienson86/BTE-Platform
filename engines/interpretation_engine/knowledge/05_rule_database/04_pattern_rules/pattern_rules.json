@@ -1,0 +1,682 @@
+[
+    {
+      "id": "PAT001",
+      "pattern_code": "zheng_guan",
+      "pattern_name": "chinh_quan_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": {
+        "month_branch_contains": "zheng_guan",
+        "day_master_strength": [
+          "strong",
+          "balanced"
+        ],
+        "zheng_guan_visible": true,
+        "not_destroyed": true
+      },
+  
+      "result": {
+        "pattern_candidate": "zheng_guan"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT002",
+      "pattern_code": "qi_sha",
+      "pattern_name": "that_sat_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": {
+        "month_branch_contains": "qi_sha",
+        "qi_sha_visible": true,
+        "has_control": true
+      },
+  
+      "result": {
+        "pattern_candidate": "qi_sha"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT003",
+      "pattern_code": "guan_sha_mixed",
+      "pattern_name": "quan_sat_hon_tap",
+      "category": "special_pattern",
+      "priority": 90,
+      "enabled": true,
+  
+      "conditions": {
+        "has_zheng_guan": true,
+        "has_qi_sha": true
+      },
+  
+      "result": {
+        "pattern_candidate": "guan_sha_mixed"
+      },
+  
+      "references": [
+        "tam_menh_thong_hoi"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT004",
+      "pattern_code": "zheng_cai",
+      "pattern_name": "chinh_tai_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_hidden_ten_god",
+          "operator": "contains",
+          "value": "zheng_cai"
+        },
+        {
+          "field": "zheng_cai_visible",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "balanced",
+            "strong"
+          ]
+        },
+        {
+          "field": "zheng_cai_destroyed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "zheng_cai"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT005",
+      "pattern_code": "pian_cai",
+      "pattern_name": "thien_tai_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_hidden_ten_god",
+          "operator": "contains",
+          "value": "pian_cai"
+        },
+        {
+          "field": "pian_cai_visible",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "balanced",
+            "strong"
+          ]
+        },
+        {
+          "field": "pian_cai_destroyed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "pian_cai"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT006",
+      "pattern_code": "cai_mixed",
+      "pattern_name": "tai_hon_tap",
+      "category": "special_pattern",
+      "priority": 90,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "has_zheng_cai",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "has_pian_cai",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "cai_mixed"
+      },
+  
+      "references": [
+        "tam_menh_thong_hoi"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT007",
+      "pattern_code": "zheng_yin",
+      "pattern_name": "chinh_an_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_hidden_ten_gods",
+          "operator": "contains",
+          "value": "zheng_yin"
+        },
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains",
+          "value": "zheng_yin"
+        },
+        {
+          "field": "destroyed_ten_gods",
+          "operator": "not_contains",
+          "value": "zheng_yin"
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "weak",
+            "balanced"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "zheng_yin"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT008",
+      "pattern_code": "pian_yin",
+      "pattern_name": "thien_an_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_hidden_ten_gods",
+          "operator": "contains",
+          "value": "pian_yin"
+        },
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains",
+          "value": "pian_yin"
+        },
+        {
+          "field": "destroyed_ten_gods",
+          "operator": "not_contains",
+          "value": "pian_yin"
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "weak",
+            "balanced"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "pian_yin"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT009",
+      "pattern_code": "yin_mixed",
+      "pattern_name": "an_hon_tap",
+      "category": "special_pattern",
+      "priority": 90,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains_all",
+          "value": [
+            "zheng_yin",
+            "pian_yin"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "yin_mixed"
+      },
+  
+      "references": [
+        "tam_menh_thong_hoi"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT010",
+      "pattern_code": "shi_shen",
+      "pattern_name": "thuc_than_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_hidden_ten_gods",
+          "operator": "contains",
+          "value": "shi_shen"
+        },
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains",
+          "value": "shi_shen"
+        },
+        {
+          "field": "destroyed_ten_gods",
+          "operator": "not_contains",
+          "value": "shi_shen"
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "strong",
+            "balanced"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "shi_shen"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT011",
+      "pattern_code": "shang_guan",
+      "pattern_name": "thuong_quan_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_hidden_ten_gods",
+          "operator": "contains",
+          "value": "shang_guan"
+        },
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains",
+          "value": "shang_guan"
+        },
+        {
+          "field": "destroyed_ten_gods",
+          "operator": "not_contains",
+          "value": "shang_guan"
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "strong",
+            "balanced"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "shang_guan"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT012",
+      "pattern_code": "shi_shang_mixed",
+      "pattern_name": "thuc_than_thuong_quan_hon_tap",
+      "category": "special_pattern",
+      "priority": 90,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains_all",
+          "value": [
+            "shi_shen",
+            "shang_guan"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "shi_shang_mixed"
+      },
+  
+      "references": [
+        "tam_menh_thong_hoi"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT013",
+      "pattern_code": "bi_jian",
+      "pattern_name": "ty_kien_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_commander_ten_god",
+          "operator": "equals",
+          "value": "bi_jian"
+        },
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains",
+          "value": "bi_jian"
+        },
+        {
+          "field": "destroyed_ten_gods",
+          "operator": "not_contains",
+          "value": "bi_jian"
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "strong",
+            "balanced"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "bi_jian"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT014",
+      "pattern_code": "jie_cai",
+      "pattern_name": "kiep_tai_cach",
+      "category": "standard_pattern",
+      "priority": 80,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_commander_ten_god",
+          "operator": "equals",
+          "value": "jie_cai"
+        },
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains",
+          "value": "jie_cai"
+        },
+        {
+          "field": "destroyed_ten_gods",
+          "operator": "not_contains",
+          "value": "jie_cai"
+        },
+        {
+          "field": "day_master_strength",
+          "operator": "in",
+          "value": [
+            "strong",
+            "balanced"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "jie_cai"
+      },
+  
+      "references": [
+        "tu_binh_chan_thuyen"
+      ]
+    },
+  
+    {
+      "id": "PAT015",
+      "pattern_code": "bi_jie_mixed",
+      "pattern_name": "ty_kiep_hon_tap",
+      "category": "special_pattern",
+      "priority": 90,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "visible_ten_gods",
+          "operator": "contains_all",
+          "value": [
+            "bi_jian",
+            "jie_cai"
+          ]
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "bi_jie_mixed"
+      },
+  
+      "references": [
+        "tam_menh_thong_hoi"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "PAT016",
+      "pattern_code": "cong_ge",
+      "pattern_name": "tong_cach",
+      "category": "special_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "special_flags",
+          "operator": "contains",
+          "value": "cong_ge"
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "cong_ge"
+      },
+  
+      "references": [
+        "yuan_hai_zi_ping"
+      ]
+    },
+  
+    {
+      "id": "PAT017",
+      "pattern_code": "cong_qiang",
+      "pattern_name": "tong_cuong_cach",
+      "category": "special_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "special_flags",
+          "operator": "contains",
+          "value": "cong_qiang"
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "cong_qiang"
+      },
+  
+      "references": [
+        "yuan_hai_zi_ping"
+      ]
+    },
+  
+    {
+      "id": "PAT018",
+      "pattern_code": "cong_ruo",
+      "pattern_name": "tong_nhuoc_cach",
+      "category": "special_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "special_flags",
+          "operator": "contains",
+          "value": "cong_ruo"
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "cong_ruo"
+      },
+  
+      "references": [
+        "yuan_hai_zi_ping"
+      ]
+    },
+  
+    {
+      "id": "PAT019",
+      "pattern_code": "zhuan_wang",
+      "pattern_name": "chuyen_vuong_cach",
+      "category": "special_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "special_flags",
+          "operator": "contains",
+          "value": "zhuan_wang"
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "zhuan_wang"
+      },
+  
+      "references": [
+        "san_ming_tong_hui"
+      ]
+    },
+  
+    {
+      "id": "PAT020",
+      "pattern_code": "hua_qi",
+      "pattern_name": "hoa_khi_cach",
+      "category": "special_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "special_flags",
+          "operator": "contains",
+          "value": "hua_qi"
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "hua_qi"
+      },
+  
+      "references": [
+        "san_ming_tong_hui"
+      ]
+    },
+  
+    {
+      "id": "PAT021",
+      "pattern_code": "jia_se",
+      "pattern_name": "gia_tuong_cach",
+      "category": "special_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "special_flags",
+          "operator": "contains",
+          "value": "jia_se"
+        }
+      ],
+  
+      "result": {
+        "pattern_candidate": "jia_se"
+      },
+  
+      "references": [
+        "zi_ping_zhen_quan"
+      ]
+    }
+  ]

@@ -1,0 +1,280 @@
+[
+    {
+      "rule_id": "SSR_0001",
+      "support_type": "same_element",
+      "name": "Same Element Support",
+      "description": "Ngũ hành đồng hành với Nhật Chủ.",
+      "engine_effect": "increase_strength",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0002",
+      "support_type": "generating_element",
+      "name": "Generating Element Support",
+      "description": "Ngũ hành sinh Nhật Chủ.",
+      "engine_effect": "increase_strength",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0003",
+      "support_type": "stem_support",
+      "name": "Heavenly Stem Support",
+      "description": "Trợ lực đến từ Thiên Can lộ xuất.",
+      "engine_effect": "increase_strength",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0004",
+      "support_type": "hidden_stem_support",
+      "name": "Hidden Stem Support",
+      "description": "Trợ lực đến từ Tàng Can trong Địa Chi.",
+      "engine_effect": "increase_strength",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0005",
+      "support_type": "visible_support",
+      "name": "Visible Support",
+      "description": "Trợ lực từ Thiên Can, có hiệu lực trực tiếp.",
+      "engine_effect": "increase_strength",
+      "priority": 60,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0006",
+      "support_type": "hidden_support",
+      "name": "Hidden Support",
+      "description": "Trợ lực từ Tàng Can, hiệu lực gián tiếp.",
+      "engine_effect": "increase_strength",
+      "priority": 50,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SSR_0101",
+      "element": "wood",
+      "same_element_stems": [
+        "giap",
+        "at"
+      ],
+      "generating_element_stems": [
+        "nham",
+        "quy"
+      ],
+      "description": "Mộc được trợ lực bởi Mộc và Thủy.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0102",
+      "element": "fire",
+      "same_element_stems": [
+        "binh",
+        "dinh"
+      ],
+      "generating_element_stems": [
+        "giap",
+        "at"
+      ],
+      "description": "Hỏa được trợ lực bởi Hỏa và Mộc.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0103",
+      "element": "earth",
+      "same_element_stems": [
+        "mau",
+        "ky"
+      ],
+      "generating_element_stems": [
+        "binh",
+        "dinh"
+      ],
+      "description": "Thổ được trợ lực bởi Thổ và Hỏa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0104",
+      "element": "metal",
+      "same_element_stems": [
+        "canh",
+        "tan"
+      ],
+      "generating_element_stems": [
+        "mau",
+        "ky"
+      ],
+      "description": "Kim được trợ lực bởi Kim và Thổ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0105",
+      "element": "water",
+      "same_element_stems": [
+        "nham",
+        "quy"
+      ],
+      "generating_element_stems": [
+        "canh",
+        "tan"
+      ],
+      "description": "Thủy được trợ lực bởi Thủy và Kim.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SSR_0201",
+      "element": "wood",
+      "same_element_hidden_stems": [
+        "giap",
+        "at"
+      ],
+      "generating_hidden_stems": [
+        "nham",
+        "quy"
+      ],
+      "description": "Tàng Can Mộc và Thủy trợ lực cho Nhật Chủ Mộc.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0202",
+      "element": "fire",
+      "same_element_hidden_stems": [
+        "binh",
+        "dinh"
+      ],
+      "generating_hidden_stems": [
+        "giap",
+        "at"
+      ],
+      "description": "Tàng Can Hỏa và Mộc trợ lực cho Nhật Chủ Hỏa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0203",
+      "element": "earth",
+      "same_element_hidden_stems": [
+        "mau",
+        "ky"
+      ],
+      "generating_hidden_stems": [
+        "binh",
+        "dinh"
+      ],
+      "description": "Tàng Can Thổ và Hỏa trợ lực cho Nhật Chủ Thổ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0204",
+      "element": "metal",
+      "same_element_hidden_stems": [
+        "canh",
+        "tan"
+      ],
+      "generating_hidden_stems": [
+        "mau",
+        "ky"
+      ],
+      "description": "Tàng Can Kim và Thổ trợ lực cho Nhật Chủ Kim.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0205",
+      "element": "water",
+      "same_element_hidden_stems": [
+        "nham",
+        "quy"
+      ],
+      "generating_hidden_stems": [
+        "canh",
+        "tan"
+      ],
+      "description": "Tàng Can Thủy và Kim trợ lực cho Nhật Chủ Thủy.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SSR_0301",
+      "support_type": "same_element_stem",
+      "support_source": "heavenly_stem",
+      "base_score": 10,
+      "description": "Thiên Can đồng hành trợ lực trực tiếp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0302",
+      "support_type": "generating_stem",
+      "support_source": "heavenly_stem",
+      "base_score": 8,
+      "description": "Thiên Can sinh Nhật Chủ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0303",
+      "support_type": "same_element_hidden_stem",
+      "support_source": "hidden_stem",
+      "root_level": "strong_root",
+      "base_score": 10,
+      "description": "Tàng Can đồng hành ở chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0304",
+      "support_type": "same_element_hidden_stem",
+      "support_source": "hidden_stem",
+      "root_level": "medium_root",
+      "base_score": 7,
+      "description": "Tàng Can đồng hành ở trung khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0305",
+      "support_type": "same_element_hidden_stem",
+      "support_source": "hidden_stem",
+      "root_level": "weak_root",
+      "base_score": 4,
+      "description": "Tàng Can đồng hành ở dư khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0306",
+      "support_type": "generating_hidden_stem",
+      "support_source": "hidden_stem",
+      "root_level": "strong_root",
+      "base_score": 8,
+      "description": "Tàng Can sinh Nhật Chủ ở chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0307",
+      "support_type": "generating_hidden_stem",
+      "support_source": "hidden_stem",
+      "root_level": "medium_root",
+      "base_score": 6,
+      "description": "Tàng Can sinh Nhật Chủ ở trung khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0308",
+      "support_type": "generating_hidden_stem",
+      "support_source": "hidden_stem",
+      "root_level": "weak_root",
+      "base_score": 3,
+      "description": "Tàng Can sinh Nhật Chủ ở dư khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0309",
+      "rule_type": "support_limit",
+      "maximum_support_score": 100,
+      "minimum_support_score": 0,
+      "description": "Giới hạn điểm trợ lực.",
+      "enabled": true
+    }
+  ]

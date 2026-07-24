@@ -1,0 +1,283 @@
+{
+    "version": "2.1",
+    "category": "certainty",
+    "description": "Các cụm từ biểu thị mức độ chắc chắn của nhận định trong báo cáo luận giải.",
+    "groups": {
+  
+      "certain": [
+  
+        {
+          "id": "CER_CER_001",
+          "text": "có thể khẳng định rằng",
+          "position": "sentence_begin",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["expert","formal"],
+          "priority": 1,
+          "weight": 100,
+          "avoid_repeat": true,
+          "tags": ["certain"],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_CER_002",
+          "text": "cho thấy rõ rằng",
+          "position": "sentence_middle",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["standard","expert"],
+          "priority": 1,
+          "weight": 95,
+          "avoid_repeat": true,
+          "tags": ["certain"],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_CER_003",
+          "text": "được xác định là",
+          "position": "sentence_middle",
+          "compatible_sections": ["strength","pattern","useful_god"],
+          "compatible_styles": ["expert"],
+          "priority": 2,
+          "weight": 90,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ],
+  
+      "very_likely": [
+  
+        {
+          "id": "CER_VLK_001",
+          "text": "rất có khả năng",
+          "position": "inline",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["*"],
+          "priority": 1,
+          "weight": 100,
+          "avoid_repeat": false,
+          "tags": ["probability"],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_VLK_002",
+          "text": "nhiều khả năng",
+          "position": "inline",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["standard","friendly"],
+          "priority": 1,
+          "weight": 98,
+          "avoid_repeat": false,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_VLK_003",
+          "text": "khả năng rất cao",
+          "position": "sentence_end",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["expert"],
+          "priority": 2,
+          "weight": 90,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ],
+  
+      "likely": [
+  
+        {
+          "id": "CER_LIK_001",
+          "text": "có khả năng",
+          "position": "inline",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["*"],
+          "priority": 1,
+          "weight": 100,
+          "avoid_repeat": false,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_LIK_002",
+          "text": "có xu hướng",
+          "position": "inline",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["standard","expert"],
+          "priority": 1,
+          "weight": 98,
+          "avoid_repeat": false,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_LIK_003",
+          "text": "dễ có xu hướng",
+          "position": "inline",
+          "compatible_sections": ["relationship","career","wealth","health"],
+          "compatible_styles": ["friendly"],
+          "priority": 2,
+          "weight": 90,
+          "avoid_repeat": false,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ],
+  
+      "possible": [
+  
+        {
+          "id": "CER_POS_001",
+          "text": "có thể",
+          "position": "inline",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["*"],
+          "priority": 1,
+          "weight": 100,
+          "avoid_repeat": false,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_POS_002",
+          "text": "có khả năng xảy ra",
+          "position": "inline",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["standard"],
+          "priority": 2,
+          "weight": 90,
+          "avoid_repeat": false,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_POS_003",
+          "text": "không loại trừ khả năng",
+          "position": "sentence_begin",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["formal","expert"],
+          "priority": 2,
+          "weight": 85,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ],
+  
+      "uncertain": [
+  
+        {
+          "id": "CER_UNC_001",
+          "text": "khó có thể khẳng định",
+          "position": "sentence_begin",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["expert"],
+          "priority": 1,
+          "weight": 100,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_UNC_002",
+          "text": "còn phụ thuộc vào nhiều yếu tố",
+          "position": "sentence_end",
+          "compatible_sections": ["*"],
+          "compatible_styles": ["standard","expert"],
+          "priority": 1,
+          "weight": 95,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_UNC_003",
+          "text": "cần xem xét thêm các điều kiện khác",
+          "position": "sentence_end",
+          "compatible_sections": ["dayun","liunian","health","relationship"],
+          "compatible_styles": ["expert"],
+          "priority": 2,
+          "weight": 90,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ],
+  
+      "prediction": [
+  
+        {
+          "id": "CER_PRE_001",
+          "text": "dự báo rằng",
+          "position": "sentence_begin",
+          "compatible_sections": ["dayun","liunian"],
+          "compatible_styles": ["expert"],
+          "priority": 1,
+          "weight": 100,
+          "avoid_repeat": true,
+          "tags": ["prediction"],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_PRE_002",
+          "text": "xu hướng trong thời gian tới là",
+          "position": "sentence_begin",
+          "compatible_sections": ["dayun","liunian","career","wealth"],
+          "compatible_styles": ["standard"],
+          "priority": 2,
+          "weight": 90,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ],
+  
+      "recommendation_context": [
+  
+        {
+          "id": "CER_REC_001",
+          "text": "để tăng độ chính xác của nhận định",
+          "position": "sentence_begin",
+          "compatible_sections": ["summary","recommendation"],
+          "compatible_styles": ["expert"],
+          "priority": 1,
+          "weight": 90,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        },
+  
+        {
+          "id": "CER_REC_002",
+          "text": "nên kết hợp thêm các yếu tố thực tế",
+          "position": "sentence_end",
+          "compatible_sections": ["summary","recommendation"],
+          "compatible_styles": ["standard","friendly"],
+          "priority": 1,
+          "weight": 95,
+          "avoid_repeat": true,
+          "tags": [],
+          "enabled": true
+        }
+  
+      ]
+  
+    }
+  }

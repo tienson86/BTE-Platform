@@ -1,0 +1,958 @@
+[
+    {
+      "id": "pattern",
+      "term": "Pattern",
+      "aliases": [
+        "Structure",
+        "Configuration"
+      ],
+      "definition": "Khái niệm tổng quát chỉ mô hình cấu trúc của một lá số Bát Tự được hình thành từ quan hệ giữa Nhật Chủ, Thập Thần, Ngũ Hành và các yếu tố khác.",
+      "description": "Pattern là khái niệm bao quát dùng để mô tả cấu trúc đặc trưng của lá số và là nền tảng để phân loại các Cách Cục.",
+      "category": "pattern",
+      "related_terms": [
+        "cach_cuc",
+        "thap_than",
+        "nhat_chu"
+      ],
+      "references": [
+        "Tử Bình Chân Thuyên",
+        "Uyên Hải Tử Bình"
+      ],
+      "tags": [
+        "pattern",
+        "core"
+      ]
+    },
+    {
+      "id": "cach_cuc",
+      "term": "Cách Cục",
+      "aliases": [
+        "Pattern",
+        "Structure"
+      ],
+      "definition": "Mô hình cấu trúc của lá số được xác lập theo các quy tắc luận mệnh trong Bát Tự.",
+      "description": "Cách Cục là kết quả của quá trình xác định cấu trúc chính của lá số dựa trên Nhật Chủ, Nguyệt Lệnh, Thập Thần và các điều kiện hỗ trợ khác.",
+      "category": "pattern",
+      "related_terms": [
+        "pattern",
+        "thanh_cach",
+        "pha_cach"
+      ],
+      "references": [
+        "Uyên Hải Tử Bình",
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "pattern",
+        "core"
+      ]
+    },
+    {
+      "id": "chinh_cach",
+      "term": "Chính Cách",
+      "aliases": [
+        "Principal Pattern"
+      ],
+      "definition": "Nhóm Cách Cục được hình thành theo các nguyên tắc chính thống của Tử Bình.",
+      "description": "Chính Cách là nhóm Cách Cục cơ bản, thường lấy Nguyệt Lệnh và Thập Thần làm nền tảng để xác lập.",
+      "category": "pattern",
+      "related_terms": [
+        "cach_cuc",
+        "bien_cach"
+      ],
+      "references": [
+        "Tử Bình Chân Thuyên"
+      ],
+      "tags": [
+        "pattern",
+        "classification"
+      ]
+    },
+    {
+      "id": "bien_cach",
+      "term": "Biến Cách",
+      "aliases": [
+        "Variant Pattern"
+      ],
+      "definition": "Nhóm Cách Cục được hình thành từ các điều kiện đặc biệt hoặc biến hóa ngoài Chính Cách.",
+      "description": "Biến Cách phản ánh các cấu trúc đặc thù khi lá số không phù hợp hoàn toàn với các nguyên tắc của Chính Cách.",
+      "category": "pattern",
+      "related_terms": [
+        "chinh_cach",
+        "ngoai_cach"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "pattern",
+        "classification"
+      ]
+    },
+    {
+      "id": "ngoai_cach",
+      "term": "Ngoại Cách",
+      "aliases": [
+        "Special Pattern"
+      ],
+      "definition": "Nhóm Cách Cục đặc biệt không thuộc hệ thống Chính Cách truyền thống.",
+      "description": "Ngoại Cách bao gồm các cấu trúc hiếm gặp hoặc có điều kiện hình thành riêng biệt.",
+      "category": "pattern",
+      "related_terms": [
+        "bien_cach",
+        "dac_biet_cach"
+      ],
+      "references": [
+        "Uyên Hải Tử Bình"
+      ],
+      "tags": [
+        "pattern",
+        "classification"
+      ]
+    },
+    {
+      "id": "dac_biet_cach",
+      "term": "Đặc Biệt Cách",
+      "aliases": [
+        "Exceptional Pattern"
+      ],
+      "definition": "Khái niệm chỉ các Cách Cục có điều kiện hình thành đặc biệt và số lượng ít.",
+      "description": "Đặc Biệt Cách thường yêu cầu nhiều điều kiện đồng thời mới được xác lập.",
+      "category": "pattern",
+      "related_terms": [
+        "ngoai_cach",
+        "bien_cach"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "pattern",
+        "classification"
+      ]
+    },
+    {
+      "id": "thanh_cach",
+      "term": "Thành Cách",
+      "aliases": [
+        "Established Pattern"
+      ],
+      "definition": "Trạng thái một Cách Cục đáp ứng đầy đủ các điều kiện để được xác lập.",
+      "description": "Thành Cách là kết quả sau khi kiểm tra các điều kiện hình thành theo hệ thống quy tắc của từng Cách Cục.",
+      "category": "pattern",
+      "related_terms": [
+        "pha_cach",
+        "cach_cuc"
+      ],
+      "references": [
+        "Tử Bình Chân Thuyên"
+      ],
+      "tags": [
+        "pattern",
+        "state"
+      ]
+    },
+    {
+      "id": "pha_cach",
+      "term": "Phá Cách",
+      "aliases": [
+        "Broken Pattern"
+      ],
+      "definition": "Trạng thái Cách Cục không còn đáp ứng đầy đủ các điều kiện để duy trì.",
+      "description": "Phá Cách xảy ra khi cấu trúc của lá số bị ảnh hưởng bởi các yếu tố làm mất điều kiện thành lập Cách Cục.",
+      "category": "pattern",
+      "related_terms": [
+        "thanh_cach",
+        "pha_cuc"
+      ],
+      "references": [
+        "Uyên Hải Tử Bình"
+      ],
+      "tags": [
+        "pattern",
+        "state"
+      ]
+    },
+    {
+      "id": "pha_cuc",
+      "term": "Phá Cục",
+      "aliases": [
+        "Pattern Collapse"
+      ],
+      "definition": "Hiện tượng cấu trúc Cách Cục bị phá vỡ do mất các điều kiện cốt lõi.",
+      "description": "Phá Cục phản ánh việc một Cách Cục không còn được duy trì theo quy tắc xác định.",
+      "category": "pattern",
+      "related_terms": [
+        "pha_cach",
+        "cach_cuc"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "pattern",
+        "state"
+      ]
+    },
+    {
+      "id": "lap_cach",
+      "term": "Lập Cách",
+      "aliases": [
+        "Pattern Establishment"
+      ],
+      "definition": "Quá trình xác định Cách Cục của một lá số theo hệ thống quy tắc luận mệnh.",
+      "description": "Lập Cách là bước phân tích để xác định Cách Cục phù hợp trước khi tiến hành các bước luận đoán khác.",
+      "category": "pattern",
+      "related_terms": [
+        "cach_cuc",
+        "thanh_cach",
+        "pattern"
+      ],
+      "references": [
+        "Uyên Hải Tử Bình",
+        "Tử Bình Chân Thuyên"
+      ],
+      "tags": [
+        "pattern",
+        "process"
+      ]
+    }
+    ,
+  {
+    "id": "chinh_quan_cach",
+    "term": "Chính Quan Cách",
+    "aliases": [
+      "Proper Officer Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Chính Quan làm trung tâm của Cách Cục.",
+    "description": "Chính Quan Cách là một trong những Chính Cách cơ bản của Tử Bình. Điều kiện hình thành và quy tắc xác định được quản lý trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "chinh_quan",
+      "cach_cuc"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "chinh_tai_cach",
+    "term": "Chính Tài Cách",
+    "aliases": [
+      "Proper Wealth Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Chính Tài làm trung tâm của Cách Cục.",
+    "description": "Chính Tài Cách thuộc nhóm Chính Cách. Quy tắc thành lập được định nghĩa trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "chinh_tai",
+      "cach_cuc"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "thien_tai_cach",
+    "term": "Thiên Tài Cách",
+    "aliases": [
+      "Indirect Wealth Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Thiên Tài làm trung tâm của Cách Cục.",
+    "description": "Thiên Tài Cách được xác định theo hệ thống quy tắc của Tử Bình và được đánh giá bởi Pattern Engine.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "thien_tai",
+      "cach_cuc"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "thuc_than_cach",
+    "term": "Thực Thần Cách",
+    "aliases": [
+      "Eating God Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Thực Thần làm trung tâm của Cách Cục.",
+    "description": "Thực Thần Cách là một trong những Cách Cục quan trọng của hệ thống Chính Cách.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "thuc_than",
+      "cach_cuc"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "thuong_quan_cach",
+    "term": "Thương Quan Cách",
+    "aliases": [
+      "Hurting Officer Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Thương Quan làm trung tâm của Cách Cục.",
+    "description": "Thương Quan Cách thuộc nhóm Chính Cách và được xác định theo quy tắc riêng của Pattern Engine.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "thuong_quan",
+      "cach_cuc"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "that_sat_cach",
+    "term": "Thất Sát Cách",
+    "aliases": [
+      "Seven Killings Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Thất Sát làm trung tâm của Cách Cục.",
+    "description": "Thất Sát Cách là một Chính Cách quan trọng trong hệ thống luận mệnh Tử Bình.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "that_sat",
+      "cach_cuc"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên",
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "chinh_an_cach",
+    "term": "Chính Ấn Cách",
+    "aliases": [
+      "Proper Resource Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Chính Ấn làm trung tâm của Cách Cục.",
+    "description": "Chính Ấn Cách thuộc nhóm Chính Cách và được đánh giá theo hệ thống quy tắc chuẩn của BTE.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "chinh_an",
+      "cach_cuc"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "thien_an_cach",
+    "term": "Thiên Ấn Cách",
+    "aliases": [
+      "Indirect Resource Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Thiên Ấn làm trung tâm của Cách Cục.",
+    "description": "Thiên Ấn Cách được xác định theo quy tắc hình thành riêng trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "thien_an",
+      "cach_cuc"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "kien_loc_cach",
+    "term": "Kiến Lộc Cách",
+    "aliases": [
+      "Jian Lu Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Lộc của Nhật Chủ làm cơ sở lập Cách.",
+    "description": "Kiến Lộc Cách là một Chính Cách truyền thống, có nguyên tắc xác định riêng.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "cach_cuc"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  },
+  {
+    "id": "duong_nhan_cach",
+    "term": "Dương Nhận Cách",
+    "aliases": [
+      "Yang Blade Pattern"
+    ],
+    "definition": "Một Chính Cách lấy Dương Nhận làm cơ sở lập Cách.",
+    "description": "Dương Nhận Cách là một Chính Cách đặc thù với hệ thống điều kiện hình thành riêng.",
+    "category": "pattern",
+    "related_terms": [
+      "chinh_cach",
+      "cach_cuc"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "principal"
+    ]
+  }
+  ,
+  {
+    "id": "tong_cach",
+    "term": "Tòng Cách",
+    "aliases": [
+      "Follow Pattern",
+      "Cong Pattern"
+    ],
+    "definition": "Nhóm Cách Cục mà Nhật Chủ thuận theo xu thế khí thế của toàn cục thay vì giữ vai trò trung tâm.",
+    "description": "Tòng Cách được xác lập khi Nhật Chủ không đủ điều kiện duy trì trạng thái cân bằng thông thường và phải thuận theo thế mạnh của mệnh cục.",
+    "category": "pattern",
+    "related_terms": [
+      "bien_cach",
+      "tong_vuong_cach",
+      "tong_nhi_cach",
+      "tong_tai_cach",
+      "tong_sat_cach"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên",
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "follow_pattern"
+    ]
+  },
+  {
+    "id": "tong_vuong_cach",
+    "term": "Tòng Vượng Cách",
+    "aliases": [
+      "Follow Strong Pattern"
+    ],
+    "definition": "Một loại Tòng Cách trong đó Nhật Chủ thuận theo thế vượng của toàn cục.",
+    "description": "Tòng Vượng Cách là một phân loại của Tòng Cách. Điều kiện hình thành được quản lý trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "tong_cach",
+      "bien_cach"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "follow_pattern"
+    ]
+  },
+  {
+    "id": "tong_nhi_cach",
+    "term": "Tòng Nhi Cách",
+    "aliases": [
+      "Follow Output Pattern"
+    ],
+    "definition": "Một loại Tòng Cách lấy Thực Thương làm xu thế chủ đạo.",
+    "description": "Tòng Nhi Cách là một dạng Tòng Cách với nguyên tắc xác định riêng.",
+    "category": "pattern",
+    "related_terms": [
+      "tong_cach",
+      "thuc_than",
+      "thuong_quan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "follow_pattern"
+    ]
+  },
+  {
+    "id": "tong_tai_cach",
+    "term": "Tòng Tài Cách",
+    "aliases": [
+      "Follow Wealth Pattern"
+    ],
+    "definition": "Một loại Tòng Cách lấy Tài Tinh làm xu thế chủ đạo.",
+    "description": "Tòng Tài Cách thuộc hệ thống Tòng Cách và có điều kiện xác lập riêng.",
+    "category": "pattern",
+    "related_terms": [
+      "tong_cach",
+      "tai_tinh"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "follow_pattern"
+    ]
+  },
+  {
+    "id": "tong_sat_cach",
+    "term": "Tòng Sát Cách",
+    "aliases": [
+      "Follow Seven Killings Pattern"
+    ],
+    "definition": "Một loại Tòng Cách lấy Thất Sát làm xu thế chủ đạo.",
+    "description": "Tòng Sát Cách là một dạng Tòng Cách quan trọng trong hệ thống Biến Cách.",
+    "category": "pattern",
+    "related_terms": [
+      "tong_cach",
+      "that_sat"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên"
+    ],
+    "tags": [
+      "pattern",
+      "follow_pattern"
+    ]
+  },
+  {
+    "id": "tong_the_cach",
+    "term": "Tòng Thế Cách",
+    "aliases": [
+      "Follow Momentum Pattern"
+    ],
+    "definition": "Một loại Tòng Cách trong đó Nhật Chủ thuận theo khí thế tổng thể của mệnh cục.",
+    "description": "Tòng Thế Cách phản ánh nguyên lý thuận theo thế cục khi các điều kiện của Tòng Cách được đáp ứng.",
+    "category": "pattern",
+    "related_terms": [
+      "tong_cach"
+    ],
+    "references": [
+      "Một số tài liệu Tử Bình hiện đại"
+    ],
+    "tags": [
+      "pattern",
+      "follow_pattern"
+    ]
+  }
+  ,
+  {
+    "id": "khuc_truc_cach",
+    "term": "Khúc Trực Cách",
+    "aliases": [
+      "Wood Prosperity Pattern"
+    ],
+    "definition": "Một Cách Cục đặc biệt có cấu trúc khí thế nghiêng mạnh về hành Mộc.",
+    "description": "Khúc Trực Cách là một Cách Cục đặc biệt được ghi nhận trong các tài liệu Tử Bình. Điều kiện hình thành được định nghĩa trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "ngoai_cach",
+      "chuyen_vuong_cach"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "special_pattern"
+    ]
+  },
+  {
+    "id": "nhuan_ha_cach",
+    "term": "Nhuận Hạ Cách",
+    "aliases": [
+      "Water Prosperity Pattern"
+    ],
+    "definition": "Một Cách Cục đặc biệt có cấu trúc khí thế nghiêng mạnh về hành Thủy.",
+    "description": "Nhuận Hạ Cách là một Cách Cục đặc biệt với hệ thống điều kiện xác lập riêng.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "ngoai_cach",
+      "chuyen_vuong_cach"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "special_pattern"
+    ]
+  },
+  {
+    "id": "viem_thuong_cach",
+    "term": "Viêm Thượng Cách",
+    "aliases": [
+      "Fire Prosperity Pattern"
+    ],
+    "definition": "Một Cách Cục đặc biệt có cấu trúc khí thế nghiêng mạnh về hành Hỏa.",
+    "description": "Viêm Thượng Cách được hình thành theo các điều kiện riêng của hệ thống Cách Cục đặc biệt.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "ngoai_cach",
+      "chuyen_vuong_cach"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "pattern",
+      "special_pattern"
+    ]
+  },
+  {
+    "id": "gia_sac_cach",
+    "term": "Giá Sắc Cách",
+    "aliases": [
+      "Metal Prosperity Pattern"
+    ],
+    "definition": "Một Cách Cục đặc biệt có cấu trúc khí thế nghiêng mạnh về hành Kim.",
+    "description": "Giá Sắc Cách thuộc nhóm các Cách Cục chuyên vượng trong nhiều hệ thống Tử Bình.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "ngoai_cach",
+      "chuyen_vuong_cach"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "special_pattern"
+    ]
+  },
+  {
+    "id": "gia_tuong_cach",
+    "term": "Giá Tường Cách",
+    "aliases": [
+      "Earth Prosperity Pattern"
+    ],
+    "definition": "Một Cách Cục đặc biệt có cấu trúc khí thế nghiêng mạnh về hành Thổ.",
+    "description": "Giá Tường Cách là một trong các Cách Cục đặc biệt được đề cập trong một số hệ thống luận mệnh Tử Bình.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "ngoai_cach",
+      "chuyen_vuong_cach"
+    ],
+    "references": [
+      "Một số tài liệu Tử Bình hiện đại"
+    ],
+    "tags": [
+      "pattern",
+      "special_pattern"
+    ]
+  },
+  {
+    "id": "hoa_khi_cach",
+    "term": "Hóa Khí Cách",
+    "aliases": [
+      "Transformation Pattern"
+    ],
+    "definition": "Một Cách Cục đặc biệt được xác lập khi điều kiện Hóa Khí được đáp ứng.",
+    "description": "Hóa Khí Cách có hệ thống điều kiện xác định riêng và thường được các trường phái xây dựng theo những tiêu chuẩn khác nhau.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "hoa_khi"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên",
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "special_pattern"
+    ]
+  },
+  {
+    "id": "chuyen_vuong_cach",
+    "term": "Chuyên Vượng Cách",
+    "aliases": [
+      "Pure Prosperity Pattern"
+    ],
+    "definition": "Nhóm Cách Cục có khí thế tập trung mạnh vào một hành hoặc một xu thế chủ đạo.",
+    "description": "Chuyên Vượng Cách là khái niệm tổng quát dùng để chỉ các Cách Cục có sự thiên lệch rõ rệt về khí thế. Việc phân loại cụ thể phụ thuộc vào từng trường phái.",
+    "category": "pattern",
+    "related_terms": [
+      "khuc_truc_cach",
+      "nhuan_ha_cach",
+      "viem_thuong_cach",
+      "gia_sac_cach",
+      "gia_tuong_cach"
+    ],
+    "references": [
+      "Uyên Hải Tử Bình",
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "pattern",
+      "classification"
+    ]
+  }
+  ,
+  {
+    "id": "dung_cach",
+    "term": "Dụng Cách",
+    "aliases": [
+      "Pattern Application"
+    ],
+    "definition": "Khái niệm chỉ việc lấy một Cách Cục làm cơ sở chính để phân tích và luận đoán lá số.",
+    "description": "Dụng Cách là nguyên tắc lựa chọn Cách Cục phù hợp sau khi hoàn tất quá trình lập Cách. Tiêu chí lựa chọn được định nghĩa trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "lap_cach",
+      "thanh_cach"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên"
+    ],
+    "tags": [
+      "pattern",
+      "concept"
+    ]
+  },
+  {
+    "id": "chu_cach",
+    "term": "Chủ Cách",
+    "aliases": [
+      "Primary Pattern"
+    ],
+    "definition": "Cách Cục được xác định là cấu trúc chính của lá số sau quá trình đánh giá.",
+    "description": "Một lá số thông thường chỉ có một Chủ Cách, được Pattern Engine lựa chọn từ các Cách Cục đủ điều kiện.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "dung_cach",
+      "phu_cach"
+    ],
+    "references": [
+      "BTE Core Ontology v1.0"
+    ],
+    "tags": [
+      "pattern",
+      "concept"
+    ]
+  },
+  {
+    "id": "phu_cach",
+    "term": "Phụ Cách",
+    "aliases": [
+      "Secondary Pattern"
+    ],
+    "definition": "Cách Cục có thể đồng thời tồn tại nhưng không được chọn làm cấu trúc chính của lá số.",
+    "description": "Phụ Cách được sử dụng để bổ sung thông tin khi phân tích tổng thể mệnh cục.",
+    "category": "pattern",
+    "related_terms": [
+      "chu_cach",
+      "cach_cuc"
+    ],
+    "references": [
+      "BTE Core Ontology v1.0"
+    ],
+    "tags": [
+      "pattern",
+      "concept"
+    ]
+  },
+  {
+    "id": "uu_tien_cach",
+    "term": "Ưu Tiên Cách",
+    "aliases": [
+      "Pattern Priority"
+    ],
+    "definition": "Khái niệm chỉ mức độ ưu tiên giữa nhiều Cách Cục cùng đủ điều kiện hình thành.",
+    "description": "Việc xác định thứ tự ưu tiên được thực hiện bởi Rule Database và Priority Rules.",
+    "category": "pattern",
+    "related_terms": [
+      "chu_cach",
+      "phu_cach",
+      "lap_cach"
+    ],
+    "references": [
+      "BTE Pattern Engine Specification"
+    ],
+    "tags": [
+      "pattern",
+      "priority"
+    ]
+  },
+  {
+    "id": "xung_dot_cach",
+    "term": "Xung Đột Cách",
+    "aliases": [
+      "Pattern Conflict"
+    ],
+    "definition": "Trạng thái xuất hiện khi nhiều Cách Cục cùng thỏa điều kiện nhưng không thể đồng thời được chọn làm Chủ Cách.",
+    "description": "Xung Đột Cách là khái niệm mô tả hiện tượng, không phải quy tắc xử lý. Quy tắc giải quyết được định nghĩa trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "uu_tien_cach",
+      "chu_cach",
+      "phu_cach"
+    ],
+    "references": [
+      "BTE Pattern Engine Specification"
+    ],
+    "tags": [
+      "pattern",
+      "conflict"
+    ]
+  }
+  ,
+  {
+    "id": "pattern_hierarchy",
+    "term": "Phân Cấp Cách Cục",
+    "aliases": [
+      "Pattern Hierarchy"
+    ],
+    "definition": "Khái niệm mô tả mối quan hệ phân cấp giữa các nhóm Cách Cục trong hệ thống Bát Tự.",
+    "description": "Phân Cấp Cách Cục giúp tổ chức các Cách Cục thành các nhóm như Chính Cách, Biến Cách và các Cách Cục đặc biệt để phục vụ việc quản lý tri thức.",
+    "category": "pattern",
+    "related_terms": [
+      "pattern",
+      "cach_cuc",
+      "chinh_cach",
+      "bien_cach",
+      "ngoai_cach"
+    ],
+    "references": [
+      "BTE Core Ontology v1.0"
+    ],
+    "tags": [
+      "pattern",
+      "hierarchy"
+    ]
+  },
+  {
+    "id": "pattern_relationship",
+    "term": "Quan Hệ Cách Cục",
+    "aliases": [
+      "Pattern Relationship"
+    ],
+    "definition": "Khái niệm mô tả quan hệ giữa các Cách Cục trong cùng một lá số.",
+    "description": "Quan Hệ Cách Cục chỉ mô tả sự tồn tại của mối liên hệ giữa các Cách Cục. Cách xác định và xử lý quan hệ được định nghĩa trong Rule Database.",
+    "category": "pattern",
+    "related_terms": [
+      "cach_cuc",
+      "chu_cach",
+      "phu_cach",
+      "xung_dot_cach"
+    ],
+    "references": [
+      "BTE Pattern Engine Specification"
+    ],
+    "tags": [
+      "pattern",
+      "relationship"
+    ]
+  },
+  {
+    "id": "pattern_priority",
+    "term": "Thứ Tự Ưu Tiên Cách Cục",
+    "aliases": [
+      "Pattern Priority"
+    ],
+    "definition": "Khái niệm mô tả việc tồn tại thứ tự ưu tiên giữa các Cách Cục.",
+    "description": "Ontology này chỉ mô tả sự tồn tại của khái niệm ưu tiên. Quy tắc tính toán cụ thể thuộc Priority Rules.",
+    "category": "pattern",
+    "related_terms": [
+      "uu_tien_cach",
+      "chu_cach",
+      "phu_cach"
+    ],
+    "references": [
+      "BTE Pattern Engine Specification"
+    ],
+    "tags": [
+      "pattern",
+      "priority"
+    ]
+  },
+  {
+    "id": "pattern_status",
+    "term": "Trạng Thái Cách Cục",
+    "aliases": [
+      "Pattern Status"
+    ],
+    "definition": "Khái niệm mô tả trạng thái của một Cách Cục sau quá trình đánh giá.",
+    "description": "Trạng Thái Cách Cục bao gồm các trạng thái như Thành Cách hoặc Phá Cách. Điều kiện chuyển trạng thái do Rule Database xác định.",
+    "category": "pattern",
+    "related_terms": [
+      "thanh_cach",
+      "pha_cach",
+      "pha_cuc"
+    ],
+    "references": [
+      "Tử Bình Chân Thuyên",
+      "BTE Pattern Engine Specification"
+    ],
+    "tags": [
+      "pattern",
+      "state"
+    ]
+  },
+  {
+    "id": "pattern_catalog",
+    "term": "Danh Mục Cách Cục",
+    "aliases": [
+      "Pattern Catalog"
+    ],
+    "definition": "Khái niệm tổng hợp toàn bộ các Cách Cục được định nghĩa trong hệ thống tri thức.",
+    "description": "Danh Mục Cách Cục đóng vai trò là điểm tham chiếu để liên kết Pattern Engine với Rule Database và Interpretation Engine.",
+    "category": "pattern",
+    "related_terms": [
+      "pattern",
+      "cach_cuc",
+      "pattern_hierarchy"
+    ],
+    "references": [
+      "BTE Core Ontology v1.0"
+    ],
+    "tags": [
+      "pattern",
+      "catalog",
+      "core"
+    ]
+  }
+]

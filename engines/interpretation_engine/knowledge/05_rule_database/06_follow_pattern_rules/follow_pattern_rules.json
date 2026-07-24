@@ -1,0 +1,1597 @@
+[
+    {
+      "id": "FPR001",
+      "ma_rule": "follow_pattern_001",
+      "ten": "Danh gia than vuong nhuoc",
+      "pattern": "*",
+      "action": "kiem_tra_than_vuong_nhuoc",
+      "required_conditions": [
+        "pattern_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 10,
+      "active": true,
+      "ghi_chu": "Buoc dau tien sau khi Pattern Engine hoan thanh."
+    },
+    {
+      "id": "FPR002",
+      "ma_rule": "follow_pattern_002",
+      "ten": "Tinh diem suc manh than",
+      "pattern": "*",
+      "action": "tinh_diem_than",
+      "required_conditions": [
+        "than_vuong_nhuoc_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 20,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR003",
+      "ma_rule": "follow_pattern_003",
+      "ten": "Xac dinh dung than",
+      "pattern": "*",
+      "action": "xac_dinh_dung_than",
+      "required_conditions": [
+        "than_score_da_tinh"
+      ],
+      "stop_conditions": [],
+      "priority": 30,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR004",
+      "ma_rule": "follow_pattern_004",
+      "ten": "Danh gia hy than",
+      "pattern": "*",
+      "action": "danh_gia_hy_than",
+      "required_conditions": [
+        "dung_than_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 40,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR005",
+      "ma_rule": "follow_pattern_005",
+      "ten": "Danh gia ky than",
+      "pattern": "*",
+      "action": "danh_gia_ky_than",
+      "required_conditions": [
+        "hy_than_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 50,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR006",
+      "ma_rule": "follow_pattern_006",
+      "ten": "Danh gia than sat",
+      "pattern": "*",
+      "action": "phan_tich_than_sat",
+      "required_conditions": [
+        "ky_than_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 60,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR007",
+      "ma_rule": "follow_pattern_007",
+      "ten": "Danh gia dai van",
+      "pattern": "*",
+      "action": "phan_tich_dai_van",
+      "required_conditions": [
+        "than_sat_da_phan_tich"
+      ],
+      "stop_conditions": [],
+      "priority": 70,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR008",
+      "ma_rule": "follow_pattern_008",
+      "ten": "Danh gia luu nien",
+      "pattern": "*",
+      "action": "phan_tich_luu_nien",
+      "required_conditions": [
+        "dai_van_da_phan_tich"
+      ],
+      "stop_conditions": [],
+      "priority": 80,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR009",
+      "ma_rule": "follow_pattern_009",
+      "ten": "Tong hop ket qua",
+      "pattern": "*",
+      "action": "tong_hop_ket_qua",
+      "required_conditions": [
+        "luu_nien_da_phan_tich"
+      ],
+      "stop_conditions": [],
+      "priority": 90,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR010",
+      "ma_rule": "follow_pattern_010",
+      "ten": "Sinh luan giai",
+      "pattern": "*",
+      "action": "tao_luan_giai",
+      "required_conditions": [
+        "tong_hop_hoan_tat"
+      ],
+      "stop_conditions": [],
+      "priority": 100,
+      "active": true,
+      "ghi_chu": "Buoc cuoi cua quy trinh suy luan."
+    }
+  ]
+  [
+    {
+      "id": "FPR011",
+      "ma_rule": "follow_pattern_011",
+      "ten": "Kiem tra tinh thuan cua tong cach",
+      "pattern": "tong_cach",
+      "action": "kiem_tra_tinh_thuan",
+      "required_conditions": [
+        "pattern_la_tong_cach"
+      ],
+      "stop_conditions": [
+        "tong_cach_bi_pha"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc uu tien cao nhat doi voi Tong Cach."
+    },
+    {
+      "id": "FPR012",
+      "ma_rule": "follow_pattern_012",
+      "ten": "Danh gia muc do tong",
+      "pattern": "tong_cach",
+      "action": "danh_gia_muc_do_tong",
+      "required_conditions": [
+        "tong_cach_thuan"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR013",
+      "ma_rule": "follow_pattern_013",
+      "ten": "Kiem tra luc tro cua ngu hanh dong hanh",
+      "pattern": "tong_cach",
+      "action": "kiem_tra_luc_tro_dong_hanh",
+      "required_conditions": [
+        "muc_do_tong_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR014",
+      "ma_rule": "follow_pattern_014",
+      "ten": "Kiem tra ngu hanh pha tong",
+      "pattern": "tong_cach",
+      "action": "kiem_tra_ngu_hanh_pha_tong",
+      "required_conditions": [
+        "tong_cach_thuan"
+      ],
+      "stop_conditions": [],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Danh gia cac yeu to lam giam tinh chat Tong Cach."
+    },
+    {
+      "id": "FPR015",
+      "ma_rule": "follow_pattern_015",
+      "ten": "Danh gia kha nang duy tri tong cach",
+      "pattern": "tong_cach",
+      "action": "danh_gia_duy_tri_tong_cach",
+      "required_conditions": [
+        "da_kiem_tra_pha_tong"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR016",
+      "ma_rule": "follow_pattern_016",
+      "ten": "Danh gia dung than theo tong cach",
+      "pattern": "tong_cach",
+      "action": "xac_dinh_dung_than_tong_cach",
+      "required_conditions": [
+        "tong_cach_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Dung Than cua Tong Cach khac voi Cach Cuc thong thuong."
+    },
+    {
+      "id": "FPR017",
+      "ma_rule": "follow_pattern_017",
+      "ten": "Danh gia hy than theo tong cach",
+      "pattern": "tong_cach",
+      "action": "xac_dinh_hy_than_tong_cach",
+      "required_conditions": [
+        "dung_than_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR018",
+      "ma_rule": "follow_pattern_018",
+      "ten": "Danh gia ky than theo tong cach",
+      "pattern": "tong_cach",
+      "action": "xac_dinh_ky_than_tong_cach",
+      "required_conditions": [
+        "hy_than_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR019",
+      "ma_rule": "follow_pattern_019",
+      "ten": "Danh gia dai van doi voi tong cach",
+      "pattern": "tong_cach",
+      "action": "phan_tich_dai_van_tong_cach",
+      "required_conditions": [
+        "ky_than_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR020",
+      "ma_rule": "follow_pattern_020",
+      "ten": "Tong hop luan tong cach",
+      "pattern": "tong_cach",
+      "action": "tong_hop_luan_tong_cach",
+      "required_conditions": [
+        "phan_tich_dai_van_hoan_tat"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Sinh ket luan danh rieng cho Tong Cach."
+    }
+  ]
+  [
+    {
+      "id": "FPR021",
+      "ma_rule": "follow_pattern_021",
+      "ten": "Kiem tra Quan tinh co thanh cach",
+      "pattern": "chinh_quan_cach",
+      "action": "kiem_tra_quan_tinh_thanh_cach",
+      "required_conditions": [
+        "pattern_la_chinh_quan_cach"
+      ],
+      "stop_conditions": [
+        "quan_tinh_khong_thanh_cach"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc dau tien khi xu ly Chinh Quan Cach."
+    },
+    {
+      "id": "FPR022",
+      "ma_rule": "follow_pattern_022",
+      "ten": "Kiem tra Quan tinh co bi pha",
+      "pattern": "chinh_quan_cach",
+      "action": "kiem_tra_quan_tinh_bi_pha",
+      "required_conditions": [
+        "quan_tinh_thanh_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": "Danh gia cac yeu to xung, hinh, pha, hai doi voi Quan tinh."
+    },
+    {
+      "id": "FPR023",
+      "ma_rule": "follow_pattern_023",
+      "ten": "Kiem tra Tai sinh Quan",
+      "pattern": "chinh_quan_cach",
+      "action": "kiem_tra_tai_sinh_quan",
+      "required_conditions": [
+        "quan_tinh_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Tai sinh Quan la mot yeu to tang chat luong cua Chinh Quan Cach."
+    },
+    {
+      "id": "FPR024",
+      "ma_rule": "follow_pattern_024",
+      "ten": "Kiem tra An ho Quan",
+      "pattern": "chinh_quan_cach",
+      "action": "kiem_tra_an_ho_quan",
+      "required_conditions": [
+        "quan_tinh_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang An tinh bao ve Quan tinh."
+    },
+    {
+      "id": "FPR025",
+      "ma_rule": "follow_pattern_025",
+      "ten": "Kiem tra Thuong Quan kien Quan",
+      "pattern": "chinh_quan_cach",
+      "action": "kiem_tra_thuong_quan_kien_quan",
+      "required_conditions": [
+        "quan_tinh_on_dinh"
+      ],
+      "stop_conditions": [
+        "thuong_quan_kien_quan_nghiem_trong"
+      ],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Mot trong cac dieu kien quan trong nhat cua Chinh Quan Cach."
+    },
+    {
+      "id": "FPR026",
+      "ma_rule": "follow_pattern_026",
+      "ten": "Kiem tra Sat Quan hon tap",
+      "pattern": "chinh_quan_cach",
+      "action": "kiem_tra_sat_quan_hon_tap",
+      "required_conditions": [
+        "quan_tinh_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Danh gia viec Chinh Quan va That Sat cung ton tai."
+    },
+    {
+      "id": "FPR027",
+      "ma_rule": "follow_pattern_027",
+      "ten": "Danh gia do thuan cua Quan tinh",
+      "pattern": "chinh_quan_cach",
+      "action": "danh_gia_do_thuan_quan_tinh",
+      "required_conditions": [
+        "da_kiem_tra_sat_quan"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Tong hop muc do thuan cua Quan tinh."
+    },
+    {
+      "id": "FPR028",
+      "ma_rule": "follow_pattern_028",
+      "ten": "Danh gia suc manh Quan tinh",
+      "pattern": "chinh_quan_cach",
+      "action": "danh_gia_suc_manh_quan_tinh",
+      "required_conditions": [
+        "quan_tinh_thuan"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": "Danh gia Quan tinh manh, vua hay yeu."
+    },
+    {
+      "id": "FPR029",
+      "ma_rule": "follow_pattern_029",
+      "ten": "Danh gia kha nang thanh cach",
+      "pattern": "chinh_quan_cach",
+      "action": "danh_gia_kha_nang_thanh_cach",
+      "required_conditions": [
+        "quan_tinh_da_danh_gia"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": "Ket luan Chinh Quan Cach dat muc thanh cach nao."
+    },
+    {
+      "id": "FPR030",
+      "ma_rule": "follow_pattern_030",
+      "ten": "Xac nhan Chinh Quan Cach",
+      "pattern": "chinh_quan_cach",
+      "action": "xac_nhan_chinh_quan_cach",
+      "required_conditions": [
+        "kha_nang_thanh_cach_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Hoan tat danh gia dac thu cua Chinh Quan Cach va chuyen sang workflow chung."
+    }
+  ]
+  [
+    {
+      "id": "FPR031",
+      "ma_rule": "follow_pattern_031",
+      "ten": "Kiem tra That Sat thanh cach",
+      "pattern": "that_sat_cach",
+      "action": "kiem_tra_that_sat_thanh_cach",
+      "required_conditions": [
+        "pattern_la_that_sat_cach"
+      ],
+      "stop_conditions": [
+        "that_sat_khong_thanh_cach"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc dau tien khi danh gia That Sat Cach."
+    },
+    {
+      "id": "FPR032",
+      "ma_rule": "follow_pattern_032",
+      "ten": "Kiem tra suc manh That Sat",
+      "pattern": "that_sat_cach",
+      "action": "danh_gia_suc_manh_that_sat",
+      "required_conditions": [
+        "that_sat_thanh_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": "Danh gia That Sat manh, vua hay yeu."
+    },
+    {
+      "id": "FPR033",
+      "ma_rule": "follow_pattern_033",
+      "ten": "Kiem tra An hoa Sat",
+      "pattern": "that_sat_cach",
+      "action": "kiem_tra_an_hoa_sat",
+      "required_conditions": [
+        "that_sat_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang An tinh hoa giai That Sat."
+    },
+    {
+      "id": "FPR034",
+      "ma_rule": "follow_pattern_034",
+      "ten": "Kiem tra Thuc Than che Sat",
+      "pattern": "that_sat_cach",
+      "action": "kiem_tra_thuc_than_che_sat",
+      "required_conditions": [
+        "that_sat_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang Thuc Than tiet che That Sat."
+    },
+    {
+      "id": "FPR035",
+      "ma_rule": "follow_pattern_035",
+      "ten": "Kiem tra Tai sinh Sat",
+      "pattern": "that_sat_cach",
+      "action": "kiem_tra_tai_sinh_sat",
+      "required_conditions": [
+        "that_sat_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Tai sinh Sat co the lam tang hoac giam gia tri cua cach cuc tuy boi canh."
+    },
+    {
+      "id": "FPR036",
+      "ma_rule": "follow_pattern_036",
+      "ten": "Kiem tra Sat vo che",
+      "pattern": "that_sat_cach",
+      "action": "kiem_tra_sat_vo_che",
+      "required_conditions": [
+        "that_sat_manh"
+      ],
+      "stop_conditions": [
+        "sat_vo_che_nghiem_trong"
+      ],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "That Sat qua manh ma khong duoc che hoa."
+    },
+    {
+      "id": "FPR037",
+      "ma_rule": "follow_pattern_037",
+      "ten": "Kiem tra Sat co che hoa day du",
+      "pattern": "that_sat_cach",
+      "action": "kiem_tra_sat_duoc_che_hoa",
+      "required_conditions": [
+        "that_sat_manh"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Danh gia muc do che hoa cua That Sat."
+    },
+    {
+      "id": "FPR038",
+      "ma_rule": "follow_pattern_038",
+      "ten": "Danh gia do thuan cua That Sat",
+      "pattern": "that_sat_cach",
+      "action": "danh_gia_do_thuan_that_sat",
+      "required_conditions": [
+        "da_kiem_tra_che_hoa"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": "Tong hop muc do on dinh cua That Sat Cach."
+    },
+    {
+      "id": "FPR039",
+      "ma_rule": "follow_pattern_039",
+      "ten": "Danh gia kha nang thanh cach",
+      "pattern": "that_sat_cach",
+      "action": "danh_gia_kha_nang_thanh_that_sat_cach",
+      "required_conditions": [
+        "that_sat_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": "Ket luan kha nang thanh cach cua That Sat."
+    },
+    {
+      "id": "FPR040",
+      "ma_rule": "follow_pattern_040",
+      "ten": "Xac nhan That Sat Cach",
+      "pattern": "that_sat_cach",
+      "action": "xac_nhan_that_sat_cach",
+      "required_conditions": [
+        "kha_nang_thanh_cach_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Hoan tat danh gia dac thu cua That Sat Cach va chuyen sang workflow chung."
+    }
+  ]
+  [
+    {
+      "id": "FPR041",
+      "ma_rule": "follow_pattern_041",
+      "ten": "Kiem tra Tai tinh thanh cach",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "kiem_tra_tai_tinh_thanh_cach",
+      "required_conditions": [
+        "pattern_la_tai_cach"
+      ],
+      "stop_conditions": [
+        "tai_tinh_khong_thanh_cach"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc dau tien khi danh gia Tai Cach."
+    },
+    {
+      "id": "FPR042",
+      "ma_rule": "follow_pattern_042",
+      "ten": "Danh gia suc manh Tai tinh",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "danh_gia_suc_manh_tai_tinh",
+      "required_conditions": [
+        "tai_tinh_thanh_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR043",
+      "ma_rule": "follow_pattern_043",
+      "ten": "Kiem tra Than co ganh duoc Tai",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "kiem_tra_than_ganh_tai",
+      "required_conditions": [
+        "tai_tinh_da_danh_gia"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Than yeu gap Tai vuong de tao thanh Cach."
+    },
+    {
+      "id": "FPR044",
+      "ma_rule": "follow_pattern_044",
+      "ten": "Kiem tra Thuc Thuong sinh Tai",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "kiem_tra_thuc_thuong_sinh_tai",
+      "required_conditions": [
+        "tai_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Danh gia nguon sinh cho Tai tinh."
+    },
+    {
+      "id": "FPR045",
+      "ma_rule": "follow_pattern_045",
+      "ten": "Kiem tra Ty Kiep doat Tai",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_doat_tai",
+      "required_conditions": [
+        "tai_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Ty Kiep qua manh co the lam giam gia tri cua Tai Cach."
+    },
+    {
+      "id": "FPR046",
+      "ma_rule": "follow_pattern_046",
+      "ten": "Kiem tra Quan tinh bao ve Tai",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "kiem_tra_quan_bao_ve_tai",
+      "required_conditions": [
+        "tai_tinh_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Quan tinh hop ly giup Tai tinh ben vung."
+    },
+    {
+      "id": "FPR047",
+      "ma_rule": "follow_pattern_047",
+      "ten": "Kiem tra An tinh sinh Than",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "kiem_tra_an_sinh_than",
+      "required_conditions": [
+        "than_co_the_ganh_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang An tinh tro luc cho Nhat Chu."
+    },
+    {
+      "id": "FPR048",
+      "ma_rule": "follow_pattern_048",
+      "ten": "Danh gia do thuan cua Tai Cach",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "danh_gia_do_thuan_tai_cach",
+      "required_conditions": [
+        "da_kiem_tra_cac_yeu_to_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": "Tong hop cac yeu to ho tro va pha hoai Tai Cach."
+    },
+    {
+      "id": "FPR049",
+      "ma_rule": "follow_pattern_049",
+      "ten": "Danh gia kha nang thanh Tai Cach",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "danh_gia_kha_nang_thanh_tai_cach",
+      "required_conditions": [
+        "tai_cach_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR050",
+      "ma_rule": "follow_pattern_050",
+      "ten": "Xac nhan Tai Cach",
+      "pattern": [
+        "chinh_tai_cach",
+        "thien_tai_cach"
+      ],
+      "action": "xac_nhan_tai_cach",
+      "required_conditions": [
+        "kha_nang_thanh_cach_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Hoan tat danh gia dac thu cua Tai Cach va chuyen sang workflow chung."
+    }
+  ]
+  [
+    {
+      "id": "FPR051",
+      "ma_rule": "follow_pattern_051",
+      "ten": "Kiem tra Xuat tinh thanh cach",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "kiem_tra_xuat_tinh_thanh_cach",
+      "required_conditions": [
+        "pattern_la_xuat_tinh_cach"
+      ],
+      "stop_conditions": [
+        "xuat_tinh_khong_thanh_cach"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc dau tien doi voi cac Cach cuc thuoc nhom Xuat."
+    },
+    {
+      "id": "FPR052",
+      "ma_rule": "follow_pattern_052",
+      "ten": "Danh gia suc manh Xuat tinh",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "danh_gia_suc_manh_xuat_tinh",
+      "required_conditions": [
+        "xuat_tinh_thanh_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR053",
+      "ma_rule": "follow_pattern_053",
+      "ten": "Kiem tra Thuc Than sinh Tai",
+      "pattern": [
+        "thuc_than_cach"
+      ],
+      "action": "kiem_tra_thuc_than_sinh_tai",
+      "required_conditions": [
+        "pattern_la_thuc_than_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang sinh Tai cua Thuc Than."
+    },
+    {
+      "id": "FPR054",
+      "ma_rule": "follow_pattern_054",
+      "ten": "Kiem tra Thuong Quan kien Quan",
+      "pattern": [
+        "thuong_quan_cach"
+      ],
+      "action": "kiem_tra_thuong_quan_kien_quan",
+      "required_conditions": [
+        "pattern_la_thuong_quan_cach"
+      ],
+      "stop_conditions": [
+        "thuong_quan_kien_quan_nghiem_trong"
+      ],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Rule dac trung cua Thuong Quan Cach."
+    },
+    {
+      "id": "FPR055",
+      "ma_rule": "follow_pattern_055",
+      "ten": "Kiem tra An tinh che Thuong Quan",
+      "pattern": [
+        "thuong_quan_cach"
+      ],
+      "action": "kiem_tra_an_che_thuong_quan",
+      "required_conditions": [
+        "thuong_quan_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Danh gia An tinh hoa giai tac dong cua Thuong Quan."
+    },
+    {
+      "id": "FPR056",
+      "ma_rule": "follow_pattern_056",
+      "ten": "Kiem tra Tai tinh tiep nhan Xuat tinh",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "kiem_tra_tai_tinh_tiep_nhan_xuat_tinh",
+      "required_conditions": [
+        "xuat_tinh_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Danh gia dong sinh tu Xuat tinh sang Tai tinh."
+    },
+    {
+      "id": "FPR057",
+      "ma_rule": "follow_pattern_057",
+      "ten": "Kiem tra Xuat tinh qua vuong",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "kiem_tra_xuat_tinh_qua_vuong",
+      "required_conditions": [
+        "xuat_tinh_manh"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Danh gia truong hop Xuat tinh tiet khi qua muc."
+    },
+    {
+      "id": "FPR058",
+      "ma_rule": "follow_pattern_058",
+      "ten": "Danh gia do thuan cua Xuat Cach",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "danh_gia_do_thuan_xuat_cach",
+      "required_conditions": [
+        "da_kiem_tra_xuat_tinh"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR059",
+      "ma_rule": "follow_pattern_059",
+      "ten": "Danh gia kha nang thanh Xuat Cach",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "danh_gia_kha_nang_thanh_xuat_cach",
+      "required_conditions": [
+        "xuat_cach_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR060",
+      "ma_rule": "follow_pattern_060",
+      "ten": "Xac nhan Xuat Cach",
+      "pattern": [
+        "thuc_than_cach",
+        "thuong_quan_cach"
+      ],
+      "action": "xac_nhan_xuat_cach",
+      "required_conditions": [
+        "kha_nang_thanh_cach_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Hoan tat danh gia dac thu cua nhom Xuat Cach va chuyen sang workflow chung."
+    }
+  ]
+  [
+    {
+      "id": "FPR061",
+      "ma_rule": "follow_pattern_061",
+      "ten": "Kiem tra An tinh thanh cach",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "kiem_tra_an_tinh_thanh_cach",
+      "required_conditions": [
+        "pattern_la_an_cach"
+      ],
+      "stop_conditions": [
+        "an_tinh_khong_thanh_cach"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc dau tien cua An Cach."
+    },
+    {
+      "id": "FPR062",
+      "ma_rule": "follow_pattern_062",
+      "ten": "Danh gia suc manh An tinh",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "danh_gia_suc_manh_an_tinh",
+      "required_conditions": [
+        "an_tinh_thanh_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR063",
+      "ma_rule": "follow_pattern_063",
+      "ten": "Kiem tra An sinh Than",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "kiem_tra_an_sinh_than",
+      "required_conditions": [
+        "an_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang sinh tro Nhat Chu."
+    },
+    {
+      "id": "FPR064",
+      "ma_rule": "follow_pattern_064",
+      "ten": "Kiem tra An hoa Sat",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "kiem_tra_an_hoa_sat",
+      "required_conditions": [
+        "that_sat_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang hoa giai That Sat."
+    },
+    {
+      "id": "FPR065",
+      "ma_rule": "follow_pattern_065",
+      "ten": "Kiem tra Quan duoc An bao ho",
+      "pattern": [
+        "chinh_an_cach"
+      ],
+      "action": "kiem_tra_quan_duoc_an_bao_ho",
+      "required_conditions": [
+        "quan_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Rule dac trung cua Chinh An Cach."
+    },
+    {
+      "id": "FPR066",
+      "ma_rule": "follow_pattern_066",
+      "ten": "Kiem tra Thien An doat Thuc",
+      "pattern": [
+        "thien_an_cach"
+      ],
+      "action": "kiem_tra_thien_an_doat_thuc",
+      "required_conditions": [
+        "pattern_la_thien_an_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Danh gia hien tuong Thien An doat Thuc."
+    },
+    {
+      "id": "FPR067",
+      "ma_rule": "follow_pattern_067",
+      "ten": "Kiem tra An tinh qua vuong",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "kiem_tra_an_tinh_qua_vuong",
+      "required_conditions": [
+        "an_tinh_manh"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Danh gia truong hop An tinh qua manh lam giam tac dung."
+    },
+    {
+      "id": "FPR068",
+      "ma_rule": "follow_pattern_068",
+      "ten": "Danh gia do thuan cua An Cach",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "danh_gia_do_thuan_an_cach",
+      "required_conditions": [
+        "da_kiem_tra_an_tinh"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR069",
+      "ma_rule": "follow_pattern_069",
+      "ten": "Danh gia kha nang thanh An Cach",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "danh_gia_kha_nang_thanh_an_cach",
+      "required_conditions": [
+        "an_cach_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR070",
+      "ma_rule": "follow_pattern_070",
+      "ten": "Xac nhan An Cach",
+      "pattern": [
+        "chinh_an_cach",
+        "thien_an_cach"
+      ],
+      "action": "xac_nhan_an_cach",
+      "required_conditions": [
+        "kha_nang_thanh_cach_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Hoan tat danh gia dac thu cua An Cach va chuyen sang workflow chung."
+    }
+  ]
+  [
+    {
+      "id": "FPR071",
+      "ma_rule": "follow_pattern_071",
+      "ten": "Kiem tra Ty Kiep thanh cach",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_thanh_cach",
+      "required_conditions": [
+        "pattern_la_ty_kiep_cach"
+      ],
+      "stop_conditions": [
+        "ty_kiep_khong_thanh_cach"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Buoc dau tien cua nhom Ty Kiep Cach."
+    },
+    {
+      "id": "FPR072",
+      "ma_rule": "follow_pattern_072",
+      "ten": "Danh gia suc manh Ty Kiep",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "danh_gia_suc_manh_ty_kiep",
+      "required_conditions": [
+        "ty_kiep_thanh_cach"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR073",
+      "ma_rule": "follow_pattern_073",
+      "ten": "Kiem tra Ty Kiep tro Than",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_tro_than",
+      "required_conditions": [
+        "ty_kiep_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Danh gia kha nang tro luc cho Nhat Chu."
+    },
+    {
+      "id": "FPR074",
+      "ma_rule": "follow_pattern_074",
+      "ten": "Kiem tra Ty Kiep doat Tai",
+      "pattern": [
+        "kiep_tai_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_doat_tai",
+      "required_conditions": [
+        "tai_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Rule dac trung cua Kiep Tai Cach."
+    },
+    {
+      "id": "FPR075",
+      "ma_rule": "follow_pattern_075",
+      "ten": "Kiem tra Ty Kiep tro Tai",
+      "pattern": [
+        "ty_kien_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_tro_tai",
+      "required_conditions": [
+        "tai_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Danh gia truong hop Ty Kien hop tac de tao Tai."
+    },
+    {
+      "id": "FPR076",
+      "ma_rule": "follow_pattern_076",
+      "ten": "Kiem tra Ty Kiep tranh Quan",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_tranh_quan",
+      "required_conditions": [
+        "quan_tinh_ton_tai"
+      ],
+      "stop_conditions": [],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Danh gia anh huong cua Ty Kiep doi voi Quan tinh."
+    },
+    {
+      "id": "FPR077",
+      "ma_rule": "follow_pattern_077",
+      "ten": "Kiem tra Ty Kiep qua vuong",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "kiem_tra_ty_kiep_qua_vuong",
+      "required_conditions": [
+        "ty_kiep_manh"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Danh gia mat can bang do Ty Kiep qua nhieu."
+    },
+    {
+      "id": "FPR078",
+      "ma_rule": "follow_pattern_078",
+      "ten": "Danh gia do thuan cua Ty Kiep Cach",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "danh_gia_do_thuan_ty_kiep_cach",
+      "required_conditions": [
+        "da_kiem_tra_ty_kiep"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR079",
+      "ma_rule": "follow_pattern_079",
+      "ten": "Danh gia kha nang thanh Ty Kiep Cach",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "danh_gia_kha_nang_thanh_ty_kiep_cach",
+      "required_conditions": [
+        "ty_kiep_cach_on_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": ""
+    },
+    {
+      "id": "FPR080",
+      "ma_rule": "follow_pattern_080",
+      "ten": "Xac nhan Ty Kiep Cach",
+      "pattern": [
+        "ty_kien_cach",
+        "kiep_tai_cach"
+      ],
+      "action": "xac_nhan_ty_kiep_cach",
+      "required_conditions": [
+        "kha_nang_thanh_cach_da_xac_dinh"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Hoan tat danh gia dac thu cua Ty Kiep Cach va chuyen sang workflow chung."
+    }
+  ]
+  [
+    {
+      "id": "FPR081",
+      "ma_rule": "follow_pattern_081",
+      "ten": "Kiem tra dieu kien Special Pattern",
+      "pattern": [
+        "special_pattern"
+      ],
+      "action": "kiem_tra_special_pattern",
+      "required_conditions": [
+        "pattern_la_special_pattern"
+      ],
+      "stop_conditions": [
+        "special_pattern_khong_hop_le"
+      ],
+      "priority": 110,
+      "active": true,
+      "ghi_chu": "Xac nhan day la Cach cuc dac biet."
+    },
+    {
+      "id": "FPR082",
+      "ma_rule": "follow_pattern_082",
+      "ten": "Kiem tra Tong Vuong Cach",
+      "pattern": [
+        "tong_vuong_cach"
+      ],
+      "action": "kiem_tra_tong_vuong",
+      "required_conditions": [
+        "pattern_la_tong_vuong"
+      ],
+      "stop_conditions": [],
+      "priority": 120,
+      "active": true,
+      "ghi_chu": "Danh gia dieu kien Tong Vuong."
+    },
+    {
+      "id": "FPR083",
+      "ma_rule": "follow_pattern_083",
+      "ten": "Kiem tra Tong Nhuoc Cach",
+      "pattern": [
+        "tong_nhuoc_cach"
+      ],
+      "action": "kiem_tra_tong_nhuoc",
+      "required_conditions": [
+        "pattern_la_tong_nhuoc"
+      ],
+      "stop_conditions": [],
+      "priority": 130,
+      "active": true,
+      "ghi_chu": "Danh gia dieu kien Tong Nhuoc."
+    },
+    {
+      "id": "FPR084",
+      "ma_rule": "follow_pattern_084",
+      "ten": "Kiem tra Hoa Khi Cach",
+      "pattern": [
+        "hoa_khi_cach"
+      ],
+      "action": "kiem_tra_hoa_khi",
+      "required_conditions": [
+        "pattern_la_hoa_khi"
+      ],
+      "stop_conditions": [
+        "hoa_khi_that_bai"
+      ],
+      "priority": 140,
+      "active": true,
+      "ghi_chu": "Xac nhan dieu kien Hoa Khi."
+    },
+    {
+      "id": "FPR085",
+      "ma_rule": "follow_pattern_085",
+      "ten": "Kiem tra Chuyen Vuong Cach",
+      "pattern": [
+        "chuyen_vuong_cach"
+      ],
+      "action": "kiem_tra_chuyen_vuong",
+      "required_conditions": [
+        "pattern_la_chuyen_vuong"
+      ],
+      "stop_conditions": [],
+      "priority": 150,
+      "active": true,
+      "ghi_chu": "Danh gia dieu kien Chuyen Vuong."
+    },
+    {
+      "id": "FPR086",
+      "ma_rule": "follow_pattern_086",
+      "ten": "Kiem tra dieu kien giu nguyen Cach dac biet",
+      "pattern": [
+        "special_pattern"
+      ],
+      "action": "kiem_tra_duy_tri_special_pattern",
+      "required_conditions": [
+        "special_pattern_hop_le"
+      ],
+      "stop_conditions": [
+        "special_pattern_bi_pha"
+      ],
+      "priority": 160,
+      "active": true,
+      "ghi_chu": "Danh gia xem Cach dac biet co bi pha vo hay khong."
+    },
+    {
+      "id": "FPR087",
+      "ma_rule": "follow_pattern_087",
+      "ten": "Bo qua quy trinh Pattern thong thuong",
+      "pattern": [
+        "special_pattern"
+      ],
+      "action": "skip_standard_pattern_flow",
+      "required_conditions": [
+        "special_pattern_da_xac_nhan"
+      ],
+      "stop_conditions": [],
+      "priority": 170,
+      "active": true,
+      "ghi_chu": "Khong ap dung cac Follow Rule cua Cach thong thuong."
+    },
+    {
+      "id": "FPR088",
+      "ma_rule": "follow_pattern_088",
+      "ten": "Chuyen sang luong xu ly Special Pattern",
+      "pattern": [
+        "special_pattern"
+      ],
+      "action": "goto_special_pattern_engine",
+      "required_conditions": [
+        "special_pattern_da_xac_nhan"
+      ],
+      "stop_conditions": [],
+      "priority": 180,
+      "active": true,
+      "ghi_chu": "Dieu huong sang bo xu ly Cach dac biet."
+    },
+    {
+      "id": "FPR089",
+      "ma_rule": "follow_pattern_089",
+      "ten": "Danh gia kha nang thanh Special Pattern",
+      "pattern": [
+        "special_pattern"
+      ],
+      "action": "danh_gia_special_pattern",
+      "required_conditions": [
+        "special_pattern_da_xu_ly"
+      ],
+      "stop_conditions": [],
+      "priority": 190,
+      "active": true,
+      "ghi_chu": "Tong hop ket qua cua Cach dac biet."
+    },
+    {
+      "id": "FPR090",
+      "ma_rule": "follow_pattern_090",
+      "ten": "Xac nhan Special Pattern",
+      "pattern": [
+        "special_pattern"
+      ],
+      "action": "xac_nhan_special_pattern",
+      "required_conditions": [
+        "special_pattern_hoan_tat"
+      ],
+      "stop_conditions": [],
+      "priority": 200,
+      "active": true,
+      "ghi_chu": "Ket thuc Follow Rule cua Cach dac biet."
+    }
+  ]
+  [
+    {
+      "id": "FPR091",
+      "ma_rule": "follow_pattern_091",
+      "ten": "Kiem tra Pattern da duoc xac dinh",
+      "pattern": [
+        "*"
+      ],
+      "action": "validate_pattern",
+      "required_conditions": [],
+      "stop_conditions": [
+        "pattern_khong_ton_tai"
+      ],
+      "priority": 910,
+      "active": true,
+      "ghi_chu": "Dam bao Pattern da duoc Pattern Engine xac dinh."
+    },
+    {
+      "id": "FPR092",
+      "ma_rule": "follow_pattern_092",
+      "ten": "Kiem tra du lieu dau vao",
+      "pattern": [
+        "*"
+      ],
+      "action": "validate_input_data",
+      "required_conditions": [
+        "pattern_hop_le"
+      ],
+      "stop_conditions": [
+        "thieu_du_lieu"
+      ],
+      "priority": 920,
+      "active": true,
+      "ghi_chu": "Ngung xu ly neu du lieu khong day du."
+    },
+    {
+      "id": "FPR093",
+      "ma_rule": "follow_pattern_093",
+      "ten": "Kiem tra xung dot Rule",
+      "pattern": [
+        "*"
+      ],
+      "action": "detect_rule_conflict",
+      "required_conditions": [
+        "du_lieu_hop_le"
+      ],
+      "stop_conditions": [],
+      "priority": 930,
+      "active": true,
+      "ghi_chu": "Phat hien cac Rule mau thuan."
+    },
+    {
+      "id": "FPR094",
+      "ma_rule": "follow_pattern_094",
+      "ten": "Ap dung Rule uu tien cao nhat",
+      "pattern": [
+        "*"
+      ],
+      "action": "apply_highest_priority_rule",
+      "required_conditions": [
+        "co_rule_xung_dot"
+      ],
+      "stop_conditions": [],
+      "priority": 940,
+      "active": true,
+      "ghi_chu": "Su dung Priority de giai quyet xung dot."
+    },
+    {
+      "id": "FPR095",
+      "ma_rule": "follow_pattern_095",
+      "ten": "Fallback sang luong xu ly mac dinh",
+      "pattern": [
+        "*"
+      ],
+      "action": "fallback_default_pattern",
+      "required_conditions": [
+        "khong_tim_thay_rule_phu_hop"
+      ],
+      "stop_conditions": [],
+      "priority": 950,
+      "active": true,
+      "ghi_chu": "Su dung luong xu ly mac dinh."
+    },
+    {
+      "id": "FPR096",
+      "ma_rule": "follow_pattern_096",
+      "ten": "Danh dau can xem xet thu cong",
+      "pattern": [
+        "*"
+      ],
+      "action": "mark_manual_review",
+      "required_conditions": [
+        "khong_the_ket_luan"
+      ],
+      "stop_conditions": [],
+      "priority": 960,
+      "active": true,
+      "ghi_chu": "Danh dau de chuyen sang kiem tra thu cong."
+    },
+    {
+      "id": "FPR097",
+      "ma_rule": "follow_pattern_097",
+      "ten": "Ghi nhat ky xu ly",
+      "pattern": [
+        "*"
+      ],
+      "action": "write_processing_log",
+      "required_conditions": [],
+      "stop_conditions": [],
+      "priority": 970,
+      "active": true,
+      "ghi_chu": "Luu thong tin phuc vu debug va audit."
+    },
+    {
+      "id": "FPR098",
+      "ma_rule": "follow_pattern_098",
+      "ten": "Kiem tra trang thai hoan thanh",
+      "pattern": [
+        "*"
+      ],
+      "action": "verify_processing_complete",
+      "required_conditions": [],
+      "stop_conditions": [],
+      "priority": 980,
+      "active": true,
+      "ghi_chu": "Dam bao tat ca cac buoc bat buoc da duoc thuc hien."
+    },
+    {
+      "id": "FPR099",
+      "ma_rule": "follow_pattern_099",
+      "ten": "Tong hop ket qua Follow Pattern",
+      "pattern": [
+        "*"
+      ],
+      "action": "build_follow_pattern_result",
+      "required_conditions": [
+        "xu_ly_hoan_tat"
+      ],
+      "stop_conditions": [],
+      "priority": 990,
+      "active": true,
+      "ghi_chu": "Tong hop ket qua de chuyen sang module tiep theo."
+    },
+    {
+      "id": "FPR100",
+      "ma_rule": "follow_pattern_100",
+      "ten": "Ket thuc Follow Pattern",
+      "pattern": [
+        "*"
+      ],
+      "action": "finish_follow_pattern",
+      "required_conditions": [
+        "ket_qua_da_tong_hop"
+      ],
+      "stop_conditions": [],
+      "priority": 1000,
+      "active": true,
+      "ghi_chu": "Rule cuoi cung cua Follow Pattern Engine."
+    }
+  ]

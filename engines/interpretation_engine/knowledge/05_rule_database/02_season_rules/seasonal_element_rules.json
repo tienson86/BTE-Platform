@@ -1,0 +1,218 @@
+[
+    {
+      "rule_id": "SER_0001",
+      "concept": "dominant_element",
+      "display_name": "Ngũ hành chủ khí",
+      "description": "Ngũ hành đại diện cho khí chủ đạo của một mùa.",
+      "applicable_scope": [
+        "season"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0002",
+      "concept": "prosperous_state",
+      "display_name": "Vượng",
+      "state_code": "prosperous",
+      "description": "Ngũ hành đạt trạng thái mạnh nhất trong mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0003",
+      "concept": "supporting_state",
+      "display_name": "Tướng",
+      "state_code": "supporting",
+      "description": "Ngũ hành được mùa sinh trợ, có xu hướng phát triển.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0004",
+      "concept": "resting_state",
+      "display_name": "Hưu",
+      "state_code": "resting",
+      "description": "Ngũ hành bắt đầu suy giảm, khí lực ổn định nhưng không phát triển.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0005",
+      "concept": "restricted_state",
+      "display_name": "Tù",
+      "state_code": "restricted",
+      "description": "Ngũ hành bị khắc chế bởi khí mùa, sức mạnh suy yếu rõ rệt.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0006",
+      "concept": "dead_state",
+      "display_name": "Tử",
+      "state_code": "dead",
+      "description": "Ngũ hành ở trạng thái suy kiệt nhất trong mùa.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SER_0101",
+      "season": "spring",
+      "display_name": "Xuân",
+      "dominant_element": "wood",
+      "secondary_element": null,
+      "seasonal_phase": "growth",
+      "description": "Mùa Xuân thuộc Mộc, vạn vật sinh trưởng, Mộc là chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0102",
+      "season": "summer",
+      "display_name": "Hạ",
+      "dominant_element": "fire",
+      "secondary_element": null,
+      "seasonal_phase": "prosperity",
+      "description": "Mùa Hạ thuộc Hỏa, khí dương cực thịnh, Hỏa là chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0103",
+      "season": "autumn",
+      "display_name": "Thu",
+      "dominant_element": "metal",
+      "secondary_element": null,
+      "seasonal_phase": "harvest",
+      "description": "Mùa Thu thuộc Kim, khí thu liễm, Kim là chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0104",
+      "season": "winter",
+      "display_name": "Đông",
+      "dominant_element": "water",
+      "secondary_element": null,
+      "seasonal_phase": "storage",
+      "description": "Mùa Đông thuộc Thủy, khí tàng chứa, Thủy là chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0105",
+      "season": "transition",
+      "display_name": "Tứ Quý",
+      "dominant_element": "earth",
+      "secondary_element": null,
+      "seasonal_phase": "transition",
+      "description": "Giai đoạn giao mùa, Thổ làm chủ khí để chuyển tiếp giữa bốn mùa.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SER_0201",
+      "season": "spring",
+      "display_name": "Xuân",
+      "element_states": {
+        "wood": "prosperous",
+        "fire": "supporting",
+        "water": "resting",
+        "metal": "restricted",
+        "earth": "dead"
+      },
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0202",
+      "season": "summer",
+      "display_name": "Hạ",
+      "element_states": {
+        "fire": "prosperous",
+        "earth": "supporting",
+        "wood": "resting",
+        "water": "restricted",
+        "metal": "dead"
+      },
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0203",
+      "season": "autumn",
+      "display_name": "Thu",
+      "element_states": {
+        "metal": "prosperous",
+        "water": "supporting",
+        "earth": "resting",
+        "fire": "restricted",
+        "wood": "dead"
+      },
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0204",
+      "season": "winter",
+      "display_name": "Đông",
+      "element_states": {
+        "water": "prosperous",
+        "wood": "supporting",
+        "metal": "resting",
+        "earth": "restricted",
+        "fire": "dead"
+      },
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0205",
+      "season": "transition",
+      "display_name": "Tứ Quý",
+      "element_states": {
+        "earth": "prosperous",
+        "metal": "supporting",
+        "fire": "resting",
+        "wood": "restricted",
+        "water": "dead"
+      },
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SER_0301",
+      "rule_name": "season_priority",
+      "priority": 100,
+      "condition": "season_confirmed",
+      "action": "apply_season_mapping",
+      "description": "Áp dụng bảng trạng thái ngũ hành của mùa đã được xác định.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0302",
+      "rule_name": "transition_priority",
+      "priority": 90,
+      "condition": "transition_period_detected",
+      "action": "apply_transition_mapping",
+      "description": "Nếu thuộc giai đoạn Tứ Quý hoặc giao mùa thì ưu tiên quy tắc của giai đoạn chuyển mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0303",
+      "rule_name": "solar_term_priority",
+      "priority": 80,
+      "condition": "solar_term_available",
+      "action": "override_by_solar_term",
+      "description": "Nếu có dữ liệu Tiết khí thì sử dụng Tiết khí để xác nhận trạng thái mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0304",
+      "rule_name": "consistency_validation",
+      "priority": 70,
+      "condition": "mapping_completed",
+      "action": "validate_element_states",
+      "description": "Kiểm tra tính đầy đủ và hợp lệ của trạng thái năm ngũ hành trước khi xuất kết quả.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0305",
+      "rule_name": "final_confirmation",
+      "priority": 60,
+      "condition": "validation_passed",
+      "action": "confirm_final_element_states",
+      "description": "Xác nhận trạng thái cuối cùng của năm ngũ hành để cung cấp cho các Engine phía sau.",
+      "enabled": true
+    }
+  ]

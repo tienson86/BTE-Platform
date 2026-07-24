@@ -1,0 +1,831 @@
+[
+    {
+      "id": "than_sat",
+      "term": "Thần Sát",
+      "aliases": [
+        "Shen Sha",
+        "Stars and Spirits"
+      ],
+      "definition": "Hệ thống các dấu hiệu cát hung được xác định theo quy tắc phối hợp giữa Thiên Can, Địa Chi và các yếu tố của mệnh cục.",
+      "description": "Thần Sát là tập hợp các quy tắc phụ trợ trong Bát Tự nhằm bổ sung thông tin khi luận đoán. Việc xác định từng Thần Sát được định nghĩa trong Rule Database.",
+      "category": "shensha",
+      "related_terms": [
+        "cat_than",
+        "hung_than",
+        "than_sat_rule"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội",
+        "Uyên Hải Tử Bình"
+      ],
+      "tags": [
+        "shensha",
+        "core"
+      ]
+    },
+    {
+      "id": "cat_than",
+      "term": "Cát Thần",
+      "aliases": [
+        "Auspicious Star"
+      ],
+      "definition": "Nhóm Thần Sát mang ý nghĩa cát lợi hoặc hỗ trợ khi luận mệnh.",
+      "description": "Cát Thần thường phản ánh các yếu tố thuận lợi như quý nhân, học vấn, tài lộc hoặc may mắn.",
+      "category": "shensha",
+      "related_terms": [
+        "than_sat",
+        "hung_than"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "shensha",
+        "classification"
+      ]
+    },
+    {
+      "id": "hung_than",
+      "term": "Hung Thần",
+      "aliases": [
+        "Inauspicious Star"
+      ],
+      "definition": "Nhóm Thần Sát mang ý nghĩa bất lợi hoặc cảnh báo khi luận mệnh.",
+      "description": "Hung Thần thường phản ánh các yếu tố như tai họa, bệnh tật, hình phạt, tranh chấp hoặc tổn thất.",
+      "category": "shensha",
+      "related_terms": [
+        "than_sat",
+        "cat_than"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "shensha",
+        "classification"
+      ]
+    },
+    {
+      "id": "than_sat_rule",
+      "term": "Quy Tắc Thần Sát",
+      "aliases": [
+        "Shen Sha Rule"
+      ],
+      "definition": "Tập hợp điều kiện xác định sự xuất hiện của từng Thần Sát.",
+      "description": "Quy tắc xác định Thần Sát không thuộc Knowledge Base mà được lưu trữ trong Rule Database.",
+      "category": "shensha",
+      "related_terms": [
+        "than_sat",
+        "rule_database"
+      ],
+      "references": [
+        "BTE Rule Database Specification"
+      ],
+      "tags": [
+        "shensha",
+        "system"
+      ]
+    },
+    {
+      "id": "than_sat_group",
+      "term": "Nhóm Thần Sát",
+      "aliases": [
+        "Shen Sha Group"
+      ],
+      "definition": "Cách phân loại các Thần Sát theo chức năng hoặc ý nghĩa luận đoán.",
+      "description": "Các Thần Sát có thể được nhóm theo nhiều tiêu chí như cát hung, quý nhân, học nghiệp, tài lộc, hôn nhân hoặc tai họa.",
+      "category": "shensha",
+      "related_terms": [
+        "cat_than",
+        "hung_than"
+      ],
+      "references": [
+        "Tam Mệnh Thông Hội"
+      ],
+      "tags": [
+        "shensha",
+        "classification"
+      ]
+    }
+    ,
+  {
+    "id": "thien_at_quy_nhan",
+    "term": "Thiên Ất Quý Nhân",
+    "aliases": [
+      "Heavenly Virtue Nobleman",
+      "Tian Yi Gui Ren"
+    ],
+    "definition": "Thần Sát cát tinh chủ về quý nhân phù trợ, hóa giải khó khăn và tăng cơ hội gặp người giúp đỡ.",
+    "description": "Thiên Ất Quý Nhân được xem là cát tinh quan trọng bậc nhất trong hệ thống Thần Sát của Bát Tự.",
+    "category": "shensha",
+    "related_terms": [
+      "cat_than",
+      "thien_duc_quy_nhan",
+      "nguyet_duc_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "auspicious",
+      "nobleman"
+    ]
+  },
+  {
+    "id": "thien_duc_quy_nhan",
+    "term": "Thiên Đức Quý Nhân",
+    "aliases": [
+      "Heavenly Virtue",
+      "Tian De Gui Ren"
+    ],
+    "definition": "Cát tinh chủ về phúc đức, hóa giải tai họa và giảm nhẹ hung họa.",
+    "description": "Thiên Đức Quý Nhân thường được luận cùng Nguyệt Đức Quý Nhân để đánh giá khả năng hóa giải hung sát.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_at_quy_nhan",
+      "nguyet_duc_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "auspicious",
+      "virtue"
+    ]
+  },
+  {
+    "id": "nguyet_duc_quy_nhan",
+    "term": "Nguyệt Đức Quý Nhân",
+    "aliases": [
+      "Monthly Virtue",
+      "Yue De Gui Ren"
+    ],
+    "definition": "Cát tinh chủ về đức hạnh, nhân duyên tốt và khả năng hóa giải bất lợi.",
+    "description": "Nguyệt Đức Quý Nhân là một trong những Quý Nhân được sử dụng phổ biến trong luận đoán Bát Tự.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_duc_quy_nhan",
+      "thien_at_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "auspicious",
+      "virtue"
+    ]
+  },
+  {
+    "id": "thai_cuc_quy_nhan",
+    "term": "Thái Cực Quý Nhân",
+    "aliases": [
+      "Tai Ji Nobleman",
+      "Tai Ji Gui Ren"
+    ],
+    "definition": "Cát tinh chủ về trí tuệ, học vấn, tâm linh và khả năng lĩnh hội.",
+    "description": "Thái Cực Quý Nhân thường được xem là dấu hiệu của người ham học hỏi, có trực giác và dễ tiếp cận tri thức.",
+    "category": "shensha",
+    "related_terms": [
+      "van_xuong",
+      "thien_at_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "auspicious",
+      "wisdom"
+    ]
+  },
+  {
+    "id": "phuc_tinh_quy_nhan",
+    "term": "Phúc Tinh Quý Nhân",
+    "aliases": [
+      "Fortune Nobleman"
+    ],
+    "definition": "Cát tinh chủ về phúc khí, may mắn và sự hỗ trợ trong cuộc sống.",
+    "description": "Phúc Tinh Quý Nhân biểu thị khả năng gặp may mắn và được hưởng phúc đức trong nhiều phương diện.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_at_quy_nhan",
+      "thien_duc_quy_nhan"
+    ],
+    "references": [
+      "Một số tài liệu Thần Sát truyền thống"
+    ],
+    "tags": [
+      "shensha",
+      "auspicious",
+      "fortune"
+    ]
+  }
+  ,
+  {
+    "id": "van_xuong",
+    "term": "Văn Xương",
+    "aliases": [
+      "Literary Star",
+      "Wen Chang"
+    ],
+    "definition": "Thần Sát chủ về học vấn, tri thức, khả năng nghiên cứu, thi cử và sáng tạo.",
+    "description": "Văn Xương là một trong những Thần Sát quan trọng nhất khi luận học tập, công danh, nghiên cứu và năng lực tư duy.",
+    "category": "shensha",
+    "related_terms": [
+      "van_tinh",
+      "hoc_duong",
+      "quoc_an"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "education",
+      "career"
+    ]
+  },
+  {
+    "id": "van_tinh",
+    "term": "Văn Tinh",
+    "aliases": [
+      "Literary Talent Star"
+    ],
+    "definition": "Thần Sát biểu thị năng khiếu văn chương, nghệ thuật và khả năng biểu đạt.",
+    "description": "Văn Tinh thường được luận kết hợp với Văn Xương để đánh giá năng lực học thuật và sáng tạo.",
+    "category": "shensha",
+    "related_terms": [
+      "van_xuong",
+      "hoc_duong"
+    ],
+    "references": [
+      "Một số tài liệu Thần Sát truyền thống"
+    ],
+    "tags": [
+      "shensha",
+      "education",
+      "talent"
+    ]
+  },
+  {
+    "id": "hoc_duong",
+    "term": "Học Đường",
+    "aliases": [
+      "Academic Hall"
+    ],
+    "definition": "Thần Sát chủ về môi trường học tập, khả năng tiếp thu kiến thức và thành tích học hành.",
+    "description": "Học Đường thường phản ánh điều kiện thuận lợi cho việc học tập, đào tạo và phát triển tri thức.",
+    "category": "shensha",
+    "related_terms": [
+      "van_xuong",
+      "van_tinh",
+      "thai_cuc_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "education"
+    ]
+  },
+  {
+    "id": "quoc_an",
+    "term": "Quốc Ấn",
+    "aliases": [
+      "National Seal",
+      "Guo Yin"
+    ],
+    "definition": "Thần Sát chủ về quyền hạn, chức vụ, danh vọng và uy tín.",
+    "description": "Quốc Ấn thường được dùng khi luận công danh, quản lý, hành chính và khả năng nắm giữ chức vụ.",
+    "category": "shensha",
+    "related_terms": [
+      "van_xuong",
+      "thien_at_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "career",
+      "authority"
+    ]
+  },
+  {
+    "id": "tu_quan",
+    "term": "Từ Quán",
+    "aliases": [
+      "Scholarly Pavilion"
+    ],
+    "definition": "Thần Sát chủ về học thuật, văn chương và năng lực nghiên cứu chuyên sâu.",
+    "description": "Từ Quán phản ánh xu hướng phát triển trong lĩnh vực học thuật, giáo dục và nghiên cứu.",
+    "category": "shensha",
+    "related_terms": [
+      "van_xuong",
+      "hoc_duong",
+      "quoc_an"
+    ],
+    "references": [
+      "Một số tài liệu Thần Sát truyền thống"
+    ],
+    "tags": [
+      "shensha",
+      "education",
+      "research"
+    ]
+  }
+  ,
+  {
+    "id": "dao_hoa",
+    "term": "Đào Hoa",
+    "aliases": [
+      "Peach Blossom",
+      "Tao Hua"
+    ],
+    "definition": "Thần Sát chủ về sức hấp dẫn, nhân duyên, tình cảm, giao tiếp và quan hệ xã hội.",
+    "description": "Đào Hoa là một trong những Thần Sát nổi tiếng nhất trong Bát Tự. Tùy theo cấu trúc mệnh cục và các yếu tố phối hợp, Đào Hoa có thể biểu hiện theo hướng tích cực hoặc tiêu cực.",
+    "category": "shensha",
+    "related_terms": [
+      "hong_loan",
+      "thien_hy",
+      "ham_tri"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "relationship",
+      "social"
+    ]
+  },
+  {
+    "id": "hong_loan",
+    "term": "Hồng Loan",
+    "aliases": [
+      "Red Matchmaker",
+      "Hong Luan"
+    ],
+    "definition": "Thần Sát chủ về tình yêu, hỷ sự và nhân duyên.",
+    "description": "Hồng Loan thường được dùng để luận thời điểm thuận lợi cho hôn nhân, kết đôi và các sự kiện vui trong đời sống tình cảm.",
+    "category": "shensha",
+    "related_terms": [
+      "dao_hoa",
+      "thien_hy"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "relationship",
+      "marriage"
+    ]
+  },
+  {
+    "id": "thien_hy",
+    "term": "Thiên Hỷ",
+    "aliases": [
+      "Heavenly Happiness",
+      "Tian Xi"
+    ],
+    "definition": "Thần Sát chủ về hỷ sự, hôn nhân, lễ cưới và các sự kiện vui.",
+    "description": "Thiên Hỷ thường được luận cùng Hồng Loan để đánh giá khả năng xuất hiện các sự kiện cát tường liên quan đến gia đình và hôn nhân.",
+    "category": "shensha",
+    "related_terms": [
+      "hong_loan",
+      "dao_hoa"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "relationship",
+      "auspicious"
+    ]
+  },
+  {
+    "id": "ham_tri",
+    "term": "Hàm Trì",
+    "aliases": [
+      "Xian Chi",
+      "Bath Star"
+    ],
+    "definition": "Thần Sát liên quan đến sức hấp dẫn cá nhân, cảm xúc và các mối quan hệ khác giới.",
+    "description": "Trong nhiều trường phái, Hàm Trì được xem là một dạng Đào Hoa và thường được luận kết hợp với Đào Hoa để đánh giá nhân duyên.",
+    "category": "shensha",
+    "related_terms": [
+      "dao_hoa",
+      "hong_loan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "relationship"
+    ]
+  },
+  {
+    "id": "co_than",
+    "term": "Cô Thần",
+    "aliases": [
+      "Lonely Star",
+      "Gu Shen"
+    ],
+    "definition": "Thần Sát biểu thị xu hướng cô độc, ít hòa hợp trong đời sống tình cảm hoặc gia đình.",
+    "description": "Cô Thần thường được xem xét cùng Quả Tú để đánh giá xu hướng cô đơn, chậm kết hôn hoặc khó duy trì quan hệ lâu dài.",
+    "category": "shensha",
+    "related_terms": [
+      "qua_tu",
+      "dao_hoa"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "relationship",
+      "inauspicious"
+    ]
+  },
+  {
+    "id": "qua_tu",
+    "term": "Quả Tú",
+    "aliases": [
+      "Widow Star",
+      "Gua Su"
+    ],
+    "definition": "Thần Sát biểu thị xu hướng cô quả, thiếu sự hòa hợp hoặc dễ trải qua biến động trong đời sống hôn nhân.",
+    "description": "Quả Tú thường được luận kết hợp với Cô Thần, không nên luận độc lập mà cần xem toàn bộ cấu trúc mệnh cục.",
+    "category": "shensha",
+    "related_terms": [
+      "co_than",
+      "dao_hoa"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "relationship",
+      "inauspicious"
+    ]
+  }
+  ,
+  {
+    "id": "dich_ma",
+    "term": "Dịch Mã",
+    "aliases": [
+      "Traveling Horse",
+      "Yi Ma"
+    ],
+    "definition": "Thần Sát biểu thị sự dịch chuyển, thay đổi môi trường, công tác, du lịch hoặc biến động trong cuộc sống.",
+    "description": "Dịch Mã là một trong những Thần Sát phổ biến nhất trong Bát Tự. Ý nghĩa tốt hay xấu phụ thuộc vào toàn bộ mệnh cục và các yếu tố phối hợp.",
+    "category": "shensha",
+    "related_terms": [
+      "dao_hoa",
+      "thien_at_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "movement",
+      "career"
+    ]
+  },
+  {
+    "id": "loc_than",
+    "term": "Lộc Thần",
+    "aliases": [
+      "Prosperity Star",
+      "Lu Shen"
+    ],
+    "definition": "Thần Sát chủ về bổng lộc, thu nhập, cơ hội phát triển và nguồn lợi vật chất.",
+    "description": "Lộc Thần thường được sử dụng khi luận tài lộc, sự nghiệp và khả năng hưởng thành quả lao động.",
+    "category": "shensha",
+    "related_terms": [
+      "kim_quy",
+      "dich_ma"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "wealth",
+      "career"
+    ]
+  },
+  {
+    "id": "kim_quy",
+    "term": "Kim Quỹ",
+    "aliases": [
+      "Golden Treasury",
+      "Jin Gui"
+    ],
+    "definition": "Thần Sát liên quan đến tài sản, tích lũy và khả năng quản lý của cải.",
+    "description": "Kim Quỹ thường được xem là dấu hiệu hỗ trợ về tài chính, đặc biệt khi phối hợp hài hòa với các yếu tố khác trong mệnh cục.",
+    "category": "shensha",
+    "related_terms": [
+      "loc_than",
+      "phuc_tinh_quy_nhan"
+    ],
+    "references": [
+      "Một số tài liệu Thần Sát truyền thống"
+    ],
+    "tags": [
+      "shensha",
+      "wealth"
+    ]
+  },
+  {
+    "id": "hoa_cai",
+    "term": "Hoa Cái",
+    "aliases": [
+      "Elegant Canopy",
+      "Hua Gai"
+    ],
+    "definition": "Thần Sát biểu thị năng lực nghệ thuật, học thuật, tâm linh và xu hướng sống nội tâm.",
+    "description": "Hoa Cái thường gắn với năng khiếu sáng tạo, nghiên cứu, tín ngưỡng hoặc con đường tu học.",
+    "category": "shensha",
+    "related_terms": [
+      "thai_cuc_quy_nhan",
+      "van_xuong"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "art",
+      "spiritual"
+    ]
+  },
+  {
+    "id": "tuong_tinh",
+    "term": "Tướng Tinh",
+    "aliases": [
+      "General Star",
+      "Jiang Xing"
+    ],
+    "definition": "Thần Sát biểu thị năng lực lãnh đạo, tổ chức, chỉ huy và tinh thần trách nhiệm.",
+    "description": "Tướng Tinh thường được dùng để luận khả năng quản lý, điều hành hoặc giữ vị trí có ảnh hưởng trong tập thể.",
+    "category": "shensha",
+    "related_terms": [
+      "quoc_an",
+      "thien_at_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "leadership",
+      "career"
+    ]
+  }
+  ,
+  {
+    "id": "khong_vong",
+    "term": "Không Vong",
+    "aliases": [
+      "Void",
+      "Kong Wang"
+    ],
+    "definition": "Thần Sát biểu thị trạng thái hư không, thiếu thực lực hoặc gián đoạn về tác động của một yếu tố trong mệnh cục.",
+    "description": "Không Vong không mang ý nghĩa hung tuyệt đối. Ý nghĩa cụ thể phụ thuộc vào vị trí xuất hiện và sự phối hợp với toàn bộ mệnh cục.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_la",
+      "dia_vong"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội",
+      "Uyên Hải Tử Bình"
+    ],
+    "tags": [
+      "shensha",
+      "void"
+    ]
+  },
+  {
+    "id": "kiep_sat",
+    "term": "Kiếp Sát",
+    "aliases": [
+      "Robbery Sha",
+      "Jie Sha"
+    ],
+    "definition": "Thần Sát thường biểu thị cạnh tranh, tổn thất, tranh chấp hoặc các biến cố bất ngờ.",
+    "description": "Kiếp Sát cần được luận cùng các yếu tố khác trong mệnh cục, không nên kết luận độc lập.",
+    "category": "shensha",
+    "related_terms": [
+      "tai_sat",
+      "khong_vong"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "inauspicious"
+    ]
+  },
+  {
+    "id": "tai_sat",
+    "term": "Tai Sát",
+    "aliases": [
+      "Disaster Sha",
+      "Zai Sha"
+    ],
+    "definition": "Thần Sát biểu thị khả năng phát sinh trở ngại, tai họa hoặc biến động trong một số giai đoạn.",
+    "description": "Tai Sát thường được xem xét kết hợp với Đại Vận và Lưu Niên để đánh giá mức độ ảnh hưởng.",
+    "category": "shensha",
+    "related_terms": [
+      "kiep_sat",
+      "khong_vong"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "inauspicious"
+    ]
+  },
+  {
+    "id": "thien_la",
+    "term": "Thiên La",
+    "aliases": [
+      "Heavenly Net",
+      "Tian Luo"
+    ],
+    "definition": "Thần Sát biểu thị trạng thái bị ràng buộc, cản trở hoặc khó phát huy năng lực.",
+    "description": "Thiên La thường được luận cùng Địa Võng để đánh giá mức độ hạn chế hoặc vướng mắc trong mệnh cục.",
+    "category": "shensha",
+    "related_terms": [
+      "dia_vong",
+      "khong_vong"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "constraint"
+    ]
+  },
+  {
+    "id": "dia_vong",
+    "term": "Địa Võng",
+    "aliases": [
+      "Earthly Net",
+      "Di Wang"
+    ],
+    "definition": "Thần Sát biểu thị sự ràng buộc, trì trệ hoặc khó thoát khỏi hoàn cảnh bất lợi.",
+    "description": "Địa Võng thường được phân tích cùng Thiên La để đánh giá những giới hạn hoặc trở ngại trong cuộc sống.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_la",
+      "khong_vong"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "constraint"
+    ]
+  }
+  ,
+  {
+    "id": "thien_y",
+    "term": "Thiên Y",
+    "aliases": [
+      "Heavenly Doctor",
+      "Tian Yi"
+    ],
+    "definition": "Thần Sát chủ về sức khỏe, y dược, khả năng chữa lành và sự hỗ trợ trong lĩnh vực chăm sóc con người.",
+    "description": "Thiên Y thường được luận khi đánh giá sức khỏe, nghề nghiệp liên quan đến y học hoặc khả năng gặp được sự trợ giúp trong lúc bệnh tật.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_at_quy_nhan",
+      "phuc_tinh_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "health",
+      "auspicious"
+    ]
+  },
+  {
+    "id": "duc_tu",
+    "term": "Đức Tú",
+    "aliases": [
+      "Virtue Star",
+      "De Xiu"
+    ],
+    "definition": "Thần Sát chủ về phẩm hạnh, trí tuệ, học vấn và danh tiếng.",
+    "description": "Đức Tú thường biểu thị người có tư chất học tập, đạo đức tốt và dễ được người khác kính trọng.",
+    "category": "shensha",
+    "related_terms": [
+      "van_xuong",
+      "thai_cuc_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "education",
+      "virtue"
+    ]
+  },
+  {
+    "id": "thien_tru",
+    "term": "Thiên Trù",
+    "aliases": [
+      "Heavenly Kitchen",
+      "Tian Chu"
+    ],
+    "definition": "Thần Sát chủ về phúc lộc, ẩm thực, sự sung túc và khả năng hưởng thụ.",
+    "description": "Thiên Trù thường phản ánh điều kiện vật chất tương đối thuận lợi và khả năng hưởng phúc trong cuộc sống.",
+    "category": "shensha",
+    "related_terms": [
+      "phuc_tinh_quy_nhan",
+      "loc_than"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "fortune",
+      "prosperity"
+    ]
+  },
+  {
+    "id": "thien_xa",
+    "term": "Thiên Xá",
+    "aliases": [
+      "Heavenly Pardon",
+      "Tian She"
+    ],
+    "definition": "Thần Sát chủ về sự hóa giải, khoan dung và giảm nhẹ những ảnh hưởng bất lợi.",
+    "description": "Thiên Xá thường được xem là dấu hiệu có khả năng giảm nhẹ một số tác động không thuận lợi khi phối hợp hài hòa với các yếu tố khác.",
+    "category": "shensha",
+    "related_terms": [
+      "thien_duc_quy_nhan",
+      "nguyet_duc_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "auspicious",
+      "protection"
+    ]
+  },
+  {
+    "id": "phuc_duc",
+    "term": "Phúc Đức",
+    "aliases": [
+      "Fortune and Virtue",
+      "Fu De"
+    ],
+    "definition": "Thần Sát biểu thị nền tảng phúc khí, sự che chở và khả năng hưởng phúc trong cuộc sống.",
+    "description": "Phúc Đức thường được xem xét kết hợp với các Quý Nhân và các cát tinh khác để đánh giá tổng thể phúc khí của mệnh cục.",
+    "category": "shensha",
+    "related_terms": [
+      "phuc_tinh_quy_nhan",
+      "thien_duc_quy_nhan",
+      "nguyet_duc_quy_nhan"
+    ],
+    "references": [
+      "Tam Mệnh Thông Hội"
+    ],
+    "tags": [
+      "shensha",
+      "fortune",
+      "virtue"
+    ]
+  }
+]

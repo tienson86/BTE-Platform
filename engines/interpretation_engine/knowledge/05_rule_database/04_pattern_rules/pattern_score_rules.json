@@ -1,0 +1,606 @@
+[
+    {
+      "id": "PSC001",
+      "score_type": "month_commander_match",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_commander_match",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "score": 40
+      }
+    },
+  
+    {
+      "id": "PSC002",
+      "score_type": "month_commander_partial",
+  
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "month_support_match",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "score": 20
+      }
+    },
+  
+    {
+      "id": "PSC003",
+      "score_type": "seasonal_alignment",
+  
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "season_alignment",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "score": 20
+      }
+    },
+  
+    {
+      "id": "PSC004",
+      "score_type": "day_master_match",
+  
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "day_master_support_pattern",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "score": 20
+      }
+    }
+  ]
+  [
+    {
+      "id": "PSC005",
+      "score_type": "visible_primary_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "visible_pattern_count",
+          "operator": "greater_than_or_equal",
+          "value": 1
+        }
+      ],
+  
+      "result": {
+        "score_delta": 20
+      }
+    },
+  
+    {
+      "id": "PSC006",
+      "score_type": "multiple_visible_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "visible_pattern_count",
+          "operator": "greater_than_or_equal",
+          "value": 2
+        }
+      ],
+  
+      "result": {
+        "score_delta": 10
+      }
+    },
+  
+    {
+      "id": "PSC007",
+      "score_type": "hidden_only_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "visible_pattern_count",
+          "operator": "equals",
+          "value": 0
+        }
+      ],
+  
+      "result": {
+        "score_delta": -15
+      }
+    },
+  
+    {
+      "id": "PSC008",
+      "score_type": "pattern_fully_visible",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_visibility_ratio",
+          "operator": "greater_than_or_equal",
+          "value": 1.0
+        }
+      ],
+  
+      "result": {
+        "score_delta": 15
+      }
+    },
+  
+    {
+      "id": "PSC009",
+      "score_type": "pattern_partially_visible",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_visibility_ratio",
+          "operator": "greater_than",
+          "value": 0.0
+        },
+        {
+          "field": "pattern_visibility_ratio",
+          "operator": "less_than",
+          "value": 1.0
+        }
+      ],
+  
+      "result": {
+        "score_delta": 5
+      }
+    }
+  ]
+  [
+    {
+      "id": "PSC010",
+      "score_group": "support",
+      "score_type": "supported_by_resource",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "supported_pattern_count",
+          "operator": "greater_than_or_equal",
+          "value": 1
+        }
+      ],
+  
+      "result": {
+        "score_delta": 15
+      }
+    },
+  
+    {
+      "id": "PSC011",
+      "score_group": "support",
+      "score_type": "multiple_support",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "supported_pattern_count",
+          "operator": "greater_than_or_equal",
+          "value": 2
+        }
+      ],
+  
+      "result": {
+        "score_delta": 10
+      }
+    },
+  
+    {
+      "id": "PSC012",
+      "score_group": "root",
+      "score_type": "primary_root",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "root_strength",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 15
+      }
+    },
+  
+    {
+      "id": "PSC013",
+      "score_group": "root",
+      "score_type": "secondary_root",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "root_strength",
+          "operator": "equals",
+          "value": "moderate"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 8
+      }
+    },
+  
+    {
+      "id": "PSC014",
+      "score_group": "root",
+      "score_type": "no_root",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "root_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+  
+      "result": {
+        "score_delta": -20
+      }
+    }
+  ]
+  [
+    {
+      "id": "PSC015",
+      "score_group": "conflict",
+      "score_type": "pattern_destroyed",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "destroyed_pattern_count",
+          "operator": "greater_than_or_equal",
+          "value": 1
+        }
+      ],
+  
+      "result": {
+        "score_delta": -20,
+        "reason_code": "pattern_destroyed"
+      }
+    },
+  
+    {
+      "id": "PSC016",
+      "score_group": "conflict",
+      "score_type": "multiple_pattern_destroyed",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "destroyed_pattern_count",
+          "operator": "greater_than_or_equal",
+          "value": 2
+        }
+      ],
+  
+      "result": {
+        "score_delta": -35,
+        "reason_code": "multiple_pattern_destroyed"
+      }
+    },
+  
+    {
+      "id": "PSC017",
+      "score_group": "conflict",
+      "score_type": "pattern_clashed",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_clash_count",
+          "operator": "greater_than_or_equal",
+          "value": 1
+        }
+      ],
+  
+      "result": {
+        "score_delta": -15,
+        "reason_code": "pattern_clashed"
+      }
+    },
+  
+    {
+      "id": "PSC018",
+      "score_group": "conflict",
+      "score_type": "pattern_combined_and_preserved",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_combination_status",
+          "operator": "equals",
+          "value": "preserved"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 10,
+        "reason_code": "pattern_preserved_after_combination"
+      }
+    },
+  
+    {
+      "id": "PSC019",
+      "score_group": "conflict",
+      "score_type": "pattern_transformed",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_transformation",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "score_delta": -25,
+        "reason_code": "pattern_transformed"
+      }
+    }
+  ]
+  [
+    {
+      "id": "PSC020",
+      "score_group": "special",
+      "score_type": "pure_pattern_bonus",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_purity",
+          "operator": "equals",
+          "value": "pure"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 20,
+        "reason_code": "pure_pattern_bonus"
+      }
+    },
+  
+    {
+      "id": "PSC021",
+      "score_group": "special",
+      "score_type": "high_consistency_bonus",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_consistency",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 15,
+        "reason_code": "high_pattern_consistency"
+      }
+    },
+  
+    {
+      "id": "PSC022",
+      "score_group": "special",
+      "score_type": "complete_structure_bonus",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "structure_completeness",
+          "operator": "equals",
+          "value": "complete"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 15,
+        "reason_code": "complete_pattern_structure"
+      }
+    },
+  
+    {
+      "id": "PSC023",
+      "score_group": "bonus",
+      "score_type": "special_pattern_bonus",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "pattern_category",
+          "operator": "equals",
+          "value": "special_pattern"
+        }
+      ],
+  
+      "result": {
+        "score_delta": 25,
+        "reason_code": "special_pattern_bonus"
+      }
+    },
+  
+    {
+      "id": "PSC024",
+      "score_group": "bonus",
+      "score_type": "classic_reference_bonus",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "classic_validation",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "score_delta": 10,
+        "reason_code": "validated_by_classic_reference"
+      }
+    }
+  ]
+  [
+    {
+      "id": "PSC025",
+      "score_group": "mapping",
+      "score_type": "excellent_pattern",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "total_score",
+          "operator": "greater_than_or_equal",
+          "value": 90
+        },
+        {
+          "field": "total_score",
+          "operator": "less_than_or_equal",
+          "value": 100
+        }
+      ],
+  
+      "result": {
+        "pattern_strength": "excellent",
+        "confidence": "very_high",
+        "reason_code": "excellent_pattern_score"
+      }
+    },
+  
+    {
+      "id": "PSC026",
+      "score_group": "mapping",
+      "score_type": "strong_pattern",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "total_score",
+          "operator": "greater_than_or_equal",
+          "value": 75
+        },
+        {
+          "field": "total_score",
+          "operator": "less_than",
+          "value": 90
+        }
+      ],
+  
+      "result": {
+        "pattern_strength": "strong",
+        "confidence": "high",
+        "reason_code": "strong_pattern_score"
+      }
+    },
+  
+    {
+      "id": "PSC027",
+      "score_group": "mapping",
+      "score_type": "moderate_pattern",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "total_score",
+          "operator": "greater_than_or_equal",
+          "value": 60
+        },
+        {
+          "field": "total_score",
+          "operator": "less_than",
+          "value": 75
+        }
+      ],
+  
+      "result": {
+        "pattern_strength": "moderate",
+        "confidence": "medium",
+        "reason_code": "moderate_pattern_score"
+      }
+    },
+  
+    {
+      "id": "PSC028",
+      "score_group": "mapping",
+      "score_type": "weak_pattern",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "total_score",
+          "operator": "greater_than_or_equal",
+          "value": 40
+        },
+        {
+          "field": "total_score",
+          "operator": "less_than",
+          "value": 60
+        }
+      ],
+  
+      "result": {
+        "pattern_strength": "weak",
+        "confidence": "low",
+        "reason_code": "weak_pattern_score"
+      }
+    },
+  
+    {
+      "id": "PSC029",
+      "score_group": "mapping",
+      "score_type": "invalid_pattern",
+      "weight": 1.0,
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "total_score",
+          "operator": "less_than",
+          "value": 40
+        }
+      ],
+  
+      "result": {
+        "pattern_strength": "invalid",
+        "confidence": "very_low",
+        "reason_code": "invalid_pattern_score"
+      }
+    }
+  ]

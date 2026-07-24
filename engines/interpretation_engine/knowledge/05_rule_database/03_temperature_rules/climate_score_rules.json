@@ -1,0 +1,617 @@
+[
+    {
+        "id": "CLS001",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 0,
+            "cold_max": 2,
+            "hot_min": 0,
+            "hot_max": 2
+        },
+        "temperature_result": "neutral",
+        "score": 0,
+        "priority": 100,
+        "description": "Hàn nhiệt cân bằng."
+    },
+    {
+        "id": "CLS002",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 3,
+            "cold_max": 5,
+            "hot_min": 0,
+            "hot_max": 2
+        },
+        "temperature_result": "slightly_cold",
+        "score": -1,
+        "priority": 100,
+        "description": "Hơi thiên về hàn."
+    },
+    {
+        "id": "CLS003",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 6,
+            "cold_max": 9,
+            "hot_min": 0,
+            "hot_max": 3
+        },
+        "temperature_result": "cold",
+        "score": -2,
+        "priority": 100,
+        "description": "Hàn khí rõ rệt."
+    },
+    {
+        "id": "CLS004",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 10,
+            "cold_max": 99,
+            "hot_min": 0,
+            "hot_max": 4
+        },
+        "temperature_result": "very_cold",
+        "score": -3,
+        "priority": 100,
+        "description": "Hàn cực mạnh."
+    },
+    {
+        "id": "CLS005",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 0,
+            "cold_max": 2,
+            "hot_min": 3,
+            "hot_max": 5
+        },
+        "temperature_result": "slightly_hot",
+        "score": 1,
+        "priority": 100,
+        "description": "Hơi thiên về nhiệt."
+    },
+    {
+        "id": "CLS006",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 0,
+            "cold_max": 3,
+            "hot_min": 6,
+            "hot_max": 9
+        },
+        "temperature_result": "hot",
+        "score": 2,
+        "priority": 100,
+        "description": "Nhiệt khí rõ rệt."
+    },
+    {
+        "id": "CLS007",
+        "rule_type": "temperature_classification",
+        "condition": {
+            "cold_min": 0,
+            "cold_max": 4,
+            "hot_min": 10,
+            "hot_max": 99
+        },
+        "temperature_result": "very_hot",
+        "score": 3,
+        "priority": 100,
+        "description": "Nhiệt cực mạnh."
+    }
+]
+[
+    {
+      "id": "CLS008",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": -99,
+        "humidity_index_max": -7
+      },
+      "humidity_result": "very_dry",
+      "score": -3,
+      "priority": 100,
+      "description": "Táo khí cực mạnh."
+    },
+    {
+      "id": "CLS009",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": -6,
+        "humidity_index_max": -3
+      },
+      "humidity_result": "dry",
+      "score": -2,
+      "priority": 100,
+      "description": "Táo khí rõ rệt."
+    },
+    {
+      "id": "CLS010",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": -2,
+        "humidity_index_max": -1
+      },
+      "humidity_result": "slightly_dry",
+      "score": -1,
+      "priority": 100,
+      "description": "Hơi thiên về táo."
+    },
+    {
+      "id": "CLS011",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": 0,
+        "humidity_index_max": 0
+      },
+      "humidity_result": "balanced",
+      "score": 0,
+      "priority": 100,
+      "description": "Độ ẩm cân bằng."
+    },
+    {
+      "id": "CLS012",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": 1,
+        "humidity_index_max": 2
+      },
+      "humidity_result": "slightly_humid",
+      "score": 1,
+      "priority": 100,
+      "description": "Hơi thiên về thấp."
+    },
+    {
+      "id": "CLS013",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": 3,
+        "humidity_index_max": 6
+      },
+      "humidity_result": "humid",
+      "score": 2,
+      "priority": 100,
+      "description": "Thấp khí rõ rệt."
+    },
+    {
+      "id": "CLS014",
+      "rule_type": "humidity_classification",
+      "condition": {
+        "humidity_index_min": 7,
+        "humidity_index_max": 99
+      },
+      "humidity_result": "very_humid",
+      "score": 3,
+      "priority": 100,
+      "description": "Thấp khí cực mạnh."
+    }
+  ]
+  [
+    {
+      "id": "CLS015",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "very_cold",
+        "cold",
+        "slightly_cold"
+      ],
+      "humidity": [
+        "very_dry",
+        "dry",
+        "slightly_dry"
+      ],
+      "climate_pattern": "cold_dry",
+      "priority": 95,
+      "description": "Hàn táo."
+    },
+    {
+      "id": "CLS016",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "very_cold",
+        "cold",
+        "slightly_cold"
+      ],
+      "humidity": [
+        "balanced"
+      ],
+      "climate_pattern": "cold_balanced",
+      "priority": 95,
+      "description": "Hàn bình."
+    },
+    {
+      "id": "CLS017",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "very_cold",
+        "cold",
+        "slightly_cold"
+      ],
+      "humidity": [
+        "slightly_humid",
+        "humid",
+        "very_humid"
+      ],
+      "climate_pattern": "cold_humid",
+      "priority": 95,
+      "description": "Hàn thấp."
+    },
+    {
+      "id": "CLS018",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "neutral"
+      ],
+      "humidity": [
+        "very_dry",
+        "dry",
+        "slightly_dry"
+      ],
+      "climate_pattern": "neutral_dry",
+      "priority": 95,
+      "description": "Bình táo."
+    },
+    {
+      "id": "CLS019",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "neutral"
+      ],
+      "humidity": [
+        "balanced"
+      ],
+      "climate_pattern": "neutral_balanced",
+      "priority": 95,
+      "description": "Khí hậu cân bằng."
+    },
+    {
+      "id": "CLS020",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "neutral"
+      ],
+      "humidity": [
+        "slightly_humid",
+        "humid",
+        "very_humid"
+      ],
+      "climate_pattern": "neutral_humid",
+      "priority": 95,
+      "description": "Bình thấp."
+    },
+    {
+      "id": "CLS021",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "slightly_hot",
+        "hot",
+        "very_hot"
+      ],
+      "humidity": [
+        "very_dry",
+        "dry",
+        "slightly_dry"
+      ],
+      "climate_pattern": "hot_dry",
+      "priority": 95,
+      "description": "Nhiệt táo."
+    },
+    {
+      "id": "CLS022",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "slightly_hot",
+        "hot",
+        "very_hot"
+      ],
+      "humidity": [
+        "balanced"
+      ],
+      "climate_pattern": "hot_balanced",
+      "priority": 95,
+      "description": "Nhiệt bình."
+    },
+    {
+      "id": "CLS023",
+      "rule_type": "climate_pattern",
+      "temperature": [
+        "slightly_hot",
+        "hot",
+        "very_hot"
+      ],
+      "humidity": [
+        "slightly_humid",
+        "humid",
+        "very_humid"
+      ],
+      "climate_pattern": "hot_humid",
+      "priority": 95,
+      "description": "Nhiệt thấp."
+    }
+  ]
+  [
+    {
+      "id": "CLS024",
+      "rule_type": "climate_severity",
+      "condition": {
+        "temperature_result": [
+          "neutral"
+        ],
+        "humidity_result": [
+          "balanced"
+        ]
+      },
+      "severity": "balanced",
+      "severity_score": 0,
+      "priority": 90,
+      "description": "Khí hậu cân bằng, không cần điều hậu."
+    },
+    {
+      "id": "CLS025",
+      "rule_type": "climate_severity",
+      "condition": {
+        "temperature_result": [
+          "slightly_cold",
+          "slightly_hot"
+        ],
+        "humidity_result": [
+          "slightly_dry",
+          "slightly_humid",
+          "balanced"
+        ]
+      },
+      "severity": "mild",
+      "severity_score": 1,
+      "priority": 90,
+      "description": "Khí hậu lệch nhẹ."
+    },
+    {
+      "id": "CLS026",
+      "rule_type": "climate_severity",
+      "condition": {
+        "temperature_result": [
+          "cold",
+          "hot"
+        ],
+        "humidity_result": [
+          "dry",
+          "humid",
+          "balanced"
+        ]
+      },
+      "severity": "moderate",
+      "severity_score": 2,
+      "priority": 90,
+      "description": "Khí hậu mất cân bằng mức trung bình."
+    },
+    {
+      "id": "CLS027",
+      "rule_type": "climate_severity",
+      "condition": {
+        "temperature_result": [
+          "very_cold",
+          "very_hot"
+        ],
+        "humidity_result": [
+          "very_dry",
+          "very_humid",
+          "dry",
+          "humid"
+        ]
+      },
+      "severity": "strong",
+      "severity_score": 3,
+      "priority": 90,
+      "description": "Khí hậu mất cân bằng mạnh."
+    },
+    {
+      "id": "CLS028",
+      "rule_type": "climate_severity",
+      "condition": {
+        "climate_pattern": [
+          "cold_dry",
+          "cold_humid",
+          "hot_dry",
+          "hot_humid"
+        ],
+        "temperature_result": [
+          "very_cold",
+          "very_hot"
+        ],
+        "humidity_result": [
+          "very_dry",
+          "very_humid"
+        ]
+      },
+      "severity": "extreme",
+      "severity_score": 4,
+      "priority": 100,
+      "description": "Khí hậu cực đoan, điều hậu là ưu tiên hàng đầu."
+    }
+  ]
+  [
+    {
+      "id": "CLS029",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["cold_dry"]
+      },
+      "primary_adjustment": "warm",
+      "secondary_adjustment": "moisten",
+      "priority_strategy": "temperature_first",
+      "description": "Ưu tiên tăng nhiệt trước, sau đó bổ sung độ ẩm."
+    },
+    {
+      "id": "CLS030",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["cold_balanced"]
+      },
+      "primary_adjustment": "warm",
+      "secondary_adjustment": "maintain",
+      "priority_strategy": "temperature_first",
+      "description": "Ưu tiên làm ấm, duy trì độ ẩm hiện có."
+    },
+    {
+      "id": "CLS031",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["cold_humid"]
+      },
+      "primary_adjustment": "warm",
+      "secondary_adjustment": "dry",
+      "priority_strategy": "temperature_first",
+      "description": "Làm ấm trước, sau đó giảm bớt thấp khí."
+    },
+    {
+      "id": "CLS032",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["neutral_dry"]
+      },
+      "primary_adjustment": "moisten",
+      "secondary_adjustment": "maintain",
+      "priority_strategy": "humidity_first",
+      "description": "Khí hậu cân bằng về nhiệt, ưu tiên tăng độ ẩm."
+    },
+    {
+      "id": "CLS033",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["neutral_balanced"]
+      },
+      "primary_adjustment": "maintain",
+      "secondary_adjustment": "maintain",
+      "priority_strategy": "balanced",
+      "description": "Khí hậu cân bằng, không cần điều chỉnh."
+    },
+    {
+      "id": "CLS034",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["neutral_humid"]
+      },
+      "primary_adjustment": "dry",
+      "secondary_adjustment": "maintain",
+      "priority_strategy": "humidity_first",
+      "description": "Ưu tiên giảm thấp khí, giữ nguyên nhiệt độ."
+    },
+    {
+      "id": "CLS035",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["hot_dry"]
+      },
+      "primary_adjustment": "cool",
+      "secondary_adjustment": "moisten",
+      "priority_strategy": "temperature_first",
+      "description": "Giảm nhiệt trước, sau đó tăng độ ẩm."
+    },
+    {
+      "id": "CLS036",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["hot_balanced"]
+      },
+      "primary_adjustment": "cool",
+      "secondary_adjustment": "maintain",
+      "priority_strategy": "temperature_first",
+      "description": "Ưu tiên làm mát, duy trì độ ẩm."
+    },
+    {
+      "id": "CLS037",
+      "rule_type": "climate_recommendation",
+      "condition": {
+        "climate_pattern": ["hot_humid"]
+      },
+      "primary_adjustment": "cool",
+      "secondary_adjustment": "dry",
+      "priority_strategy": "temperature_first",
+      "description": "Giảm nhiệt trước, sau đó giảm thấp khí."
+    }
+  ]
+  [
+    {
+      "id": "CLS038",
+      "rule_type": "final_climate_evaluation",
+      "condition": {
+        "severity": [
+          "balanced"
+        ]
+      },
+      "climate_grade": "A",
+      "climate_score_range": {
+        "min": 90,
+        "max": 100
+      },
+      "interpretation_level": "excellent",
+      "priority": 80,
+      "description": "Khí hậu cân bằng, điều hậu gần như không cần thiết."
+    },
+    {
+      "id": "CLS039",
+      "rule_type": "final_climate_evaluation",
+      "condition": {
+        "severity": [
+          "mild"
+        ]
+      },
+      "climate_grade": "B",
+      "climate_score_range": {
+        "min": 75,
+        "max": 89
+      },
+      "interpretation_level": "good",
+      "priority": 80,
+      "description": "Khí hậu lệch nhẹ, cần điều chỉnh ít."
+    },
+    {
+      "id": "CLS040",
+      "rule_type": "final_climate_evaluation",
+      "condition": {
+        "severity": [
+          "moderate"
+        ]
+      },
+      "climate_grade": "C",
+      "climate_score_range": {
+        "min": 60,
+        "max": 74
+      },
+      "interpretation_level": "average",
+      "priority": 80,
+      "description": "Khí hậu mất cân bằng trung bình."
+    },
+    {
+      "id": "CLS041",
+      "rule_type": "final_climate_evaluation",
+      "condition": {
+        "severity": [
+          "strong"
+        ]
+      },
+      "climate_grade": "D",
+      "climate_score_range": {
+        "min": 40,
+        "max": 59
+      },
+      "interpretation_level": "poor",
+      "priority": 80,
+      "description": "Khí hậu mất cân bằng mạnh."
+    },
+    {
+      "id": "CLS042",
+      "rule_type": "final_climate_evaluation",
+      "condition": {
+        "severity": [
+          "extreme"
+        ]
+      },
+      "climate_grade": "F",
+      "climate_score_range": {
+        "min": 0,
+        "max": 39
+      },
+      "interpretation_level": "critical",
+      "priority": 80,
+      "description": "Khí hậu cực đoan, điều hậu là ưu tiên hàng đầu."
+    }
+  ]

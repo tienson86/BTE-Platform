@@ -1,0 +1,1185 @@
+[
+    {
+      "id": "EX001",
+      "ma_vi_du": "missing_birth_hour",
+      "ten": "Thieu gio sinh",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap gio sinh.",
+      "muc_dich": "Kiem tra thieu gio sinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "nam": "binh_dan",
+        "thang": "tan_suu",
+        "ngay": "canh_ngo",
+        "gio": null
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "100",
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "Khong the lap tu tru khi thieu gio sinh.",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX002",
+      "ma_vi_du": "missing_birth_day",
+      "ten": "Thieu ngay sinh",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap ngay sinh.",
+      "muc_dich": "Kiem tra thieu ngay sinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "nam": "binh_dan",
+        "thang": "tan_suu",
+        "ngay": null,
+        "gio": "dan"
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "100",
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "Ngay sinh la tru cot bat buoc.",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX003",
+      "ma_vi_du": "missing_birth_month",
+      "ten": "Thieu thang sinh",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap thang sinh.",
+      "muc_dich": "Kiem tra thieu thang sinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "nam": "binh_dan",
+        "thang": null,
+        "ngay": "canh_ngo",
+        "gio": "dan"
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "100",
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX004",
+      "ma_vi_du": "missing_birth_year",
+      "ten": "Thieu nam sinh",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap nam sinh.",
+      "muc_dich": "Kiem tra thieu nam sinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "nam": null,
+        "thang": "tan_suu",
+        "ngay": "canh_ngo",
+        "gio": "dan"
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "100",
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX005",
+      "ma_vi_du": "missing_gender",
+      "ten": "Thieu gioi tinh",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap gioi tinh.",
+      "muc_dich": "Kiem tra thieu gioi tinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "gioi_tinh": null,
+        "nam": "binh_dan",
+        "thang": "tan_suu",
+        "ngay": "canh_ngo",
+        "gio": "dan"
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "95",
+        "severity": "cao"
+      },
+      "ghi_chu": "Can cho tinh dai van.",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX006",
+      "ma_vi_du": "missing_calendar_type",
+      "ten": "Thieu loai lich",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong xac dinh duong lich hay am lich.",
+      "muc_dich": "Kiem tra thieu loai lich.",
+      "do_kho": "trung_binh",
+      "input": {
+        "calendar_type": null
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "95",
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX007",
+      "ma_vi_du": "missing_timezone",
+      "ten": "Thieu mui gio",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap mui gio.",
+      "muc_dich": "Kiem tra thieu timezone.",
+      "do_kho": "trung_binh",
+      "input": {
+        "timezone": null
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "90",
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX008",
+      "ma_vi_du": "missing_location",
+      "ten": "Thieu dia diem sinh",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap dia diem sinh.",
+      "muc_dich": "Kiem tra thieu dia diem.",
+      "do_kho": "trung_binh",
+      "input": {
+        "birth_place": null
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "90",
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX009",
+      "ma_vi_du": "missing_longitude",
+      "ten": "Thieu kinh do",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap kinh do.",
+      "muc_dich": "Kiem tra thieu kinh do.",
+      "do_kho": "nang_cao",
+      "input": {
+        "longitude": null
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "80",
+        "severity": "trung_binh"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX010",
+      "ma_vi_du": "missing_latitude",
+      "ten": "Thieu vi do",
+      "special_case": "thieu_du_lieu_bat_buoc",
+      "mo_ta": "Khong cung cap vi do.",
+      "muc_dich": "Kiem tra thieu vi do.",
+      "do_kho": "nang_cao",
+      "input": {
+        "latitude": null
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": "80",
+        "severity": "trung_binh"
+      },
+      "ghi_chu": "",
+      "tham_chieu": []
+    }
+  ]
+  [
+    {
+      "id": "EX011",
+      "ma_vi_du": "invalid_birth_hour",
+      "ten": "Gio sinh khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Gia tri gio sinh khong nam trong 12 dia chi.",
+      "muc_dich": "Kiem tra gia tri gio sinh khong hop le.",
+      "do_kho": "co_ban",
+      "input": {
+        "gio": "abc"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "Gia tri gio phai thuoc 12 dia chi.",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX012",
+      "ma_vi_du": "invalid_birth_day",
+      "ten": "Ngay sinh khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Ngay sinh vuot qua so ngay cua thang.",
+      "muc_dich": "Kiem tra ngay khong ton tai.",
+      "do_kho": "co_ban",
+      "input": {
+        "ngay": 31,
+        "thang": 2,
+        "nam": 2026
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX013",
+      "ma_vi_du": "invalid_birth_month",
+      "ten": "Thang sinh khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Thang sinh nam ngoai khoang 1-12.",
+      "muc_dich": "Kiem tra thang sinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "thang": 13
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX014",
+      "ma_vi_du": "invalid_birth_year",
+      "ten": "Nam sinh khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Nam sinh nam ngoai pham vi ho tro.",
+      "muc_dich": "Kiem tra nam sinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "nam": 99999
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX015",
+      "ma_vi_du": "invalid_gender",
+      "ten": "Gioi tinh khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Gia tri gioi tinh khong nam trong tap ho tro.",
+      "muc_dich": "Kiem tra gioi tinh.",
+      "do_kho": "co_ban",
+      "input": {
+        "gioi_tinh": "unknown"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX016",
+      "ma_vi_du": "invalid_calendar_type",
+      "ten": "Loai lich khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Loai lich khong phai am_lich hoac duong_lich.",
+      "muc_dich": "Kiem tra calendar_type.",
+      "do_kho": "trung_binh",
+      "input": {
+        "calendar_type": "solar_lunar"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX017",
+      "ma_vi_du": "invalid_timezone",
+      "ten": "Mui gio khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Timezone khong ton tai.",
+      "muc_dich": "Kiem tra timezone.",
+      "do_kho": "trung_binh",
+      "input": {
+        "timezone": "UTC+99"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX018",
+      "ma_vi_du": "invalid_longitude",
+      "ten": "Kinh do khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Kinh do nam ngoai khoang -180 den 180.",
+      "muc_dich": "Kiem tra kinh do.",
+      "do_kho": "trung_binh",
+      "input": {
+        "longitude": 250.5
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX019",
+      "ma_vi_du": "invalid_latitude",
+      "ten": "Vi do khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Vi do nam ngoai khoang -90 den 90.",
+      "muc_dich": "Kiem tra vi do.",
+      "do_kho": "trung_binh",
+      "input": {
+        "latitude": -120.0
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "ghi_chu": "",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    },
+    {
+      "id": "EX020",
+      "ma_vi_du": "invalid_datetime_format",
+      "ten": "Dinh dang ngay gio khong hop le",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Ngay gio dau vao khong dung dinh dang ISO hoac dinh dang duoc ho tro.",
+      "muc_dich": "Kiem tra dinh dang ngay gio.",
+      "do_kho": "nang_cao",
+      "input": {
+        "datetime": "31-02-2026 25:61"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "ghi_chu": "Can xac thuc dinh dang truoc khi tinh toan.",
+      "tham_chieu": [
+        "SCR002"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "EX021",
+      "ma_vi_du": "multiple_pattern_match",
+      "ten": "Nhieu cach cuc cung phu hop",
+      "special_case": "nhieu_cach_cuc_cung_uu_tien",
+      "mo_ta": "Mot la so dong thoi thoa man nhieu cach cuc co cung muc uu tien.",
+      "muc_dich": "Kiem tra xu ly khi nhieu cach cuc cung duoc kich hoat.",
+      "do_kho": "nang_cao",
+      "input": {
+        "matched_patterns": [
+          "tong_cach",
+          "tong_sat"
+        ]
+      },
+      "expected_output": {
+        "special_case": "nhieu_cach_cuc_cung_uu_tien",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR004",
+        "SCP004"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX022",
+      "ma_vi_du": "pattern_and_useful_god_conflict",
+      "ten": "Xung dot giua cach cuc va dung than",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Ket qua cach cuc va dung than dua ra hai huong danh gia trai nguoc.",
+      "muc_dich": "Kiem tra xung dot giua cac module.",
+      "do_kho": "nang_cao",
+      "input": {
+        "pattern": "tong_cach",
+        "useful_god": "hoa"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "xac_thuc_lai",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR002"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX023",
+      "ma_vi_du": "conflicting_strength_result",
+      "ten": "Mau thuan ket qua than vuong nhuoc",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Hai rule danh gia suc manh than cho ket qua trai nguoc.",
+      "muc_dich": "Kiem tra conflict trong Strength Engine.",
+      "do_kho": "nang_cao",
+      "input": {
+        "strength_result": [
+          "vuong",
+          "nhuoc"
+        ]
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "tinh_toan_lai",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR002"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX024",
+      "ma_vi_du": "duplicate_primary_rule",
+      "ten": "Hai rule chinh cung kich hoat",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Hai rule chinh cung co dieu kien dung va deu co ghi_de=true.",
+      "muc_dich": "Kiem tra Priority Engine.",
+      "do_kho": "nang_cao",
+      "input": {
+        "matched_rules": [
+          "SCR021",
+          "SCR022"
+        ]
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "rule_refs": [
+        "SCP012"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX025",
+      "ma_vi_du": "duplicate_special_case",
+      "ten": "Nhieu special case trung lap",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Nhieu rule tao ra cung mot special case.",
+      "muc_dich": "Kiem tra hop nhat special case.",
+      "do_kho": "trung_binh",
+      "input": {
+        "special_cases": [
+          "thieu_du_lieu_bat_buoc",
+          "thieu_du_lieu_bat_buoc"
+        ]
+      },
+      "expected_output": {
+        "special_case": "thieu_du_lieu_bat_buoc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "rule_refs": [
+        "SCP011"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX026",
+      "ma_vi_du": "multiple_override_rules",
+      "ten": "Nhieu rule ghi de",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Co nhieu rule deu danh dau ghi_de=true.",
+      "muc_dich": "Kiem tra co che override.",
+      "do_kho": "nang_cao",
+      "input": {
+        "override_rules": [
+          "SCR031",
+          "SCR032",
+          "SCR033"
+        ]
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "xac_thuc_lai",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "rule_refs": [
+        "SCP012"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX027",
+      "ma_vi_du": "conflict_between_modules",
+      "ten": "Xung dot giua hai module",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Hai module dua ra ket qua khong thong nhat.",
+      "muc_dich": "Kiem tra conflict cross-module.",
+      "do_kho": "nang_cao",
+      "input": {
+        "module_a": "pattern_engine",
+        "module_b": "score_engine"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR002"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX028",
+      "ma_vi_du": "conflict_hidden_stem",
+      "ten": "Xung dot tang can",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Ket qua tang can khong thong nhat voi bo quy tac.",
+      "muc_dich": "Kiem tra hidden stem.",
+      "do_kho": "trung_binh",
+      "input": {
+        "hidden_stem_result": "invalid"
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "tinh_toan_lai",
+        "priority": 85,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR002"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX029",
+      "ma_vi_du": "conflict_calendar_conversion",
+      "ten": "Xung dot chuyen doi lich",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Hai ket qua chuyen doi lich khong trung nhau.",
+      "muc_dich": "Kiem tra Calendar Engine.",
+      "do_kho": "nang_cao",
+      "input": {
+        "calendar_results": [
+          "result_a",
+          "result_b"
+        ]
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "tinh_toan_lai",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR002"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX030",
+      "ma_vi_du": "conflict_priority_resolution",
+      "ten": "Khong the phan giai uu tien",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Priority Engine khong tim duoc quy tac de phan giai.",
+      "muc_dich": "Kiem tra fallback cua Priority Engine.",
+      "do_kho": "chuyen_gia",
+      "input": {
+        "priority_candidates": [
+          "SCR041",
+          "SCR042"
+        ]
+      },
+      "expected_output": {
+        "special_case": "can_kiem_tra_thu_cong",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "rule_refs": [
+        "SCP020"
+      ],
+      "ghi_chu": "Khong co rule nao du dieu kien de quyet dinh uu tien.",
+      "tham_chieu": []
+    }
+  ]
+  [
+    {
+      "id": "EX031",
+      "ma_vi_du": "no_pattern_matched",
+      "ten": "Khong co cach cuc nao phu hop",
+      "special_case": "khong_xac_dinh_duoc_cach_cuc",
+      "mo_ta": "Tat ca dieu kien dau vao hop le nhung khong kich hoat cach cuc nao.",
+      "muc_dich": "Kiem tra truong hop khong tim thay cach cuc.",
+      "do_kho": "trung_binh",
+      "input": {
+        "matched_patterns": []
+      },
+      "expected_output": {
+        "special_case": "khong_xac_dinh_duoc_cach_cuc",
+        "action": "ap_dung_du_phong",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR003"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX032",
+      "ma_vi_du": "pattern_score_too_low",
+      "ten": "Diem cach cuc qua thap",
+      "special_case": "khong_xac_dinh_duoc_cach_cuc",
+      "mo_ta": "Tat ca cach cuc deu co diem thap hon nguong chap nhan.",
+      "muc_dich": "Kiem tra nguong diem toi thieu.",
+      "do_kho": "trung_binh",
+      "input": {
+        "pattern_scores": {
+          "tong_cach": 42,
+          "tong_sat": 38
+        },
+        "minimum_score": 60
+      },
+      "expected_output": {
+        "special_case": "khong_xac_dinh_duoc_cach_cuc",
+        "action": "ap_dung_du_phong",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR003"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX033",
+      "ma_vi_du": "missing_pattern_dependency",
+      "ten": "Thieu dieu kien de xac dinh cach cuc",
+      "special_case": "khong_xac_dinh_duoc_cach_cuc",
+      "mo_ta": "Du lieu hop le nhung thieu mot dieu kien bat buoc de suy luan cach cuc.",
+      "muc_dich": "Kiem tra phu thuoc cua Pattern Engine.",
+      "do_kho": "nang_cao",
+      "input": {
+        "dependency_status": "missing"
+      },
+      "expected_output": {
+        "special_case": "khong_xac_dinh_duoc_cach_cuc",
+        "action": "yeu_cau_bo_sung_du_lieu",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR003"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX034",
+      "ma_vi_du": "pattern_result_ambiguous",
+      "ten": "Ket qua cach cuc mo ho",
+      "special_case": "nhieu_cach_cuc_cung_uu_tien",
+      "mo_ta": "Nhieu cach cuc co diem gan nhu bang nhau va khong du dieu kien phan dinh.",
+      "muc_dich": "Kiem tra truong hop mo ho.",
+      "do_kho": "nang_cao",
+      "input": {
+        "pattern_scores": {
+          "tong_cach": 88,
+          "tong_sat": 87
+        }
+      },
+      "expected_output": {
+        "special_case": "nhieu_cach_cuc_cung_uu_tien",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR004"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX035",
+      "ma_vi_du": "pattern_rule_disabled",
+      "ten": "Rule cach cuc bi vo hieu",
+      "special_case": "khong_xac_dinh_duoc_cach_cuc",
+      "mo_ta": "Rule can thiet de xac dinh cach cuc dang khong kich hoat.",
+      "muc_dich": "Kiem tra rule bi vo hieu.",
+      "do_kho": "trung_binh",
+      "input": {
+        "rule_status": "disabled"
+      },
+      "expected_output": {
+        "special_case": "khong_xac_dinh_duoc_cach_cuc",
+        "action": "ap_dung_du_phong",
+        "priority": 85,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR003"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX036",
+      "ma_vi_du": "pattern_dependency_conflict",
+      "ten": "Xung dot giua cac rule cach cuc",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Cac rule cach cuc dua ra dieu kien mau thuan.",
+      "muc_dich": "Kiem tra conflict trong Pattern Engine.",
+      "do_kho": "chuyen_gia",
+      "input": {
+        "conflicting_rules": [
+          "PAT001",
+          "PAT015"
+        ]
+      },
+      "expected_output": {
+        "special_case": "xung_dot_dieu_kien",
+        "action": "xac_thuc_lai",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR002"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX037",
+      "ma_vi_du": "pattern_not_supported",
+      "ten": "Cach cuc chua duoc ho tro",
+      "special_case": "to_hop_du_lieu_khong_ho_tro",
+      "mo_ta": "Pattern duoc nhan dien nhung chua nam trong co so tri thuc.",
+      "muc_dich": "Kiem tra pattern ngoai pham vi.",
+      "do_kho": "nang_cao",
+      "input": {
+        "pattern": "dac_biet_v2"
+      },
+      "expected_output": {
+        "special_case": "to_hop_du_lieu_khong_ho_tro",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR007"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX038",
+      "ma_vi_du": "pattern_confidence_low",
+      "ten": "Do tin cay cua cach cuc thap",
+      "special_case": "do_tin_cay_thap",
+      "mo_ta": "Pattern tim duoc nhung do tin cay khong dat nguong.",
+      "muc_dich": "Kiem tra nguong confidence.",
+      "do_kho": "trung_binh",
+      "input": {
+        "confidence": 0.42,
+        "minimum_confidence": 0.7
+      },
+      "expected_output": {
+        "special_case": "do_tin_cay_thap",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 85,
+        "severity": "trung_binh"
+      },
+      "rule_refs": [
+        "SCR009"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX039",
+      "ma_vi_du": "pattern_requires_manual_review",
+      "ten": "Cach cuc can tham dinh",
+      "special_case": "can_kiem_tra_thu_cong",
+      "mo_ta": "Ket qua pattern dat dieu kien can duoc chuyen gia tham dinh.",
+      "muc_dich": "Kiem tra co che Manual Review.",
+      "do_kho": "nang_cao",
+      "input": {
+        "manual_review": true
+      },
+      "expected_output": {
+        "special_case": "can_kiem_tra_thu_cong",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR008"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX040",
+      "ma_vi_du": "fallback_pattern_selected",
+      "ten": "Su dung cach cuc du phong",
+      "special_case": "ap_dung_quy_tac_du_phong",
+      "mo_ta": "Khong tim duoc cach cuc chinh nen su dung quy tac du phong.",
+      "muc_dich": "Kiem tra co che fallback.",
+      "do_kho": "nang_cao",
+      "input": {
+        "primary_pattern": null,
+        "fallback_pattern": "tong_quat"
+      },
+      "expected_output": {
+        "special_case": "ap_dung_quy_tac_du_phong",
+        "action": "ap_dung_du_phong",
+        "priority": 80,
+        "severity": "trung_binh"
+      },
+      "rule_refs": [
+        "SCR010"
+      ],
+      "ghi_chu": "Fallback chi duoc ap dung khi tat ca pattern chinh deu that bai.",
+      "tham_chieu": []
+    }
+  ]
+  [
+    {
+      "id": "EX041",
+      "ma_vi_du": "fallback_rule_applied",
+      "ten": "Ap dung quy tac du phong",
+      "special_case": "ap_dung_quy_tac_du_phong",
+      "mo_ta": "Tat ca quy tac chinh deu khong kich hoat, he thong chuyen sang quy tac du phong.",
+      "muc_dich": "Kiem tra co che fallback.",
+      "do_kho": "trung_binh",
+      "input": {
+        "matched_rules": [],
+        "fallback_available": true
+      },
+      "expected_output": {
+        "special_case": "ap_dung_quy_tac_du_phong",
+        "action": "ap_dung_du_phong",
+        "priority": 80,
+        "severity": "trung_binh"
+      },
+      "rule_refs": [
+        "SCR010",
+        "SCP019"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX042",
+      "ma_vi_du": "manual_review_required",
+      "ten": "Bat buoc kiem tra thu cong",
+      "special_case": "can_kiem_tra_thu_cong",
+      "mo_ta": "Ket qua nam ngoai pham vi xu ly tu dong.",
+      "muc_dich": "Kiem tra Manual Review.",
+      "do_kho": "cao",
+      "input": {
+        "confidence": 0.45,
+        "manual_review": true
+      },
+      "expected_output": {
+        "special_case": "can_kiem_tra_thu_cong",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR008"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX043",
+      "ma_vi_du": "unsupported_combination",
+      "ten": "To hop du lieu chua duoc ho tro",
+      "special_case": "to_hop_du_lieu_khong_ho_tro",
+      "mo_ta": "To hop dieu kien khong ton tai trong co so tri thuc.",
+      "muc_dich": "Kiem tra ngoai pham vi tri thuc.",
+      "do_kho": "cao",
+      "input": {
+        "combination": "unknown_pattern_v1"
+      },
+      "expected_output": {
+        "special_case": "to_hop_du_lieu_khong_ho_tro",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 90,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR007"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX044",
+      "ma_vi_du": "low_confidence_result",
+      "ten": "Ket qua co do tin cay thap",
+      "special_case": "do_tin_cay_thap",
+      "mo_ta": "Tat ca ket qua deu duoi nguong confidence.",
+      "muc_dich": "Kiem tra nguong confidence.",
+      "do_kho": "trung_binh",
+      "input": {
+        "confidence": 0.32
+      },
+      "expected_output": {
+        "special_case": "do_tin_cay_thap",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 85,
+        "severity": "trung_binh"
+      },
+      "rule_refs": [
+        "SCR009"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX045",
+      "ma_vi_du": "incomplete_transformation",
+      "ten": "Hoa khi chua hoan chinh",
+      "special_case": "hoa_khi_khong_hoan_chinh",
+      "mo_ta": "Dieu kien hoa khi moi dat mot phan.",
+      "muc_dich": "Kiem tra quy tac hoa khi.",
+      "do_kho": "cao",
+      "input": {
+        "transformation_state": "partial"
+      },
+      "expected_output": {
+        "special_case": "hoa_khi_khong_hoan_chinh",
+        "action": "tinh_toan_lai",
+        "priority": 85,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR005"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX046",
+      "ma_vi_du": "incomplete_pattern_summary",
+      "ten": "Tong cach chua day du",
+      "special_case": "tong_cach_chua_day_du",
+      "mo_ta": "Tong hop ket qua cach cuc chua du dieu kien ket luan.",
+      "muc_dich": "Kiem tra tong hop Pattern Engine.",
+      "do_kho": "cao",
+      "input": {
+        "summary_complete": false
+      },
+      "expected_output": {
+        "special_case": "tong_cach_chua_day_du",
+        "action": "tinh_toan_lai",
+        "priority": 80,
+        "severity": "trung_binh"
+      },
+      "rule_refs": [
+        "SCR006"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX047",
+      "ma_vi_du": "expert_override",
+      "ten": "Chuyen gia ghi de ket qua",
+      "special_case": "can_kiem_tra_thu_cong",
+      "mo_ta": "Ket qua tu dong bi ghi de boi danh gia cua chuyen gia.",
+      "muc_dich": "Kiem tra quy trinh override.",
+      "do_kho": "chuyen_gia",
+      "input": {
+        "expert_override": true
+      },
+      "expected_output": {
+        "special_case": "can_kiem_tra_thu_cong",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 95,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCP012"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX048",
+      "ma_vi_du": "fallback_after_conflict",
+      "ten": "Fallback sau xung dot",
+      "special_case": "ap_dung_quy_tac_du_phong",
+      "mo_ta": "Sau khi khong the phan giai xung dot, he thong chuyen sang fallback.",
+      "muc_dich": "Kiem tra fallback sau conflict.",
+      "do_kho": "cao",
+      "input": {
+        "conflict_resolved": false
+      },
+      "expected_output": {
+        "special_case": "ap_dung_quy_tac_du_phong",
+        "action": "ap_dung_du_phong",
+        "priority": 85,
+        "severity": "cao"
+      },
+      "rule_refs": [
+        "SCR010",
+        "SCP020"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX049",
+      "ma_vi_du": "multiple_special_cases",
+      "ten": "Nhieu special case cung luc",
+      "special_case": "xung_dot_dieu_kien",
+      "mo_ta": "Dong thoi kich hoat nhieu special case va can Priority Engine xu ly.",
+      "muc_dich": "Kiem tra xu ly dong thoi.",
+      "do_kho": "chuyen_gia",
+      "input": {
+        "special_cases": [
+          "do_tin_cay_thap",
+          "hoa_khi_khong_hoan_chinh",
+          "can_kiem_tra_thu_cong"
+        ]
+      },
+      "expected_output": {
+        "special_case": "can_kiem_tra_thu_cong",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "rule_refs": [
+        "SCP011",
+        "SCP012"
+      ],
+      "ghi_chu": "",
+      "tham_chieu": []
+    },
+    {
+      "id": "EX050",
+      "ma_vi_du": "unknown_special_case",
+      "ten": "Special case chua duoc dinh nghia",
+      "special_case": "to_hop_du_lieu_khong_ho_tro",
+      "mo_ta": "He thong nhan duoc mot special case khong ton tai trong Rule Database.",
+      "muc_dich": "Kiem tra tinh toan ven cua Rule Database.",
+      "do_kho": "chuyen_gia",
+      "input": {
+        "special_case": "unknown_case"
+      },
+      "expected_output": {
+        "special_case": "to_hop_du_lieu_khong_ho_tro",
+        "action": "chuyen_kiem_tra_thu_cong",
+        "priority": 100,
+        "severity": "rat_cao"
+      },
+      "rule_refs": [
+        "SCR007",
+        "SCP020"
+      ],
+      "ghi_chu": "Khong duoc phep tiep tuc xu ly voi special case khong xac dinh.",
+      "tham_chieu": []
+    }
+  ]

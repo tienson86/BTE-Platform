@@ -1,0 +1,336 @@
+[
+    {
+      "rule_id": "CAR_0001",
+      "adjustment_type": "combination",
+      "name": "Combination Adjustment",
+      "description": "Các quan hệ hợp làm thay đổi hoặc tăng cường sức mạnh ngũ hành.",
+      "engine_effect": "adjust_strength",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0002",
+      "adjustment_type": "transformation",
+      "name": "Transformation Adjustment",
+      "description": "Quan hệ hợp hóa làm thay đổi thuộc tính ngũ hành.",
+      "engine_effect": "adjust_strength",
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0003",
+      "adjustment_type": "conflict",
+      "name": "Conflict Adjustment",
+      "description": "Quan hệ xung làm suy giảm hoặc phá vỡ lực ngũ hành.",
+      "engine_effect": "adjust_strength",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0004",
+      "adjustment_type": "punishment",
+      "name": "Punishment Adjustment",
+      "description": "Quan hệ hình tạo ảnh hưởng điều chỉnh sức mạnh.",
+      "engine_effect": "adjust_strength",
+      "priority": 85,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0005",
+      "adjustment_type": "harm",
+      "name": "Harm Adjustment",
+      "description": "Quan hệ hại làm giảm hiệu lực của ngũ hành.",
+      "engine_effect": "adjust_strength",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0006",
+      "adjustment_type": "break",
+      "name": "Break Adjustment",
+      "description": "Quan hệ phá làm giảm sự ổn định của ngũ hành.",
+      "engine_effect": "adjust_strength",
+      "priority": 75,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0007",
+      "adjustment_type": "self_punishment",
+      "name": "Self Punishment Adjustment",
+      "description": "Quan hệ tự hình tạo ảnh hưởng nội tại lên sức mạnh.",
+      "engine_effect": "adjust_strength",
+      "priority": 70,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "CAR_0101",
+      "combination_type": "heavenly_stem_combination",
+      "combination_name": "giap_ky",
+      "members": ["giap", "ky"],
+      "result_element": "earth",
+      "requires_transformation": true,
+      "adjustment_direction": "positive",
+      "base_score": 5,
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0102",
+      "combination_type": "heavenly_stem_combination",
+      "combination_name": "at_canh",
+      "members": ["at", "canh"],
+      "result_element": "metal",
+      "requires_transformation": true,
+      "adjustment_direction": "positive",
+      "base_score": 5,
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0103",
+      "combination_type": "heavenly_stem_combination",
+      "combination_name": "binh_tan",
+      "members": ["binh", "tan"],
+      "result_element": "water",
+      "requires_transformation": true,
+      "adjustment_direction": "positive",
+      "base_score": 5,
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0104",
+      "combination_type": "heavenly_stem_combination",
+      "combination_name": "dinh_nham",
+      "members": ["dinh", "nham"],
+      "result_element": "wood",
+      "requires_transformation": true,
+      "adjustment_direction": "positive",
+      "base_score": 5,
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0105",
+      "combination_type": "heavenly_stem_combination",
+      "combination_name": "mau_quy",
+      "members": ["mau", "quy"],
+      "result_element": "fire",
+      "requires_transformation": true,
+      "adjustment_direction": "positive",
+      "base_score": 5,
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0106",
+      "combination_type": "earthly_branch_six_combination",
+      "combination_name": "luc_hop",
+      "members": [
+        ["ti", "suu"],
+        ["dan", "hoi"],
+        ["mao", "tuat"],
+        ["thin", "dau"],
+        ["ty", "than"],
+        ["ngo", "mui"]
+      ],
+      "adjustment_direction": "positive",
+      "base_score": 4,
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0107",
+      "combination_type": "three_harmony",
+      "combination_name": "tam_hop",
+      "members": [
+        ["than", "ti", "thin"],
+        ["hoi", "mao", "mui"],
+        ["dan", "ngo", "tuat"],
+        ["ty", "dau", "suu"]
+      ],
+      "adjustment_direction": "positive",
+      "base_score": 8,
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0108",
+      "combination_type": "three_meeting",
+      "combination_name": "tam_hoi",
+      "members": [
+        ["hoi", "ti", "suu"],
+        ["dan", "mao", "thin"],
+        ["ty", "ngo", "mui"],
+        ["than", "dau", "tuat"]
+      ],
+      "adjustment_direction": "positive",
+      "base_score": 10,
+      "priority": 98,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "CAR_0201",
+      "conflict_type": "branch_clash",
+      "conflict_name": "luc_xung",
+      "members": [
+        ["ty", "ngo"],
+        ["suu", "mui"],
+        ["dan", "than"],
+        ["mao", "dau"],
+        ["thin", "tuat"],
+        ["ti", "hoi"]
+      ],
+      "adjustment_direction": "negative",
+      "base_score": -8,
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0202",
+      "conflict_type": "branch_punishment",
+      "conflict_name": "hinh",
+      "members": [
+        ["dan", "ti", "than"],
+        ["suu", "tuat", "mui"],
+        ["ty", "mao"]
+      ],
+      "adjustment_direction": "negative",
+      "base_score": -6,
+      "priority": 95,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0203",
+      "conflict_type": "self_punishment",
+      "conflict_name": "tu_hinh",
+      "members": [
+        ["thin"],
+        ["ngo"],
+        ["dau"],
+        ["hoi"]
+      ],
+      "adjustment_direction": "negative",
+      "base_score": -4,
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0204",
+      "conflict_type": "branch_harm",
+      "conflict_name": "luc_hai",
+      "members": [
+        ["ty", "mui"],
+        ["suu", "ngo"],
+        ["dan", "ti"],
+        ["mao", "thin"],
+        ["than", "hoi"],
+        ["dau", "tuat"]
+      ],
+      "adjustment_direction": "negative",
+      "base_score": -5,
+      "priority": 85,
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0205",
+      "conflict_type": "branch_break",
+      "conflict_name": "luc_pha",
+      "members": [
+        ["ty", "dau"],
+        ["ngo", "mao"],
+        ["thin", "suu"],
+        ["tuat", "mui"],
+        ["dan", "hoi"],
+        ["than", "ti"]
+      ],
+      "adjustment_direction": "negative",
+      "base_score": -4,
+      "priority": 80,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "CAR_0301",
+      "adjustment_type": "heavenly_stem_combination",
+      "score": 5,
+      "description": "Điểm điều chỉnh cho Thiên Can hợp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0302",
+      "adjustment_type": "earthly_branch_six_combination",
+      "score": 4,
+      "description": "Điểm điều chỉnh cho Lục Hợp Địa Chi.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0303",
+      "adjustment_type": "three_harmony",
+      "score": 8,
+      "description": "Điểm điều chỉnh cho Tam Hợp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0304",
+      "adjustment_type": "three_meeting",
+      "score": 10,
+      "description": "Điểm điều chỉnh cho Tam Hội.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0305",
+      "adjustment_type": "transformation",
+      "score": 12,
+      "description": "Điểm điều chỉnh khi hợp hóa thành công.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0306",
+      "adjustment_type": "branch_clash",
+      "score": -8,
+      "description": "Điểm điều chỉnh cho Lục Xung.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0307",
+      "adjustment_type": "branch_punishment",
+      "score": -6,
+      "description": "Điểm điều chỉnh cho Hình.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0308",
+      "adjustment_type": "self_punishment",
+      "score": -4,
+      "description": "Điểm điều chỉnh cho Tự Hình.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0309",
+      "adjustment_type": "branch_harm",
+      "score": -5,
+      "description": "Điểm điều chỉnh cho Lục Hại.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0310",
+      "adjustment_type": "branch_break",
+      "score": -4,
+      "description": "Điểm điều chỉnh cho Lục Phá.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CAR_0311",
+      "rule_type": "adjustment_limit",
+      "maximum_positive_score": 30,
+      "maximum_negative_score": -30,
+      "description": "Giới hạn tổng điểm điều chỉnh.",
+      "enabled": true
+    }
+  ]

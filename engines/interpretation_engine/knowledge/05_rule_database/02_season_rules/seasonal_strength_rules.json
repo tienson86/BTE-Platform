@@ -1,0 +1,380 @@
+[
+    {
+      "rule_id": "SSR_0001",
+      "concept": "seasonal_strength",
+      "display_name": "Sức mạnh theo mùa",
+      "description": "Mức ảnh hưởng tổng thể của mùa đối với một ngũ hành.",
+      "applicable_scope": [
+        "five_elements"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0002",
+      "concept": "seasonal_influence",
+      "display_name": "Ảnh hưởng theo mùa",
+      "description": "Ảnh hưởng của khí mùa lên trạng thái của ngũ hành.",
+      "applicable_scope": [
+        "five_elements"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0003",
+      "concept": "seasonal_modifier",
+      "display_name": "Hệ số điều chỉnh theo mùa",
+      "description": "Hệ số dùng để điều chỉnh sức mạnh của ngũ hành theo ảnh hưởng của mùa.",
+      "applicable_scope": [
+        "strength_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0004",
+      "concept": "influence_level",
+      "display_name": "Mức ảnh hưởng",
+      "description": "Mức phân loại cường độ ảnh hưởng của mùa đối với ngũ hành.",
+      "available_levels": [
+        "very_high",
+        "high",
+        "medium",
+        "low",
+        "very_low"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0005",
+      "concept": "seasonal_adjustment",
+      "display_name": "Điều chỉnh theo mùa",
+      "description": "Các quy tắc điều chỉnh ảnh hưởng theo mùa trước khi xuất kết quả cuối cùng.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0006",
+      "concept": "final_seasonal_strength",
+      "display_name": "Kết quả sức mạnh theo mùa",
+      "description": "Kết quả chuẩn hóa sau khi áp dụng toàn bộ quy tắc ảnh hưởng và điều chỉnh theo mùa.",
+      "applicable_scope": [
+        "season_engine",
+        "strength_engine",
+        "useful_god_engine",
+        "pattern_engine",
+        "interpretation_engine"
+      ],
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SSR_0101",
+      "season": "spring",
+      "element": "wood",
+      "influence_level": "very_high",
+      "description": "Mộc là chủ khí của mùa Xuân.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0102",
+      "season": "spring",
+      "element": "fire",
+      "influence_level": "high",
+      "description": "Hỏa được Mộc sinh, ảnh hưởng mạnh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0103",
+      "season": "spring",
+      "element": "water",
+      "influence_level": "medium",
+      "description": "Thủy đã sinh Mộc nên ảnh hưởng trung bình.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0104",
+      "season": "spring",
+      "element": "metal",
+      "influence_level": "low",
+      "description": "Kim bị Mộc khắc nên ảnh hưởng thấp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0105",
+      "season": "spring",
+      "element": "earth",
+      "influence_level": "very_low",
+      "description": "Thổ bị Mộc khắc mạnh, ảnh hưởng rất thấp.",
+      "enabled": true
+    },
+  
+    {
+      "rule_id": "SSR_0106",
+      "season": "summer",
+      "element": "fire",
+      "influence_level": "very_high",
+      "description": "Hỏa là chủ khí của mùa Hạ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0107",
+      "season": "summer",
+      "element": "earth",
+      "influence_level": "high",
+      "description": "Thổ được Hỏa sinh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0108",
+      "season": "summer",
+      "element": "wood",
+      "influence_level": "medium",
+      "description": "Mộc đã sinh Hỏa nên ảnh hưởng trung bình.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0109",
+      "season": "summer",
+      "element": "water",
+      "influence_level": "low",
+      "description": "Thủy bị Hỏa khắc chế.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0110",
+      "season": "summer",
+      "element": "metal",
+      "influence_level": "very_low",
+      "description": "Kim bị Hỏa khắc mạnh.",
+      "enabled": true
+    },
+  
+    {
+      "rule_id": "SSR_0111",
+      "season": "autumn",
+      "element": "metal",
+      "influence_level": "very_high",
+      "description": "Kim là chủ khí của mùa Thu.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0112",
+      "season": "autumn",
+      "element": "water",
+      "influence_level": "high",
+      "description": "Thủy được Kim sinh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0113",
+      "season": "autumn",
+      "element": "earth",
+      "influence_level": "medium",
+      "description": "Thổ đã sinh Kim.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0114",
+      "season": "autumn",
+      "element": "fire",
+      "influence_level": "low",
+      "description": "Hỏa khắc Kim nên ảnh hưởng thấp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0115",
+      "season": "autumn",
+      "element": "wood",
+      "influence_level": "very_low",
+      "description": "Mộc bị Kim khắc mạnh.",
+      "enabled": true
+    },
+  
+    {
+      "rule_id": "SSR_0116",
+      "season": "winter",
+      "element": "water",
+      "influence_level": "very_high",
+      "description": "Thủy là chủ khí của mùa Đông.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0117",
+      "season": "winter",
+      "element": "wood",
+      "influence_level": "high",
+      "description": "Mộc được Thủy sinh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0118",
+      "season": "winter",
+      "element": "metal",
+      "influence_level": "medium",
+      "description": "Kim đã sinh Thủy.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0119",
+      "season": "winter",
+      "element": "earth",
+      "influence_level": "low",
+      "description": "Thổ khắc Thủy nên ảnh hưởng thấp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0120",
+      "season": "winter",
+      "element": "fire",
+      "influence_level": "very_low",
+      "description": "Hỏa bị Thủy khắc mạnh.",
+      "enabled": true
+    },
+  
+    {
+      "rule_id": "SSR_0121",
+      "season": "transition",
+      "element": "earth",
+      "influence_level": "very_high",
+      "description": "Thổ là chủ khí của Tứ Quý.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0122",
+      "season": "transition",
+      "element": "metal",
+      "influence_level": "high",
+      "description": "Kim được Thổ sinh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0123",
+      "season": "transition",
+      "element": "fire",
+      "influence_level": "medium",
+      "description": "Hỏa đã sinh Thổ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0124",
+      "season": "transition",
+      "element": "wood",
+      "influence_level": "low",
+      "description": "Mộc khắc Thổ nên ảnh hưởng thấp.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0125",
+      "season": "transition",
+      "element": "water",
+      "influence_level": "very_low",
+      "description": "Thủy bị Thổ khắc.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SSR_0201",
+      "adjustment_type": "season_transition",
+      "display_name": "Điều chỉnh giao mùa",
+      "condition": "transition_period",
+      "adjustment_strategy": "blend_adjacent_seasons",
+      "description": "Trong giai đoạn giao mùa, kết hợp ảnh hưởng của mùa hiện tại và mùa kế tiếp.",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0202",
+      "adjustment_type": "earth_transition",
+      "display_name": "Điều chỉnh Tứ Quý",
+      "condition": "transition_season",
+      "adjustment_strategy": "apply_earth_dominance",
+      "description": "Trong giai đoạn Tứ Quý, ưu tiên ảnh hưởng của hành Thổ.",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0203",
+      "adjustment_type": "solar_term_boundary",
+      "display_name": "Điều chỉnh theo Tiết khí",
+      "condition": "solar_term_boundary",
+      "adjustment_strategy": "apply_solar_term_mapping",
+      "description": "Nếu thời điểm nằm gần ranh giới Tiết khí thì sử dụng dữ liệu Tiết khí để xác định ảnh hưởng theo mùa.",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0204",
+      "adjustment_type": "season_validation",
+      "display_name": "Kiểm tra dữ liệu mùa",
+      "condition": "season_resolved",
+      "adjustment_strategy": "validate_mapping",
+      "description": "Kiểm tra tính hợp lệ của mùa trước khi áp dụng điều chỉnh.",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0205",
+      "adjustment_type": "final_adjustment",
+      "display_name": "Xác nhận điều chỉnh",
+      "condition": "all_adjustments_completed",
+      "adjustment_strategy": "confirm_adjustment",
+      "description": "Xác nhận kết quả điều chỉnh cuối cùng trước khi xuất dữ liệu.",
+      "priority": 60,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SSR_0301",
+      "influence_level": "very_high",
+      "display_name": "Rất mạnh",
+      "strength_category": "dominant",
+      "seasonal_rank": 5,
+      "recommended_state": "prosperous",
+      "description": "Ảnh hưởng của mùa ở mức rất mạnh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0302",
+      "influence_level": "high",
+      "display_name": "Mạnh",
+      "strength_category": "strong",
+      "seasonal_rank": 4,
+      "recommended_state": "supporting",
+      "description": "Ảnh hưởng của mùa ở mức mạnh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0303",
+      "influence_level": "medium",
+      "display_name": "Trung bình",
+      "strength_category": "neutral",
+      "seasonal_rank": 3,
+      "recommended_state": "resting",
+      "description": "Ảnh hưởng của mùa ở mức trung bình.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0304",
+      "influence_level": "low",
+      "display_name": "Yếu",
+      "strength_category": "weak",
+      "seasonal_rank": 2,
+      "recommended_state": "restricted",
+      "description": "Ảnh hưởng của mùa ở mức yếu.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SSR_0305",
+      "influence_level": "very_low",
+      "display_name": "Rất yếu",
+      "strength_category": "minimal",
+      "seasonal_rank": 1,
+      "recommended_state": "dead",
+      "description": "Ảnh hưởng của mùa ở mức rất yếu.",
+      "enabled": true
+    }
+  ]

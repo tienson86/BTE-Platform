@@ -1,0 +1,503 @@
+[
+    {
+      "rule_id": "RSR_0001",
+      "name": "Strong Root",
+      "root_level": "strong_root",
+      "priority": 100,
+      "score": 100,
+      "hidden_stem_position": [
+        "principal"
+      ],
+      "description": "Nhật Chủ thông căn tại chủ khí của Địa Chi. Đây là mức thông căn mạnh nhất, biểu thị gốc khí vững chắc.",
+      "engine_effect": {
+        "strength_multiplier": 1.0,
+        "count_as_root": true
+      },
+      "references": [
+        "Tử Bình Chân Thuyên",
+        "Uyên Hải Tử Bình"
+      ]
+    },
+    {
+      "rule_id": "RSR_0002",
+      "name": "Medium Root",
+      "root_level": "medium_root",
+      "priority": 70,
+      "score": 70,
+      "hidden_stem_position": [
+        "secondary"
+      ],
+      "description": "Nhật Chủ thông căn tại trung khí của Địa Chi. Có khả năng nâng đỡ Nhật Chủ nhưng yếu hơn chủ khí.",
+      "engine_effect": {
+        "strength_multiplier": 0.7,
+        "count_as_root": true
+      },
+      "references": [
+        "Địch Thiên Tủy",
+        "Uyên Hải Tử Bình"
+      ]
+    },
+    {
+      "rule_id": "RSR_0003",
+      "name": "Weak Root",
+      "root_level": "weak_root",
+      "priority": 40,
+      "score": 40,
+      "hidden_stem_position": [
+        "residual"
+      ],
+      "description": "Nhật Chủ chỉ thông căn tại dư khí của Địa Chi. Có tác dụng hỗ trợ nhưng tương đối yếu.",
+      "engine_effect": {
+        "strength_multiplier": 0.4,
+        "count_as_root": true
+      },
+      "references": [
+        "Tử Bình Chân Thuyên"
+      ]
+    },
+    {
+      "rule_id": "RSR_0004",
+      "name": "No Root",
+      "root_level": "no_root",
+      "priority": 0,
+      "score": 0,
+      "hidden_stem_position": [],
+      "description": "Nhật Chủ không có thông căn trong Địa Chi.",
+      "engine_effect": {
+        "strength_multiplier": 0.0,
+        "count_as_root": false
+      },
+      "references": []
+    },
+    {
+      "rule_id": "RSR_0005",
+      "name": "Multiple Root Bonus",
+      "root_level": "multiple_root_bonus",
+      "priority": 120,
+      "score": 20,
+      "description": "Có từ hai căn trở lên. Điểm này dùng làm điểm cộng bổ sung, không thay thế điểm của từng căn riêng lẻ.",
+      "engine_effect": {
+        "bonus_score": 20,
+        "minimum_root_count": 2
+      },
+      "references": [
+        "Tử Bình Chân Thuyên"
+      ]
+    },
+    {
+      "rule_id": "RSR_0006",
+      "name": "Three Root Bonus",
+      "root_level": "three_root_bonus",
+      "priority": 130,
+      "score": 35,
+      "description": "Có từ ba căn trở lên. Thể hiện Nhật Chủ có nền tảng rất ổn định.",
+      "engine_effect": {
+        "bonus_score": 35,
+        "minimum_root_count": 3
+      },
+      "references": [
+        "Uyên Hải Tử Bình"
+      ]
+    },
+    {
+      "rule_id": "RSR_0007",
+      "name": "Four Root Bonus",
+      "root_level": "four_root_bonus",
+      "priority": 140,
+      "score": 50,
+      "description": "Có đủ bốn căn trong Tứ Trụ. Đây là mức cộng điểm tối đa về số lượng thông căn.",
+      "engine_effect": {
+        "bonus_score": 50,
+        "minimum_root_count": 4
+      },
+      "references": [
+        "Địch Thiên Tủy"
+      ]
+    }
+  ]
+  {
+    "rule_id": "RSR_0101",
+    "earthly_branch": "ty",
+    "hidden_stems": [
+      {
+        "stem": "quy",
+        "position": "principal",
+        "root_level": "strong_root"
+      }
+    ],
+    "description": "Chi Tý chỉ chứa Quý Thủy làm chủ khí."
+  }
+  {
+    "rule_id": "RSR_0102",
+    "earthly_branch": "suu",
+    "hidden_stems": [
+      {
+        "stem": "ky",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "quy",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "tan",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Sửu gồm Kỷ Thổ chủ khí, Quý Thủy trung khí và Tân Kim dư khí."
+  }
+  {
+    "rule_id": "RSR_0103",
+    "earthly_branch": "dan",
+    "hidden_stems": [
+      {
+        "stem": "giap",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "binh",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "mau",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Dần gồm Giáp Mộc chủ khí, Bính Hỏa trung khí và Mậu Thổ dư khí."
+  }
+  {
+    "rule_id": "RSR_0104",
+    "earthly_branch": "mao",
+    "hidden_stems": [
+      {
+        "stem": "at",
+        "position": "principal",
+        "root_level": "strong_root"
+      }
+    ],
+    "description": "Chi Mão chỉ chứa Ất Mộc làm chủ khí."
+  }
+  {
+    "rule_id": "RSR_0105",
+    "earthly_branch": "thin",
+    "hidden_stems": [
+      {
+        "stem": "mau",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "at",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "quy",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Thìn gồm Mậu Thổ chủ khí, Ất Mộc trung khí và Quý Thủy dư khí."
+  }
+  {
+    "rule_id": "RSR_0106",
+    "earthly_branch": "ti",
+    "hidden_stems": [
+      {
+        "stem": "binh",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "mau",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "canh",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Tỵ gồm Bính Hỏa chủ khí, Mậu Thổ trung khí và Canh Kim dư khí."
+  }
+  {
+    "rule_id": "RSR_0107",
+    "earthly_branch": "ngo",
+    "hidden_stems": [
+      {
+        "stem": "dinh",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "ky",
+        "position": "secondary",
+        "root_level": "medium_root"
+      }
+    ],
+    "description": "Chi Ngọ gồm Đinh Hỏa chủ khí và Kỷ Thổ trung khí."
+  }
+  {
+    "rule_id": "RSR_0108",
+    "earthly_branch": "mui",
+    "hidden_stems": [
+      {
+        "stem": "ky",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "dinh",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "at",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Mùi gồm Kỷ Thổ chủ khí, Đinh Hỏa trung khí và Ất Mộc dư khí."
+  }
+  {
+    "rule_id": "RSR_0109",
+    "earthly_branch": "than",
+    "hidden_stems": [
+      {
+        "stem": "canh",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "nham",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "mau",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Thân gồm Canh Kim chủ khí, Nhâm Thủy trung khí và Mậu Thổ dư khí."
+  }
+  {
+    "rule_id": "RSR_0110",
+    "earthly_branch": "dau",
+    "hidden_stems": [
+      {
+        "stem": "tan",
+        "position": "principal",
+        "root_level": "strong_root"
+      }
+    ],
+    "description": "Chi Dậu chỉ chứa Tân Kim làm chủ khí."
+  }
+  {
+    "rule_id": "RSR_0111",
+    "earthly_branch": "tuat",
+    "hidden_stems": [
+      {
+        "stem": "mau",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "tan",
+        "position": "secondary",
+        "root_level": "medium_root"
+      },
+      {
+        "stem": "dinh",
+        "position": "residual",
+        "root_level": "weak_root"
+      }
+    ],
+    "description": "Chi Tuất gồm Mậu Thổ chủ khí, Tân Kim trung khí và Đinh Hỏa dư khí."
+  }
+  {
+    "rule_id": "RSR_0112",
+    "earthly_branch": "hoi",
+    "hidden_stems": [
+      {
+        "stem": "nham",
+        "position": "principal",
+        "root_level": "strong_root"
+      },
+      {
+        "stem": "giap",
+        "position": "secondary",
+        "root_level": "medium_root"
+      }
+    ],
+    "description": "Chi Hợi gồm Nhâm Thủy chủ khí và Giáp Mộc trung khí."
+  }
+  {
+    "rule_id": "RSR_0201",
+    "rule_type": "root_score",
+    "root_level": "strong_root",
+    "base_score": 30,
+    "max_count": 4,
+    "description": "Mỗi Strong Root đóng góp 30 điểm sức mạnh."
+  }
+  {
+    "rule_id": "RSR_0202",
+    "rule_type": "root_score",
+    "root_level": "medium_root",
+    "base_score": 20,
+    "max_count": 4,
+    "description": "Mỗi Medium Root đóng góp 20 điểm sức mạnh."
+  }
+  {
+    "rule_id": "RSR_0203",
+    "rule_type": "root_score",
+    "root_level": "weak_root",
+    "base_score": 10,
+    "max_count": 4,
+    "description": "Mỗi Weak Root đóng góp 10 điểm sức mạnh."
+  }
+  {
+    "rule_id": "RSR_0204",
+    "rule_type": "root_score",
+    "root_level": "no_root",
+    "base_score": 0,
+    "description": "Không có thông căn nên không cộng điểm."
+  }
+  {
+    "rule_id": "RSR_0205",
+    "rule_type": "root_bonus",
+    "minimum_root_count": 2,
+    "bonus_score": 5,
+    "description": "Có từ hai căn trở lên."
+  }
+  {
+    "rule_id": "RSR_0206",
+    "rule_type": "root_bonus",
+    "minimum_root_count": 3,
+    "bonus_score": 10,
+    "description": "Có từ ba căn trở lên."
+  }
+  {
+    "rule_id": "RSR_0207",
+    "rule_type": "root_bonus",
+    "minimum_root_count": 4,
+    "bonus_score": 15,
+    "description": "Có đủ bốn căn."
+  }
+  {
+    "rule_id": "RSR_0208",
+    "rule_type": "root_limit",
+    "maximum_score": 100,
+    "description": "Điểm thông căn tối đa là 100."
+  }
+  {
+    "rule_id": "RSR_0301",
+    "rule_type": "special_root",
+    "condition": {
+      "root_count": 0
+    },
+    "effect": {
+      "score_adjustment": -20,
+      "minimum_score": 0
+    },
+    "priority": 100,
+    "description": "Nhật Chủ hoàn toàn vô căn, giảm thêm điểm sức mạnh."
+  }
+  {
+    "rule_id": "RSR_0302",
+    "rule_type": "special_root",
+    "condition": {
+      "strong_root_count": 1,
+      "total_root_count": 1
+    },
+    "effect": {
+      "score_adjustment": 10
+    },
+    "priority": 90,
+    "description": "Chỉ có một căn nhưng là chủ khí, được cộng điểm ổn định."
+  }
+  {
+    "rule_id": "RSR_0303",
+    "rule_type": "special_root",
+    "condition": {
+      "strong_root_count": {
+        "gte": 2
+      }
+    },
+    "effect": {
+      "score_adjustment": 20
+    },
+    "priority": 80,
+    "description": "Có từ hai căn chủ khí trở lên."
+  }
+  {
+    "rule_id": "RSR_0304",
+    "rule_type": "special_root",
+    "condition": {
+      "strong_root_count": 0,
+      "medium_root_count": 0,
+      "weak_root_count": {
+        "gte": 2
+      }
+    },
+    "effect": {
+      "score_adjustment": -10
+    },
+    "priority": 70,
+    "description": "Chỉ có dư khí, không có chủ khí hoặc trung khí."
+  }
+  {
+    "rule_id": "RSR_0305",
+    "rule_type": "special_root",
+    "condition": {
+      "strong_root_count": {
+        "gte": 1
+      },
+      "medium_root_count": {
+        "gte": 1
+      }
+    },
+    "effect": {
+      "score_adjustment": 10
+    },
+    "priority": 60,
+    "description": "Đồng thời có chủ khí và trung khí."
+  }
+  {
+    "rule_id": "RSR_0306",
+    "rule_type": "special_root",
+    "condition": {
+      "strong_root_count": {
+        "gte": 1
+      },
+      "medium_root_count": {
+        "gte": 1
+      },
+      "weak_root_count": {
+        "gte": 1
+      }
+    },
+    "effect": {
+      "score_adjustment": 15
+    },
+    "priority": 50,
+    "description": "Thông căn đầy đủ ở cả chủ khí, trung khí và dư khí."
+  }
+  {
+    "rule_id": "RSR_0307",
+    "rule_type": "special_root",
+    "condition": {},
+    "effect": {
+      "minimum_score": 0,
+      "maximum_score": 100
+    },
+    "priority": 1,
+    "description": "Giới hạn điểm thông căn trong khoảng 0–100."
+  }
