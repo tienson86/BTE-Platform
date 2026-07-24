@@ -1,4 +1,4 @@
-"""Report Engine Content Analysis Layer (WP7A + WP7B + WP7C)."""
+"""Report Engine Content Analysis Layer (WP7A–WP7E)."""
 
 from __future__ import annotations
 
@@ -10,6 +10,8 @@ from .models import ContentContext
 _analysis = importlib.import_module("engines.report_engine.content.01_analysis")
 _paragraph = importlib.import_module("engines.report_engine.content.02_paragraph")
 _style = importlib.import_module("engines.report_engine.content.03_style")
+_consistency = importlib.import_module("engines.report_engine.content.04_consistency")
+_output = importlib.import_module("engines.report_engine.content.05_output")
 
 ContextAnalyzer = _analysis.ContextAnalyzer
 ImportanceRanker = _analysis.ImportanceRanker
@@ -34,6 +36,20 @@ SynonymRewriter = _style.SynonymRewriter
 EmphasisController = _style.EmphasisController
 ToneController = _style.ToneController
 
+ConsistencyBuilder = _consistency.ConsistencyBuilder
+ConsistentParagraphContext = _consistency.ConsistentParagraphContext
+DuplicateChecker = _consistency.DuplicateChecker
+ContradictionChecker = _consistency.ContradictionChecker
+CoherenceChecker = _consistency.CoherenceChecker
+PolarityChecker = _consistency.PolarityChecker
+
+OutputBuilder = _output.OutputBuilder
+ContentOutput = _output.ContentOutput
+HtmlOptimizer = _output.HtmlOptimizer
+MarkdownOptimizer = _output.MarkdownOptimizer
+PdfOptimizer = _output.PdfOptimizer
+ApiSerializer = _output.ApiSerializer
+
 __all__ = [
     "ContentContext",
     "ContentEngine",
@@ -57,4 +73,16 @@ __all__ = [
     "SynonymRewriter",
     "EmphasisController",
     "ToneController",
+    "ConsistencyBuilder",
+    "ConsistentParagraphContext",
+    "DuplicateChecker",
+    "ContradictionChecker",
+    "CoherenceChecker",
+    "PolarityChecker",
+    "OutputBuilder",
+    "ContentOutput",
+    "HtmlOptimizer",
+    "MarkdownOptimizer",
+    "PdfOptimizer",
+    "ApiSerializer",
 ]

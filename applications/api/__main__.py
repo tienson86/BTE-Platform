@@ -6,10 +6,10 @@ import uvicorn
 
 
 def main() -> None:
-    """Start uvicorn for Applications API."""
+    """Start Applications API with uvicorn."""
     uvicorn.run(
         "applications.api.app:app",
-        host="0.0.0.0",
+        host="127.0.0.1",
         port=8000,
         reload=False,
     )
