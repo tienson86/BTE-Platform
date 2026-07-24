@@ -61,6 +61,10 @@ class ReportExporter:
 
             self.export_html(report, output)
 
+        elif fmt == ReportFormat.PDF:
+
+            self.export_pdf(report, output)
+
         else:
 
             raise ValueError(
@@ -147,6 +151,20 @@ class ReportExporter:
 
             encoding="utf-8",
 
+        )
+
+    def export_pdf(
+        self,
+        report: Report,
+        output: Path,
+    ) -> None:
+        """Export PDF via dependency-free writer."""
+        from .simple_pdf import report_lines_from_model, write_simple_pdf
+
+        write_simple_pdf(
+            report_lines_from_model(report),
+            output,
+            title=getattr(report.metadata, "title", None) or "BTE Report",
         )
 
     # ==========================================================

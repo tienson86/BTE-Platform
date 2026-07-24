@@ -3,11 +3,12 @@ BTE Platform
 Report Engine
 
 File: engine.py
-Version: 1.0
+Version: 2.0 — WP6
 """
 
 from __future__ import annotations
 
+from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
@@ -15,7 +16,7 @@ from engines.base.base_engine import BaseEngine
 from engines.base.context import EngineContext
 from engines.base.result import EngineResult
 
-from .report import ReportFormat
+from .report import ReportFormat, ReportModel
 from .service import ReportService
 
 
@@ -23,138 +24,68 @@ class ReportEngine(BaseEngine):
     """
     Report Engine.
 
-    Chuyển InterpretationResult thành Report.
+    InterpretationResult → ReportModel → HTML / Markdown / PDF.
+    Templates: knowledge/06_report_templates only.
     """
 
     stage = "report"
 
     def __init__(self) -> None:
-
         super().__init__()
-
         self.service = ReportService()
-
-    # ==========================================================
-    # Legacy API
-    # ==========================================================
 
     def generate(
         self,
         *args: Any,
         **kwargs: Any,
     ) -> Any:
-        """
-        Tạo báo cáo (API tương thích tests / pipeline cũ).
-        """
-
+        """Tạo báo cáo (API tương thích tests / pipeline cũ)."""
         if "interpretation" in kwargs:
-
             raw = kwargs["interpretation"]
-
         elif not args:
-
             raw = {}
-
         elif len(args) == 1:
-
             raw = args[0]
-
         else:
-
             raw = args[-1]
 
-        if isinstance(raw, dict):
+        report = self.service.build(raw)
+        content = self.service.format(report, ReportFormat.TEXT)
+        return SimpleNamespace(success=True, content=content, report=report)
 
-            interpretation = raw
-
-        else:
-
-            interpretation = {}
-
-            text = getattr(raw, "text", None)
-
-            if isinstance(text, str) and text:
-
-                interpretation["summary"] = text
-
-            sections = getattr(raw, "sections", None)
-
-            if sections:
-
-                interpretation["sections"] = sections
-
-            score = getattr(raw, "score", None)
-
-            if score is not None:
-
-                interpretation["score"] = score
-
-        report = self.service.build(interpretation)
-
-        content = self.service.format(
-            report,
-            ReportFormat.TEXT,
-        )
-
-        return SimpleNamespace(
-            success=True,
-            content=content,
-        )
-
-    # ==========================================================
-    # Validate
-    # ==========================================================
-
-    def validate(
+    def render(
         self,
-        context: EngineContext,
-    ) -> None:
+        interpretation: Any,
+        *,
+        pdf_output: str | Path | None = None,
+    ) -> ReportModel:
         """
-        Kiểm tra dữ liệu đầu vào.
-        """
+        WP6 full pipeline:
 
+        InterpretationResult → ReportModel → HTML → Markdown → PDF
+        """
+        return self.service.build_full(interpretation, pdf_output=pdf_output)
+
+    def validate(self, context: EngineContext) -> None:
+        """Kiểm tra dữ liệu đầu vào."""
         interpretation = context.get("interpretation")
-
         if interpretation is None:
+            raise ValueError("InterpretationResult not found.")
 
-            raise ValueError(
-                "InterpretationResult not found."
-            )
-
-    # ==========================================================
-    # Run
-    # ==========================================================
-
-    def run(
-        self,
-        context: EngineContext,
-    ) -> EngineResult:
-        """
-        Sinh Report.
-        """
-
-        interpretation = context.get(
-            "interpretation"
-        )
-
-        report = self.service.build(
-            interpretation
-        )
-
-        context.set(
-            "report",
-            report,
-        )
-
+    def run(self, context: EngineContext) -> EngineResult:
+        """Sinh ReportModel (with optional HTML/MD/PDF in context)."""
+        interpretation = context.get("interpretation")
+        pdf_output = context.get("pdf_output")
+        report = self.service.build_full(interpretation, pdf_output=pdf_output)
+        context.set("report", report)
+        context.set("report_html", report.html)
+        context.set("report_markdown", report.markdown)
+        context.set("report_pdf", report.pdf_path)
         return EngineResult(
             success=True,
             data=report,
             message="Report generated successfully.",
         )
-
-    # ==========================================================
-    # Helpers
-    # ==========================================================
 
     def export(
         self,
@@ -162,42 +93,19 @@ class ReportEngine(BaseEngine):
         output: str,
         fmt: ReportFormat,
     ) -> None:
-        """
-        Xuất Report.
-        """
-
+        """Xuất Report."""
         report = context.get("report")
-
         if report is None:
-
-            raise ValueError(
-                "Report not found."
-            )
-
-        self.service.export(
-            report=report,
-            output=output,
-            fmt=fmt,
-        )
+            raise ValueError("Report not found.")
+        self.service.export(report=report, output=output, fmt=fmt)
 
     def format(
         self,
         context: EngineContext,
         fmt: ReportFormat,
     ) -> str:
-        """
-        Chuyển Report thành chuỗi.
-        """
-
+        """Chuyển Report thành chuỗi."""
         report = context.get("report")
-
         if report is None:
-
-            raise ValueError(
-                "Report not found."
-            )
-
-        return self.service.format(
-            report=report,
-            fmt=fmt,
-        )
+            raise ValueError("Report not found.")
+        return self.service.format(report=report, fmt=fmt)

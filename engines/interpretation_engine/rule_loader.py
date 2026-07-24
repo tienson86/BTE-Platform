@@ -46,13 +46,26 @@ class RuleLoader:
 
         file_path = path or self.rule_path
 
+        # WP4: default to Knowledge Base when no explicit file
         if not file_path:
-            return []
+            if self.cache:
+                return self.cache
+            from .knowledge_rule_loader import KnowledgeRuleLoader
+
+            self.cache = KnowledgeRuleLoader().load()
+            return self.cache
 
         if self.cache:
             return self.cache
 
-        extension = Path(file_path).suffix.lower().replace(".", "")
+        path_obj = Path(file_path)
+        if path_obj.is_dir():
+            from .knowledge_rule_loader import KnowledgeRuleLoader
+
+            self.cache = KnowledgeRuleLoader(path_obj).load()
+            return self.cache
+
+        extension = path_obj.suffix.lower().replace(".", "")
 
         if extension not in SUPPORTED_FORMAT:
             raise ValueError(f"Unsupported rule format: {extension}")

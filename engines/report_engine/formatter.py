@@ -16,6 +16,17 @@ from .report import (
 )
 
 
+def _escape(text: str) -> str:
+    """Minimal HTML escaping."""
+    return (
+        str(text)
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
 class ReportFormatter:
     """
     Formatter của Report.
@@ -112,7 +123,7 @@ class ReportFormatter:
 
         if report.summary.content:
 
-            lines.append("## Tổng quan")
+            lines.append(f"## {report.summary.title or 'summary'}")
 
             lines.append("")
 
@@ -138,7 +149,18 @@ class ReportFormatter:
 
         if report.recommendations:
 
-            lines.append("## Khuyến nghị")
+            rec_title = "recommendation"
+            for section in report.sections:
+                meta = getattr(section, "metadata", None) or {}
+                if meta.get("module_id") == "01_summary":
+                    rec_title = section.title
+                    break
+            # Prefer appendix label if present
+            labels = (report.appendix or {}).get("recommendation_label")
+            if labels:
+                rec_title = str(labels)
+
+            lines.append(f"## {rec_title}")
 
             lines.append("")
 
@@ -168,16 +190,18 @@ class ReportFormatter:
         html.append("<body>")
 
         html.append(
-            f"<h1>{report.metadata.title}</h1>"
+            f"<h1>{_escape(report.metadata.title)}</h1>"
         )
 
         if report.summary.content:
 
-            html.append("<h2>Tổng quan</h2>")
-
             html.append(
-                f"<p>{report.summary.content}</p>"
+                f"<h2>{_escape(report.summary.title or 'summary')}</h2>"
             )
+
+            for paragraph in str(report.summary.content).split("\n\n"):
+                if paragraph.strip():
+                    html.append(f"<p>{_escape(paragraph.strip())}</p>")
 
         for section in sorted(
             report.sections,
@@ -188,12 +212,12 @@ class ReportFormatter:
                 continue
 
             html.append(
-                f"<h2>{section.title}</h2>"
+                f"<h2>{_escape(section.title)}</h2>"
             )
 
-            html.append(
-                f"<p>{section.content}</p>"
-            )
+            for paragraph in str(section.content).split("\n\n"):
+                if paragraph.strip():
+                    html.append(f"<p>{_escape(paragraph.strip())}</p>")
 
         html.append("</body>")
 

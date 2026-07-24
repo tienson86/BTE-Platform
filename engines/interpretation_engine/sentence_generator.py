@@ -51,18 +51,19 @@ class SentenceGenerator:
         """
         Sinh câu từ danh sách SemanticBlock.
 
-        WP0B compatibility: InterpretationResult (đã compose) được
-        pass-through. Bridge SemanticBlock ↔ Result làm ở WP1.
+        WP4: InterpretationResult — attach sentence text from rule descriptions
+        when missing, then pass through.
         """
 
         # Late import avoids circular dependency with engine/legacy_builder
         from .legacy_builder import InterpretationResult
 
         if isinstance(blocks, InterpretationResult):
-            return blocks
+            return self._enrich_result(blocks)
 
         if not isinstance(blocks, list):
-            return []
+            # Backward-compatible empty generate({}) → str
+            return ""
 
         sentences = []
 
@@ -73,6 +74,43 @@ class SentenceGenerator:
             )
 
         return sentences
+
+    def _enrich_result(self, result: InterpretationResult) -> InterpretationResult:
+        """Ensure each section rule has a sentence; drop duplicate texts (WP5)."""
+        collected: list[dict[str, Any]] = []
+        seen_text: set[str] = set()
+        for name, section in (result.sections or {}).items():
+            for rule in section.rules:
+                text = (
+                    rule.get("sentence")
+                    or rule.get("description")
+                    or rule.get("message")
+                    or rule.get("rule_name")
+                    or ""
+                )
+                if not text:
+                    continue
+                key = str(text).strip().lower()
+                if key in seen_text:
+                    continue
+                seen_text.add(key)
+                rule["sentence"] = text
+                collected.append(
+                    {
+                        "section": name,
+                        "rule_id": rule.get("rule_id"),
+                        "sentence": text,
+                        "priority": rule.get("priority", 0),
+                        "confidence": rule.get("confidence", 0),
+                    }
+                )
+        if collected:
+            result.sentences = collected
+            result.sentence_count = len(collected)
+        result.section_count = sum(
+            1 for section in (result.sections or {}).values() if section.rules
+        )
+        return result
 
     def generate_sentence(
         self,

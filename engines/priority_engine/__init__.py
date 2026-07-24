@@ -14,6 +14,11 @@ from .exceptions import (
     PriorityResolutionError,
 )
 from .execution_planner import ExecutionPlanner
+from .matched_rule_resolver import (
+    DiscardedMatchedRule,
+    MatchedRuleResolution,
+    MatchedRuleResolver,
+)
 from .models import (
     ConditionMatch,
     ExecutionPlan,
@@ -35,9 +40,12 @@ from .service import PriorityService
 __all__ = [
     "ConditionMatch",
     "ConditionMatcher",
+    "DiscardedMatchedRule",
     "ExecutionPlan",
     "ExecutionPlanner",
     "ExecutionStep",
+    "MatchedRuleResolution",
+    "MatchedRuleResolver",
     "PriorityCondition",
     "PriorityConditionError",
     "PriorityData",

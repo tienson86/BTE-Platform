@@ -97,7 +97,7 @@ class ReportRecommendation:
 @dataclass(slots=True)
 class Report:
     """
-    Model báo cáo hoàn chỉnh.
+    WP6 ReportModel — báo cáo hoàn chỉnh + artifacts + template coverage.
     """
 
     metadata: ReportMetadata = field(
@@ -127,3 +127,61 @@ class Report:
     status: ReportStatus = ReportStatus.DRAFT
 
     format: ReportFormat = ReportFormat.MARKDOWN
+
+    html: str = ""
+    markdown: str = ""
+    pdf_path: str = ""
+    templates_used: list[dict[str, Any]] = field(default_factory=list)
+    templates_unused: list[dict[str, Any]] = field(default_factory=list)
+    template_coverage: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        """Serialize report for JSON export / pipeline."""
+        return {
+            "metadata": {
+                "title": self.metadata.title,
+                "author": self.metadata.author,
+                "version": self.metadata.version,
+                "language": self.metadata.language,
+                "created_at": (
+                    self.metadata.created_at.isoformat()
+                    if self.metadata.created_at
+                    else None
+                ),
+                "generated_at": (
+                    self.metadata.generated_at.isoformat()
+                    if self.metadata.generated_at
+                    else None
+                ),
+            },
+            "summary": {
+                "title": self.summary.title,
+                "content": self.summary.content,
+            },
+            "sections": [
+                section.to_dict() if hasattr(section, "to_dict") else section
+                for section in self.sections
+            ],
+            "recommendations": [
+                {
+                    "title": item.title,
+                    "content": item.content,
+                    "priority": item.priority,
+                }
+                for item in self.recommendations
+            ],
+            "score": self.score,
+            "appendix": self.appendix,
+            "status": self.status.value if isinstance(self.status, ReportStatus) else self.status,
+            "format": self.format.value if isinstance(self.format, ReportFormat) else self.format,
+            "html": self.html,
+            "markdown": self.markdown,
+            "pdf_path": self.pdf_path,
+            "templates_used": self.templates_used,
+            "templates_unused": self.templates_unused,
+            "template_coverage": self.template_coverage,
+        }
+
+
+# Public WP6 name
+ReportModel = Report
