@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rule Schema",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "chapter",
+    "template_id",
+    "priority",
+    "enabled"
+  ],
+  "properties": {
+    "rule_id": { "$ref": "common_schema.json#/$defs/id" },
+    "chapter": { "type": "string" },
+    "section": { "type": "string" },
+    "priority": { "$ref": "common_schema.json#/$defs/priority" },
+    "enabled": { "$ref": "common_schema.json#/$defs/enabled" },
+    "condition_json": { "type": "object" },
+    "template_id": { "$ref": "common_schema.json#/$defs/id" },
+    "score": { "type": "integer" },
+    "tags": { "$ref": "common_schema.json#/$defs/tags" },
+    "author": { "type": "string" },
+    "version": { "$ref": "common_schema.json#/$defs/version" },
+    "description": { "type": "string" }
+  }
+}

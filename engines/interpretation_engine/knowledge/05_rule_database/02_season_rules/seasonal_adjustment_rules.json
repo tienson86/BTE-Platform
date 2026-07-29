@@ -1,0 +1,251 @@
+[
+    {
+      "rule_id": "SAR_0001",
+      "concept": "seasonal_adjustment",
+      "display_name": "Điều chỉnh theo mùa",
+      "description": "Tập hợp các quy tắc điều chỉnh ảnh hưởng của mùa trong các trường hợp đặc biệt hoặc ngoại lệ.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0002",
+      "concept": "adjustment_type",
+      "display_name": "Loại điều chỉnh",
+      "description": "Phân loại các kiểu điều chỉnh được áp dụng trong Season Engine.",
+      "available_types": [
+        "season_transition",
+        "earth_transition",
+        "solar_term_boundary",
+        "season_override",
+        "exception_override"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0003",
+      "concept": "adjustment_strategy",
+      "display_name": "Chiến lược điều chỉnh",
+      "description": "Định nghĩa phương pháp điều chỉnh ảnh hưởng theo mùa.",
+      "available_strategies": [
+        "blend",
+        "override",
+        "replace",
+        "inherit",
+        "fallback"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0004",
+      "concept": "transition_period",
+      "display_name": "Giai đoạn giao mùa",
+      "description": "Khoảng thời gian chuyển tiếp giữa hai mùa, có thể chịu ảnh hưởng đồng thời của cả hai mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0005",
+      "concept": "season_override",
+      "display_name": "Ghi đè theo mùa",
+      "description": "Cho phép thay thế kết quả mùa mặc định khi thỏa mãn điều kiện đặc biệt.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0006",
+      "concept": "season_exception",
+      "display_name": "Ngoại lệ theo mùa",
+      "description": "Các trường hợp không áp dụng quy tắc mùa thông thường và cần xử lý riêng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0007",
+      "concept": "adjustment_priority",
+      "display_name": "Thứ tự ưu tiên điều chỉnh",
+      "description": "Xác định mức ưu tiên giữa nhiều quy tắc điều chỉnh cùng được áp dụng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0008",
+      "concept": "final_adjustment_result",
+      "display_name": "Kết quả điều chỉnh cuối cùng",
+      "description": "Kết quả sau khi áp dụng toàn bộ quy tắc điều chỉnh theo mùa.",
+      "applicable_scope": [
+        "strength_engine",
+        "temperature_engine",
+        "useful_god_engine",
+        "pattern_engine",
+        "interpretation_engine"
+      ],
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SAR_0101",
+      "adjustment_type": "season_transition",
+      "display_name": "Điều chỉnh giao mùa",
+      "trigger_condition": "transition_period",
+      "adjustment_strategy": "blend",
+      "affected_scope": [
+        "season",
+        "element_state",
+        "seasonal_strength"
+      ],
+      "description": "Kết hợp ảnh hưởng của mùa hiện tại và mùa kế tiếp trong giai đoạn giao mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0102",
+      "adjustment_type": "earth_transition",
+      "display_name": "Điều chỉnh Tứ Quý",
+      "trigger_condition": "transition_season",
+      "adjustment_strategy": "override",
+      "affected_scope": [
+        "dominant_element",
+        "element_state",
+        "seasonal_strength"
+      ],
+      "description": "Ưu tiên ảnh hưởng của hành Thổ trong giai đoạn Tứ Quý.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0103",
+      "adjustment_type": "solar_term_boundary",
+      "display_name": "Điều chỉnh theo ranh giới Tiết khí",
+      "trigger_condition": "solar_term_boundary",
+      "adjustment_strategy": "replace",
+      "affected_scope": [
+        "season",
+        "element_state"
+      ],
+      "description": "Khi thời điểm nằm tại ranh giới Tiết khí, sử dụng kết quả xác định theo Tiết khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0104",
+      "adjustment_type": "season_override",
+      "display_name": "Ghi đè mùa",
+      "trigger_condition": "override_condition",
+      "adjustment_strategy": "override",
+      "affected_scope": [
+        "season",
+        "seasonal_strength"
+      ],
+      "description": "Cho phép thay thế kết quả mùa mặc định khi có quy tắc ưu tiên cao hơn.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0105",
+      "adjustment_type": "exception_override",
+      "display_name": "Ghi đè ngoại lệ",
+      "trigger_condition": "exception_detected",
+      "adjustment_strategy": "fallback",
+      "affected_scope": [
+        "season",
+        "element_state",
+        "seasonal_strength"
+      ],
+      "description": "Áp dụng quy tắc thay thế trong các trường hợp ngoại lệ đã được định nghĩa.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SAR_0201",
+      "exception_type": "solar_term_override",
+      "display_name": "Ưu tiên Tiết khí",
+      "trigger_condition": "solar_term_available",
+      "override_target": "season",
+      "priority": 100,
+      "description": "Khi có dữ liệu Tiết khí hợp lệ, việc xác định mùa phải dựa trên Tiết khí thay vì tháng âm lịch.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0202",
+      "exception_type": "transition_period",
+      "display_name": "Ngoại lệ giao mùa",
+      "trigger_condition": "transition_period_detected",
+      "override_target": "seasonal_strength",
+      "priority": 90,
+      "description": "Trong giai đoạn giao mùa, áp dụng quy tắc điều chỉnh thay vì sử dụng trực tiếp quy tắc của một mùa duy nhất.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0203",
+      "exception_type": "earth_transition",
+      "display_name": "Ngoại lệ Tứ Quý",
+      "trigger_condition": "earth_transition_detected",
+      "override_target": "dominant_element",
+      "priority": 80,
+      "description": "Trong giai đoạn Tứ Quý, ưu tiên hành Thổ làm chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0204",
+      "exception_type": "calendar_fallback",
+      "display_name": "Sử dụng dữ liệu dự phòng",
+      "trigger_condition": "solar_term_unavailable",
+      "override_target": "season",
+      "priority": 70,
+      "description": "Nếu không xác định được Tiết khí thì sử dụng Địa Chi tháng để xác định mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0205",
+      "exception_type": "manual_override",
+      "display_name": "Ghi đè thủ công",
+      "trigger_condition": "manual_configuration",
+      "override_target": "all",
+      "priority": 60,
+      "description": "Cho phép cấu hình ghi đè kết quả trong các trường hợp kiểm thử hoặc hiệu chỉnh dữ liệu.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SAR_0301",
+      "adjustment_result": "no_adjustment",
+      "display_name": "Không điều chỉnh",
+      "result_category": "normal",
+      "severity_level": "none",
+      "description": "Không có quy tắc điều chỉnh nào được áp dụng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0302",
+      "adjustment_result": "blended",
+      "display_name": "Điều chỉnh giao mùa",
+      "result_category": "transition",
+      "severity_level": "low",
+      "description": "Đã áp dụng quy tắc kết hợp ảnh hưởng giữa hai mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0303",
+      "adjustment_result": "overridden",
+      "display_name": "Điều chỉnh ghi đè",
+      "result_category": "override",
+      "severity_level": "medium",
+      "description": "Kết quả mặc định đã được thay thế bằng quy tắc ưu tiên cao hơn.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0304",
+      "adjustment_result": "fallback",
+      "display_name": "Điều chỉnh dự phòng",
+      "result_category": "fallback",
+      "severity_level": "medium",
+      "description": "Áp dụng quy tắc dự phòng do thiếu dữ liệu đầu vào.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SAR_0305",
+      "adjustment_result": "exception_applied",
+      "display_name": "Điều chỉnh ngoại lệ",
+      "result_category": "exception",
+      "severity_level": "high",
+      "description": "Đã áp dụng một hoặc nhiều quy tắc ngoại lệ theo mùa.",
+      "enabled": true
+    }
+  ]

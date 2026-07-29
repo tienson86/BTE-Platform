@@ -1,0 +1,121 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T17:00:00Z",
+        "updated_at": "2026-07-29T17:00:00Z",
+        "approved_at": "2026-07-29T17:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "special_case",
+            "dependencies"
+        ],
+        "source": "BTE Platform Special Case Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Module dependencies and execution order for Special Case Rule Database.",
+        "description": "Defines upstream and downstream module relationships in the BTE analysis pipeline.",
+        "references": [
+            "MODULE_SPEC.md",
+            "SPECIAL_CASE_DECISION_TREE.md"
+        ]
+    },
+    "depends_on": [
+        {
+            "module": "01_strength_rules",
+            "path": "knowledge/rule_database/01_strength_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "strength_level",
+                "strength_score"
+            ],
+            "reason": "Special cases consume strength classification for edge detection."
+        },
+        {
+            "module": "02_season_rules",
+            "path": "knowledge/rule_database/02_season_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "season",
+                "season_score"
+            ],
+            "reason": "Seasonal exceptions reference season module output."
+        },
+        {
+            "module": "03_temperature_rules",
+            "path": "knowledge/rule_database/03_temperature_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "temperature_type",
+                "temperature_score"
+            ],
+            "reason": "Temperature special cases use climate classification."
+        },
+        {
+            "module": "04_pattern_rules",
+            "path": "knowledge/rule_database/04_pattern_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "primary_pattern",
+                "pattern_quality",
+                "pattern_confidence"
+            ],
+            "reason": "Pattern-breaking exceptions reference pattern classification."
+        }
+    ],
+    "used_by": [
+        {
+            "module": "06_follow_pattern_rules",
+            "path": "knowledge/rule_database/06_follow_pattern_rules/",
+            "signals": [
+                "special_case_flag"
+            ],
+            "reason": "Follow pattern rules check special case overrides."
+        },
+        {
+            "module": "13_useful_god_engine",
+            "path": "database/13_useful_god/",
+            "signals": [
+                "special_case_flag"
+            ],
+            "reason": "Useful God selection applies special case adjustments."
+        }
+    ],
+    "execution_order": [
+        {
+            "stage": 1,
+            "module": "02_season_rules",
+            "output": "season_score"
+        },
+        {
+            "stage": 2,
+            "module": "01_strength_rules",
+            "output": "strength_score"
+        },
+        {
+            "stage": 3,
+            "module": "03_temperature_rules",
+            "output": "temperature_score"
+        },
+        {
+            "stage": 4,
+            "module": "04_pattern_rules",
+            "output": "pattern_match"
+        },
+        {
+            "stage": 5,
+            "module": "05_special_case_rules",
+            "output": "special_case_flag"
+        },
+        {
+            "stage": 6,
+            "module": "06_follow_pattern_rules",
+            "output": "follow_pattern"
+        }
+    ]
+}

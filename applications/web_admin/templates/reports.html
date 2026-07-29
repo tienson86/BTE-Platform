@@ -1,0 +1,17 @@
+<div class="panel">
+  <div class="toolbar">
+    <input id="reportCaseId" placeholder="Case ID" style="min-width:280px" />
+    <button type="button" id="btnLoadReport">Load report</button>
+    <button type="button" class="secondary" id="btnShowHtml">HTML</button>
+    <button type="button" class="secondary" id="btnShowMd">Markdown</button>
+    <button type="button" class="secondary" id="btnDownloadPdf">Download / Print PDF</button>
+  </div>
+  <p class="muted">Loads report/narrative content from a case via REST export &amp; case detail.</p>
+</div>
+<div class="panel">
+  <h2>Viewer</h2>
+  <iframe id="htmlView" class="viewer-frame" title="HTML report" style="display:none"></iframe>
+  <div id="mdView" class="pre" style="display:none"></div>
+</div>
+<script src="/static/js/reports.js"></script>
+<script>document.getElementById("pageTitle").textContent = "Reports";</script>

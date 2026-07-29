@@ -1,0 +1,21 @@
+<div class="card-grid">
+  <div class="card"><div class="label">Edition</div><div class="value" id="licEdition">—</div></div>
+  <div class="card"><div class="label">Status</div><div class="value" id="licStatus">—</div></div>
+  <div class="card"><div class="label">Expires</div><div class="value" id="licExpires">—</div></div>
+  <div class="card"><div class="label">Machine ID</div><div class="value" id="licMachine" style="font-size:0.85rem">—</div></div>
+</div>
+<div class="panel">
+  <h2>Enabled features</h2>
+  <div id="licFeatures" class="toolbar"></div>
+</div>
+<div class="panel">
+  <h2>Activate license</h2>
+  <div class="toolbar">
+    <input id="licenseKey" placeholder="License key" style="min-width:320px" />
+    <button type="button" id="btnActivate">Activate</button>
+    <button type="button" class="secondary" id="btnRefreshLic">Refresh</button>
+  </div>
+  <div id="licRaw" class="pre"></div>
+</div>
+<script src="/static/js/licenses.js"></script>
+<script>document.getElementById("pageTitle").textContent = "Licenses";</script>

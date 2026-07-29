@@ -1,0 +1,150 @@
+[
+    {
+      "rule_id": "CSR_0001",
+      "control_type": "controlling_element",
+      "name": "Controlling Element",
+      "description": "Ngũ hành khắc Nhật Chủ, làm suy giảm sức mạnh của Nhật Chủ.",
+      "engine_effect": "decrease_strength",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0002",
+      "control_type": "stem_control",
+      "name": "Heavenly Stem Control",
+      "description": "Lực khắc phát sinh từ Thiên Can lộ xuất.",
+      "engine_effect": "decrease_strength",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0003",
+      "control_type": "hidden_stem_control",
+      "name": "Hidden Stem Control",
+      "description": "Lực khắc phát sinh từ Tàng Can trong Địa Chi.",
+      "engine_effect": "decrease_strength",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0004",
+      "control_type": "visible_control",
+      "name": "Visible Control",
+      "description": "Lực khắc đến từ Thiên Can, có hiệu lực trực tiếp.",
+      "engine_effect": "decrease_strength",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0005",
+      "control_type": "hidden_control",
+      "name": "Hidden Control",
+      "description": "Lực khắc đến từ Tàng Can, có hiệu lực gián tiếp.",
+      "engine_effect": "decrease_strength",
+      "priority": 60,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "CSR_0101",
+      "element": "wood",
+      "control_stems": [
+        "canh",
+        "tan"
+      ],
+      "description": "Mộc bị Kim khắc, vì vậy Nhật Chủ Mộc chịu lực khắc từ Thiên Can Canh và Tân.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0102",
+      "element": "fire",
+      "control_stems": [
+        "nham",
+        "quy"
+      ],
+      "description": "Hỏa bị Thủy khắc, vì vậy Nhật Chủ Hỏa chịu lực khắc từ Thiên Can Nhâm và Quý.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0103",
+      "element": "earth",
+      "control_stems": [
+        "giap",
+        "at"
+      ],
+      "description": "Thổ bị Mộc khắc, vì vậy Nhật Chủ Thổ chịu lực khắc từ Thiên Can Giáp và Ất.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0104",
+      "element": "metal",
+      "control_stems": [
+        "binh",
+        "dinh"
+      ],
+      "description": "Kim bị Hỏa khắc, vì vậy Nhật Chủ Kim chịu lực khắc từ Thiên Can Bính và Đinh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0105",
+      "element": "water",
+      "control_stems": [
+        "mau",
+        "ky"
+      ],
+      "description": "Thủy bị Thổ khắc, vì vậy Nhật Chủ Thủy chịu lực khắc từ Thiên Can Mậu và Kỷ.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "CSR_0201",
+      "control_source": "hidden_stem",
+      "mapping_strategy": "inherit_from_part_2",
+      "use_root_strength": true,
+      "description": "Áp dụng quy tắc Control của Part 2 cho các Tàng Can trong Địa Chi. Mức ảnh hưởng được xác định theo root_strength_rules.json.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "CSR_0301",
+      "control_source": "heavenly_stem",
+      "score": -10,
+      "description": "Thiên Can khắc trực tiếp làm giảm mạnh sức mạnh Nhật Chủ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0302",
+      "control_source": "hidden_stem",
+      "root_level": "strong_root",
+      "score": -10,
+      "description": "Tàng Can chủ khí khắc Nhật Chủ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0303",
+      "control_source": "hidden_stem",
+      "root_level": "medium_root",
+      "score": -7,
+      "description": "Tàng Can trung khí khắc Nhật Chủ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0304",
+      "control_source": "hidden_stem",
+      "root_level": "weak_root",
+      "score": -4,
+      "description": "Tàng Can dư khí khắc Nhật Chủ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "CSR_0305",
+      "rule_type": "control_limit",
+      "maximum_negative_score": -100,
+      "minimum_negative_score": 0,
+      "description": "Giới hạn tổng điểm Control.",
+      "enabled": true
+    }
+  ]

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sentence_schema.json",
+  "title": "BTE Sentence Schema",
+
+  "type": "object",
+
+  "required": [
+    "sentence_id",
+    "text",
+    "enabled"
+  ],
+
+  "properties": {
+
+    "sentence_id": {
+      "$ref": "common_schema.json#/$defs/id"
+    },
+
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "variables": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      },
+
+      "default": []
+
+    },
+
+    "style": {
+
+      "type": "string",
+
+      "enum": [
+        "normal",
+        "highlight",
+        "warning",
+        "important"
+      ],
+
+      "default": "normal"
+
+    },
+
+    "enabled": {
+      "$ref": "common_schema.json#/$defs/enabled"
+    }
+
+  },
+
+  "additionalProperties": false
+}

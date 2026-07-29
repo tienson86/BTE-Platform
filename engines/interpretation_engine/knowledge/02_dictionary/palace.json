@@ -1,0 +1,143 @@
+{
+    "version": "2.1",
+    "category": "palace",
+    "description": "Từ điển chuẩn hóa các cung trong Bát Tự.",
+  
+    "items": [
+  
+      {
+        "id": "PL_YEAR",
+        "code": "year_pillar",
+        "display_name": "Cung Năm",
+        "name": "Niên Trụ",
+        "order": 1,
+        "scope": "year",
+        "description": "Đại diện tổ tiên, gia tộc, thời niên thiếu và môi trường ban đầu.",
+        "keywords": [
+          "Niên Trụ",
+          "Tổ Tiên",
+          "Cha Mẹ",
+          "Thời Niên Thiếu"
+        ],
+        "enabled": true
+      },
+  
+      {
+        "id": "PL_MONTH",
+        "code": "month_pillar",
+        "display_name": "Cung Tháng",
+        "name": "Nguyệt Trụ",
+        "order": 2,
+        "scope": "month",
+        "description": "Đại diện cha mẹ, anh chị em, sự nghiệp giai đoạn trưởng thành và môi trường làm việc.",
+        "keywords": [
+          "Nguyệt Trụ",
+          "Cha Mẹ",
+          "Anh Em",
+          "Sự Nghiệp"
+        ],
+        "enabled": true
+      },
+  
+      {
+        "id": "PL_DAY",
+        "code": "day_pillar",
+        "display_name": "Cung Ngày",
+        "name": "Nhật Trụ",
+        "order": 3,
+        "scope": "day",
+        "description": "Đại diện bản thân, hôn nhân và đời sống gia đình.",
+        "keywords": [
+          "Nhật Trụ",
+          "Bản Thân",
+          "Hôn Nhân",
+          "Phối Ngẫu"
+        ],
+        "enabled": true
+      },
+  
+      {
+        "id": "PL_HOUR",
+        "code": "hour_pillar",
+        "display_name": "Cung Giờ",
+        "name": "Thời Trụ",
+        "order": 4,
+        "scope": "hour",
+        "description": "Đại diện con cái, hậu vận, lý tưởng và thành quả về sau.",
+        "keywords": [
+          "Thời Trụ",
+          "Con Cái",
+          "Hậu Vận"
+        ],
+        "enabled": true
+      }
+  
+    ],
+  
+    "relationships": [
+  
+      {
+        "id": "PR_YEAR_MONTH",
+        "code": "year_month",
+        "display_name": "Niên - Nguyệt",
+        "from": "PL_YEAR",
+        "to": "PL_MONTH",
+        "description": "Quan hệ giữa gia tộc và cha mẹ."
+      },
+  
+      {
+        "id": "PR_MONTH_DAY",
+        "code": "month_day",
+        "display_name": "Nguyệt - Nhật",
+        "from": "PL_MONTH",
+        "to": "PL_DAY",
+        "description": "Quan hệ giữa cha mẹ và bản thân."
+      },
+  
+      {
+        "id": "PR_DAY_HOUR",
+        "code": "day_hour",
+        "display_name": "Nhật - Thời",
+        "from": "PL_DAY",
+        "to": "PL_HOUR",
+        "description": "Quan hệ giữa bản thân và con cái."
+      }
+  
+    ],
+  
+    "life_stages": [
+  
+      {
+        "id": "LS_CHILDHOOD",
+        "code": "childhood",
+        "display_name": "Thiếu Niên",
+        "palace_id": "PL_YEAR",
+        "description": "Giai đoạn từ khi sinh ra đến tuổi thiếu niên."
+      },
+  
+      {
+        "id": "LS_YOUTH",
+        "code": "youth",
+        "display_name": "Thanh Niên",
+        "palace_id": "PL_MONTH",
+        "description": "Giai đoạn học tập, lập nghiệp và phát triển ban đầu."
+      },
+  
+      {
+        "id": "LS_ADULTHOOD",
+        "code": "adulthood",
+        "display_name": "Trung Niên",
+        "palace_id": "PL_DAY",
+        "description": "Giai đoạn ổn định cuộc sống, hôn nhân và sự nghiệp."
+      },
+  
+      {
+        "id": "LS_OLDAGE",
+        "code": "oldage",
+        "display_name": "Hậu Vận",
+        "palace_id": "PL_HOUR",
+        "description": "Giai đoạn về già, con cháu và thành quả cuộc đời."
+      }
+  
+    ]
+  }

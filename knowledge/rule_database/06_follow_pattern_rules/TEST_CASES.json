@@ -1,0 +1,91 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T18:00:00Z",
+        "updated_at": "2026-07-29T18:00:00Z",
+        "approved_at": "2026-07-29T18:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "follow_pattern",
+            "test_cases"
+        ],
+        "source": "BTE Platform Follow Pattern Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Follow Pattern Rule Database.",
+        "description": "Unit test fixtures for follow pattern detection and override resolution.",
+        "references": [
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Tòng Vượng true follow matches",
+            "rule_id": "FOL-000001",
+            "input": {
+                "ten_gods_list": [
+                    "Tỷ Kiên",
+                    "Chính Ấn"
+                ]
+            },
+            "expected_match": true,
+            "expected_weight": 87
+        },
+        {
+            "test_id": "tc_002",
+            "description": "Tòng Tài true follow matches",
+            "rule_id": "FOL-000002",
+            "input": {
+                "ten_gods_list": [
+                    "Chính Tài"
+                ]
+            },
+            "expected_match": true,
+            "expected_weight": 86
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Pseudo follow false blocks",
+            "rule_id": "FOL-000010",
+            "input": {
+                "special_case": "FALSE_FOLLOW"
+            },
+            "expected_match": true,
+            "expected_weight": -20
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Strength weak eligibility gate",
+            "rule_id": "FOL-000012",
+            "input": {
+                "strength_level": "weak"
+            },
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Follow beats main priority",
+            "rule_id": "FOL-000043",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_006",
+            "description": "Fallback no follow",
+            "rule_id": "FOL-000050",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        }
+    ]
+}

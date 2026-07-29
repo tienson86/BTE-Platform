@@ -1,0 +1,720 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T20:00:00Z",
+        "updated_at": "2026-07-29T20:00:00Z",
+        "approved_at": "2026-07-29T20:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "priority",
+            "index"
+        ],
+        "source": "BTE Platform Priority Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Rule index for Priority Rule Database module.",
+        "description": "Deterministic lookup index by rule id, code, category, and family.",
+        "references": [
+            "NAMING_CONVENTIONS.md",
+            "PRIORITY_HIERARCHY.md"
+        ]
+    },
+    "index": [
+        {
+            "id": "PRI-000001",
+            "code": "pri_follow_beats_main",
+            "name": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được",
+            "category": "override",
+            "family": "override_rule",
+            "type": "follow_override_marker",
+            "priority_order": 200,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000002",
+            "code": "pri_special_beats_main",
+            "name": "Special cách (Khúc Trực v.v.) luôn beats Main cách",
+            "category": "override",
+            "family": "override_rule",
+            "type": "special_override_marker",
+            "priority_order": 190,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000003",
+            "code": "pri_combination_beats_standard",
+            "name": "Combination cách beats standard single cách",
+            "category": "override",
+            "family": "override_rule",
+            "type": "combination_override_marker",
+            "priority_order": 185,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000004",
+            "code": "ug_pri_001",
+            "name": "Special rules highest priority",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "pri_001",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000005",
+            "code": "ug_pri_002",
+            "name": "Season rules second priority",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "pri_002",
+            "priority_order": 90,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000006",
+            "code": "ug_pri_003",
+            "name": "Strength rules third priority",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "pri_003",
+            "priority_order": 80,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000007",
+            "code": "ug_pri_004",
+            "name": "Temperature rules fourth priority",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "pri_004",
+            "priority_order": 70,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000008",
+            "code": "ug_pri_005",
+            "name": "Flow rules last priority",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "pri_005",
+            "priority_order": 60,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000009",
+            "code": "str_pri_special",
+            "name": "Rule đặc biệt override",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_special",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000010",
+            "code": "str_pri_season",
+            "name": "Tháng lệnh quan trọng nhất",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_season",
+            "priority_order": 95,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000011",
+            "code": "str_pri_root",
+            "name": "Thông căn",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_root",
+            "priority_order": 90,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000012",
+            "code": "str_pri_support",
+            "name": "Trợ lực",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_support",
+            "priority_order": 85,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000013",
+            "code": "str_pri_control",
+            "name": "Khắc chế",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_control",
+            "priority_order": 80,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000014",
+            "code": "str_pri_drain",
+            "name": "Tiết khí",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_drain",
+            "priority_order": 75,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000015",
+            "code": "str_pri_combination",
+            "name": "Hợp hóa",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "pri_combination",
+            "priority_order": 70,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000016",
+            "code": "str_pri_level_strong",
+            "name": "Điểm tổng >= 65%",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "pri_level_strong",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000017",
+            "code": "str_pri_level_weak",
+            "name": "Điểm tổng <= 35%",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "pri_level_weak",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000018",
+            "code": "str_pri_level_balanced",
+            "name": "Điểm tổng cân bằng",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "pri_level_balanced",
+            "priority_order": 80,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000019",
+            "code": "dw001",
+            "name": "Ngũ hành",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "wuxing",
+            "priority_order": 70,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000020",
+            "code": "dw002",
+            "name": "Thân vượng nhược",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "strength",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000021",
+            "code": "dw003",
+            "name": "Thập thần",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "ten_gods",
+            "priority_order": 85,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000022",
+            "code": "dw004",
+            "name": "Cách cục",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "pattern",
+            "priority_order": 95,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000023",
+            "code": "dw005",
+            "name": "Dụng thần",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "useful_god",
+            "priority_order": 95,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000024",
+            "code": "dw006",
+            "name": "Thần sát",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "shensha",
+            "priority_order": 50,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000025",
+            "code": "dw007",
+            "name": "Đại vận",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "luck",
+            "priority_order": 60,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000026",
+            "code": "lp001",
+            "name": "Ưu tiên cao nhất",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "100",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000027",
+            "code": "lp002",
+            "name": "Tăng mạnh điểm",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "95",
+            "priority_order": 95,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000028",
+            "code": "lp003",
+            "name": "Tăng điểm",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "90",
+            "priority_order": 90,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000029",
+            "code": "lp004",
+            "name": "Điểm chuẩn",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "85",
+            "priority_order": 85,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000030",
+            "code": "lp005",
+            "name": "Giảm nhẹ",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "70",
+            "priority_order": 70,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000031",
+            "code": "lp006",
+            "name": "Giảm mạnh",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "60",
+            "priority_order": 60,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000032",
+            "code": "lp007",
+            "name": "Ưu tiên thấp nhất",
+            "category": "weighted_selection",
+            "family": "weighted_selection",
+            "type": "50",
+            "priority_order": 50,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000033",
+            "code": "exec_stage_season",
+            "name": "Execution Stage Season",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "02_season_rules",
+            "priority_order": 100,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000034",
+            "code": "exec_stage_strength",
+            "name": "Execution Stage Strength",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "01_strength_rules",
+            "priority_order": 95,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000035",
+            "code": "exec_stage_temperature",
+            "name": "Execution Stage Temperature",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "03_temperature_rules",
+            "priority_order": 90,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000036",
+            "code": "exec_stage_pattern",
+            "name": "Execution Stage Pattern",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "04_pattern_rules",
+            "priority_order": 85,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000037",
+            "code": "exec_stage_special",
+            "name": "Execution Stage Special Case",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "05_special_case_rules",
+            "priority_order": 80,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000038",
+            "code": "exec_stage_follow",
+            "name": "Execution Stage Follow Pattern",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "06_follow_pattern_rules",
+            "priority_order": 75,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000039",
+            "code": "exec_stage_combination",
+            "name": "Execution Stage Combination",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "07_combination_rules",
+            "priority_order": 70,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000040",
+            "code": "exec_stage_priority",
+            "name": "Execution Stage Priority",
+            "category": "execution_order",
+            "family": "execution_order",
+            "type": "08_priority_rules",
+            "priority_order": 65,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000041",
+            "code": "mod_pri_pattern",
+            "name": "Module Priority Pattern",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "pattern_module",
+            "priority_order": 92,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000042",
+            "code": "mod_pri_combination",
+            "name": "Module Priority Combination",
+            "category": "module_priority",
+            "family": "module_priority",
+            "type": "combination_module",
+            "priority_order": 88,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000043",
+            "code": "rule_pri_special",
+            "name": "Rule Priority Special Group",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "special_group",
+            "priority_order": 98,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000044",
+            "code": "rule_pri_follow",
+            "name": "Rule Priority Follow Group",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "follow_group",
+            "priority_order": 96,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000045",
+            "code": "rule_pri_main",
+            "name": "Rule Priority Main Pattern",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "main_group",
+            "priority_order": 85,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000046",
+            "code": "rule_pri_eligibility",
+            "name": "Rule Priority Eligibility",
+            "category": "rule_priority",
+            "family": "rule_priority",
+            "type": "eligibility_group",
+            "priority_order": 60,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000047",
+            "code": "ov_special_beats_all",
+            "name": "Override Special Beats All",
+            "category": "override",
+            "family": "override_rule",
+            "type": "special_beats_all",
+            "priority_order": 198,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000048",
+            "code": "ov_follow_beats_pattern",
+            "name": "Override Follow Beats Pattern",
+            "category": "override",
+            "family": "override_rule",
+            "type": "follow_beats_pattern",
+            "priority_order": 195,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000049",
+            "code": "ov_combination_beats_single",
+            "name": "Override Combination Beats Single",
+            "category": "override",
+            "family": "override_rule",
+            "type": "combination_beats_single",
+            "priority_order": 190,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000050",
+            "code": "conflict_multi_module",
+            "name": "Conflict Multi Module",
+            "category": "conflict_resolution",
+            "family": "conflict_resolution",
+            "type": "multi_module",
+            "priority_order": 180,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000051",
+            "code": "conflict_pattern_follow",
+            "name": "Conflict Pattern Follow",
+            "category": "conflict_resolution",
+            "family": "conflict_resolution",
+            "type": "pattern_follow",
+            "priority_order": 178,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000052",
+            "code": "conflict_special_pattern",
+            "name": "Conflict Special Pattern",
+            "category": "conflict_resolution",
+            "family": "conflict_resolution",
+            "type": "special_pattern",
+            "priority_order": 177,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000053",
+            "code": "conflict_equal_priority",
+            "name": "Conflict Equal Priority",
+            "category": "conflict_resolution",
+            "family": "conflict_resolution",
+            "type": "equal_priority",
+            "priority_order": 175,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000054",
+            "code": "conflict_equal_score",
+            "name": "Conflict Equal Score",
+            "category": "conflict_resolution",
+            "family": "conflict_resolution",
+            "type": "equal_score",
+            "priority_order": 174,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000055",
+            "code": "tie_higher_priority",
+            "name": "Tiebreak Higher Priority",
+            "category": "tie_breaking",
+            "family": "tie_breaking",
+            "type": "higher_priority",
+            "priority_order": 170,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000056",
+            "code": "tie_higher_weight",
+            "name": "Tiebreak Higher Weight",
+            "category": "tie_breaking",
+            "family": "tie_breaking",
+            "type": "higher_weight",
+            "priority_order": 168,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000057",
+            "code": "tie_first_match",
+            "name": "Tiebreak First Match",
+            "category": "tie_breaking",
+            "family": "tie_breaking",
+            "type": "first_match",
+            "priority_order": 165,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000058",
+            "code": "tie_module_order",
+            "name": "Tiebreak Module Order",
+            "category": "tie_breaking",
+            "family": "tie_breaking",
+            "type": "module_order",
+            "priority_order": 163,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000059",
+            "code": "fallback_default_module",
+            "name": "Fallback Default Module",
+            "category": "fallback",
+            "family": "fallback_selection",
+            "type": "default_module",
+            "priority_order": 10,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000060",
+            "code": "fallback_lowest_priority",
+            "name": "Fallback Lowest Priority",
+            "category": "fallback",
+            "family": "fallback_selection",
+            "type": "lowest_priority",
+            "priority_order": 5,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000061",
+            "code": "fallback_no_match",
+            "name": "Fallback No Match",
+            "category": "fallback",
+            "family": "fallback_selection",
+            "type": "no_match",
+            "priority_order": 1,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000062",
+            "code": "norm_baseline_50",
+            "name": "Normalize Baseline 50",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "baseline_50",
+            "priority_order": 55,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000063",
+            "code": "norm_scale_100",
+            "name": "Normalize Scale 100",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "scale_100",
+            "priority_order": 54,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000064",
+            "code": "norm_clamp_range",
+            "name": "Normalize Clamp Range",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "clamp_range",
+            "priority_order": 53,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000065",
+            "code": "norm_weighted_aggregate",
+            "name": "Normalize Weighted Aggregate",
+            "category": "score_normalization",
+            "family": "score_normalization",
+            "type": "weighted_aggregate",
+            "priority_order": 56,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000066",
+            "code": "final_highest_composite",
+            "name": "Final Highest Composite",
+            "category": "final_selection",
+            "family": "final_selection",
+            "type": "highest_composite",
+            "priority_order": 200,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000067",
+            "code": "final_confidence_gate",
+            "name": "Final Confidence Gate",
+            "category": "final_selection",
+            "family": "final_selection",
+            "type": "confidence_gate",
+            "priority_order": 195,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000068",
+            "code": "final_single_winner",
+            "name": "Final Single Winner",
+            "category": "final_selection",
+            "family": "final_selection",
+            "type": "single_winner",
+            "priority_order": 190,
+            "enabled": true
+        },
+        {
+            "id": "PRI-000069",
+            "code": "final_mark_selected",
+            "name": "Final Mark Selected",
+            "category": "final_selection",
+            "family": "final_selection",
+            "type": "mark_selected",
+            "priority_order": 185,
+            "enabled": true
+        }
+    ]
+}

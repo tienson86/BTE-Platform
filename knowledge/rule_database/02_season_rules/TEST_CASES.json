@@ -1,0 +1,84 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T14:00:00Z",
+        "updated_at": "2026-07-29T14:00:00Z",
+        "approved_at": "2026-07-29T14:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "season",
+            "test_cases"
+        ],
+        "source": "BTE Platform Season Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Season Rule Database.",
+        "description": "Unit and integration test fixtures for rule matching validation.",
+        "references": [
+            "MODULE_SPEC.md",
+            "TEST_CASES.json"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Spring wood in season applies positive weight",
+            "rule_id": "SEA-000017",
+            "input": {
+                "season": "spring",
+                "day_master_element": "wood",
+                "element_relation": "in_season"
+            },
+            "expected_match": true,
+            "expected_weight": 20
+        },
+        {
+            "test_id": "tc_002",
+            "description": "Winter fire dead applies negative weight",
+            "rule_id": "SEA-000034",
+            "input": {
+                "season": "winter",
+                "day_master_element": "fire",
+                "element_relation": "dead"
+            },
+            "expected_match": true,
+            "expected_weight": -20
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Solar term winter solstice matches",
+            "rule_id": "SEA-000042",
+            "input": {
+                "solar_term": "winter_solstice"
+            },
+            "expected_match": true,
+            "expected_weight": 12
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Wrong season does not match spring base",
+            "rule_id": "SEA-000001",
+            "input": {
+                "season": "winter"
+            },
+            "expected_match": false,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Mid summer phase matches",
+            "rule_id": "SEA-000008",
+            "input": {
+                "season_phase": "mid_summer"
+            },
+            "expected_match": true,
+            "expected_weight": 8
+        }
+    ]
+}

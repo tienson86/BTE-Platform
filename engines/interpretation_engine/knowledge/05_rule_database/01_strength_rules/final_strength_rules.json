@@ -1,0 +1,272 @@
+[
+    {
+      "rule_id": "FSR_0001",
+      "strength_level": "extremely_strong",
+      "display_name": "Cực Vượng",
+      "description": "Nhật Chủ có sức mạnh vượt trội, lực sinh trợ rất lớn.",
+      "category": "strong",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0002",
+      "strength_level": "strong",
+      "display_name": "Vượng",
+      "description": "Nhật Chủ mạnh, có nhiều lực hỗ trợ.",
+      "category": "strong",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0003",
+      "strength_level": "slightly_strong",
+      "display_name": "Hơi Vượng",
+      "description": "Nhật Chủ hơi nghiêng về vượng.",
+      "category": "strong",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0004",
+      "strength_level": "balanced",
+      "display_name": "Trung Hòa",
+      "description": "Nhật Chủ đạt trạng thái cân bằng.",
+      "category": "balanced",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0005",
+      "strength_level": "slightly_weak",
+      "display_name": "Hơi Nhược",
+      "description": "Nhật Chủ hơi yếu.",
+      "category": "weak",
+      "priority": 60,
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0006",
+      "strength_level": "weak",
+      "display_name": "Nhược",
+      "description": "Nhật Chủ yếu.",
+      "category": "weak",
+      "priority": 50,
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0007",
+      "strength_level": "extremely_weak",
+      "display_name": "Cực Nhược",
+      "description": "Nhật Chủ rất yếu, lực khắc và tiết chiếm ưu thế.",
+      "category": "weak",
+      "priority": 40,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "FSR_0101",
+      "strength_level": "extremely_strong",
+      "min_score": 80,
+      "max_score": 999,
+      "priority": 100,
+      "description": "Điểm tổng hợp đạt mức Cực Vượng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0102",
+      "strength_level": "strong",
+      "min_score": 60,
+      "max_score": 79,
+      "priority": 90,
+      "description": "Điểm tổng hợp đạt mức Vượng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0103",
+      "strength_level": "slightly_strong",
+      "min_score": 40,
+      "max_score": 59,
+      "priority": 80,
+      "description": "Điểm tổng hợp đạt mức Hơi Vượng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0104",
+      "strength_level": "balanced",
+      "min_score": 20,
+      "max_score": 39,
+      "priority": 70,
+      "description": "Điểm tổng hợp đạt mức Trung Hòa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0105",
+      "strength_level": "slightly_weak",
+      "min_score": 0,
+      "max_score": 19,
+      "priority": 60,
+      "description": "Điểm tổng hợp đạt mức Hơi Nhược.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0106",
+      "strength_level": "weak",
+      "min_score": -20,
+      "max_score": -1,
+      "priority": 50,
+      "description": "Điểm tổng hợp đạt mức Nhược.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0107",
+      "strength_level": "extremely_weak",
+      "min_score": -999,
+      "max_score": -21,
+      "priority": 40,
+      "description": "Điểm tổng hợp đạt mức Cực Nhược.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "FSR_0201",
+      "decision_type": "score_based",
+      "priority": 100,
+      "condition": "total_score",
+      "action": "apply_threshold",
+      "description": "Sử dụng tổng điểm để xác định mức vượng nhược.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0202",
+      "decision_type": "month_override",
+      "priority": 95,
+      "condition": "season_strength_exception",
+      "action": "adjust_strength_level",
+      "description": "Cho phép Nguyệt lệnh điều chỉnh kết quả nếu thuộc trường hợp ngoại lệ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0203",
+      "decision_type": "root_override",
+      "priority": 90,
+      "condition": "root_strength_exception",
+      "action": "adjust_strength_level",
+      "description": "Cho phép mức thông căn điều chỉnh kết quả nếu thuộc trường hợp ngoại lệ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0204",
+      "decision_type": "combination_override",
+      "priority": 85,
+      "condition": "transformation_success",
+      "action": "recalculate_strength",
+      "description": "Nếu hợp hóa thành công thì tính lại sức mạnh theo ngũ hành mới.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0205",
+      "decision_type": "special_case_override",
+      "priority": 80,
+      "condition": "special_case_detected",
+      "action": "apply_special_rule",
+      "description": "Áp dụng quy tắc đặc biệt nếu thuộc trường hợp ngoại lệ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0206",
+      "decision_type": "final_validation",
+      "priority": 70,
+      "condition": "all_rules_completed",
+      "action": "confirm_final_strength",
+      "description": "Xác nhận kết quả cuối cùng sau khi hoàn thành toàn bộ quá trình đánh giá.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "FSR_0301",
+      "strength_level": "extremely_strong",
+      "strength_category": "strong",
+      "strength_index": 7,
+      "is_strong_master": true,
+      "is_balanced_master": false,
+      "is_weak_master": false,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Cực Vượng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0302",
+      "strength_level": "strong",
+      "strength_category": "strong",
+      "strength_index": 6,
+      "is_strong_master": true,
+      "is_balanced_master": false,
+      "is_weak_master": false,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Vượng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0303",
+      "strength_level": "slightly_strong",
+      "strength_category": "strong",
+      "strength_index": 5,
+      "is_strong_master": true,
+      "is_balanced_master": false,
+      "is_weak_master": false,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Hơi Vượng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0304",
+      "strength_level": "balanced",
+      "strength_category": "balanced",
+      "strength_index": 4,
+      "is_strong_master": false,
+      "is_balanced_master": true,
+      "is_weak_master": false,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Trung Hòa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0305",
+      "strength_level": "slightly_weak",
+      "strength_category": "weak",
+      "strength_index": 3,
+      "is_strong_master": false,
+      "is_balanced_master": false,
+      "is_weak_master": true,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Hơi Nhược.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0306",
+      "strength_level": "weak",
+      "strength_category": "weak",
+      "strength_index": 2,
+      "is_strong_master": false,
+      "is_balanced_master": false,
+      "is_weak_master": true,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Nhược.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0307",
+      "strength_level": "extremely_weak",
+      "strength_category": "weak",
+      "strength_index": 1,
+      "is_strong_master": false,
+      "is_balanced_master": false,
+      "is_weak_master": true,
+      "recommended_next_engine": "useful_god_engine",
+      "description": "Nhật Chủ thuộc nhóm Cực Nhược.",
+      "enabled": true
+    }
+  ]

@@ -1,0 +1,363 @@
+[
+    {
+      "id": "PPR001",
+      "category": "special_pattern",
+      "priority_rank": 1,
+      "enabled": true,
+      "description": "Đặc cách được ưu tiên cao nhất."
+    },
+    {
+      "id": "PPR002",
+      "category": "transformation_pattern",
+      "priority_rank": 2,
+      "enabled": true,
+      "description": "Hóa khí cách và các biến hóa đặc biệt."
+    },
+    {
+      "id": "PPR003",
+      "category": "follow_pattern",
+      "priority_rank": 3,
+      "enabled": true,
+      "description": "Tòng cách."
+    },
+    {
+      "id": "PPR004",
+      "category": "standard_pattern",
+      "priority_rank": 4,
+      "enabled": true,
+      "description": "Chính cách thông thường."
+    }
+  ]
+  [
+    {
+      "id": "PPR005",
+      "priority_stage": "pattern_selection",
+      "priority_class": "override",
+      "priority_rank": 1,
+      "selection_action": "select_first",
+      "enabled": true,
+      "description": "Override Pattern luôn được xét đầu tiên."
+    },
+    {
+      "id": "PPR006",
+      "priority_stage": "pattern_selection",
+      "priority_class": "transformation",
+      "priority_rank": 2,
+      "selection_action": "select_first",
+      "enabled": true,
+      "description": "Transformation Pattern được ưu tiên sau Override."
+    },
+    {
+      "id": "PPR007",
+      "priority_stage": "pattern_selection",
+      "priority_class": "follow",
+      "priority_rank": 3,
+      "selection_action": "select_first",
+      "enabled": true,
+      "description": "Follow Pattern được ưu tiên hơn Standard Pattern."
+    },
+    {
+      "id": "PPR008",
+      "priority_stage": "pattern_selection",
+      "priority_class": "normal",
+      "priority_rank": 4,
+      "selection_action": "compare_score",
+      "enabled": true,
+      "description": "Các Chính cách được so sánh bằng Pattern Score."
+    },
+    {
+      "id": "PPR009",
+      "priority_stage": "pattern_selection",
+      "priority_class": "fallback",
+      "priority_rank": 5,
+      "selection_action": "select_highest_score",
+      "enabled": true,
+      "description": "Nếu không có quy tắc ưu tiên đặc biệt thì chọn ứng viên có tổng điểm cao nhất."
+    }
+  ]
+  [
+    {
+      "id": "PPR010",
+      "priority_stage": "tie_break",
+      "tie_break_order": 1,
+      "comparison_field": "priority_level",
+      "comparison_method": "higher_first",
+      "enabled": true,
+      "description": "Ưu tiên Pattern có Priority Level cao hơn."
+    },
+    {
+      "id": "PPR011",
+      "priority_stage": "tie_break",
+      "tie_break_order": 2,
+      "comparison_field": "pattern_strength",
+      "comparison_method": "higher_first",
+      "enabled": true,
+      "description": "Nếu cùng Priority Level thì ưu tiên Pattern Strength cao hơn."
+    },
+    {
+      "id": "PPR012",
+      "priority_stage": "tie_break",
+      "tie_break_order": 3,
+      "comparison_field": "confidence",
+      "comparison_method": "higher_first",
+      "enabled": true,
+      "description": "Nếu Strength bằng nhau thì ưu tiên Confidence cao hơn."
+    },
+    {
+      "id": "PPR013",
+      "priority_stage": "tie_break",
+      "tie_break_order": 4,
+      "comparison_field": "total_score",
+      "comparison_method": "higher_first",
+      "enabled": true,
+      "description": "Nếu Confidence bằng nhau thì ưu tiên tổng điểm cao hơn."
+    },
+    {
+      "id": "PPR014",
+      "priority_stage": "tie_break",
+      "tie_break_order": 5,
+      "comparison_field": "month_commander_match",
+      "comparison_method": "true_first",
+      "enabled": true,
+      "description": "Ưu tiên Pattern phù hợp với Nguyệt lệnh."
+    },
+    {
+      "id": "PPR015",
+      "priority_stage": "tie_break",
+      "tie_break_order": 6,
+      "comparison_field": "candidate_order",
+      "comparison_method": "lower_first",
+      "enabled": true,
+      "description": "Nếu vẫn bằng nhau thì chọn Pattern được phát hiện đầu tiên để đảm bảo kết quả ổn định."
+    }
+  ]
+  [
+    {
+      "id": "PPR016",
+      "priority_stage": "override",
+      "override_type": "single_override",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "override_pattern_detected",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "action": "select_override_pattern",
+        "reason_code": "override_pattern_detected"
+      }
+    },
+  
+    {
+      "id": "PPR017",
+      "priority_stage": "override",
+      "override_type": "transformation_override",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "transformation_pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "action": "select_transformation_pattern",
+        "reason_code": "transformation_pattern_confirmed"
+      }
+    },
+  
+    {
+      "id": "PPR018",
+      "priority_stage": "override",
+      "override_type": "follow_override",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "follow_pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+  
+      "result": {
+        "action": "select_follow_pattern",
+        "reason_code": "follow_pattern_confirmed"
+      }
+    },
+  
+    {
+      "id": "PPR019",
+      "priority_stage": "override",
+      "override_type": "exclusive_pattern",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "exclusive_pattern_count",
+          "operator": "equals",
+          "value": 1
+        }
+      ],
+  
+      "result": {
+        "action": "select_exclusive_pattern",
+        "reason_code": "only_one_exclusive_pattern"
+      }
+    },
+  
+    {
+      "id": "PPR020",
+      "priority_stage": "override",
+      "override_type": "no_override",
+      "enabled": true,
+  
+      "conditions": [
+        {
+          "field": "override_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+  
+      "result": {
+        "action": "continue_priority_pipeline",
+        "reason_code": "no_override_rule_applied"
+      }
+    }
+  ]
+  [
+    {
+      "id": "PPR021",
+      "stage_order": 1,
+      "stage_name": "collect_candidates",
+      "execution_mode": "collect",
+      "continue_on_success": true,
+      "enabled": true,
+      "description": "Thu thập toàn bộ Pattern Candidate hợp lệ từ Pattern Engine."
+    },
+    {
+      "id": "PPR022",
+      "stage_order": 2,
+      "stage_name": "apply_override_rules",
+      "execution_mode": "override",
+      "continue_on_success": false,
+      "enabled": true,
+      "description": "Áp dụng Override Rules. Nếu có kết quả thì kết thúc quá trình chọn."
+    },
+    {
+      "id": "PPR023",
+      "stage_order": 3,
+      "stage_name": "apply_priority_rules",
+      "execution_mode": "priority",
+      "continue_on_success": true,
+      "enabled": true,
+      "description": "Lọc ứng viên theo Priority Level."
+    },
+    {
+      "id": "PPR024",
+      "stage_order": 4,
+      "stage_name": "apply_tie_break_rules",
+      "execution_mode": "tie_break",
+      "continue_on_success": true,
+      "enabled": true,
+      "description": "Giải quyết các trường hợp đồng hạng."
+    },
+    {
+      "id": "PPR025",
+      "stage_order": 5,
+      "stage_name": "select_final_pattern",
+      "execution_mode": "finalize",
+      "continue_on_success": false,
+      "enabled": true,
+      "description": "Chọn Pattern cuối cùng và trả kết quả cho Interpretation Engine."
+    }
+  ]
+  [
+    {
+      "id": "PPR026",
+      "policy_name": "single_final_pattern",
+      "enabled": true,
+      "policy_type": "selection",
+      "value": true,
+      "description": "Mỗi lá số chỉ được phép có một Final Pattern."
+    },
+    {
+      "id": "PPR027",
+      "policy_name": "deterministic_selection",
+      "enabled": true,
+      "policy_type": "execution",
+      "value": true,
+      "description": "Cùng một dữ liệu đầu vào phải luôn cho cùng một kết quả."
+    },
+    {
+      "id": "PPR028",
+      "policy_name": "override_has_highest_priority",
+      "enabled": true,
+      "policy_type": "priority",
+      "value": true,
+      "description": "Override Rules luôn được áp dụng trước Priority Rules."
+    },
+    {
+      "id": "PPR029",
+      "policy_name": "highest_score_within_same_level",
+      "enabled": true,
+      "policy_type": "priority",
+      "value": true,
+      "description": "Trong cùng một Priority Level, chọn Pattern có Total Score cao nhất."
+    },
+    {
+      "id": "PPR030",
+      "policy_name": "tie_break_required",
+      "enabled": true,
+      "policy_type": "execution",
+      "value": true,
+      "description": "Nếu còn nhiều Pattern sau bước Priority thì bắt buộc áp dụng Tie Break Rules."
+    },
+    {
+      "id": "PPR031",
+      "policy_name": "ignore_disabled_rules",
+      "enabled": true,
+      "policy_type": "execution",
+      "value": true,
+      "description": "Bỏ qua mọi Rule có enabled = false."
+    },
+    {
+      "id": "PPR032",
+      "policy_name": "require_minimum_confidence",
+      "enabled": true,
+      "policy_type": "validation",
+      "value": "medium",
+      "description": "Final Pattern phải đạt tối thiểu mức Confidence = medium."
+    },
+    {
+      "id": "PPR033",
+      "policy_name": "fallback_to_highest_score",
+      "enabled": true,
+      "policy_type": "fallback",
+      "value": true,
+      "description": "Nếu không có Rule ưu tiên nào áp dụng thì chọn Candidate có Total Score cao nhất."
+    },
+    {
+      "id": "PPR034",
+      "policy_name": "explain_selection_reason",
+      "enabled": true,
+      "policy_type": "interpretation",
+      "value": true,
+      "description": "Lưu lại lý do lựa chọn để Interpretation Engine sinh phần giải thích."
+    },
+    {
+      "id": "PPR035",
+      "policy_name": "return_selection_metadata",
+      "enabled": true,
+      "policy_type": "output",
+      "value": true,
+      "description": "Trả về đầy đủ metadata của quá trình lựa chọn (priority level, score, confidence, reason)."
+    }
+  ]

@@ -1,0 +1,93 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T19:00:00Z",
+        "updated_at": "2026-07-29T19:00:00Z",
+        "approved_at": "2026-07-29T19:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "combination",
+            "test_cases"
+        ],
+        "source": "BTE Platform Combination Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Combination Rule Database.",
+        "description": "Unit test fixtures for combination matching and conflict resolution.",
+        "references": [
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Quan Ấn pattern combination",
+            "rule_id": "COM-000001",
+            "input": {
+                "ten_gods_list": [
+                    "Chính Quan",
+                    "Chính Ấn"
+                ]
+            },
+            "expected_match": true,
+            "expected_weight": 85
+        },
+        {
+            "test_id": "tc_002",
+            "description": "Strong spring wood strength+season",
+            "rule_id": "COM-000016",
+            "input": {
+                "strength_level": "strong",
+                "season": "spring",
+                "day_master_element": "Mộc"
+            },
+            "expected_match": true,
+            "expected_weight": 15
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Pattern follow tai combination",
+            "rule_id": "COM-000032",
+            "input": {
+                "primary_pattern": "chinh_tai",
+                "follow_type": "tong_tai"
+            },
+            "expected_match": true,
+            "expected_weight": 18
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Season temperature mismatch",
+            "rule_id": "COM-000026",
+            "input": {
+                "season": "summer",
+                "temperature_type": "cold"
+            },
+            "expected_match": true,
+            "expected_weight": -10
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Override follow beats pattern",
+            "rule_id": "COM-000046",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_006",
+            "description": "Select highest score candidate",
+            "rule_id": "COM-000054",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        }
+    ]
+}

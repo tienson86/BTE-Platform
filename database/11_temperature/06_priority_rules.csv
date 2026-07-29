@@ -1,0 +1,11 @@
+rule_id,priority,score,score_target,conditions,temperature_level,recommendation,reason,description,reference,status,enabled
+pri_special,100,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""special""}]",,Ưu tiên đặc biệt,Rule đặc biệt,BTE-TMP-V2,active,true
+pri_climate,95,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""climate""}]",,Ưu tiên khí hậu,Tháng lệnh khí hậu,BTE-TMP-V2,active,true
+pri_season,90,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""season""}]",,Ưu tiên mùa,Mùa sinh,BTE-TMP-V2,active,true
+pri_dryness,85,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""dryness""}]",,Ưu tiên táo,Độ khô,BTE-TMP-V2,active,true
+pri_humidity,85,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""humidity""}]",,Ưu tiên thấm,Độ ẩm,BTE-TMP-V2,active,true
+pri_flow,80,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""flow""}]",,Ưu tiên lưu thông,Điều hậu,BTE-TMP-V2,active,true
+pri_level_hot,100,0,level,"[{""field"": ""temperature_score"", ""operator"": "">="", ""value"": 0.65}]",hot,Nhuận hạ giáng nhiệt,Nhiệt khí nặng,Điểm nhiệt cao,BTE-TMP-V2,active,true
+pri_level_cold,100,0,level,"[{""field"": ""temperature_score"", ""operator"": ""<="", ""value"": 0.35}]",cold,Ôn dưỡng tăng dương,Hàn khí nặng,Điểm hàn cao,BTE-TMP-V2,active,true
+pri_level_warm,85,0,level,"[{""field"": ""temperature_score"", ""operator"": "">"", ""value"": 0.50}, {""field"": ""temperature_score"", ""operator"": ""<"", ""value"": 0.65}]",warm,Cân Hỏa Thủy,Khí ấm,Khí ấm cân bằng,BTE-TMP-V2,active,true
+pri_level_cool,85,0,level,"[{""field"": ""temperature_score"", ""operator"": "">"", ""value"": 0.35}, {""field"": ""temperature_score"", ""operator"": ""<="", ""value"": 0.50}]",cool,Tăng dương khí,Khí mát,Khí mát cân bằng,BTE-TMP-V2,active,true

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "condition_schema.json",
+  "title": "BTE Rule Condition Schema",
+  "description": "Schema định nghĩa cấu trúc điều kiện Rule của Interpretation Engine.",
+  "type": "object",
+
+  "required": [
+    "operator",
+    "conditions"
+  ],
+
+  "properties": {
+
+    "operator": {
+
+      "type": "string",
+
+      "enum": [
+        "AND",
+        "OR",
+        "NOT"
+      ]
+
+    },
+
+    "conditions": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+
+        "oneOf": [
+
+          {
+            "$ref": "#/$defs/simple_condition"
+          },
+
+          {
+            "$ref": "#"
+          }
+
+        ]
+
+      }
+
+    }
+
+  },
+
+  "$defs": {
+
+    "simple_condition": {
+
+      "type": "object",
+
+      "required": [
+
+        "field",
+
+        "operator"
+
+      ],
+
+      "properties": {
+
+        "field": {
+
+          "type": "string"
+
+        },
+
+        "operator": {
+
+          "type": "string",
+
+          "enum": [
+
+            "eq",
+
+            "ne",
+
+            "gt",
+
+            "gte",
+
+            "lt",
+
+            "lte",
+
+            "in",
+
+            "not_in",
+
+            "contains",
+
+            "starts_with",
+
+            "ends_with",
+
+            "between",
+
+            "exists",
+
+            "not_exists",
+
+            "is_true",
+
+            "is_false"
+
+          ]
+
+        },
+
+        "value": {
+
+          "oneOf": [
+
+            {
+              "type": "string"
+            },
+
+            {
+              "type": "number"
+            },
+
+            {
+              "type": "integer"
+            },
+
+            {
+              "type": "boolean"
+            },
+
+            {
+              "type": "array"
+            },
+
+            {
+              "type": "null"
+            }
+
+          ]
+
+        }
+
+      },
+
+      "additionalProperties": false
+
+    }
+
+  },
+
+  "additionalProperties": false
+}

@@ -1,0 +1,47 @@
+{
+  "module_id": "12_luck_cycle",
+  "index_version": "1.0.0",
+  "schema_ref": "../sentence_schema.json",
+  "description": "Index của module 12_luck_cycle. Chỉ chứa entry nhẹ để lookup. Không chứa nội dung sentence.",
+  "entry_schema": {
+    "sentence_id": {
+      "type": "string",
+      "required": true,
+      "description": "ID duy nhất của sentence."
+    },
+    "sentence_name": {
+      "type": "string",
+      "required": true,
+      "description": "Tên kỹ thuật (snake_case)."
+    },
+    "category": {
+      "type": "string",
+      "required": true,
+      "description": "Nhóm phân loại trong module."
+    },
+    "priority": {
+      "type": "integer",
+      "required": true,
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Độ ưu tiên chọn sentence."
+    },
+    "version": {
+      "type": "string",
+      "required": true,
+      "description": "Phiên bản sentence."
+    },
+    "enabled": {
+      "type": "boolean",
+      "required": true,
+      "description": "Trạng thái bật/tắt."
+    },
+    "file_ref": {
+      "type": "string",
+      "required": false,
+      "description": "Đường dẫn tương đối tới file sentence (khi có sentence thật)."
+    }
+  },
+  "sentences": [],
+  "notes": "V1.0: mảng sentences để trống. Khi thêm sentence thật, cập nhật entry tại đây."
+}

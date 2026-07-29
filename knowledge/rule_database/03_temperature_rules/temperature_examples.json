@@ -1,0 +1,105 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T15:00:00Z",
+        "updated_at": "2026-07-29T15:00:00Z",
+        "approved_at": "2026-07-29T15:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "temperature",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Temperature Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Temperature Rule Database validation.",
+        "description": "Reference chart scenarios with expected temperature level and score ranges.",
+        "references": [
+            "database/11_temperature/08_examples.csv",
+            "MODULE_SPEC.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "day_master": "Binh",
+            "day_master_element": "fire",
+            "month_branch": "Ngo",
+            "climate_type": "hot",
+            "season": "summer",
+            "expected_level": "hot",
+            "expected_score_min": 0.55,
+            "expected_score_max": 0.95,
+            "notes": "Fire day master in fire month during summer."
+        },
+        {
+            "example_id": "ex_002",
+            "day_master": "Nham",
+            "day_master_element": "water",
+            "month_branch": "Ty",
+            "climate_type": "cold",
+            "season": "winter",
+            "expected_level": "cold",
+            "expected_score_min": 0.05,
+            "expected_score_max": 0.45,
+            "notes": "Water day master in water month during winter."
+        },
+        {
+            "example_id": "ex_003",
+            "day_master": "Giap",
+            "day_master_element": "wood",
+            "month_branch": "Dan",
+            "climate_type": "warm",
+            "season": "spring",
+            "expected_level": "warm",
+            "expected_score_min": 0.4,
+            "expected_score_max": 0.7,
+            "notes": "Wood day master in spring with warm climate."
+        },
+        {
+            "example_id": "ex_004",
+            "day_master": "Canh",
+            "day_master_element": "metal",
+            "month_branch": "Dau",
+            "climate_type": "cool",
+            "season": "autumn",
+            "expected_level": "cool",
+            "expected_score_min": 0.3,
+            "expected_score_max": 0.6,
+            "notes": "Metal day master in autumn with cool climate."
+        },
+        {
+            "example_id": "ex_005",
+            "day_master": "Dinh",
+            "day_master_element": "fire",
+            "month_branch": "Mui",
+            "climate_type": "hot",
+            "season": "summer",
+            "season_phase": "late_summer",
+            "expected_level": "hot",
+            "expected_score_min": 0.5,
+            "expected_score_max": 0.85,
+            "notes": "Late summer heat with fire day master."
+        },
+        {
+            "example_id": "ex_006",
+            "day_master": "Mau",
+            "day_master_element": "earth",
+            "month_branch": "Chen",
+            "climate_type": "warm",
+            "season": "summer",
+            "dryness_level": "slightly_dry",
+            "expected_level": "warm",
+            "expected_score_min": 0.35,
+            "expected_score_max": 0.65,
+            "notes": "Earth day master with slight dryness in summer."
+        }
+    ]
+}

@@ -1,0 +1,120 @@
+---
+description: Testing Rules
+alwaysApply: true
+---
+
+# Testing Rules
+
+## Rule 1
+
+Không sửa test nếu người dùng không yêu cầu.
+
+---
+
+## Rule 2
+
+Ưu tiên sửa source code.
+
+---
+
+## Rule 3
+
+Mỗi lần sửa
+
+chỉ chạy test của module.
+
+Ví dụ
+
+pytest tests/report -q
+
+Không chạy toàn project.
+
+---
+
+## Rule 4
+
+Chỉ chạy toàn bộ pytest khi người dùng yêu cầu.
+
+---
+
+## Rule 5
+
+Không sửa Golden Dataset.
+
+---
+
+## Rule 6
+
+Không sửa snapshot.
+
+---
+
+## Rule 7
+
+Không sửa expected output.
+
+---
+
+## Rule 8
+
+Không bỏ assert để test pass.
+
+---
+
+## Rule 9
+
+Không comment test.
+
+---
+
+## Rule 10
+
+Không skip test.
+
+---
+
+## Rule 11
+
+Không xóa test.
+
+---
+
+## Rule 12
+
+Giữ backward compatibility.
+
+---
+
+## Rule 13
+
+Nếu nhiều test fail
+
+ưu tiên sửa nguyên nhân gốc.
+
+Không sửa từng test riêng lẻ.
+
+---
+
+## Rule 14
+
+Nếu sửa API
+
+phải tạo wrapper.
+
+---
+
+## Rule 15
+
+Sau khi test pass
+
+hiển thị
+
+- files changed
+
+- test summary
+
+- remaining failures
+
+---
+
+END

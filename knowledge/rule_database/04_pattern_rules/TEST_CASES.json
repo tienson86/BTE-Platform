@@ -1,0 +1,101 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T16:00:00Z",
+        "updated_at": "2026-07-29T16:00:00Z",
+        "approved_at": "2026-07-29T16:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "pattern",
+            "test_cases"
+        ],
+        "source": "BTE Platform Pattern Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Pattern Rule Database.",
+        "description": "Unit test fixtures for rule matching, priority, and cross-pattern interaction.",
+        "references": [
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json",
+            "PATTERN_DECISION_TREE.md"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Chính Quan main pattern matches month command",
+            "rule_id": "PAT-000002",
+            "input": {
+                "month_branch_ten_god": "Chính Quan"
+            },
+            "expected_match": true,
+            "expected_weight": 80
+        },
+        {
+            "test_id": "tc_002",
+            "description": "Khúc Trực special pattern matches wood element",
+            "rule_id": "PAT-000012",
+            "input": {
+                "day_master_element": "Mộc",
+                "month_branch_element": "Mộc",
+                "officer_elements": []
+            },
+            "expected_match": true,
+            "expected_weight": 92
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Tòng Tài follow pattern matches",
+            "rule_id": "PAT-000018",
+            "input": {
+                "ten_gods_list": [
+                    "Chính Tài",
+                    "Tỷ Kiên"
+                ]
+            },
+            "expected_match": true,
+            "expected_weight": 86
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Quan Ấn combination matches",
+            "rule_id": "PAT-000023",
+            "input": {
+                "ten_gods_list": [
+                    "Chính Quan",
+                    "Chính Ấn"
+                ]
+            },
+            "expected_match": true,
+            "expected_weight": 85
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Follow beats main priority marker",
+            "rule_id": "PAT-000028",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_006",
+            "description": "Broken officer clash pattern",
+            "rule_id": "PAT-000035",
+            "input": {
+                "month_branch_ten_god": "Chính Quan",
+                "ten_gods_list": [
+                    "Chính Quan",
+                    "Thất Sát"
+                ]
+            },
+            "expected_match": true,
+            "expected_weight": 45
+        }
+    ]
+}

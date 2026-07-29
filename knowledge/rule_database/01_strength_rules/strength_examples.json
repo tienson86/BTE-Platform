@@ -1,0 +1,91 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T12:00:00Z",
+        "updated_at": "2026-07-29T12:00:00Z",
+        "approved_at": "2026-07-29T12:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "strength",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Strength Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Strength Rule Database validation.",
+        "description": "Reference chart scenarios with expected strength level and score ranges for regression testing.",
+        "references": [
+            "database/12_strength/08_examples.csv",
+            "VALIDATION_STANDARD.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "day_master": "Giap",
+            "day_master_element": "wood",
+            "month_branch": "Dan",
+            "month_status": "prosperous",
+            "root_level": "root_one",
+            "expected_level": "strong",
+            "expected_score_min": 0.55,
+            "expected_score_max": 0.9,
+            "notes": "Wood prosperous in spring with one root branch."
+        },
+        {
+            "example_id": "ex_002",
+            "day_master": "Canh",
+            "day_master_element": "metal",
+            "month_branch": "Ngo",
+            "month_status": "dead",
+            "root_level": "no_root",
+            "expected_level": "weak",
+            "expected_score_min": 0.05,
+            "expected_score_max": 0.4,
+            "notes": "Metal dead phase in fire month without root."
+        },
+        {
+            "example_id": "ex_003",
+            "day_master": "Nham",
+            "day_master_element": "water",
+            "month_branch": "Ty",
+            "month_status": "prosperous",
+            "root_level": "root_two",
+            "expected_level": "strong",
+            "expected_score_min": 0.6,
+            "expected_score_max": 0.95,
+            "notes": "Water prosperous in winter with two root branches."
+        },
+        {
+            "example_id": "ex_004",
+            "day_master": "At",
+            "day_master_element": "wood",
+            "month_branch": "Mui",
+            "month_status": "rest",
+            "root_level": "hidden_root",
+            "expected_level": "balanced",
+            "expected_score_min": 0.35,
+            "expected_score_max": 0.65,
+            "notes": "Wood in rest phase during summer with hidden root."
+        },
+        {
+            "example_id": "ex_005",
+            "day_master": "Binh",
+            "day_master_element": "fire",
+            "month_branch": "Ty",
+            "month_status": "dead",
+            "root_level": "root_one",
+            "expected_level": "weak",
+            "expected_score_min": 0.1,
+            "expected_score_max": 0.45,
+            "notes": "Fire dead phase in winter despite one root."
+        }
+    ]
+}

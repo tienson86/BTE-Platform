@@ -1,0 +1,6 @@
+rule_id,priority,score,score_target,conditions,temperature_level,recommendation,reason,description,reference,status,enabled
+hum_001,100,18,humidity,"[{""field"": ""humidity_level"", ""operator"": ""=="", ""value"": ""humid""}]",,Tăng Thổ Hỏa khối thấm,Khí thấm nặng,Thủy vượng gây thấm,BTE-TMP-V2,active,true
+hum_002,95,12,humidity,"[{""field"": ""humidity_level"", ""operator"": ""=="", ""value"": ""slightly_humid""}]",,Thông Thổ hóa Thủy,Khí hơi thấm,Hơi thấm cần khối,BTE-TMP-V2,active,true
+hum_003,90,8,humidity,"[{""field"": ""water_count"", ""operator"": "">="", ""value"": 3}]",,Tăng Hỏa Thổ,Thủy vượng thấm,Thủy nhiều gây ẩm,BTE-TMP-V2,active,true
+hum_004,88,6,humidity,"[{""field"": ""season"", ""operator"": ""=="", ""value"": ""winter""}, {""field"": ""water_count"", ""operator"": "">="", ""value"": 2}]",cold,Sấy ấm phòng thấm,Đông thấm hàn,Đông ẩm lạnh,BTE-TMP-V2,active,true
+hum_005,85,-5,humidity,"[{""field"": ""humidity_level"", ""operator"": ""=="", ""value"": ""normal""}]",,Giữ cân bằng,Độ ẩm bình thường,Không thấm không táo,BTE-TMP-V2,active,true

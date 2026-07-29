@@ -1,0 +1,127 @@
+{
+  "module_id": "01_summary",
+  "examples_version": "1.0.0",
+  "schema_ref": "../template_schema.json",
+  "description": "Example minh họa schema. Không phải nội dung luận giải thật.",
+  "examples": [
+    {
+      "id": "SUMX001",
+      "example_code": "schema_illustration_001",
+      "purpose": "illustrate_template_schema",
+      "is_real_content": false,
+      "template": {
+        "template_id": "summary_000",
+        "template_name": "summary_schema_example",
+        "module": "01_summary",
+        "category": "overview",
+        "title": "[SCHEMA EXAMPLE] Tổng Quan",
+        "description": "Ví dụ cấu trúc template. Placeholder only.",
+        "version": "1.0.0",
+        "priority": 50,
+        "condition_group": "AND",
+        "conditions": [
+          {
+            "condition_id": "C001",
+            "field": "interpretation.module_ready",
+            "operator": "eq",
+            "value": true
+          }
+        ],
+        "placeholders": [
+          {
+            "key": "{{subject_name}}",
+            "source": "report_context.subject_name",
+            "fallback": ""
+          },
+          {
+            "key": "{{section_key}}",
+            "source": "interpretation.summary.section_key",
+            "fallback": "overview"
+          }
+        ],
+        "render_config": {
+          "layout": "standard",
+          "max_blocks": 20,
+          "theme": "default"
+        },
+        "sections": [
+          {
+            "section_id": "summary_intro",
+            "section_key": "intro",
+            "title": "Intro",
+            "order": 1,
+            "enabled": true,
+            "blocks": [
+              "summary_B001",
+              "summary_B002"
+            ]
+          },
+          {
+            "section_id": "summary_body",
+            "section_key": "body",
+            "title": "Body",
+            "order": 2,
+            "enabled": true,
+            "blocks": [
+              "summary_B003",
+              "summary_B004"
+            ]
+          }
+        ],
+        "blocks": [
+          {
+            "block_id": "summary_B001",
+            "block_type": "title",
+            "label_ref": "title",
+            "order": 1,
+            "content_ref": "interpretation.summary.title",
+            "render_style": {
+              "weight": "bold"
+            },
+            "enabled": true
+          },
+          {
+            "block_id": "summary_B002",
+            "block_type": "summary",
+            "label_ref": "summary",
+            "order": 2,
+            "content_ref": "interpretation.summary.summary",
+            "render_style": {},
+            "enabled": true
+          },
+          {
+            "block_id": "summary_B003",
+            "block_type": "paragraph",
+            "label_ref": "paragraph",
+            "order": 3,
+            "content_ref": "interpretation.summary.body",
+            "render_style": {},
+            "enabled": true
+          },
+          {
+            "block_id": "summary_B004",
+            "block_type": "recommendation",
+            "label_ref": "recommendation",
+            "order": 4,
+            "content_ref": "interpretation.summary.recommendation",
+            "render_style": {},
+            "enabled": true
+          }
+        ],
+        "tags": [
+          "schema_example",
+          "framework",
+          "summary"
+        ],
+        "language": "vi",
+        "enabled": false,
+        "schema_version": "1.0.0",
+        "created_at": "2026-07-24",
+        "updated_at": "2026-07-24",
+        "author": "BTE Platform",
+        "notes": "enabled=false vì đây chỉ là example schema, không dùng để render báo cáo thật.",
+        "extensions": {}
+      }
+    }
+  ]
+}

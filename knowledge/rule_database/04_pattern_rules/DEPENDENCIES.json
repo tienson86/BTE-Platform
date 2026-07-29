@@ -1,0 +1,109 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T16:00:00Z",
+        "updated_at": "2026-07-29T16:00:00Z",
+        "approved_at": "2026-07-29T16:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "pattern",
+            "dependencies"
+        ],
+        "source": "BTE Platform Pattern Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Module dependencies and execution order for Pattern Rule Database.",
+        "description": "Defines upstream and downstream module relationships in the BTE analysis pipeline.",
+        "references": [
+            "MODULE_SPEC.md",
+            "PATTERN_DECISION_TREE.md",
+            "knowledge/ROADMAP.md"
+        ]
+    },
+    "depends_on": [
+        {
+            "module": "01_strength_rules",
+            "path": "knowledge/rule_database/01_strength_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "strength_level",
+                "strength_score"
+            ],
+            "reason": "Pattern eligibility and follow detection consume strength classification."
+        },
+        {
+            "module": "02_season_rules",
+            "path": "knowledge/rule_database/02_season_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "season",
+                "season_phase",
+                "season_score"
+            ],
+            "reason": "Special and transformed patterns reference season context."
+        },
+        {
+            "module": "03_temperature_rules",
+            "path": "knowledge/rule_database/03_temperature_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "temperature_type",
+                "temperature_score"
+            ],
+            "reason": "Exceptional and eligibility rules use temperature classification."
+        }
+    ],
+    "used_by": [
+        {
+            "module": "05_flow_rules",
+            "path": "knowledge/rule_database/05_flow_rules/",
+            "signals": [
+                "pattern_match",
+                "primary_pattern"
+            ],
+            "reason": "Flow Engine uses pattern classification for directional analysis."
+        },
+        {
+            "module": "13_useful_god_engine",
+            "path": "database/13_useful_god/",
+            "signals": [
+                "primary_pattern",
+                "pattern_quality"
+            ],
+            "reason": "Useful God selection depends on pattern type."
+        }
+    ],
+    "execution_order": [
+        {
+            "stage": 1,
+            "module": "02_season_rules",
+            "output": "season_score"
+        },
+        {
+            "stage": 2,
+            "module": "01_strength_rules",
+            "output": "strength_score"
+        },
+        {
+            "stage": 3,
+            "module": "03_temperature_rules",
+            "output": "temperature_score"
+        },
+        {
+            "stage": 4,
+            "module": "04_pattern_rules",
+            "output": "pattern_match"
+        },
+        {
+            "stage": 5,
+            "module": "05_flow_rules",
+            "output": "flow_direction"
+        }
+    ]
+}

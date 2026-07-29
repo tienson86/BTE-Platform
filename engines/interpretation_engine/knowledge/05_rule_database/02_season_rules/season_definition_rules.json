@@ -1,0 +1,228 @@
+[
+    {
+      "rule_id": "SDR_0001",
+      "season_type": "spring",
+      "display_name": "Xuân",
+      "description": "Mùa Xuân, giai đoạn khởi sinh của vạn vật.",
+      "dominant_element": "wood",
+      "dominant_yin_yang": "yang",
+      "climate_trend": "warming",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0002",
+      "season_type": "summer",
+      "display_name": "Hạ",
+      "description": "Mùa Hạ, giai đoạn phát triển cực thịnh.",
+      "dominant_element": "fire",
+      "dominant_yin_yang": "yang",
+      "climate_trend": "hot",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0003",
+      "season_type": "autumn",
+      "display_name": "Thu",
+      "description": "Mùa Thu, giai đoạn thu liễm.",
+      "dominant_element": "metal",
+      "dominant_yin_yang": "yin",
+      "climate_trend": "cooling",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0004",
+      "season_type": "winter",
+      "display_name": "Đông",
+      "description": "Mùa Đông, giai đoạn tàng chứa.",
+      "dominant_element": "water",
+      "dominant_yin_yang": "yin",
+      "climate_trend": "cold",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0005",
+      "season_type": "transition",
+      "display_name": "Tứ Quý",
+      "description": "Giai đoạn chuyển mùa, Thổ vượng, dùng để kết nối giữa bốn mùa.",
+      "dominant_element": "earth",
+      "dominant_yin_yang": "balanced",
+      "climate_trend": "transition",
+      "priority": 60,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SDR_0101",
+      "season": "spring",
+      "display_name": "Xuân",
+      "lunar_months": [1, 2, 3],
+      "month_branches": [
+        "dan",
+        "mao",
+        "thin"
+      ],
+      "dominant_element": "wood",
+      "transition_branch": "thin",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0102",
+      "season": "summer",
+      "display_name": "Hạ",
+      "lunar_months": [4, 5, 6],
+      "month_branches": [
+        "ti",
+        "ngo",
+        "mui"
+      ],
+      "dominant_element": "fire",
+      "transition_branch": "mui",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0103",
+      "season": "autumn",
+      "display_name": "Thu",
+      "lunar_months": [7, 8, 9],
+      "month_branches": [
+        "than",
+        "dau",
+        "tuat"
+      ],
+      "dominant_element": "metal",
+      "transition_branch": "tuat",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0104",
+      "season": "winter",
+      "display_name": "Đông",
+      "lunar_months": [10, 11, 12],
+      "month_branches": [
+        "hoi",
+        "ty",
+        "suu"
+      ],
+      "dominant_element": "water",
+      "transition_branch": "suu",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SDR_0201",
+      "season": "spring",
+      "solar_terms": [
+        "lap_xuan",
+        "vu_thuy",
+        "kinh_trap",
+        "xuan_phan",
+        "thanh_minh",
+        "coc_vu"
+      ],
+      "start_term": "lap_xuan",
+      "end_term": "coc_vu",
+      "dominant_element": "wood",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0202",
+      "season": "summer",
+      "solar_terms": [
+        "lap_ha",
+        "tieu_man",
+        "mang_chung",
+        "ha_chi",
+        "tieu_thu",
+        "dai_thu"
+      ],
+      "start_term": "lap_ha",
+      "end_term": "dai_thu",
+      "dominant_element": "fire",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0203",
+      "season": "autumn",
+      "solar_terms": [
+        "lap_thu",
+        "xu_thu",
+        "bach_lo",
+        "thu_phan",
+        "han_lo",
+        "suong_giang"
+      ],
+      "start_term": "lap_thu",
+      "end_term": "suong_giang",
+      "dominant_element": "metal",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0204",
+      "season": "winter",
+      "solar_terms": [
+        "lap_dong",
+        "tieu_tuyet",
+        "dai_tuyet",
+        "dong_chi",
+        "tieu_han",
+        "dai_han"
+      ],
+      "start_term": "lap_dong",
+      "end_term": "dai_han",
+      "dominant_element": "water",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SDR_0301",
+      "rule_name": "solar_term_priority",
+      "priority": 100,
+      "condition": "solar_term_available",
+      "action": "use_solar_term",
+      "description": "Ưu tiên xác định mùa theo Tiết khí nếu dữ liệu Tiết khí có sẵn.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0302",
+      "rule_name": "month_branch_fallback",
+      "priority": 90,
+      "condition": "month_branch_available",
+      "action": "use_month_branch",
+      "description": "Nếu chưa có Tiết khí thì xác định mùa theo Địa Chi tháng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0303",
+      "rule_name": "lunar_month_reference",
+      "priority": 80,
+      "condition": "lunar_month_available",
+      "action": "use_lunar_month_reference",
+      "description": "Tháng âm lịch chỉ dùng để tham khảo khi không có dữ liệu khác.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0304",
+      "rule_name": "calendar_validation",
+      "priority": 70,
+      "condition": "multiple_sources_available",
+      "action": "validate_consistency",
+      "description": "Kiểm tra tính nhất quán giữa các nguồn dữ liệu trước khi xuất kết quả.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SDR_0305",
+      "rule_name": "final_season_confirmation",
+      "priority": 60,
+      "condition": "resolution_completed",
+      "action": "confirm_final_season",
+      "description": "Xác nhận mùa cuối cùng để cung cấp cho các Engine phía sau.",
+      "enabled": true
+    }
+  ]

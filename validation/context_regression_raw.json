@@ -1,0 +1,31 @@
+{
+  "total_charts": 100,
+  "errors": 0,
+  "strength_level_distribution": {
+    "weak": 11,
+    "balanced": 37,
+    "strong": 52
+  },
+  "temperature_type_distribution": {
+    "warm": 46,
+    "cool": 18,
+    "hot": 24,
+    "cold": 12
+  },
+  "field_coverage": {
+    "strength.level": 100,
+    "temperature.type": 100,
+    "pattern.main": 100,
+    "useful_god.primary": 100,
+    "bazi.day_master": 100
+  },
+  "dependency_graph": [
+    "calendar → context_engine.calendar",
+    "bazi → context_engine.bazi",
+    "strength_engine → context_engine.strength",
+    "temperature_engine → context_engine.temperature",
+    "pattern_engine → context_engine.pattern",
+    "useful_god_engine → context_engine.useful_god",
+    "context_engine → rule_context → interpretation"
+  ]
+}

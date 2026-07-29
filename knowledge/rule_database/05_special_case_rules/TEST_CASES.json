@@ -1,0 +1,87 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T17:00:00Z",
+        "updated_at": "2026-07-29T17:00:00Z",
+        "approved_at": "2026-07-29T17:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "special_case",
+            "test_cases"
+        ],
+        "source": "BTE Platform Special Case Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Special Case Rule Database.",
+        "description": "Unit test fixtures for special case detection and override resolution.",
+        "references": [
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Kiếp Tài vô căn strength special case",
+            "rule_id": "SPC-000001",
+            "input": {
+                "month_branch_ten_god": "Kiếp Tài",
+                "root_level": "Vô căn"
+            },
+            "expected_match": true,
+            "expected_weight": 15
+        },
+        {
+            "test_id": "tc_002",
+            "description": "False follow pseudo override",
+            "rule_id": "SPC-000024",
+            "input": {
+                "special_case": "FALSE_FOLLOW"
+            },
+            "expected_match": true,
+            "expected_weight": -20
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Useful god follow tai override",
+            "rule_id": "SPC-000016",
+            "input": {
+                "follow_pattern": "tong_tai"
+            },
+            "expected_match": true,
+            "expected_weight": 94
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Liu chong clash exception",
+            "rule_id": "SPC-000038",
+            "input": {
+                "clash_type": "LIU_CHONG"
+            },
+            "expected_match": true,
+            "expected_weight": -15
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Tiebreak special over standard",
+            "rule_id": "SPC-000052",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_006",
+            "description": "Fallback no special case",
+            "rule_id": "SPC-000058",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        }
+    ]
+}

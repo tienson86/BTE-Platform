@@ -1,0 +1,168 @@
+[
+    {
+      "rule_id": "FSR_0001",
+      "concept": "final_season",
+      "display_name": "Mùa cuối cùng",
+      "description": "Kết quả mùa cuối cùng sau khi tổng hợp toàn bộ quy tắc xác định mùa.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0002",
+      "concept": "final_dominant_element",
+      "display_name": "Ngũ hành chủ khí cuối cùng",
+      "description": "Ngũ hành chủ khí được xác định sau khi áp dụng các quy tắc theo mùa.",
+      "applicable_scope": [
+        "season_engine",
+        "strength_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0003",
+      "concept": "final_element_state",
+      "display_name": "Trạng thái ngũ hành cuối cùng",
+      "description": "Trạng thái của ngũ hành sau khi tổng hợp kết quả theo mùa.",
+      "applicable_scope": [
+        "strength_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0004",
+      "concept": "final_seasonal_strength",
+      "display_name": "Mức ảnh hưởng cuối cùng của mùa",
+      "description": "Mức ảnh hưởng theo mùa sau khi đã áp dụng điều chỉnh và ngoại lệ.",
+      "applicable_scope": [
+        "strength_engine",
+        "temperature_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0005",
+      "concept": "final_adjustment_result",
+      "display_name": "Kết quả điều chỉnh cuối cùng",
+      "description": "Kết quả của Adjustment Layer được sử dụng trong kết quả cuối cùng.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0006",
+      "concept": "final_exception_status",
+      "display_name": "Trạng thái ngoại lệ cuối cùng",
+      "description": "Trạng thái ngoại lệ sau khi áp dụng các quy tắc xử lý.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0007",
+      "concept": "final_season_result",
+      "display_name": "Kết quả mùa cuối cùng",
+      "description": "Kết quả tổng hợp cuối cùng của toàn bộ Season Rule Database.",
+      "applicable_scope": [
+        "strength_engine",
+        "temperature_engine",
+        "useful_god_engine",
+        "pattern_engine",
+        "interpretation_engine"
+      ],
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "FSR_0101",
+      "decision_type": "season_resolution",
+      "input_source": [
+        "season_definition",
+        "seasonal_element"
+      ],
+      "output": "final_season",
+      "description": "Xác định mùa cuối cùng từ kết quả xác định mùa và ngũ hành chủ khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0102",
+      "decision_type": "strength_resolution",
+      "input_source": [
+        "seasonal_strength",
+        "seasonal_adjustment"
+      ],
+      "output": "final_seasonal_strength",
+      "description": "Xác định mức ảnh hưởng cuối cùng của mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0103",
+      "decision_type": "adjustment_resolution",
+      "input_source": [
+        "seasonal_adjustment"
+      ],
+      "output": "final_adjustment_result",
+      "description": "Tiếp nhận kết quả điều chỉnh theo mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0104",
+      "decision_type": "exception_resolution",
+      "input_source": [
+        "seasonal_exception"
+      ],
+      "output": "final_exception_status",
+      "description": "Tiếp nhận trạng thái ngoại lệ cuối cùng.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "FSR_0201",
+      "resolution_type": "priority_merge",
+      "display_name": "Tổng hợp theo thứ tự ưu tiên",
+      "description": "Tổng hợp kết quả theo mức ưu tiên đã được xác định ở các Rule Layer.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0202",
+      "resolution_type": "adjustment_merge",
+      "display_name": "Tổng hợp Adjustment",
+      "description": "Áp dụng kết quả điều chỉnh vào kết quả mùa cuối cùng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0203",
+      "resolution_type": "exception_merge",
+      "display_name": "Tổng hợp Exception",
+      "description": "Áp dụng trạng thái ngoại lệ vào kết quả cuối cùng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "FSR_0204",
+      "resolution_type": "final_merge",
+      "display_name": "Tổng hợp cuối cùng",
+      "description": "Kết hợp toàn bộ kết quả thành Final Season Result.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "FSR_0301",
+      "output_type": "final_season_result",
+      "output_fields": [
+        "final_season",
+        "final_dominant_element",
+        "final_element_state",
+        "final_seasonal_strength",
+        "final_adjustment_result",
+        "final_exception_status"
+      ],
+      "description": "Chuẩn hóa dữ liệu đầu ra của Season Engine.",
+      "enabled": true
+    }
+  ]

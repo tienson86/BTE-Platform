@@ -1,0 +1,744 @@
+[
+    {
+      "id": "EXP001",
+      "example_name": "Very Cold Winter",
+      "description": "Lá số có khí Hàn cực mạnh.",
+      "input": {
+        "month_branch": "ty",
+        "temperature_result": "very_cold",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "cold_balanced",
+        "severity": "strong",
+        "adjustment": "warm"
+      }
+    },
+    {
+      "id": "EXP002",
+      "example_name": "Cold Dry",
+      "description": "Khí Hàn kết hợp Táo.",
+      "input": {
+        "month_branch": "suu",
+        "temperature_result": "cold",
+        "humidity_result": "dry"
+      },
+      "expected": {
+        "climate_pattern": "cold_dry",
+        "severity": "strong",
+        "adjustment": "warm_and_moisten"
+      }
+    },
+    {
+      "id": "EXP003",
+      "example_name": "Slightly Cold",
+      "description": "Khí Hàn nhẹ.",
+      "input": {
+        "month_branch": "dan",
+        "temperature_result": "slightly_cold",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "cold_balanced",
+        "severity": "mild",
+        "adjustment": "warm"
+      }
+    },
+    {
+      "id": "EXP004",
+      "example_name": "Cold Humid",
+      "description": "Khí Hàn kết hợp Thấp.",
+      "input": {
+        "month_branch": "hoi",
+        "temperature_result": "cold",
+        "humidity_result": "humid"
+      },
+      "expected": {
+        "climate_pattern": "cold_humid",
+        "severity": "strong",
+        "adjustment": "warm_and_dry"
+      }
+    },
+    {
+      "id": "EXP005",
+      "example_name": "Extreme Cold",
+      "description": "Khí Hàn cực đoan.",
+      "input": {
+        "month_branch": "ty",
+        "temperature_result": "very_cold",
+        "humidity_result": "very_dry"
+      },
+      "expected": {
+        "climate_pattern": "cold_dry",
+        "severity": "extreme",
+        "adjustment": "warm_and_moisten"
+      }
+    }
+  ]
+  [
+    {
+      "id": "EXP006",
+      "category": "hot",
+      "example_name": "Hot Summer",
+      "purpose": "unit_test",
+      "description": "Tháng mùa Hạ, khí Nhiệt chiếm ưu thế.",
+      "input": {
+        "month_branch": "ngo",
+        "season": "summer"
+      },
+      "expected": {
+        "temperature_result": "hot",
+        "humidity_result": "balanced",
+        "climate_pattern": "hot_balanced",
+        "severity": "strong",
+        "adjustment": "cool"
+      }
+    },
+    {
+      "id": "EXP007",
+      "category": "hot",
+      "example_name": "Very Hot Summer",
+      "purpose": "unit_test",
+      "description": "Khí Nhiệt cực mạnh.",
+      "input": {
+        "month_branch": "ty2",
+        "season": "summer"
+      },
+      "expected": {
+        "temperature_result": "very_hot",
+        "humidity_result": "balanced",
+        "climate_pattern": "hot_balanced",
+        "severity": "extreme",
+        "adjustment": "cool"
+      }
+    },
+    {
+      "id": "EXP008",
+      "category": "hot",
+      "example_name": "Hot Dry",
+      "purpose": "unit_test",
+      "description": "Khí Nhiệt kết hợp Táo.",
+      "input": {
+        "month_branch": "ngo",
+        "season": "summer",
+        "humidity_index": -3
+      },
+      "expected": {
+        "temperature_result": "hot",
+        "humidity_result": "dry",
+        "climate_pattern": "hot_dry",
+        "severity": "strong",
+        "adjustment": "cool_and_moisten"
+      }
+    },
+    {
+      "id": "EXP009",
+      "category": "hot",
+      "example_name": "Hot Humid",
+      "purpose": "unit_test",
+      "description": "Khí Nhiệt kết hợp Thấp.",
+      "input": {
+        "month_branch": "mui",
+        "season": "summer",
+        "humidity_index": 3
+      },
+      "expected": {
+        "temperature_result": "hot",
+        "humidity_result": "humid",
+        "climate_pattern": "hot_humid",
+        "severity": "strong",
+        "adjustment": "cool_and_dry"
+      }
+    },
+    {
+      "id": "EXP010",
+      "category": "hot",
+      "example_name": "Slightly Hot",
+      "purpose": "unit_test",
+      "description": "Khí Nhiệt nhẹ.",
+      "input": {
+        "month_branch": "ty2",
+        "season": "late_summer"
+      },
+      "expected": {
+        "temperature_result": "slightly_hot",
+        "humidity_result": "balanced",
+        "climate_pattern": "hot_balanced",
+        "severity": "mild",
+        "adjustment": "cool"
+      }
+    }
+  ]
+  [
+    {
+      "id": "EXP011",
+      "category": "humidity",
+      "example_name": "Very Dry Climate",
+      "purpose": "unit_test",
+      "description": "Độ ẩm rất thấp, khí Táo cực mạnh.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "than",
+        "season": "autumn",
+        "humidity_index": -5
+      },
+      "expected": {
+        "temperature_result": "neutral",
+        "humidity_result": "very_dry",
+        "climate_pattern": "neutral_dry",
+        "severity": "strong",
+        "adjustment": "moisten"
+      },
+      "expected_rule_ids": [
+        "HUM001",
+        "CLS011",
+        "ADJ010"
+      ]
+    },
+    {
+      "id": "EXP012",
+      "category": "humidity",
+      "example_name": "Dry Climate",
+      "purpose": "unit_test",
+      "description": "Khí Táo chiếm ưu thế.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "dau",
+        "season": "autumn",
+        "humidity_index": -3
+      },
+      "expected": {
+        "temperature_result": "neutral",
+        "humidity_result": "dry",
+        "climate_pattern": "neutral_dry",
+        "severity": "moderate",
+        "adjustment": "moisten"
+      },
+      "expected_rule_ids": [
+        "HUM002",
+        "CLS012",
+        "ADJ011"
+      ]
+    },
+    {
+      "id": "EXP013",
+      "category": "humidity",
+      "example_name": "Balanced Humidity",
+      "purpose": "unit_test",
+      "description": "Độ ẩm cân bằng.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "thin",
+        "season": "spring",
+        "humidity_index": 0
+      },
+      "expected": {
+        "temperature_result": "neutral",
+        "humidity_result": "balanced",
+        "climate_pattern": "neutral_balanced",
+        "severity": "balanced",
+        "adjustment": "no_adjustment"
+      },
+      "expected_rule_ids": [
+        "HUM004",
+        "CLS015",
+        "ADJ037"
+      ]
+    },
+    {
+      "id": "EXP014",
+      "category": "humidity",
+      "example_name": "Humid Climate",
+      "purpose": "unit_test",
+      "description": "Khí Thấp chiếm ưu thế.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "mui",
+        "season": "late_summer",
+        "humidity_index": 3
+      },
+      "expected": {
+        "temperature_result": "neutral",
+        "humidity_result": "humid",
+        "climate_pattern": "neutral_humid",
+        "severity": "moderate",
+        "adjustment": "dry"
+      },
+      "expected_rule_ids": [
+        "HUM006",
+        "CLS018",
+        "ADJ013"
+      ]
+    },
+    {
+      "id": "EXP015",
+      "category": "humidity",
+      "example_name": "Very Humid Climate",
+      "purpose": "unit_test",
+      "description": "Khí Thấp rất mạnh.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "mui",
+        "season": "late_summer",
+        "humidity_index": 5
+      },
+      "expected": {
+        "temperature_result": "neutral",
+        "humidity_result": "very_humid",
+        "climate_pattern": "neutral_humid",
+        "severity": "strong",
+        "adjustment": "dry"
+      },
+      "expected_rule_ids": [
+        "HUM007",
+        "CLS019",
+        "ADJ014"
+      ]
+    }
+  ]
+  [
+    {
+      "id": "EXP016",
+      "category": "climate_combination",
+      "example_name": "Cold Dry Combination",
+      "purpose": "golden_dataset",
+      "description": "Khí Hàn kết hợp Táo.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "suu",
+        "season": "winter",
+        "temperature_index": -4,
+        "humidity_index": -3
+      },
+      "expected": {
+        "temperature_result": "cold",
+        "humidity_result": "dry",
+        "climate_pattern": "cold_dry",
+        "severity": "strong",
+        "adjustment": "warm_and_moisten"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP004",
+        "humidity_rule": "HUM002",
+        "climate_score_rule": "CLS004",
+        "adjustment_rule": "ADJ015",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP017",
+      "category": "climate_combination",
+      "example_name": "Cold Humid Combination",
+      "purpose": "golden_dataset",
+      "description": "Khí Hàn kết hợp Thấp.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "ty",
+        "season": "winter",
+        "temperature_index": -4,
+        "humidity_index": 3
+      },
+      "expected": {
+        "temperature_result": "cold",
+        "humidity_result": "humid",
+        "climate_pattern": "cold_humid",
+        "severity": "strong",
+        "adjustment": "warm_and_dry"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP004",
+        "humidity_rule": "HUM006",
+        "climate_score_rule": "CLS006",
+        "adjustment_rule": "ADJ016",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP018",
+      "category": "climate_combination",
+      "example_name": "Hot Dry Combination",
+      "purpose": "golden_dataset",
+      "description": "Khí Nhiệt kết hợp Táo.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "ngo",
+        "season": "summer",
+        "temperature_index": 4,
+        "humidity_index": -3
+      },
+      "expected": {
+        "temperature_result": "hot",
+        "humidity_result": "dry",
+        "climate_pattern": "hot_dry",
+        "severity": "strong",
+        "adjustment": "cool_and_moisten"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP011",
+        "humidity_rule": "HUM002",
+        "climate_score_rule": "CLS008",
+        "adjustment_rule": "ADJ017",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP019",
+      "category": "climate_combination",
+      "example_name": "Hot Humid Combination",
+      "purpose": "golden_dataset",
+      "description": "Khí Nhiệt kết hợp Thấp.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "mui",
+        "season": "late_summer",
+        "temperature_index": 4,
+        "humidity_index": 3
+      },
+      "expected": {
+        "temperature_result": "hot",
+        "humidity_result": "humid",
+        "climate_pattern": "hot_humid",
+        "severity": "strong",
+        "adjustment": "cool_and_dry"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP011",
+        "humidity_rule": "HUM006",
+        "climate_score_rule": "CLS009",
+        "adjustment_rule": "ADJ018",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP020",
+      "category": "climate_combination",
+      "example_name": "Balanced Climate",
+      "purpose": "golden_dataset",
+      "description": "Nhiệt độ và độ ẩm đều cân bằng.",
+      "engine_version": "1.0",
+      "input": {
+        "month_branch": "thin",
+        "season": "spring",
+        "temperature_index": 0,
+        "humidity_index": 0
+      },
+      "expected": {
+        "temperature_result": "neutral",
+        "humidity_result": "balanced",
+        "climate_pattern": "neutral_balanced",
+        "severity": "balanced",
+        "adjustment": "no_adjustment"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP008",
+        "humidity_rule": "HUM004",
+        "climate_score_rule": "CLS015",
+        "adjustment_rule": "ADJ037",
+        "priority_rule": "PRI030"
+      }
+    }
+  ]
+  [
+    {
+      "id": "EXP021",
+      "category": "adjustment",
+      "example_name": "Warm Adjustment",
+      "purpose": "golden_dataset",
+      "description": "Khí Hàn mạnh, cần thực hiện Ôn.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "ty",
+        "season": "winter"
+      },
+      "derived_state": {
+        "temperature_index": -4,
+        "humidity_index": 0,
+        "temperature_result": "cold",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "cold_balanced",
+        "severity": "strong",
+        "adjustment": "warm"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP004",
+        "humidity_rule": "HUM004",
+        "climate_score_rule": "CLS005",
+        "adjustment_rule": "ADJ001",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP022",
+      "category": "adjustment",
+      "example_name": "Cool Adjustment",
+      "purpose": "golden_dataset",
+      "description": "Khí Nhiệt mạnh, cần thực hiện Lương.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "ngo",
+        "season": "summer"
+      },
+      "derived_state": {
+        "temperature_index": 4,
+        "humidity_index": 0,
+        "temperature_result": "hot",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "hot_balanced",
+        "severity": "strong",
+        "adjustment": "cool"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP011",
+        "humidity_rule": "HUM004",
+        "climate_score_rule": "CLS014",
+        "adjustment_rule": "ADJ002",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP023",
+      "category": "adjustment",
+      "example_name": "Moisten Adjustment",
+      "purpose": "golden_dataset",
+      "description": "Khí Táo mạnh, cần thực hiện Nhuận.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "dau",
+        "season": "autumn"
+      },
+      "derived_state": {
+        "temperature_index": 0,
+        "humidity_index": -4,
+        "temperature_result": "neutral",
+        "humidity_result": "dry"
+      },
+      "expected": {
+        "climate_pattern": "neutral_dry",
+        "severity": "strong",
+        "adjustment": "moisten"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP008",
+        "humidity_rule": "HUM002",
+        "climate_score_rule": "CLS011",
+        "adjustment_rule": "ADJ008",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP024",
+      "category": "adjustment",
+      "example_name": "Dry Adjustment",
+      "purpose": "golden_dataset",
+      "description": "Khí Thấp mạnh, cần thực hiện Táo.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "mui",
+        "season": "late_summer"
+      },
+      "derived_state": {
+        "temperature_index": 0,
+        "humidity_index": 4,
+        "temperature_result": "neutral",
+        "humidity_result": "humid"
+      },
+      "expected": {
+        "climate_pattern": "neutral_humid",
+        "severity": "strong",
+        "adjustment": "dry"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP008",
+        "humidity_rule": "HUM006",
+        "climate_score_rule": "CLS018",
+        "adjustment_rule": "ADJ012",
+        "priority_rule": "PRI028"
+      }
+    },
+    {
+      "id": "EXP025",
+      "category": "adjustment",
+      "example_name": "No Adjustment Required",
+      "purpose": "golden_dataset",
+      "description": "Khí hậu cân bằng, không cần điều hậu.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "thin",
+        "season": "spring"
+      },
+      "derived_state": {
+        "temperature_index": 0,
+        "humidity_index": 0,
+        "temperature_result": "neutral",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "neutral_balanced",
+        "severity": "balanced",
+        "adjustment": "no_adjustment"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP008",
+        "humidity_rule": "HUM004",
+        "climate_score_rule": "CLS015",
+        "adjustment_rule": "ADJ037",
+        "priority_rule": "PRI030"
+      }
+    }
+  ]
+  [
+    {
+      "id": "EXP026",
+      "category": "edge_case",
+      "example_name": "Boundary Temperature",
+      "purpose": "golden_dataset",
+      "description": "Nhiệt độ nằm đúng ngưỡng chuyển giữa Neutral và Cold.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "mao",
+        "season": "spring"
+      },
+      "derived_state": {
+        "temperature_index": -1,
+        "humidity_index": 0,
+        "temperature_result": "slightly_cold",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "cold_balanced",
+        "severity": "mild",
+        "adjustment": "warm"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP007",
+        "humidity_rule": "HUM004",
+        "climate_score_rule": "CLS005",
+        "adjustment_rule": "ADJ001",
+        "priority_rule": "PRI021"
+      }
+    },
+    {
+      "id": "EXP027",
+      "category": "edge_case",
+      "example_name": "Boundary Humidity",
+      "purpose": "golden_dataset",
+      "description": "Độ ẩm nằm đúng ngưỡng giữa Balanced và Dry.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "dau",
+        "season": "autumn"
+      },
+      "derived_state": {
+        "temperature_index": 0,
+        "humidity_index": -1,
+        "temperature_result": "neutral",
+        "humidity_result": "slightly_dry"
+      },
+      "expected": {
+        "climate_pattern": "neutral_dry",
+        "severity": "mild",
+        "adjustment": "moisten"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP008",
+        "humidity_rule": "HUM003",
+        "climate_score_rule": "CLS011",
+        "adjustment_rule": "ADJ008",
+        "priority_rule": "PRI021"
+      }
+    },
+    {
+      "id": "EXP028",
+      "category": "edge_case",
+      "example_name": "Priority Conflict",
+      "purpose": "golden_dataset",
+      "description": "Hai rule cùng khớp, Priority Engine chọn rule có độ ưu tiên cao hơn.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "suu",
+        "season": "winter"
+      },
+      "derived_state": {
+        "temperature_index": -3,
+        "humidity_index": -2,
+        "temperature_result": "cold",
+        "humidity_result": "dry"
+      },
+      "expected": {
+        "climate_pattern": "cold_dry",
+        "severity": "strong",
+        "adjustment": "warm_and_moisten"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP004",
+        "humidity_rule": "HUM002",
+        "climate_score_rule": "CLS004",
+        "adjustment_rule": "ADJ015",
+        "priority_rule": "PRI016"
+      }
+    },
+    {
+      "id": "EXP029",
+      "category": "edge_case",
+      "example_name": "Override Rule",
+      "purpose": "golden_dataset",
+      "description": "Rule Override ghi đè kết quả thông thường.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "ty",
+        "season": "winter"
+      },
+      "derived_state": {
+        "temperature_index": -5,
+        "humidity_index": -5,
+        "temperature_result": "very_cold",
+        "humidity_result": "very_dry"
+      },
+      "expected": {
+        "climate_pattern": "cold_dry",
+        "severity": "extreme",
+        "adjustment": "warm_and_moisten"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP001",
+        "humidity_rule": "HUM001",
+        "climate_score_rule": "CLS001",
+        "adjustment_rule": "ADJ015",
+        "priority_rule": "PRI026"
+      }
+    },
+    {
+      "id": "EXP030",
+      "category": "edge_case",
+      "example_name": "Extreme Balanced Resolution",
+      "purpose": "golden_dataset",
+      "description": "Kiểm tra Engine vẫn trả về kết quả xác định khi nhiều điều kiện có cùng mức ưu tiên.",
+      "engine_version": "1.0",
+      "raw_input": {
+        "month_branch": "thin",
+        "season": "spring"
+      },
+      "derived_state": {
+        "temperature_index": 0,
+        "humidity_index": 0,
+        "temperature_result": "neutral",
+        "humidity_result": "balanced"
+      },
+      "expected": {
+        "climate_pattern": "neutral_balanced",
+        "severity": "balanced",
+        "adjustment": "no_adjustment"
+      },
+      "expected_rule_trace": {
+        "temperature_rule": "TMP008",
+        "humidity_rule": "HUM004",
+        "climate_score_rule": "CLS015",
+        "adjustment_rule": "ADJ037",
+        "priority_rule": "PRI039"
+      }
+    }
+  ]

@@ -1,0 +1,275 @@
+[
+    {
+      "rule_id": "SER_0001",
+      "concept": "seasonal_exception",
+      "display_name": "Ngoại lệ theo mùa",
+      "description": "Định nghĩa các trường hợp ngoại lệ phát sinh trong quá trình xác định mùa và ảnh hưởng theo mùa.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0002",
+      "concept": "exception_type",
+      "display_name": "Loại ngoại lệ",
+      "description": "Định nghĩa nhóm ngoại lệ được sử dụng trong Season Engine.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0003",
+      "concept": "exception_source",
+      "display_name": "Nguồn phát sinh ngoại lệ",
+      "description": "Định nghĩa nguồn dữ liệu hoặc thành phần hệ thống tạo ra ngoại lệ.",
+      "applicable_scope": [
+        "calendar_engine",
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0004",
+      "concept": "exception_severity",
+      "display_name": "Mức độ ngoại lệ",
+      "description": "Định nghĩa mức độ ảnh hưởng của ngoại lệ đối với kết quả xác định mùa.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0005",
+      "concept": "resolution_strategy",
+      "display_name": "Chiến lược xử lý ngoại lệ",
+      "description": "Định nghĩa phương pháp xử lý được áp dụng khi phát hiện ngoại lệ.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0006",
+      "concept": "fallback_rule",
+      "display_name": "Quy tắc dự phòng",
+      "description": "Định nghĩa quy tắc thay thế khi không thể áp dụng quy tắc xác định mùa thông thường.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0007",
+      "concept": "exception_priority",
+      "display_name": "Ưu tiên ngoại lệ",
+      "description": "Định nghĩa thứ tự ưu tiên khi nhiều ngoại lệ cùng xuất hiện.",
+      "applicable_scope": [
+        "season_engine"
+      ],
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0008",
+      "concept": "exception_status",
+      "display_name": "Trạng thái ngoại lệ",
+      "description": "Định nghĩa trạng thái cuối cùng của một ngoại lệ sau khi được đánh giá.",
+      "applicable_scope": [
+        "season_engine",
+        "final_season_engine"
+      ],
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SER_0101",
+      "exception_type": "missing_solar_term",
+      "display_name": "Thiếu dữ liệu Tiết khí",
+      "exception_source": "calendar_engine",
+      "severity": "high",
+      "description": "Không xác định được Tiết khí tại thời điểm cần tính toán.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0102",
+      "exception_type": "invalid_calendar_data",
+      "display_name": "Dữ liệu lịch không hợp lệ",
+      "exception_source": "calendar_engine",
+      "severity": "critical",
+      "description": "Thông tin lịch âm, lịch dương hoặc Julian Day không hợp lệ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0103",
+      "exception_type": "missing_month_branch",
+      "display_name": "Thiếu Địa Chi tháng",
+      "exception_source": "input_data",
+      "severity": "high",
+      "description": "Không xác định được Địa Chi tháng để phục vụ việc xác định mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0104",
+      "exception_type": "season_conflict",
+      "display_name": "Xung đột kết quả xác định mùa",
+      "exception_source": "rule_conflict",
+      "severity": "high",
+      "description": "Có nhiều quy tắc cùng xác định mùa nhưng cho kết quả khác nhau.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0105",
+      "exception_type": "invalid_season",
+      "display_name": "Mùa không hợp lệ",
+      "exception_source": "season_engine",
+      "severity": "critical",
+      "description": "Giá trị mùa không thuộc tập mùa đã được định nghĩa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0106",
+      "exception_type": "unknown_season",
+      "display_name": "Không xác định được mùa",
+      "exception_source": "season_engine",
+      "severity": "critical",
+      "description": "Không thể xác định mùa sau khi áp dụng toàn bộ quy tắc.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0107",
+      "exception_type": "override_conflict",
+      "display_name": "Xung đột ghi đè",
+      "exception_source": "external_override",
+      "severity": "medium",
+      "description": "Có nhiều nguồn ghi đè với cùng mức ưu tiên.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0108",
+      "exception_type": "validation_failed",
+      "display_name": "Kiểm tra dữ liệu thất bại",
+      "exception_source": "system_validation",
+      "severity": "medium",
+      "description": "Dữ liệu đầu vào không vượt qua các điều kiện kiểm tra hợp lệ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0109",
+      "exception_type": "missing_required_data",
+      "display_name": "Thiếu dữ liệu bắt buộc",
+      "exception_source": "input_data",
+      "severity": "critical",
+      "description": "Thiếu một hoặc nhiều trường dữ liệu bắt buộc để xác định mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0110",
+      "exception_type": "unsupported_rule_version",
+      "display_name": "Phiên bản quy tắc không được hỗ trợ",
+      "exception_source": "system_validation",
+      "severity": "low",
+      "description": "Bộ quy tắc theo mùa không tương thích với phiên bản Rule Engine hiện tại.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SER_0201",
+      "exception_type": "missing_solar_term",
+      "resolution_type": "fallback",
+      "resolution_target": "month_branch",
+      "priority": 100,
+      "description": "Khi không có dữ liệu Tiết khí, sử dụng Địa Chi tháng để xác định mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0202",
+      "exception_type": "missing_month_branch",
+      "resolution_type": "fallback",
+      "resolution_target": "lunar_month",
+      "priority": 90,
+      "description": "Khi thiếu Địa Chi tháng, sử dụng tháng âm lịch làm nguồn dữ liệu dự phòng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0203",
+      "exception_type": "season_conflict",
+      "resolution_type": "priority_resolution",
+      "resolution_target": "solar_term",
+      "priority": 80,
+      "description": "Nếu kết quả xác định mùa bị xung đột, ưu tiên kết quả xác định theo Tiết khí.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0204",
+      "exception_type": "invalid_season",
+      "resolution_type": "default_value",
+      "resolution_target": "unknown",
+      "priority": 70,
+      "description": "Nếu giá trị mùa không hợp lệ, trả về trạng thái Unknown để chờ xử lý tiếp theo.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0205",
+      "exception_type": "unknown_season",
+      "resolution_type": "manual_review",
+      "resolution_target": "human_validation",
+      "priority": 60,
+      "description": "Nếu không thể xác định mùa sau khi áp dụng toàn bộ quy tắc, chuyển sang kiểm tra thủ công.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "SER_0301",
+      "exception_status": "normal",
+      "display_name": "Bình thường",
+      "is_exception": false,
+      "is_resolved": true,
+      "requires_review": false,
+      "description": "Không phát hiện ngoại lệ trong quá trình xác định mùa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0302",
+      "exception_status": "resolved",
+      "display_name": "Đã xử lý",
+      "is_exception": true,
+      "is_resolved": true,
+      "requires_review": false,
+      "description": "Ngoại lệ đã được xử lý theo quy tắc nghiệp vụ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0303",
+      "exception_status": "fallback",
+      "display_name": "Đã sử dụng dữ liệu dự phòng",
+      "is_exception": true,
+      "is_resolved": true,
+      "requires_review": false,
+      "description": "Ngoại lệ được giải quyết bằng nguồn dữ liệu dự phòng.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0304",
+      "exception_status": "manual_review",
+      "display_name": "Cần kiểm tra thủ công",
+      "is_exception": true,
+      "is_resolved": false,
+      "requires_review": true,
+      "description": "Không thể giải quyết hoàn toàn bằng quy tắc, cần kiểm tra thủ công.",
+      "enabled": true
+    },
+    {
+      "rule_id": "SER_0305",
+      "exception_status": "unresolved",
+      "display_name": "Chưa xử lý",
+      "is_exception": true,
+      "is_resolved": false,
+      "requires_review": false,
+      "description": "Ngoại lệ đã được phát hiện nhưng chưa có quy tắc xử lý phù hợp.",
+      "enabled": true
+    }
+  ]

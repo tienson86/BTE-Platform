@@ -1,0 +1,70 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T20:00:00Z",
+        "updated_at": "2026-07-29T20:00:00Z",
+        "approved_at": "2026-07-29T20:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "priority",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Priority Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Priority Rule Database validation.",
+        "description": "Reference scenarios with expected priority resolution.",
+        "references": [
+            "MODULE_SPEC.md",
+            "PRIORITY_DECISION_TREE.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "rule_group": "special",
+            "expected_priority": 100,
+            "notes": "Special override highest priority."
+        },
+        {
+            "example_id": "ex_002",
+            "pipeline_stage": 4,
+            "module": "04_pattern_rules",
+            "expected_match": true,
+            "notes": "Pattern execution stage."
+        },
+        {
+            "example_id": "ex_003",
+            "follow_type": "tong_tai",
+            "primary_pattern": "chinh_tai",
+            "expected_resolution": "follow_beats_pattern",
+            "notes": "Follow override conflict."
+        },
+        {
+            "example_id": "ex_004",
+            "module": "STRENGTH",
+            "weight": 0.25,
+            "expected_weight": 25,
+            "notes": "Dimension weight for strength."
+        },
+        {
+            "example_id": "ex_005",
+            "candidate_count": 3,
+            "expected_action": "tie_breaking",
+            "notes": "Multi-candidate conflict."
+        },
+        {
+            "example_id": "ex_006",
+            "confidence": 0.7,
+            "expected_selection": true,
+            "notes": "Final selection passes confidence gate."
+        }
+    ]
+}

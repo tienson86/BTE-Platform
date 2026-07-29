@@ -1,0 +1,79 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T19:00:00Z",
+        "updated_at": "2026-07-29T19:00:00Z",
+        "approved_at": "2026-07-29T19:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "combination",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Combination Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Combination Rule Database validation.",
+        "description": "Reference chart scenarios with expected combination classification.",
+        "references": [
+            "MODULE_SPEC.md",
+            "COMBINATION_DECISION_TREE.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "combination": "quan_an",
+            "ten_gods_list": [
+                "Chính Quan",
+                "Chính Ấn"
+            ],
+            "expected_match": true,
+            "notes": "Quan Ấn tương sinh combination."
+        },
+        {
+            "example_id": "ex_002",
+            "strength_level": "strong",
+            "season": "spring",
+            "day_master_element": "Mộc",
+            "expected_match": true,
+            "notes": "Strong wood in spring."
+        },
+        {
+            "example_id": "ex_003",
+            "primary_pattern": "chinh_tai",
+            "follow_type": "tong_tai",
+            "expected_match": true,
+            "notes": "Pattern + follow tai combination."
+        },
+        {
+            "example_id": "ex_004",
+            "season": "summer",
+            "temperature_type": "cold",
+            "expected_match": true,
+            "expected_adverse": true,
+            "notes": "Season-temperature mismatch."
+        },
+        {
+            "example_id": "ex_005",
+            "combination_type": "TAM_HOP",
+            "expected_match": true,
+            "notes": "Three harmony element combination."
+        },
+        {
+            "example_id": "ex_006",
+            "strength_level": "weak",
+            "season": "winter",
+            "primary_pattern": "chinh_quan",
+            "follow_type": "tong_quan",
+            "expected_match": true,
+            "notes": "Multi-module full combination."
+        }
+    ]
+}

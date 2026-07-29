@@ -1,0 +1,150 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T19:00:00Z",
+        "updated_at": "2026-07-29T19:00:00Z",
+        "approved_at": "2026-07-29T19:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "combination",
+            "dependencies"
+        ],
+        "source": "BTE Platform Combination Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Module dependencies and execution order for Combination Rule Database.",
+        "description": "Defines upstream and downstream module relationships in the BTE analysis pipeline.",
+        "references": [
+            "MODULE_SPEC.md",
+            "COMBINATION_DECISION_TREE.md"
+        ]
+    },
+    "depends_on": [
+        {
+            "module": "01_strength_rules",
+            "path": "knowledge/rule_database/01_strength_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "strength_level",
+                "strength_score"
+            ],
+            "reason": "Strength+season combinations require strength output."
+        },
+        {
+            "module": "02_season_rules",
+            "path": "knowledge/rule_database/02_season_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "season",
+                "season_score"
+            ],
+            "reason": "Season+ temperature and strength+season combinations."
+        },
+        {
+            "module": "03_temperature_rules",
+            "path": "knowledge/rule_database/03_temperature_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "temperature_type",
+                "temperature_score"
+            ],
+            "reason": "Season+temperature combinations."
+        },
+        {
+            "module": "04_pattern_rules",
+            "path": "knowledge/rule_database/04_pattern_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "primary_pattern",
+                "pattern_quality",
+                "pattern_confidence"
+            ],
+            "reason": "Pattern+special and pattern+follow combinations."
+        },
+        {
+            "module": "05_special_case_rules",
+            "path": "knowledge/rule_database/05_special_case_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "special_case_flag"
+            ],
+            "reason": "Pattern+special case combinations."
+        },
+        {
+            "module": "06_follow_pattern_rules",
+            "path": "knowledge/rule_database/06_follow_pattern_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "follow_type",
+                "follow_pattern_match"
+            ],
+            "reason": "Pattern+follow combinations."
+        }
+    ],
+    "used_by": [
+        {
+            "module": "08_priority_rules",
+            "path": "knowledge/rule_database/08_priority_rules/",
+            "signals": [
+                "combination_match"
+            ],
+            "reason": "Priority engine resolves combination conflicts."
+        },
+        {
+            "module": "13_useful_god_engine",
+            "path": "database/13_useful_god/",
+            "signals": [
+                "combination_match"
+            ],
+            "reason": "Useful God uses combination results."
+        }
+    ],
+    "execution_order": [
+        {
+            "stage": 1,
+            "module": "02_season_rules",
+            "output": "season_score"
+        },
+        {
+            "stage": 2,
+            "module": "01_strength_rules",
+            "output": "strength_score"
+        },
+        {
+            "stage": 3,
+            "module": "03_temperature_rules",
+            "output": "temperature_score"
+        },
+        {
+            "stage": 4,
+            "module": "04_pattern_rules",
+            "output": "pattern_match"
+        },
+        {
+            "stage": 5,
+            "module": "05_special_case_rules",
+            "output": "special_case_flag"
+        },
+        {
+            "stage": 6,
+            "module": "06_follow_pattern_rules",
+            "output": "follow_pattern_match"
+        },
+        {
+            "stage": 7,
+            "module": "07_combination_rules",
+            "output": "combination_match"
+        },
+        {
+            "stage": 8,
+            "module": "08_priority_rules",
+            "output": "priority_resolution"
+        }
+    ]
+}

@@ -1,0 +1,3732 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T18:00:00Z",
+        "updated_at": "2026-07-29T18:00:00Z",
+        "approved_at": "2026-07-29T18:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "follow_pattern",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Follow Pattern Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Follow Pattern Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Follow Pattern rules covering true follow, pseudo-follow, eligibility, maintenance, break conditions, conversion, season confirmation, strength thresholds, special case interaction, priority ordering, and fallback behavior.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "MODULE_SPEC.md",
+            "FOLLOW_PATTERN_TAXONOMY.md",
+            "FOLLOW_PATTERN_DECISION_TREE.md",
+            "DEPENDENCIES.json",
+            "database/14_pattern/03_follow_pattern.csv",
+            "engines/pattern_engine/calculators/follow_pattern.py",
+            "knowledge/rule_database/05_special_case_rules/"
+        ]
+    },
+    "config": {
+        "baseline": 50,
+        "scale": 100,
+        "weak_support_ratio": 0.25,
+        "strong_support_ratio": 0.7,
+        "dominant_ratio_threshold": 0.5,
+        "dominant_count_minimum": 2,
+        "confidence_threshold": 0.65,
+        "follow_types": [
+            "tong_vuong",
+            "tong_tai",
+            "tong_sat",
+            "tong_quan",
+            "tong_nhi",
+            "tong_an"
+        ]
+    },
+    "rules": [
+        {
+            "id": "FOL-000001",
+            "code": "fol_tv_01",
+            "name": "Tòng Vượng cách",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "true_follow",
+                "family": "true_follow",
+                "type": "tong_vuong"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Thất Sát"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Thiên Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 87,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "True follow: tong_vuong",
+                "description": "Tòng Vượng cách — Nhật chủ cực vượng theo Tỷ/Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "true_follow",
+                    "tong_vuong",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000002",
+            "code": "fol_ttai_01",
+            "name": "Tòng Tài cách",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "true_follow",
+                "family": "true_follow",
+                "type": "tong_tai"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 86,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "True follow: tong_tai",
+                "description": "Tòng Tài cách — Nhật chủ cực nhược theo Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "true_follow",
+                    "tong_tai",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000003",
+            "code": "fol_tsat_01",
+            "name": "Tòng Sát cách",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "true_follow",
+                "family": "true_follow",
+                "type": "tong_sat"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thất Sát"
+                }
+            ],
+            "evaluation": {
+                "weight": 86,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "True follow: tong_sat",
+                "description": "Tòng Sát cách — Nhật chủ cực nhược theo Sát",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "true_follow",
+                    "tong_sat",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000004",
+            "code": "fol_tquan_01",
+            "name": "Tòng Quan cách",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "true_follow",
+                "family": "true_follow",
+                "type": "tong_quan"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 85,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "True follow: tong_quan",
+                "description": "Tòng Quan cách — Nhật chủ cực nhược theo Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "true_follow",
+                    "tong_quan",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000005",
+            "code": "fol_tnhi_01",
+            "name": "Tòng Nhi cách",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "true_follow",
+                "family": "true_follow",
+                "type": "tong_nhi"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thực Thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 84,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "True follow: tong_nhi",
+                "description": "Tòng Nhi cách — Nhật chủ cực nhược theo Thực/Thương",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "true_follow",
+                    "tong_nhi",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000006",
+            "code": "fol_tan_01",
+            "name": "Tòng Ấn cách",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "true_follow",
+                "family": "true_follow",
+                "type": "tong_an"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 84,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "True follow: tong_an",
+                "description": "Tòng Ấn cách — Nhật chủ cực nhược theo Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "true_follow",
+                    "tong_an",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000007",
+            "code": "pseudo_follow_quan",
+            "name": "Pseudo Follow Quan",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "tong_quan"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_quan"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "not_equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Quan",
+                "description": "Follow quan detected but strength not weak",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000008",
+            "code": "pseudo_follow_tai",
+            "name": "Pseudo Follow Tai",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "tong_tai"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_tai"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "balanced"
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 87
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Tai",
+                "description": "Follow tai with balanced strength — pseudo follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000009",
+            "code": "pseudo_follow_officer_block",
+            "name": "Pseudo Follow Officer Block",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "officer_block"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "support_ratio",
+                    "operator": "less_than",
+                    "value": 0.25
+                }
+            ],
+            "evaluation": {
+                "weight": -12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 89
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Officer Block",
+                "description": "Officer present blocks true follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000010",
+            "code": "pseudo_follow_false",
+            "name": "Pseudo Follow False",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "false_follow"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case",
+                    "operator": "equals",
+                    "value": "FALSE_FOLLOW"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow False",
+                "description": "Follow calculator returns type but conditions fail",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000011",
+            "code": "pseudo_follow_special_override",
+            "name": "Pseudo Follow Special Override",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "special_override"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Special Override",
+                "description": "Special case downgrades follow to pseudo",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000012",
+            "code": "elig_strength_weak",
+            "name": "Eligibility Strength Weak",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "eligibility",
+                "family": "follow_eligibility",
+                "type": "weak_body"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility Strength Weak",
+                "description": "Day master extremely weak — follow eligible",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000013",
+            "code": "elig_strength_strong_vuong",
+            "name": "Eligibility Strength Strong Vuong",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "eligibility",
+                "family": "follow_eligibility",
+                "type": "strong_body"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility Strength Strong Vuong",
+                "description": "Day master extremely strong — Tòng Vượng eligible",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000014",
+            "code": "elig_support_ratio_low",
+            "name": "Eligibility Support Ratio Low",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "eligibility",
+                "family": "follow_eligibility",
+                "type": "low_support"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "support_ratio",
+                    "operator": "less_than",
+                    "value": 0.25
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 72
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility Support Ratio Low",
+                "description": "Support ratio below 0.25 — weak follow family",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000015",
+            "code": "elig_support_ratio_high",
+            "name": "Eligibility Support Ratio High",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "eligibility",
+                "family": "follow_eligibility",
+                "type": "high_support"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "support_ratio",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.7
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 72
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility Support Ratio High",
+                "description": "Support ratio above 0.70 — Tòng Vượng eligible",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000016",
+            "code": "elig_dominant_force",
+            "name": "Eligibility Dominant Force",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "eligibility",
+                "family": "follow_eligibility",
+                "type": "dominant_force"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "dominant_ratio",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.5
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 71
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility Dominant Force",
+                "description": "Dominant opposing force clear (≥ half non-support)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000017",
+            "code": "elig_pattern_confirmed",
+            "name": "Eligibility Pattern Confirmed",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "eligibility",
+                "family": "follow_eligibility",
+                "type": "pattern_confirmed"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 65
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility Pattern Confirmed",
+                "description": "Primary pattern must be confirmed before follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000018",
+            "code": "maintain_seal_support",
+            "name": "Maintain Seal Support",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "maintenance",
+                "family": "follow_maintenance",
+                "type": "seal_support"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "in",
+                    "value": [
+                        "tong_an",
+                        "tong_vuong"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Maintain Seal Support",
+                "description": "Seal stars maintain follow pattern stability",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "maintenance",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000019",
+            "code": "maintain_wealth_flow",
+            "name": "Maintain Wealth Flow",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "maintenance",
+                "family": "follow_maintenance",
+                "type": "wealth_flow"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_tai"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Maintain Wealth Flow",
+                "description": "Wealth stars maintain Tòng Tài pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "maintenance",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000020",
+            "code": "maintain_officer_control",
+            "name": "Maintain Officer Control",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "maintenance",
+                "family": "follow_maintenance",
+                "type": "officer_control"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Maintain Officer Control",
+                "description": "Officer control maintains Tòng Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "maintenance",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000021",
+            "code": "maintain_output_gen",
+            "name": "Maintain Output Generation",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "maintenance",
+                "family": "follow_maintenance",
+                "type": "output_gen"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thực Thần"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_nhi"
+                }
+            ],
+            "evaluation": {
+                "weight": 7,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 74
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Maintain Output Generation",
+                "description": "Output stars maintain Tòng Nhi",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "maintenance",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000022",
+            "code": "break_officer_clash",
+            "name": "Break Officer Clash",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "break",
+                "family": "follow_break",
+                "type": "officer_clash"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_quan"
+                },
+                {
+                    "type": "stem_clash",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": -18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 96
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Break Officer Clash",
+                "description": "Stem clash breaks Tòng Quan follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "break",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000023",
+            "code": "break_seal_attack",
+            "name": "Break Seal Attack",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "break",
+                "family": "follow_break",
+                "type": "seal_attack"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_an"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thương Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": -15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 94
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Break Seal Attack",
+                "description": "Thương Quan attacks seal — breaks Tòng Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "break",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000024",
+            "code": "break_wealth_rob",
+            "name": "Break Wealth Rob",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "break",
+                "family": "follow_break",
+                "type": "wealth_rob"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_tai"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Kiếp Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": -16,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Break Wealth Rob",
+                "description": "Kiếp Tài robs wealth — breaks Tòng Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "break",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000025",
+            "code": "break_strength_recovery",
+            "name": "Break Strength Recovery",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "break",
+                "family": "follow_break",
+                "type": "strength_recovery"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "support_ratio",
+                    "operator": "greater_than",
+                    "value": 0.4
+                }
+            ],
+            "evaluation": {
+                "weight": -12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Break Strength Recovery",
+                "description": "Strength recovers above threshold — follow breaks",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "break",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000026",
+            "code": "break_special_case",
+            "name": "Break Special Case Override",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "break",
+                "family": "follow_break",
+                "type": "special_break"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                },
+                {
+                    "type": "special_case",
+                    "operator": "equals",
+                    "value": "FALSE_FOLLOW"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 98
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Break Special Case Override",
+                "description": "Special case flag breaks follow classification",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "break",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000027",
+            "code": "convert_weak_to_tai",
+            "name": "Convert Weak To Tai",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "conversion",
+                "family": "follow_conversion",
+                "type": "weak_to_tai"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                },
+                {
+                    "type": "dominant_family",
+                    "operator": "equals",
+                    "value": "wealth"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Convert Weak To Tai",
+                "description": "Extreme weak + wealth dominant → Tòng Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conversion",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000028",
+            "code": "convert_weak_to_quan",
+            "name": "Convert Weak To Quan",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "conversion",
+                "family": "follow_conversion",
+                "type": "weak_to_quan"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                },
+                {
+                    "type": "dominant_family",
+                    "operator": "equals",
+                    "value": "officer"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Convert Weak To Quan",
+                "description": "Extreme weak + officer dominant → Tòng Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conversion",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000029",
+            "code": "convert_strong_to_vuong",
+            "name": "Convert Strong To Vuong",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "conversion",
+                "family": "follow_conversion",
+                "type": "strong_to_vuong"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                },
+                {
+                    "type": "support_ratio",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.7
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Convert Strong To Vuong",
+                "description": "Extreme strong + high support → Tòng Vượng",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conversion",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000030",
+            "code": "convert_pseudo_to_true",
+            "name": "Convert Pseudo To True",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "conversion",
+                "family": "follow_conversion",
+                "type": "pseudo_to_true"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 82
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Convert Pseudo To True",
+                "description": "Pseudo follow converts to true when conditions met",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conversion",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000031",
+            "code": "season_spring_resource",
+            "name": "Season Spring Resource Confirm",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "seasonal",
+                "family": "season_confirmation",
+                "type": "spring_resource"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_an"
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 68
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season Spring Resource Confirm",
+                "description": "Spring confirms resource follow (Tòng Ấn)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "seasonal",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000032",
+            "code": "season_summer_output",
+            "name": "Season Summer Output Confirm",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "seasonal",
+                "family": "season_confirmation",
+                "type": "summer_output"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_nhi"
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 68
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season Summer Output Confirm",
+                "description": "Summer confirms output follow (Tòng Nhi)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "seasonal",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000033",
+            "code": "season_autumn_officer",
+            "name": "Season Autumn Officer Confirm",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "seasonal",
+                "family": "season_confirmation",
+                "type": "autumn_officer"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "in",
+                    "value": [
+                        "tong_quan",
+                        "tong_sat"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 68
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season Autumn Officer Confirm",
+                "description": "Autumn confirms officer follow (Tòng Quan/Sát)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "seasonal",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000034",
+            "code": "season_winter_wealth",
+            "name": "Season Winter Wealth Confirm",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "seasonal",
+                "family": "season_confirmation",
+                "type": "winter_wealth"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_tai"
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 68
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season Winter Wealth Confirm",
+                "description": "Winter confirms wealth follow (Tòng Tài)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "seasonal",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000035",
+            "code": "threshold_weak_025",
+            "name": "Threshold Weak Support 0.25",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "threshold",
+                "family": "strength_threshold",
+                "type": "weak_025"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "support_ratio",
+                    "operator": "less_than_or_equals",
+                    "value": 0.25
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 73
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Threshold Weak Support 0.25",
+                "description": "Support ratio ≤ 0.25 triggers weak follow detection",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "threshold",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000036",
+            "code": "threshold_strong_070",
+            "name": "Threshold Strong Support 0.70",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "threshold",
+                "family": "strength_threshold",
+                "type": "strong_070"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "support_ratio",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.7
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 73
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Threshold Strong Support 0.70",
+                "description": "Support ratio ≥ 0.70 triggers Tòng Vượng",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "threshold",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000037",
+            "code": "threshold_dominant_half",
+            "name": "Threshold Dominant Half",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "threshold",
+                "family": "strength_threshold",
+                "type": "dominant_half"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "dominant_ratio",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.5
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 72
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Threshold Dominant Half",
+                "description": "Dominant force must be ≥ half of non-support",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "threshold",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000038",
+            "code": "threshold_count_two",
+            "name": "Threshold Absolute Count Two",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "threshold",
+                "family": "strength_threshold",
+                "type": "count_two"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "dominant_count",
+                    "operator": "greater_than_or_equals",
+                    "value": 2
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 71
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Threshold Absolute Count Two",
+                "description": "Dominant family must have ≥ 2 occurrences",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "threshold",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000039",
+            "code": "spc_false_follow_block",
+            "name": "Special Case False Follow Block",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "special_interaction",
+                "family": "special_case_interaction",
+                "type": "false_follow_block"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case",
+                    "operator": "equals",
+                    "value": "FALSE_FOLLOW"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 97
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special Case False Follow Block",
+                "description": "FALSE_FOLLOW special case blocks follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special_interaction",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000040",
+            "code": "spc_pseudo_penalty",
+            "name": "Special Case Pseudo Penalty",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "special_interaction",
+                "family": "special_case_interaction",
+                "type": "pseudo_penalty"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special Case Pseudo Penalty",
+                "description": "Pseudo follow special case applies penalty",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special_interaction",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000041",
+            "code": "spc_useful_god_tai",
+            "name": "Special Case Useful God Tai Override",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "special_interaction",
+                "family": "special_case_interaction",
+                "type": "ug_tai_override"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_pattern",
+                    "operator": "equals",
+                    "value": "tong_tai"
+                }
+            ],
+            "evaluation": {
+                "weight": 94,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special Case Useful God Tai Override",
+                "description": "Useful god follow tai override from special case module",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special_interaction",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000042",
+            "code": "spc_useful_god_quan",
+            "name": "Special Case Useful God Quan Override",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "special_interaction",
+                "family": "special_case_interaction",
+                "type": "ug_quan_override"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_pattern",
+                    "operator": "equals",
+                    "value": "tong_quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 94,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special Case Useful God Quan Override",
+                "description": "Useful god follow quan override",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special_interaction",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000043",
+            "code": "pri_follow_beats_main",
+            "name": "Priority Follow Beats Main",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "follow_beats_main"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 200
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority Follow Beats Main",
+                "description": "Follow pattern beats main pattern when detected",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000044",
+            "code": "pri_follow_score_tiebreak",
+            "name": "Priority Follow Score Tiebreak",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "score_tiebreak"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 175
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority Follow Score Tiebreak",
+                "description": "Equal priority — higher score wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000045",
+            "code": "pri_follow_first_match",
+            "name": "Priority Follow First Match",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "first_match"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 170
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority Follow First Match",
+                "description": "Equal score — first match wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000046",
+            "code": "pri_tong_vuong_first",
+            "name": "Priority Tong Vuong First",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "tong_vuong_first"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "follow_detection"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 195
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority Tong Vuong First",
+                "description": "Tòng Vượng checked before Tòng Nhược family",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000047",
+            "code": "pri_tong_nhuoc_second",
+            "name": "Priority Tong Nhuoc Second",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "tong_nhuoc_second"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "follow_detection"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority Tong Nhuoc Second",
+                "description": "Tòng Nhược family checked after Tòng Vượng",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000048",
+            "code": "group_priority_follow",
+            "name": "Group Priority Follow",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "follow_group"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "true_follow"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Group Priority Follow",
+                "description": "Execution order for true follow rules",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000049",
+            "code": "group_priority_eligibility",
+            "name": "Group Priority Eligibility",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "priority",
+                "family": "priority_ordering",
+                "type": "eligibility_group"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "eligibility"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Group Priority Eligibility",
+                "description": "Eligibility gates run before follow matching",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000050",
+            "code": "fallback_no_follow",
+            "name": "Fallback No Follow",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "fallback",
+                "family": "fallback_behavior",
+                "type": "no_follow"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 1
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Fallback No Follow",
+                "description": "No follow pattern detected — use primary pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "fallback",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "FOL-000051",
+            "code": "fallback_ambiguous_follow",
+            "name": "Fallback Ambiguous Follow",
+            "classification": {
+                "domain": "follow_pattern",
+                "category": "fallback",
+                "family": "fallback_behavior",
+                "type": "ambiguous"
+            },
+            "source": {
+                "signal": "follow_pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "follow_pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_confidence",
+                    "operator": "less_than",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 5
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Fallback Ambiguous Follow",
+                "description": "Follow type ambiguous — conservative handling",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "FOLLOW_PATTERN_TAXONOMY.md",
+                    "FOLLOW_PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/03_follow_pattern.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T18:00:00Z",
+                "updated_at": "2026-07-29T18:00:00Z",
+                "approved_at": "2026-07-29T18:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "fallback",
+                    "follow_pattern"
+                ],
+                "source": "BTE Platform Follow Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

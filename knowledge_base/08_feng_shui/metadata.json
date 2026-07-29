@@ -1,0 +1,47 @@
+{
+  "module_id": "08_feng_shui",
+  "module_name": "feng_shui",
+  "module_title": "Feng Shui Knowledge Base",
+  "description": "Framework tri thức Cung Phi (Mệnh Quái). FS-01A chỉ dựng khung + schema + validator; nội dung chuyên môn do đội chuyên môn nhập sau.",
+  "version": "1.0.0",
+  "author": "BTE Platform",
+  "updated_at": "2026-07-26",
+  "schema_version": "1.0.0",
+  "work_package": "FS-01A",
+  "status": "framework_ready",
+  "language": "vi",
+  "encoding": "UTF-8",
+  "purpose": "knowledge_base",
+  "content_policy": "framework_only_arrays_empty_until_expert_input",
+  "scope": [
+    "cung_phi",
+    "menh_quai",
+    "dong_tay_tu_trach"
+  ],
+  "out_of_scope": [
+    "business_rules",
+    "sentence_templates",
+    "interpretation_narrative",
+    "ai_generated_content",
+    "duong_trach_layout"
+  ],
+  "schema_ref": "schema.json",
+  "validator_ref": "validator.py",
+  "batch_validator_ref": "validate_all.py",
+  "example_ref": "examples/sample.json",
+  "gua_files": {
+    "1": "01_gua/kham.json",
+    "2": "01_gua/khon.json",
+    "3": "01_gua/chan.json",
+    "4": "01_gua/ton.json",
+    "6": "01_gua/can.json",
+    "7": "01_gua/doai.json",
+    "8": "01_gua/can_gen.json",
+    "9": "01_gua/ly.json"
+  },
+  "groups": {
+    "Đông Tứ Trạch": [1, 3, 4, 9],
+    "Tây Tứ Trạch": [2, 6, 7, 8]
+  },
+  "related_engine": "engines/feng_shui_engine"
+}

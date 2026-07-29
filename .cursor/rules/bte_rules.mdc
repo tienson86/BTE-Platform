@@ -1,0 +1,162 @@
+---
+description: BTE Development Rules
+alwaysApply: true
+---
+
+# BTE Rules
+
+## Rule 1
+
+Không được sửa tests nếu người dùng không yêu cầu.
+
+---
+
+## Rule 2
+
+Ưu tiên sửa source code.
+
+---
+
+## Rule 3
+
+Không đổi tên Public API.
+
+---
+
+## Rule 4
+
+Không xóa class.
+
+---
+
+## Rule 5
+
+Không đổi tên method.
+
+Nếu cần
+
+→ tạo wrapper.
+
+---
+
+## Rule 6
+
+Không thay đổi cấu trúc database.
+
+---
+
+## Rule 7
+
+Không thêm dependency bên ngoài nếu chưa được yêu cầu.
+
+---
+
+## Rule 8
+
+Mỗi lần sửa
+
+Chỉ sửa đúng module được yêu cầu.
+
+Ví dụ
+
+Report Engine
+
+↓
+
+Không được sửa
+
+Calendar
+
+Bazi
+
+Score
+
+Pattern
+
+---
+
+## Rule 9
+
+Không refactor toàn bộ project.
+
+---
+
+## Rule 10
+
+Luôn giữ backward compatibility.
+
+---
+
+## Rule 11
+
+Sau mỗi lần sửa
+
+chạy đúng test của module.
+
+Ví dụ
+
+pytest tests/report -q
+
+không chạy toàn project.
+
+---
+
+## Rule 12
+
+Không tạo code duplicate.
+
+---
+
+## Rule 13
+
+Ưu tiên sửa ít dòng nhất.
+
+---
+
+## Rule 14
+
+Không thay đổi API nếu test đang sử dụng.
+
+---
+
+## Rule 15
+
+Nếu có nhiều cách sửa
+
+ưu tiên
+
+Minimal Change.
+
+---
+
+## Rule 16
+
+Không thay đổi dữ liệu Golden Dataset.
+
+---
+
+## Rule 17
+
+Không sửa snapshot.
+
+---
+
+## Rule 18
+
+Không sửa expected output.
+
+---
+
+## Rule 19
+
+Nếu phát hiện bug ngoài phạm vi
+
+chỉ báo cáo.
+
+Không tự ý sửa.
+
+---
+
+## Rule 20
+
+Mọi thay đổi phải hiển thị diff trước khi kết thúc.

@@ -1,0 +1,11 @@
+rule_id,priority,score,score_target,conditions,strength_level,reason,description,reference,status,enabled
+pri_special,100,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""special""}]",,Ưu tiên đặc biệt,Rule đặc biệt override,BTE-STR-V2,active,true
+pri_season,95,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""season""}]",,Ưu tiên mùa,Tháng lệnh quan trọng nhất,BTE-STR-V2,active,true
+pri_root,90,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""root""}]",,Ưu tiên căn,Thông căn,BTE-STR-V2,active,true
+pri_support,85,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""support""}]",,Ưu tiên trợ,Trợ lực,BTE-STR-V2,active,true
+pri_control,80,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""control""}]",,Ưu tiên khắc,Khắc chế,BTE-STR-V2,active,true
+pri_drain,75,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""drain""}]",,Ưu tiên tiết,Tiết khí,BTE-STR-V2,active,true
+pri_combination,70,0,priority,"[{""field"": ""rule_group"", ""operator"": ""=="", ""value"": ""combination""}]",,Ưu tiên hợp,Hợp hóa,BTE-STR-V2,active,true
+pri_level_strong,100,0,level,"[{""field"": ""strength_score"", ""operator"": "">="", ""value"": 0.65}]",strong,Thân vượng,Điểm tổng >= 65%,BTE-STR-V2,active,true
+pri_level_weak,100,0,level,"[{""field"": ""strength_score"", ""operator"": ""<="", ""value"": 0.35}]",weak,Thân nhược,Điểm tổng <= 35%,BTE-STR-V2,active,true
+pri_level_balanced,80,0,level,"[{""field"": ""strength_score"", ""operator"": "">"", ""value"": 0.35}, {""field"": ""strength_score"", ""operator"": ""<"", ""value"": 0.65}]",balanced,Trung hòa,Điểm tổng cân bằng,BTE-STR-V2,active,true

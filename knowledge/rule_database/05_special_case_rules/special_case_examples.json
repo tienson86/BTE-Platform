@@ -1,0 +1,84 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T17:00:00Z",
+        "updated_at": "2026-07-29T17:00:00Z",
+        "approved_at": "2026-07-29T17:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "special_case",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Special Case Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Special Case Rule Database validation.",
+        "description": "Reference chart scenarios with expected special case flags.",
+        "references": [
+            "MODULE_SPEC.md",
+            "SPECIAL_CASE_DECISION_TREE.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "day_master": "Giáp",
+            "special_case": "CONG_THANH",
+            "primary_pattern": "ty_kien",
+            "strength_level": "strong",
+            "expected_flag": true,
+            "notes": "Extreme strong with pure structure."
+        },
+        {
+            "example_id": "ex_002",
+            "day_master": "Bính",
+            "special_case": "FALSE_FOLLOW",
+            "primary_pattern": "tong_tai",
+            "strength_level": "balanced",
+            "expected_flag": true,
+            "notes": "Pseudo follow — strength not weak enough."
+        },
+        {
+            "example_id": "ex_003",
+            "day_master": "Nham",
+            "special_case": "EXTREME_WEAK",
+            "primary_pattern": "chinh_tai",
+            "strength_level": "weak",
+            "expected_flag": true,
+            "notes": "Extreme weak body with wealth pattern."
+        },
+        {
+            "example_id": "ex_004",
+            "day_master": "Canh",
+            "special_case": "SAT_VO_CHE",
+            "primary_pattern": "that_sat",
+            "strength_level": "weak",
+            "expected_flag": true,
+            "notes": "Seven killings without control."
+        },
+        {
+            "example_id": "ex_005",
+            "day_master": "Mậu",
+            "special_case": "LIU_CHONG",
+            "clash_type": "LIU_CHONG",
+            "expected_flag": true,
+            "notes": "Six clash breaks pattern structure."
+        },
+        {
+            "example_id": "ex_006",
+            "day_master": "Đinh",
+            "special_case": "seasonal",
+            "season": "summer",
+            "day_master_element": "Hỏa",
+            "expected_flag": true,
+            "notes": "Fire day master summer temperature exception."
+        }
+    ]
+}

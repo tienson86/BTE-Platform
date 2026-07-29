@@ -1,0 +1,29 @@
+<div class="panel">
+  <div class="toolbar">
+    <input id="filterCustomer" placeholder="Filter by customer_id" />
+    <button type="button" id="btnLoadCases">Reload</button>
+  </div>
+  <div style="overflow:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Case ID</th><th>Customer</th><th>Created</th><th>Engine</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="caseRows"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel" id="caseDetail" style="display:none">
+  <h2>Case detail</h2>
+  <div class="toolbar">
+    <button type="button" class="secondary" id="btnExportJson">Export JSON</button>
+    <button type="button" class="secondary" id="btnExportMd">Export Markdown</button>
+    <button type="button" class="secondary" id="btnExportHtml">Export HTML</button>
+    <button type="button" class="danger" id="btnDeleteCase">Delete</button>
+  </div>
+  <div id="caseBody" class="pre"></div>
+</div>
+<script src="/static/js/cases.js"></script>
+<script>document.getElementById("pageTitle").textContent = "Cases";</script>

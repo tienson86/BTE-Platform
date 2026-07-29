@@ -1,0 +1,85 @@
+[
+    {
+      "rule_id": "SSR_0001",
+      "name": "Strength Score Framework",
+      "version": "1.0",
+      "enabled": true,
+  
+      "priority": 100,
+  
+      "components": [
+        {
+          "id": "month_strength",
+          "name": "Nguyệt lệnh",
+          "source": "month_strength_rules.json",
+          "weight": 40
+        },
+        {
+          "id": "root_strength",
+          "name": "Thông căn",
+          "source": "root_strength_rules.json",
+          "weight": 25
+        },
+        {
+          "id": "support_strength",
+          "name": "Sinh trợ",
+          "source": "support_strength_rules.json",
+          "weight": 15
+        },
+        {
+          "id": "drain_strength",
+          "name": "Tiết khí",
+          "source": "drain_strength_rules.json",
+          "weight": 10
+        },
+        {
+          "id": "control_strength",
+          "name": "Khắc chế",
+          "source": "control_strength_rules.json",
+          "weight": 10
+        }
+      ],
+  
+      "score_range": {
+        "minimum": 0,
+        "maximum": 100
+      },
+  
+      "strength_levels": [
+        {
+          "id": "extremely_weak",
+          "name": "Thân cực nhược",
+          "min": 0,
+          "max": 20
+        },
+        {
+          "id": "weak",
+          "name": "Thân nhược",
+          "min": 21,
+          "max": 40
+        },
+        {
+          "id": "balanced",
+          "name": "Thân cân bằng",
+          "min": 41,
+          "max": 60
+        },
+        {
+          "id": "strong",
+          "name": "Thân vượng",
+          "min": 61,
+          "max": 80
+        },
+        {
+          "id": "extremely_strong",
+          "name": "Thân cực vượng",
+          "min": 81,
+          "max": 100
+        }
+      ],
+  
+      "references": [
+        "BTE Strength Engine V1.0"
+      ]
+    }
+  ]

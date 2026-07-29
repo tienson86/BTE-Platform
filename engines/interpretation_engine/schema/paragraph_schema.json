@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "paragraph_schema.json",
+
+  "title": "Paragraph Schema",
+
+  "type": "object",
+
+  "required": [
+
+    "paragraph_id",
+
+    "title",
+
+    "sentence_ids"
+
+  ],
+
+  "properties": {
+
+    "paragraph_id": {
+      "$ref": "common_schema.json#/$defs/id"
+    },
+
+    "title": {
+      "$ref": "common_schema.json#/$defs/name"
+    },
+
+    "sentence_ids": {
+
+      "type": "array",
+
+      "minItems": 1,
+
+      "items": {
+        "$ref": "common_schema.json#/$defs/id"
+      }
+
+    },
+
+    "order": {
+
+      "type": "integer",
+
+      "minimum": 1,
+
+      "default": 1
+
+    },
+
+    "enabled": {
+      "$ref": "common_schema.json#/$defs/enabled"
+    }
+
+  },
+
+  "additionalProperties": false
+}

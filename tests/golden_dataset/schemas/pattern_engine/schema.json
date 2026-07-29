@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/snapshots/pattern_engine/schema.json",
+  "title": "Pattern Engine Snapshot",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "case_id",
+    "strength",
+    "pattern",
+    "useful_god"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "strength": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string"
+        },
+        "score": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": true
+    },
+    "pattern": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string"
+        },
+        "secondary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "follow_pattern": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "useful_god": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string"
+        },
+        "secondary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "favorable_elements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unfavorable_elements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,595 @@
+[
+    {
+      "id": "PC001",
+      "condition_code": "DETECT_TONG_VUONG",
+      "condition_name": "Detect Tong Vuong",
+      "priority_rule": "PR001",
+      "rule_type": "special_case",
+      "trigger_stage": "special_case_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "day_master_extremely_strong",
+        "follow_output_element",
+        "follow_resource_element"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số được xác định là Tòng Vượng."
+    },
+    {
+      "id": "PC002",
+      "condition_code": "DETECT_TONG_NHUOC",
+      "condition_name": "Detect Tong Nhuoc",
+      "priority_rule": "PR002",
+      "rule_type": "special_case",
+      "trigger_stage": "special_case_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "day_master_extremely_weak",
+        "unable_to_self_support",
+        "follow_dominant_element"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số được xác định là Tòng Nhược."
+    },
+    {
+      "id": "PC003",
+      "condition_code": "DETECT_TONG_TAI",
+      "condition_name": "Detect Tong Tai",
+      "priority_rule": "PR003",
+      "rule_type": "special_case",
+      "trigger_stage": "special_case_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "wealth_element_dominant",
+        "day_master_cannot_resist",
+        "wealth_structure_complete"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số thuộc Tòng Tài."
+    },
+    {
+      "id": "PC004",
+      "condition_code": "DETECT_TONG_SAT",
+      "condition_name": "Detect Tong Sat",
+      "priority_rule": "PR004",
+      "rule_type": "special_case",
+      "trigger_stage": "special_case_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "officer_killing_dominant",
+        "day_master_extremely_weak",
+        "cannot_counter_killing"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số thuộc Tòng Sát."
+    },
+    {
+      "id": "PC005",
+      "condition_code": "DETECT_HOA_KHI",
+      "condition_name": "Detect Hoa Khi",
+      "priority_rule": "PR005",
+      "rule_type": "special_case",
+      "trigger_stage": "special_case_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "heavenly_stem_transform",
+        "earthly_branch_support",
+        "season_support_transform"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi điều kiện Hóa Khí được xác lập."
+    },
+    {
+      "id": "PC006",
+      "condition_code": "FOLLOW_TONG_VUONG",
+      "condition_name": "Follow Tong Vuong",
+      "priority_rule": "PR006",
+      "rule_type": "follow_pattern",
+      "trigger_stage": "pattern_confirmation",
+      "match_type": "first",
+      "required_conditions": [
+        "tong_vuong_confirmed"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt sau khi Tòng Vượng đã được xác nhận."
+    },
+    {
+      "id": "PC007",
+      "condition_code": "FOLLOW_TONG_NHUOC",
+      "condition_name": "Follow Tong Nhuoc",
+      "priority_rule": "PR007",
+      "rule_type": "follow_pattern",
+      "trigger_stage": "pattern_confirmation",
+      "match_type": "first",
+      "required_conditions": [
+        "tong_nhuoc_confirmed"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt sau khi Tòng Nhược đã được xác nhận."
+    },
+    {
+      "id": "PC008",
+      "condition_code": "FOLLOW_TONG_TAI",
+      "condition_name": "Follow Tong Tai",
+      "priority_rule": "PR008",
+      "rule_type": "follow_pattern",
+      "trigger_stage": "pattern_confirmation",
+      "match_type": "first",
+      "required_conditions": [
+        "tong_tai_confirmed"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt sau khi Tòng Tài đã được xác nhận."
+    },
+    {
+      "id": "PC009",
+      "condition_code": "FOLLOW_TONG_SAT",
+      "condition_name": "Follow Tong Sat",
+      "priority_rule": "PR009",
+      "rule_type": "follow_pattern",
+      "trigger_stage": "pattern_confirmation",
+      "match_type": "first",
+      "required_conditions": [
+        "tong_sat_confirmed"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt sau khi Tòng Sát đã được xác nhận."
+    },
+    {
+      "id": "PC010",
+      "condition_code": "FOLLOW_HOA_KHI",
+      "condition_name": "Follow Hoa Khi",
+      "priority_rule": "PR010",
+      "rule_type": "follow_pattern",
+      "trigger_stage": "pattern_confirmation",
+      "match_type": "first",
+      "required_conditions": [
+        "hoa_khi_confirmed"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt sau khi Hóa Khí đã được xác nhận."
+    }
+  ]
+  [
+    {
+      "id": "PC011",
+      "condition_code": "DETECT_THIEN_CAN_HOP",
+      "condition_name": "Detect Heavenly Stem Combination",
+      "priority_rule": "PR011",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "heavenly_stem_combination_found",
+        "combination_rule_valid"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện Thiên Can Hợp hợp lệ."
+    },
+    {
+      "id": "PC012",
+      "condition_code": "DETECT_DIA_CHI_LUC_HOP",
+      "condition_name": "Detect Earthly Branch Six Combination",
+      "priority_rule": "PR012",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "earthly_branch_six_combination_found",
+        "combination_rule_valid"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện Địa Chi Lục Hợp."
+    },
+    {
+      "id": "PC013",
+      "condition_code": "DETECT_TAM_HOP",
+      "condition_name": "Detect Three Harmony Combination",
+      "priority_rule": "PR013",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "three_harmony_found",
+        "season_support_available"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện Tam Hợp cục hợp lệ."
+    },
+    {
+      "id": "PC014",
+      "condition_code": "DETECT_TAM_HOI",
+      "condition_name": "Detect Three Meeting Combination",
+      "priority_rule": "PR014",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "three_meeting_found",
+        "meeting_rule_valid"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện Tam Hội cục."
+    },
+    {
+      "id": "PC015",
+      "condition_code": "DETECT_BAN_HOP",
+      "condition_name": "Detect Half Combination",
+      "priority_rule": "PR015",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "half_combination_found"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện Bán Hợp."
+    },
+    {
+      "id": "PC016",
+      "condition_code": "DETECT_BAN_HOI",
+      "condition_name": "Detect Half Meeting",
+      "priority_rule": "PR016",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "all",
+      "required_conditions": [
+        "half_meeting_found"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện Bán Hội."
+    },
+    {
+      "id": "PC017",
+      "condition_code": "DETECT_XUNG",
+      "condition_name": "Detect Clash",
+      "priority_rule": "PR017",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "any",
+      "required_conditions": [
+        "earthly_branch_clash_found",
+        "heavenly_stem_clash_found"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện quan hệ Xung."
+    },
+    {
+      "id": "PC018",
+      "condition_code": "DETECT_HAI",
+      "condition_name": "Detect Harm",
+      "priority_rule": "PR018",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "any",
+      "required_conditions": [
+        "harm_relation_found"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện quan hệ Hại."
+    },
+    {
+      "id": "PC019",
+      "condition_code": "DETECT_HINH",
+      "condition_name": "Detect Punishment",
+      "priority_rule": "PR019",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "any",
+      "required_conditions": [
+        "punishment_relation_found"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện quan hệ Hình."
+    },
+    {
+      "id": "PC020",
+      "condition_code": "DETECT_PHA",
+      "condition_name": "Detect Destruction",
+      "priority_rule": "PR020",
+      "rule_type": "combination",
+      "trigger_stage": "combination_detection",
+      "match_type": "any",
+      "required_conditions": [
+        "destruction_relation_found"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi phát hiện quan hệ Phá."
+    }
+  ]
+  [
+    {
+      "id": "PC021",
+      "condition_code": "DETECT_STRONG_DAY_MASTER",
+      "condition_name": "Detect Strong Day Master",
+      "priority_rule": "PR021",
+      "rule_type": "strength",
+      "trigger_stage": "strength_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "day_master_strength_calculated",
+        "strength_score >= 80",
+        "strong_day_master"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi Nhật Chủ được đánh giá là Thân Vượng."
+    },
+    {
+      "id": "PC022",
+      "condition_code": "DETECT_WEAK_DAY_MASTER",
+      "condition_name": "Detect Weak Day Master",
+      "priority_rule": "PR022",
+      "rule_type": "strength",
+      "trigger_stage": "strength_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "day_master_strength_calculated",
+        "strength_score <= 20",
+        "weak_day_master"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi Nhật Chủ được đánh giá là Thân Nhược."
+    },
+    {
+      "id": "PC023",
+      "condition_code": "DETECT_BALANCED_DAY_MASTER",
+      "condition_name": "Detect Balanced Day Master",
+      "priority_rule": "PR023",
+      "rule_type": "strength",
+      "trigger_stage": "strength_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "day_master_strength_calculated",
+        "balanced_day_master"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi Nhật Chủ ở trạng thái cân bằng."
+    },
+    {
+      "id": "PC024",
+      "condition_code": "DETECT_EXTREMELY_STRONG",
+      "condition_name": "Detect Extremely Strong",
+      "priority_rule": "PR024",
+      "rule_type": "strength",
+      "trigger_stage": "strength_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "extremely_strong_day_master"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi Nhật Chủ cực vượng."
+    },
+    {
+      "id": "PC025",
+      "condition_code": "DETECT_EXTREMELY_WEAK",
+      "condition_name": "Detect Extremely Weak",
+      "priority_rule": "PR025",
+      "rule_type": "strength",
+      "trigger_stage": "strength_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "extremely_weak_day_master"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi Nhật Chủ cực nhược."
+    },
+    {
+      "id": "PC026",
+      "condition_code": "DETECT_SPRING_SEASON",
+      "condition_name": "Detect Spring Season",
+      "priority_rule": "PR026",
+      "rule_type": "season",
+      "trigger_stage": "season_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "birth_season = spring"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi tháng sinh thuộc mùa Xuân."
+    },
+    {
+      "id": "PC027",
+      "condition_code": "DETECT_SUMMER_SEASON",
+      "condition_name": "Detect Summer Season",
+      "priority_rule": "PR027",
+      "rule_type": "season",
+      "trigger_stage": "season_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "birth_season = summer"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi tháng sinh thuộc mùa Hạ."
+    },
+    {
+      "id": "PC028",
+      "condition_code": "DETECT_AUTUMN_SEASON",
+      "condition_name": "Detect Autumn Season",
+      "priority_rule": "PR028",
+      "rule_type": "season",
+      "trigger_stage": "season_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "birth_season = autumn"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi tháng sinh thuộc mùa Thu."
+    },
+    {
+      "id": "PC029",
+      "condition_code": "DETECT_WINTER_SEASON",
+      "condition_name": "Detect Winter Season",
+      "priority_rule": "PR029",
+      "rule_type": "season",
+      "trigger_stage": "season_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "birth_season = winter"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi tháng sinh thuộc mùa Đông."
+    },
+    {
+      "id": "PC030",
+      "condition_code": "DETECT_TRANSITION_SEASON",
+      "condition_name": "Detect Transition Season",
+      "priority_rule": "PR030",
+      "rule_type": "season",
+      "trigger_stage": "season_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "birth_season = transition"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi tháng sinh thuộc giai đoạn Tứ Quý Thổ (giao mùa)."
+    }
+  ]
+  [
+    {
+      "id": "PC031",
+      "condition_code": "DETECT_COLD_CHART",
+      "condition_name": "Detect Cold Chart",
+      "priority_rule": "PR031",
+      "rule_type": "temperature",
+      "trigger_stage": "temperature_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "temperature_profile_calculated",
+        "cold_score >= 70"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số được xác định thuộc Hàn cục."
+    },
+    {
+      "id": "PC032",
+      "condition_code": "DETECT_HOT_CHART",
+      "condition_name": "Detect Hot Chart",
+      "priority_rule": "PR032",
+      "rule_type": "temperature",
+      "trigger_stage": "temperature_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "temperature_profile_calculated",
+        "hot_score >= 70"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số được xác định thuộc Nhiệt cục."
+    },
+    {
+      "id": "PC033",
+      "condition_code": "DETECT_DRY_CHART",
+      "condition_name": "Detect Dry Chart",
+      "priority_rule": "PR033",
+      "rule_type": "temperature",
+      "trigger_stage": "temperature_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "temperature_profile_calculated",
+        "dry_score >= 70"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số được xác định thuộc Táo cục."
+    },
+    {
+      "id": "PC034",
+      "condition_code": "DETECT_DAMP_CHART",
+      "condition_name": "Detect Damp Chart",
+      "priority_rule": "PR034",
+      "rule_type": "temperature",
+      "trigger_stage": "temperature_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "temperature_profile_calculated",
+        "damp_score >= 70"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi lá số được xác định thuộc Thấp cục."
+    },
+    {
+      "id": "PC035",
+      "condition_code": "DETECT_STANDARD_PATTERN",
+      "condition_name": "Detect Standard Pattern",
+      "priority_rule": "PR035",
+      "rule_type": "pattern",
+      "trigger_stage": "pattern_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "pattern_identified",
+        "standard_pattern"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi xác định Chính Cách."
+    },
+    {
+      "id": "PC036",
+      "condition_code": "DETECT_SPECIAL_PATTERN",
+      "condition_name": "Detect Special Pattern",
+      "priority_rule": "PR036",
+      "rule_type": "pattern",
+      "trigger_stage": "pattern_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "pattern_identified",
+        "special_pattern"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi xác định Biến Cách hoặc Cách Cục đặc biệt."
+    },
+    {
+      "id": "PC037",
+      "condition_code": "DETECT_SECONDARY_PATTERN",
+      "condition_name": "Detect Secondary Pattern",
+      "priority_rule": "PR037",
+      "rule_type": "pattern",
+      "trigger_stage": "pattern_evaluation",
+      "match_type": "all",
+      "required_conditions": [
+        "secondary_pattern_detected"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi xác định Cách Cục phụ."
+    },
+    {
+      "id": "PC038",
+      "condition_code": "USE_DEFAULT_RULE",
+      "condition_name": "Use Default Rule",
+      "priority_rule": "PR038",
+      "rule_type": "fallback",
+      "trigger_stage": "fallback_processing",
+      "match_type": "first",
+      "required_conditions": [
+        "no_priority_rule_matched"
+      ],
+      "enabled": true,
+      "description": "Sử dụng quy tắc mặc định khi không có Priority Rule nào được kích hoạt."
+    },
+    {
+      "id": "PC039",
+      "condition_code": "REQUIRE_MANUAL_REVIEW",
+      "condition_name": "Require Manual Review",
+      "priority_rule": "PR039",
+      "rule_type": "fallback",
+      "trigger_stage": "fallback_processing",
+      "match_type": "first",
+      "required_conditions": [
+        "conflicting_priority_rules",
+        "manual_review_required"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi có nhiều Priority Rule xung đột cần kiểm tra thủ công."
+    },
+    {
+      "id": "PC040",
+      "condition_code": "UNKNOWN_CASE",
+      "condition_name": "Unknown Case",
+      "priority_rule": "PR040",
+      "rule_type": "fallback",
+      "trigger_stage": "fallback_processing",
+      "match_type": "first",
+      "required_conditions": [
+        "unsupported_case"
+      ],
+      "enabled": true,
+      "description": "Kích hoạt khi gặp trường hợp chưa được định nghĩa trong Rule Database."
+    }
+  ]

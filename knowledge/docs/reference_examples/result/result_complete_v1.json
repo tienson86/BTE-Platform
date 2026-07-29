@@ -1,0 +1,153 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "result_version": "1.0.0",
+        "status": "active",
+        "origin": "reference_example",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T08:00:00Z",
+        "updated_at": "2026-07-29T08:30:00Z",
+        "approved_at": "2026-07-29T09:00:00Z",
+        "deprecated_at": null,
+        "generated_at": "2026-07-29T12:00:00Z",
+        "engine_version": "1.0.0",
+        "tags": [
+            "bazi",
+            "reference_example",
+            "result"
+        ],
+        "source": "BTE Platform Knowledge Framework",
+        "license": "BTE Internal Reference — Not for Production Use"
+    },
+    "summary": {
+        "overall_strength": "balanced",
+        "primary_pattern": "Chinh Quan Cach",
+        "useful_god": "Water",
+        "temperature_type": "warm",
+        "confidence": 0.87
+    },
+    "rule_matches": [
+        {
+            "rule_id": "SUP-000001",
+            "rule_code": "wood_generate_fire",
+            "priority": 20,
+            "matched": true,
+            "weight_applied": 25
+        },
+        {
+            "rule_id": "SUP-000002",
+            "rule_code": "fire_supports_earth",
+            "priority": 50,
+            "matched": false,
+            "weight_applied": 0
+        }
+    ],
+    "analysis": {
+        "strength": {
+            "level": "balanced",
+            "score": 72,
+            "details": "Nhat chu Canh Kim duoc Ho tro vua phai trong mua Dong"
+        },
+        "pattern": {
+            "primary": "Chinh Quan Cach",
+            "secondary": "An Than Cach",
+            "confidence": 0.87
+        },
+        "temperature": {
+            "type": "warm",
+            "score": 68
+        },
+        "seasonal_balance": {
+            "season": "winter",
+            "dominant_element": "water",
+            "adjustment": "favor_water_metal"
+        },
+        "combination": [],
+        "clash": [
+            {
+                "type": "branch_clash",
+                "pillars": [
+                    "month",
+                    "day"
+                ],
+                "branches": [
+                    "Suu",
+                    "Dan"
+                ],
+                "severity": "minor"
+            }
+        ]
+    },
+    "scores": {
+        "strength": 72,
+        "pattern": 87,
+        "temperature": 68,
+        "support": 75,
+        "overall": 76
+    },
+    "interpretations": [
+        {
+            "topic": "strength",
+            "text": "Nhat chu Canh Kim o muc can bang, can duoc Thuy va Kim ho tro de on dinh nang luong."
+        },
+        {
+            "topic": "pattern",
+            "text": "Cach cuc Chinh Quan noi bat, thien ve ky luat va trach nhiem trong cong viec."
+        },
+        {
+            "topic": "useful_god",
+            "text": "Dung Than chinh la Thuy, giup dieu hoa nhiet do va bo sung hanh thieu."
+        }
+    ],
+    "recommendations": [
+        {
+            "type": "useful_god",
+            "element": "water",
+            "action": "Uu tien hanh Thuy trong moi truong song va cong viec"
+        },
+        {
+            "type": "avoid",
+            "element": "fire",
+            "action": "Han che hanh Hoa qua manh trong giai doan Dai van hien tai"
+        },
+        {
+            "type": "luck_cycle",
+            "period": "2025-2034",
+            "action": "Chu y dieu hoa ngũ hanh khi chuyen sang Dai van At Mao"
+        }
+    ],
+    "warnings": [
+        {
+            "code": "LOW_WATER_ELEMENT",
+            "severity": "info",
+            "message": "Hanh Thuy thieu trong tu tru, can bo sung qua Dung Than"
+        }
+    ],
+    "diagnostics": {
+        "rule_count": 2,
+        "rules_matched": 1,
+        "match_time_ms": 12,
+        "execution_time_ms": 245,
+        "validation_messages": [],
+        "pipeline_stages_completed": 9
+    },
+    "extensions": {
+        "report_hints": {
+            "primary_section": "pattern",
+            "locale": "vi-VN"
+        }
+    },
+    "documentation": {
+        "summary": "Canonical complete Result produced by the BTE analysis pipeline for person_ref_001.",
+        "description": "Demonstrates the full Result Model including summary, rule matches, structured analysis, scores, interpretations, recommendations, warnings, diagnostics, and extensions. Corresponds to context_complete_v1.json and rule_complete_v1.json.",
+        "references": [
+            "RESULT_MODEL_SPEC.md",
+            "PIPELINE_MODEL_SPEC.md",
+            "METADATA_STANDARD.md",
+            "JSON_STYLE_GUIDE.md",
+            "REFERENCE_EXAMPLE_REQUIREMENTS.md"
+        ]
+    }
+}

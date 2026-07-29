@@ -1,0 +1,3406 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T14:00:00Z",
+        "updated_at": "2026-07-29T14:00:00Z",
+        "approved_at": "2026-07-29T14:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "season",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Season Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Season Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Season Engine rules covering season classification, phases, element affinity, solar terms, and priority resolution. Derived from database/15_score_engine/02_wuxing/02_season_score.csv and aligned with RULE_MODEL_SPEC.md.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "RULE_SCHEMA_REFERENCE.md",
+            "METADATA_STANDARD.md",
+            "MODULE_SPEC.md",
+            "database/15_score_engine/02_wuxing/02_season_score.csv",
+            "knowledge/docs/reference_examples/rule/rule_complete_v1.json",
+            "knowledge/rule_database/01_strength_rules/"
+        ]
+    },
+    "config": {
+        "baseline": 50,
+        "scale": 100,
+        "seasons": [
+            "spring",
+            "summer",
+            "autumn",
+            "winter"
+        ],
+        "dominant_elements": {
+            "spring": "wood",
+            "summer": "fire",
+            "autumn": "metal",
+            "winter": "water"
+        }
+    },
+    "rules": [
+        {
+            "id": "SEA-000001",
+            "code": "spring_season_base",
+            "name": "Spring Season",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "season_classification",
+                "type": "spring_base"
+            },
+            "source": {
+                "signal": "season",
+                "dominant_element": "wood"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Spring Season classification",
+                "description": "Assign spring season with dominant element wood.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_classification",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000002",
+            "code": "summer_season_base",
+            "name": "Summer Season",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "season_classification",
+                "type": "summer_base"
+            },
+            "source": {
+                "signal": "season",
+                "dominant_element": "fire"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Summer Season classification",
+                "description": "Assign summer season with dominant element fire.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_classification",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000003",
+            "code": "autumn_season_base",
+            "name": "Autumn Season",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "season_classification",
+                "type": "autumn_base"
+            },
+            "source": {
+                "signal": "season",
+                "dominant_element": "metal"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Autumn Season classification",
+                "description": "Assign autumn season with dominant element metal.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "season",
+                    "season_classification"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000004",
+            "code": "winter_season_base",
+            "name": "Winter Season",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "season_classification",
+                "type": "winter_base"
+            },
+            "source": {
+                "signal": "season",
+                "dominant_element": "water"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Winter Season classification",
+                "description": "Assign winter season with dominant element water.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_classification",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000005",
+            "code": "early_spring",
+            "name": "Early Spring",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "season_phase",
+                "type": "early_spring"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "spring"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "early_spring"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Early Spring phase",
+                "description": "Apply season phase score for early_spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000006",
+            "code": "mid_spring",
+            "name": "Mid Spring",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "season_phase",
+                "type": "mid_spring"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "spring"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "mid_spring"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mid Spring phase",
+                "description": "Apply season phase score for mid_spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000007",
+            "code": "late_spring",
+            "name": "Late Spring",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "season_phase",
+                "type": "late_spring"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "spring"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "late_spring"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Late Spring phase",
+                "description": "Apply season phase score for late_spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000008",
+            "code": "early_summer",
+            "name": "Early Summer",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "season_phase",
+                "type": "early_summer"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "summer"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "early_summer"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Early Summer phase",
+                "description": "Apply season phase score for early_summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000009",
+            "code": "mid_summer",
+            "name": "Mid Summer",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "season_phase",
+                "type": "mid_summer"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "summer"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "mid_summer"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mid Summer phase",
+                "description": "Apply season phase score for mid_summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000010",
+            "code": "late_summer",
+            "name": "Late Summer",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "season_phase",
+                "type": "late_summer"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "summer"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "late_summer"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Late Summer phase",
+                "description": "Apply season phase score for late_summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000011",
+            "code": "early_autumn",
+            "name": "Early Autumn",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "season_phase",
+                "type": "early_autumn"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "autumn"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "early_autumn"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Early Autumn phase",
+                "description": "Apply season phase score for early_autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "season",
+                    "season_phase"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000012",
+            "code": "mid_autumn",
+            "name": "Mid Autumn",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "season_phase",
+                "type": "mid_autumn"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "autumn"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "mid_autumn"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mid Autumn phase",
+                "description": "Apply season phase score for mid_autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "season",
+                    "season_phase"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000013",
+            "code": "late_autumn",
+            "name": "Late Autumn",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "season_phase",
+                "type": "late_autumn"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "autumn"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "late_autumn"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Late Autumn phase",
+                "description": "Apply season phase score for late_autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "season",
+                    "season_phase"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000014",
+            "code": "early_winter",
+            "name": "Early Winter",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "season_phase",
+                "type": "early_winter"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "winter"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "early_winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Early Winter phase",
+                "description": "Apply season phase score for early_winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000015",
+            "code": "mid_winter",
+            "name": "Mid Winter",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "season_phase",
+                "type": "mid_winter"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "winter"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "mid_winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mid Winter phase",
+                "description": "Apply season phase score for mid_winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000016",
+            "code": "late_winter",
+            "name": "Late Winter",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "season_phase",
+                "type": "late_winter"
+            },
+            "source": {
+                "signal": "season_phase",
+                "season": "winter"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "equals",
+                    "value": "late_winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Late Winter phase",
+                "description": "Apply season phase score for late_winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000017",
+            "code": "spring_wood_in_season",
+            "name": "Spring Wood In Season",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "element_affinity",
+                "type": "in_season"
+            },
+            "source": {
+                "signal": "season",
+                "element": "wood"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "wood"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "in_season"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "wood in_season in spring",
+                "description": "Element affinity: wood is in_season during spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000018",
+            "code": "spring_fire_growing",
+            "name": "Spring Fire Growing",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "element_affinity",
+                "type": "growing"
+            },
+            "source": {
+                "signal": "season",
+                "element": "fire"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "fire"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "growing"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "fire growing in spring",
+                "description": "Element affinity: fire is growing during spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000019",
+            "code": "spring_earth_neutral",
+            "name": "Spring Earth Neutral",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "element_affinity",
+                "type": "neutral"
+            },
+            "source": {
+                "signal": "season",
+                "element": "earth"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "earth"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "neutral"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "earth neutral in spring",
+                "description": "Element affinity: earth is neutral during spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000020",
+            "code": "spring_metal_weak",
+            "name": "Spring Metal Weak",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "element_affinity",
+                "type": "weak"
+            },
+            "source": {
+                "signal": "season",
+                "element": "metal"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "metal"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "metal weak in spring",
+                "description": "Element affinity: metal is weak during spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000021",
+            "code": "spring_water_remaining_qi",
+            "name": "Spring Water Remaining Qi",
+            "classification": {
+                "domain": "season",
+                "category": "spring",
+                "family": "element_affinity",
+                "type": "remaining_qi"
+            },
+            "source": {
+                "signal": "season",
+                "element": "water"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "water"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "remaining_qi"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "water remaining_qi in spring",
+                "description": "Element affinity: water is remaining_qi during spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "spring"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000022",
+            "code": "summer_fire_in_season",
+            "name": "Summer Fire In Season",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "element_affinity",
+                "type": "in_season"
+            },
+            "source": {
+                "signal": "season",
+                "element": "fire"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "fire"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "in_season"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "fire in_season in summer",
+                "description": "Element affinity: fire is in_season during summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000023",
+            "code": "summer_earth_growing",
+            "name": "Summer Earth Growing",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "element_affinity",
+                "type": "growing"
+            },
+            "source": {
+                "signal": "season",
+                "element": "earth"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "earth"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "growing"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "earth growing in summer",
+                "description": "Element affinity: earth is growing during summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000024",
+            "code": "summer_metal_weak",
+            "name": "Summer Metal Weak",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "element_affinity",
+                "type": "weak"
+            },
+            "source": {
+                "signal": "season",
+                "element": "metal"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "metal"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "metal weak in summer",
+                "description": "Element affinity: metal is weak during summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000025",
+            "code": "summer_water_dead",
+            "name": "Summer Water Dead",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "element_affinity",
+                "type": "dead"
+            },
+            "source": {
+                "signal": "season",
+                "element": "water"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "water"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "dead"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "water dead in summer",
+                "description": "Element affinity: water is dead during summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000026",
+            "code": "summer_wood_remaining_qi",
+            "name": "Summer Wood Remaining Qi",
+            "classification": {
+                "domain": "season",
+                "category": "summer",
+                "family": "element_affinity",
+                "type": "remaining_qi"
+            },
+            "source": {
+                "signal": "season",
+                "element": "wood"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "wood"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "remaining_qi"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "wood remaining_qi in summer",
+                "description": "Element affinity: wood is remaining_qi during summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "summer"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000027",
+            "code": "autumn_earth_in_season",
+            "name": "Autumn Earth In Season",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "element_affinity",
+                "type": "in_season"
+            },
+            "source": {
+                "signal": "season",
+                "element": "earth"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "earth"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "in_season"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "earth in_season in autumn",
+                "description": "Element affinity: earth is in_season during autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "element_affinity",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000028",
+            "code": "autumn_metal_growing",
+            "name": "Autumn Metal Growing",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "element_affinity",
+                "type": "growing"
+            },
+            "source": {
+                "signal": "season",
+                "element": "metal"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "metal"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "growing"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "metal growing in autumn",
+                "description": "Element affinity: metal is growing during autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "element_affinity",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000029",
+            "code": "autumn_metal_in_season",
+            "name": "Autumn Metal In Season",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "element_affinity",
+                "type": "in_season"
+            },
+            "source": {
+                "signal": "season",
+                "element": "metal"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "metal"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "in_season"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "metal in_season in autumn",
+                "description": "Element affinity: metal is in_season during autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "element_affinity",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000030",
+            "code": "autumn_water_growing",
+            "name": "Autumn Water Growing",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "element_affinity",
+                "type": "growing"
+            },
+            "source": {
+                "signal": "season",
+                "element": "water"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "water"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "growing"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "water growing in autumn",
+                "description": "Element affinity: water is growing during autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "element_affinity",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000031",
+            "code": "autumn_wood_dead",
+            "name": "Autumn Wood Dead",
+            "classification": {
+                "domain": "season",
+                "category": "autumn",
+                "family": "element_affinity",
+                "type": "dead"
+            },
+            "source": {
+                "signal": "season",
+                "element": "wood"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "wood"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "dead"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "wood dead in autumn",
+                "description": "Element affinity: wood is dead during autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "autumn",
+                    "element_affinity",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000032",
+            "code": "winter_water_in_season",
+            "name": "Winter Water In Season",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "element_affinity",
+                "type": "in_season"
+            },
+            "source": {
+                "signal": "season",
+                "element": "water"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "water"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "in_season"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "water in_season in winter",
+                "description": "Element affinity: water is in_season during winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000033",
+            "code": "winter_wood_growing",
+            "name": "Winter Wood Growing",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "element_affinity",
+                "type": "growing"
+            },
+            "source": {
+                "signal": "season",
+                "element": "wood"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "wood"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "growing"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "wood growing in winter",
+                "description": "Element affinity: wood is growing during winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000034",
+            "code": "winter_fire_dead",
+            "name": "Winter Fire Dead",
+            "classification": {
+                "domain": "season",
+                "category": "winter",
+                "family": "element_affinity",
+                "type": "dead"
+            },
+            "source": {
+                "signal": "season",
+                "element": "fire"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "fire"
+                },
+                {
+                    "type": "element_relation",
+                    "operator": "equals",
+                    "value": "dead"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "fire dead in winter",
+                "description": "Element affinity: fire is dead during winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_affinity",
+                    "season",
+                    "winter"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000035",
+            "code": "spring_equinox",
+            "name": "Spring Equinox",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "spring_equinox"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "spring"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "spring_equinox"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Spring Equinox",
+                "description": "Seasonal influence during solar term Spring Equinox (spring).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000036",
+            "code": "pure_brightness",
+            "name": "Pure Brightness",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "pure_brightness"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "spring"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "pure_brightness"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Pure Brightness",
+                "description": "Seasonal influence during solar term Pure Brightness (spring).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000037",
+            "code": "grain_rain",
+            "name": "Grain Rain",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "grain_rain"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "spring"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "grain_rain"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Grain Rain",
+                "description": "Seasonal influence during solar term Grain Rain (spring).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000038",
+            "code": "summer_solstice",
+            "name": "Summer Solstice",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "summer_solstice"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "summer"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "summer_solstice"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Summer Solstice",
+                "description": "Seasonal influence during solar term Summer Solstice (summer).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000039",
+            "code": "great_heat",
+            "name": "Great Heat",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "great_heat"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "summer"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "great_heat"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Great Heat",
+                "description": "Seasonal influence during solar term Great Heat (summer).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000040",
+            "code": "autumn_equinox",
+            "name": "Autumn Equinox",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "autumn_equinox"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "autumn"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "autumn_equinox"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Autumn Equinox",
+                "description": "Seasonal influence during solar term Autumn Equinox (autumn).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000041",
+            "code": "frost_descent",
+            "name": "Frost Descent",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "frost_descent"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "autumn"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "frost_descent"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Frost Descent",
+                "description": "Seasonal influence during solar term Frost Descent (autumn).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000042",
+            "code": "winter_solstice",
+            "name": "Winter Solstice",
+            "classification": {
+                "domain": "season",
+                "category": "solar_term",
+                "family": "solar_term_score",
+                "type": "winter_solstice"
+            },
+            "source": {
+                "signal": "solar_term",
+                "season": "winter"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "solar_term",
+                    "operator": "equals",
+                    "value": "winter_solstice"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Solar term Winter Solstice",
+                "description": "Seasonal influence during solar term Winter Solstice (winter).",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "solar_term",
+                    "solar_term_score"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000043",
+            "code": "priority_season",
+            "name": "Priority Season Group",
+            "classification": {
+                "domain": "season",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_season"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "season"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for season",
+                "description": "Resolve evaluation order for season rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000044",
+            "code": "priority_phase",
+            "name": "Priority Season Phase",
+            "classification": {
+                "domain": "season",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_phase"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "phase"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for phase",
+                "description": "Resolve evaluation order for phase rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000045",
+            "code": "priority_element",
+            "name": "Priority Element Affinity",
+            "classification": {
+                "domain": "season",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_element"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "element"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for element",
+                "description": "Resolve evaluation order for element rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "SEA-000046",
+            "code": "priority_solar_term",
+            "name": "Priority Solar Term",
+            "classification": {
+                "domain": "season",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_solar_term"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "season_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "solar_term"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for solar_term",
+                "description": "Resolve evaluation order for solar_term rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/15_score_engine/02_wuxing/02_season_score.csv"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T14:00:00Z",
+                "updated_at": "2026-07-29T14:00:00Z",
+                "approved_at": "2026-07-29T14:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "season"
+                ],
+                "source": "BTE Platform Season Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

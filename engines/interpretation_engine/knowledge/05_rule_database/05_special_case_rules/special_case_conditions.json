@@ -1,0 +1,1802 @@
+[
+    {
+      "id": "SCC001",
+      "condition_name": "tong_cach_true",
+      "enabled": true,
+      "target_special_case": "tong_cach",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "mot_ngu_hanh_chiem_uu_the",
+        "khong_co_luc_sinh_than"
+      ],
+      "optional_conditions": [
+        "thien_can_dong_loai",
+        "dia_chi_dong_loai"
+      ],
+      "forbidden_conditions": [
+        "an_sinh_than",
+        "ty_kiep_manh"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện xác nhận Tòng Cách chân."
+    },
+    {
+      "id": "SCC002",
+      "condition_name": "gia_tong",
+      "enabled": true,
+      "target_special_case": "gia_tong",
+      "required_conditions": [
+        "than_nhuoc",
+        "ngu_hanh_tap_trung"
+      ],
+      "optional_conditions": [
+        "tai_vuong",
+        "quan_vuong"
+      ],
+      "forbidden_conditions": [
+        "than_duoc_sinh_manh"
+      ],
+      "minimum_match_score": 85,
+      "description": "Điều kiện xác nhận Giả Tòng."
+    },
+    {
+      "id": "SCC003",
+      "condition_name": "hoa_khi_thanh_cach",
+      "enabled": true,
+      "target_special_case": "hoa_khi",
+      "required_conditions": [
+        "can_hoa_hop",
+        "duoc_thang_lenh",
+        "duoc_dia_chi_ho_tro"
+      ],
+      "optional_conditions": [
+        "co_than_sat_phu_tro"
+      ],
+      "forbidden_conditions": [
+        "bi_xung_pha_hop"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện xác nhận Hóa Khí thành cách."
+    },
+    {
+      "id": "SCC004",
+      "condition_name": "hoa_khi_bat_thanh",
+      "enabled": true,
+      "target_special_case": "hoa_khi_bat_thanh",
+      "required_conditions": [
+        "can_hoa_hop"
+      ],
+      "optional_conditions": [
+        "luc_sinh_yeu"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 60,
+      "description": "Điều kiện Hóa Khí không thành."
+    },
+    {
+      "id": "SCC005",
+      "condition_name": "phan_cuc",
+      "enabled": true,
+      "target_special_case": "phan_cuc",
+      "required_conditions": [
+        "cach_cuc_hinh_thanh",
+        "gap_pha_cach"
+      ],
+      "optional_conditions": [
+        "xung_manh"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 80,
+      "description": "Điều kiện xác định Phản Cục."
+    },
+    {
+      "id": "SCC006",
+      "condition_name": "pha_cach",
+      "enabled": true,
+      "target_special_case": "pha_cach",
+      "required_conditions": [
+        "cach_cuc_hinh_thanh",
+        "mat_dung_than"
+      ],
+      "optional_conditions": [
+        "than_qua_yeu"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 80,
+      "description": "Điều kiện xác định Phá Cách."
+    },
+    {
+      "id": "SCC007",
+      "condition_name": "song_cach",
+      "enabled": true,
+      "target_special_case": "song_cach",
+      "required_conditions": [
+        "hai_cach_cuc_hop_le"
+      ],
+      "optional_conditions": [
+        "khong_xung_dot"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện xác định Song Cách."
+    },
+    {
+      "id": "SCC008",
+      "condition_name": "da_cach",
+      "enabled": true,
+      "target_special_case": "da_cach",
+      "required_conditions": [
+        "tu_ba_cach_cuc_hop_le"
+      ],
+      "optional_conditions": [],
+      "forbidden_conditions": [
+        "xung_dot_cach_cuc"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện xác định Đa Cách."
+    },
+    {
+      "id": "SCC009",
+      "condition_name": "dieu_hau_uu_tien",
+      "enabled": true,
+      "target_special_case": "dieu_hau",
+      "required_conditions": [
+        "hanh_khi_mat_can_bang"
+      ],
+      "optional_conditions": [
+        "han_nhiet_cuc_doan"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 75,
+      "description": "Điều kiện ưu tiên Điều Hậu."
+    },
+    {
+      "id": "SCC010",
+      "condition_name": "dac_biet_khac",
+      "enabled": true,
+      "target_special_case": "other_special_case",
+      "required_conditions": [
+        "rule_specific_condition"
+      ],
+      "optional_conditions": [],
+      "forbidden_conditions": [],
+      "minimum_match_score": 70,
+      "description": "Điều kiện mặc định cho các Special Case mở rộng."
+    }
+    ,
+    {
+      "id": "SCC011",
+      "condition_name": "tong_quan_basic",
+      "enabled": true,
+      "target_special_case": "tong_quan",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "quan_sat_cuc_vuong",
+        "khong_co_ty_kiep_tro_than"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh",
+        "quan_thau_can"
+      ],
+      "forbidden_conditions": [
+        "an_vuong",
+        "ty_kiep_vuong"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện cơ bản xác định Tòng Quan."
+    },
+    {
+      "id": "SCC012",
+      "condition_name": "tong_quan_complete",
+      "enabled": true,
+      "target_special_case": "tong_quan",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "quan_sat_cuc_vuong",
+        "quan_thong_can",
+        "quan_duoc_sinh"
+      ],
+      "optional_conditions": [
+        "tai_sinh_quan"
+      ],
+      "forbidden_conditions": [
+        "thuc_than_che_quan"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện Tòng Quan thành cách."
+    },
+    {
+      "id": "SCC013",
+      "condition_name": "tong_quan_with_tai",
+      "enabled": true,
+      "target_special_case": "tong_quan",
+      "required_conditions": [
+        "than_nhuoc",
+        "tai_sinh_quan",
+        "quan_vuong"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "an_sinh_than"
+      ],
+      "minimum_match_score": 88,
+      "description": "Tòng Quan có Tài sinh trợ."
+    },
+    {
+      "id": "SCC014",
+      "condition_name": "tong_quan_pure",
+      "enabled": true,
+      "target_special_case": "tong_quan",
+      "required_conditions": [
+        "chi_mot_the_quan",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "khong_xung_hinh"
+      ],
+      "forbidden_conditions": [
+        "tap_than"
+      ],
+      "minimum_match_score": 92,
+      "description": "Tòng Quan thuần cách."
+    },
+    {
+      "id": "SCC015",
+      "condition_name": "tong_quan_high_quality",
+      "enabled": true,
+      "target_special_case": "tong_quan",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "quan_sat_thuan",
+        "tai_tuong_sinh"
+      ],
+      "optional_conditions": [
+        "khong_hinh_xung"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 96,
+      "description": "Tòng Quan chất lượng cao."
+    },
+  
+    {
+      "id": "SCC016",
+      "condition_name": "tong_sat_basic",
+      "enabled": true,
+      "target_special_case": "tong_sat",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "sat_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "sat_thau_can"
+      ],
+      "forbidden_conditions": [
+        "an_che_sat"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện cơ bản xác định Tòng Sát."
+    },
+    {
+      "id": "SCC017",
+      "condition_name": "tong_sat_complete",
+      "enabled": true,
+      "target_special_case": "tong_sat",
+      "required_conditions": [
+        "sat_cuc_vuong",
+        "sat_thong_can",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_sinh_sat"
+      ],
+      "forbidden_conditions": [
+        "thuc_than_che_sat"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện Tòng Sát thành cách."
+    },
+    {
+      "id": "SCC018",
+      "condition_name": "tong_sat_with_tai",
+      "enabled": true,
+      "target_special_case": "tong_sat",
+      "required_conditions": [
+        "sat_vuong",
+        "tai_sinh_sat",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_sat"
+      ],
+      "forbidden_conditions": [
+        "an_vuong"
+      ],
+      "minimum_match_score": 90,
+      "description": "Tòng Sát có Tài sinh."
+    },
+    {
+      "id": "SCC019",
+      "condition_name": "tong_sat_pure",
+      "enabled": true,
+      "target_special_case": "tong_sat",
+      "required_conditions": [
+        "sat_thuan",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "khong_xung_pha"
+      ],
+      "forbidden_conditions": [
+        "quan_lan_sat"
+      ],
+      "minimum_match_score": 93,
+      "description": "Tòng Sát thuần cách."
+    },
+    {
+      "id": "SCC020",
+      "condition_name": "tong_sat_high_quality",
+      "enabled": true,
+      "target_special_case": "tong_sat",
+      "required_conditions": [
+        "sat_cuc_manh",
+        "than_rat_nhuoc",
+        "tai_tuong_sinh"
+      ],
+      "optional_conditions": [
+        "khong_hinh_hai"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 97,
+      "description": "Tòng Sát chất lượng cao."
+    },
+  
+    {
+      "id": "SCC021",
+      "condition_name": "tong_tai_basic",
+      "enabled": true,
+      "target_special_case": "tong_tai",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "tai_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "tai_thau_can"
+      ],
+      "forbidden_conditions": [
+        "ty_kiep_vuong"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện cơ bản xác định Tòng Tài."
+    },
+    {
+      "id": "SCC022",
+      "condition_name": "tong_tai_complete",
+      "enabled": true,
+      "target_special_case": "tong_tai",
+      "required_conditions": [
+        "tai_thong_can",
+        "tai_vuong",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "quan_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "an_sinh_than"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện Tòng Tài thành cách."
+    },
+    {
+      "id": "SCC023",
+      "condition_name": "tong_tai_pure",
+      "enabled": true,
+      "target_special_case": "tong_tai",
+      "required_conditions": [
+        "tai_thuan",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "khong_hinh_xung"
+      ],
+      "forbidden_conditions": [
+        "ty_kiep_tro_than"
+      ],
+      "minimum_match_score": 92,
+      "description": "Tòng Tài thuần cách."
+    },
+    {
+      "id": "SCC024",
+      "condition_name": "tong_tai_with_quan",
+      "enabled": true,
+      "target_special_case": "tong_tai",
+      "required_conditions": [
+        "tai_vuong",
+        "quan_sinh",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "pha_tai"
+      ],
+      "minimum_match_score": 91,
+      "description": "Tòng Tài có Quan phối hợp."
+    },
+    {
+      "id": "SCC025",
+      "condition_name": "tong_tai_high_quality",
+      "enabled": true,
+      "target_special_case": "tong_tai",
+      "required_conditions": [
+        "tai_cuc_manh",
+        "than_rat_nhuoc",
+        "tai_thuan"
+      ],
+      "optional_conditions": [
+        "khong_hinh_hai"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 97,
+      "description": "Tòng Tài chất lượng cao."
+    }
+    ,
+    {
+      "id": "SCC026",
+      "condition_name": "tong_nhi_basic",
+      "enabled": true,
+      "target_special_case": "tong_nhi",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "thuc_than_thuong_quan_vuong"
+      ],
+      "optional_conditions": [
+        "thuc_than_thau_can"
+      ],
+      "forbidden_conditions": [
+        "an_tinh_vuong"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện cơ bản xác định Tòng Nhi."
+    },
+    {
+      "id": "SCC027",
+      "condition_name": "tong_nhi_complete",
+      "enabled": true,
+      "target_special_case": "tong_nhi",
+      "required_conditions": [
+        "than_rat_nhuoc",
+        "thuc_than_thuong_quan_thong_can",
+        "thuc_than_vuong"
+      ],
+      "optional_conditions": [
+        "tai_duoc_sinh"
+      ],
+      "forbidden_conditions": [
+        "an_sinh_than"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện Tòng Nhi thành cách."
+    },
+    {
+      "id": "SCC028",
+      "condition_name": "tong_nhi_thuc_than",
+      "enabled": true,
+      "target_special_case": "tong_nhi",
+      "required_conditions": [
+        "thuc_than_vuong",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_tuong_sinh"
+      ],
+      "forbidden_conditions": [
+        "kien_an"
+      ],
+      "minimum_match_score": 91,
+      "description": "Tòng Nhi thiên về Thực Thần."
+    },
+    {
+      "id": "SCC029",
+      "condition_name": "tong_nhi_thuong_quan",
+      "enabled": true,
+      "target_special_case": "tong_nhi",
+      "required_conditions": [
+        "thuong_quan_vuong",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_vuong"
+      ],
+      "forbidden_conditions": [
+        "chinh_quan_lo"
+      ],
+      "minimum_match_score": 91,
+      "description": "Tòng Nhi thiên về Thương Quan."
+    },
+    {
+      "id": "SCC030",
+      "condition_name": "tong_nhi_high_quality",
+      "enabled": true,
+      "target_special_case": "tong_nhi",
+      "required_conditions": [
+        "thuc_than_thuan",
+        "than_rat_nhuoc",
+        "khong_pha_cach"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "xung_hinh_manh"
+      ],
+      "minimum_match_score": 97,
+      "description": "Tòng Nhi chất lượng cao."
+    },
+  
+    {
+      "id": "SCC031",
+      "condition_name": "tong_vuong_basic",
+      "enabled": true,
+      "target_special_case": "tong_vuong",
+      "required_conditions": [
+        "than_rat_vuong",
+        "dong_hanh_ap_dao"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh"
+      ],
+      "forbidden_conditions": [
+        "khac_hanh_manh"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện cơ bản xác định Tòng Vượng."
+    },
+    {
+      "id": "SCC032",
+      "condition_name": "tong_vuong_complete",
+      "enabled": true,
+      "target_special_case": "tong_vuong",
+      "required_conditions": [
+        "than_rat_vuong",
+        "dong_hanh_thong_can",
+        "ngu_hanh_tap_trung"
+      ],
+      "optional_conditions": [
+        "khong_xung_pha"
+      ],
+      "forbidden_conditions": [
+        "tai_quan_sat_manh"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện Tòng Vượng thành cách."
+    },
+    {
+      "id": "SCC033",
+      "condition_name": "tong_vuong_pure",
+      "enabled": true,
+      "target_special_case": "tong_vuong",
+      "required_conditions": [
+        "mot_ngu_hanh_ap_dao",
+        "than_rat_vuong"
+      ],
+      "optional_conditions": [
+        "chi_mot_khi"
+      ],
+      "forbidden_conditions": [
+        "ngu_hanh_tap_nhieu"
+      ],
+      "minimum_match_score": 93,
+      "description": "Tòng Vượng thuần cách."
+    },
+    {
+      "id": "SCC034",
+      "condition_name": "tong_vuong_high_quality",
+      "enabled": true,
+      "target_special_case": "tong_vuong",
+      "required_conditions": [
+        "than_cuc_vuong",
+        "dong_hanh_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "thien_can_lien_tiep"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 98,
+      "description": "Tòng Vượng chất lượng cao."
+    },
+    {
+      "id": "SCC035",
+      "condition_name": "tong_vuong_full_support",
+      "enabled": true,
+      "target_special_case": "tong_vuong",
+      "required_conditions": [
+        "than_rat_vuong",
+        "dia_chi_ho_tro_day_du"
+      ],
+      "optional_conditions": [
+        "thien_can_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "xung_hai"
+      ],
+      "minimum_match_score": 96,
+      "description": "Tòng Vượng được trợ lực đầy đủ."
+    },
+  
+    {
+      "id": "SCC036",
+      "condition_name": "tong_cuong_basic",
+      "enabled": true,
+      "target_special_case": "tong_cuong",
+      "required_conditions": [
+        "than_cuc_vuong",
+        "ty_kiep_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "an_tuong_sinh"
+      ],
+      "forbidden_conditions": [
+        "tai_quan_manh"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện cơ bản xác định Tòng Cường."
+    },
+    {
+      "id": "SCC037",
+      "condition_name": "tong_cuong_complete",
+      "enabled": true,
+      "target_special_case": "tong_cuong",
+      "required_conditions": [
+        "than_cuc_vuong",
+        "ty_kiep_thong_can",
+        "an_vuong"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh"
+      ],
+      "forbidden_conditions": [
+        "tai_sat_manh"
+      ],
+      "minimum_match_score": 95,
+      "description": "Điều kiện Tòng Cường thành cách."
+    },
+    {
+      "id": "SCC038",
+      "condition_name": "tong_cuong_pure",
+      "enabled": true,
+      "target_special_case": "tong_cuong",
+      "required_conditions": [
+        "ty_kiep_thuan",
+        "than_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "an_phoi_hop"
+      ],
+      "forbidden_conditions": [
+        "thuong_quan_lo"
+      ],
+      "minimum_match_score": 93,
+      "description": "Tòng Cường thuần cách."
+    },
+    {
+      "id": "SCC039",
+      "condition_name": "tong_cuong_high_quality",
+      "enabled": true,
+      "target_special_case": "tong_cuong",
+      "required_conditions": [
+        "than_cuc_vuong",
+        "ty_kiep_cuc_vuong",
+        "an_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "khong_xung_hinh"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 98,
+      "description": "Tòng Cường chất lượng cao."
+    },
+    {
+      "id": "SCC040",
+      "condition_name": "tong_cuong_complete_support",
+      "enabled": true,
+      "target_special_case": "tong_cuong",
+      "required_conditions": [
+        "than_rat_vuong",
+        "dong_hanh_day_du",
+        "luc_sinh_manh"
+      ],
+      "optional_conditions": [
+        "dia_chi_tuong_tro"
+      ],
+      "forbidden_conditions": [
+        "tai_quan_sat_pha"
+      ],
+      "minimum_match_score": 97,
+      "description": "Tòng Cường được hỗ trợ hoàn chỉnh."
+    }
+    ,
+    {
+      "id": "SCC041",
+      "condition_name": "gia_tong_quan_basic",
+      "enabled": true,
+      "target_special_case": "gia_tong_quan",
+      "required_conditions": [
+        "than_nhuoc",
+        "quan_vuong"
+      ],
+      "optional_conditions": [
+        "tai_sinh_quan"
+      ],
+      "forbidden_conditions": [
+        "ty_kiep_vuong"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Giả Tòng Quan."
+    },
+    {
+      "id": "SCC042",
+      "condition_name": "gia_tong_quan_complete",
+      "enabled": true,
+      "target_special_case": "gia_tong_quan",
+      "required_conditions": [
+        "than_nhuoc",
+        "quan_sat_thong_can",
+        "tai_sinh_quan"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh"
+      ],
+      "forbidden_conditions": [
+        "an_vuong"
+      ],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Giả Tòng Quan hoàn chỉnh."
+    },
+    {
+      "id": "SCC043",
+      "condition_name": "gia_tong_quan_with_tai",
+      "enabled": true,
+      "target_special_case": "gia_tong_quan",
+      "required_conditions": [
+        "quan_vuong",
+        "tai_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_quan"
+      ],
+      "forbidden_conditions": [
+        "thuc_than_che_quan"
+      ],
+      "minimum_match_score": 86,
+      "description": "Giả Tòng Quan có Tài phối hợp."
+    },
+    {
+      "id": "SCC044",
+      "condition_name": "gia_tong_quan_partial",
+      "enabled": true,
+      "target_special_case": "gia_tong_quan",
+      "required_conditions": [
+        "quan_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "mot_phan_thong_can"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 80,
+      "description": "Giả Tòng Quan bán thành."
+    },
+    {
+      "id": "SCC045",
+      "condition_name": "gia_tong_quan_high_quality",
+      "enabled": true,
+      "target_special_case": "gia_tong_quan",
+      "required_conditions": [
+        "quan_cuc_manh",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_tuong_sinh"
+      ],
+      "forbidden_conditions": [
+        "xung_hinh_manh"
+      ],
+      "minimum_match_score": 90,
+      "description": "Giả Tòng Quan chất lượng cao."
+    },
+  
+    {
+      "id": "SCC046",
+      "condition_name": "gia_tong_sat_basic",
+      "enabled": true,
+      "target_special_case": "gia_tong_sat",
+      "required_conditions": [
+        "than_nhuoc",
+        "sat_vuong"
+      ],
+      "optional_conditions": [
+        "tai_sinh_sat"
+      ],
+      "forbidden_conditions": [
+        "an_che_sat"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Giả Tòng Sát."
+    },
+    {
+      "id": "SCC047",
+      "condition_name": "gia_tong_sat_complete",
+      "enabled": true,
+      "target_special_case": "gia_tong_sat",
+      "required_conditions": [
+        "sat_thong_can",
+        "than_nhuoc",
+        "tai_vuong"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh"
+      ],
+      "forbidden_conditions": [
+        "thuc_than_che_sat"
+      ],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Giả Tòng Sát hoàn chỉnh."
+    },
+    {
+      "id": "SCC048",
+      "condition_name": "gia_tong_sat_partial",
+      "enabled": true,
+      "target_special_case": "gia_tong_sat",
+      "required_conditions": [
+        "sat_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "sat_thau_can"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 81,
+      "description": "Giả Tòng Sát bán thành."
+    },
+    {
+      "id": "SCC049",
+      "condition_name": "gia_tong_sat_with_tai",
+      "enabled": true,
+      "target_special_case": "gia_tong_sat",
+      "required_conditions": [
+        "tai_sinh_sat",
+        "sat_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_sat"
+      ],
+      "forbidden_conditions": [
+        "an_vuong"
+      ],
+      "minimum_match_score": 87,
+      "description": "Giả Tòng Sát có Tài sinh."
+    },
+    {
+      "id": "SCC050",
+      "condition_name": "gia_tong_sat_high_quality",
+      "enabled": true,
+      "target_special_case": "gia_tong_sat",
+      "required_conditions": [
+        "sat_cuc_manh",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_cuc_vuong"
+      ],
+      "forbidden_conditions": [
+        "xung_hai"
+      ],
+      "minimum_match_score": 90,
+      "description": "Giả Tòng Sát chất lượng cao."
+    },
+  
+    {
+      "id": "SCC051",
+      "condition_name": "gia_tong_tai_basic",
+      "enabled": true,
+      "target_special_case": "gia_tong_tai",
+      "required_conditions": [
+        "than_nhuoc",
+        "tai_vuong"
+      ],
+      "optional_conditions": [
+        "quan_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "ty_kiep_vuong"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Giả Tòng Tài."
+    },
+    {
+      "id": "SCC052",
+      "condition_name": "gia_tong_tai_complete",
+      "enabled": true,
+      "target_special_case": "gia_tong_tai",
+      "required_conditions": [
+        "tai_thong_can",
+        "tai_cuc_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "quan_phoi_hop"
+      ],
+      "forbidden_conditions": [
+        "an_sinh_than"
+      ],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Giả Tòng Tài hoàn chỉnh."
+    },
+    {
+      "id": "SCC053",
+      "condition_name": "gia_tong_tai_partial",
+      "enabled": true,
+      "target_special_case": "gia_tong_tai",
+      "required_conditions": [
+        "tai_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_thau_can"
+      ],
+      "forbidden_conditions": [
+        "pha_tai"
+      ],
+      "minimum_match_score": 81,
+      "description": "Giả Tòng Tài bán thành."
+    },
+    {
+      "id": "SCC054",
+      "condition_name": "gia_tong_tai_with_quan",
+      "enabled": true,
+      "target_special_case": "gia_tong_tai",
+      "required_conditions": [
+        "tai_vuong",
+        "quan_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tai"
+      ],
+      "forbidden_conditions": [
+        "ty_kiep_manh"
+      ],
+      "minimum_match_score": 87,
+      "description": "Giả Tòng Tài có Quan phối hợp."
+    },
+    {
+      "id": "SCC055",
+      "condition_name": "gia_tong_tai_high_quality",
+      "enabled": true,
+      "target_special_case": "gia_tong_tai",
+      "required_conditions": [
+        "tai_cuc_manh",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "tai_thuan"
+      ],
+      "forbidden_conditions": [
+        "xung_hinh_manh"
+      ],
+      "minimum_match_score": 90,
+      "description": "Giả Tòng Tài chất lượng cao."
+    }
+    ,
+    {
+      "id": "SCC056",
+      "condition_name": "gia_tong_nhi_basic",
+      "enabled": true,
+      "target_special_case": "gia_tong_nhi",
+      "required_conditions": [
+        "than_nhuoc",
+        "thuc_than_thuong_quan_vuong"
+      ],
+      "optional_conditions": [
+        "thuc_than_thau_can"
+      ],
+      "forbidden_conditions": [
+        "an_vuong"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Giả Tòng Nhi."
+    },
+    {
+      "id": "SCC057",
+      "condition_name": "gia_tong_nhi_complete",
+      "enabled": true,
+      "target_special_case": "gia_tong_nhi",
+      "required_conditions": [
+        "than_nhuoc",
+        "thuc_than_vuong",
+        "thuc_than_thong_can"
+      ],
+      "optional_conditions": [
+        "tai_sinh"
+      ],
+      "forbidden_conditions": [
+        "an_sinh_than"
+      ],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Giả Tòng Nhi hoàn chỉnh."
+    },
+    {
+      "id": "SCC058",
+      "condition_name": "gia_tong_nhi_partial",
+      "enabled": true,
+      "target_special_case": "gia_tong_nhi",
+      "required_conditions": [
+        "than_nhuoc",
+        "thuong_quan_vuong"
+      ],
+      "optional_conditions": [
+        "tai_vuong"
+      ],
+      "forbidden_conditions": [
+        "quan_vuong"
+      ],
+      "minimum_match_score": 81,
+      "description": "Giả Tòng Nhi bán thành."
+    },
+    {
+      "id": "SCC059",
+      "condition_name": "gia_tong_nhi_with_tai",
+      "enabled": true,
+      "target_special_case": "gia_tong_nhi",
+      "required_conditions": [
+        "thuc_than_vuong",
+        "tai_vuong",
+        "than_nhuoc"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "an_cuc_vuong"
+      ],
+      "minimum_match_score": 87,
+      "description": "Giả Tòng Nhi có Tài phối hợp."
+    },
+    {
+      "id": "SCC060",
+      "condition_name": "gia_tong_nhi_high_quality",
+      "enabled": true,
+      "target_special_case": "gia_tong_nhi",
+      "required_conditions": [
+        "thuc_than_thuan",
+        "than_rat_nhuoc"
+      ],
+      "optional_conditions": [
+        "khong_xung_hinh"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 90,
+      "description": "Giả Tòng Nhi chất lượng cao."
+    },
+  
+    {
+      "id": "SCC061",
+      "condition_name": "gia_tong_vuong_basic",
+      "enabled": true,
+      "target_special_case": "gia_tong_vuong",
+      "required_conditions": [
+        "than_vuong",
+        "dong_hanh_chiem_uu_the"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh"
+      ],
+      "forbidden_conditions": [
+        "khac_hanh_manh"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Giả Tòng Vượng."
+    },
+    {
+      "id": "SCC062",
+      "condition_name": "gia_tong_vuong_complete",
+      "enabled": true,
+      "target_special_case": "gia_tong_vuong",
+      "required_conditions": [
+        "than_vuong",
+        "dong_hanh_thong_can",
+        "ngu_hanh_tap_trung"
+      ],
+      "optional_conditions": [
+        "thien_can_lien_tiep"
+      ],
+      "forbidden_conditions": [
+        "tai_quan_sat_manh"
+      ],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Giả Tòng Vượng hoàn chỉnh."
+    },
+    {
+      "id": "SCC063",
+      "condition_name": "gia_tong_vuong_partial",
+      "enabled": true,
+      "target_special_case": "gia_tong_vuong",
+      "required_conditions": [
+        "than_vuong",
+        "mot_ngu_hanh_chiem_uu_the"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 81,
+      "description": "Giả Tòng Vượng bán thành."
+    },
+    {
+      "id": "SCC064",
+      "condition_name": "gia_tong_vuong_full_support",
+      "enabled": true,
+      "target_special_case": "gia_tong_vuong",
+      "required_conditions": [
+        "than_vuong",
+        "dong_hanh_rat_manh"
+      ],
+      "optional_conditions": [
+        "chi_mot_khi"
+      ],
+      "forbidden_conditions": [
+        "xung_hinh_lon"
+      ],
+      "minimum_match_score": 89,
+      "description": "Giả Tòng Vượng được trợ lực mạnh."
+    },
+    {
+      "id": "SCC065",
+      "condition_name": "gia_tong_vuong_high_quality",
+      "enabled": true,
+      "target_special_case": "gia_tong_vuong",
+      "required_conditions": [
+        "than_cuc_vuong",
+        "dong_hanh_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "khong_hinh_xung"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 90,
+      "description": "Giả Tòng Vượng chất lượng cao."
+    },
+  
+    {
+      "id": "SCC066",
+      "condition_name": "gia_tong_cuong_basic",
+      "enabled": true,
+      "target_special_case": "gia_tong_cuong",
+      "required_conditions": [
+        "than_vuong",
+        "ty_kiep_vuong"
+      ],
+      "optional_conditions": [
+        "an_tuong_sinh"
+      ],
+      "forbidden_conditions": [
+        "tai_quan_vuong"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Giả Tòng Cường."
+    },
+    {
+      "id": "SCC067",
+      "condition_name": "gia_tong_cuong_complete",
+      "enabled": true,
+      "target_special_case": "gia_tong_cuong",
+      "required_conditions": [
+        "than_vuong",
+        "ty_kiep_thong_can",
+        "an_vuong"
+      ],
+      "optional_conditions": [
+        "duoc_thang_lenh"
+      ],
+      "forbidden_conditions": [
+        "tai_sat_manh"
+      ],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Giả Tòng Cường hoàn chỉnh."
+    },
+    {
+      "id": "SCC068",
+      "condition_name": "gia_tong_cuong_partial",
+      "enabled": true,
+      "target_special_case": "gia_tong_cuong",
+      "required_conditions": [
+        "than_vuong",
+        "ty_kiep_manh"
+      ],
+      "optional_conditions": [
+        "an_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 81,
+      "description": "Giả Tòng Cường bán thành."
+    },
+    {
+      "id": "SCC069",
+      "condition_name": "gia_tong_cuong_full_support",
+      "enabled": true,
+      "target_special_case": "gia_tong_cuong",
+      "required_conditions": [
+        "than_rat_vuong",
+        "dong_hanh_day_du"
+      ],
+      "optional_conditions": [
+        "dia_chi_tuong_tro"
+      ],
+      "forbidden_conditions": [
+        "tai_quan_sat_pha"
+      ],
+      "minimum_match_score": 89,
+      "description": "Giả Tòng Cường được trợ lực đầy đủ."
+    },
+    {
+      "id": "SCC070",
+      "condition_name": "gia_tong_cuong_high_quality",
+      "enabled": true,
+      "target_special_case": "gia_tong_cuong",
+      "required_conditions": [
+        "than_cuc_vuong",
+        "ty_kiep_cuc_vuong",
+        "an_cuc_vuong"
+      ],
+      "optional_conditions": [
+        "khong_xung_hinh"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 90,
+      "description": "Giả Tòng Cường chất lượng cao."
+    }
+    ,
+    {
+      "id": "SCC071",
+      "condition_name": "hoa_khi_basic",
+      "enabled": true,
+      "target_special_case": "hoa_khi",
+      "required_conditions": [
+        "thien_can_hoa_hop",
+        "duoc_thang_lenh"
+      ],
+      "optional_conditions": [
+        "dia_chi_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "xung_pha_hoa"
+      ],
+      "minimum_match_score": 82,
+      "description": "Điều kiện cơ bản xác định Hóa Khí."
+    },
+    {
+      "id": "SCC072",
+      "condition_name": "hoa_khi_complete",
+      "enabled": true,
+      "target_special_case": "hoa_khi",
+      "required_conditions": [
+        "thien_can_hoa_hop",
+        "duoc_thang_lenh",
+        "ngu_hanh_hoa_thanh"
+      ],
+      "optional_conditions": [
+        "thien_can_tuong_tro"
+      ],
+      "forbidden_conditions": [
+        "xung_hinh_lon"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Hóa Khí thành cách."
+    },
+    {
+      "id": "SCC073",
+      "condition_name": "hoa_khi_full_support",
+      "enabled": true,
+      "target_special_case": "hoa_khi",
+      "required_conditions": [
+        "thien_can_hop",
+        "dia_chi_ho_tro",
+        "ngu_hanh_tap_trung"
+      ],
+      "optional_conditions": [
+        "luc_than_phoi_hop"
+      ],
+      "forbidden_conditions": [
+        "pha_hop"
+      ],
+      "minimum_match_score": 92,
+      "description": "Hóa Khí được hỗ trợ đầy đủ."
+    },
+    {
+      "id": "SCC074",
+      "condition_name": "hoa_khi_high_quality",
+      "enabled": true,
+      "target_special_case": "hoa_khi",
+      "required_conditions": [
+        "hoa_khi_on_dinh",
+        "khong_xung_hinh",
+        "ngu_hanh_thuan"
+      ],
+      "optional_conditions": [
+        "thien_can_lien_tiep"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 95,
+      "description": "Hóa Khí chất lượng cao."
+    },
+    {
+      "id": "SCC075",
+      "condition_name": "hoa_khi_perfect",
+      "enabled": true,
+      "target_special_case": "hoa_khi",
+      "required_conditions": [
+        "hoa_khi_cuc_manh",
+        "duoc_thien_dia_ho_tro"
+      ],
+      "optional_conditions": [
+        "khong_sat_pha"
+      ],
+      "forbidden_conditions": [
+        "phan_hoa"
+      ],
+      "minimum_match_score": 98,
+      "description": "Hóa Khí hoàn mỹ."
+    },
+  
+    {
+      "id": "SCC076",
+      "condition_name": "hoa_khi_partial",
+      "enabled": true,
+      "target_special_case": "ban_hoa",
+      "required_conditions": [
+        "thien_can_hoa_hop"
+      ],
+      "optional_conditions": [
+        "mot_phan_ho_tro"
+      ],
+      "forbidden_conditions": [
+        "xung_truc_tiep"
+      ],
+      "minimum_match_score": 70,
+      "description": "Điều kiện Bán Hóa."
+    },
+    {
+      "id": "SCC077",
+      "condition_name": "gia_hoa",
+      "enabled": true,
+      "target_special_case": "gia_hoa",
+      "required_conditions": [
+        "hoa_hop",
+        "luc_hoa_yeu"
+      ],
+      "optional_conditions": [
+        "co_ho_tro_mot_phan"
+      ],
+      "forbidden_conditions": [
+        "hoa_thanh"
+      ],
+      "minimum_match_score": 72,
+      "description": "Điều kiện Giả Hóa."
+    },
+    {
+      "id": "SCC078",
+      "condition_name": "hoa_khi_bat_thanh",
+      "enabled": true,
+      "target_special_case": "hoa_khi_bat_thanh",
+      "required_conditions": [
+        "thien_can_hoa_hop"
+      ],
+      "optional_conditions": [
+        "luc_hoa_khong_du"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 65,
+      "description": "Điều kiện Hóa Khí bất thành."
+    },
+    {
+      "id": "SCC079",
+      "condition_name": "hoa_khi_bi_pha",
+      "enabled": true,
+      "target_special_case": "pha_hoa",
+      "required_conditions": [
+        "thien_can_hoa_hop",
+        "xung_pha_hoa"
+      ],
+      "optional_conditions": [
+        "dia_chi_xung"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 75,
+      "description": "Điều kiện Hóa Khí bị phá."
+    },
+    {
+      "id": "SCC080",
+      "condition_name": "hoa_khi_phan_hoa",
+      "enabled": true,
+      "target_special_case": "phan_hoa",
+      "required_conditions": [
+        "hoa_hop",
+        "ngu_hanh_doi_huong"
+      ],
+      "optional_conditions": [
+        "xung_nhe"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 78,
+      "description": "Điều kiện Phản Hóa."
+    },
+  
+    {
+      "id": "SCC081",
+      "condition_name": "hoa_moc",
+      "enabled": true,
+      "target_special_case": "hoa_moc",
+      "required_conditions": [
+        "hoa_moc_day_du"
+      ],
+      "optional_conditions": [
+        "moc_vuong"
+      ],
+      "forbidden_conditions": [
+        "kim_pha"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Hóa Mộc."
+    },
+    {
+      "id": "SCC082",
+      "condition_name": "hoa_hoa",
+      "enabled": true,
+      "target_special_case": "hoa_hoa",
+      "required_conditions": [
+        "hoa_hoa_day_du"
+      ],
+      "optional_conditions": [
+        "hoa_vuong"
+      ],
+      "forbidden_conditions": [
+        "thuy_pha"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Hóa Hỏa."
+    },
+    {
+      "id": "SCC083",
+      "condition_name": "hoa_tho",
+      "enabled": true,
+      "target_special_case": "hoa_tho",
+      "required_conditions": [
+        "hoa_tho_day_du"
+      ],
+      "optional_conditions": [
+        "tho_vuong"
+      ],
+      "forbidden_conditions": [
+        "moc_pha"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Hóa Thổ."
+    },
+    {
+      "id": "SCC084",
+      "condition_name": "hoa_kim",
+      "enabled": true,
+      "target_special_case": "hoa_kim",
+      "required_conditions": [
+        "hoa_kim_day_du"
+      ],
+      "optional_conditions": [
+        "kim_vuong"
+      ],
+      "forbidden_conditions": [
+        "hoa_pha"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Hóa Kim."
+    },
+    {
+      "id": "SCC085",
+      "condition_name": "hoa_thuy",
+      "enabled": true,
+      "target_special_case": "hoa_thuy",
+      "required_conditions": [
+        "hoa_thuy_day_du"
+      ],
+      "optional_conditions": [
+        "thuy_vuong"
+      ],
+      "forbidden_conditions": [
+        "tho_pha"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Hóa Thủy."
+    }
+    ,
+    {
+      "id": "SCC086",
+      "condition_name": "pha_cach_basic",
+      "enabled": true,
+      "target_special_case": "pha_cach",
+      "required_conditions": [
+        "cach_cuc_hinh_thanh",
+        "dung_than_bi_pha"
+      ],
+      "optional_conditions": [
+        "than_suy"
+      ],
+      "forbidden_conditions": [
+        "co_cuu_ung"
+      ],
+      "minimum_match_score": 80,
+      "description": "Điều kiện cơ bản xác định Phá Cách."
+    },
+    {
+      "id": "SCC087",
+      "condition_name": "pha_cach_by_xung",
+      "enabled": true,
+      "target_special_case": "pha_cach",
+      "required_conditions": [
+        "cach_cuc_hinh_thanh",
+        "bi_xung_manh"
+      ],
+      "optional_conditions": [
+        "bi_hinh"
+      ],
+      "forbidden_conditions": [
+        "hop_giai"
+      ],
+      "minimum_match_score": 85,
+      "description": "Phá Cách do Xung mạnh."
+    },
+    {
+      "id": "SCC088",
+      "condition_name": "pha_cach_by_hop",
+      "enabled": true,
+      "target_special_case": "pha_cach",
+      "required_conditions": [
+        "cach_cuc_hinh_thanh",
+        "hop_bien_chat"
+      ],
+      "optional_conditions": [
+        "mat_dung_than"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 84,
+      "description": "Phá Cách do Hợp biến chất."
+    },
+    {
+      "id": "SCC089",
+      "condition_name": "pha_cach_complete",
+      "enabled": true,
+      "target_special_case": "pha_cach",
+      "required_conditions": [
+        "dung_than_bi_pha",
+        "hy_than_bi_ton_hai",
+        "khong_co_cuu_ung"
+      ],
+      "optional_conditions": [
+        "than_suy"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Phá Cách hoàn chỉnh."
+    },
+    {
+      "id": "SCC090",
+      "condition_name": "pha_cach_severe",
+      "enabled": true,
+      "target_special_case": "pha_cach",
+      "required_conditions": [
+        "pha_cach_nghiem_trong"
+      ],
+      "optional_conditions": [
+        "da_trong_pha"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 95,
+      "description": "Phá Cách nghiêm trọng."
+    },
+  
+    {
+      "id": "SCC091",
+      "condition_name": "phan_cuc_basic",
+      "enabled": true,
+      "target_special_case": "phan_cuc",
+      "required_conditions": [
+        "cach_cuc_hinh_thanh",
+        "luc_luong_doi_lap"
+      ],
+      "optional_conditions": [
+        "xung_nhe"
+      ],
+      "forbidden_conditions": [
+        "van_on_dinh"
+      ],
+      "minimum_match_score": 80,
+      "description": "Điều kiện cơ bản xác định Phản Cục."
+    },
+    {
+      "id": "SCC092",
+      "condition_name": "phan_cuc_complete",
+      "enabled": true,
+      "target_special_case": "phan_cuc",
+      "required_conditions": [
+        "pha_the_can_bang",
+        "hai_the_luc_doi_lap"
+      ],
+      "optional_conditions": [
+        "xung_hinh"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 88,
+      "description": "Điều kiện Phản Cục hoàn chỉnh."
+    },
+    {
+      "id": "SCC093",
+      "condition_name": "phan_cuc_by_luck",
+      "enabled": true,
+      "target_special_case": "phan_cuc",
+      "required_conditions": [
+        "dai_van_lam_doi_cuc_dien"
+      ],
+      "optional_conditions": [
+        "luu_nien_pha_the"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 82,
+      "description": "Phản Cục phát sinh do Đại Vận."
+    },
+    {
+      "id": "SCC094",
+      "condition_name": "phan_cuc_by_flow_year",
+      "enabled": true,
+      "target_special_case": "phan_cuc",
+      "required_conditions": [
+        "luu_nien_pha_the"
+      ],
+      "optional_conditions": [
+        "thai_tue_xung"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 82,
+      "description": "Phản Cục do Lưu Niên."
+    },
+    {
+      "id": "SCC095",
+      "condition_name": "phan_cuc_severe",
+      "enabled": true,
+      "target_special_case": "phan_cuc",
+      "required_conditions": [
+        "pha_cuc_hoan_toan"
+      ],
+      "optional_conditions": [
+        "nhieu_luc_xung"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 95,
+      "description": "Phản Cục nghiêm trọng."
+    },
+  
+    {
+      "id": "SCC096",
+      "condition_name": "song_cach",
+      "enabled": true,
+      "target_special_case": "song_cach",
+      "required_conditions": [
+        "hai_cach_cung_hinh_thanh"
+      ],
+      "optional_conditions": [
+        "khong_xung_dot"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Song Cách."
+    },
+    {
+      "id": "SCC097",
+      "condition_name": "da_cach",
+      "enabled": true,
+      "target_special_case": "da_cach",
+      "required_conditions": [
+        "tu_ba_cach_cung_ton_tai"
+      ],
+      "optional_conditions": [
+        "khong_mau_thuan"
+      ],
+      "forbidden_conditions": [
+        "pha_cach"
+      ],
+      "minimum_match_score": 92,
+      "description": "Điều kiện Đa Cách."
+    },
+    {
+      "id": "SCC098",
+      "condition_name": "kiem_cach",
+      "enabled": true,
+      "target_special_case": "kiem_cach",
+      "required_conditions": [
+        "cach_chinh",
+        "cach_phu"
+      ],
+      "optional_conditions": [
+        "ho_tro_lan_nhau"
+      ],
+      "forbidden_conditions": [
+        "xung_dot_cach"
+      ],
+      "minimum_match_score": 90,
+      "description": "Điều kiện Kiêm Cách."
+    },
+    {
+      "id": "SCC099",
+      "condition_name": "dieu_hau_priority",
+      "enabled": true,
+      "target_special_case": "dieu_hau",
+      "required_conditions": [
+        "han_nhiet_mat_can_bang"
+      ],
+      "optional_conditions": [
+        "thoi_tiet_cuc_doan"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 88,
+      "description": "Ưu tiên Điều Hậu."
+    },
+    {
+      "id": "SCC100",
+      "condition_name": "exception_priority",
+      "enabled": true,
+      "target_special_case": "special_priority",
+      "required_conditions": [
+        "thoa_man_dieu_kien_ngoai_le"
+      ],
+      "optional_conditions": [
+        "uu_tien_dac_biet"
+      ],
+      "forbidden_conditions": [],
+      "minimum_match_score": 95,
+      "description": "Điều kiện ưu tiên cho các Special Case đặc biệt."
+    }
+  ]
+  

@@ -1,0 +1,4756 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T20:00:00Z",
+        "updated_at": "2026-07-29T20:00:00Z",
+        "approved_at": "2026-07-29T20:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "priority",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Priority Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Priority Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Priority rules covering module priority, rule priority, overrides, conflict resolution, tie-breaking, fallback, weighted selection, score normalization, execution order, and final selection.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "MODULE_SPEC.md",
+            "PRIORITY_HIERARCHY.md",
+            "PRIORITY_DECISION_TREE.md",
+            "DEPENDENCIES.json",
+            "database/14_pattern/05_priority_rules.csv",
+            "database/13_useful_god/05_priority_rules.csv",
+            "database/12_strength/06_priority_rules.csv",
+            "database/15_score_engine/09_final_score/04_dimension_weight.csv"
+        ]
+    },
+    "config": {
+        "baseline": 50,
+        "scale": 100,
+        "confidence_threshold": 0.65,
+        "pipeline_stages": 8,
+        "module_execution_order": [
+            "02_season_rules",
+            "01_strength_rules",
+            "03_temperature_rules",
+            "04_pattern_rules",
+            "05_special_case_rules",
+            "06_follow_pattern_rules",
+            "07_combination_rules",
+            "08_priority_rules"
+        ]
+    },
+    "rules": [
+        {
+            "id": "PRI-000001",
+            "code": "pri_follow_beats_main",
+            "name": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được",
+            "classification": {
+                "domain": "priority",
+                "category": "override",
+                "family": "override_rule",
+                "type": "follow_override_marker"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 200
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được",
+                "description": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "pattern",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000002",
+            "code": "pri_special_beats_main",
+            "name": "Special cách (Khúc Trực v.v.) luôn beats Main cách",
+            "classification": {
+                "domain": "priority",
+                "category": "override",
+                "family": "override_rule",
+                "type": "special_override_marker"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special cách (Khúc Trực v.v.) luôn beats Main cách",
+                "description": "Special cách (Khúc Trực v.v.) luôn beats Main cách",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "pattern",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000003",
+            "code": "pri_combination_beats_standard",
+            "name": "Combination cách beats standard single cách",
+            "classification": {
+                "domain": "priority",
+                "category": "override",
+                "family": "override_rule",
+                "type": "combination_override_marker"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Combination cách beats standard single cách",
+                "description": "Combination cách beats standard single cách",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "pattern",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000004",
+            "code": "ug_pri_001",
+            "name": "Special rules highest priority",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "pri_001"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special"
+                }
+            ],
+            "evaluation": {
+                "weight": 100,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special override",
+                "description": "Special rules highest priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000005",
+            "code": "ug_pri_002",
+            "name": "Season rules second priority",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "pri_002"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "season"
+                }
+            ],
+            "evaluation": {
+                "weight": 90,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season high priority",
+                "description": "Season rules second priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000006",
+            "code": "ug_pri_003",
+            "name": "Strength rules third priority",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "pri_003"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "strength"
+                }
+            ],
+            "evaluation": {
+                "weight": 80,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Strength medium priority",
+                "description": "Strength rules third priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000007",
+            "code": "ug_pri_004",
+            "name": "Temperature rules fourth priority",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "pri_004"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "temperature"
+                }
+            ],
+            "evaluation": {
+                "weight": 70,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Temperature fallback",
+                "description": "Temperature rules fourth priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000008",
+            "code": "ug_pri_005",
+            "name": "Flow rules last priority",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "pri_005"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "flow"
+                }
+            ],
+            "evaluation": {
+                "weight": 60,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Flow fallback",
+                "description": "Flow rules last priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000009",
+            "code": "str_pri_special",
+            "name": "Rule đặc biệt override",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_special"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên đặc biệt",
+                "description": "Rule đặc biệt override",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000010",
+            "code": "str_pri_season",
+            "name": "Tháng lệnh quan trọng nhất",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_season"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "season"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên mùa",
+                "description": "Tháng lệnh quan trọng nhất",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000011",
+            "code": "str_pri_root",
+            "name": "Thông căn",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_root"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "root"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên căn",
+                "description": "Thông căn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000012",
+            "code": "str_pri_support",
+            "name": "Trợ lực",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_support"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "support"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên trợ",
+                "description": "Trợ lực",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000013",
+            "code": "str_pri_control",
+            "name": "Khắc chế",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_control"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "control"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên khắc",
+                "description": "Khắc chế",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000014",
+            "code": "str_pri_drain",
+            "name": "Tiết khí",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_drain"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "drain"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên tiết",
+                "description": "Tiết khí",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000015",
+            "code": "str_pri_combination",
+            "name": "Hợp hóa",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "pri_combination"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "combination"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên hợp",
+                "description": "Hợp hóa",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000016",
+            "code": "str_pri_level_strong",
+            "name": "Điểm tổng >= 65%",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "pri_level_strong"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thân vượng",
+                "description": "Điểm tổng >= 65%",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000017",
+            "code": "str_pri_level_weak",
+            "name": "Điểm tổng <= 35%",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "pri_level_weak"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "less_than_or_equals",
+                    "value": 0.35
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thân nhược",
+                "description": "Điểm tổng <= 35%",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000018",
+            "code": "str_pri_level_balanced",
+            "name": "Điểm tổng cân bằng",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "pri_level_balanced"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "greater_than",
+                    "value": 0.35
+                },
+                {
+                    "type": "strength_score",
+                    "operator": "less_than",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Trung hòa",
+                "description": "Điểm tổng cân bằng",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000019",
+            "code": "dw001",
+            "name": "Ngũ hành",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "wuxing"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "WUXING"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: WUXING",
+                "description": "Ngũ hành — weight 0.10",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000020",
+            "code": "dw002",
+            "name": "Thân vượng nhược",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "strength"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "STRENGTH"
+                }
+            ],
+            "evaluation": {
+                "weight": 25,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: STRENGTH",
+                "description": "Thân vượng nhược — weight 0.25",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000021",
+            "code": "dw003",
+            "name": "Thập thần",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "ten_gods"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "TEN_GODS"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: TEN_GODS",
+                "description": "Thập thần — weight 0.15",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000022",
+            "code": "dw004",
+            "name": "Cách cục",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "pattern"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "PATTERN"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: PATTERN",
+                "description": "Cách cục — weight 0.20",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000023",
+            "code": "dw005",
+            "name": "Dụng thần",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "useful_god"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "USEFUL_GOD"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: USEFUL_GOD",
+                "description": "Dụng thần — weight 0.20",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000024",
+            "code": "dw006",
+            "name": "Thần sát",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "shensha"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "SHENSHA"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 50
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: SHENSHA",
+                "description": "Thần sát — weight 0.05",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000025",
+            "code": "dw007",
+            "name": "Đại vận",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "luck"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module",
+                    "operator": "equals",
+                    "value": "LUCK"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weighted selection: LUCK",
+                "description": "Đại vận — weight 0.05",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000026",
+            "code": "lp001",
+            "name": "Ưu tiên cao nhất",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "100"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận trợ Dụng thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 150,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên cao nhất",
+                "description": "Ưu tiên cao nhất",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000027",
+            "code": "lp002",
+            "name": "Tăng mạnh điểm",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "95"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận thành Cách cục"
+                }
+            ],
+            "evaluation": {
+                "weight": 140,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tăng mạnh điểm",
+                "description": "Tăng mạnh điểm",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000028",
+            "code": "lp003",
+            "name": "Tăng điểm",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "90"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận trợ Hỷ thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 130,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tăng điểm",
+                "description": "Tăng điểm",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000029",
+            "code": "lp004",
+            "name": "Điểm chuẩn",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "85"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận trung tính"
+                }
+            ],
+            "evaluation": {
+                "weight": 100,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Điểm chuẩn",
+                "description": "Điểm chuẩn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000030",
+            "code": "lp005",
+            "name": "Giảm nhẹ",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "70"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận có xung nhẹ"
+                }
+            ],
+            "evaluation": {
+                "weight": 80,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Giảm nhẹ",
+                "description": "Giảm nhẹ",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000031",
+            "code": "lp006",
+            "name": "Giảm mạnh",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "60"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận trợ Kỵ thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 60,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Giảm mạnh",
+                "description": "Giảm mạnh",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000032",
+            "code": "lp007",
+            "name": "Ưu tiên thấp nhất",
+            "classification": {
+                "domain": "priority",
+                "category": "weighted_selection",
+                "family": "weighted_selection",
+                "type": "50"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "luck_condition",
+                    "operator": "equals",
+                    "value": "Đại vận phá Dụng thần hoặc phá Cách cục"
+                }
+            ],
+            "evaluation": {
+                "weight": 40,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 50
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ưu tiên thấp nhất",
+                "description": "Ưu tiên thấp nhất",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "weighted_selection",
+                    "luck",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000033",
+            "code": "exec_stage_season",
+            "name": "Execution Stage Season",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "02_season_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 1: 02_season_rules",
+                "description": "Execute 02_season_rules at stage 1.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000034",
+            "code": "exec_stage_strength",
+            "name": "Execution Stage Strength",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "01_strength_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 2
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 2: 01_strength_rules",
+                "description": "Execute 01_strength_rules at stage 2.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000035",
+            "code": "exec_stage_temperature",
+            "name": "Execution Stage Temperature",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "03_temperature_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 3
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 3: 03_temperature_rules",
+                "description": "Execute 03_temperature_rules at stage 3.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000036",
+            "code": "exec_stage_pattern",
+            "name": "Execution Stage Pattern",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "04_pattern_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 4
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 4: 04_pattern_rules",
+                "description": "Execute 04_pattern_rules at stage 4.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000037",
+            "code": "exec_stage_special",
+            "name": "Execution Stage Special Case",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "05_special_case_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 5
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 5: 05_special_case_rules",
+                "description": "Execute 05_special_case_rules at stage 5.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000038",
+            "code": "exec_stage_follow",
+            "name": "Execution Stage Follow Pattern",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "06_follow_pattern_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 6
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 6: 06_follow_pattern_rules",
+                "description": "Execute 06_follow_pattern_rules at stage 6.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000039",
+            "code": "exec_stage_combination",
+            "name": "Execution Stage Combination",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "07_combination_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 7
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 7: 07_combination_rules",
+                "description": "Execute 07_combination_rules at stage 7.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000040",
+            "code": "exec_stage_priority",
+            "name": "Execution Stage Priority",
+            "classification": {
+                "domain": "priority",
+                "category": "execution_order",
+                "family": "execution_order",
+                "type": "08_priority_rules"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "pipeline_stage",
+                    "operator": "equals",
+                    "value": 8
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 65
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pipeline stage 8: 08_priority_rules",
+                "description": "Execute 08_priority_rules at stage 8.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_order",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000041",
+            "code": "mod_pri_pattern",
+            "name": "Module Priority Pattern",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "pattern_module"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "source_module",
+                    "operator": "equals",
+                    "value": "04_pattern_rules"
+                }
+            ],
+            "evaluation": {
+                "weight": 95,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Module Priority Pattern",
+                "description": "Pattern module priority in cross-module resolution",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000042",
+            "code": "mod_pri_combination",
+            "name": "Module Priority Combination",
+            "classification": {
+                "domain": "priority",
+                "category": "module_priority",
+                "family": "module_priority",
+                "type": "combination_module"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "source_module",
+                    "operator": "equals",
+                    "value": "07_combination_rules"
+                }
+            ],
+            "evaluation": {
+                "weight": 88,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Module Priority Combination",
+                "description": "Combination module priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "module_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000043",
+            "code": "rule_pri_special",
+            "name": "Rule Priority Special Group",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "special_group"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special"
+                }
+            ],
+            "evaluation": {
+                "weight": 100,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 98
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Rule Priority Special Group",
+                "description": "Special rule group highest within-module priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000044",
+            "code": "rule_pri_follow",
+            "name": "Rule Priority Follow Group",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "follow_group"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "follow"
+                }
+            ],
+            "evaluation": {
+                "weight": 95,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 96
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Rule Priority Follow Group",
+                "description": "Follow rule group high priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000045",
+            "code": "rule_pri_main",
+            "name": "Rule Priority Main Pattern",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "main_group"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "main"
+                }
+            ],
+            "evaluation": {
+                "weight": 80,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Rule Priority Main Pattern",
+                "description": "Main pattern rule group priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000046",
+            "code": "rule_pri_eligibility",
+            "name": "Rule Priority Eligibility",
+            "classification": {
+                "domain": "priority",
+                "category": "rule_priority",
+                "family": "rule_priority",
+                "type": "eligibility_group"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "eligibility"
+                }
+            ],
+            "evaluation": {
+                "weight": 50,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Rule Priority Eligibility",
+                "description": "Eligibility gates lowest rule priority",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "rule_priority",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000047",
+            "code": "ov_special_beats_all",
+            "name": "Override Special Beats All",
+            "classification": {
+                "domain": "priority",
+                "category": "override",
+                "family": "override_rule",
+                "type": "special_beats_all"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 198
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Special Beats All",
+                "description": "Special case overrides all other module results",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000048",
+            "code": "ov_follow_beats_pattern",
+            "name": "Override Follow Beats Pattern",
+            "classification": {
+                "domain": "priority",
+                "category": "override",
+                "family": "override_rule",
+                "type": "follow_beats_pattern"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 195
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Follow Beats Pattern",
+                "description": "Follow pattern overrides primary pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000049",
+            "code": "ov_combination_beats_single",
+            "name": "Override Combination Beats Single",
+            "classification": {
+                "domain": "priority",
+                "category": "override",
+                "family": "override_rule",
+                "type": "combination_beats_single"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "combination_match",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Combination Beats Single",
+                "description": "Combination beats single-module result",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000050",
+            "code": "conflict_multi_module",
+            "name": "Conflict Multi Module",
+            "classification": {
+                "domain": "priority",
+                "category": "conflict_resolution",
+                "family": "conflict_resolution",
+                "type": "multi_module"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "candidate_count",
+                    "operator": "greater_than",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 180
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Multi Module",
+                "description": "Multiple module candidates — conflict resolution required",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000051",
+            "code": "conflict_pattern_follow",
+            "name": "Conflict Pattern Follow",
+            "classification": {
+                "domain": "priority",
+                "category": "conflict_resolution",
+                "family": "conflict_resolution",
+                "type": "pattern_follow"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 178
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Pattern Follow",
+                "description": "Pattern and follow both match — resolve conflict",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000052",
+            "code": "conflict_special_pattern",
+            "name": "Conflict Special Pattern",
+            "classification": {
+                "domain": "priority",
+                "category": "conflict_resolution",
+                "family": "conflict_resolution",
+                "type": "special_pattern"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                },
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 177
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Special Pattern",
+                "description": "Special case conflicts with pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000053",
+            "code": "conflict_equal_priority",
+            "name": "Conflict Equal Priority",
+            "classification": {
+                "domain": "priority",
+                "category": "conflict_resolution",
+                "family": "conflict_resolution",
+                "type": "equal_priority"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "priority_tie",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 175
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Equal Priority",
+                "description": "Equal priority candidates — tie-break needed",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000054",
+            "code": "conflict_equal_score",
+            "name": "Conflict Equal Score",
+            "classification": {
+                "domain": "priority",
+                "category": "conflict_resolution",
+                "family": "conflict_resolution",
+                "type": "equal_score"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "score_tie",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 174
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Equal Score",
+                "description": "Equal score after priority — secondary tie-break",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000055",
+            "code": "tie_higher_priority",
+            "name": "Tiebreak Higher Priority",
+            "classification": {
+                "domain": "priority",
+                "category": "tie_breaking",
+                "family": "tie_breaking",
+                "type": "higher_priority"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 170
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tiebreak Higher Priority",
+                "description": "Higher priority order wins tie",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "tie_breaking",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000056",
+            "code": "tie_higher_weight",
+            "name": "Tiebreak Higher Weight",
+            "classification": {
+                "domain": "priority",
+                "category": "tie_breaking",
+                "family": "tie_breaking",
+                "type": "higher_weight"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 168
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tiebreak Higher Weight",
+                "description": "Equal priority — higher evaluation weight wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "tie_breaking",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000057",
+            "code": "tie_first_match",
+            "name": "Tiebreak First Match",
+            "classification": {
+                "domain": "priority",
+                "category": "tie_breaking",
+                "family": "tie_breaking",
+                "type": "first_match"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 165
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tiebreak First Match",
+                "description": "Equal priority and weight — first match wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "tie_breaking",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000058",
+            "code": "tie_module_order",
+            "name": "Tiebreak Module Order",
+            "classification": {
+                "domain": "priority",
+                "category": "tie_breaking",
+                "family": "tie_breaking",
+                "type": "module_order"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 163
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tiebreak Module Order",
+                "description": "Pipeline stage order breaks remaining ties",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "tie_breaking",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000059",
+            "code": "fallback_default_module",
+            "name": "Fallback Default Module",
+            "classification": {
+                "domain": "priority",
+                "category": "fallback",
+                "family": "fallback_selection",
+                "type": "default_module"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 10
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Fallback Default Module",
+                "description": "No priority rule matched — use default module output",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "fallback",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000060",
+            "code": "fallback_lowest_priority",
+            "name": "Fallback Lowest Priority",
+            "classification": {
+                "domain": "priority",
+                "category": "fallback",
+                "family": "fallback_selection",
+                "type": "lowest_priority"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "all_candidates_rejected",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 5
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Fallback Lowest Priority",
+                "description": "All candidates rejected — select lowest priority fallback",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "fallback",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000061",
+            "code": "fallback_no_match",
+            "name": "Fallback No Match",
+            "classification": {
+                "domain": "priority",
+                "category": "fallback",
+                "family": "fallback_selection",
+                "type": "no_match"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 1
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Fallback No Match",
+                "description": "No rules matched — pipeline default behavior",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "fallback",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000062",
+            "code": "norm_baseline_50",
+            "name": "Normalize Baseline 50",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "baseline_50"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "raw_score",
+                    "operator": "greater_than",
+                    "value": 0
+                }
+            ],
+            "evaluation": {
+                "weight": 50,
+                "stackable": true,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 55
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Normalize Baseline 50",
+                "description": "Normalize raw scores to baseline 50",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000063",
+            "code": "norm_scale_100",
+            "name": "Normalize Scale 100",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "scale_100"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 100,
+                "stackable": true,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 54
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Normalize Scale 100",
+                "description": "Scale normalized scores to 0–100 range",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000064",
+            "code": "norm_clamp_range",
+            "name": "Normalize Clamp Range",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "clamp_range"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 53
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Normalize Clamp Range",
+                "description": "Clamp normalized scores to [0, 100]",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000065",
+            "code": "norm_weighted_aggregate",
+            "name": "Normalize Weighted Aggregate",
+            "classification": {
+                "domain": "priority",
+                "category": "score_normalization",
+                "family": "score_normalization",
+                "type": "weighted_aggregate"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "module_count",
+                    "operator": "greater_than",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "low",
+                "order": 56
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Normalize Weighted Aggregate",
+                "description": "Weighted aggregate normalization across modules",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "score_normalization",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000066",
+            "code": "final_highest_composite",
+            "name": "Final Highest Composite",
+            "classification": {
+                "domain": "priority",
+                "category": "final_selection",
+                "family": "final_selection",
+                "type": "highest_composite"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 200
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Final Highest Composite",
+                "description": "Select rule with highest composite score",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "final_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000067",
+            "code": "final_confidence_gate",
+            "name": "Final Confidence Gate",
+            "classification": {
+                "domain": "priority",
+                "category": "final_selection",
+                "family": "final_selection",
+                "type": "confidence_gate"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [
+                {
+                    "type": "confidence",
+                    "operator": "greater_than_or_equals",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 195
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Final Confidence Gate",
+                "description": "Only select rules meeting confidence threshold",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "final_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000068",
+            "code": "final_single_winner",
+            "name": "Final Single Winner",
+            "classification": {
+                "domain": "priority",
+                "category": "final_selection",
+                "family": "final_selection",
+                "type": "single_winner"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Final Single Winner",
+                "description": "Enforce exactly one winning rule per resolution cycle",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "final_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PRI-000069",
+            "code": "final_mark_selected",
+            "name": "Final Mark Selected",
+            "classification": {
+                "domain": "priority",
+                "category": "final_selection",
+                "family": "final_selection",
+                "type": "mark_selected"
+            },
+            "source": {
+                "signal": "priority_context",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "rule_set",
+                "attribute": "priority_resolution"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Final Mark Selected",
+                "description": "Mark selected rule for downstream engines",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PRIORITY_HIERARCHY.md",
+                    "PRIORITY_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T20:00:00Z",
+                "updated_at": "2026-07-29T20:00:00Z",
+                "approved_at": "2026-07-29T20:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "final_selection",
+                    "priority"
+                ],
+                "source": "BTE Platform Priority Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

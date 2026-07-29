@@ -1,0 +1,437 @@
+[
+    {
+      "id": "PRI001",
+      "rule_type": "priority_definition",
+      "target_rule_type": "special_case_rule",
+      "priority": 1000,
+      "execution_level": 1,
+      "override_lower_rules": true,
+      "description": "Quy tắc đặc biệt luôn được ưu tiên cao nhất."
+    },
+    {
+      "id": "PRI002",
+      "rule_type": "priority_definition",
+      "target_rule_type": "combination_rule",
+      "priority": 900,
+      "execution_level": 2,
+      "override_lower_rules": true,
+      "description": "Quy tắc tổ hợp được áp dụng sau Special Case."
+    },
+    {
+      "id": "PRI003",
+      "rule_type": "priority_definition",
+      "target_rule_type": "climate_score_rule",
+      "priority": 800,
+      "execution_level": 3,
+      "override_lower_rules": false,
+      "description": "Quy tắc đánh giá khí hậu."
+    },
+    {
+      "id": "PRI004",
+      "rule_type": "priority_definition",
+      "target_rule_type": "adjustment_rule",
+      "priority": 700,
+      "execution_level": 4,
+      "override_lower_rules": false,
+      "description": "Quy tắc điều hậu."
+    },
+    {
+      "id": "PRI005",
+      "rule_type": "priority_definition",
+      "target_rule_type": "month_branch_rule",
+      "priority": 600,
+      "execution_level": 5,
+      "override_lower_rules": false,
+      "description": "Quy tắc tháng lệnh."
+    },
+    {
+      "id": "PRI006",
+      "rule_type": "priority_definition",
+      "target_rule_type": "season_rule",
+      "priority": 500,
+      "execution_level": 6,
+      "override_lower_rules": false,
+      "description": "Quy tắc mùa."
+    },
+    {
+      "id": "PRI007",
+      "rule_type": "priority_definition",
+      "target_rule_type": "hidden_stem_rule",
+      "priority": 400,
+      "execution_level": 7,
+      "override_lower_rules": false,
+      "description": "Quy tắc tàng can."
+    },
+    {
+      "id": "PRI008",
+      "rule_type": "priority_definition",
+      "target_rule_type": "earthly_branch_rule",
+      "priority": 300,
+      "execution_level": 8,
+      "override_lower_rules": false,
+      "description": "Quy tắc địa chi."
+    },
+    {
+      "id": "PRI009",
+      "rule_type": "priority_definition",
+      "target_rule_type": "heavenly_stem_rule",
+      "priority": 200,
+      "execution_level": 9,
+      "override_lower_rules": false,
+      "description": "Quy tắc thiên can."
+    },
+    {
+      "id": "PRI010",
+      "rule_type": "priority_definition",
+      "target_rule_type": "five_element_rule",
+      "priority": 100,
+      "execution_level": 10,
+      "override_lower_rules": false,
+      "description": "Quy tắc ngũ hành là lớp nền thấp nhất."
+    }
+  ]
+  [
+    {
+      "id": "PRI011",
+      "rule_type": "severity_priority",
+      "severity": "extreme",
+      "priority_score": 500,
+      "execution_level": 1,
+      "override_lower_severity": true,
+      "stop_processing": false,
+      "description": "Mức khí hậu cực đoan được ưu tiên cao nhất."
+    },
+    {
+      "id": "PRI012",
+      "rule_type": "severity_priority",
+      "severity": "strong",
+      "priority_score": 400,
+      "execution_level": 2,
+      "override_lower_severity": true,
+      "stop_processing": false,
+      "description": "Ưu tiên sau mức Extreme."
+    },
+    {
+      "id": "PRI013",
+      "rule_type": "severity_priority",
+      "severity": "moderate",
+      "priority_score": 300,
+      "execution_level": 3,
+      "override_lower_severity": false,
+      "stop_processing": false,
+      "description": "Mức điều hậu trung bình."
+    },
+    {
+      "id": "PRI014",
+      "rule_type": "severity_priority",
+      "severity": "mild",
+      "priority_score": 200,
+      "execution_level": 4,
+      "override_lower_severity": false,
+      "stop_processing": false,
+      "description": "Điều hậu nhẹ."
+    },
+    {
+      "id": "PRI015",
+      "rule_type": "severity_priority",
+      "severity": "balanced",
+      "priority_score": 100,
+      "execution_level": 5,
+      "override_lower_severity": false,
+      "stop_processing": false,
+      "description": "Khí hậu cân bằng, mức ưu tiên thấp nhất."
+    }
+  ]
+  [
+    {
+      "id": "PRI016",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "condition_specificity",
+      "priority_score": 1000,
+      "resolution_strategy": "most_specific_condition",
+      "description": "Ưu tiên rule có điều kiện cụ thể nhất (nhiều điều kiện khớp hơn)."
+    },
+    {
+      "id": "PRI017",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "condition_weight",
+      "priority_score": 900,
+      "resolution_strategy": "highest_condition_weight",
+      "description": "Nếu có trọng số điều kiện thì chọn rule có tổng trọng số lớn nhất."
+    },
+    {
+      "id": "PRI018",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "source_priority",
+      "priority_score": 800,
+      "resolution_strategy": "highest_source_priority",
+      "description": "Ưu tiên rule có nguồn dữ liệu hoặc nhóm quy tắc có mức ưu tiên cao hơn."
+    },
+    {
+      "id": "PRI019",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "priority_group",
+      "priority_score": 700,
+      "resolution_strategy": "highest_priority_group",
+      "description": "Ưu tiên rule thuộc priority_group có giá trị cao hơn."
+    },
+    {
+      "id": "PRI020",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "severity",
+      "priority_score": 600,
+      "resolution_strategy": "highest_severity",
+      "description": "Nếu còn xung đột thì chọn severity cao hơn."
+    },
+    {
+      "id": "PRI021",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "rule_version",
+      "priority_score": 500,
+      "resolution_strategy": "latest_version",
+      "description": "Nếu tồn tại nhiều phiên bản của cùng một rule thì dùng phiên bản mới nhất."
+    },
+    {
+      "id": "PRI022",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "effective_date",
+      "priority_score": 400,
+      "resolution_strategy": "latest_effective_date",
+      "description": "Ưu tiên rule có ngày hiệu lực mới hơn."
+    },
+    {
+      "id": "PRI023",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "rule_order",
+      "priority_score": 300,
+      "resolution_strategy": "lowest_rule_order",
+      "description": "Nếu các tiêu chí khác vẫn bằng nhau thì chọn rule có thứ tự khai báo nhỏ hơn."
+    },
+    {
+      "id": "PRI024",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "rule_id",
+      "priority_score": 200,
+      "resolution_strategy": "lowest_rule_id",
+      "description": "Nếu vẫn còn hòa thì chọn rule có ID nhỏ nhất để đảm bảo kết quả xác định."
+    },
+    {
+      "id": "PRI025",
+      "rule_type": "conflict_resolution",
+      "conflict_type": "fallback",
+      "priority_score": 100,
+      "resolution_strategy": "first_match",
+      "description": "Quy tắc dự phòng cuối cùng khi mọi tiêu chí đều giống nhau."
+    }
+  ]
+  [
+    {
+      "id": "PRI026",
+      "rule_type": "override_rule",
+      "condition": {
+        "priority_group": [
+          "special_case_rule"
+        ]
+      },
+      "override_scope": "all",
+      "override_target": [
+        "rule_type_priority",
+        "severity_priority",
+        "conflict_resolution"
+      ],
+      "execution_action": "apply_immediately",
+      "continue_processing": false,
+      "priority": 1000,
+      "description": "Special Case được áp dụng ngay và dừng các bước ưu tiên còn lại."
+    },
+    {
+      "id": "PRI027",
+      "rule_type": "override_rule",
+      "condition": {
+        "severity": [
+          "extreme"
+        ]
+      },
+      "override_scope": "severity",
+      "override_target": [
+        "severity_priority"
+      ],
+      "execution_action": "promote_to_highest",
+      "continue_processing": true,
+      "priority": 950,
+      "description": "Khí hậu cực đoan được nâng lên mức ưu tiên cao nhất trong cùng nhóm rule."
+    },
+    {
+      "id": "PRI028",
+      "rule_type": "override_rule",
+      "condition": {
+        "priority_group": [
+          "combination_rule"
+        ]
+      },
+      "override_scope": "rule_selection",
+      "override_target": [
+        "conflict_resolution"
+      ],
+      "execution_action": "prefer_combination_rule",
+      "continue_processing": true,
+      "priority": 900,
+      "description": "Nếu có Combination Rule hợp lệ thì ưu tiên chọn trước Base Rule."
+    },
+    {
+      "id": "PRI029",
+      "rule_type": "override_rule",
+      "condition": {
+        "adjustment_mode": [
+          "mandatory"
+        ]
+      },
+      "override_scope": "adjustment",
+      "override_target": [
+        "adjustment_rule"
+      ],
+      "execution_action": "force_adjustment",
+      "continue_processing": true,
+      "priority": 850,
+      "description": "Điều hậu bắt buộc luôn được thực hiện."
+    },
+    {
+      "id": "PRI030",
+      "rule_type": "override_rule",
+      "condition": {
+        "climate_pattern": [
+          "neutral_balanced"
+        ]
+      },
+      "override_scope": "adjustment",
+      "override_target": [
+        "adjustment_rule"
+      ],
+      "execution_action": "skip_adjustment",
+      "continue_processing": true,
+      "priority": 800,
+      "description": "Khí hậu cân bằng thì bỏ qua toàn bộ điều hậu."
+    }
+  ]
+  [
+    {
+      "id": "PRI031",
+      "rule_type": "execution_order",
+      "phase": "temperature_analysis",
+      "priority": 1000,
+      "depends_on": [],
+      "next_phase": "humidity_analysis",
+      "blocking": true,
+      "description": "Phân tích Hàn/Nhiệt luôn được thực hiện đầu tiên."
+    },
+    {
+      "id": "PRI032",
+      "rule_type": "execution_order",
+      "phase": "humidity_analysis",
+      "priority": 900,
+      "depends_on": [
+        "temperature_analysis"
+      ],
+      "next_phase": "climate_scoring",
+      "blocking": true,
+      "description": "Phân tích Táo/Thấp sau khi hoàn tất Hàn/Nhiệt."
+    },
+    {
+      "id": "PRI033",
+      "rule_type": "execution_order",
+      "phase": "climate_scoring",
+      "priority": 800,
+      "depends_on": [
+        "humidity_analysis"
+      ],
+      "next_phase": "adjustment_analysis",
+      "blocking": true,
+      "description": "Tính toán trạng thái khí hậu tổng hợp."
+    },
+    {
+      "id": "PRI034",
+      "rule_type": "execution_order",
+      "phase": "adjustment_analysis",
+      "priority": 700,
+      "depends_on": [
+        "climate_scoring"
+      ],
+      "next_phase": "priority_resolution",
+      "blocking": true,
+      "description": "Xây dựng chiến lược điều hậu."
+    },
+    {
+      "id": "PRI035",
+      "rule_type": "execution_order",
+      "phase": "priority_resolution",
+      "priority": 600,
+      "depends_on": [
+        "adjustment_analysis"
+      ],
+      "next_phase": "useful_god_engine",
+      "blocking": true,
+      "description": "Giải quyết ưu tiên và chuyển kết quả sang Useful God Engine."
+    }
+  ]
+  [
+    {
+      "id": "PRI036",
+      "rule_type": "priority_policy",
+      "policy_name": "single_winner",
+      "phase": "execution",
+      "priority": 1000,
+      "policy": {
+        "allow_multiple_winners": false,
+        "selection_strategy": "highest_priority"
+      },
+      "description": "Mỗi lần đánh giá chỉ chọn một rule thắng cuối cùng."
+    },
+    {
+      "id": "PRI037",
+      "rule_type": "priority_policy",
+      "policy_name": "deterministic_execution",
+      "phase": "execution",
+      "priority": 950,
+      "policy": {
+        "deterministic": true,
+        "stable_result": true
+      },
+      "description": "Cùng một đầu vào luôn sinh ra cùng một kết quả."
+    },
+    {
+      "id": "PRI038",
+      "rule_type": "priority_policy",
+      "policy_name": "override_first",
+      "phase": "execution",
+      "priority": 900,
+      "policy": {
+        "override_before_priority": true
+      },
+      "description": "Luôn xử lý Override trước Rule Priority."
+    },
+    {
+      "id": "PRI039",
+      "rule_type": "priority_policy",
+      "policy_name": "fail_safe",
+      "phase": "execution",
+      "priority": 850,
+      "policy": {
+        "fallback_strategy": "lowest_rule_id",
+        "never_return_null": true
+      },
+      "description": "Nếu mọi tiêu chí đều bằng nhau thì chọn rule có ID nhỏ nhất để đảm bảo luôn có kết quả."
+    },
+    {
+      "id": "PRI040",
+      "rule_type": "priority_policy",
+      "policy_name": "engine_handoff",
+      "phase": "execution",
+      "priority": 800,
+      "policy": {
+        "next_engine": "useful_god_engine",
+        "export_priority_context": true,
+        "export_execution_trace": true
+      },
+      "description": "Sau khi hoàn tất Temperature Engine, chuyển đầy đủ ngữ cảnh ưu tiên sang Useful God Engine."
+    }
+  ]

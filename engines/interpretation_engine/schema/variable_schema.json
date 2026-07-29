@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "variable_schema.json",
+  "title": "BTE Variable Dictionary",
+  "description": "Danh sách toàn bộ biến hợp lệ trong Interpretation Engine.",
+
+  "type": "object",
+
+  "required": [
+
+    "variables"
+
+  ],
+
+  "properties": {
+
+    "variables": {
+
+      "type": "array",
+
+      "items": {
+
+        "$ref": "#/$defs/variable"
+
+      }
+
+    }
+
+  },
+
+  "$defs": {
+
+    "variable": {
+
+      "type": "object",
+
+      "required": [
+
+        "name",
+
+        "type",
+
+        "description"
+
+      ],
+
+      "properties": {
+
+        "name": {
+
+          "type": "string"
+
+        },
+
+        "type": {
+
+          "type": "string",
+
+          "enum": [
+
+            "string",
+
+            "integer",
+
+            "number",
+
+            "boolean",
+
+            "list",
+
+            "object"
+
+          ]
+
+        },
+
+        "description": {
+
+          "type": "string"
+
+        },
+
+        "required": {
+
+          "type": "boolean",
+
+          "default": false
+
+        },
+
+        "example": {
+
+          "type": [
+            "string",
+            "integer",
+            "number",
+            "boolean"
+          ]
+
+        }
+
+      },
+
+      "additionalProperties": false
+
+    }
+
+  }
+}

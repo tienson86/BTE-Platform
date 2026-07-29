@@ -1,0 +1,162 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "reference_example",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T08:00:00Z",
+        "updated_at": "2026-07-29T11:00:00Z",
+        "approved_at": "2026-07-29T09:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "reference_example",
+            "validation"
+        ],
+        "source": "BTE Platform Knowledge Framework",
+        "license": "BTE Internal Reference — Not for Production Use"
+    },
+    "documentation": {
+        "summary": "Canonical complete validation report for the reference_examples package.",
+        "description": "Demonstrates a full Validation Report covering all five validation levels with per-object results, severity counts, and timing metadata. Represents a successful validation run of all active reference examples.",
+        "references": [
+            "VALIDATION_STANDARD.md",
+            "METADATA_STANDARD.md",
+            "JSON_STYLE_GUIDE.md",
+            "REFERENCE_EXAMPLE_REQUIREMENTS.md"
+        ]
+    },
+    "report": {
+        "total_objects": 15,
+        "errors": 3,
+        "warnings": 0,
+        "fatal": 0,
+        "info": 0,
+        "validation_levels": [
+            "schema",
+            "structural",
+            "reference",
+            "semantic",
+            "governance"
+        ],
+        "started_at": "2026-07-29T10:00:00Z",
+        "completed_at": "2026-07-29T10:00:01Z",
+        "duration_ms": 1250,
+        "validator_version": "1.0.0",
+        "package": "reference_examples",
+        "results": [
+            {
+                "path": "rule/rule_complete_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "rule/rule_minimal_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "rule/rule_invalid_missing_id_v1.json",
+                "status": "fail",
+                "levels_passed": 0,
+                "errors": 1,
+                "warnings": 0,
+                "expected_failure": true,
+                "failure_rule": "missing_id"
+            },
+            {
+                "path": "rule/rule_invalid_bad_version_v1.json",
+                "status": "fail",
+                "levels_passed": 4,
+                "errors": 1,
+                "warnings": 0,
+                "expected_failure": true,
+                "failure_rule": "bad_version"
+            },
+            {
+                "path": "rule/rule_invalid_unknown_enum_v1.json",
+                "status": "fail",
+                "levels_passed": 0,
+                "errors": 1,
+                "warnings": 0,
+                "expected_failure": true,
+                "failure_rule": "unknown_enum"
+            },
+            {
+                "path": "context/context_complete_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "context/context_minimal_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "result/result_complete_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "result/result_minimal_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "pipeline/pipeline_complete_v1.md",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "pipeline/pipeline_minimal_v1.md",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "validation/validation_complete_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "validation/validation_minimal_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "metadata/metadata_complete_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            },
+            {
+                "path": "metadata/metadata_minimal_v1.json",
+                "status": "pass",
+                "levels_passed": 5,
+                "errors": 0,
+                "warnings": 0
+            }
+        ]
+    }
+}

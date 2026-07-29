@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{DOC_TITLE}}</title>
+  <link rel="stylesheet" href="/static/css/portal.css" />
+  <script>
+    window.__BTE_I18N__ = {{I18N_JSON}};
+    window.__BTE_I18N_LOCALE__ = "{{I18N_LOCALE}}";
+  </script>
+  <script src="/static/js/i18n.js"></script>
+  <script src="/static/js/result_store.js"></script>
+  <script src="/static/js/api.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <div class="top">
+      <div class="brand">BTE <span>Portal</span></div>
+      <nav class="nav">{{NAV}}</nav>
+    </div>
+    <div id="globalFlash" class="flash"></div>
+    {{CONTENT}}
+  </div>
+  <script>if (window.BteI18n) BteI18n.apply(document);</script>
+</body>
+</html>

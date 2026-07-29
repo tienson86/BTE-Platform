@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/golden_dataset/expected_schema.json",
+  "title": "BTE Golden Dataset Expected Output Schema",
+  "description": "V1 InterpretationReport expected output (success, text, sections) plus legacy full-result shape.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "text": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array"
+    },
+    "case_id": {
+      "type": "string"
+    },
+    "strength": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "pattern": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "useful_god": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "score": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "anyOf": [
+    {
+      "required": ["success", "text", "sections"]
+    },
+    {
+      "required": ["case_id", "strength", "pattern", "useful_god", "score", "interpretation"]
+    }
+  ]
+}

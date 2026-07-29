@@ -1,0 +1,87 @@
+{
+    "id": "SUP-000001",
+    "code": "wood_generate_fire",
+    "name": "Wood Generates Fire",
+    "classification": {
+        "domain": "support",
+        "category": "element_support",
+        "family": "generating",
+        "type": "wood_to_fire"
+    },
+    "source": {
+        "element": "wood",
+        "pillar": "month"
+    },
+    "target": {
+        "element": "fire",
+        "role": "day_master"
+    },
+    "conditions": [
+        {
+            "type": "season",
+            "operator": "equals",
+            "value": "spring"
+        },
+        {
+            "type": "strength_level",
+            "operator": "in",
+            "value": [
+                "balanced",
+                "weak"
+            ]
+        },
+        {
+            "type": "temperature_type",
+            "operator": "not_equals",
+            "value": "cold"
+        }
+    ],
+    "evaluation": {
+        "weight": 25,
+        "stackable": true,
+        "max_stack": 2,
+        "exclusive": false
+    },
+    "priority": {
+        "level": "high",
+        "order": 20
+    },
+    "lifecycle": {
+        "status": "active",
+        "enabled": true,
+        "deprecated": false
+    },
+    "documentation": {
+        "summary": "Canonical complete Support Rule demonstrating the full BTE Rule Model.",
+        "description": "When Wood in the month pillar generates Fire for a day master during spring, this rule adds supportive generating influence. Used as the primary reference for Rule Database authoring, Validator regression, and AI generation prompts.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "RULE_SCHEMA_REFERENCE.md",
+            "METADATA_STANDARD.md",
+            "JSON_STYLE_GUIDE.md",
+            "REFERENCE_EXAMPLE_REQUIREMENTS.md"
+        ]
+    },
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "reference_example",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T08:00:00Z",
+        "updated_at": "2026-07-29T08:30:00Z",
+        "approved_at": "2026-07-29T09:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "element_support",
+            "five_elements",
+            "generating",
+            "reference_example",
+            "support",
+            "wood"
+        ],
+        "source": "BTE Platform Knowledge Framework",
+        "license": "BTE Internal Reference — Not for Production Use"
+    }
+}

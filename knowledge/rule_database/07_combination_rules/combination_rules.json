@@ -1,0 +1,4473 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T19:00:00Z",
+        "updated_at": "2026-07-29T19:00:00Z",
+        "approved_at": "2026-07-29T19:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "combination",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Combination Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Combination Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Combination rules covering strength+season, season+temperature, pattern+special case, pattern+follow, multi-module, composite decision, override, conflict detection, candidate selection, and execution grouping.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "MODULE_SPEC.md",
+            "COMBINATION_TAXONOMY.md",
+            "COMBINATION_DECISION_TREE.md",
+            "DEPENDENCIES.json",
+            "database/14_pattern/04_combination_pattern.csv",
+            "database/12_strength/07_special_rules.csv",
+            "database/15_score_engine/02_wuxing/04_combination_score.csv"
+        ]
+    },
+    "config": {
+        "baseline": 50,
+        "scale": 100,
+        "confidence_threshold": 0.65,
+        "favorable_threshold": 70,
+        "unfavorable_threshold": 30,
+        "execution_groups": [
+            "strength_season",
+            "pattern_follow",
+            "special_override",
+            "final_selection"
+        ]
+    },
+    "rules": [
+        {
+            "id": "COM-000001",
+            "code": "com_qan_01",
+            "name": "Quan Ấn tương sinh",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_combination",
+                "family": "pattern_combination",
+                "type": "quan_an"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 85,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern combination: quan_an",
+                "description": "Quan Ấn tương sinh — Chính Quan sinh Chính Ấn trợ Nhật chủ",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_combination",
+                    "quan_an",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000002",
+            "code": "com_san_01",
+            "name": "Sát Ấn tương sinh",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_combination",
+                "family": "pattern_combination",
+                "type": "sat_an"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thất Sát"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 84,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern combination: sat_an",
+                "description": "Sát Ấn tương sinh — Thất Sát chế bởi Chính Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_combination",
+                    "sat_an",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000003",
+            "code": "com_tttai_01",
+            "name": "Thực Thần sinh Tài",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_combination",
+                "family": "pattern_combination",
+                "type": "thuc_than_sinh_tai"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thực Thần"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 82,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 82
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern combination: thuc_than_sinh_tai",
+                "description": "Thực Thần sinh Tài — Thực Thần tiết khí sinh Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_combination",
+                    "thuc_than_sinh_tai",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000004",
+            "code": "com_thuq_an_01",
+            "name": "Thương Quan phối Ấn",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_combination",
+                "family": "pattern_combination",
+                "type": "thuong_quan_phoi_an"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thương Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 82,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 83
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern combination: thuong_quan_phoi_an",
+                "description": "Thương Quan phối Ấn — Thương Quan chế bởi Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_combination",
+                    "thuong_quan_phoi_an",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000005",
+            "code": "com_taiqs_01",
+            "name": "Tài Quan Song Mỹ",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_combination",
+                "family": "pattern_combination",
+                "type": "tai_quan_song_my"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 86,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern combination: tai_quan_song_my",
+                "description": "Tài Quan Song Mỹ — có cả Tài và Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_combination",
+                    "tai_quan_song_my",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000006",
+            "code": "str_cmb_001",
+            "name": "Đồng hành và Ấn cùng trợ",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "cmb_001"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "companion_count",
+                    "operator": "greater_than_or_equals",
+                    "value": 2
+                },
+                {
+                    "type": "resource_count",
+                    "operator": "greater_than_or_equals",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Ấn Kiếp hội tụ",
+                "description": "Đồng hành và Ấn cùng trợ",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000007",
+            "code": "str_cmb_002",
+            "name": "Quan và Thực cùng hại thân",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "cmb_002"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "officer_count",
+                    "operator": "greater_than_or_equals",
+                    "value": 2
+                },
+                {
+                    "type": "output_count",
+                    "operator": "greater_than_or_equals",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": -12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 93
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Quan Thực khắc tiết",
+                "description": "Quan và Thực cùng hại thân",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000008",
+            "code": "str_cmb_003",
+            "name": "Tài nhiều nhưng vô căn",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "cmb_003"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "wealth_count",
+                    "operator": "greater_than_or_equals",
+                    "value": 2
+                },
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "Vô căn"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tài vượng vô căn",
+                "description": "Tài nhiều nhưng vô căn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000009",
+            "code": "cb001",
+            "name": "Hợp Can",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "tian_gan_he"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "TIAN_GAN_HE"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Hợp Can",
+                "description": "Hợp Can — Hợp Thiên Can thành công",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000010",
+            "code": "cb002",
+            "name": "Lục Hợp",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "di_zhi_liuhe"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "DI_ZHI_LIUHE"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Lục Hợp",
+                "description": "Lục Hợp — Lục Hợp",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000011",
+            "code": "cb003",
+            "name": "Tam Hợp",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "tam_hop"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "TAM_HOP"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tam Hợp",
+                "description": "Tam Hợp — Tam Hợp thành cục",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000012",
+            "code": "cb004",
+            "name": "Tam Hội",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "tam_hoi"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "TAM_HOI"
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tam Hội",
+                "description": "Tam Hội — Tam Hội thành cục",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000013",
+            "code": "cb005",
+            "name": "Bán Hợp",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "ban_hop"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "BAN_HOP"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Bán Hợp",
+                "description": "Bán Hợp — Bán Hợp",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000014",
+            "code": "cb006",
+            "name": "Hợp hóa",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "hua_success"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "HUA_SUCCESS"
+                }
+            ],
+            "evaluation": {
+                "weight": 25,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Hợp hóa",
+                "description": "Hợp hóa — Hợp hóa thành công",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000015",
+            "code": "cb007",
+            "name": "Hợp không hóa",
+            "classification": {
+                "domain": "combination",
+                "category": "element_combination",
+                "family": "element_combination",
+                "type": "hua_fail"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_type",
+                    "operator": "equals",
+                    "value": "HUA_FAIL"
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Hợp không hóa",
+                "description": "Hợp không hóa — Hợp mà không hóa",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element_combination",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000016",
+            "code": "ss_strong_spring_wood",
+            "name": "Strong Spring Wood",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "strong_spring_wood"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Mộc"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 82
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Strong Spring Wood",
+                "description": "Strong wood day master in spring — favorable combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000017",
+            "code": "ss_weak_winter_water",
+            "name": "Weak Winter Water",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "weak_winter_water"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Thủy"
+                }
+            ],
+            "evaluation": {
+                "weight": -12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weak Winter Water",
+                "description": "Weak water in winter — unfavorable combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000018",
+            "code": "ss_strong_summer_fire",
+            "name": "Strong Summer Fire",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "strong_summer_fire"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Hỏa"
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 83
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Strong Summer Fire",
+                "description": "Strong fire in summer — peak season combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000019",
+            "code": "ss_balanced_autumn_metal",
+            "name": "Balanced Autumn Metal",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "balanced_autumn_metal"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "balanced"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Kim"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 78
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Balanced Autumn Metal",
+                "description": "Balanced metal in autumn — stable combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000020",
+            "code": "ss_weak_spring_wood",
+            "name": "Weak Spring Wood",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "weak_spring_wood"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 76
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Weak Spring Wood",
+                "description": "Weak body in own season — partial benefit only",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000021",
+            "code": "ss_strong_winter_water",
+            "name": "Strong Winter Water",
+            "classification": {
+                "domain": "combination",
+                "category": "strength_season",
+                "family": "strength_season",
+                "type": "strong_winter_water"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Thủy"
+                }
+            ],
+            "evaluation": {
+                "weight": 16,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 81
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Strong Winter Water",
+                "description": "Strong water in winter — favorable combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength_season",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000022",
+            "code": "st_spring_warm",
+            "name": "Spring Warm Climate",
+            "classification": {
+                "domain": "combination",
+                "category": "season_temperature",
+                "family": "season_temperature",
+                "type": "spring_warm"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                },
+                {
+                    "type": "temperature_type",
+                    "operator": "in",
+                    "value": [
+                        "warm",
+                        "hot"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Spring Warm Climate",
+                "description": "Spring with warm/hot climate — season-temperature alignment",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season_temperature",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000023",
+            "code": "st_summer_hot",
+            "name": "Summer Hot Climate",
+            "classification": {
+                "domain": "combination",
+                "category": "season_temperature",
+                "family": "season_temperature",
+                "type": "summer_hot"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "temperature_type",
+                    "operator": "equals",
+                    "value": "hot"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 76
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Summer Hot Climate",
+                "description": "Summer hot — expected temperature combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season_temperature",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000024",
+            "code": "st_autumn_cool",
+            "name": "Autumn Cool Climate",
+            "classification": {
+                "domain": "combination",
+                "category": "season_temperature",
+                "family": "season_temperature",
+                "type": "autumn_cool"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                },
+                {
+                    "type": "temperature_type",
+                    "operator": "in",
+                    "value": [
+                        "cool",
+                        "cold"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Autumn Cool Climate",
+                "description": "Autumn cool — season-temperature alignment",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season_temperature",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000025",
+            "code": "st_winter_cold",
+            "name": "Winter Cold Climate",
+            "classification": {
+                "domain": "combination",
+                "category": "season_temperature",
+                "family": "season_temperature",
+                "type": "winter_cold"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "temperature_type",
+                    "operator": "equals",
+                    "value": "cold"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 76
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Winter Cold Climate",
+                "description": "Winter cold — expected temperature combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season_temperature",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000026",
+            "code": "st_season_temp_mismatch",
+            "name": "Season Temperature Mismatch",
+            "classification": {
+                "domain": "combination",
+                "category": "season_temperature",
+                "family": "season_temperature",
+                "type": "mismatch"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "temperature_type",
+                    "operator": "equals",
+                    "value": "cold"
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season Temperature Mismatch",
+                "description": "Summer with cold temperature — adverse combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season_temperature",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000027",
+            "code": "ps_false_follow",
+            "name": "Pattern Special False Follow",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_special_case",
+                "family": "pattern_special_case",
+                "type": "false_follow"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "special_case",
+                    "operator": "equals",
+                    "value": "FALSE_FOLLOW"
+                }
+            ],
+            "evaluation": {
+                "weight": -15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Special False Follow",
+                "description": "Pattern with false follow special case",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_special_case",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000028",
+            "code": "ps_pure_pattern",
+            "name": "Pattern Special Pure",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_special_case",
+                "family": "pattern_special_case",
+                "type": "pure_pattern"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "special_case",
+                    "operator": "equals",
+                    "value": "PURE_PATTERN"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Special Pure",
+                "description": "Pure pattern with special case confirmation",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_special_case",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000029",
+            "code": "ps_extreme_weak",
+            "name": "Pattern Special Extreme Weak",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_special_case",
+                "family": "pattern_special_case",
+                "type": "extreme_weak"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "equals",
+                    "value": "chinh_tai"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Special Extreme Weak",
+                "description": "Wealth pattern with extreme weak special case",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_special_case",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000030",
+            "code": "ps_broken_pattern",
+            "name": "Pattern Broken Special",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_special_case",
+                "family": "pattern_special_case",
+                "type": "broken"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "pattern_quality",
+                    "operator": "equals",
+                    "value": "broken"
+                },
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": -18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Broken Special",
+                "description": "Broken pattern with special case flag",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_special_case",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000031",
+            "code": "ps_special_override",
+            "name": "Pattern Special Override",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_special_case",
+                "family": "pattern_special_case",
+                "type": "override"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                },
+                {
+                    "type": "pattern_confidence",
+                    "operator": "less_than",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 84
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Special Override",
+                "description": "Special case overrides low-confidence pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_special_case",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000032",
+            "code": "pf_follow_tai",
+            "name": "Pattern Follow Tai",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_follow",
+                "family": "pattern_follow",
+                "type": "follow_tai"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "in",
+                    "value": [
+                        "chinh_tai",
+                        "thien_tai"
+                    ]
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_tai"
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Follow Tai",
+                "description": "Wealth pattern confirmed by Tòng Tài follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_follow",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000033",
+            "code": "pf_follow_quan",
+            "name": "Pattern Follow Quan",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_follow",
+                "family": "pattern_follow",
+                "type": "follow_quan"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "equals",
+                    "value": "chinh_quan"
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Follow Quan",
+                "description": "Officer pattern confirmed by Tòng Quan follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_follow",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000034",
+            "code": "pf_follow_vuong",
+            "name": "Pattern Follow Vuong",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_follow",
+                "family": "pattern_follow",
+                "type": "follow_vuong"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "in",
+                    "value": [
+                        "ty_kien",
+                        "kiep_tai"
+                    ]
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "equals",
+                    "value": "tong_vuong"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 89
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Follow Vuong",
+                "description": "Companion pattern with Tòng Vượng follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_follow",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000035",
+            "code": "pf_follow_override",
+            "name": "Pattern Follow Override Main",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_follow",
+                "family": "pattern_follow",
+                "type": "override_main"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Follow Override Main",
+                "description": "Follow pattern overrides primary when both present",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_follow",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000036",
+            "code": "pf_pseudo_follow",
+            "name": "Pattern Pseudo Follow Combo",
+            "classification": {
+                "domain": "combination",
+                "category": "pattern_follow",
+                "family": "pattern_follow",
+                "type": "pseudo_follow"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "not_equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 82
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pattern Pseudo Follow Combo",
+                "description": "Follow detected but strength not weak — pseudo combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pattern_follow",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000037",
+            "code": "mm_strength_season_pattern",
+            "name": "Multi Strength Season Pattern",
+            "classification": {
+                "domain": "combination",
+                "category": "multi_module",
+                "family": "multi_module",
+                "type": "strength_season_pattern"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "season",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Multi Strength Season Pattern",
+                "description": "Three-module combination: strength + season + pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "multi_module",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000038",
+            "code": "mm_season_temp_strength",
+            "name": "Multi Season Temp Strength",
+            "classification": {
+                "domain": "combination",
+                "category": "multi_module",
+                "family": "multi_module",
+                "type": "season_temp_strength"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "temperature_type",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 79
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Multi Season Temp Strength",
+                "description": "Season + temperature + strength composite",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "multi_module",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000039",
+            "code": "mm_pattern_follow_special",
+            "name": "Multi Pattern Follow Special",
+            "classification": {
+                "domain": "combination",
+                "category": "multi_module",
+                "family": "multi_module",
+                "type": "pattern_follow_special"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": false
+                }
+            ],
+            "evaluation": {
+                "weight": 14,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Multi Pattern Follow Special",
+                "description": "Pattern + follow without special case interference",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "multi_module",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000040",
+            "code": "mm_full_pipeline",
+            "name": "Multi Full Pipeline",
+            "classification": {
+                "domain": "combination",
+                "category": "multi_module",
+                "family": "multi_module",
+                "type": "full_pipeline"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "greater_than",
+                    "value": 0
+                },
+                {
+                    "type": "season_score",
+                    "operator": "greater_than",
+                    "value": 0
+                },
+                {
+                    "type": "temperature_score",
+                    "operator": "greater_than",
+                    "value": 0
+                },
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 16,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 87
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Multi Full Pipeline",
+                "description": "All upstream modules contribute to combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "multi_module",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000041",
+            "code": "mm_score_aggregate",
+            "name": "Multi Score Aggregate",
+            "classification": {
+                "domain": "combination",
+                "category": "multi_module",
+                "family": "multi_module",
+                "type": "score_aggregate"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "greater_than_or_equals",
+                    "value": 50
+                },
+                {
+                    "type": "season_score",
+                    "operator": "greater_than_or_equals",
+                    "value": 50
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 77
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Multi Score Aggregate",
+                "description": "Aggregate favorable scores from multiple modules",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "multi_module",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000042",
+            "code": "cd_favorable",
+            "name": "Composite Favorable",
+            "classification": {
+                "domain": "combination",
+                "category": "composite_decision",
+                "family": "composite_decision",
+                "type": "favorable"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_score",
+                    "operator": "greater_than",
+                    "value": 70
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Composite Favorable",
+                "description": "Composite decision: overall favorable combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "composite_decision",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000043",
+            "code": "cd_unfavorable",
+            "name": "Composite Unfavorable",
+            "classification": {
+                "domain": "combination",
+                "category": "composite_decision",
+                "family": "composite_decision",
+                "type": "unfavorable"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_score",
+                    "operator": "less_than",
+                    "value": 30
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Composite Unfavorable",
+                "description": "Composite decision: overall unfavorable combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "composite_decision",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000044",
+            "code": "cd_neutral",
+            "name": "Composite Neutral",
+            "classification": {
+                "domain": "combination",
+                "category": "composite_decision",
+                "family": "composite_decision",
+                "type": "neutral"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "combination_score",
+                    "operator": "greater_than_or_equals",
+                    "value": 40
+                },
+                {
+                    "type": "combination_score",
+                    "operator": "less_than_or_equals",
+                    "value": 60
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 68
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Composite Neutral",
+                "description": "Composite decision: neutral combination zone",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "composite_decision",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000045",
+            "code": "cd_mixed_signals",
+            "name": "Composite Mixed Signals",
+            "classification": {
+                "domain": "combination",
+                "category": "composite_decision",
+                "family": "composite_decision",
+                "type": "mixed"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "conflict_detected",
+                    "operator": "equals",
+                    "value": true
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Composite Mixed Signals",
+                "description": "Composite decision: conflicting module signals",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "composite_decision",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000046",
+            "code": "ov_follow_beats_pattern",
+            "name": "Override Follow Beats Pattern",
+            "classification": {
+                "domain": "combination",
+                "category": "override",
+                "family": "override_combination",
+                "type": "follow_beats_pattern"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 195
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Follow Beats Pattern",
+                "description": "Follow combination overrides primary pattern combination",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000047",
+            "code": "ov_special_beats_pattern",
+            "name": "Override Special Beats Pattern",
+            "classification": {
+                "domain": "combination",
+                "category": "override",
+                "family": "override_combination",
+                "type": "special_beats_pattern"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Special Beats Pattern",
+                "description": "Special case combination overrides pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000048",
+            "code": "ov_combination_beats_main",
+            "name": "Override Combination Beats Main",
+            "classification": {
+                "domain": "combination",
+                "category": "override",
+                "family": "override_combination",
+                "type": "combination_beats_main"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Combination Beats Main",
+                "description": "Combination pattern beats standard single pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000049",
+            "code": "ov_multi_winner",
+            "name": "Override Multi Winner",
+            "classification": {
+                "domain": "combination",
+                "category": "override",
+                "family": "override_combination",
+                "type": "multi_winner"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 180
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Override Multi Winner",
+                "description": "Highest-scoring combination wins across modules",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "override",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000050",
+            "code": "cf_pattern_follow",
+            "name": "Conflict Pattern Follow",
+            "classification": {
+                "domain": "combination",
+                "category": "conflict",
+                "family": "conflict_detection",
+                "type": "pattern_follow"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                },
+                {
+                    "type": "follow_type",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Pattern Follow",
+                "description": "Detect conflict between primary pattern and follow type",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000051",
+            "code": "cf_special_pattern",
+            "name": "Conflict Special Pattern",
+            "classification": {
+                "domain": "combination",
+                "category": "conflict",
+                "family": "conflict_detection",
+                "type": "special_pattern"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "special_case_flag",
+                    "operator": "equals",
+                    "value": true
+                },
+                {
+                    "type": "primary_pattern",
+                    "operator": "not_equals",
+                    "value": null
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 87
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Special Pattern",
+                "description": "Detect conflict between special case and pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000052",
+            "code": "cf_strength_season",
+            "name": "Conflict Strength Season",
+            "classification": {
+                "domain": "combination",
+                "category": "conflict",
+                "family": "conflict_detection",
+                "type": "strength_season"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Hỏa"
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Strength Season",
+                "description": "Strong fire in winter — strength-season conflict",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000053",
+            "code": "cf_multi_candidate",
+            "name": "Conflict Multi Candidate",
+            "classification": {
+                "domain": "combination",
+                "category": "conflict",
+                "family": "conflict_detection",
+                "type": "multi_candidate"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "candidate_count",
+                    "operator": "greater_than",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Multi Candidate",
+                "description": "Multiple combination candidates detected — conflict resolution needed",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000054",
+            "code": "sel_highest_score",
+            "name": "Select Highest Score",
+            "classification": {
+                "domain": "combination",
+                "category": "candidate_selection",
+                "family": "candidate_selection",
+                "type": "highest_score"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 175
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Select Highest Score",
+                "description": "Select combination candidate with highest score",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "candidate_selection",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000055",
+            "code": "sel_highest_priority",
+            "name": "Select Highest Priority",
+            "classification": {
+                "domain": "combination",
+                "category": "candidate_selection",
+                "family": "candidate_selection",
+                "type": "highest_priority"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 170
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Select Highest Priority",
+                "description": "Select candidate with highest priority order",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "candidate_selection",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000056",
+            "code": "sel_first_match",
+            "name": "Select First Match",
+            "classification": {
+                "domain": "combination",
+                "category": "candidate_selection",
+                "family": "candidate_selection",
+                "type": "first_match"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 165
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Select First Match",
+                "description": "Equal score and priority — first match wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "candidate_selection",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000057",
+            "code": "sel_best_composite",
+            "name": "Select Best Composite",
+            "classification": {
+                "domain": "combination",
+                "category": "candidate_selection",
+                "family": "candidate_selection",
+                "type": "best_composite"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 178
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Select Best Composite",
+                "description": "Select best composite across all module combinations",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "candidate_selection",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000058",
+            "code": "eg_strength_season",
+            "name": "Group Strength Season",
+            "classification": {
+                "domain": "combination",
+                "category": "execution_group",
+                "family": "execution_grouping",
+                "type": "strength_season"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "strength_season"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Group Strength Season",
+                "description": "Execute strength+season combinations first",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_group",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000059",
+            "code": "eg_pattern_follow",
+            "name": "Group Pattern Follow",
+            "classification": {
+                "domain": "combination",
+                "category": "execution_group",
+                "family": "execution_grouping",
+                "type": "pattern_follow"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "pattern_follow"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Group Pattern Follow",
+                "description": "Execute pattern+follow combinations second",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_group",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000060",
+            "code": "eg_special_override",
+            "name": "Group Special Override",
+            "classification": {
+                "domain": "combination",
+                "category": "execution_group",
+                "family": "execution_grouping",
+                "type": "special_override"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special_override"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Group Special Override",
+                "description": "Execute special case override combinations",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_group",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "COM-000061",
+            "code": "eg_final_selection",
+            "name": "Group Final Selection",
+            "classification": {
+                "domain": "combination",
+                "category": "execution_group",
+                "family": "execution_grouping",
+                "type": "final_selection"
+            },
+            "source": {
+                "signal": "combination_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "combination_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "final_selection"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Group Final Selection",
+                "description": "Final candidate selection group",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "COMBINATION_TAXONOMY.md",
+                    "COMBINATION_DECISION_TREE.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T19:00:00Z",
+                "updated_at": "2026-07-29T19:00:00Z",
+                "approved_at": "2026-07-29T19:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "execution_group",
+                    "combination"
+                ],
+                "source": "BTE Platform Combination Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T20:00:00Z",
+        "updated_at": "2026-07-29T20:00:00Z",
+        "approved_at": "2026-07-29T20:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "priority",
+            "test_cases"
+        ],
+        "source": "BTE Platform Priority Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Priority Rule Database.",
+        "description": "Unit test fixtures for priority resolution and tie-breaking.",
+        "references": [
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Follow beats main pattern override",
+            "rule_id": "PRI-000001",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_002",
+            "description": "Useful god special module priority",
+            "rule_id": "PRI-000004",
+            "input": {
+                "rule_group": "special"
+            },
+            "expected_match": true,
+            "expected_weight": 100
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Strength dimension weight",
+            "rule_id": "PRI-000020",
+            "input": {
+                "module": "STRENGTH"
+            },
+            "expected_match": true,
+            "expected_weight": 25
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Tiebreak higher priority",
+            "rule_id": "PRI-000055",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Execution stage pattern",
+            "rule_id": "PRI-000036",
+            "input": {
+                "pipeline_stage": 4
+            },
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_006",
+            "description": "Final single winner selection",
+            "rule_id": "PRI-000068",
+            "input": {},
+            "expected_match": true,
+            "expected_weight": 0
+        }
+    ]
+}

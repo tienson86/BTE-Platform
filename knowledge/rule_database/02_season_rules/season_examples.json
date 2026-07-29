@@ -1,0 +1,116 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T14:00:00Z",
+        "updated_at": "2026-07-29T14:00:00Z",
+        "approved_at": "2026-07-29T14:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "season",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Season Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Season Rule Database validation.",
+        "description": "Reference chart scenarios with expected season scores and dominant elements for regression testing.",
+        "references": [
+            "MODULE_SPEC.md",
+            "TEST_CASES.json",
+            "VALIDATION_STANDARD.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "day_master": "Giap",
+            "day_master_element": "wood",
+            "month_branch": "Dan",
+            "season": "spring",
+            "season_phase": "early_spring",
+            "solar_term": "spring_equinox",
+            "element_relation": "in_season",
+            "expected_dominant_element": "wood",
+            "expected_score_min": 0.55,
+            "expected_score_max": 0.9,
+            "notes": "Wood day master in spring equinox, wood in season."
+        },
+        {
+            "example_id": "ex_002",
+            "day_master": "Binh",
+            "day_master_element": "fire",
+            "month_branch": "Ngo",
+            "season": "summer",
+            "season_phase": "mid_summer",
+            "solar_term": "summer_solstice",
+            "element_relation": "in_season",
+            "expected_dominant_element": "fire",
+            "expected_score_min": 0.6,
+            "expected_score_max": 0.95,
+            "notes": "Fire day master at summer solstice, fire in season."
+        },
+        {
+            "example_id": "ex_003",
+            "day_master": "Canh",
+            "day_master_element": "metal",
+            "month_branch": "Dau",
+            "season": "autumn",
+            "season_phase": "mid_autumn",
+            "solar_term": "autumn_equinox",
+            "element_relation": "in_season",
+            "expected_dominant_element": "metal",
+            "expected_score_min": 0.55,
+            "expected_score_max": 0.9,
+            "notes": "Metal day master in autumn equinox, metal in season."
+        },
+        {
+            "example_id": "ex_004",
+            "day_master": "Nham",
+            "day_master_element": "water",
+            "month_branch": "Ty",
+            "season": "winter",
+            "season_phase": "mid_winter",
+            "solar_term": "winter_solstice",
+            "element_relation": "in_season",
+            "expected_dominant_element": "water",
+            "expected_score_min": 0.6,
+            "expected_score_max": 0.95,
+            "notes": "Water day master at winter solstice, water in season."
+        },
+        {
+            "example_id": "ex_005",
+            "day_master": "Giap",
+            "day_master_element": "wood",
+            "month_branch": "Mui",
+            "season": "summer",
+            "season_phase": "late_summer",
+            "solar_term": "great_heat",
+            "element_relation": "remaining_qi",
+            "expected_dominant_element": "fire",
+            "expected_score_min": 0.1,
+            "expected_score_max": 0.45,
+            "notes": "Wood day master in late summer, wood has remaining qi only."
+        },
+        {
+            "example_id": "ex_006",
+            "day_master": "Dinh",
+            "day_master_element": "fire",
+            "month_branch": "Hoi",
+            "season": "winter",
+            "season_phase": "early_winter",
+            "solar_term": "frost_descent",
+            "element_relation": "dead",
+            "expected_dominant_element": "water",
+            "expected_score_min": 0.05,
+            "expected_score_max": 0.35,
+            "notes": "Fire day master in winter, fire element dead in season."
+        }
+    ]
+}

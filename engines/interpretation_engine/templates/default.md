@@ -1,0 +1,3 @@
+# Default Report
+
+{{content}}

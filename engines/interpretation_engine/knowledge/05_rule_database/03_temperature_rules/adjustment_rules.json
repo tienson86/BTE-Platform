@@ -1,0 +1,684 @@
+[
+    {
+      "id": "ADJ001",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "very_cold"
+        ]
+      },
+      "primary_adjustment": "warm",
+      "target_state": "neutral",
+      "adjustment_strength": "maximum",
+      "recommended_elements": [
+        "hoa"
+      ],
+      "avoid_elements": [
+        "thuy"
+      ],
+      "priority": 100,
+      "description": "Hàn cực mạnh, ưu tiên tăng nhiệt tối đa."
+    },
+    {
+      "id": "ADJ002",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "cold"
+        ]
+      },
+      "primary_adjustment": "warm",
+      "target_state": "neutral",
+      "adjustment_strength": "strong",
+      "recommended_elements": [
+        "hoa"
+      ],
+      "avoid_elements": [
+        "thuy"
+      ],
+      "priority": 100,
+      "description": "Hàn mạnh, ưu tiên làm ấm."
+    },
+    {
+      "id": "ADJ003",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "slightly_cold"
+        ]
+      },
+      "primary_adjustment": "warm",
+      "target_state": "neutral",
+      "adjustment_strength": "moderate",
+      "recommended_elements": [
+        "hoa"
+      ],
+      "avoid_elements": [],
+      "priority": 100,
+      "description": "Hàn nhẹ, điều chỉnh vừa phải."
+    },
+    {
+      "id": "ADJ004",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "neutral"
+        ]
+      },
+      "primary_adjustment": "maintain",
+      "target_state": "neutral",
+      "adjustment_strength": "none",
+      "recommended_elements": [],
+      "avoid_elements": [],
+      "priority": 100,
+      "description": "Nhiệt độ đã cân bằng."
+    },
+    {
+      "id": "ADJ005",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "slightly_hot"
+        ]
+      },
+      "primary_adjustment": "cool",
+      "target_state": "neutral",
+      "adjustment_strength": "moderate",
+      "recommended_elements": [
+        "thuy"
+      ],
+      "avoid_elements": [],
+      "priority": 100,
+      "description": "Nhiệt nhẹ, ưu tiên làm mát."
+    },
+    {
+      "id": "ADJ006",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "hot"
+        ]
+      },
+      "primary_adjustment": "cool",
+      "target_state": "neutral",
+      "adjustment_strength": "strong",
+      "recommended_elements": [
+        "thuy"
+      ],
+      "avoid_elements": [
+        "hoa"
+      ],
+      "priority": 100,
+      "description": "Nhiệt mạnh, cần hạ nhiệt."
+    },
+    {
+      "id": "ADJ007",
+      "rule_type": "temperature_adjustment",
+      "condition": {
+        "temperature_result": [
+          "very_hot"
+        ]
+      },
+      "primary_adjustment": "cool",
+      "target_state": "neutral",
+      "adjustment_strength": "maximum",
+      "recommended_elements": [
+        "thuy"
+      ],
+      "avoid_elements": [
+        "hoa"
+      ],
+      "priority": 100,
+      "description": "Nhiệt cực mạnh, ưu tiên hạ nhiệt tối đa."
+    }
+  ]
+  [
+    {
+      "id": "ADJ008",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "very_dry"
+        ]
+      },
+      "primary_adjustment": "moisten",
+      "target_state": "balanced",
+      "adjustment_strength": "maximum",
+      "recommended_elements": [
+        "thuy"
+      ],
+      "avoid_elements": [
+        "hoa"
+      ],
+      "priority": 100,
+      "description": "Táo khí cực mạnh, ưu tiên tăng độ ẩm tối đa."
+    },
+    {
+      "id": "ADJ009",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "dry"
+        ]
+      },
+      "primary_adjustment": "moisten",
+      "target_state": "balanced",
+      "adjustment_strength": "strong",
+      "recommended_elements": [
+        "thuy"
+      ],
+      "avoid_elements": [
+        "hoa"
+      ],
+      "priority": 100,
+      "description": "Táo khí mạnh, cần bổ sung độ ẩm."
+    },
+    {
+      "id": "ADJ010",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "slightly_dry"
+        ]
+      },
+      "primary_adjustment": "moisten",
+      "target_state": "balanced",
+      "adjustment_strength": "moderate",
+      "recommended_elements": [
+        "thuy"
+      ],
+      "avoid_elements": [],
+      "priority": 100,
+      "description": "Táo nhẹ, điều chỉnh vừa phải."
+    },
+    {
+      "id": "ADJ011",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "balanced"
+        ]
+      },
+      "primary_adjustment": "maintain",
+      "target_state": "balanced",
+      "adjustment_strength": "none",
+      "recommended_elements": [],
+      "avoid_elements": [],
+      "priority": 100,
+      "description": "Độ ẩm đã cân bằng."
+    },
+    {
+      "id": "ADJ012",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "slightly_humid"
+        ]
+      },
+      "primary_adjustment": "dry",
+      "target_state": "balanced",
+      "adjustment_strength": "moderate",
+      "recommended_elements": [
+        "tho"
+      ],
+      "avoid_elements": [],
+      "priority": 100,
+      "description": "Thấp nhẹ, cần giảm độ ẩm ở mức vừa phải."
+    },
+    {
+      "id": "ADJ013",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "humid"
+        ]
+      },
+      "primary_adjustment": "dry",
+      "target_state": "balanced",
+      "adjustment_strength": "strong",
+      "recommended_elements": [
+        "tho"
+      ],
+      "avoid_elements": [
+        "thuy"
+      ],
+      "priority": 100,
+      "description": "Thấp khí mạnh, ưu tiên giảm độ ẩm."
+    },
+    {
+      "id": "ADJ014",
+      "rule_type": "humidity_adjustment",
+      "condition": {
+        "humidity_result": [
+          "very_humid"
+        ]
+      },
+      "primary_adjustment": "dry",
+      "target_state": "balanced",
+      "adjustment_strength": "maximum",
+      "recommended_elements": [
+        "tho"
+      ],
+      "avoid_elements": [
+        "thuy"
+      ],
+      "priority": 100,
+      "description": "Thấp khí cực mạnh, ưu tiên hóa thấp."
+    }
+  ]
+  [
+    {
+      "id": "ADJ015",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "cold_dry"
+        ]
+      },
+      "temperature_adjustment": "warm",
+      "humidity_adjustment": "moisten",
+      "adjustment_sequence": [
+        "temperature",
+        "humidity"
+      ],
+      "adjustment_strategy": "warm_first",
+      "priority": 95,
+      "description": "Ưu tiên tăng nhiệt trước, sau đó bổ sung độ ẩm."
+    },
+    {
+      "id": "ADJ016",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "cold_balanced"
+        ]
+      },
+      "temperature_adjustment": "warm",
+      "humidity_adjustment": "maintain",
+      "adjustment_sequence": [
+        "temperature"
+      ],
+      "adjustment_strategy": "warm_only",
+      "priority": 95,
+      "description": "Chỉ cần điều chỉnh nhiệt độ."
+    },
+    {
+      "id": "ADJ017",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "cold_humid"
+        ]
+      },
+      "temperature_adjustment": "warm",
+      "humidity_adjustment": "dry",
+      "adjustment_sequence": [
+        "temperature",
+        "humidity"
+      ],
+      "adjustment_strategy": "warm_then_dry",
+      "priority": 95,
+      "description": "Làm ấm trước rồi hóa thấp."
+    },
+    {
+      "id": "ADJ018",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "neutral_dry"
+        ]
+      },
+      "temperature_adjustment": "maintain",
+      "humidity_adjustment": "moisten",
+      "adjustment_sequence": [
+        "humidity"
+      ],
+      "adjustment_strategy": "moisten_only",
+      "priority": 95,
+      "description": "Nhiệt độ cân bằng, chỉ cần tăng độ ẩm."
+    },
+    {
+      "id": "ADJ019",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "neutral_balanced"
+        ]
+      },
+      "temperature_adjustment": "maintain",
+      "humidity_adjustment": "maintain",
+      "adjustment_sequence": [],
+      "adjustment_strategy": "none",
+      "priority": 95,
+      "description": "Khí hậu cân bằng, không cần điều hậu."
+    },
+    {
+      "id": "ADJ020",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "neutral_humid"
+        ]
+      },
+      "temperature_adjustment": "maintain",
+      "humidity_adjustment": "dry",
+      "adjustment_sequence": [
+        "humidity"
+      ],
+      "adjustment_strategy": "dry_only",
+      "priority": 95,
+      "description": "Nhiệt độ cân bằng, ưu tiên hóa thấp."
+    },
+    {
+      "id": "ADJ021",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "hot_dry"
+        ]
+      },
+      "temperature_adjustment": "cool",
+      "humidity_adjustment": "moisten",
+      "adjustment_sequence": [
+        "temperature",
+        "humidity"
+      ],
+      "adjustment_strategy": "cool_then_moisten",
+      "priority": 95,
+      "description": "Hạ nhiệt trước rồi tăng độ ẩm."
+    },
+    {
+      "id": "ADJ022",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "hot_balanced"
+        ]
+      },
+      "temperature_adjustment": "cool",
+      "humidity_adjustment": "maintain",
+      "adjustment_sequence": [
+        "temperature"
+      ],
+      "adjustment_strategy": "cool_only",
+      "priority": 95,
+      "description": "Chỉ cần hạ nhiệt."
+    },
+    {
+      "id": "ADJ023",
+      "rule_type": "climate_adjustment",
+      "condition": {
+        "climate_pattern": [
+          "hot_humid"
+        ]
+      },
+      "temperature_adjustment": "cool",
+      "humidity_adjustment": "dry",
+      "adjustment_sequence": [
+        "temperature",
+        "humidity"
+      ],
+      "adjustment_strategy": "cool_then_dry",
+      "priority": 95,
+      "description": "Hạ nhiệt trước rồi hóa thấp."
+    }
+  ]
+  [
+    {
+      "id": "ADJ024",
+      "rule_type": "adjustment_priority",
+      "condition": {
+        "severity": [
+          "balanced"
+        ]
+      },
+      "adjustment_required": false,
+      "priority_level": "none",
+      "execution_order": [],
+      "urgency_score": 0,
+      "priority": 90,
+      "description": "Khí hậu cân bằng, không cần điều hậu."
+    },
+    {
+      "id": "ADJ025",
+      "rule_type": "adjustment_priority",
+      "condition": {
+        "severity": [
+          "mild"
+        ]
+      },
+      "adjustment_required": true,
+      "priority_level": "low",
+      "execution_order": [
+        "primary_adjustment"
+      ],
+      "urgency_score": 1,
+      "priority": 90,
+      "description": "Ưu tiên điều chỉnh nhẹ theo hướng điều hậu chính."
+    },
+    {
+      "id": "ADJ026",
+      "rule_type": "adjustment_priority",
+      "condition": {
+        "severity": [
+          "moderate"
+        ]
+      },
+      "adjustment_required": true,
+      "priority_level": "medium",
+      "execution_order": [
+        "primary_adjustment",
+        "secondary_adjustment"
+      ],
+      "urgency_score": 2,
+      "priority": 90,
+      "description": "Điều chỉnh đầy đủ theo chiến lược điều hậu."
+    },
+    {
+      "id": "ADJ027",
+      "rule_type": "adjustment_priority",
+      "condition": {
+        "severity": [
+          "strong"
+        ]
+      },
+      "adjustment_required": true,
+      "priority_level": "high",
+      "execution_order": [
+        "primary_adjustment",
+        "secondary_adjustment"
+      ],
+      "urgency_score": 3,
+      "priority": 90,
+      "description": "Khí hậu mất cân bằng mạnh, cần ưu tiên điều hậu trước các phân tích khác."
+    },
+    {
+      "id": "ADJ028",
+      "rule_type": "adjustment_priority",
+      "condition": {
+        "severity": [
+          "extreme"
+        ]
+      },
+      "adjustment_required": true,
+      "priority_level": "critical",
+      "execution_order": [
+        "primary_adjustment",
+        "secondary_adjustment"
+      ],
+      "urgency_score": 4,
+      "priority": 100,
+      "description": "Khí hậu cực đoan, điều hậu là ưu tiên tuyệt đối trước khi xét các yếu tố khác."
+    }
+  ]
+  [
+    {
+      "id": "ADJ029",
+      "rule_type": "adjustment_constraint",
+      "condition": {
+        "climate_pattern": [
+          "neutral_balanced"
+        ]
+      },
+      "adjustment_mode": "none",
+      "allow_temperature_adjustment": false,
+      "allow_humidity_adjustment": false,
+      "allow_combined_adjustment": false,
+      "description": "Khí hậu cân bằng, không thực hiện điều hậu.",
+      "priority": 90
+    },
+    {
+      "id": "ADJ030",
+      "rule_type": "adjustment_constraint",
+      "condition": {
+        "climate_pattern": [
+          "cold_balanced",
+          "hot_balanced"
+        ]
+      },
+      "adjustment_mode": "temperature_only",
+      "allow_temperature_adjustment": true,
+      "allow_humidity_adjustment": false,
+      "allow_combined_adjustment": false,
+      "description": "Chỉ điều chỉnh nhiệt độ.",
+      "priority": 90
+    },
+    {
+      "id": "ADJ031",
+      "rule_type": "adjustment_constraint",
+      "condition": {
+        "climate_pattern": [
+          "neutral_dry",
+          "neutral_humid"
+        ]
+      },
+      "adjustment_mode": "humidity_only",
+      "allow_temperature_adjustment": false,
+      "allow_humidity_adjustment": true,
+      "allow_combined_adjustment": false,
+      "description": "Chỉ điều chỉnh độ ẩm.",
+      "priority": 90
+    },
+    {
+      "id": "ADJ032",
+      "rule_type": "adjustment_constraint",
+      "condition": {
+        "climate_pattern": [
+          "cold_dry",
+          "cold_humid",
+          "hot_dry",
+          "hot_humid"
+        ]
+      },
+      "adjustment_mode": "combined",
+      "allow_temperature_adjustment": true,
+      "allow_humidity_adjustment": true,
+      "allow_combined_adjustment": true,
+      "description": "Điều chỉnh đồng thời nhiệt độ và độ ẩm theo đúng thứ tự ưu tiên.",
+      "priority": 95
+    },
+    {
+      "id": "ADJ033",
+      "rule_type": "adjustment_constraint",
+      "condition": {
+        "severity": [
+          "extreme"
+        ]
+      },
+      "adjustment_mode": "mandatory",
+      "allow_temperature_adjustment": true,
+      "allow_humidity_adjustment": true,
+      "allow_combined_adjustment": true,
+      "override_priority": true,
+      "description": "Khí hậu cực đoan, bắt buộc áp dụng đầy đủ chiến lược điều hậu và được phép ghi đè các quy tắc ưu tiên thấp hơn.",
+      "priority": 100
+    }
+  ]
+  [
+    {
+      "id": "ADJ034",
+      "rule_type": "adjustment_result_mapping",
+      "condition": {
+        "adjustment_mode": [
+          "none"
+        ]
+      },
+      "result": {
+        "adjustment_required": false,
+        "execution_status": "completed",
+        "next_engine": "useful_god_engine",
+        "adjustment_summary": "no_adjustment"
+      },
+      "priority": 80,
+      "description": "Không cần điều hậu, chuyển trực tiếp sang Useful God Engine."
+    },
+    {
+      "id": "ADJ035",
+      "rule_type": "adjustment_result_mapping",
+      "condition": {
+        "adjustment_mode": [
+          "temperature_only"
+        ]
+      },
+      "result": {
+        "adjustment_required": true,
+        "execution_status": "temperature_only",
+        "next_engine": "useful_god_engine",
+        "adjustment_summary": "temperature_adjustment"
+      },
+      "priority": 80,
+      "description": "Chỉ thực hiện điều chỉnh nhiệt độ."
+    },
+    {
+      "id": "ADJ036",
+      "rule_type": "adjustment_result_mapping",
+      "condition": {
+        "adjustment_mode": [
+          "humidity_only"
+        ]
+      },
+      "result": {
+        "adjustment_required": true,
+        "execution_status": "humidity_only",
+        "next_engine": "useful_god_engine",
+        "adjustment_summary": "humidity_adjustment"
+      },
+      "priority": 80,
+      "description": "Chỉ thực hiện điều chỉnh độ ẩm."
+    },
+    {
+      "id": "ADJ037",
+      "rule_type": "adjustment_result_mapping",
+      "condition": {
+        "adjustment_mode": [
+          "combined"
+        ]
+      },
+      "result": {
+        "adjustment_required": true,
+        "execution_status": "combined_adjustment",
+        "next_engine": "useful_god_engine",
+        "adjustment_summary": "combined_adjustment"
+      },
+      "priority": 80,
+      "description": "Thực hiện điều chỉnh đồng thời nhiệt độ và độ ẩm."
+    },
+    {
+      "id": "ADJ038",
+      "rule_type": "adjustment_result_mapping",
+      "condition": {
+        "adjustment_mode": [
+          "mandatory"
+        ]
+      },
+      "result": {
+        "adjustment_required": true,
+        "execution_status": "mandatory_adjustment",
+        "next_engine": "useful_god_engine",
+        "adjustment_summary": "mandatory_adjustment",
+        "override_all": true
+      },
+      "priority": 100,
+      "description": "Điều hậu bắt buộc, ưu tiên tuyệt đối trước khi chuyển sang Useful God Engine."
+    }
+  ]

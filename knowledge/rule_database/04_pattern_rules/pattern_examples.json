@@ -1,0 +1,91 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T16:00:00Z",
+        "updated_at": "2026-07-29T16:00:00Z",
+        "approved_at": "2026-07-29T16:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "pattern",
+            "examples",
+            "golden_dataset"
+        ],
+        "source": "BTE Platform Pattern Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Golden examples for Pattern Rule Database validation.",
+        "description": "Reference chart scenarios with expected pattern classification.",
+        "references": [
+            "database/14_pattern/07_pattern_examples.csv",
+            "MODULE_SPEC.md"
+        ]
+    },
+    "examples": [
+        {
+            "example_id": "ex_001",
+            "pattern": "chinh_quan",
+            "day_master": "Giáp",
+            "month_branch": "Dậu",
+            "month_branch_ten_god": "Chính Quan",
+            "expected_pattern": "chinh_quan",
+            "expected_confidence_min": 0.7,
+            "notes": "Giáp Mộc sinh tháng Dậu (Tân = Chính Quan)"
+        },
+        {
+            "example_id": "ex_002",
+            "pattern": "chinh_quan",
+            "day_master": "Ất",
+            "month_branch": "Thân",
+            "month_branch_ten_god": "Chính Quan",
+            "expected_pattern": "chinh_quan",
+            "expected_confidence_min": 0.7,
+            "notes": "Ất Mộc sinh tháng Thân (Canh = Chính Quan)"
+        },
+        {
+            "example_id": "ex_003",
+            "pattern": "chinh_quan",
+            "day_master": "Bính",
+            "month_branch": "Tý",
+            "month_branch_ten_god": "Chính Quan",
+            "expected_pattern": "chinh_quan",
+            "expected_confidence_min": 0.7,
+            "notes": "Bính Hỏa sinh tháng Tý (Quý = Chính Quan)"
+        },
+        {
+            "example_id": "ex_004",
+            "pattern": "chinh_quan",
+            "day_master": "Đinh",
+            "month_branch": "Hợi",
+            "month_branch_ten_god": "Chính Quan",
+            "expected_pattern": "chinh_quan",
+            "expected_confidence_min": 0.7,
+            "notes": "Đinh Hỏa sinh tháng Hợi (Nhâm = Chính Quan)"
+        },
+        {
+            "example_id": "ex_005",
+            "pattern": "chinh_quan",
+            "day_master": "Mậu",
+            "month_branch": "Mão",
+            "month_branch_ten_god": "Chính Quan",
+            "expected_pattern": "chinh_quan",
+            "expected_confidence_min": 0.7,
+            "notes": "Mậu Thổ sinh tháng Mão (Ất = Chính Quan)"
+        },
+        {
+            "example_id": "ex_006",
+            "pattern": "that_sat",
+            "day_master": "Giáp",
+            "month_branch": "Thân",
+            "month_branch_ten_god": "Thất Sát",
+            "expected_pattern": "that_sat",
+            "expected_confidence_min": 0.7,
+            "notes": "Giáp Mộc sinh tháng Thân (Canh = Thất Sát)"
+        }
+    ]
+}

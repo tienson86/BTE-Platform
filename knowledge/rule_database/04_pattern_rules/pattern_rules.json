@@ -1,0 +1,5046 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T16:00:00Z",
+        "updated_at": "2026-07-29T16:00:00Z",
+        "approved_at": "2026-07-29T16:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "pattern",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Pattern Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Pattern Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Pattern Engine rules covering standard, transformed, follow, pseudo-follow, broken, mixed, exceptional patterns, eligibility conditions, conflict resolution, and priority groups. Derived from database/14_pattern/ and aligned with RULE_MODEL_SPEC.md.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "MODULE_SPEC.md",
+            "PATTERN_TAXONOMY.md",
+            "PATTERN_DECISION_TREE.md",
+            "DEPENDENCIES.json",
+            "database/14_pattern/README.md",
+            "knowledge/rule_database/01_strength_rules/",
+            "knowledge/rule_database/02_season_rules/",
+            "knowledge/rule_database/03_temperature_rules/"
+        ]
+    },
+    "config": {
+        "baseline": 50,
+        "scale": 100,
+        "main_patterns": [
+            "chinh_quan",
+            "that_sat",
+            "chinh_tai",
+            "thien_tai",
+            "thuc_than",
+            "thuong_quan",
+            "chinh_an",
+            "thien_an",
+            "ty_kien",
+            "kiep_tai"
+        ],
+        "priority_hierarchy": [
+            "follow_override",
+            "special_pattern",
+            "combination_pattern",
+            "main_pattern",
+            "broken_pattern",
+            "eligibility",
+            "exceptional"
+        ],
+        "confidence_threshold": 0.65
+    },
+    "rules": [
+        {
+            "id": "PAT-000001",
+            "code": "pat_fallback",
+            "name": "Chính Quan cách (fallback",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "chinh_quan"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 1
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Chính Quan cách (fallback pattern rule",
+                "description": "Chính Quan cách (fallback — không xác định được Lệnh Tháng)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "chinh_quan",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000002",
+            "code": "pat_cq_01",
+            "name": "Chính Quan cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "chinh_quan"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 80,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Chính Quan cách pattern rule",
+                "description": "Chính Quan cách — Lệnh tháng là Chính Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "chinh_quan",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000003",
+            "code": "pat_ts_01",
+            "name": "Thất Sát cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "that_sat"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thất Sát"
+                }
+            ],
+            "evaluation": {
+                "weight": 78,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thất Sát cách pattern rule",
+                "description": "Thất Sát cách — Lệnh tháng là Thất Sát",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "that_sat",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000004",
+            "code": "pat_ct_01",
+            "name": "Chính Tài cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "chinh_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 75,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Chính Tài cách pattern rule",
+                "description": "Chính Tài cách — Lệnh tháng là Chính Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "chinh_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000005",
+            "code": "pat_tt_01",
+            "name": "Thiên Tài cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "thien_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thiên Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 73,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thiên Tài cách pattern rule",
+                "description": "Thiên Tài cách — Lệnh tháng là Thiên Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "thien_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000006",
+            "code": "pat_tht_01",
+            "name": "Thực Thần cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "thuc_than"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thực Thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 70,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thực Thần cách pattern rule",
+                "description": "Thực Thần cách — Lệnh tháng là Thực Thần",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "thuc_than",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000007",
+            "code": "pat_thuq_01",
+            "name": "Thương Quan cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "thuong_quan"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thương Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 68,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thương Quan cách pattern rule",
+                "description": "Thương Quan cách — Lệnh tháng là Thương Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "thuong_quan",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000008",
+            "code": "pat_ca_01",
+            "name": "Chính Ấn cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "chinh_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 72,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 72
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Chính Ấn cách pattern rule",
+                "description": "Chính Ấn cách — Lệnh tháng là Chính Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "chinh_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000009",
+            "code": "pat_ta_01",
+            "name": "Thiên Ấn cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "thien_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thiên Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 70,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 72
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thiên Ấn cách pattern rule",
+                "description": "Thiên Ấn cách — Lệnh tháng là Thiên Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "thien_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000010",
+            "code": "pat_tyk_01",
+            "name": "Kiến Lộc cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "ty_kien"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Tỷ Kiên"
+                }
+            ],
+            "evaluation": {
+                "weight": 55,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Kiến Lộc cách pattern rule",
+                "description": "Kiến Lộc cách — Lệnh tháng là Tỷ Kiên (Kiến Lộc)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "ty_kien",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000011",
+            "code": "pat_ktai_01",
+            "name": "Dương Nhẫn cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "standard",
+                "family": "main_pattern",
+                "type": "kiep_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Kiếp Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 53,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 60
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Dương Nhẫn cách pattern rule",
+                "description": "Dương Nhẫn cách — Lệnh tháng là Kiếp Tài (Dương Nhẫn)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "standard",
+                    "main_pattern",
+                    "kiep_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000012",
+            "code": "spe_kc_01",
+            "name": "Khúc Trực cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "transformed",
+                "family": "special_pattern",
+                "type": "khuc_truc"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Mộc"
+                },
+                {
+                    "type": "month_branch_element",
+                    "operator": "equals",
+                    "value": "Mộc"
+                },
+                {
+                    "type": "officer_elements",
+                    "operator": "equals",
+                    "value": []
+                }
+            ],
+            "evaluation": {
+                "weight": 92,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Khúc Trực cách pattern rule",
+                "description": "Khúc Trực cách — Nhật chủ Mộc sinh tháng Mộc không bị Quan Sát khắc",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "transformed",
+                    "special_pattern",
+                    "khuc_truc",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000013",
+            "code": "spe_vt_01",
+            "name": "Viêm Thượng cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "transformed",
+                "family": "special_pattern",
+                "type": "viem_thuong"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Hỏa"
+                },
+                {
+                    "type": "month_branch_element",
+                    "operator": "equals",
+                    "value": "Hỏa"
+                },
+                {
+                    "type": "officer_elements",
+                    "operator": "equals",
+                    "value": []
+                }
+            ],
+            "evaluation": {
+                "weight": 92,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Viêm Thượng cách pattern rule",
+                "description": "Viêm Thượng cách — Nhật chủ Hỏa sinh tháng Hỏa không bị khắc",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "transformed",
+                    "special_pattern",
+                    "viem_thuong",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000014",
+            "code": "spe_nh_01",
+            "name": "Nhuận Hạ cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "transformed",
+                "family": "special_pattern",
+                "type": "nhuan_ha"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Thủy"
+                },
+                {
+                    "type": "month_branch_element",
+                    "operator": "equals",
+                    "value": "Thủy"
+                },
+                {
+                    "type": "officer_elements",
+                    "operator": "equals",
+                    "value": []
+                }
+            ],
+            "evaluation": {
+                "weight": 92,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Nhuận Hạ cách pattern rule",
+                "description": "Nhuận Hạ cách — Nhật chủ Thủy sinh tháng Thủy không bị khắc",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "transformed",
+                    "special_pattern",
+                    "nhuan_ha",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000015",
+            "code": "spe_gs_01",
+            "name": "Giá Sắc cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "transformed",
+                "family": "special_pattern",
+                "type": "gia_sac"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Kim"
+                },
+                {
+                    "type": "month_branch_element",
+                    "operator": "equals",
+                    "value": "Kim"
+                },
+                {
+                    "type": "output_elements",
+                    "operator": "equals",
+                    "value": []
+                }
+            ],
+            "evaluation": {
+                "weight": 92,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Giá Sắc cách pattern rule",
+                "description": "Giá Sắc cách — Nhật chủ Kim sinh tháng Kim không bị tiết",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "transformed",
+                    "special_pattern",
+                    "gia_sac",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000016",
+            "code": "spe_jw_01",
+            "name": "Giá Vượng cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "transformed",
+                "family": "special_pattern",
+                "type": "jia_wang"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Thổ"
+                },
+                {
+                    "type": "month_branch_element",
+                    "operator": "equals",
+                    "value": "Thổ"
+                },
+                {
+                    "type": "officer_elements",
+                    "operator": "equals",
+                    "value": []
+                }
+            ],
+            "evaluation": {
+                "weight": 90,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 93
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Giá Vượng cách pattern rule",
+                "description": "Giá Vượng cách — Nhật chủ Thổ sinh tháng Thổ không bị khắc",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "transformed",
+                    "special_pattern",
+                    "jia_wang",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000017",
+            "code": "fol_tv_01",
+            "name": "Tòng Vượng cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "follow",
+                "family": "follow_pattern",
+                "type": "tong_vuong"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Thất Sát"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "not_contains",
+                    "value": "Thiên Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 87,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tòng Vượng cách pattern rule",
+                "description": "Tòng Vượng cách — Nhật chủ cực vượng theo Tỷ/Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "follow",
+                    "follow_pattern",
+                    "tong_vuong",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000018",
+            "code": "fol_ttai_01",
+            "name": "Tòng Tài cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "follow",
+                "family": "follow_pattern",
+                "type": "tong_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 86,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tòng Tài cách pattern rule",
+                "description": "Tòng Tài cách — Nhật chủ cực nhược theo Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "follow",
+                    "follow_pattern",
+                    "tong_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000019",
+            "code": "fol_tsat_01",
+            "name": "Tòng Sát cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "follow",
+                "family": "follow_pattern",
+                "type": "tong_sat"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thất Sát"
+                }
+            ],
+            "evaluation": {
+                "weight": 86,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tòng Sát cách pattern rule",
+                "description": "Tòng Sát cách — Nhật chủ cực nhược theo Sát",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "follow",
+                    "follow_pattern",
+                    "tong_sat",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000020",
+            "code": "fol_tquan_01",
+            "name": "Tòng Quan cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "follow",
+                "family": "follow_pattern",
+                "type": "tong_quan"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 85,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tòng Quan cách pattern rule",
+                "description": "Tòng Quan cách — Nhật chủ cực nhược theo Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "follow",
+                    "follow_pattern",
+                    "tong_quan",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000021",
+            "code": "fol_tnhi_01",
+            "name": "Tòng Nhi cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "follow",
+                "family": "follow_pattern",
+                "type": "tong_nhi"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thực Thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 84,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tòng Nhi cách pattern rule",
+                "description": "Tòng Nhi cách — Nhật chủ cực nhược theo Thực/Thương",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "follow",
+                    "follow_pattern",
+                    "tong_nhi",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000022",
+            "code": "fol_tan_01",
+            "name": "Tòng Ấn cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "follow",
+                "family": "follow_pattern",
+                "type": "tong_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 84,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tòng Ấn cách pattern rule",
+                "description": "Tòng Ấn cách — Nhật chủ cực nhược theo Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "follow",
+                    "follow_pattern",
+                    "tong_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000023",
+            "code": "com_qan_01",
+            "name": "Quan Ấn tương sinh",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "combination_pattern",
+                "type": "quan_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 85,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Quan Ấn tương sinh pattern rule",
+                "description": "Quan Ấn tương sinh — Chính Quan sinh Chính Ấn trợ Nhật chủ",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "combination_pattern",
+                    "quan_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000024",
+            "code": "com_san_01",
+            "name": "Sát Ấn tương sinh",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "combination_pattern",
+                "type": "sat_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thất Sát"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 84,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Sát Ấn tương sinh pattern rule",
+                "description": "Sát Ấn tương sinh — Thất Sát chế bởi Chính Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "combination_pattern",
+                    "sat_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000025",
+            "code": "com_tttai_01",
+            "name": "Thực Thần sinh Tài",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "combination_pattern",
+                "type": "thuc_than_sinh_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thực Thần"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 82,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 82
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thực Thần sinh Tài pattern rule",
+                "description": "Thực Thần sinh Tài — Thực Thần tiết khí sinh Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "combination_pattern",
+                    "thuc_than_sinh_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000026",
+            "code": "com_thuq_an_01",
+            "name": "Thương Quan phối Ấn",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "combination_pattern",
+                "type": "thuong_quan_phoi_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thương Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 82,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 83
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Thương Quan phối Ấn pattern rule",
+                "description": "Thương Quan phối Ấn — Thương Quan chế bởi Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "combination_pattern",
+                    "thuong_quan_phoi_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000027",
+            "code": "com_taiqs_01",
+            "name": "Tài Quan Song Mỹ",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "combination_pattern",
+                "type": "tai_quan_song_my"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 86,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Tài Quan Song Mỹ pattern rule",
+                "description": "Tài Quan Song Mỹ — có cả Tài và Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "combination_pattern",
+                    "tai_quan_song_my",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000028",
+            "code": "pri_follow_beats_main",
+            "name": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "follow_override_marker"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 200
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được pattern rule",
+                "description": "Follow cách luôn được ưu tiên cao hơn Main cách khi FollowPatternCalculator detect được",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "conflict_resolution",
+                    "follow_override_marker",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000029",
+            "code": "pri_special_beats_main",
+            "name": "Special cách (Khúc Trực v.v.) luôn beats Main cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "special_override_marker"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special cách (Khúc Trực v.v.) luôn beats Main cách pattern rule",
+                "description": "Special cách (Khúc Trực v.v.) luôn beats Main cách",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "conflict_resolution",
+                    "special_override_marker",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000030",
+            "code": "pri_combination_beats_standard",
+            "name": "Combination cách beats standard single cách",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "combination_override_marker"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Combination cách beats standard single cách pattern rule",
+                "description": "Combination cách beats standard single cách",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "priority",
+                    "conflict_resolution",
+                    "combination_override_marker",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000031",
+            "code": "pseudo_follow_quan",
+            "name": "Pseudo Follow Quan",
+            "classification": {
+                "domain": "pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "tong_quan"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "not_equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": 72,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Quan",
+                "description": "Has Chính Quan but strength not weak enough for true follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "tong_quan",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000032",
+            "code": "pseudo_follow_tai",
+            "name": "Pseudo Follow Tai",
+            "classification": {
+                "domain": "pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "tong_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "balanced"
+                }
+            ],
+            "evaluation": {
+                "weight": 70,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 87
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Tai",
+                "description": "Has Chính Tài but not extreme weak for true follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "tong_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000033",
+            "code": "pseudo_follow_sat",
+            "name": "Pseudo Follow Sat",
+            "classification": {
+                "domain": "pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "tong_sat"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thất Sát"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "balanced"
+                }
+            ],
+            "evaluation": {
+                "weight": 70,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 87
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow Sat",
+                "description": "Has Thất Sát but officer not dominant enough",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "tong_sat",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000034",
+            "code": "pseudo_follow_an",
+            "name": "Pseudo Follow An",
+            "classification": {
+                "domain": "pattern",
+                "category": "pseudo_follow",
+                "family": "pseudo_follow",
+                "type": "tong_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                },
+                {
+                    "type": "strength_level",
+                    "operator": "not_equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": 68,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Pseudo Follow An",
+                "description": "Has Chính Ấn but seal support insufficient for follow",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "pseudo_follow",
+                    "tong_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000035",
+            "code": "broken_officer_clash",
+            "name": "Broken Officer Clash",
+            "classification": {
+                "domain": "pattern",
+                "category": "broken",
+                "family": "broken_pattern",
+                "type": "broken_chinh_quan"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thất Sát"
+                }
+            ],
+            "evaluation": {
+                "weight": 45,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 55
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Broken Officer Clash",
+                "description": "Chính Quan cách broken by Thất Sát clash in chart",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "broken",
+                    "broken_chinh_quan",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000036",
+            "code": "broken_wealth_drain",
+            "name": "Broken Wealth Drain",
+            "classification": {
+                "domain": "pattern",
+                "category": "broken",
+                "family": "broken_pattern",
+                "type": "broken_chinh_tai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Kiếp Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 43,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 55
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Broken Wealth Drain",
+                "description": "Chính Tài cách broken by Kiếp Tài drain",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "broken",
+                    "broken_chinh_tai",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000037",
+            "code": "broken_seal_break",
+            "name": "Broken Seal Break",
+            "classification": {
+                "domain": "pattern",
+                "category": "broken",
+                "family": "broken_pattern",
+                "type": "broken_chinh_an"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Ấn"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thương Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 44,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 55
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Broken Seal Break",
+                "description": "Chính Ấn cách broken by Thương Quan attacking seal",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "broken",
+                    "broken_chinh_an",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000038",
+            "code": "broken_output_block",
+            "name": "Broken Output Block",
+            "classification": {
+                "domain": "pattern",
+                "category": "broken",
+                "family": "broken_pattern",
+                "type": "broken_thuc_than"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thực Thần"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 42,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 55
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Broken Output Block",
+                "description": "Thực Thần cách blocked by excessive Chính Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "broken",
+                    "broken_thuc_than",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000039",
+            "code": "broken_season_mismatch",
+            "name": "Broken Season Mismatch",
+            "classification": {
+                "domain": "pattern",
+                "category": "broken",
+                "family": "broken_pattern",
+                "type": "broken_season"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 40,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 50
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Broken Season Mismatch",
+                "description": "Main pattern weakened by adverse season for day master element",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "broken",
+                    "broken_season",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000040",
+            "code": "mixed_officer_wealth_output",
+            "name": "Mixed Officer Wealth Output",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "mixed_pattern",
+                "type": "mixed_triple"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thực Thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 78,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 84
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mixed Officer Wealth Output",
+                "description": "Officer, wealth, and output all present — complex mixed structure",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "mixed_triple",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000041",
+            "code": "mixed_seal_officer_wealth",
+            "name": "Mixed Seal Officer Wealth",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "mixed_pattern",
+                "type": "mixed_seal_officer"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Ấn"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 80,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 84
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mixed Seal Officer Wealth",
+                "description": "Seal, officer, and wealth coexisting — mixed favorable structure",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "mixed_seal_officer",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000042",
+            "code": "mixed_output_wealth_officer",
+            "name": "Mixed Output Wealth Officer",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "mixed_pattern",
+                "type": "mixed_output_wealth"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Thực Thần"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Tài"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 79,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 83
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mixed Output Wealth Officer",
+                "description": "Output generates wealth with officer control — productive mix",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "mixed_output_wealth",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000043",
+            "code": "mixed_balanced_multi_god",
+            "name": "Mixed Balanced Multi God",
+            "classification": {
+                "domain": "pattern",
+                "category": "mixed",
+                "family": "mixed_pattern",
+                "type": "mixed_balanced"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "balanced"
+                },
+                {
+                    "type": "ten_gods_list",
+                    "operator": "contains",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 65,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 62
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Mixed Balanced Multi God",
+                "description": "Multiple ten gods with balanced strength — no single dominant pattern",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "mixed",
+                    "mixed_balanced",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000044",
+            "code": "exceptional_no_month_command",
+            "name": "Exceptional No Month Command",
+            "classification": {
+                "domain": "pattern",
+                "category": "exceptional",
+                "family": "exceptional_pattern",
+                "type": "no_month_command"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 1
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Exceptional No Month Command",
+                "description": "Fallback when month branch ten god cannot be determined",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "exceptional",
+                    "no_month_command",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000045",
+            "code": "exceptional_dual_special",
+            "name": "Exceptional Dual Special",
+            "classification": {
+                "domain": "pattern",
+                "category": "exceptional",
+                "family": "exceptional_pattern",
+                "type": "dual_special"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "Mộc"
+                },
+                {
+                    "type": "month_branch_element",
+                    "operator": "equals",
+                    "value": "Mộc"
+                }
+            ],
+            "evaluation": {
+                "weight": 88,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 94
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Exceptional Dual Special",
+                "description": "Two special pattern candidates with equal score — requires tiebreak",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "exceptional",
+                    "dual_special",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000046",
+            "code": "exceptional_follow_main_tie",
+            "name": "Exceptional Follow Main Tie",
+            "classification": {
+                "domain": "pattern",
+                "category": "exceptional",
+                "family": "exceptional_pattern",
+                "type": "follow_main_tie"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                }
+            ],
+            "evaluation": {
+                "weight": 85,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Exceptional Follow Main Tie",
+                "description": "Follow and main pattern equal score — follow wins by policy",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "exceptional",
+                    "follow_main_tie",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000047",
+            "code": "exceptional_temperature_override",
+            "name": "Exceptional Temperature Override",
+            "classification": {
+                "domain": "pattern",
+                "category": "exceptional",
+                "family": "exceptional_pattern",
+                "type": "temperature_override"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "temperature_type",
+                    "operator": "in",
+                    "value": [
+                        "cold",
+                        "hot"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Exceptional Temperature Override",
+                "description": "Extreme temperature affects pattern quality classification",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "exceptional",
+                    "temperature_override",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000048",
+            "code": "cond_month_cq",
+            "name": "Lệnh tháng là Chính Quan",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_cq"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Chính Quan",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Chính Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000049",
+            "code": "cond_month_ts",
+            "name": "Lệnh tháng là Thất Sát",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_ts"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thất Sát"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Thất Sát",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Thất Sát",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000050",
+            "code": "cond_month_ct",
+            "name": "Lệnh tháng là Chính Tài",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_ct"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Chính Tài",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Chính Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000051",
+            "code": "cond_month_tt",
+            "name": "Lệnh tháng là Thiên Tài",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_tt"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thiên Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Thiên Tài",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Thiên Tài",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000052",
+            "code": "cond_month_tht",
+            "name": "Lệnh tháng là Thực Thần",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_tht"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thực Thần"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Thực Thần",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Thực Thần",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000053",
+            "code": "cond_month_thuq",
+            "name": "Lệnh tháng là Thương Quan",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_thuq"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thương Quan"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Thương Quan",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Thương Quan",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000054",
+            "code": "cond_month_ca",
+            "name": "Lệnh tháng là Chính Ấn",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_ca"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Chính Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Chính Ấn",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Chính Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000055",
+            "code": "cond_month_ta",
+            "name": "Lệnh tháng là Thiên Ấn",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_ta"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Thiên Ấn"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Thiên Ấn",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Thiên Ấn",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000056",
+            "code": "cond_month_tyk",
+            "name": "Lệnh tháng là Tỷ Kiên (Kiến Lộc)",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_tyk"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Tỷ Kiên"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Tỷ Kiên (Kiến Lộc)",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Tỷ Kiên (Kiến Lộc)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000057",
+            "code": "cond_month_ktai",
+            "name": "Lệnh tháng là Kiếp Tài (Dương Nhẫn)",
+            "classification": {
+                "domain": "pattern",
+                "category": "eligibility",
+                "family": "eligibility_condition",
+                "type": "cond_month_ktai"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "Kiếp Tài"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Eligibility: Lệnh tháng là Kiếp Tài (Dương Nhẫn)",
+                "description": "Eligibility gate for standard pattern matching — Lệnh tháng là Kiếp Tài (Dương Nhẫn)",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "eligibility",
+                    "standard",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000058",
+            "code": "conflict_score_tiebreak",
+            "name": "Conflict Score Tiebreak",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "score_tiebreak"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 175
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Score Tiebreak",
+                "description": "When priority equal, higher score wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "score_tiebreak",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000059",
+            "code": "conflict_same_priority_first",
+            "name": "Conflict Same Priority First Match",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "first_match"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 174
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Same Priority First Match",
+                "description": "Same priority and score — first matched rule wins",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "first_match",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000060",
+            "code": "conflict_follow_vs_combination",
+            "name": "Conflict Follow Vs Combination",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "follow_vs_combination"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 172
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Follow Vs Combination",
+                "description": "Follow pattern beats combination when both match",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "follow_vs_combination",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000061",
+            "code": "conflict_special_vs_follow",
+            "name": "Conflict Special Vs Follow",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "conflict_resolution",
+                "type": "special_vs_follow"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": true
+            },
+            "priority": {
+                "level": "high",
+                "order": 171
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Conflict Special Vs Follow",
+                "description": "Special pattern beats follow when both match",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "conflict_resolution",
+                    "special_vs_follow",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000062",
+            "code": "priority_follow_group",
+            "name": "Priority Follow Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_follow_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "follow"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 200
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for follow group",
+                "description": "Resolve evaluation order for follow pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "follow",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000063",
+            "code": "priority_special_group",
+            "name": "Priority Special Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_special_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 195
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for special group",
+                "description": "Resolve evaluation order for special pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "special",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000064",
+            "code": "priority_combination_group",
+            "name": "Priority Combination Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_combination_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "combination"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for combination group",
+                "description": "Resolve evaluation order for combination pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "combination",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000065",
+            "code": "priority_main_group",
+            "name": "Priority Main Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_main_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "main"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 180
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for main group",
+                "description": "Resolve evaluation order for main pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "main",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000066",
+            "code": "priority_broken_group",
+            "name": "Priority Broken Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_broken_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "broken"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 170
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for broken group",
+                "description": "Resolve evaluation order for broken pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "broken",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000067",
+            "code": "priority_eligibility_group",
+            "name": "Priority Eligibility Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_eligibility_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "eligibility"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 50
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for eligibility group",
+                "description": "Resolve evaluation order for eligibility pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "eligibility",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "PAT-000068",
+            "code": "priority_exceptional_group",
+            "name": "Priority Exceptional Group",
+            "classification": {
+                "domain": "pattern",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_exceptional_group"
+            },
+            "source": {
+                "signal": "pattern_context",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "pattern_match"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "exceptional"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 45
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for exceptional group",
+                "description": "Resolve evaluation order for exceptional pattern rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "PATTERN_TAXONOMY.md",
+                    "PATTERN_DECISION_TREE.md",
+                    "database/14_pattern/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T16:00:00Z",
+                "updated_at": "2026-07-29T16:00:00Z",
+                "approved_at": "2026-07-29T16:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "exceptional",
+                    "pattern"
+                ],
+                "source": "BTE Platform Pattern Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

@@ -1,0 +1,3143 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T12:00:00Z",
+        "updated_at": "2026-07-29T12:00:00Z",
+        "approved_at": "2026-07-29T12:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "strength",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Strength Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Strength Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Strength Engine rules covering season command, root strength, support, control, drain, special cases, combinations, priority resolution, and level classification. Derived from database/12_strength/ executable CSV and aligned with RULE_MODEL_SPEC.md.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "RULE_SCHEMA_REFERENCE.md",
+            "METADATA_STANDARD.md",
+            "database/12_strength/README.md",
+            "knowledge/docs/reference_examples/rule/rule_complete_v1.json"
+        ]
+    },
+    "config": {
+        "baseline": 50,
+        "scale": 100,
+        "strong_threshold": 0.65,
+        "weak_threshold": 0.35
+    },
+    "rules": [
+        {
+            "id": "STR-000001",
+            "code": "season_prosperous",
+            "name": "Season Prosperous",
+            "classification": {
+                "domain": "strength",
+                "category": "season",
+                "family": "season_score",
+                "type": "season_prosperous"
+            },
+            "source": {
+                "signal": "month_status",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_status",
+                    "operator": "equals",
+                    "value": "prosperous"
+                }
+            ],
+            "evaluation": {
+                "weight": 35,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month status prosperous",
+                "description": "Apply season score when month status is prosperous.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "season",
+                    "season_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000002",
+            "code": "season_peak",
+            "name": "Season Peak",
+            "classification": {
+                "domain": "strength",
+                "category": "season",
+                "family": "season_score",
+                "type": "season_peak"
+            },
+            "source": {
+                "signal": "month_status",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_status",
+                    "operator": "equals",
+                    "value": "peak"
+                }
+            ],
+            "evaluation": {
+                "weight": 25,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month status peak",
+                "description": "Apply season score when month status is peak.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "season",
+                    "season_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000003",
+            "code": "season_rest",
+            "name": "Season Rest",
+            "classification": {
+                "domain": "strength",
+                "category": "season",
+                "family": "season_score",
+                "type": "season_rest"
+            },
+            "source": {
+                "signal": "month_status",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_status",
+                    "operator": "equals",
+                    "value": "rest"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month status rest",
+                "description": "Apply season score when month status is rest.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "season",
+                    "season_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000004",
+            "code": "season_imprisoned",
+            "name": "Season Imprisoned",
+            "classification": {
+                "domain": "strength",
+                "category": "season",
+                "family": "season_score",
+                "type": "season_imprisoned"
+            },
+            "source": {
+                "signal": "month_status",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_status",
+                    "operator": "equals",
+                    "value": "imprisoned"
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month status imprisoned",
+                "description": "Apply season score when month status is imprisoned.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "season",
+                    "season_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000005",
+            "code": "season_dead",
+            "name": "Season Dead",
+            "classification": {
+                "domain": "strength",
+                "category": "season",
+                "family": "season_score",
+                "type": "season_dead"
+            },
+            "source": {
+                "signal": "month_status",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_status",
+                    "operator": "equals",
+                    "value": "dead"
+                }
+            ],
+            "evaluation": {
+                "weight": -25,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month status dead",
+                "description": "Apply season score when month status is dead.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "season",
+                    "season_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000006",
+            "code": "root_three_plus",
+            "name": "Root Three Plus Branches",
+            "classification": {
+                "domain": "strength",
+                "category": "root",
+                "family": "root_score",
+                "type": "root_three_plus"
+            },
+            "source": {
+                "signal": "root_level",
+                "component": "hidden_stems"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "root_three_plus"
+                }
+            ],
+            "evaluation": {
+                "weight": 30,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Root level root_three_plus",
+                "description": "Apply root score when root level is root_three_plus.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "root",
+                    "root_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000007",
+            "code": "root_two",
+            "name": "Root Two Branches",
+            "classification": {
+                "domain": "strength",
+                "category": "root",
+                "family": "root_score",
+                "type": "root_two"
+            },
+            "source": {
+                "signal": "root_level",
+                "component": "hidden_stems"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "root_two"
+                }
+            ],
+            "evaluation": {
+                "weight": 22,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Root level root_two",
+                "description": "Apply root score when root level is root_two.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "root",
+                    "root_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000008",
+            "code": "root_one",
+            "name": "Root One Branch",
+            "classification": {
+                "domain": "strength",
+                "category": "root",
+                "family": "root_score",
+                "type": "root_one"
+            },
+            "source": {
+                "signal": "root_level",
+                "component": "hidden_stems"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "root_one"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Root level root_one",
+                "description": "Apply root score when root level is root_one.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "root",
+                    "root_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000009",
+            "code": "root_hidden",
+            "name": "Hidden Stem Root",
+            "classification": {
+                "domain": "strength",
+                "category": "root",
+                "family": "root_score",
+                "type": "root_hidden"
+            },
+            "source": {
+                "signal": "root_level",
+                "component": "hidden_stems"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "hidden_root"
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Root level hidden_root",
+                "description": "Apply root score when root level is hidden_root.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "root",
+                    "root_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000010",
+            "code": "root_none",
+            "name": "No Root",
+            "classification": {
+                "domain": "strength",
+                "category": "root",
+                "family": "root_score",
+                "type": "root_none"
+            },
+            "source": {
+                "signal": "root_level",
+                "component": "hidden_stems"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "no_root"
+                }
+            ],
+            "evaluation": {
+                "weight": -20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Root level no_root",
+                "description": "Apply root score when root level is no_root.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "root",
+                    "root_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000011",
+            "code": "support_companion",
+            "name": "Companion Support",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "companion_support"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "support_type",
+                    "operator": "equals",
+                    "value": "companion_support"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Support type companion_support",
+                "description": "Apply support score when support type is companion_support.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000012",
+            "code": "support_resource",
+            "name": "Resource Star Support",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "resource_support"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "support_type",
+                    "operator": "equals",
+                    "value": "resource_star_support"
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Support type resource_star_support",
+                "description": "Apply support score when support type is resource_star_support.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000013",
+            "code": "support_stem",
+            "name": "Stem Support",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "stem_support"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "support_type",
+                    "operator": "equals",
+                    "value": "stem_support"
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Support type stem_support",
+                "description": "Apply support score when support type is stem_support.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000014",
+            "code": "support_branch",
+            "name": "Branch Support",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "branch_support"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "support_type",
+                    "operator": "equals",
+                    "value": "branch_support"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Support type branch_support",
+                "description": "Apply support score when support type is branch_support.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000015",
+            "code": "support_combination",
+            "name": "Combination Support",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "combination_support"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "support_type",
+                    "operator": "equals",
+                    "value": "combination_generates"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Support type combination_generates",
+                "description": "Apply support score when support type is combination_generates.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000016",
+            "code": "support_official_resource",
+            "name": "Official Resource Present",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "official_resource"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "resource_elements",
+                    "operator": "contains",
+                    "value": "official_resource"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Official resource present",
+                "description": "Chart contains official resource element.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000017",
+            "code": "support_companion_present",
+            "name": "Companion Present",
+            "classification": {
+                "domain": "strength",
+                "category": "support",
+                "family": "support_score",
+                "type": "companion_present"
+            },
+            "source": {
+                "signal": "support_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "companion_elements",
+                    "operator": "contains",
+                    "value": "companion"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Companion present",
+                "description": "Chart contains companion element.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "support",
+                    "support_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000018",
+            "code": "control_officer",
+            "name": "Officer Control",
+            "classification": {
+                "domain": "strength",
+                "category": "control",
+                "family": "control_score",
+                "type": "officer_control"
+            },
+            "source": {
+                "signal": "control_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "control_type",
+                    "operator": "equals",
+                    "value": "officer_control"
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Control type officer_control",
+                "description": "Apply control penalty when control type is officer_control.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "control",
+                    "control_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000019",
+            "code": "control_output",
+            "name": "Output Drain Control",
+            "classification": {
+                "domain": "strength",
+                "category": "control",
+                "family": "control_score",
+                "type": "output_control"
+            },
+            "source": {
+                "signal": "control_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "control_type",
+                    "operator": "equals",
+                    "value": "output_drain"
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Control type output_drain",
+                "description": "Apply control penalty when control type is output_drain.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "control",
+                    "control_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000020",
+            "code": "control_wealth",
+            "name": "Wealth Drain Control",
+            "classification": {
+                "domain": "strength",
+                "category": "control",
+                "family": "control_score",
+                "type": "wealth_control"
+            },
+            "source": {
+                "signal": "control_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "control_type",
+                    "operator": "equals",
+                    "value": "wealth_drain"
+                }
+            ],
+            "evaluation": {
+                "weight": -6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Control type wealth_drain",
+                "description": "Apply control penalty when control type is wealth_drain.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "control",
+                    "control_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000021",
+            "code": "control_root_clash",
+            "name": "Root Clash",
+            "classification": {
+                "domain": "strength",
+                "category": "control",
+                "family": "control_score",
+                "type": "root_clash"
+            },
+            "source": {
+                "signal": "control_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "control_type",
+                    "operator": "equals",
+                    "value": "root_clash"
+                }
+            ],
+            "evaluation": {
+                "weight": -15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Control type root_clash",
+                "description": "Apply control penalty when control type is root_clash.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "control",
+                    "control_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000022",
+            "code": "control_combination_loss",
+            "name": "Combination Root Loss",
+            "classification": {
+                "domain": "strength",
+                "category": "control",
+                "family": "control_score",
+                "type": "combination_root_loss"
+            },
+            "source": {
+                "signal": "control_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "control_type",
+                    "operator": "equals",
+                    "value": "combination_root_loss"
+                }
+            ],
+            "evaluation": {
+                "weight": -12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Control type combination_root_loss",
+                "description": "Apply control penalty when control type is combination_root_loss.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "control",
+                    "control_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000023",
+            "code": "control_seven_killings",
+            "name": "Seven Killings Present",
+            "classification": {
+                "domain": "strength",
+                "category": "control",
+                "family": "control_score",
+                "type": "seven_killings_present"
+            },
+            "source": {
+                "signal": "control_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "officer_elements",
+                    "operator": "contains",
+                    "value": "seven_killings"
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Seven killings present",
+                "description": "Chart contains seven killings officer element.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "control",
+                    "control_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000024",
+            "code": "drain_output",
+            "name": "Output Drain",
+            "classification": {
+                "domain": "strength",
+                "category": "drain",
+                "family": "drain_score",
+                "type": "output_drain"
+            },
+            "source": {
+                "signal": "drain_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "drain_type",
+                    "operator": "equals",
+                    "value": "output_drain"
+                }
+            ],
+            "evaluation": {
+                "weight": -8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Drain type output_drain",
+                "description": "Apply drain penalty when drain type is output_drain.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "drain",
+                    "drain_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000025",
+            "code": "drain_wealth",
+            "name": "Wealth Drain",
+            "classification": {
+                "domain": "strength",
+                "category": "drain",
+                "family": "drain_score",
+                "type": "wealth_drain"
+            },
+            "source": {
+                "signal": "drain_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "drain_type",
+                    "operator": "equals",
+                    "value": "wealth_drain"
+                }
+            ],
+            "evaluation": {
+                "weight": -6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Drain type wealth_drain",
+                "description": "Apply drain penalty when drain type is wealth_drain.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "drain",
+                    "drain_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000026",
+            "code": "drain_hurt_officer",
+            "name": "Hurt Officer Present",
+            "classification": {
+                "domain": "strength",
+                "category": "drain",
+                "family": "drain_score",
+                "type": "hurt_officer_present"
+            },
+            "source": {
+                "signal": "drain_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "output_elements",
+                    "operator": "contains",
+                    "value": "hurt_officer"
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Hurt officer present",
+                "description": "Chart contains hurt officer output element.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "drain",
+                    "drain_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000027",
+            "code": "drain_heavenly_wealth",
+            "name": "Heavenly Wealth Present",
+            "classification": {
+                "domain": "strength",
+                "category": "drain",
+                "family": "drain_score",
+                "type": "heavenly_wealth_present"
+            },
+            "source": {
+                "signal": "drain_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "wealth_elements",
+                    "operator": "contains",
+                    "value": "heavenly_wealth"
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Heavenly wealth present",
+                "description": "Chart contains heavenly wealth element.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "drain",
+                    "drain_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000028",
+            "code": "drain_heavy",
+            "name": "Heavy Drain",
+            "classification": {
+                "domain": "strength",
+                "category": "drain",
+                "family": "drain_score",
+                "type": "heavy_drain"
+            },
+            "source": {
+                "signal": "drain_type",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "drain_count",
+                    "operator": "gte",
+                    "value": 3
+                }
+            ],
+            "evaluation": {
+                "weight": -10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Heavy drain",
+                "description": "Three or more drain factors present.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "drain",
+                    "drain_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000029",
+            "code": "special_rob_wealth_no_root",
+            "name": "Rob Wealth No Root",
+            "classification": {
+                "domain": "strength",
+                "category": "special",
+                "family": "special_score",
+                "type": "rob_wealth_no_root"
+            },
+            "source": {
+                "signal": "special_case",
+                "scope": "month_and_root"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "rob_wealth"
+                },
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "no_root"
+                }
+            ],
+            "evaluation": {
+                "weight": -15,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 110
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Rob wealth without root",
+                "description": "Special weak case when month branch ten god is rob wealth and day master has no root.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "special",
+                    "special_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000030",
+            "code": "special_companion_prosperous",
+            "name": "Companion Prosperous",
+            "classification": {
+                "domain": "strength",
+                "category": "special",
+                "family": "special_score",
+                "type": "companion_prosperous"
+            },
+            "source": {
+                "signal": "special_case",
+                "scope": "month_and_root"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "companion"
+                },
+                {
+                    "type": "month_status",
+                    "operator": "equals",
+                    "value": "prosperous"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 105
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Companion prosperous month",
+                "description": "Special strong case when month branch ten god is companion in prosperous phase.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "special",
+                    "special_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000031",
+            "code": "special_seven_killings_no_root",
+            "name": "Seven Killings No Root",
+            "classification": {
+                "domain": "strength",
+                "category": "special",
+                "family": "special_score",
+                "type": "seven_killings_no_root"
+            },
+            "source": {
+                "signal": "special_case",
+                "scope": "month_and_root"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "seven_killings"
+                },
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "no_root"
+                }
+            ],
+            "evaluation": {
+                "weight": -15,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 108
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Seven killings without root",
+                "description": "Special weak case when month branch ten god is seven killings and day master has no root.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "special",
+                    "special_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000032",
+            "code": "special_resource_cold_season",
+            "name": "Resource Cold Season",
+            "classification": {
+                "domain": "strength",
+                "category": "special",
+                "family": "special_score",
+                "type": "resource_cold_season"
+            },
+            "source": {
+                "signal": "special_case",
+                "scope": "month_and_root"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch_ten_god",
+                    "operator": "equals",
+                    "value": "official_resource"
+                },
+                {
+                    "type": "season",
+                    "operator": "in",
+                    "value": [
+                        "winter",
+                        "autumn"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 102
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Resource in cold season",
+                "description": "Resource star supports day master during winter or autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "special",
+                    "special_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000033",
+            "code": "combination_resource_companion",
+            "name": "Resource Companion Combo",
+            "classification": {
+                "domain": "strength",
+                "category": "combination",
+                "family": "combination_score",
+                "type": "resource_companion"
+            },
+            "source": {
+                "signal": "combination",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "companion_count",
+                    "operator": "gte",
+                    "value": 2
+                },
+                {
+                    "type": "resource_count",
+                    "operator": "gte",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Resource and companion together",
+                "description": "Companion and resource stars combine to support day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "combination",
+                    "combination_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000034",
+            "code": "combination_officer_output",
+            "name": "Officer Output Combo",
+            "classification": {
+                "domain": "strength",
+                "category": "combination",
+                "family": "combination_score",
+                "type": "officer_output"
+            },
+            "source": {
+                "signal": "combination",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "officer_count",
+                    "operator": "gte",
+                    "value": 2
+                },
+                {
+                    "type": "output_count",
+                    "operator": "gte",
+                    "value": 1
+                }
+            ],
+            "evaluation": {
+                "weight": -12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 93
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Officer and output together",
+                "description": "Officer and output stars combine to harm day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "combination",
+                    "combination_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000035",
+            "code": "combination_wealth_no_root",
+            "name": "Wealth No Root Combo",
+            "classification": {
+                "domain": "strength",
+                "category": "combination",
+                "family": "combination_score",
+                "type": "wealth_no_root"
+            },
+            "source": {
+                "signal": "combination",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "wealth_count",
+                    "operator": "gte",
+                    "value": 2
+                },
+                {
+                    "type": "root_level",
+                    "operator": "equals",
+                    "value": "no_root"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Wealth abundant without root",
+                "description": "Wealth stars abundant but day master lacks root support.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "combination",
+                    "combination_score"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000036",
+            "code": "priority_special",
+            "name": "Priority Special Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_special"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for special group",
+                "description": "Resolve evaluation order for special rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000037",
+            "code": "priority_season",
+            "name": "Priority Season Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_season"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "season"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for season group",
+                "description": "Resolve evaluation order for season rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000038",
+            "code": "priority_root",
+            "name": "Priority Root Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_root"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "root"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for root group",
+                "description": "Resolve evaluation order for root rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000039",
+            "code": "priority_support",
+            "name": "Priority Support Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_support"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "support"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for support group",
+                "description": "Resolve evaluation order for support rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000040",
+            "code": "priority_control",
+            "name": "Priority Control Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_control"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "control"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for control group",
+                "description": "Resolve evaluation order for control rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000041",
+            "code": "priority_drain",
+            "name": "Priority Drain Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_drain"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "drain"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 75
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for drain group",
+                "description": "Resolve evaluation order for drain rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000042",
+            "code": "priority_combination",
+            "name": "Priority Combination Group",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "group_combination"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "combination"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 70
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for combination group",
+                "description": "Resolve evaluation order for combination rule group.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "group_priority"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000043",
+            "code": "level_strong",
+            "name": "Classify Strong",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_strong"
+            },
+            "source": {
+                "signal": "strength_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "gte",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify as strong",
+                "description": "Assign strength level strong based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "level_classification"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000044",
+            "code": "level_weak",
+            "name": "Classify Weak",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_weak"
+            },
+            "source": {
+                "signal": "strength_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "lte",
+                    "value": 0.35
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify as weak",
+                "description": "Assign strength level weak based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "level_classification"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "STR-000045",
+            "code": "level_balanced",
+            "name": "Classify Balanced",
+            "classification": {
+                "domain": "strength",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_balanced"
+            },
+            "source": {
+                "signal": "strength_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "day_master",
+                "attribute": "strength_score"
+            },
+            "conditions": [
+                {
+                    "type": "strength_score",
+                    "operator": "gt",
+                    "value": 0.35
+                },
+                {
+                    "type": "strength_score",
+                    "operator": "lt",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify as balanced",
+                "description": "Assign strength level balanced based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "database/12_strength/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T12:00:00Z",
+                "updated_at": "2026-07-29T12:00:00Z",
+                "approved_at": "2026-07-29T12:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "strength",
+                    "priority",
+                    "level_classification"
+                ],
+                "source": "BTE Platform Strength Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

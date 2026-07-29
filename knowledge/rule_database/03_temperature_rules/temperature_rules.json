@@ -1,0 +1,4021 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T15:00:00Z",
+        "updated_at": "2026-07-29T15:00:00Z",
+        "approved_at": "2026-07-29T15:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "temperature",
+            "rule_database",
+            "module"
+        ],
+        "source": "BTE Platform Temperature Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Temperature Rule Database module for BTE Platform Knowledge Base.",
+        "description": "JSON representation of Temperature Engine V2 rules covering seasonal influence, climate correction, dryness/humidity balance, element adjustment, cross-module interaction, and priority resolution. Derived from database/11_temperature/ and aligned with RULE_MODEL_SPEC.md.",
+        "references": [
+            "RULE_MODEL_SPEC.md",
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json",
+            "database/11_temperature/README.md",
+            "knowledge/rule_database/01_strength_rules/",
+            "knowledge/rule_database/02_season_rules/"
+        ]
+    },
+    "config": {
+        "baseline": 35,
+        "scale": 100,
+        "divisor": 3,
+        "hot_threshold": 0.65,
+        "cold_threshold": 0.35,
+        "temperature_levels": [
+            "cold",
+            "cool",
+            "warm",
+            "hot"
+        ]
+    },
+    "rules": [
+        {
+            "id": "TMP-000001",
+            "code": "summer_hot",
+            "name": "Summer Hot Influence",
+            "classification": {
+                "domain": "temperature",
+                "category": "season",
+                "family": "season_influence",
+                "type": "season_hot"
+            },
+            "source": {
+                "signal": "season",
+                "scope": "calendar"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season summer temperature influence (level: hot)",
+                "description": "Apply hot temperature bias when season is summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_influence",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000002",
+            "code": "winter_cold",
+            "name": "Winter Cold Influence",
+            "classification": {
+                "domain": "temperature",
+                "category": "season",
+                "family": "season_influence",
+                "type": "season_cold"
+            },
+            "source": {
+                "signal": "season",
+                "scope": "calendar"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season winter temperature influence (level: cold)",
+                "description": "Apply cold temperature bias when season is winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_influence",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000003",
+            "code": "spring_warm",
+            "name": "Spring Warm Influence",
+            "classification": {
+                "domain": "temperature",
+                "category": "season",
+                "family": "season_influence",
+                "type": "season_warm"
+            },
+            "source": {
+                "signal": "season",
+                "scope": "calendar"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "spring"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season spring temperature influence (level: warm)",
+                "description": "Apply warm temperature bias when season is spring.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_influence",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000004",
+            "code": "autumn_cool",
+            "name": "Autumn Cool Influence",
+            "classification": {
+                "domain": "temperature",
+                "category": "season",
+                "family": "season_influence",
+                "type": "season_cool"
+            },
+            "source": {
+                "signal": "season",
+                "scope": "calendar"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "autumn"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season autumn temperature influence (level: cool)",
+                "description": "Apply cool temperature bias when season is autumn.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_influence",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000005",
+            "code": "late_summer_heat",
+            "name": "Late Summer Heat",
+            "classification": {
+                "domain": "temperature",
+                "category": "season",
+                "family": "season_phase_influence",
+                "type": "late_summer_heat"
+            },
+            "source": {
+                "signal": "season",
+                "scope": "calendar"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "in",
+                    "value": [
+                        "mid_summer",
+                        "late_summer"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season phase late_summer_heat (level: hot)",
+                "description": "Intensify hot during mid_summer, late_summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase_influence",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000006",
+            "code": "mid_winter_cold",
+            "name": "Mid Winter Cold",
+            "classification": {
+                "domain": "temperature",
+                "category": "season",
+                "family": "season_phase_influence",
+                "type": "mid_winter_cold"
+            },
+            "source": {
+                "signal": "season",
+                "scope": "calendar"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season_phase",
+                    "operator": "in",
+                    "value": [
+                        "mid_winter",
+                        "late_winter"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Season phase mid_winter_cold (level: cold)",
+                "description": "Intensify cold during mid_winter, late_winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "season",
+                    "season_phase_influence",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000007",
+            "code": "climate_hot",
+            "name": "Climate Hot",
+            "classification": {
+                "domain": "temperature",
+                "category": "climate",
+                "family": "climate_correction",
+                "type": "climate_hot"
+            },
+            "source": {
+                "signal": "climate_type",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "climate_type",
+                    "operator": "equals",
+                    "value": "hot"
+                }
+            ],
+            "evaluation": {
+                "weight": 25,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Climate type hot (level: hot)",
+                "description": "Month branch climate correction for hot conditions.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "climate",
+                    "climate_correction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000008",
+            "code": "climate_cold",
+            "name": "Climate Cold",
+            "classification": {
+                "domain": "temperature",
+                "category": "climate",
+                "family": "climate_correction",
+                "type": "climate_cold"
+            },
+            "source": {
+                "signal": "climate_type",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "climate_type",
+                    "operator": "equals",
+                    "value": "cold"
+                }
+            ],
+            "evaluation": {
+                "weight": 25,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Climate type cold (level: cold)",
+                "description": "Month branch climate correction for cold conditions.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "climate",
+                    "climate_correction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000009",
+            "code": "climate_warm",
+            "name": "Climate Warm",
+            "classification": {
+                "domain": "temperature",
+                "category": "climate",
+                "family": "climate_correction",
+                "type": "climate_warm"
+            },
+            "source": {
+                "signal": "climate_type",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "climate_type",
+                    "operator": "equals",
+                    "value": "warm"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Climate type warm (level: warm)",
+                "description": "Month branch climate correction for warm conditions.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "climate",
+                    "climate_correction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000010",
+            "code": "climate_cool",
+            "name": "Climate Cool",
+            "classification": {
+                "domain": "temperature",
+                "category": "climate",
+                "family": "climate_correction",
+                "type": "climate_cool"
+            },
+            "source": {
+                "signal": "climate_type",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "climate_type",
+                    "operator": "equals",
+                    "value": "cool"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Climate type cool (level: cool)",
+                "description": "Month branch climate correction for cool conditions.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "climate",
+                    "climate_correction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000011",
+            "code": "fire_month_climate",
+            "name": "Fire Month Climate",
+            "classification": {
+                "domain": "temperature",
+                "category": "climate",
+                "family": "branch_climate",
+                "type": "fire_month_climate"
+            },
+            "source": {
+                "signal": "climate_type",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch",
+                    "operator": "in",
+                    "value": [
+                        "Ngo",
+                        "Ty",
+                        "Mui"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month branch climate fire_month_climate (level: hot)",
+                "description": "Climate correction for fire/water dominant month branches.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "branch_climate",
+                    "climate",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000012",
+            "code": "water_month_climate",
+            "name": "Water Month Climate",
+            "classification": {
+                "domain": "temperature",
+                "category": "climate",
+                "family": "branch_climate",
+                "type": "water_month_climate"
+            },
+            "source": {
+                "signal": "climate_type",
+                "pillar": "month"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "month_branch",
+                    "operator": "in",
+                    "value": [
+                        "Hoi",
+                        "Ty",
+                        "Suu"
+                    ]
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Month branch climate water_month_climate (level: cold)",
+                "description": "Climate correction for fire/water dominant month branches.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "branch_climate",
+                    "climate",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000013",
+            "code": "dryness_heavy",
+            "name": "Heavy Dryness",
+            "classification": {
+                "domain": "temperature",
+                "category": "dryness",
+                "family": "dryness_score",
+                "type": "dry"
+            },
+            "source": {
+                "signal": "dryness_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "dryness_level",
+                    "operator": "equals",
+                    "value": "dry"
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Dryness level dry",
+                "description": "Apply dryness score adjustment for dry.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "dryness",
+                    "dryness_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000014",
+            "code": "dryness_slight",
+            "name": "Slight Dryness",
+            "classification": {
+                "domain": "temperature",
+                "category": "dryness",
+                "family": "dryness_score",
+                "type": "slightly_dry"
+            },
+            "source": {
+                "signal": "dryness_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "dryness_level",
+                    "operator": "equals",
+                    "value": "slightly_dry"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Dryness level slightly_dry",
+                "description": "Apply dryness score adjustment for slightly_dry.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "dryness",
+                    "dryness_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000015",
+            "code": "dryness_fire_excess",
+            "name": "Fire Excess Dryness",
+            "classification": {
+                "domain": "temperature",
+                "category": "dryness",
+                "family": "dryness_score",
+                "type": "fire_excess"
+            },
+            "source": {
+                "signal": "dryness_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "fire_count",
+                    "operator": "gte",
+                    "value": 3
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Dryness level fire_excess",
+                "description": "Apply dryness score adjustment for fire_excess.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "dryness",
+                    "dryness_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000016",
+            "code": "dryness_earth_excess",
+            "name": "Earth Excess Dryness",
+            "classification": {
+                "domain": "temperature",
+                "category": "dryness",
+                "family": "dryness_score",
+                "type": "earth_excess"
+            },
+            "source": {
+                "signal": "dryness_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "earth_count",
+                    "operator": "gte",
+                    "value": 4
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Dryness level earth_excess",
+                "description": "Apply dryness score adjustment for earth_excess.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "dryness",
+                    "dryness_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000017",
+            "code": "dryness_normal",
+            "name": "Normal Dryness",
+            "classification": {
+                "domain": "temperature",
+                "category": "dryness",
+                "family": "dryness_score",
+                "type": "normal"
+            },
+            "source": {
+                "signal": "dryness_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "dryness_level",
+                    "operator": "equals",
+                    "value": "normal"
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Dryness level normal",
+                "description": "Apply dryness score adjustment for normal.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "dryness",
+                    "dryness_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000018",
+            "code": "humidity_heavy",
+            "name": "Heavy Humidity",
+            "classification": {
+                "domain": "temperature",
+                "category": "humidity",
+                "family": "humidity_score",
+                "type": "humid"
+            },
+            "source": {
+                "signal": "humidity_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "humidity_level",
+                    "operator": "equals",
+                    "value": "humid"
+                }
+            ],
+            "evaluation": {
+                "weight": 18,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Humidity level humid",
+                "description": "Apply humidity score adjustment for humid.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "humidity",
+                    "humidity_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000019",
+            "code": "humidity_slight",
+            "name": "Slight Humidity",
+            "classification": {
+                "domain": "temperature",
+                "category": "humidity",
+                "family": "humidity_score",
+                "type": "slightly_humid"
+            },
+            "source": {
+                "signal": "humidity_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "humidity_level",
+                    "operator": "equals",
+                    "value": "slightly_humid"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Humidity level slightly_humid",
+                "description": "Apply humidity score adjustment for slightly_humid.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "humidity",
+                    "humidity_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000020",
+            "code": "humidity_water_excess",
+            "name": "Water Excess Humidity",
+            "classification": {
+                "domain": "temperature",
+                "category": "humidity",
+                "family": "humidity_score",
+                "type": "water_excess"
+            },
+            "source": {
+                "signal": "humidity_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "water_count",
+                    "operator": "gte",
+                    "value": 3
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Humidity level water_excess",
+                "description": "Apply humidity score adjustment for water_excess.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "humidity",
+                    "humidity_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000021",
+            "code": "humidity_winter_damp",
+            "name": "Winter Damp Cold",
+            "classification": {
+                "domain": "temperature",
+                "category": "humidity",
+                "family": "humidity_score",
+                "type": "winter_damp"
+            },
+            "source": {
+                "signal": "humidity_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "water_count",
+                    "operator": "gte",
+                    "value": 2
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Humidity level winter_damp (level: cold)",
+                "description": "Apply humidity score adjustment for winter_damp.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "humidity",
+                    "humidity_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000022",
+            "code": "humidity_normal",
+            "name": "Normal Humidity",
+            "classification": {
+                "domain": "temperature",
+                "category": "humidity",
+                "family": "humidity_score",
+                "type": "normal"
+            },
+            "source": {
+                "signal": "humidity_level",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "humidity_level",
+                    "operator": "equals",
+                    "value": "normal"
+                }
+            ],
+            "evaluation": {
+                "weight": -5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Humidity level normal",
+                "description": "Apply humidity score adjustment for normal.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "humidity",
+                    "humidity_score",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000023",
+            "code": "balance_warm_cold",
+            "name": "Warm Cold Balance",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "hot_cold_balance",
+                "type": "balance_warm_cold"
+            },
+            "source": {
+                "signal": "temperature_balance",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "warm_score",
+                    "operator": "gte",
+                    "value": 0.15
+                },
+                {
+                    "type": "cold_score",
+                    "operator": "gte",
+                    "value": 0.15
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Temperature balance balance_warm_cold (level: warm)",
+                "description": "Hot/cold or dry/humid balance correction.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "hot_cold_balance",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000024",
+            "code": "balance_dry_humid",
+            "name": "Dry Humid Balance",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "hot_cold_balance",
+                "type": "balance_dry_humid"
+            },
+            "source": {
+                "signal": "temperature_balance",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "dry_score",
+                    "operator": "gte",
+                    "value": 0.1
+                },
+                {
+                    "type": "humid_score",
+                    "operator": "gte",
+                    "value": 0.1
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Temperature balance balance_dry_humid",
+                "description": "Hot/cold or dry/humid balance correction.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "hot_cold_balance",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000025",
+            "code": "balance_fire_water_equal",
+            "name": "Fire Water Equal Balance",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "hot_cold_balance",
+                "type": "balance_fire_water_equal"
+            },
+            "source": {
+                "signal": "temperature_balance",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "fire_count",
+                    "operator": "equals",
+                    "value": 2
+                },
+                {
+                    "type": "water_count",
+                    "operator": "equals",
+                    "value": 2
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Temperature balance balance_fire_water_equal (level: warm)",
+                "description": "Hot/cold or dry/humid balance correction.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "hot_cold_balance",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000026",
+            "code": "balance_no_fire",
+            "name": "No Fire Cold Bias",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "hot_cold_balance",
+                "type": "balance_no_fire"
+            },
+            "source": {
+                "signal": "temperature_balance",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "fire_count",
+                    "operator": "equals",
+                    "value": 0
+                }
+            ],
+            "evaluation": {
+                "weight": -3,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Temperature balance balance_no_fire (level: cool)",
+                "description": "Hot/cold or dry/humid balance correction.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "hot_cold_balance",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000027",
+            "code": "balance_no_water",
+            "name": "No Water Warm Bias",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "hot_cold_balance",
+                "type": "balance_no_water"
+            },
+            "source": {
+                "signal": "temperature_balance",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "water_count",
+                    "operator": "equals",
+                    "value": 0
+                }
+            ],
+            "evaluation": {
+                "weight": -3,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Temperature balance balance_no_water (level: warm)",
+                "description": "Hot/cold or dry/humid balance correction.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "hot_cold_balance",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000028",
+            "code": "element_fire_hot",
+            "name": "Fire Element Hot Bias",
+            "classification": {
+                "domain": "temperature",
+                "category": "element",
+                "family": "element_temperature",
+                "type": "element_fire_hot"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "fire"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Element fire temperature adjustment (level: hot)",
+                "description": "Intrinsic temperature bias for fire day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element",
+                    "element_temperature",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000029",
+            "code": "element_water_cold",
+            "name": "Water Element Cold Bias",
+            "classification": {
+                "domain": "temperature",
+                "category": "element",
+                "family": "element_temperature",
+                "type": "element_water_cold"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "water"
+                }
+            ],
+            "evaluation": {
+                "weight": 12,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Element water temperature adjustment (level: cold)",
+                "description": "Intrinsic temperature bias for water day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element",
+                    "element_temperature",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000030",
+            "code": "element_metal_cool",
+            "name": "Metal Element Cool Bias",
+            "classification": {
+                "domain": "temperature",
+                "category": "element",
+                "family": "element_temperature",
+                "type": "element_metal_cool"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "metal"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Element metal temperature adjustment (level: cool)",
+                "description": "Intrinsic temperature bias for metal day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element",
+                    "element_temperature",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000031",
+            "code": "element_wood_warm",
+            "name": "Wood Element Warm Bias",
+            "classification": {
+                "domain": "temperature",
+                "category": "element",
+                "family": "element_temperature",
+                "type": "element_wood_warm"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "wood"
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Element wood temperature adjustment (level: warm)",
+                "description": "Intrinsic temperature bias for wood day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element",
+                    "element_temperature",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000032",
+            "code": "element_earth_neutral",
+            "name": "Earth Element Neutral",
+            "classification": {
+                "domain": "temperature",
+                "category": "element",
+                "family": "element_temperature",
+                "type": "element_earth_neutral"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "earth"
+                }
+            ],
+            "evaluation": {
+                "weight": 5,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Element earth temperature adjustment (level: warm)",
+                "description": "Intrinsic temperature bias for earth day master.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "element",
+                    "element_temperature",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000033",
+            "code": "special_fire_summer",
+            "name": "Fire Day Master Summer",
+            "classification": {
+                "domain": "temperature",
+                "category": "special",
+                "family": "special_case",
+                "type": "special_fire_summer"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "fire"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 110
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special case special_fire_summer (level: hot)",
+                "description": "Special temperature override for fire under summer.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special",
+                    "special_case",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000034",
+            "code": "special_water_winter",
+            "name": "Water Day Master Winter",
+            "classification": {
+                "domain": "temperature",
+                "category": "special",
+                "family": "special_case",
+                "type": "special_water_winter"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "water"
+                },
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                }
+            ],
+            "evaluation": {
+                "weight": 20,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 110
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special case special_water_winter (level: cold)",
+                "description": "Special temperature override for water under winter.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special",
+                    "special_case",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000035",
+            "code": "special_metal_hot_climate",
+            "name": "Metal Hot Climate",
+            "classification": {
+                "domain": "temperature",
+                "category": "special",
+                "family": "special_case",
+                "type": "special_metal_hot_climate"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "metal"
+                },
+                {
+                    "type": "climate_type",
+                    "operator": "equals",
+                    "value": "hot"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 105
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special case special_metal_hot_climate (level: hot)",
+                "description": "Special temperature override for metal under hot.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special",
+                    "special_case",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000036",
+            "code": "special_wood_cold_climate",
+            "name": "Wood Cold Climate",
+            "classification": {
+                "domain": "temperature",
+                "category": "special",
+                "family": "special_case",
+                "type": "special_wood_cold_climate"
+            },
+            "source": {
+                "signal": "day_master_element",
+                "scope": "chart"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "day_master_element",
+                    "operator": "equals",
+                    "value": "wood"
+                },
+                {
+                    "type": "climate_type",
+                    "operator": "equals",
+                    "value": "cold"
+                }
+            ],
+            "evaluation": {
+                "weight": 15,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 105
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Special case special_wood_cold_climate (level: cold)",
+                "description": "Special temperature override for wood under cold.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "special",
+                    "special_case",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000037",
+            "code": "flow_dry_dominant",
+            "name": "Dry Dominant Flow",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "moisture_flow",
+                "type": "flow_dry_dominant"
+            },
+            "source": {
+                "signal": "moisture_flow",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "dry_score",
+                    "operator": "gte",
+                    "value": 0.1
+                },
+                {
+                    "type": "humid_score",
+                    "operator": "lt",
+                    "value": 0.05
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Moisture flow flow_dry_dominant",
+                "description": "Regulate dry/humid or warm/cold flow imbalance.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "moisture_flow",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000038",
+            "code": "flow_humid_dominant",
+            "name": "Humid Dominant Flow",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "moisture_flow",
+                "type": "flow_humid_dominant"
+            },
+            "source": {
+                "signal": "moisture_flow",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "humid_score",
+                    "operator": "gte",
+                    "value": 0.1
+                },
+                {
+                    "type": "dry_score",
+                    "operator": "lt",
+                    "value": 0.05
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Moisture flow flow_humid_dominant",
+                "description": "Regulate dry/humid or warm/cold flow imbalance.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "moisture_flow",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000039",
+            "code": "flow_warm_dominant",
+            "name": "Warm Dominant Flow",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "moisture_flow",
+                "type": "flow_warm_dominant"
+            },
+            "source": {
+                "signal": "moisture_flow",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "warm_score",
+                    "operator": "gte",
+                    "value": 0.12
+                },
+                {
+                    "type": "cold_score",
+                    "operator": "lt",
+                    "value": 0.05
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Moisture flow flow_warm_dominant (level: warm)",
+                "description": "Regulate dry/humid or warm/cold flow imbalance.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "moisture_flow",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000040",
+            "code": "flow_cold_dominant",
+            "name": "Cold Dominant Flow",
+            "classification": {
+                "domain": "temperature",
+                "category": "balance",
+                "family": "moisture_flow",
+                "type": "flow_cold_dominant"
+            },
+            "source": {
+                "signal": "moisture_flow",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "cold_score",
+                    "operator": "gte",
+                    "value": 0.12
+                },
+                {
+                    "type": "warm_score",
+                    "operator": "lt",
+                    "value": 0.05
+                }
+            ],
+            "evaluation": {
+                "weight": 6,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Moisture flow flow_cold_dominant (level: cold)",
+                "description": "Regulate dry/humid or warm/cold flow imbalance.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "balance",
+                    "moisture_flow",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000041",
+            "code": "interact_season_summer_amplify",
+            "name": "Season Summer Amplify Hot",
+            "classification": {
+                "domain": "temperature",
+                "category": "interaction",
+                "family": "cross_module",
+                "type": "interact_season_summer_amplify"
+            },
+            "source": {
+                "signal": "cross_module",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "summer"
+                },
+                {
+                    "type": "season_score",
+                    "operator": "gte",
+                    "value": 0.5
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 94
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Cross-module interact_season_summer_amplify (level: hot)",
+                "description": "Temperature adjustment using output from 02_season_rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md",
+                    "02_season_rules"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "cross_module",
+                    "interaction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000042",
+            "code": "interact_season_winter_amplify",
+            "name": "Season Winter Amplify Cold",
+            "classification": {
+                "domain": "temperature",
+                "category": "interaction",
+                "family": "cross_module",
+                "type": "interact_season_winter_amplify"
+            },
+            "source": {
+                "signal": "cross_module",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "season",
+                    "operator": "equals",
+                    "value": "winter"
+                },
+                {
+                    "type": "season_score",
+                    "operator": "gte",
+                    "value": 0.5
+                }
+            ],
+            "evaluation": {
+                "weight": 10,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 94
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Cross-module interact_season_winter_amplify (level: cold)",
+                "description": "Temperature adjustment using output from 02_season_rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md",
+                    "02_season_rules"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "cross_module",
+                    "interaction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000043",
+            "code": "interact_strength_weak_cold",
+            "name": "Strength Weak Cold Sensitive",
+            "classification": {
+                "domain": "temperature",
+                "category": "interaction",
+                "family": "cross_module",
+                "type": "interact_strength_weak_cold"
+            },
+            "source": {
+                "signal": "cross_module",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "weak"
+                },
+                {
+                    "type": "cold_score",
+                    "operator": "gte",
+                    "value": 0.1
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Cross-module interact_strength_weak_cold (level: cold)",
+                "description": "Temperature adjustment using output from 01_strength_rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md",
+                    "01_strength_rules"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "cross_module",
+                    "interaction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000044",
+            "code": "interact_strength_strong_heat",
+            "name": "Strength Strong Heat Retention",
+            "classification": {
+                "domain": "temperature",
+                "category": "interaction",
+                "family": "cross_module",
+                "type": "interact_strength_strong_heat"
+            },
+            "source": {
+                "signal": "cross_module",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "strong"
+                },
+                {
+                    "type": "warm_score",
+                    "operator": "gte",
+                    "value": 0.1
+                }
+            ],
+            "evaluation": {
+                "weight": 8,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Cross-module interact_strength_strong_heat (level: hot)",
+                "description": "Temperature adjustment using output from 01_strength_rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md",
+                    "01_strength_rules"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "cross_module",
+                    "interaction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000045",
+            "code": "interact_strength_balanced_neutral",
+            "name": "Strength Balanced Neutral Temp",
+            "classification": {
+                "domain": "temperature",
+                "category": "interaction",
+                "family": "cross_module",
+                "type": "interact_strength_balanced_neutral"
+            },
+            "source": {
+                "signal": "cross_module",
+                "scope": "pipeline"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "strength_level",
+                    "operator": "equals",
+                    "value": "balanced"
+                }
+            ],
+            "evaluation": {
+                "weight": 3,
+                "stackable": true,
+                "max_stack": 3,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 86
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Cross-module interact_strength_balanced_neutral (level: warm)",
+                "description": "Temperature adjustment using output from 01_strength_rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md",
+                    "01_strength_rules"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "cross_module",
+                    "interaction",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000046",
+            "code": "priority_special",
+            "name": "Priority Special Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_special"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "special"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for special group",
+                "description": "Resolve evaluation order for special temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000047",
+            "code": "priority_climate",
+            "name": "Priority Climate Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_climate"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "climate"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 95
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for climate group",
+                "description": "Resolve evaluation order for climate temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000048",
+            "code": "priority_season",
+            "name": "Priority Season Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_season"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "season"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for season group",
+                "description": "Resolve evaluation order for season temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000049",
+            "code": "priority_dryness",
+            "name": "Priority Dryness Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_dryness"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "dryness"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for dryness group",
+                "description": "Resolve evaluation order for dryness temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000050",
+            "code": "priority_humidity",
+            "name": "Priority Humidity Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_humidity"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "humidity"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for humidity group",
+                "description": "Resolve evaluation order for humidity temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000051",
+            "code": "priority_flow",
+            "name": "Priority Flow Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_flow"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "flow"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for flow group",
+                "description": "Resolve evaluation order for flow temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000052",
+            "code": "priority_interaction",
+            "name": "Priority Interaction Group",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "group_priority",
+                "type": "priority_interaction"
+            },
+            "source": {
+                "signal": "rule_group",
+                "scope": "engine"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "rule_group",
+                    "operator": "equals",
+                    "value": "interaction"
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "low",
+                "order": 78
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Priority for interaction group",
+                "description": "Resolve evaluation order for interaction temperature rules.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "group_priority",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000053",
+            "code": "level_hot",
+            "name": "Classify Hot",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_hot"
+            },
+            "source": {
+                "signal": "temperature_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "temperature_score",
+                    "operator": "gte",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify temperature as hot (level: hot)",
+                "description": "Assign temperature level hot based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "level_classification",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000054",
+            "code": "level_cold",
+            "name": "Classify Cold",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_cold"
+            },
+            "source": {
+                "signal": "temperature_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "temperature_score",
+                    "operator": "lte",
+                    "value": 0.35
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "high",
+                "order": 100
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify temperature as cold (level: cold)",
+                "description": "Assign temperature level cold based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "level_classification",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000055",
+            "code": "level_warm",
+            "name": "Classify Warm",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_warm"
+            },
+            "source": {
+                "signal": "temperature_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "temperature_score",
+                    "operator": "gt",
+                    "value": 0.5
+                },
+                {
+                    "type": "temperature_score",
+                    "operator": "lt",
+                    "value": 0.65
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify temperature as warm (level: warm)",
+                "description": "Assign temperature level warm based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "level_classification",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        },
+        {
+            "id": "TMP-000056",
+            "code": "level_cool",
+            "name": "Classify Cool",
+            "classification": {
+                "domain": "temperature",
+                "category": "priority",
+                "family": "level_classification",
+                "type": "level_cool"
+            },
+            "source": {
+                "signal": "temperature_score",
+                "scope": "aggregate"
+            },
+            "target": {
+                "role": "chart",
+                "attribute": "temperature_score"
+            },
+            "conditions": [
+                {
+                    "type": "temperature_score",
+                    "operator": "gt",
+                    "value": 0.35
+                },
+                {
+                    "type": "temperature_score",
+                    "operator": "lte",
+                    "value": 0.5
+                }
+            ],
+            "evaluation": {
+                "weight": 0,
+                "stackable": false,
+                "max_stack": 1,
+                "exclusive": false
+            },
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "lifecycle": {
+                "status": "active",
+                "enabled": true,
+                "deprecated": false
+            },
+            "documentation": {
+                "summary": "Classify temperature as cool (level: cool)",
+                "description": "Assign temperature level cool based on normalized score.",
+                "references": [
+                    "RULE_MODEL_SPEC.md",
+                    "MODULE_SPEC.md",
+                    "database/11_temperature/README.md"
+                ]
+            },
+            "metadata": {
+                "schema_version": "1.0.0",
+                "version": "1.0.0",
+                "status": "active",
+                "origin": "rule_database",
+                "author": "BTE",
+                "reviewer": "BTE Knowledge Framework Review Board",
+                "created_at": "2026-07-29T15:00:00Z",
+                "updated_at": "2026-07-29T15:00:00Z",
+                "approved_at": "2026-07-29T15:00:00Z",
+                "deprecated_at": null,
+                "tags": [
+                    "level_classification",
+                    "priority",
+                    "temperature"
+                ],
+                "source": "BTE Platform Temperature Rule Database",
+                "license": "BTE Internal Use"
+            }
+        }
+    ]
+}

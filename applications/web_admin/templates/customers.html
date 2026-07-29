@@ -1,0 +1,50 @@
+<div class="panel">
+  <div class="toolbar">
+    <input id="qName" placeholder="Search name" />
+    <input id="qPhone" placeholder="Phone" />
+    <input id="qEmail" placeholder="Email" />
+    <input id="qTag" placeholder="Tag" />
+    <button type="button" id="btnSearch">Search</button>
+    <button type="button" class="secondary" id="btnReload">Reload</button>
+    <button type="button" id="btnCreate">Add customer</button>
+  </div>
+  <div style="overflow:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Gender</th><th>Birth</th><th>Phone</th><th>Email</th><th>Tags</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="customerRows"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel" id="historyPanel" style="display:none">
+  <h2>Analysis history — <span id="historyName"></span></h2>
+  <div id="historyBody" class="pre"></div>
+</div>
+
+<div class="modal-backdrop" id="customerModal">
+  <div class="modal">
+    <h2 id="modalTitle">Customer</h2>
+    <form id="customerForm" class="form-grid">
+      <input type="hidden" id="customerId" />
+      <label class="full">Full name<input id="full_name" required /></label>
+      <label>Gender<input id="gender" placeholder="male/female" /></label>
+      <label>Birth datetime<input id="birth_datetime" placeholder="1990-05-15T10:30:00" /></label>
+      <label>Phone<input id="phone" /></label>
+      <label>Email<input id="email" /></label>
+      <label>Timezone<input id="timezone" value="Asia/Ho_Chi_Minh" /></label>
+      <label>Language<input id="language" value="vi" /></label>
+      <label class="full">Tags (comma)<input id="tags" /></label>
+      <label class="full">Notes<textarea id="notes"></textarea></label>
+      <div class="full toolbar">
+        <button type="submit">Save</button>
+        <button type="button" class="secondary" id="modalClose">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="/static/js/customers.js"></script>
+<script>document.getElementById("pageTitle").textContent = "Customers";</script>

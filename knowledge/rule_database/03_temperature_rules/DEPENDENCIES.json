@@ -1,0 +1,92 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T15:00:00Z",
+        "updated_at": "2026-07-29T15:00:00Z",
+        "approved_at": "2026-07-29T15:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "temperature",
+            "dependencies"
+        ],
+        "source": "BTE Platform Temperature Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Module dependencies and execution order for Temperature Rule Database.",
+        "description": "Defines upstream and downstream module relationships in the BTE analysis pipeline.",
+        "references": [
+            "MODULE_SPEC.md",
+            "knowledge/ROADMAP.md"
+        ]
+    },
+    "depends_on": [
+        {
+            "module": "01_strength_rules",
+            "path": "knowledge/rule_database/01_strength_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "strength_level",
+                "strength_score"
+            ],
+            "reason": "Temperature cross-module rules consume strength classification output."
+        },
+        {
+            "module": "02_season_rules",
+            "path": "knowledge/rule_database/02_season_rules/",
+            "version": "1.0.0",
+            "signals": [
+                "season",
+                "season_phase",
+                "season_score"
+            ],
+            "reason": "Seasonal temperature influence rules reference season module output."
+        }
+    ],
+    "used_by": [
+        {
+            "module": "04_pattern_rules",
+            "path": "knowledge/rule_database/04_pattern_rules/",
+            "signals": [
+                "temperature_type",
+                "temperature_score"
+            ],
+            "reason": "Pattern Engine consumes temperature classification."
+        },
+        {
+            "module": "13_useful_god_engine",
+            "path": "database/13_useful_god/",
+            "signals": [
+                "temperature_type"
+            ],
+            "reason": "Useful God selection uses temperature type for seasonal adjustment."
+        }
+    ],
+    "execution_order": [
+        {
+            "stage": 1,
+            "module": "02_season_rules",
+            "output": "season_score"
+        },
+        {
+            "stage": 2,
+            "module": "01_strength_rules",
+            "output": "strength_score"
+        },
+        {
+            "stage": 3,
+            "module": "03_temperature_rules",
+            "output": "temperature_score"
+        },
+        {
+            "stage": 4,
+            "module": "04_pattern_rules",
+            "output": "pattern_match"
+        }
+    ]
+}

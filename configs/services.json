@@ -1,0 +1,33 @@
+{
+  "name": "bte-platform",
+  "version": "1.0.0",
+  "services": {
+    "api": {
+      "module": "applications.api.app:app",
+      "port": 8000,
+      "health": "/api/v1/health",
+      "log": "logs/api.log"
+    },
+    "web_admin": {
+      "module": "applications.web_admin.app:app",
+      "port": 8080,
+      "health": "/healthz",
+      "log": "logs/admin.log"
+    },
+    "customer_portal": {
+      "module": "applications.customer_portal.app:app",
+      "port": 8081,
+      "health": "/healthz",
+      "log": "logs/portal.log"
+    }
+  },
+  "environment": {
+    "BTE_API_BASE_URL": "http://127.0.0.1:8000",
+    "BTE_STORAGE_BACKEND": "json",
+    "BTE_LICENSE_PATH": "applications/data/licenses.json",
+    "BTE_REPORT_PATH": "reports",
+    "BTE_LOG_LEVEL": "INFO",
+    "HOST": "127.0.0.1",
+    "PORT": 8000
+  }
+}

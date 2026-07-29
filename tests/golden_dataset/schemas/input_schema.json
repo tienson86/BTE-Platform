@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/golden_dataset/input_schema.json",
+  "title": "BTE Platform Golden Dataset Input Schema",
+  "description": "Birth input for Golden Dataset (legacy datetime and WP4.5 solar_datetime).",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "case_id",
+    "description",
+    "birth"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^case_[0-9]{4}$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coverage_goal": {
+      "type": "string"
+    },
+    "expected_pattern": {
+      "type": ["string", "null"]
+    },
+    "expected_score_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "expected_matched_rule_count": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "upstream": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "fact_overrides": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "birth": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "gender",
+        "timezone",
+        "location"
+      ],
+      "properties": {
+        "gender": {
+          "type": "string",
+          "enum": ["male", "female"]
+        },
+        "calendar": {
+          "type": "string",
+          "enum": ["solar", "lunar"]
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "solar_datetime": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "location": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "country",
+            "province",
+            "district",
+            "latitude",
+            "longitude"
+          ],
+          "properties": {
+            "country": { "type": "string" },
+            "province": { "type": "string" },
+            "district": { "type": "string" },
+            "latitude": { "type": "number" },
+            "longitude": { "type": "number" }
+          }
+        }
+      },
+      "anyOf": [
+        { "required": ["datetime"] },
+        { "required": ["solar_datetime"] }
+      ]
+    },
+    "options": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

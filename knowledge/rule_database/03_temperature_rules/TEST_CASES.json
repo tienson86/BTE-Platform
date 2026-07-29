@@ -1,0 +1,92 @@
+{
+    "metadata": {
+        "schema_version": "1.0.0",
+        "version": "1.0.0",
+        "status": "active",
+        "origin": "rule_database",
+        "author": "BTE",
+        "reviewer": "BTE Knowledge Framework Review Board",
+        "created_at": "2026-07-29T15:00:00Z",
+        "updated_at": "2026-07-29T15:00:00Z",
+        "approved_at": "2026-07-29T15:00:00Z",
+        "deprecated_at": null,
+        "tags": [
+            "temperature",
+            "test_cases"
+        ],
+        "source": "BTE Platform Temperature Rule Database",
+        "license": "BTE Internal Use"
+    },
+    "documentation": {
+        "summary": "Structured test cases for Temperature Rule Database.",
+        "description": "Unit test fixtures for rule matching and cross-module interaction.",
+        "references": [
+            "MODULE_SPEC.md",
+            "DEPENDENCIES.json"
+        ]
+    },
+    "test_cases": [
+        {
+            "test_id": "tc_001",
+            "description": "Summer season applies hot influence",
+            "rule_id": "TMP-000001",
+            "input": {
+                "season": "summer"
+            },
+            "expected_match": true,
+            "expected_weight": 20
+        },
+        {
+            "test_id": "tc_002",
+            "description": "Climate hot correction matches",
+            "rule_id": "TMP-000007",
+            "input": {
+                "climate_type": "hot"
+            },
+            "expected_match": true,
+            "expected_weight": 25
+        },
+        {
+            "test_id": "tc_003",
+            "description": "Heavy dryness rule matches",
+            "rule_id": "TMP-000013",
+            "input": {
+                "dryness_level": "dry"
+            },
+            "expected_match": true,
+            "expected_weight": 18
+        },
+        {
+            "test_id": "tc_004",
+            "description": "Cross-module season summer amplify",
+            "rule_id": "TMP-000041",
+            "input": {
+                "season": "summer",
+                "season_score": 0.6
+            },
+            "expected_match": true,
+            "expected_weight": 10
+        },
+        {
+            "test_id": "tc_005",
+            "description": "Level hot classification",
+            "rule_id": "TMP-000053",
+            "input": {
+                "temperature_score": 0.7
+            },
+            "expected_match": true,
+            "expected_weight": 0
+        },
+        {
+            "test_id": "tc_006",
+            "description": "Strength weak cold interaction",
+            "rule_id": "TMP-000043",
+            "input": {
+                "strength_level": "weak",
+                "cold_score": 0.15
+            },
+            "expected_match": true,
+            "expected_weight": 8
+        }
+    ]
+}

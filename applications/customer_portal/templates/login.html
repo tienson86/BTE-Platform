@@ -1,0 +1,15 @@
+<div class="panel">
+  <h1 data-i18n="login.title"></h1>
+  <p class="muted" data-i18n="login.hint"></p>
+  <form id="loginForm" class="form-grid" style="max-width:420px">
+    <label class="full"><span data-i18n="login.username"></span><input id="username" value="customer" required /></label>
+    <label class="full"><span data-i18n="login.password"></span><input id="password" type="password" value="customer123" required /></label>
+    <div class="full toolbar">
+      <button type="submit" data-i18n="login.submit"></button>
+      <button type="button" class="secondary" id="btnLogout" data-i18n="login.logout"></button>
+      <a class="btn secondary" href="/dashboard" style="display:inline-flex;align-items:center" data-i18n="login.guest"></a>
+    </div>
+  </form>
+  <p class="muted" id="loginStatus"></p>
+</div>
+<script src="/static/js/login.js"></script>

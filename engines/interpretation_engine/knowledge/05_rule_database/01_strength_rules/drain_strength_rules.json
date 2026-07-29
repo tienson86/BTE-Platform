@@ -1,0 +1,150 @@
+[
+    {
+      "rule_id": "DSR_0001",
+      "drain_type": "generated_element",
+      "name": "Generated Element Drain",
+      "description": "Ngũ hành do Nhật Chủ sinh ra, làm tiêu hao sức mạnh của Nhật Chủ.",
+      "engine_effect": "decrease_strength",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0002",
+      "drain_type": "stem_drain",
+      "name": "Heavenly Stem Drain",
+      "description": "Tiết lực phát sinh từ Thiên Can lộ xuất.",
+      "engine_effect": "decrease_strength",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0003",
+      "drain_type": "hidden_stem_drain",
+      "name": "Hidden Stem Drain",
+      "description": "Tiết lực phát sinh từ Tàng Can trong Địa Chi.",
+      "engine_effect": "decrease_strength",
+      "priority": 80,
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0004",
+      "drain_type": "visible_drain",
+      "name": "Visible Drain",
+      "description": "Tiết lực đến từ Thiên Can, có hiệu lực trực tiếp.",
+      "engine_effect": "decrease_strength",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0005",
+      "drain_type": "hidden_drain",
+      "name": "Hidden Drain",
+      "description": "Tiết lực đến từ Tàng Can, có hiệu lực gián tiếp.",
+      "engine_effect": "decrease_strength",
+      "priority": 60,
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "DSR_0101",
+      "element": "wood",
+      "generated_element_stems": [
+        "binh",
+        "dinh"
+      ],
+      "description": "Mộc sinh Hỏa, vì vậy Nhật Chủ Mộc bị tiết bởi Thiên Can Hỏa.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0102",
+      "element": "fire",
+      "generated_element_stems": [
+        "mau",
+        "ky"
+      ],
+      "description": "Hỏa sinh Thổ, vì vậy Nhật Chủ Hỏa bị tiết bởi Thiên Can Thổ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0103",
+      "element": "earth",
+      "generated_element_stems": [
+        "canh",
+        "tan"
+      ],
+      "description": "Thổ sinh Kim, vì vậy Nhật Chủ Thổ bị tiết bởi Thiên Can Kim.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0104",
+      "element": "metal",
+      "generated_element_stems": [
+        "nham",
+        "quy"
+      ],
+      "description": "Kim sinh Thủy, vì vậy Nhật Chủ Kim bị tiết bởi Thiên Can Thủy.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0105",
+      "element": "water",
+      "generated_element_stems": [
+        "giap",
+        "at"
+      ],
+      "description": "Thủy sinh Mộc, vì vậy Nhật Chủ Thủy bị tiết bởi Thiên Can Mộc.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "DSR_0201",
+      "support_source": "hidden_stem",
+      "mapping_strategy": "inherit_from_part_2",
+      "use_root_strength": true,
+      "description": "Áp dụng quy tắc Drain của Part 2 cho các Tàng Can trong Địa Chi. Mức ảnh hưởng được xác định theo root_strength_rules.json.",
+      "enabled": true
+    }
+  ]
+  [
+    {
+      "rule_id": "DSR_0301",
+      "drain_source": "heavenly_stem",
+      "base_score": -8,
+      "description": "Thiên Can tiết khí trực tiếp làm giảm sức mạnh Nhật Chủ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0302",
+      "drain_source": "hidden_stem",
+      "root_level": "strong_root",
+      "base_score": -8,
+      "description": "Tàng Can chủ khí tiết lực mạnh.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0303",
+      "drain_source": "hidden_stem",
+      "root_level": "medium_root",
+      "base_score": -6,
+      "description": "Tàng Can trung khí tiết lực trung bình.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0304",
+      "drain_source": "hidden_stem",
+      "root_level": "weak_root",
+      "base_score": -3,
+      "description": "Tàng Can dư khí tiết lực nhẹ.",
+      "enabled": true
+    },
+    {
+      "rule_id": "DSR_0305",
+      "rule_type": "drain_limit",
+      "maximum_negative_score": -100,
+      "minimum_negative_score": 0,
+      "description": "Giới hạn tổng điểm Drain.",
+      "enabled": true
+    }
+  ]
