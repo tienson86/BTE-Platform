@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 from dataclasses import dataclass, field
 from types import MappingProxyType
@@ -311,9 +312,12 @@ class ReportGeneratorResult:
             "structured_report": self.structured_report.to_dict(),
             "html": None if self.html is None else self.html.content,
             "markdown": None if self.markdown is None else self.markdown.content,
-            "json": None if self.json is None else self.json.payload,
+            "json": None if self.json is None else dict(self.json.payload),
             "pdf_size": None if self.pdf is None else self.pdf.size,
             "pdf_path": None if self.pdf is None else self.pdf.path,
+            "pdf_base64": None
+            if self.pdf is None
+            else base64.b64encode(self.pdf.content).decode("ascii"),
             "diagnostics": [
                 {
                     "code": item.code,

@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, sans-serif;
+  --color-ink: #102018;
+  --color-ink-soft: #1c2a24;
+  --color-paper: #f3efe6;
+  --color-paper-deep: #e7e0d2;
+  --color-jade: #1f7a5c;
+  --color-jade-bright: #2f9b74;
+  --color-amber-line: #c4a35a;
+  --color-mist: #6d7a72;
+}
+
+:root {
+  color-scheme: light;
+  --bg: #f3efe6;
+  --bg-elevated: rgba(255, 252, 246, 0.78);
+  --fg: #14201b;
+  --muted: #5f6d65;
+  --accent: #1f7a5c;
+  --accent-soft: rgba(31, 122, 92, 0.12);
+  --line: rgba(28, 42, 36, 0.12);
+  --glow: rgba(196, 163, 90, 0.28);
+  --danger: #9b3b2f;
+  --shadow: 0 24px 60px rgba(20, 32, 27, 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #0b1210;
+  --bg-elevated: rgba(18, 28, 24, 0.88);
+  --fg: #e8efe9;
+  --muted: #9aaba1;
+  --accent: #3db889;
+  --accent-soft: rgba(61, 184, 137, 0.14);
+  --line: rgba(232, 239, 233, 0.1);
+  --glow: rgba(61, 184, 137, 0.18);
+  --danger: #e08a7a;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, var(--glow), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 0%, var(--accent-soft), transparent 50%),
+    linear-gradient(165deg, var(--bg), color-mix(in srgb, var(--bg) 88%, var(--accent) 12%));
+  background-attachment: fixed;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.surface {
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.fade-in {
+  animation: fade-up 420ms ease both;
+}
+
+.fade-in-delay {
+  animation: fade-up 520ms ease both;
+  animation-delay: 80ms;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .fade-in-delay {
+    animation: none;
+  }
+}
