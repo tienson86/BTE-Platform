@@ -1,6 +1,6 @@
-# Pattern Engine Cache Strategy
+# Useful God Engine Cache Strategy
 
-**Module:** `engines/analysis_engine/03_pattern_engine`  
+**Module:** `engines/analysis_engine/04_useful_god_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Cache Strategy Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines the caching strategy for the Pattern Engine.
+This document defines the caching strategy for the Useful God Engine.
 
 The objective is to improve execution efficiency while preserving deterministic behavior, analytical correctness, and consistency.
 
@@ -33,7 +33,7 @@ Analytical results shall remain identical regardless of cache state.
 
 # 3. Cache Scope
 
-The Pattern Engine may cache only immutable resources.
+The Useful God Engine may cache only immutable resources.
 
 Eligible cache targets include:
 
@@ -47,15 +47,15 @@ Eligible cache targets include:
 
 Runtime analytical results shall not be cached within the engine.
 
-StrengthResult and TemperatureResult shall never be cached as mutable or engine-owned resources.
+StrengthResult, TemperatureResult, and PatternResult shall never be cached as mutable or engine-owned resources.
 
 ---
 
 # 4. Cache Architecture
 
 ```text
-Knowledge Base
-knowledge/rule_database/04_pattern_rules/
+Useful God Rule Database
+(Knowledge Module — Planned)
         │
         ▼
 Rule Loader
@@ -67,7 +67,7 @@ Rule Registry Cache
 Analyzer Lookup
         │
         ▼
-Pattern Engine
+Useful God Engine
 ```
 
 The cache serves immutable reference data only.
@@ -83,7 +83,7 @@ Cache creation:
 
 Cache usage:
 
-- Shared by all analyzers and resolvers.
+- Shared by all analyzers, resolvers, and determiners.
 - Read-only during execution.
 
 Cache invalidation:
@@ -101,7 +101,7 @@ The Rule Loader owns cache population.
 
 The Rule Registry owns cache publication.
 
-Analyzers and resolvers are read-only consumers.
+Analyzers, resolvers, and determiners are read-only consumers.
 
 No analyzer may modify cache contents.
 

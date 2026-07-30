@@ -1,6 +1,6 @@
-# Pattern Engine Error Handling
+# Useful God Engine Error Handling
 
-**Module:** `engines/analysis_engine/03_pattern_engine`  
+**Module:** `engines/analysis_engine/04_useful_god_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Error Handling Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines the error handling strategy of the Pattern Engine.
+This document defines the error handling strategy of the Useful God Engine.
 
 The objective is to ensure predictable behavior, clear diagnostics, and safe termination under failure conditions.
 
@@ -38,11 +38,13 @@ The engine recognizes the following error categories:
 - Rule Version Error
 - Strength Input Error
 - Temperature Input Error
+- Pattern Input Error
 - Analysis Error
 - Candidate Generation Error
 - Candidate Evaluation Error
 - Conflict Resolution Error
 - Priority Resolution Error
+- Determination Error
 - Scoring Error
 - Internal Engine Error
 
@@ -78,7 +80,7 @@ Every error shall include:
 - Error Category
 - Message
 - Execution Stage
-- Analyzer or Resolver (if applicable)
+- Analyzer, Resolver, or Determiner (if applicable)
 - Rule ID (if applicable)
 - Timestamp
 - Correlation Identifier
@@ -91,7 +93,7 @@ Fatal errors:
 
 - stop execution immediately;
 - invalidate the current evaluation;
-- prevent PatternResult publication.
+- prevent UsefulGodResult publication.
 
 Recoverable errors may continue only when explicitly permitted by the specification.
 

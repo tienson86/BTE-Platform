@@ -1,6 +1,6 @@
-# Pattern Engine Scoring Model
+# Useful God Engine Scoring Model
 
-**Module:** `engines/analysis_engine/03_pattern_engine`  
+**Module:** `engines/analysis_engine/04_useful_god_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Mathematical Model Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines the mathematical scoring model used by the Pattern Engine.
+This document defines the mathematical scoring model used by the Useful God Engine.
 
 It specifies the scoring dimensions, weighting principles, normalization rules, confidence calculation inputs, and traceability requirements.
 
@@ -52,7 +52,7 @@ Conflict / Priority Resolution
 Normalization
         │
         ▼
-Identified Pattern
+Yong Shen / Xi Shen / Ji Shen / Xian Shen
 ```
 
 ---
@@ -61,16 +61,17 @@ Identified Pattern
 
 The model evaluates the following analytical dimensions:
 
-- Chart Structure Influence
-- Day Master Relation Influence
-- Standard Pattern Match Strength
-- Transformation Pattern Match Strength
-- Special Pattern Match Strength
-- Follow Pattern Match Strength
-- Mixed Pattern Match Strength
-- Exceptional Pattern Match Strength
+- Strength Balance Influence
+- Climate Balance Influence
+- Pattern Requirement Influence
+- Five-Element Equilibrium
+- Supporting and Controlling Relation Strength
+- Adjustment Priority Strength
+- Primary Candidate Match Strength
+- Secondary Candidate Match Strength
+- Alternative Candidate Match Strength
 - Conflict Resolution Strength
-- Priority Resolution Strength
+- Candidate Priority Strength
 
 Each dimension is evaluated independently.
 
@@ -105,12 +106,15 @@ Normalization shall:
 
 ---
 
-# 7. Pattern Classification
+# 7. Useful God Classification
 
 Normalized candidate scores are mapped to:
 
-- identified pattern
-- pattern category
+- useful_god
+- favorable_gods
+- unfavorable_gods
+- neutral_gods
+- candidate rankings
 
 Classification thresholds and selection criteria are defined in the Rule Database.
 
@@ -123,13 +127,13 @@ The engine shall never embed threshold values in source code.
 Competing candidates are resolved using:
 
 - Conflict Resolution Rules
-- Priority Resolution Rules
+- Candidate Priority Rules
 - Score separation
-- Category override criteria where defined by rules
+- Category assignment criteria where defined by rules
 
 Resolution shall remain deterministic and explainable.
 
-Rejected candidates shall be retained in PatternResult.
+Rejected candidates shall be retained in UsefulGodResult.
 
 ---
 
@@ -145,6 +149,7 @@ Confidence evaluation considers:
 - Candidate separation quality
 - AnalysisContext.strength_result completeness where required
 - AnalysisContext.temperature_result completeness where required
+- AnalysisContext.pattern_result completeness where required
 
 Confidence is evaluated independently from narrative interpretation.
 
@@ -155,12 +160,12 @@ Confidence is evaluated independently from narrative interpretation.
 Every score shall include:
 
 - contributing rules;
-- contributing analyzers;
+- contributing analyzers and determiners;
 - calculation evidence;
 - weighting details;
 - normalization path;
 - conflict and priority resolution path;
-- StrengthResult and TemperatureResult references from AnalysisContext when used as evidence.
+- StrengthResult, TemperatureResult, and PatternResult references from AnalysisContext when used as evidence.
 
 No score may exist without traceability.
 
@@ -190,8 +195,7 @@ The scoring model shall never:
 - infer undocumented weights;
 - skip mandatory dimensions;
 - generate random scores;
-- recompute Day Master strength scores;
-- recompute climate scores.
+- recompute Strength, Temperature, or Pattern scores.
 
 ---
 
@@ -202,6 +206,6 @@ The scoring model is accepted when:
 - identical inputs always produce identical normalized scores;
 - all score contributions are traceable;
 - confidence is reproducible;
-- pattern classification is deterministic;
+- Useful God classification is deterministic;
 - candidate resolution is deterministic;
 - rejected candidates are retained.

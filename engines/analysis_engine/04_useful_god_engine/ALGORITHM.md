@@ -1,6 +1,6 @@
-# Pattern Engine Algorithm
+# Useful God Engine Algorithm
 
-**Module:** `engines/analysis_engine/03_pattern_engine`  
+**Module:** `engines/analysis_engine/04_useful_god_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Algorithm Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document specifies the analytical algorithm executed by the Pattern Engine.
+This document specifies the analytical algorithm executed by the Useful God Engine.
 
 The algorithm is deterministic and rule-driven.
 
@@ -18,12 +18,12 @@ The algorithm is deterministic and rule-driven.
 
 The algorithm shall:
 
-- analyse chart structure and Day Master relationship;
-- generate pattern candidates across supported categories;
-- evaluate competing candidates;
+- evaluate strength, climate, and pattern requirements as Useful God inputs;
+- generate and evaluate Useful God candidates;
 - resolve conflicts and priority contests;
+- determine Yong Shen, Xi Shen, Ji Shen, and Xian Shen;
 - calculate confidence;
-- produce a reproducible PatternResult.
+- produce a reproducible UsefulGodResult.
 
 ---
 
@@ -46,15 +46,15 @@ Read TemperatureResult from AnalysisContext
 
 ↓
 
-Load Pattern Rules
+Read PatternResult from AnalysisContext
 
 ↓
 
-Analyse Structure
+Load Useful God Rules
 
 ↓
 
-Generate Pattern Candidates
+Generate Candidates
 
 ↓
 
@@ -66,15 +66,31 @@ Resolve Priority
 
 ↓
 
+Determine Yong Shen
+
+↓
+
+Determine Xi Shen
+
+↓
+
+Determine Ji Shen
+
+↓
+
+Determine Xian Shen
+
+↓
+
 Calculate Confidence
 
 ↓
 
-Build Immutable PatternResult
+Build Immutable UsefulGodResult
 
 ↓
 
-Publish PatternResult
+Publish UsefulGodResult
 ```
 
 ---
@@ -85,14 +101,15 @@ Each dimension is evaluated independently before candidate aggregation.
 
 Dimensions include:
 
-- Chart Structure
-- Day Master Relationship
-- Standard Patterns
-- Transformation Patterns
-- Special Patterns
-- Follow Patterns
-- Mixed Patterns
-- Exceptional Patterns
+- Strength Balance
+- Climate Balance
+- Pattern Requirements
+- Five-Element Equilibrium
+- Supporting and Controlling Relationships
+- Adjustment Priorities
+- Primary Candidates
+- Secondary Candidates
+- Alternative Candidates
 
 No dimension may directly modify another.
 
@@ -100,14 +117,14 @@ No dimension may directly modify another.
 
 # 5. Candidate Generation
 
-The algorithm shall generate candidates from all applicable pattern categories.
+The algorithm shall generate candidates from all applicable Useful God categories.
 
 Candidate generation shall:
 
 1. Collect eligible matches from each category analyzer.
-2. Preserve category identity.
+2. Preserve candidate rank class (primary, secondary, alternative).
 3. Preserve matched-rule evidence.
-4. Form an immutable PatternCandidateSet.
+4. Form an immutable UsefulGodCandidateSet.
 
 ---
 
@@ -115,11 +132,12 @@ Candidate generation shall:
 
 The algorithm shall evaluate each candidate using:
 
-- Pattern Rules
-- Structure evidence
-- Day Master relation evidence
-- Upstream StrengthResult evidence where required
-- Upstream TemperatureResult evidence where required
+- Useful God Rules
+- Strength balance evidence
+- Climate balance evidence
+- Pattern requirement evidence
+- Equilibrium and relation evidence
+- Upstream StrengthResult, TemperatureResult, and PatternResult evidence where required
 
 Evaluation produces deterministic CandidateEvaluation records.
 
@@ -130,8 +148,8 @@ Evaluation produces deterministic CandidateEvaluation records.
 The algorithm shall:
 
 1. Apply Conflict Resolution Rules.
-2. Apply Priority Resolution Rules.
-3. Select one governing Pattern identity.
+2. Apply Candidate Priority Rules.
+3. Select Yong Shen, Xi Shen, Ji Shen, and Xian Shen assignments.
 4. Record rejected candidates and resolution evidence.
 
 Resolution order shall remain stable.
@@ -147,7 +165,7 @@ Confidence is determined using:
 - Rule consistency
 - Analytical agreement
 - Candidate separation quality
-- Upstream StrengthResult and TemperatureResult completeness where required by Pattern Rules
+- Upstream StrengthResult, TemperatureResult, and PatternResult completeness where required by Useful God Rules
 
 Confidence shall be independent of narrative interpretation.
 
@@ -157,7 +175,7 @@ Confidence shall be independent of narrative interpretation.
 
 When multiple rule outcomes or candidates have equal priority:
 
-1. Apply the official Priority Resolution Rules.
+1. Apply the official Candidate Priority Rules.
 2. Preserve deterministic ordering.
 3. Record the resolution path.
 
@@ -167,12 +185,12 @@ When multiple rule outcomes or candidates have equal priority:
 
 Every output decision shall reference:
 
-- contributing analyzers;
+- contributing analyzers and determiners;
 - matched rules;
 - rejected candidates;
 - score contributions;
 - supporting evidence;
-- upstream StrengthResult and TemperatureResult evidence when consumed.
+- upstream StrengthResult, TemperatureResult, and PatternResult evidence when consumed.
 
 ---
 
@@ -192,11 +210,11 @@ Target characteristics:
 The algorithm shall never:
 
 - infer undocumented rules;
-- modify Rule Database contents;
-- recompute Day Master strength;
-- recompute climate balance;
+- modify Useful God Rule Database Knowledge Module contents;
+- recompute Strength, Temperature, or Pattern;
 - invoke downstream engines;
-- produce non-deterministic results.
+- produce non-deterministic results;
+- hard-code a physical repository path to the Rule Database.
 
 ---
 
@@ -207,7 +225,8 @@ The algorithm is accepted when:
 - identical inputs produce identical outputs;
 - all analytical dimensions execute successfully;
 - competing candidates are evaluated and resolved;
+- Yong Shen, Xi Shen, Ji Shen, and Xian Shen are determined;
 - confidence is calculated;
 - rejected candidates are recorded;
 - all matched rules are traceable;
-- PatternResult is reproducible.
+- UsefulGodResult is reproducible.

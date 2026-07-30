@@ -1,6 +1,6 @@
-# Pattern Engine Validation
+# Useful God Engine Validation
 
-**Module:** `engines/analysis_engine/03_pattern_engine`  
+**Module:** `engines/analysis_engine/04_useful_god_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Validation Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines all validation rules performed by the Pattern Engine before, during, and after execution.
+This document defines all validation rules performed by the Useful God Engine before, during, and after execution.
 
 Validation ensures correctness, consistency, and integrity of analytical results.
 
@@ -33,12 +33,14 @@ The engine shall verify:
 - AnalysisContext exists.
 - AnalysisContext.strength_result exists.
 - AnalysisContext.temperature_result exists.
+- AnalysisContext.pattern_result exists.
 - Required context fields are present.
 - Calendar data is complete.
 - Bazi pillars are complete.
 - Hidden stems are available.
 - StrengthResult required fields are present within AnalysisContext.
 - TemperatureResult required fields are present within AnalysisContext.
+- PatternResult required fields are present within AnalysisContext.
 - Rule database version is supported.
 - Configuration is valid.
 
@@ -50,23 +52,27 @@ Invalid inputs shall be rejected.
 
 During execution the engine shall verify:
 
-- Rules are successfully loaded from `knowledge/rule_database/04_pattern_rules/`.
-- Rule categories are complete for mandatory pattern categories.
+- Rules are successfully loaded from the Useful God Rule Database Knowledge Module.
+- Rule categories are complete for mandatory Useful God categories.
 - Analyzer dependencies are satisfied.
 - Required intermediate models are available.
 - Candidate generation produces a valid candidate set.
 - No duplicate mandatory rule execution occurs.
 - AnalysisContext.strength_result is treated as read-only evidence.
 - AnalysisContext.temperature_result is treated as read-only evidence.
+- AnalysisContext.pattern_result is treated as read-only evidence.
 
 ---
 
 # 5. Output Validation
 
-Before publishing PatternResult the engine shall verify:
+Before publishing UsefulGodResult the engine shall verify:
 
-- Identified pattern exists.
-- Pattern category exists.
+- useful_god exists.
+- favorable_gods exists.
+- unfavorable_gods exists.
+- neutral_gods exists.
+- Candidate rankings exist.
 - Confidence exists.
 - Matched rules are recorded.
 - Rejected candidates are recorded.
@@ -110,8 +116,9 @@ The engine shall verify:
 - reproducible results;
 - complete rule traceability;
 - consistent scoring;
-- no Day Master strength recomputation;
-- no climate recomputation.
+- no Strength recomputation;
+- no Temperature recomputation;
+- no Pattern recomputation.
 
 ---
 
@@ -133,4 +140,4 @@ Validation is complete when:
 
 - all required checks pass;
 - no fatal validation errors remain;
-- PatternResult satisfies all invariants.
+- UsefulGodResult satisfies all invariants.
