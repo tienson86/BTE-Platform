@@ -1,28 +1,32 @@
-﻿# Report Template Registry Index
+# Report Registry — Index
 
+**Module:** `knowledge/report_templates`  
+**Domain:** `registry`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-## Allocated Templates
+## Catalog
 
-| Report Template ID | Domain | Title | Status | Path |
-|--------------------|--------|-------|--------|------|
-| — | — | No templates allocated in V1.0.0 | — | — |
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
 ---
 
-## Domain Next-Free Summary
+## Allocation
 
-| Domain | Next Free ID |
-|--------|--------------|
-| 01_basic | RPT-000001 |
-| 02_professional | RPT-000100 |
-| 03_business | RPT-000200 |
-| 04_marriage | RPT-000300 |
-| 05_career | RPT-000400 |
-| 06_health | RPT-000500 |
-| 07_children | RPT-000600 |
-| 08_wealth | RPT-000700 |
-| 09_luck_cycles | RPT-000800 |
-| 10_custom | RPT-000900 |
+| Field | Value |
+|-------|-------|
+| ID Prefix | `RPT` |
+| Reserved Range | `Cross-domain locator` |
+| Next Free ID | **See domain ranges** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/report_templates/REPORT_TEMPLATE_SPEC.md`.

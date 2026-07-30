@@ -1,12 +1,18 @@
-﻿# Health Report Template
+# Health — Record Template
 
-Copy this template for a new **Health** report template.
+**Module:** `knowledge/report_templates`  
+**Domain:** `06_health`  
+**Template File:** `REPORT_TEMPLATE.md`  
 
-Allocate the next free ID from this domain range (see domain INDEX and `REPORT_TEMPLATE_SPEC.md`).
+Copy this template for a new **Health** record.
+
+Allocate the next free ID from `INDEX.md` / `knowledge/report_templates/REPORT_TEMPLATE_SPEC.md` before writing.
+
+Framework refinement only — do not invent academic or operational content here.
 
 ---
 
-# <Report Template Title>
+# <Canonical Name>
 
 ---
 
@@ -14,28 +20,122 @@ Allocate the next free ID from this domain range (see domain INDEX and `REPORT_T
 
 | Field | Value |
 |-------|-------|
-| Report Template ID | RPT-NNNNNN |
-| Title | |
+| ID | RPT-NNNNNN |
+| Canonical Name | |
+| Aliases | |
+| Chinese | |
+| Traditional Chinese | |
+| Simplified Chinese | |
+| Vietnamese | |
+| English | |
+| Definition | |
+| Description | |
+| Classification | |
 | Domain | 06_health |
-| Category | General |
-| Audience | General Reader |
-| Language | English |
-| Structure | |
+| Category | |
+| Relationships | |
+| Dependencies | |
+| Evidence | |
+| References | |
+| Terminology Links | |
 | Knowledge Links | |
 | Rule Links | |
 | Sentence Links | |
-| Reference Links | |
+| Confidence | Unverified |
+| Review | Not reviewed |
 | Version | V1.0.0 |
 | Status | Placeholder |
 | Traceability | L0 |
 
 ---
 
-## Structure
+## Canonical Name
 
-1. _TBD section_
-2. _TBD section_
-3. _TBD section_
+_TBD_
+
+---
+
+## Aliases
+
+_TBD_
+
+---
+
+## Chinese
+
+_TBD_
+
+---
+
+## Traditional Chinese
+
+_TBD_
+
+---
+
+## Simplified Chinese
+
+_TBD_
+
+---
+
+## Vietnamese
+
+_TBD_
+
+---
+
+## English
+
+_TBD_
+
+---
+
+## Definition
+
+_TBD_
+
+---
+
+## Description
+
+_TBD_
+
+---
+
+## Classification
+
+_TBD_
+
+---
+
+## Relationships
+
+_TBD_
+
+---
+
+## Dependencies
+
+_TBD_
+
+---
+
+## Evidence
+
+_TBD_
+
+---
+
+## References
+
+_TBD — `REF-*`_
+
+---
+
+## Terminology Links
+
+_TBD — `TERM-*`_
 
 ---
 
@@ -57,13 +157,36 @@ _TBD — `SEN-*`_
 
 ---
 
-## Reference Links
+## Confidence
 
-_TBD — `REF-*`_
+Unverified
 
 ---
 
-## Traceability Notes
+## Review
+
+| Field | Value |
+|-------|-------|
+| Reviewer | |
+| Review Date | |
+| Outcome | |
+| Notes | |
+
+---
+
+## Version
+
+V1.0.0
+
+---
+
+## Status
+
+Placeholder
+
+---
+
+## Traceability
 
 _TBD_
 
@@ -73,4 +196,4 @@ _TBD_
 
 | Version | Date | Notes |
 |---------|------|-------|
-| V1.0.0 | YYYY-MM-DD | Initial placeholder |
+| V1.0.0 | YYYY-MM-DD | Framework template placeholder |
