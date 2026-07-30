@@ -1,14 +1,32 @@
-﻿# Luck Cycles Sentence Index
+# Luck Cycles — Index
 
+**Module:** `knowledge/sentence_library`  
 **Domain:** `11_luck_cycles`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-| Sentence ID | Title | Status | File |
-|-------------|-------|--------|------|
-| — | — | No sentences in V1.0.0 | — |
+## Catalog
 
-Next free ID: **SEN-001100**
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
-Use [SENTENCE_TEMPLATE.md](SENTENCE_TEMPLATE.md) when adding content later. Update this index and [../registry/INDEX.md](../registry/INDEX.md).
+---
+
+## Allocation
+
+| Field | Value |
+|-------|-------|
+| ID Prefix | `SEN` |
+| Reserved Range | `SEN-001100 – SEN-001199` |
+| Next Free ID | **SEN-001100** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [SENTENCE_TEMPLATE.md](SENTENCE_TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/sentence_library/SENTENCE_LIBRARY_SPEC.md`.

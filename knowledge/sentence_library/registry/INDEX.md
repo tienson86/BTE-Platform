@@ -1,30 +1,32 @@
-﻿# Sentence Library Registry Index
+# Sentence Registry — Index
 
+**Module:** `knowledge/sentence_library`  
+**Domain:** `registry`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-## Allocated Sentences
+## Catalog
 
-| Sentence ID | Domain | Title | Status | Path |
-|-------------|--------|-------|--------|------|
-| — | — | No sentences allocated in V1.0.0 | — | — |
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
 ---
 
-## Domain Next-Free Summary
+## Allocation
 
-| Domain | Next Free ID |
-|--------|--------------|
-| 01_strength | SEN-000001 |
-| 02_five_elements | SEN-000100 |
-| 03_heavenly_stems | SEN-000200 |
-| 04_earthly_branches | SEN-000300 |
-| 05_ten_gods | SEN-000400 |
-| 06_patterns | SEN-000500 |
-| 07_useful_gods | SEN-000600 |
-| 08_combinations | SEN-000700 |
-| 09_temperature | SEN-000800 |
-| 10_shensha | SEN-000900 |
-| 11_luck_cycles | SEN-001100 |
-| 12_special_cases | SEN-001200 |
+| Field | Value |
+|-------|-------|
+| ID Prefix | `SEN` |
+| Reserved Range | `Cross-domain locator` |
+| Next Free ID | **See domain ranges** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/sentence_library/SENTENCE_LIBRARY_SPEC.md`.
