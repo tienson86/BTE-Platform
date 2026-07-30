@@ -1,18 +1,32 @@
-﻿# Sentences Registry Index
+# Sentences Registry — Index
 
-**Registry:** `sentences`  
+**Module:** `knowledge/registry`  
+**Domain:** `sentences`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-| Sentence ID | Title | Domain | Language | Status |
-| --- | --- | --- | --- | --- |
-| — | — | — | No entries in V1.0.0 | — |
+## Catalog
+
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
 ---
 
-Next steps for content phase:
+## Allocation
 
-1. Allocate ID in the source domain module.
-2. Create the authoritative record there.
-3. Add one locator row here using [TEMPLATE.md](TEMPLATE.md).
+| Field | Value |
+|-------|-------|
+| ID Prefix | `SEN` |
+| Reserved Range | `Locator catalog` |
+| Next Free ID | **Allocated in source module first** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/registry/README.md`.
