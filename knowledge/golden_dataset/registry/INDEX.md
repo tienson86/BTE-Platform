@@ -1,28 +1,32 @@
-﻿# Golden Dataset Registry Index
+# Dataset Registry — Index
 
+**Module:** `knowledge/golden_dataset`  
+**Domain:** `registry`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-## Allocated Cases
+## Catalog
 
-| Dataset ID | Domain | Title | Status | Path |
-|------------|--------|-------|--------|------|
-| — | — | No cases allocated in V1.0.0 | — | — |
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
 ---
 
-## Domain Next-Free Summary
+## Allocation
 
-| Domain | Next Free ID |
-|--------|--------------|
-| 01_basic | CASE-000001 |
-| 02_strength | CASE-000100 |
-| 03_patterns | CASE-000200 |
-| 04_useful_gods | CASE-000300 |
-| 05_ten_gods | CASE-000400 |
-| 06_temperature | CASE-000500 |
-| 07_combinations | CASE-000600 |
-| 08_shensha | CASE-000700 |
-| 09_luck_cycles | CASE-000900 |
-| 10_special_cases | CASE-001000 |
+| Field | Value |
+|-------|-------|
+| ID Prefix | `CASE` |
+| Reserved Range | `Cross-domain locator` |
+| Next Free ID | **See domain ranges** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/golden_dataset/GOLDEN_DATASET_SPEC.md`.

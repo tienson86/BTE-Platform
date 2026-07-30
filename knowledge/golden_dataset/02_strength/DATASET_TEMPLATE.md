@@ -1,12 +1,18 @@
-﻿# Strength Dataset Template
+# Strength — Record Template
 
-Copy this template for a new **Strength** golden case.
+**Module:** `knowledge/golden_dataset`  
+**Domain:** `02_strength`  
+**Template File:** `DATASET_TEMPLATE.md`  
 
-Allocate the next free ID from this domain range (see domain INDEX and `GOLDEN_DATASET_SPEC.md`).
+Copy this template for a new **Strength** record.
+
+Allocate the next free ID from `INDEX.md` / `knowledge/golden_dataset/GOLDEN_DATASET_SPEC.md` before writing.
+
+Framework refinement only — do not invent academic or operational content here.
 
 ---
 
-# <Case Title>
+# <Canonical Name>
 
 ---
 
@@ -14,56 +20,108 @@ Allocate the next free ID from this domain range (see domain INDEX and `GOLDEN_D
 
 | Field | Value |
 |-------|-------|
-| Dataset ID | CASE-NNNNNN |
-| Title | |
+| ID | CASE-NNNNNN |
+| Canonical Name | |
+| Aliases | |
+| Chinese | |
+| Traditional Chinese | |
+| Simplified Chinese | |
+| Vietnamese | |
+| English | |
+| Definition | |
+| Description | |
+| Classification | |
 | Domain | 02_strength |
-| Category | Canonical |
-| Input | |
-| Expected Output | |
-| Knowledge Assets | |
-| Rules | |
-| Sentences | |
-| Score | |
+| Category | |
+| Relationships | |
+| Dependencies | |
+| Evidence | |
 | References | |
+| Terminology Links | |
+| Knowledge Links | |
+| Rule Links | |
+| Sentence Links | |
+| Confidence | Unverified |
+| Review | Not reviewed |
 | Version | V1.0.0 |
 | Status | Placeholder |
-| Review | Not reviewed |
 | Traceability | L0 |
-| Tolerance Policy | Exact |
 
 ---
 
-## Input
+## Canonical Name
 
 _TBD_
 
 ---
 
-## Expected Output
+## Aliases
 
 _TBD_
 
 ---
 
-## Knowledge Assets
+## Chinese
 
-_TBD — `KNO-*`_
-
----
-
-## Rules
-
-_TBD — `RUL-*`_
+_TBD_
 
 ---
 
-## Sentences
+## Traditional Chinese
 
-_TBD — `SEN-*`_
+_TBD_
 
 ---
 
-## Score
+## Simplified Chinese
+
+_TBD_
+
+---
+
+## Vietnamese
+
+_TBD_
+
+---
+
+## English
+
+_TBD_
+
+---
+
+## Definition
+
+_TBD_
+
+---
+
+## Description
+
+_TBD_
+
+---
+
+## Classification
+
+_TBD_
+
+---
+
+## Relationships
+
+_TBD_
+
+---
+
+## Dependencies
+
+_TBD_
+
+---
+
+## Evidence
 
 _TBD_
 
@@ -72,6 +130,36 @@ _TBD_
 ## References
 
 _TBD — `REF-*`_
+
+---
+
+## Terminology Links
+
+_TBD — `TERM-*`_
+
+---
+
+## Knowledge Links
+
+_TBD — `KNO-*`_
+
+---
+
+## Rule Links
+
+_TBD — `RUL-*`_
+
+---
+
+## Sentence Links
+
+_TBD — `SEN-*`_
+
+---
+
+## Confidence
+
+Unverified
 
 ---
 
@@ -86,7 +174,19 @@ _TBD — `REF-*`_
 
 ---
 
-## Traceability Notes
+## Version
+
+V1.0.0
+
+---
+
+## Status
+
+Placeholder
+
+---
+
+## Traceability
 
 _TBD_
 
@@ -96,4 +196,4 @@ _TBD_
 
 | Version | Date | Notes |
 |---------|------|-------|
-| V1.0.0 | YYYY-MM-DD | Initial placeholder |
+| V1.0.0 | YYYY-MM-DD | Framework template placeholder |
