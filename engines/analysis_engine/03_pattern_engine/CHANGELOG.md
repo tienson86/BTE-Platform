@@ -1,8 +1,8 @@
-# Temperature Engine Changelog
+# Pattern Engine Changelog
 
-**Module:** `engines/analysis_engine/02_temperature_engine`
+**Module:** `engines/analysis_engine/03_pattern_engine`
 
-This document records all architecture, specification, interface, and implementation changes throughout the lifecycle of the Temperature Engine.
+This document records all architecture, specification, interface, and implementation changes throughout the lifecycle of the Pattern Engine.
 
 The changelog follows Semantic Versioning (SemVer).
 
@@ -14,7 +14,7 @@ The changelog follows Semantic Versioning (SemVer).
 
 ## Overview
 
-Version 1.0.0 establishes the complete architectural foundation of the Temperature Engine.
+Version 1.0.0 establishes the complete architectural foundation of the Pattern Engine.
 
 This version defines the public contracts, execution model, scoring framework, validation strategy, cache policy, and rule integration required for implementation.
 
@@ -47,7 +47,8 @@ No production source code is included in this milestone.
 - Immutable domain model.
 - Deterministic execution pipeline.
 - Explainable analytical design.
-- Explicit StrengthResult consumption contract.
+- Explicit AnalysisContext-only input contract.
+- Upstream StrengthResult and TemperatureResult consumption via AnalysisContext.
 
 ### Rule Integration
 
@@ -55,19 +56,19 @@ No production source code is included in this milestone.
 - Rule Loader integration.
 - Rule traceability requirements.
 - Version-aware rule management.
-- Temperature Rule Database source mapping.
+- Pattern Rule Database source mapping.
 
 ### Scoring
 
-- Independent climatic scoring dimensions.
+- Independent pattern scoring dimensions.
 - Externalized weighting model.
 - Rule-driven normalization.
 - Explainable score composition.
-- Climate adjustment indicator derivation.
+- Deterministic candidate resolution.
 
 ### Validation
 
-- Input validation for AnalysisContext, including AnalysisContext.strength_result.
+- Input validation for AnalysisContext, including AnalysisContext.strength_result and AnalysisContext.temperature_result.
 - Runtime validation.
 - Output validation.
 - Model invariant enforcement.
@@ -75,7 +76,8 @@ No production source code is included in this milestone.
 ### Error Handling
 
 - Standardized error taxonomy.
-- Strength Input Error category.
+- Strength Input Error and Temperature Input Error categories.
+- Candidate Resolution Error category.
 - Diagnostic metadata requirements.
 - Fail-fast strategy.
 - Public error contract.
@@ -101,7 +103,7 @@ Backward-compatible throughout Version 1.x.
 
 ### Upstream Contracts
 
-Compatible with Strength Engine V1.x published StrengthResult via AnalysisContext.strength_result.
+Compatible with Strength Engine V1.x and Temperature Engine V1.x published results via AnalysisContext.
 
 ### Rule Database
 
@@ -147,13 +149,13 @@ Required for:
 - Scoring model redesign.
 - Execution pipeline redesign.
 - Rule compatibility changes.
-- Changes to StrengthResult consumption semantics via AnalysisContext.
+- Changes to upstream result consumption semantics via AnalysisContext.
 
 ---
 
 ## Freeze Declaration
 
-Version **1.0.0** is designated as the official architecture baseline for the Temperature Engine.
+Version **1.0.0** is designated as the official architecture baseline for the Pattern Engine.
 
 Subsequent implementation shall conform to the specifications defined in this document set.
 

@@ -32,10 +32,13 @@ Each stage has exactly one responsibility.
 # 3. High-Level Flow
 
 ```text
-AnalysisContext + StrengthResult
+Receive AnalysisContext
         │
         ▼
 Context Validation
+        │
+        ▼
+Read StrengthResult from AnalysisContext
         │
         ▼
 Temperature Context Builder
@@ -88,11 +91,11 @@ TemperatureResult
 
 Objective:
 
-Validate AnalysisContext and StrengthResult integrity.
+Validate AnalysisContext integrity, including required upstream fields.
 
 Output:
 
-Validated AnalysisContext and StrengthResult.
+Validated AnalysisContext.
 
 Failure:
 
@@ -100,7 +103,23 @@ Terminate immediately.
 
 ---
 
-## Stage 2 — Temperature Context Builder
+## Stage 2 — Read StrengthResult
+
+Objective:
+
+Read published StrengthResult from AnalysisContext.strength_result.
+
+Output:
+
+Validated StrengthResult evidence for temperature analysis.
+
+Failure:
+
+Terminate immediately if missing or invalid.
+
+---
+
+## Stage 3 — Temperature Context Builder
 
 Objective:
 
@@ -112,7 +131,7 @@ TemperatureContext.
 
 ---
 
-## Stage 3 — Rule Discovery
+## Stage 4 — Rule Discovery
 
 Objective:
 
@@ -124,7 +143,7 @@ Rule identifiers.
 
 ---
 
-## Stage 4 — Rule Loading
+## Stage 5 — Rule Loading
 
 Objective:
 
@@ -136,7 +155,7 @@ Executable rule set.
 
 ---
 
-## Stage 5 — Season Temperature Analysis
+## Stage 6 — Season Temperature Analysis
 
 Objective:
 
@@ -144,7 +163,7 @@ Evaluate seasonal temperature influence on the natal chart.
 
 ---
 
-## Stage 6 — Warm / Cold Analysis
+## Stage 7 — Warm / Cold Analysis
 
 Objective:
 
@@ -152,7 +171,7 @@ Evaluate warm / cold balance.
 
 ---
 
-## Stage 7 — Dryness Analysis
+## Stage 8 — Dryness Analysis
 
 Objective:
 
@@ -160,7 +179,7 @@ Evaluate dryness contribution.
 
 ---
 
-## Stage 8 — Humidity Analysis
+## Stage 9 — Humidity Analysis
 
 Objective:
 
@@ -168,7 +187,7 @@ Evaluate humidity contribution.
 
 ---
 
-## Stage 9 — Equilibrium Analysis
+## Stage 10 — Equilibrium Analysis
 
 Objective:
 
@@ -176,7 +195,7 @@ Evaluate climate equilibrium.
 
 ---
 
-## Stage 10 — Environmental Support Analysis
+## Stage 11 — Environmental Support Analysis
 
 Objective:
 
@@ -184,7 +203,7 @@ Evaluate environmental support for climatic balance.
 
 ---
 
-## Stage 11 — Adjustment Analysis
+## Stage 12 — Adjustment Analysis
 
 Objective:
 
@@ -192,7 +211,7 @@ Evaluate climate adjustment requirements.
 
 ---
 
-## Stage 12 — Score Aggregation
+## Stage 13 — Score Aggregation
 
 Objective:
 
@@ -200,7 +219,7 @@ Aggregate all analytical dimensions into a normalized climate score.
 
 ---
 
-## Stage 13 — Confidence Evaluation
+## Stage 14 — Confidence Evaluation
 
 Objective:
 
@@ -208,7 +227,7 @@ Evaluate analytical confidence.
 
 ---
 
-## Stage 14 — Result Builder
+## Stage 15 — Result Builder
 
 Objective:
 
@@ -225,24 +244,22 @@ Received
 Validated
 ↓
 
-Prepared
+Strength Evidence Loaded
+↓
 
+Prepared
 ↓
 
 Rules Loaded
-
 ↓
 
 Analyzing
-
 ↓
 
 Scored
-
 ↓
 
 Confidence Evaluated
-
 ↓
 
 Completed
@@ -255,6 +272,12 @@ Failure transitions immediately enter the Error state.
 # 6. Failure Flow
 
 Validation Failure
+
+↓
+
+Stop Execution
+
+Missing StrengthResult
 
 ↓
 

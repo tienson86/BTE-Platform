@@ -1,6 +1,6 @@
-# Temperature Engine Validation
+# Pattern Engine Validation
 
-**Module:** `engines/analysis_engine/02_temperature_engine`  
+**Module:** `engines/analysis_engine/03_pattern_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Validation Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines all validation rules performed by the Temperature Engine before, during, and after execution.
+This document defines all validation rules performed by the Pattern Engine before, during, and after execution.
 
 Validation ensures correctness, consistency, and integrity of analytical results.
 
@@ -32,11 +32,13 @@ The engine shall verify:
 
 - AnalysisContext exists.
 - AnalysisContext.strength_result exists.
+- AnalysisContext.temperature_result exists.
 - Required context fields are present.
 - Calendar data is complete.
 - Bazi pillars are complete.
 - Hidden stems are available.
 - StrengthResult required fields are present within AnalysisContext.
+- TemperatureResult required fields are present within AnalysisContext.
 - Rule database version is supported.
 - Configuration is valid.
 
@@ -54,18 +56,19 @@ During execution the engine shall verify:
 - Required intermediate models are available.
 - No duplicate mandatory rule execution occurs.
 - AnalysisContext.strength_result is treated as read-only evidence.
+- AnalysisContext.temperature_result is treated as read-only evidence.
 
 ---
 
 # 5. Output Validation
 
-Before publishing TemperatureResult the engine shall verify:
+Before publishing PatternResult the engine shall verify:
 
-- Overall climate score exists.
-- Temperature level exists.
-- Adjustment indicators exist where required by rules.
+- Pattern identity exists.
+- Pattern category exists.
 - Confidence exists.
 - Matched rules are recorded.
+- Candidate resolution evidence exists where applicable.
 - Reasoning is complete.
 - Metadata is attached.
 - Result is immutable.
@@ -105,7 +108,8 @@ The engine shall verify:
 - reproducible results;
 - complete rule traceability;
 - consistent scoring;
-- no Day Master strength recomputation.
+- no Day Master strength recomputation;
+- no climate recomputation.
 
 ---
 
@@ -127,4 +131,4 @@ Validation is complete when:
 
 - all required checks pass;
 - no fatal validation errors remain;
-- TemperatureResult satisfies all invariants.
+- PatternResult satisfies all invariants.

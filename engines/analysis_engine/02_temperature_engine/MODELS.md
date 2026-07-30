@@ -37,51 +37,31 @@ The Temperature Engine defines the following primary models:
 
 ```text
 AnalysisContext (Input)
-
-StrengthResult (Input)
-
         │
-
+        │  reads AnalysisContext.strength_result
         ▼
-
 TemperatureContext
-
         │
-
         ▼
-
 SeasonTemperatureAnalysis
-
 WarmColdAnalysis
-
 DrynessAnalysis
-
 HumidityAnalysis
-
 EquilibriumAnalysis
-
 EnvironmentalSupportAnalysis
-
 AdjustmentAnalysis
-
         │
-
         ▼
-
 TemperatureScore
-
         │
-
         ▼
-
 ConfidenceEvaluation
-
         │
-
         ▼
-
 TemperatureResult
 ```
+
+The engine does not define a dedicated TemperatureInput wrapper. Shared AnalysisContext is used directly.
 
 ---
 
@@ -89,11 +69,17 @@ TemperatureResult
 
 Owner:
 
-- Bazi Engine / Analysis Engine orchestrator
+- Analysis Engine orchestrator
 
 Purpose:
 
-Provides immutable analytical input.
+Provides immutable analytical input, including published upstream stage results.
+
+Contains:
+
+- Calendar and BaZi chart facts
+- Runtime metadata
+- `strength_result` published by Strength Engine
 
 Mutability:
 
@@ -101,19 +87,25 @@ Immutable
 
 Lifecycle:
 
-Created before Temperature Engine execution.
+Created and enriched before Temperature Engine execution.
 
 Modified:
 
-Never.
+Never by Temperature Engine.
 
 ---
 
-# 5. StrengthResult (External)
+# 5. StrengthResult (Upstream via AnalysisContext)
 
 Owner:
 
 - Strength Engine
+
+Access Path:
+
+```text
+AnalysisContext.strength_result
+```
 
 Purpose:
 
@@ -125,7 +117,7 @@ Immutable
 
 Lifecycle:
 
-Created by Strength Engine before Temperature Engine execution.
+Created by Strength Engine and attached to AnalysisContext before Temperature Engine execution.
 
 Modified:
 
@@ -146,7 +138,7 @@ Internal normalized analytical context.
 Contains:
 
 - normalized chart references
-- projected strength evidence
+- projected strength evidence from AnalysisContext.strength_result
 - cached calculations
 - runtime configuration
 - rule references
@@ -309,7 +301,7 @@ Each model has exactly one owner.
 
 Models shall never be modified by downstream engines.
 
-Temperature Engine shall never modify StrengthResult.
+Temperature Engine shall never modify AnalysisContext.strength_result.
 
 ---
 

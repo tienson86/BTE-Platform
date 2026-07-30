@@ -1,6 +1,6 @@
-# Temperature Engine Scoring Model
+# Pattern Engine Scoring Model
 
-**Module:** `engines/analysis_engine/02_temperature_engine`  
+**Module:** `engines/analysis_engine/03_pattern_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Mathematical Model Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines the mathematical scoring model used by the Temperature Engine.
+This document defines the mathematical scoring model used by the Pattern Engine.
 
 It specifies the scoring dimensions, weighting principles, normalization rules, confidence calculation inputs, and traceability requirements.
 
@@ -43,16 +43,13 @@ Dimension Scores
 Weighted Scores
         │
         ▼
+Candidate Ranking
+        │
+        ▼
 Normalization
         │
         ▼
-Overall Climate Score
-        │
-        ▼
-Temperature Level
-        │
-        ▼
-Adjustment Indicators
+Pattern Identity
 ```
 
 ---
@@ -61,13 +58,10 @@ Adjustment Indicators
 
 The model evaluates the following analytical dimensions:
 
-- Seasonal Temperature Influence
-- Warm / Cold Balance
-- Dryness Influence
-- Humidity Influence
-- Climate Equilibrium
-- Environmental Support
-- Climate Adjustment Requirements
+- Chart Structure Influence
+- Standard Pattern Match Strength
+- Special Pattern Match Strength
+- Candidate Resolution Strength
 
 Each dimension is evaluated independently.
 
@@ -102,27 +96,26 @@ Normalization shall:
 
 ---
 
-# 7. Temperature Classification
+# 7. Pattern Classification
 
-The normalized score is mapped to a temperature level.
+Normalized candidate scores are mapped to a Pattern identity.
 
-Classification thresholds are defined in the Rule Database.
+Classification thresholds and selection criteria are defined in the Rule Database.
 
 The engine shall never embed threshold values in source code.
 
 ---
 
-# 8. Adjustment Classification
+# 8. Candidate Resolution Model
 
-Climate adjustment requirements are derived from:
+Competing candidates are resolved using:
 
-- Adjustment Rules
-- Equilibrium state
-- Warm / cold imbalance
-- Dryness and humidity imbalance
-- Environmental support deficits
+- Candidate Resolution Rules
+- Priority Rules
+- Score separation
+- Special-pattern override criteria where defined by rules
 
-Adjustment indicators shall remain rule-defined and explainable.
+Resolution shall remain deterministic and explainable.
 
 ---
 
@@ -135,9 +128,11 @@ Confidence evaluation considers:
 - Rule consistency
 - Evidence quality
 - Analytical agreement
+- Candidate separation quality
 - AnalysisContext.strength_result completeness where required
+- AnalysisContext.temperature_result completeness where required
 
-Confidence is evaluated independently from the climate score.
+Confidence is evaluated independently from the pattern score where applicable.
 
 ---
 
@@ -150,7 +145,8 @@ Every score shall include:
 - calculation evidence;
 - weighting details;
 - normalization path;
-- StrengthResult references from AnalysisContext when used as evidence.
+- candidate resolution path;
+- StrengthResult and TemperatureResult references from AnalysisContext when used as evidence.
 
 No score may exist without traceability.
 
@@ -166,7 +162,7 @@ Any modification to:
 - weighting strategy;
 - normalization method;
 - classification thresholds;
-- adjustment derivation logic;
+- candidate resolution strategy;
 
 requires a new scoring model version.
 
@@ -180,7 +176,8 @@ The scoring model shall never:
 - infer undocumented weights;
 - skip mandatory dimensions;
 - generate random scores;
-- recompute Day Master strength scores.
+- recompute Day Master strength scores;
+- recompute climate scores.
 
 ---
 
@@ -191,5 +188,5 @@ The scoring model is accepted when:
 - identical inputs always produce identical normalized scores;
 - all score contributions are traceable;
 - confidence is reproducible;
-- classification is deterministic;
-- adjustment indicators are deterministic.
+- pattern classification is deterministic;
+- candidate resolution is deterministic.

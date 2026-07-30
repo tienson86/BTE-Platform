@@ -1,6 +1,6 @@
-# Temperature Engine Algorithm
+# Pattern Engine Algorithm
 
-**Module:** `engines/analysis_engine/02_temperature_engine`  
+**Module:** `engines/analysis_engine/03_pattern_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Algorithm Specification)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document specifies the analytical algorithm executed by the Temperature Engine.
+This document specifies the analytical algorithm executed by the Pattern Engine.
 
 The algorithm is deterministic and rule-driven.
 
@@ -18,11 +18,11 @@ The algorithm is deterministic and rule-driven.
 
 The algorithm shall:
 
-- evaluate each climatic analytical dimension independently;
-- aggregate all dimensions into a normalized climate score;
-- determine climate adjustment requirements;
+- evaluate each pattern analytical dimension independently;
+- identify standard and special pattern candidates;
+- resolve competing candidates into one Pattern identity;
 - calculate confidence;
-- produce a reproducible TemperatureResult.
+- produce a reproducible PatternResult.
 
 ---
 
@@ -41,6 +41,10 @@ Read StrengthResult from AnalysisContext
 
 ↓
 
+Read TemperatureResult from AnalysisContext
+
+↓
+
 Normalize Context
 
 ↓
@@ -49,31 +53,19 @@ Load Rules
 
 ↓
 
-Evaluate Season Temperature
+Evaluate Structure
 
 ↓
 
-Evaluate Warm / Cold Balance
+Evaluate Standard Patterns
 
 ↓
 
-Evaluate Dryness
+Evaluate Special Patterns
 
 ↓
 
-Evaluate Humidity
-
-↓
-
-Evaluate Equilibrium
-
-↓
-
-Evaluate Environmental Support
-
-↓
-
-Evaluate Adjustment Requirements
+Resolve Competing Candidates
 
 ↓
 
@@ -89,7 +81,7 @@ Evaluate Confidence
 
 ↓
 
-Build TemperatureResult
+Build PatternResult
 ```
 
 ---
@@ -100,13 +92,10 @@ Each dimension is evaluated independently.
 
 Dimensions include:
 
-- Seasonal Temperature
-- Warm / Cold Balance
-- Dryness
-- Humidity
-- Climate Equilibrium
-- Environmental Support
-- Climate Adjustment Requirements
+- Chart Structure
+- Standard Patterns
+- Special Patterns
+- Candidate Resolution
 
 No dimension may directly modify another.
 
@@ -119,8 +108,8 @@ The algorithm shall:
 1. Collect all dimension scores.
 2. Apply configured weights.
 3. Normalize the total score.
-4. Determine the temperature level.
-5. Derive adjustment indicators from matched Adjustment Rules.
+4. Determine the Pattern identity.
+5. Record rejected candidates and resolution evidence.
 
 Aggregation order shall remain stable.
 
@@ -134,15 +123,16 @@ Confidence is determined using:
 - Data completeness
 - Rule consistency
 - Analytical agreement
-- AnalysisContext.strength_result completeness where required by Temperature Rules
+- Candidate separation quality
+- Upstream StrengthResult and TemperatureResult completeness where required by Pattern Rules
 
-Confidence shall be independent of the climate score.
+Confidence shall be independent of the pattern score where applicable.
 
 ---
 
 # 7. Tie Resolution
 
-When multiple rule outcomes have equal priority:
+When multiple rule outcomes or candidates have equal priority:
 
 1. Apply the official Priority Rules.
 2. Preserve deterministic ordering.
@@ -152,13 +142,13 @@ When multiple rule outcomes have equal priority:
 
 # 8. Explainability
 
-Every output score shall reference:
+Every output decision shall reference:
 
 - contributing analyzers;
 - matched rules;
 - score contributions;
 - supporting evidence;
-- StrengthResult evidence when consumed from AnalysisContext.
+- upstream StrengthResult and TemperatureResult evidence when consumed.
 
 ---
 
@@ -180,6 +170,7 @@ The algorithm shall never:
 - infer undocumented rules;
 - modify Rule Database contents;
 - recompute Day Master strength;
+- recompute climate balance;
 - invoke downstream engines;
 - produce non-deterministic results.
 
@@ -193,4 +184,4 @@ The algorithm is accepted when:
 - all analytical dimensions execute successfully;
 - confidence is calculated;
 - all matched rules are traceable;
-- TemperatureResult is reproducible.
+- PatternResult is reproducible.

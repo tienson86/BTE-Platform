@@ -30,7 +30,7 @@ It does not answer questions of Day Master strength recomputation, pattern ident
 The Temperature Engine is solely responsible for:
 
 1. Accepting a validated analytical context produced after Calendar and Bazi construction.
-2. Consuming the published immutable `StrengthResult` from the Strength Engine.
+2. Reading the published immutable `StrengthResult` from `AnalysisContext.strength_result`.
 3. Loading and applying official Temperature Rules from the Temperature Rule Database.
 4. Evaluating seasonal temperature influence on the natal chart.
 5. Evaluating warm / cold balance.
@@ -147,20 +147,19 @@ Architectural constraints:
 
 # 6. Input
 
-## Primary Inputs
+## Primary Input
 
-The Temperature Engine accepts two immutable analytical inputs:
+The Temperature Engine accepts one immutable analytical input:
 
 ```text
 AnalysisContext
-StrengthResult
 ```
 
-`AnalysisContext` is assembled by the Analysis Engine orchestrator from upstream products. `StrengthResult` is published by the Strength Engine. The Temperature Engine does not accept raw birth data.
+`AnalysisContext` is assembled by the Analysis Engine orchestrator from upstream products. Published `StrengthResult` is accessed through `AnalysisContext.strength_result`. The Temperature Engine does not accept raw birth data and does not accept `StrengthResult` as a separate function parameter.
 
 ## Required Upstream Content
 
-The inputs must provide, at minimum:
+The context must provide, at minimum:
 
 | Domain | Required Content |
 |--------|------------------|
@@ -168,13 +167,13 @@ The inputs must provide, at minimum:
 | Bazi | Four Pillars, Day Master identity, Day Master element and polarity |
 | Structural facts | Hidden stems, Earthly Branch composition, Five Element distribution |
 | Relational facts | Production/control and climate-relevant elemental relationships as chart facts |
-| Strength | Published `StrengthResult` including strength level, score, and component evidence |
+| Strength | `AnalysisContext.strength_result` including strength level, score, and component evidence |
 | Runtime | Rule-database version reference and execution metadata |
 
 ## Input Contract Rules
 
-- Inputs are read-only.
-- Missing mandatory chart facts or missing `StrengthResult` must fail validation before scoring.
+- Input is read-only.
+- Missing mandatory chart facts or missing `AnalysisContext.strength_result` must fail validation before scoring.
 - The engine does not reconstruct pillars from calendar data.
 - The engine does not recompute Day Master strength.
 - The engine does not load Pattern, Useful God, or Interpretation results as inputs.
@@ -222,8 +221,8 @@ TemperatureResult
 |------------|------|
 | Calendar Engine | Supplies temporal and seasonal facts |
 | Bazi Engine | Supplies chart structure and Day Master identity |
-| Strength Engine | Supplies published `StrengthResult` |
-| Analysis Engine orchestrator | Supplies validated `AnalysisContext`, injects `StrengthResult`, and consumes `TemperatureResult` |
+| Strength Engine | Publishes `StrengthResult` into `AnalysisContext.strength_result` |
+| Analysis Engine orchestrator | Supplies validated `AnalysisContext` and consumes `TemperatureResult` |
 
 ## Knowledge Dependencies
 
@@ -254,7 +253,9 @@ The Temperature Engine must not depend on:
 V1.0 exposes one stable execution entry point.
 
 ```text
-TemperatureEngine.evaluate(context: AnalysisContext, strength: StrengthResult) -> TemperatureResult
+TemperatureEngine.evaluate(
+    context: AnalysisContext
+) -> TemperatureResult
 ```
 
 ## Public Surface
@@ -265,13 +266,13 @@ TemperatureEngine.evaluate(context: AnalysisContext, strength: StrengthResult) -
 | `TemperatureEngine.evaluate` | Stable | Sole public execution method |
 | `TemperatureResult` | Stable | Published output contract |
 | `AnalysisContext` | Stable | Shared analytical input contract |
-| `StrengthResult` | Stable | Upstream published strength contract |
+| `AnalysisContext.strength_result` | Stable | Upstream strength evidence accessed through context |
 
 ## Public API Guarantees
 
 - Callers interact only through the public façade.
 - Internal analyzers, scorers, loaders, and matchers are not part of the public contract.
-- Alternate internal method names may exist for adapters, but V1.0 architectural stability is defined by `evaluate(context, strength) -> TemperatureResult`.
+- Alternate internal method names may exist for adapters, but V1.0 architectural stability is defined by `evaluate(context) -> TemperatureResult`.
 - Breaking changes to the public surface require a major version increment.
 
 ---
@@ -282,7 +283,7 @@ Internal modules implement a single-responsibility pipeline within the temperatu
 
 | Internal Module | Responsibility |
 |-----------------|----------------|
-| Context Validator | Validates required `AnalysisContext` and `StrengthResult` fields before evaluation |
+| Context Validator | Validates required `AnalysisContext` fields and `AnalysisContext.strength_result` before evaluation |
 | Temperature Context Adapter | Projects chart facts and strength evidence into a temperature-matching view |
 | Rule Loader | Loads Temperature Rules and configuration in read-only mode |
 | Rule Matcher | Evaluates rule conditions against the temperature context |
@@ -330,7 +331,7 @@ engines/analysis_engine/02_temperature_engine/
 ├── scorer.py                 # Scoring and level classification
 ├── exceptions.py             # Temperature-domain errors
 ├── utils/
-│   └── context_builder.py    # AnalysisContext + StrengthResult → temperature view projection
+│   └── context_builder.py    # AnalysisContext → temperature view projection
 └── analyzers/
     ├── season_temperature.py
     ├── warm_cold.py
@@ -354,10 +355,13 @@ Structural rules:
 Evaluation is strictly sequential and deterministic.
 
 ```text
-Receive AnalysisContext and StrengthResult
+Receive AnalysisContext
         │
         ▼
-Validate Context and StrengthResult
+Validate AnalysisContext
+        │
+        ▼
+Read StrengthResult from AnalysisContext
         │
         ▼
 Build Temperature Context View
@@ -407,7 +411,7 @@ Return to Analysis Engine Orchestrator
 
 Execution invariants:
 
-- Identical `AnalysisContext`, identical `StrengthResult`, and identical Temperature Rule version must yield identical `TemperatureResult`.
+- Identical `AnalysisContext` and identical Temperature Rule version must yield identical `TemperatureResult`.
 - Validation failure terminates evaluation before scoring.
 - No downstream engine is called during this flow.
 - No Strength recomputation, Pattern, Useful God, Interpretation, or Report logic is executed inside this flow.
@@ -422,7 +426,7 @@ The module evaluates natal climate balance and nothing else.
 
 ## Stage Isolation
 
-Temperature communicates with the rest of the platform only through published contracts: `AnalysisContext` and `StrengthResult` in, `TemperatureResult` out.
+Temperature communicates with the rest of the platform only through published contracts: `AnalysisContext` in, `TemperatureResult` out. Upstream strength evidence is read from `AnalysisContext.strength_result`.
 
 ## Determinism
 
@@ -442,7 +446,7 @@ Published inputs and outputs are not mutated after creation.
 
 ## Fail Fast
 
-Invalid or incomplete upstream context or missing `StrengthResult` stops evaluation immediately.
+Invalid or incomplete upstream context or missing `AnalysisContext.strength_result` stops evaluation immediately.
 
 ## Non-Overlap
 

@@ -1,6 +1,6 @@
-# Temperature Engine Public API
+# Pattern Engine Public API
 
-**Module:** `engines/analysis_engine/02_temperature_engine`  
+**Module:** `engines/analysis_engine/03_pattern_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Public API Contract)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines the official public interface of the Temperature Engine.
+This document defines the official public interface of the Pattern Engine.
 
 Only the interfaces described here are guaranteed to remain stable throughout the V1.x lifecycle.
 
@@ -21,10 +21,12 @@ Internal components are not part of the public contract.
 The module exposes exactly one public operation.
 
 ```text
-TemperatureEngine.evaluate(
+PatternEngine.evaluate(
     context: AnalysisContext
-) -> TemperatureResult
+) -> PatternResult
 ```
+
+No additional public methods are exposed.
 
 No additional execution entry points are guaranteed.
 
@@ -45,16 +47,20 @@ Requirements:
 - Complete
 - Produced by upstream Calendar and BaZi stages
 - Contains published `strength_result` from the Strength Engine
+- Contains published `temperature_result` from the Temperature Engine
 
-StrengthResult is accessed through:
+Upstream results are accessed through:
 
 ```text
 AnalysisContext.strength_result
+AnalysisContext.temperature_result
 ```
 
-The Temperature Engine shall not accept StrengthResult as a second function parameter.
+The Pattern Engine shall not accept StrengthResult or TemperatureResult as separate function parameters.
 
-The Temperature Engine shall reject invalid inputs.
+No additional input models shall be introduced.
+
+The Pattern Engine shall reject invalid inputs.
 
 ---
 
@@ -63,7 +69,7 @@ The Temperature Engine shall reject invalid inputs.
 Output Type:
 
 ```text
-TemperatureResult
+PatternResult
 ```
 
 The returned object shall be:
@@ -72,6 +78,19 @@ The returned object shall be:
 - Explainable
 - Deterministic
 - Fully validated
+
+PatternResult becomes part of AnalysisResult.
+
+Minimum content:
+
+- identified pattern
+- pattern category
+- confidence
+- matched rules
+- rejected candidates
+- reasoning
+- diagnostics
+- metadata
 
 ---
 
@@ -85,6 +104,7 @@ The API guarantees:
 - explainable decisions
 - thread-safe execution
 - no Day Master strength recomputation
+- no climate recomputation
 
 ---
 
@@ -94,9 +114,11 @@ The API may return errors for:
 
 - invalid context
 - missing or invalid AnalysisContext.strength_result
+- missing or invalid AnalysisContext.temperature_result
 - missing rules
 - unsupported versions
 - invalid runtime configuration
+- unresolvable pattern candidate conflicts
 - analytical failures
 
 Errors shall not modify input data.
@@ -138,6 +160,8 @@ Future versions may add optional capabilities.
 
 Existing API behavior shall remain unchanged within V1.x.
 
+Additional public methods are prohibited within V1.x.
+
 ---
 
 # 11. Usage Rules
@@ -155,7 +179,6 @@ Consumers shall:
 
 | Consumer | Supported |
 |-----------|-----------|
-| Pattern Engine | ✓ |
 | Useful God Engine | ✓ |
 | Ten Gods Engine | ✓ |
 | Combination Engine | ✓ |

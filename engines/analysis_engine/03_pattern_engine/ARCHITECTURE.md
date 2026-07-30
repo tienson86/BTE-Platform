@@ -1,6 +1,6 @@
-# Temperature Engine Architecture
+# Pattern Engine Architecture
 
-**Module:** `engines/analysis_engine/02_temperature_engine`  
+**Module:** `engines/analysis_engine/03_pattern_engine`  
 **Version:** V1.0.0  
 **Status:** Frozen (Architecture Baseline)
 
@@ -8,7 +8,7 @@
 
 # 1. Purpose
 
-This document defines the official software architecture of the Temperature Engine.
+This document defines the official software architecture of the Pattern Engine.
 
 It establishes the architectural principles, component boundaries, dependency rules, execution lifecycle, and extension mechanisms for the module.
 
@@ -18,12 +18,13 @@ This document serves as the architecture baseline for all future implementation 
 
 # 2. Architectural Goals
 
-The Temperature Engine is designed to achieve the following goals:
+The Pattern Engine is designed to achieve the following goals:
 
-- Provide deterministic natal climate evaluation.
-- Isolate temperature analysis from all other analytical concerns.
+- Provide deterministic natal Pattern (Ge Ju / 格局) determination.
+- Isolate pattern analysis from all other analytical concerns.
 - Maintain strict separation between business knowledge and implementation logic.
-- Consume published StrengthResult from AnalysisContext.strength_result without recomputing Day Master strength.
+- Consume published StrengthResult and TemperatureResult from AnalysisContext without recomputation.
+- Support standard, special, follow, transformation, mixed, and exceptional pattern categories.
 - Produce reusable outputs for downstream engines.
 - Support future rule expansion without architectural changes.
 - Enable independent testing of each analytical component.
@@ -33,7 +34,22 @@ The Temperature Engine is designed to achieve the following goals:
 
 # 3. Position in the BTE Platform
 
-The Temperature Engine is the second analytical module within the Analysis Engine.
+The Pattern Engine is the third analytical module within the Analysis Engine.
+
+```text
+Strength Engine
+        │
+        ▼
+Temperature Engine
+        │
+        ▼
+Pattern Engine
+        │
+        ▼
+Useful God Engine
+```
+
+Full orchestration context:
 
 ```text
 Calendar Engine
@@ -52,6 +68,9 @@ AnalysisContext.strength_result
         │
         ▼
 Temperature Engine
+        │
+        ▼
+AnalysisContext.temperature_result
         │
         ▼
 Pattern Engine
@@ -81,7 +100,7 @@ Interpretation Engine
 Report Engine
 ```
 
-The Temperature Engine never skips stages, never invokes downstream engines, and never modifies upstream data.
+The Pattern Engine never skips stages, never invokes downstream engines, and never modifies upstream data.
 
 ---
 
@@ -89,7 +108,7 @@ The Temperature Engine never skips stages, never invokes downstream engines, and
 
 ## 4.1 Single Responsibility
 
-The module evaluates only the climatic balance of the natal chart.
+The module determines only the Pattern (Ge Ju / 格局) of the natal chart.
 
 No interpretation or recommendation logic is permitted.
 
@@ -125,24 +144,25 @@ Intermediate analytical results are immutable once finalized.
 
 ## 4.5 Explainability
 
-Every score must be traceable back to:
+Every pattern decision must be traceable back to:
 
 - Applied rule
 - Analytical component
 - Supporting evidence
-- Calculation path
+- Rejected candidates
+- Conflict and priority resolution path
 
 ---
 
 ## 4.6 Extensibility
 
-New rules and analyzers may be introduced without changing the public API.
+New rules, pattern categories, and analyzers may be introduced without changing the public API within Version 1.x.
 
 ---
 
 # 5. Layered Architecture
 
-The Temperature Engine follows a layered architecture.
+The Pattern Engine follows a layered architecture.
 
 ```text
 Public API
@@ -160,13 +180,16 @@ Rule Adapter
 Analyzer Layer
       │
       ▼
+Candidate Layer
+      │
+      ▼
 Calculator Layer
       │
       ▼
 Result Builder
       │
       ▼
-TemperatureResult
+PatternResult
 ```
 
 Each layer has a single responsibility and communicates only with adjacent layers.
@@ -180,13 +203,17 @@ The internal components are organized as follows:
 - Engine Orchestrator
 - Context Validator
 - Rule Adapter
-- Season Temperature Analyzer
-- Warm Cold Analyzer
-- Dryness Analyzer
-- Humidity Analyzer
-- Equilibrium Analyzer
-- Environmental Support Analyzer
-- Adjustment Analyzer
+- Structure Analyzer
+- Day Master Relation Analyzer
+- Standard Pattern Analyzer
+- Transformation Pattern Analyzer
+- Special Pattern Analyzer
+- Follow Pattern Analyzer
+- Mixed / Exceptional Analyzer
+- Candidate Generator
+- Candidate Evaluator
+- Conflict Resolver
+- Priority Resolver
 - Score Calculator
 - Confidence Evaluator
 - Result Builder
@@ -202,14 +229,15 @@ Allowed dependencies:
 - Calendar Engine
 - Bazi Engine
 - Strength Engine (via AnalysisContext.strength_result only)
+- Temperature Engine (via AnalysisContext.temperature_result only)
 - Rule Loader
 - Rule Registry
 - Shared Analysis Models
 
 Forbidden dependencies:
 
-- Pattern Engine
 - Useful God Engine
+- Ten Gods Engine
 - Interpretation Engine
 - Report Engine
 - User Interface
@@ -233,28 +261,22 @@ Validation
 Read StrengthResult from AnalysisContext
       │
       ▼
+Read TemperatureResult from AnalysisContext
+      │
+      ▼
 Rule Loading
       │
       ▼
-Season Temperature Analysis
+Structure Analysis
       │
       ▼
-Warm / Cold Analysis
+Generate Pattern Candidates
       │
       ▼
-Dryness Analysis
+Evaluate Candidates
       │
       ▼
-Humidity Analysis
-      │
-      ▼
-Equilibrium Analysis
-      │
-      ▼
-Environmental Support Analysis
-      │
-      ▼
-Adjustment Analysis
+Resolve Priority
       │
       ▼
 Score Calculation
@@ -263,7 +285,7 @@ Score Calculation
 Confidence Evaluation
       │
       ▼
-TemperatureResult
+PatternResult
 ```
 
 No stage may mutate results produced by previous stages.
@@ -280,7 +302,7 @@ Coordinates the complete execution lifecycle.
 
 ## Validator
 
-Validates the AnalysisContext, including AnalysisContext.strength_result, before analysis begins.
+Validates the AnalysisContext, including upstream stage results, before analysis begins.
 
 ---
 
@@ -296,19 +318,25 @@ Evaluates individual analytical dimensions.
 
 Examples include:
 
-- Seasonal temperature
-- Warm / cold balance
-- Dryness
-- Humidity
-- Climate equilibrium
-- Environmental support
-- Climate adjustment requirements
+- Chart structure eligibility
+- Day Master relationship with chart composition
+- Standard patterns
+- Transformation patterns
+- Special patterns
+- Follow patterns
+- Mixed and exceptional patterns
+
+---
+
+## Candidate Layer
+
+Generates, evaluates, and resolves competing pattern candidates.
 
 ---
 
 ## Calculator
 
-Combines analytical outputs into normalized scores.
+Combines analytical outputs into normalized scores and pattern classification.
 
 ---
 
@@ -320,7 +348,7 @@ Determines confidence based on analytical completeness and rule coverage.
 
 ## Result Builder
 
-Constructs the immutable TemperatureResult object.
+Constructs the immutable PatternResult object.
 
 ---
 
@@ -329,9 +357,9 @@ Constructs the immutable TemperatureResult object.
 The module exposes a single public interface.
 
 ```text
-TemperatureEngine.evaluate(
+PatternEngine.evaluate(
     context: AnalysisContext
-) -> TemperatureResult
+) -> PatternResult
 ```
 
 Input:
@@ -340,9 +368,11 @@ Input:
 
 Output:
 
-- TemperatureResult
+- PatternResult
 
 No internal component is considered part of the public contract.
+
+No additional public methods are exposed.
 
 ---
 
@@ -351,14 +381,17 @@ No internal component is considered part of the public contract.
 Execution proceeds through the following phases:
 
 1. Receive AnalysisContext.
-2. Validate input.
+2. Validate context.
 3. Read StrengthResult from AnalysisContext.
-4. Load applicable rules.
-5. Execute analyzers.
-6. Aggregate scores.
-7. Evaluate confidence.
-8. Build immutable result.
-9. Return TemperatureResult.
+4. Read TemperatureResult from AnalysisContext.
+5. Load Pattern Rules.
+6. Analyse structure.
+7. Generate pattern candidates.
+8. Evaluate candidates.
+9. Resolve priority and conflicts.
+10. Calculate confidence.
+11. Build immutable PatternResult.
+12. Publish PatternResult.
 
 Execution terminates immediately if validation fails.
 
@@ -366,16 +399,18 @@ Execution terminates immediately if validation fails.
 
 # 12. Error Boundaries
 
-The Temperature Engine is responsible only for errors occurring within its own execution boundary.
+The Pattern Engine is responsible only for errors occurring within its own execution boundary.
 
 Typical categories include:
 
 - Invalid analysis context
 - Missing or invalid AnalysisContext.strength_result
+- Missing or invalid AnalysisContext.temperature_result
 - Missing rule definitions
 - Unsupported rule versions
 - Internal calculation failures
 - Invalid analytical state
+- Unresolvable pattern candidate conflicts
 
 External failures are propagated to the caller.
 
@@ -385,6 +420,7 @@ External failures are propagated to the caller.
 
 Future extensions may include:
 
+- Additional pattern categories
 - Alternative scoring algorithms
 - Regional evaluation profiles
 - Experimental analyzers
@@ -392,7 +428,7 @@ Future extensions may include:
 - Rule version selection
 - Performance optimizations
 
-Extensions must preserve the public API.
+Extensions must preserve the public API within Version 1.x.
 
 ---
 
@@ -436,13 +472,13 @@ AnalysisContext is immutable.
 
 ## ADR-003
 
-StrengthResult is consumed as an immutable upstream contract through AnalysisContext.strength_result.
+StrengthResult and TemperatureResult are consumed as immutable upstream contracts through AnalysisContext.
 
 ---
 
 ## ADR-004
 
-TemperatureResult is immutable.
+PatternResult is immutable.
 
 ---
 
@@ -460,7 +496,7 @@ The engine never performs interpretation.
 
 ## ADR-007
 
-The engine never recomputes Day Master strength.
+The engine never recomputes Day Master strength or climate balance.
 
 ---
 
@@ -478,7 +514,13 @@ Dependencies flow only toward upstream modules or shared infrastructure.
 
 ## ADR-010
 
-All analytical decisions must be explainable through matched rules.
+All analytical decisions must be explainable through matched rules and rejected candidates.
+
+---
+
+## ADR-011
+
+Pattern categories are extensible within Version 1.x without public API breakage.
 
 ---
 
@@ -494,6 +536,8 @@ The architecture imposes the following constraints:
 - No localization logic.
 - No report rendering.
 - No Day Master strength recomputation.
+- No climate recomputation.
+- No additional public methods beyond evaluate.
 
 ---
 
@@ -503,6 +547,7 @@ This architecture is compatible with:
 
 - Analysis Engine V1.x
 - Strength Engine V1.x
+- Temperature Engine V1.x
 - Rule Database V1.x
 - Interpretation Engine V1.x
 
