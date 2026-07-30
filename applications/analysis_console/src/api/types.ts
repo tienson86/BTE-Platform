@@ -12,6 +12,7 @@ export type ChartData = {
     gender?: string | null;
     luck?: Record<string, unknown>;
     stems?: Record<string, string>;
+    branches?: Record<string, string>;
   };
   calendar: {
     year?: number | null;

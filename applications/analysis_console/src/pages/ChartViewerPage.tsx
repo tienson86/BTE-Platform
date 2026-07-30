@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
+import { VisualBaZiChart } from "../components/visualChart/VisualBaZiChart";
 import { useSession } from "../state/session";
 
 export function ChartViewerPage() {
-  const { chart } = useSession();
+  const { chart, analysis } = useSession();
 
   if (!chart) {
     return (
       <EmptyState
         title="No chart yet"
-        body="Create a chart first, then return to inspect stems, calendar, and luck."
+        body="Create a chart first, then return to inspect the visual BaZi chart."
         actionTo="/chart/input"
         actionLabel="Open Chart Input"
       />
@@ -22,7 +23,7 @@ export function ChartViewerPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
+    <div className="mx-auto max-w-6xl space-y-6">
       <header className="fade-in">
         <h1 className="font-display text-3xl font-semibold md:text-4xl">
           Chart Viewer
@@ -31,6 +32,8 @@ export function ChartViewerPage() {
           {chart.chart_id}
         </p>
       </header>
+
+      <VisualBaZiChart chart={chart} analysis={analysis} />
 
       <section className="fade-in surface grid gap-4 rounded-2xl p-5 sm:grid-cols-2">
         <Field label="Day Master" value={chart.chart.day_master} />
@@ -57,7 +60,7 @@ export function ChartViewerPage() {
       </section>
 
       <section className="surface rounded-2xl p-5">
-        <h2 className="font-display text-2xl font-semibold">Stems</h2>
+        <h2 className="font-display text-2xl font-semibold">Stems (raw)</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
           {Object.entries(stems).map(([key, value]) => (
             <div
@@ -87,12 +90,20 @@ export function ChartViewerPage() {
         </p>
       </section>
 
-      <Link
-        to="/analysis"
-        className="inline-flex rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white"
-      >
-        Run Analysis
-      </Link>
+      <div className="flex flex-wrap gap-3">
+        <Link
+          to="/analysis"
+          className="inline-flex rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+        >
+          Run Analysis
+        </Link>
+        <Link
+          to="/luck"
+          className="inline-flex rounded-xl border border-[var(--line)] px-5 py-3 text-sm font-semibold transition hover:border-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+        >
+          Luck Viewer
+        </Link>
+      </div>
     </div>
   );
 }

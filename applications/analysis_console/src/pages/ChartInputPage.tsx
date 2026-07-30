@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/client";
+import { useLibrary } from "../state/library";
 import { useSession } from "../state/session";
 
 const DAY_MASTERS = [
@@ -19,6 +20,7 @@ const DAY_MASTERS = [
 export function ChartInputPage() {
   const navigate = useNavigate();
   const { setChart, resetDownstreamFromChart } = useSession();
+  const { upsertChartFromCreate, settings } = useLibrary();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -30,7 +32,7 @@ export function ChartInputPage() {
     hour: 10,
     minute: 0,
     gender: "male",
-    timezone: "Asia/Ho_Chi_Minh",
+    timezone: settings.default_timezone || "Asia/Ho_Chi_Minh",
   });
 
   async function onSubmit(event: FormEvent) {
@@ -38,7 +40,7 @@ export function ChartInputPage() {
     setBusy(true);
     setError(null);
     try {
-      const chart = await api.createChart({
+      const payload = {
         day_master: form.day_master,
         year: form.year,
         month: form.month,
@@ -48,9 +50,13 @@ export function ChartInputPage() {
         gender: form.gender,
         timezone: form.timezone,
         full_name: form.full_name || undefined,
-      });
+      };
+      const chart = await api.createChart(payload);
       setChart(chart);
       resetDownstreamFromChart();
+      if (settings.auto_save_charts) {
+        upsertChartFromCreate(payload, chart);
+      }
       navigate("/chart");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create chart");

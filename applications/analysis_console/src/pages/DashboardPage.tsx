@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ChartCard } from "../components/ChartCard";
 import { EmptyState } from "../components/EmptyState";
-import { PageHeader } from "../components/PageHeader";
 import { useOpenLibraryChart } from "../hooks/useOpenLibraryChart";
 import { useLibrary } from "../state/library";
 import { useSession } from "../state/session";

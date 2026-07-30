@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import type { LibraryChart } from "../state/libraryTypes";
 
 type ChartCardProps = {
@@ -78,21 +77,14 @@ export function ChartCard({
         </div>
       </dl>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-4">
         <button
           type="button"
           onClick={() => onOpen(chart.id)}
           className="rounded-xl bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         >
-          Open
+          Open in viewer
         </button>
-        <Link
-          to="/chart"
-          onClick={() => onOpen(chart.id)}
-          className="rounded-xl border border-[var(--line)] px-3 py-2 text-xs font-semibold transition hover:border-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-        >
-          Viewer
-        </Link>
       </div>
     </article>
   );

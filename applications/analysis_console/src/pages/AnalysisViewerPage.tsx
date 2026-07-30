@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
+import { useLibrary } from "../state/library";
 import { useSession } from "../state/session";
 
 export function AnalysisViewerPage() {
@@ -11,6 +12,7 @@ export function AnalysisViewerPage() {
     setInterpretation,
     setReport,
   } = useSession();
+  const { recordEvent } = useLibrary();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,6 +25,12 @@ export function AnalysisViewerPage() {
       setAnalysis(result);
       setInterpretation(null);
       setReport(null);
+      recordEvent(
+        "analysis_run",
+        "Analysis completed",
+        result.analysis_id,
+        { chart_id: chart.chart_id },
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Analysis failed");
     } finally {

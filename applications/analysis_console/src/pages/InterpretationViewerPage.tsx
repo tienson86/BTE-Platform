@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { api, downloadPdfBase64 } from "../api/client";
+import { useLibrary } from "../state/library";
 import { useSession } from "../state/session";
 
 export function InterpretationViewerPage() {
@@ -11,6 +12,7 @@ export function InterpretationViewerPage() {
     setInterpretation,
     setReport,
   } = useSession();
+  const { recordEvent } = useLibrary();
   const [busy, setBusy] = useState(false);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +25,12 @@ export function InterpretationViewerPage() {
       const result = await api.runInterpretation(analysis.analysis_id);
       setInterpretation(result);
       setReport(null);
+      recordEvent(
+        "interpretation",
+        "Interpretation completed",
+        result.interpretation_id,
+        { chart_id: analysis.chart_id },
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Interpretation failed");
     } finally {
@@ -50,6 +58,12 @@ export function InterpretationViewerPage() {
       downloadPdfBase64(
         result.pdf_base64,
         `${result.report_id || "bte-report"}.pdf`,
+      );
+      recordEvent(
+        "report",
+        "Report exported",
+        result.report_id,
+        { chart_id: interpretation.chart_id },
       );
     } catch (err) {
       setError(err instanceof Error ? err.message : "PDF download failed");
