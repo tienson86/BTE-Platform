@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/combination.schema.json",
+  "title": "BTE Combination Knowledge Record",
+  "description": "Combinations module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "combinations"
+            },
+            "category": {
+              "const": "combination"
+            }
+          }
+        },
+        "combination_attributes": {
+          "$ref": "#/$defs/combination_attributes"
+        }
+      },
+      "required": [
+        "combination_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "combination_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "combination_type": {
+          "type": "string"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "result_element": {
+          "type": "string"
+        },
+        "requires_presence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transformation_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "combination_type",
+        "participants"
+      ]
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/transformation.schema.json",
+  "title": "BTE Transformation Knowledge Record",
+  "description": "Transformations module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "transformations"
+            },
+            "category": {
+              "const": "transformation"
+            }
+          }
+        },
+        "transformation_attributes": {
+          "$ref": "#/$defs/transformation_attributes"
+        }
+      },
+      "required": [
+        "transformation_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "transformation_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transformation_type": {
+          "type": "string"
+        },
+        "source_participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target_element": {
+          "type": "string"
+        },
+        "activation_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failure_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "transformation_type",
+        "source_participants"
+      ]
+    }
+  }
+}

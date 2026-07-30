@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/hidden_stem.schema.json",
+  "title": "BTE Hidden Stem Knowledge Record",
+  "description": "Hidden Stems module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "hidden_stems"
+            },
+            "category": {
+              "const": "hidden_stem"
+            }
+          }
+        },
+        "hidden_stem_attributes": {
+          "$ref": "#/$defs/hidden_stem_attributes"
+        }
+      },
+      "required": [
+        "hidden_stem_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "hidden_stem_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "host_branch": {
+          "type": "string"
+        },
+        "stem": {
+          "type": "string"
+        },
+        "qi_role": {
+          "type": "string",
+          "enum": [
+            "main",
+            "middle",
+            "residual",
+            "other"
+          ]
+        },
+        "strength_weight": {
+          "type": "number"
+        },
+        "element": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "host_branch",
+        "stem",
+        "qi_role"
+      ]
+    }
+  }
+}

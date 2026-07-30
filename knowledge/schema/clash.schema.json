@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/clash.schema.json",
+  "title": "BTE Clash Knowledge Record",
+  "description": "Clashes module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "clashes"
+            },
+            "category": {
+              "const": "clash"
+            }
+          }
+        },
+        "clash_attributes": {
+          "$ref": "#/$defs/clash_attributes"
+        }
+      },
+      "required": [
+        "clash_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "clash_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clash_type": {
+          "type": "string"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mitigation_notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clash_type",
+        "participants"
+      ]
+    }
+  }
+}

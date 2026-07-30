@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/punishment.schema.json",
+  "title": "BTE Punishment Knowledge Record",
+  "description": "Punishments module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "punishments"
+            },
+            "category": {
+              "const": "punishment"
+            }
+          }
+        },
+        "punishment_attributes": {
+          "$ref": "#/$defs/punishment_attributes"
+        }
+      },
+      "required": [
+        "punishment_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "punishment_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "punishment_type": {
+          "type": "string"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "self_punishment": {
+          "type": "boolean"
+        },
+        "effects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "severity": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "punishment_type",
+        "participants"
+      ]
+    }
+  }
+}

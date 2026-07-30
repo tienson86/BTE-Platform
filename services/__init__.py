@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 __all__ = [
+    "knowledge",
     "registry_loader",
     "registry_validator",
     "registry_indexer",

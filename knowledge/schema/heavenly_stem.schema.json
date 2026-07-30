@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/heavenly_stem.schema.json",
+  "title": "BTE Heavenly Stem Knowledge Record",
+  "description": "Heavenly Stems module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "heavenly_stems"
+            },
+            "category": {
+              "const": "stem"
+            }
+          }
+        },
+        "stem_attributes": {
+          "$ref": "#/$defs/stem_attributes"
+        }
+      },
+      "required": [
+        "stem_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "stem_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "yin_yang": {
+          "type": "string"
+        },
+        "element": {
+          "type": "string"
+        },
+        "order_index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "polarity": {
+          "type": "string"
+        },
+        "hidden_qi_notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "yin_yang",
+        "element",
+        "order_index"
+      ]
+    }
+  }
+}

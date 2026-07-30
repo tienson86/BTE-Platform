@@ -18,8 +18,13 @@ It provides:
 - Multilingual metadata schema
 - Domain directories and templates
 - Quality, review, mapping, and traceability standards
+- Machine-readable Foundation catalogs (`glossary.json`, `aliases.json`, `abbreviations.json`)
 
-This module is **documentation only**. No terminology content records are authored in V1.0.0.
+Validate:
+
+```bash
+python knowledge/terminology/validate_terminology.py
+```
 
 ---
 
@@ -31,14 +36,15 @@ In scope:
 - Templates and indexes
 - Quality / review / mapping / traceability standards
 - Domain directory scaffolding
+- Foundation JSON glossary / alias / abbreviation catalogs
 
 Out of scope:
 
-- Populating individual term definitions
+- Deep academic definitions (use `TODO_REVIEW` until Academic Review)
 - Runtime terminology services
-- Changes to Governance V1.0
-- Changes to the Reference Framework
+- Redesign of Governance architecture
 - Engine implementation
+- Edits to locked Canon / schema / Rule Database
 
 ---
 
@@ -56,6 +62,10 @@ knowledge/terminology/
 ├── TERMINOLOGY_TRACEABILITY_SPEC.md
 ├── CHANGELOG.md
 ├── EDGE_CASES.md
+├── glossary.json
+├── aliases.json
+├── abbreviations.json
+├── validate_terminology.py
 ├── basic/
 ├── heavenly_stems/
 ├── earthly_branches/

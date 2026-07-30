@@ -154,8 +154,44 @@ Authors MUST NOT:
 
 ## 10. Acceptance Criteria (Framework V1.0.0)
 
-- [ ] Root framework documents exist
-- [ ] All domain directories contain README / INDEX / TEMPLATE
-- [ ] No term content records allocated
-- [ ] ID policy documented
-- [ ] Governance and Reference boundaries respected
+- [x] Root framework documents exist
+- [x] All domain directories contain README / INDEX / TEMPLATE
+- [x] ID policy documented
+- [x] Governance and Reference boundaries respected
+
+---
+
+## 11. Machine-readable Foundation Catalog (V1.0)
+
+Knowledge Foundation adds JSON catalogs at module root.
+
+### 11.1 `glossary.json` record fields
+
+| Field | Required |
+|-------|----------|
+| `term_id` | Yes (`TERM-NNNNNN`) |
+| `canonical_term` | Yes |
+| `chinese` | Yes (`TODO_REVIEW` allowed) |
+| `pinyin` | Yes (`TODO_REVIEW` allowed) |
+| `english` | Yes |
+| `definition` | Yes (identity-level only until Academic Review) |
+| `category` | Yes |
+| `synonyms` | Yes (array) |
+| `related_terms` | Yes (array of `TERM-*`) |
+| `status` | Yes (`draft` \| `review` \| `official` \| `deprecated` \| `placeholder` \| `archived`) |
+
+### 11.2 `aliases.json`
+
+Maps `alias` → `canonical_term_id` / `canonical_term`.
+
+### 11.3 `abbreviations.json`
+
+Maps `abbreviation` → `canonical_term_id` / `canonical_term`.
+
+### 11.4 Validation
+
+```bash
+python knowledge/terminology/validate_terminology.py
+```
+
+Domain Markdown indexes remain scaffolding; Foundation JSON is the machine-readable term identity layer for platform infrastructure.

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/temperature.schema.json",
+  "title": "BTE Temperature Knowledge Record",
+  "description": "Temperature module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "temperature"
+            },
+            "category": {
+              "const": "temperature"
+            }
+          }
+        },
+        "temperature_attributes": {
+          "$ref": "#/$defs/temperature_attributes"
+        }
+      },
+      "required": [
+        "temperature_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "temperature_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "temperature_class": {
+          "type": "string"
+        },
+        "cold_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hot_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regulation_gods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seasonal_bias": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "temperature_class"
+      ]
+    }
+  }
+}

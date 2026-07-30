@@ -1,5 +1,20 @@
 # BTE Knowledge Governance Framework
 
+## Knowledge Foundation entry documents (V1.0)
+
+| Document | Role |
+|----------|------|
+| [REVIEW_PROCESS.md](REVIEW_PROCESS.md) | Lifecycle + review/approval workflow |
+| [VERSION_POLICY.md](VERSION_POLICY.md) | Semantic versioning for knowledge assets |
+| [RELEASE_POLICY.md](RELEASE_POLICY.md) | Release gates for Foundation packages |
+| [CHANGE_POLICY.md](CHANGE_POLICY.md) | Allowed/disallowed changes; deprecation |
+| [ROLE_DEFINITIONS.md](ROLE_DEFINITIONS.md) | Ownership and responsibilities |
+| [CHANGELOG.md](CHANGELOG.md) | Foundation governance changelog |
+
+These entry docs summarize operational rules for Knowledge Foundation work and point to detailed policies under `policies/` and `procedures/`.
+
+---
+
 ## Overview
 
 The BTE Knowledge Governance Framework establishes the standards, policies, architecture, workflows, and governance mechanisms for developing, maintaining, and evolving the BTE Knowledge Canon.

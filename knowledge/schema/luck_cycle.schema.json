@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/luck_cycle.schema.json",
+  "title": "BTE Luck Cycle Knowledge Record",
+  "description": "Luck Cycles module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "luck_cycles"
+            },
+            "category": {
+              "const": "luck_cycle"
+            }
+          }
+        },
+        "luck_cycle_attributes": {
+          "$ref": "#/$defs/luck_cycle_attributes"
+        }
+      },
+      "required": [
+        "luck_cycle_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "luck_cycle_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cycle_type": {
+          "type": "string",
+          "enum": [
+            "dayun",
+            "liunian",
+            "liuyue",
+            "liuri",
+            "liushi",
+            "other"
+          ]
+        },
+        "duration_unit": {
+          "type": "string"
+        },
+        "duration_value": {
+          "type": "number"
+        },
+        "stem_branch_pair": {
+          "type": "string"
+        },
+        "interaction_themes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "cycle_type"
+      ]
+    }
+  }
+}

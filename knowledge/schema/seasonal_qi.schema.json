@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/seasonal_qi.schema.json",
+  "title": "BTE Seasonal Qi Knowledge Record",
+  "description": "Seasonal Qi module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "seasonal_qi"
+            },
+            "category": {
+              "const": "seasonal_qi"
+            }
+          }
+        },
+        "seasonal_qi_attributes": {
+          "$ref": "#/$defs/seasonal_qi_attributes"
+        }
+      },
+      "required": [
+        "seasonal_qi_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "seasonal_qi_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "season": {
+          "type": "string"
+        },
+        "dominant_element": {
+          "type": "string"
+        },
+        "supporting_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "weakened_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "month_branches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "season",
+        "dominant_element"
+      ]
+    }
+  }
+}

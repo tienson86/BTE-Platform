@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/five_element.schema.json",
+  "title": "BTE Five Element Knowledge Record",
+  "description": "Five Elements module schema. Extends knowledge_record; adds correspondences only.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "five_elements"
+            },
+            "category": {
+              "const": "element"
+            }
+          }
+        },
+        "correspondences": {
+          "$ref": "#/$defs/correspondences"
+        },
+        "relationships": {
+          "type": "object",
+          "properties": {
+            "generates": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "generated_by": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "controls": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "controlled_by": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "overacts": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "overacted_by": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "insults": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            },
+            "insulted_by": {
+              "$ref": "knowledge_record.schema.json#/$defs/relationship_link"
+            }
+          }
+        }
+      },
+      "required": [
+        "correspondences"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "correspondences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "yin_yang": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "season": {
+          "type": "string"
+        },
+        "climate": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "number": {
+          "type": "integer"
+        },
+        "planet": {
+          "type": "string"
+        },
+        "heavenly_stems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "earthly_branches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zang_organs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fu_organs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "body_parts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sense_organs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emotion": {
+          "type": "string"
+        },
+        "taste": {
+          "type": "string"
+        },
+        "odor": {
+          "type": "string"
+        },
+        "sound": {
+          "type": "string"
+        },
+        "development_stage": {
+          "type": "string"
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "animals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

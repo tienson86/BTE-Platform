@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/earthly_branch.schema.json",
+  "title": "BTE Earthly Branch Knowledge Record",
+  "description": "Earthly Branches module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "earthly_branches"
+            },
+            "category": {
+              "const": "branch"
+            }
+          }
+        },
+        "branch_attributes": {
+          "$ref": "#/$defs/branch_attributes"
+        }
+      },
+      "required": [
+        "branch_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "branch_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "yin_yang": {
+          "type": "string"
+        },
+        "element": {
+          "type": "string"
+        },
+        "order_index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "animal": {
+          "type": "string"
+        },
+        "season": {
+          "type": "string"
+        },
+        "month_range": {
+          "type": "string"
+        },
+        "hidden_stems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "yin_yang",
+        "element",
+        "order_index"
+      ]
+    }
+  }
+}

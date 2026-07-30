@@ -1,6 +1,6 @@
-# Reference Library Changelog
+# Knowledge Reference Library Changelog
 
-**Module:** knowledge/references  
+**Module:** `knowledge/references`  
 **Versioning:** Semantic (`MAJOR.MINOR.PATCH`)
 
 ---
@@ -9,17 +9,34 @@
 
 ### Added
 
-- Reference Library framework under `knowledge/references/`
-- Root documents: README, REFERENCE_INDEX, REFERENCE_SPEC, QUALITY_GUIDE, EDGE_CASES, CHANGELOG
-- Machine-readable catalog: `REFERENCE_METADATA.yaml`
-- Category frameworks: `classics/`, `modern/`, `papers/`, `internal/` (README, INDEX, TEMPLATE)
-- Classical seed placeholders REF-000001 through REF-000010
-- Mapping registry skeletons under `mapping/`
+- Official machine-readable Reference Library layer:
+  - `references.json`
+  - `reference_index.json`
+  - `REFERENCES_SPEC.md`
+  - `citation_style.md`
+  - `validation_rules.md`
+  - `validate_references.py`
+- Initial classical seed REF-000001 … REF-000007:
+  - Huang Di Nei Jing
+  - Zhou Yi
+  - Yuan Hai Zi Ping
+  - San Ming Tong Hui
+  - Di Tian Sui
+  - Zi Ping Zhen Quan
+  - Qiong Tong Bao Jian
+- Reports: `VALIDATION_REPORT.md`, `REFERENCE_COVERAGE_REPORT.md`, `TODO_REVIEW.md`
+
+### Changed
+
+- `README.md` updated to declare `references.json` as Reference ID Single Source of Truth
+- Field name normalized to `identifier` (Foundation Freeze V1.0)
 
 ### Notes
 
-- Framework and metadata only; no detailed academic book content
-- Governance V1.0 not modified (frozen)
+- Legacy Markdown placeholders under `classics/` remain for coexistence
+- ID assignment in V1.0 seed differs from legacy classics INDEX placeholders — see coverage/TODO reports
+- Uncertain bibliographic metadata marked `TODO_REVIEW`
+- Foundation Freeze candidate for V1.0
 
 ---
 

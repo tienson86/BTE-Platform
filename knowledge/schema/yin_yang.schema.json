@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/yin_yang.schema.json",
+  "title": "BTE Yin Yang Knowledge Record",
+  "description": "Yin-Yang module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "yin_yang"
+            },
+            "category": {
+              "const": "polarity"
+            }
+          }
+        },
+        "polarity_attributes": {
+          "$ref": "#/$defs/polarity_attributes"
+        }
+      },
+      "required": [
+        "polarity_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "polarity_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "polarity": {
+          "type": "string",
+          "enum": [
+            "yin",
+            "yang"
+          ]
+        },
+        "opposing_polarity": {
+          "type": "string"
+        },
+        "qualities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manifestations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "polarity"
+      ]
+    }
+  }
+}

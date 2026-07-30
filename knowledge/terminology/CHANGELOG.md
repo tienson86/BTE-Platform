@@ -13,12 +13,15 @@
 - Root documents: README, INDEX, SPEC, TEMPLATE, Review Guide, Quality Standard, Mapping Standard, Traceability Spec, EDGE_CASES, CHANGELOG
 - Domain scaffolding (19 domains) with README / INDEX / TEMPLATE each
 - ID policy `TERM-NNNNNN` and reserved allocation ranges
+- Knowledge Foundation catalogs: `glossary.json`, `aliases.json`, `abbreviations.json`
+- `validate_terminology.py`
+- Seed identity terms (basic + five_elements labels); scholarly expansion deferred via `TODO_REVIEW` where needed
 
 ### Notes
 
-- Framework only; no terminology content records
-- Governance V1.0 not modified
-- Reference Framework not modified
+- Definitions are identity-level platform labels, not academic exegesis
+- Governance architecture not redesigned
+- Locked Canon / schema / Rule Database / engines not modified
 
 ---
 

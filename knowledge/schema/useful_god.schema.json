@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/useful_god.schema.json",
+  "title": "BTE Useful God Knowledge Record",
+  "description": "Useful Gods module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "useful_gods"
+            },
+            "category": {
+              "const": "useful_god"
+            }
+          }
+        },
+        "useful_god_attributes": {
+          "$ref": "#/$defs/useful_god_attributes"
+        }
+      },
+      "required": [
+        "useful_god_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "useful_god_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "yong_shen",
+            "xi_shen",
+            "ji_shen",
+            "chou_shen",
+            "xian_shen",
+            "other"
+          ]
+        },
+        "selection_basis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supporting_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "opposing_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "role"
+      ]
+    }
+  }
+}

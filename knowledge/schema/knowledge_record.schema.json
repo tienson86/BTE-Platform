@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/knowledge_record.schema.json",
+  "title": "BTE Knowledge Record (Base)",
+  "description": "Base Data Contract for every Knowledge Canon record. Module schemas MUST extend this schema via allOf + $ref.",
+  "type": "object",
+  "required": [
+    "identity",
+    "classification",
+    "definition",
+    "characteristics",
+    "relationships",
+    "references",
+    "metadata",
+    "validation",
+    "revision_history"
+  ],
+  "properties": {
+    "identity": {
+      "$ref": "#/$defs/identity"
+    },
+    "classification": {
+      "$ref": "#/$defs/classification"
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Canonical definition text for the knowledge asset."
+    },
+    "characteristics": {
+      "$ref": "#/$defs/characteristics"
+    },
+    "relationships": {
+      "$ref": "#/$defs/relationships"
+    },
+    "references": {
+      "type": "array",
+      "description": "Evidence / bibliographic references.",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "validation": {
+      "$ref": "#/$defs/validation"
+    },
+    "revision_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/revision_entry"
+      }
+    }
+  },
+  "$defs": {
+    "knowledge_id": {
+      "type": "string",
+      "pattern": "^KNO-[0-9]{6}$",
+      "description": "Immutable Knowledge Canon identifier."
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "knowledge_id": {
+          "$ref": "#/$defs/knowledge_id"
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chinese": {
+          "type": "string"
+        },
+        "traditional_chinese": {
+          "type": "string"
+        },
+        "simplified_chinese": {
+          "type": "string"
+        },
+        "pinyin": {
+          "type": "string"
+        },
+        "vietnamese": {
+          "type": "string"
+        },
+        "english_name": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "knowledge_id",
+        "canonical_name",
+        "chinese",
+        "pinyin",
+        "english_name"
+      ]
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "domain",
+        "category"
+      ]
+    },
+    "characteristics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nature": {
+          "type": "string"
+        },
+        "symbolism": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "relationship_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "knowledge_id": {
+          "$ref": "#/$defs/knowledge_id"
+        },
+        "relationship_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "knowledge_id",
+        "relationship_type"
+      ]
+    },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationship_link"
+          }
+        },
+        "related_to": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationship_link"
+          }
+        },
+        "see_also": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationship_link"
+          }
+        }
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/relationship_link"
+          },
+          {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/relationship_link"
+            }
+          }
+        ]
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reference_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chapter": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "reference_id",
+        "title"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "official",
+            "deprecated",
+            "archived"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string",
+          "const": "1.0.0"
+        }
+      },
+      "required": [
+        "version",
+        "status"
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_valid": {
+          "type": "boolean"
+        },
+        "reference_valid": {
+          "type": "boolean"
+        },
+        "relationship_valid": {
+          "type": "boolean"
+        },
+        "integrity_valid": {
+          "type": "boolean"
+        },
+        "validated_at": {
+          "type": "string"
+        },
+        "validator": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_valid",
+        "reference_valid",
+        "relationship_valid",
+        "integrity_valid"
+      ]
+    },
+    "revision_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "date",
+        "summary"
+      ]
+    }
+  }
+}

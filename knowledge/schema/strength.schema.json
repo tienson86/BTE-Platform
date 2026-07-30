@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/strength.schema.json",
+  "title": "BTE Strength Knowledge Record",
+  "description": "Strength module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "strength"
+            },
+            "category": {
+              "const": "strength"
+            }
+          }
+        },
+        "strength_attributes": {
+          "$ref": "#/$defs/strength_attributes"
+        }
+      },
+      "required": [
+        "strength_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "strength_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "strength_class": {
+          "type": "string"
+        },
+        "seasonal_factor": {
+          "type": "string"
+        },
+        "root_factor": {
+          "type": "string"
+        },
+        "support_factor": {
+          "type": "string"
+        },
+        "drain_factor": {
+          "type": "string"
+        },
+        "indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "strength_class"
+      ]
+    }
+  }
+}

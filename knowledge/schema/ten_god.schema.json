@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/ten_god.schema.json",
+  "title": "BTE Ten God Knowledge Record",
+  "description": "Ten Gods module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "ten_gods"
+            },
+            "category": {
+              "const": "ten_god"
+            }
+          }
+        },
+        "ten_god_attributes": {
+          "$ref": "#/$defs/ten_god_attributes"
+        }
+      },
+      "required": [
+        "ten_god_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "ten_god_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relative_to_day_master": {
+          "type": "string"
+        },
+        "yin_yang_relation": {
+          "type": "string"
+        },
+        "element_relation": {
+          "type": "string"
+        },
+        "family_role": {
+          "type": "string"
+        },
+        "career_themes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "personality_themes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "relative_to_day_master",
+        "element_relation"
+      ]
+    }
+  }
+}

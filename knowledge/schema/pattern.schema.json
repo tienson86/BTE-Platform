@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/pattern.schema.json",
+  "title": "BTE Pattern Knowledge Record",
+  "description": "Patterns module schema extension.",
+  "allOf": [
+    {
+      "$ref": "knowledge_record.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "domain": {
+              "const": "patterns"
+            },
+            "category": {
+              "const": "pattern"
+            }
+          }
+        },
+        "pattern_attributes": {
+          "$ref": "#/$defs/pattern_attributes"
+        }
+      },
+      "required": [
+        "pattern_attributes"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "pattern_attributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pattern_family": {
+          "type": "string"
+        },
+        "formation_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "success_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failure_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "useful_god_bias": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "pattern_family"
+      ]
+    }
+  }
+}
