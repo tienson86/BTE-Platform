@@ -184,3 +184,41 @@ def test_report_deterministic_across_pipeline_runs() -> None:
         }
 
     assert once("a") == once("b")
+
+
+def test_template_system_themes_and_print_end_to_end() -> None:
+    runtime = _build_runtime()
+    analysis = runtime.run(
+        AnalysisContext(request_id="rpt-theme-001", chart={"day_master": "Giáp"})
+    )
+    interpretation = InterpretationEngine().interpret(
+        InterpretationContext(
+            analysis_result=analysis,
+            chart={"day_master": "Giáp"},
+            knowledge_session=create_default_knowledge_session(),
+        )
+    )
+    for theme_id in ("classic", "modern", "professional", "dark"):
+        result = ReportGenerator().assemble(
+            ReportAssemblyContext(
+                interpretation_result=interpretation,
+                analysis_result=analysis,
+                format_profile=FormatProfile(
+                    formats=("html", "markdown", "print", "pdf"),
+                    theme_id=theme_id,
+                    template_id=theme_id,
+                    include_structured_data=True,
+                    title=f"{theme_id.title()} Report",
+                    mandatory_sections=("overview",),
+                ),
+                request_id="rpt-theme-001",
+            )
+        )
+        assert result.html is not None
+        assert "Giáp" in result.html.content
+        assert "report-table" in result.html.content
+        assert result.markdown is not None
+        assert result.print is not None
+        assert "@media print" in result.print.content or "print-document" in result.print.content
+        assert result.pdf is not None and result.pdf.content.startswith(b"%PDF")
+        assert result.summary["theme_id"] == theme_id

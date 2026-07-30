@@ -33,10 +33,15 @@ class InterpretationEngine:
         interpret(context: InterpretationContext) -> InterpretationResult
 
     Pipeline:
-        Sentence Selection → Template Binding → Placeholder Binding
-        → Paragraph Builder → Interpretation Builder
+        Sentence Selection → Sentence Ranking → Conflict Resolution
+        → Placeholder Binding → Paragraph Builder → Chapter Builder
+        → Explanation Builder → Markdown / HTML / JSON Builders
 
-    Does not recompute analytical stages and does not render reports.
+    Consumes AnalysisResult and Knowledge SDK assets
+    (Sentence / Phrase / Terminology libraries).
+
+    Rule-based only — no AI generation.
+    Does not recompute analytical stages and does not render PDF reports.
     """
 
     version: str = MODULE_VERSION
@@ -74,6 +79,7 @@ class InterpretationEngine:
                 "request_id": result.request_id,
                 "section_count": result.summary.get("section_count"),
                 "sentence_count": result.summary.get("sentence_count"),
+                "chapter_count": result.summary.get("chapter_count"),
                 "confidence_score": result.confidence.score,
                 "knowledge_version": result.knowledge_version,
             },

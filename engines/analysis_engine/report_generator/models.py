@@ -16,8 +16,8 @@ from engines.analysis_engine.runtime.models import (
 )
 from engines.analysis_engine.runtime.constants import CANONICAL_STAGES
 
-SUPPORTED_FORMATS: tuple[str, ...] = ("html", "pdf", "json", "markdown")
-FULL_PUBLICATION_FORMATS: tuple[str, ...] = SUPPORTED_FORMATS
+SUPPORTED_FORMATS: tuple[str, ...] = ("html", "pdf", "json", "markdown", "print")
+FULL_PUBLICATION_FORMATS: tuple[str, ...] = ("html", "pdf", "json", "markdown")
 
 
 @dataclass(slots=True, frozen=True)
@@ -288,6 +288,16 @@ class PdfReportArtifact:
         return len(self.content)
 
 
+@dataclass(slots=True, frozen=True)
+class PrintReportArtifact:
+    """Print-optimized HTML document output."""
+
+    content: str
+    content_type: str = "text/html; charset=utf-8"
+    encoding: str = "utf-8"
+    media: str = "print"
+
+
 @dataclass(slots=True)
 class ReportGeneratorResult:
     """Immutable public output of Report Generator."""
@@ -301,6 +311,7 @@ class ReportGeneratorResult:
     execution_metadata: ExecutionMetadata | None = None
     module_version: str = "1.0.0"
     summary: Mapping[str, Any] = field(default_factory=dict)
+    print: PrintReportArtifact | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "summary", MappingProxyType(dict(self.summary)))
@@ -313,6 +324,7 @@ class ReportGeneratorResult:
             "html": None if self.html is None else self.html.content,
             "markdown": None if self.markdown is None else self.markdown.content,
             "json": None if self.json is None else dict(self.json.payload),
+            "print": None if self.print is None else self.print.content,
             "pdf_size": None if self.pdf is None else self.pdf.size,
             "pdf_path": None if self.pdf is None else self.pdf.path,
             "pdf_base64": None

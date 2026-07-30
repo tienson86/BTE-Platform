@@ -154,6 +154,43 @@ class InterpretationSection:
     body: str
     sentence_ids: tuple[str, ...] = ()
     source_stages: tuple[str, ...] = ()
+    chapter_id: str = ""
+
+
+@dataclass(slots=True, frozen=True)
+class InterpretationChapter:
+    """Ordered chapter grouping interpretive sections."""
+
+    chapter_id: str
+    title: str
+    section_ids: tuple[str, ...]
+    body: str
+    sections: tuple[InterpretationSection, ...] = ()
+
+
+@dataclass(slots=True, frozen=True)
+class ExplanationEntry:
+    """Explainable, traceable decision for one published sentence."""
+
+    sentence_id: str
+    section_id: str
+    source_stage: str
+    template_id: str
+    priority: int
+    rank: int
+    conflict_action: str
+    text: str
+    bound_values: Mapping[str, str] = field(default_factory=dict)
+    phrase_id: str | None = None
+    terminology_ids: tuple[str, ...] = ()
+    reason: str = ""
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "bound_values",
+            MappingProxyType(dict(self.bound_values)),
+        )
 
 
 @dataclass(slots=True)
@@ -169,6 +206,11 @@ class InterpretationResult:
     knowledge_version: str
     module_version: str = "1.0.0"
     summary: Mapping[str, Any] = field(default_factory=dict)
+    chapters: tuple[InterpretationChapter, ...] = ()
+    explanations: tuple[ExplanationEntry, ...] = ()
+    markdown: str = ""
+    html: str = ""
+    json_text: str = ""
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "summary", MappingProxyType(dict(self.summary)))
@@ -191,6 +233,7 @@ class InterpretationResult:
                     "body": section.body,
                     "sentence_ids": list(section.sentence_ids),
                     "source_stages": list(section.source_stages),
+                    "chapter_id": section.chapter_id,
                     "paragraphs": [
                         {
                             "section_id": paragraph.section_id,
@@ -214,6 +257,35 @@ class InterpretationResult:
                 }
                 for section in self.sections
             ],
+            "chapters": [
+                {
+                    "chapter_id": chapter.chapter_id,
+                    "title": chapter.title,
+                    "section_ids": list(chapter.section_ids),
+                    "body": chapter.body,
+                }
+                for chapter in self.chapters
+            ],
+            "explanations": [
+                {
+                    "sentence_id": item.sentence_id,
+                    "section_id": item.section_id,
+                    "source_stage": item.source_stage,
+                    "template_id": item.template_id,
+                    "priority": item.priority,
+                    "rank": item.rank,
+                    "conflict_action": item.conflict_action,
+                    "text": item.text,
+                    "bound_values": dict(item.bound_values),
+                    "phrase_id": item.phrase_id,
+                    "terminology_ids": list(item.terminology_ids),
+                    "reason": item.reason,
+                }
+                for item in self.explanations
+            ],
+            "markdown": self.markdown,
+            "html": self.html,
+            "json_text": self.json_text,
             "confidence": {
                 "score": self.confidence.score,
                 "level": self.confidence.level,
@@ -279,8 +351,35 @@ class InterpretationResult:
                     body=str(section_raw.get("body") or ""),
                     sentence_ids=tuple(section_raw.get("sentence_ids") or ()),
                     source_stages=tuple(section_raw.get("source_stages") or ()),
+                    chapter_id=str(section_raw.get("chapter_id") or ""),
                 )
             )
+        chapters = tuple(
+            InterpretationChapter(
+                chapter_id=str(item.get("chapter_id") or ""),
+                title=str(item.get("title") or ""),
+                section_ids=tuple(item.get("section_ids") or ()),
+                body=str(item.get("body") or ""),
+            )
+            for item in payload.get("chapters", [])
+        )
+        explanations = tuple(
+            ExplanationEntry(
+                sentence_id=str(item.get("sentence_id") or ""),
+                section_id=str(item.get("section_id") or ""),
+                source_stage=str(item.get("source_stage") or ""),
+                template_id=str(item.get("template_id") or ""),
+                priority=int(item.get("priority") or 0),
+                rank=int(item.get("rank") or 0),
+                conflict_action=str(item.get("conflict_action") or ""),
+                text=str(item.get("text") or ""),
+                bound_values=dict(item.get("bound_values") or {}),
+                phrase_id=item.get("phrase_id"),
+                terminology_ids=tuple(item.get("terminology_ids") or ()),
+                reason=str(item.get("reason") or ""),
+            )
+            for item in payload.get("explanations", [])
+        )
         return cls(
             request_id=str(payload.get("request_id") or ""),
             sections=tuple(sections),
@@ -314,4 +413,9 @@ class InterpretationResult:
             knowledge_version=str(payload.get("knowledge_version") or "1.0.0"),
             module_version=str(payload.get("module_version") or "1.0.0"),
             summary=dict(payload.get("summary") or {}),
+            chapters=chapters,
+            explanations=explanations,
+            markdown=str(payload.get("markdown") or ""),
+            html=str(payload.get("html") or ""),
+            json_text=str(payload.get("json_text") or ""),
         )

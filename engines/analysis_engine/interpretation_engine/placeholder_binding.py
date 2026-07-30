@@ -8,10 +8,16 @@ from typing import Any, Mapping
 from engines.analysis_engine.interpretation_engine.exceptions import (
     InterpretationBindingError,
 )
+from engines.analysis_engine.interpretation_engine.knowledge_access import (
+    KnowledgeSession,
+)
 from engines.analysis_engine.interpretation_engine.models import (
     BoundSentence,
     BoundTemplate,
     InterpretationContext,
+)
+from engines.analysis_engine.interpretation_engine.terminology_library import (
+    TerminologyLibrary,
 )
 from engines.analysis_engine.interpretation_engine.validators import stage_payload
 from engines.analysis_engine.runtime.models import AnalysisResult
@@ -81,13 +87,28 @@ def build_placeholder_values(context: InterpretationContext) -> dict[str, str]:
 class PlaceholderBinder:
     """Bind placeholders inside template texts."""
 
+    def __init__(
+        self,
+        *,
+        terminology: TerminologyLibrary | None = None,
+    ) -> None:
+        self._terminology = terminology or TerminologyLibrary()
+
     def bind(
         self,
         templates: tuple[BoundTemplate, ...],
         context: InterpretationContext,
+        *,
+        session: KnowledgeSession | None = None,
     ) -> tuple[BoundSentence, ...]:
         """Substitute placeholders; fail closed on required missing values."""
         base_values = build_placeholder_values(context)
+        terminology_used: dict[str, tuple[str, ...]] = {}
+        if session is not None:
+            base_values, _ = self._terminology.apply_to_values(
+                base_values,
+                session=session,
+            )
         bound: list[BoundSentence] = []
         for item in templates:
             values = self._values_for_stage(
@@ -95,12 +116,23 @@ class PlaceholderBinder:
                 context.analysis_result,
                 item.source_stage,
             )
+            if session is not None:
+                values, used_terms = self._terminology.apply_to_values(
+                    values,
+                    session=session,
+                )
+                terminology_used[item.sentence_id] = used_terms
             text, used = self._render(
                 item.template_text,
                 values,
                 required=item.required_placeholders,
                 sentence_id=item.sentence_id,
             )
+            metadata = dict(item.metadata)
+            if item.sentence_id in terminology_used:
+                metadata["terminology_ids"] = list(
+                    terminology_used[item.sentence_id]
+                )
             bound.append(
                 BoundSentence(
                     sentence_id=item.sentence_id,
@@ -110,7 +142,7 @@ class PlaceholderBinder:
                     text=text,
                     priority=item.priority,
                     bound_values=used,
-                    metadata=dict(item.metadata),
+                    metadata=metadata,
                 )
             )
         return tuple(bound)

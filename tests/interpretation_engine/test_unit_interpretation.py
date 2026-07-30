@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from engines.analysis_engine.interpretation_engine import (
@@ -13,12 +15,21 @@ from engines.analysis_engine.interpretation_engine import (
     InterpretationValidationError,
     create_default_knowledge_session,
 )
+from engines.analysis_engine.interpretation_engine.chapter_builder import (
+    ChapterBuilder,
+)
+from engines.analysis_engine.interpretation_engine.conflict_resolution import (
+    ConflictResolver,
+)
 from engines.analysis_engine.interpretation_engine.paragraph_builder import (
     ParagraphBuilder,
 )
 from engines.analysis_engine.interpretation_engine.placeholder_binding import (
     PlaceholderBinder,
     build_placeholder_values,
+)
+from engines.analysis_engine.interpretation_engine.sentence_ranking import (
+    SentenceRanker,
 )
 from engines.analysis_engine.interpretation_engine.sentence_selection import (
     SentenceSelector,
@@ -56,8 +67,7 @@ class TestInterpretationValidation:
         assert "strength" in exc_info.value.details.get("missing", [])
 
     def test_request_id_required(self, engine: InterpretationEngine) -> None:
-        analysis = build_analysis_result(request_id="keep")
-        # Force empty request_id after construction.
+        analysis = build_analysis_result()
         context = InterpretationContext(
             analysis_result=analysis,
             chart={"day_master": "Giáp"},
@@ -93,6 +103,29 @@ class TestSentenceSelection:
         assert "recommendations" in sections
 
 
+class TestSentenceRankingAndConflict:
+    def test_rank_orders_by_priority_desc(
+        self,
+        context: InterpretationContext,
+    ) -> None:
+        session = context.knowledge_session
+        selected = SentenceSelector().select(context, session=session)
+        ranked = SentenceRanker().rank(selected, session=session)
+        priorities = [item.priority for item in ranked]
+        assert priorities == sorted(priorities, reverse=True)
+
+    def test_conflict_keeps_section_cap(
+        self,
+        context: InterpretationContext,
+    ) -> None:
+        session = context.knowledge_session
+        selected = SentenceSelector().select(context, session=session)
+        ranked = SentenceRanker().rank(selected, session=session)
+        resolved = ConflictResolver().resolve(ranked, session=session)
+        assert len(resolved) <= len(ranked)
+        assert {item.sentence_id for item in resolved}
+
+
 class TestTemplateAndPlaceholderBinding:
     def test_template_binding_resolves_text(
         self,
@@ -100,7 +133,9 @@ class TestTemplateAndPlaceholderBinding:
     ) -> None:
         session = context.knowledge_session
         selected = SentenceSelector().select(context, session=session)
-        templates = TemplateBinder().bind(selected, session=session)
+        ranked = SentenceRanker().rank(selected, session=session)
+        resolved = ConflictResolver().resolve(ranked, session=session)
+        templates = TemplateBinder().bind(resolved, session=session)
         assert all(item.template_text for item in templates)
 
     def test_placeholder_binding_fills_day_master(
@@ -109,11 +144,26 @@ class TestTemplateAndPlaceholderBinding:
     ) -> None:
         session = context.knowledge_session
         selected = SentenceSelector().select(context, session=session)
-        templates = TemplateBinder().bind(selected, session=session)
-        sentences = PlaceholderBinder().bind(templates, context)
+        ranked = SentenceRanker().rank(selected, session=session)
+        resolved = ConflictResolver().resolve(ranked, session=session)
+        templates = TemplateBinder().bind(resolved, session=session)
+        sentences = PlaceholderBinder().bind(templates, context, session=session)
         overview = next(s for s in sentences if s.sentence_id == "overview_intro")
         assert "Giáp" in overview.text
         assert "{" not in overview.text
+
+    def test_terminology_resolves_pattern_display_name(
+        self,
+        context: InterpretationContext,
+    ) -> None:
+        session = context.knowledge_session
+        selected = SentenceSelector().select(context, session=session)
+        ranked = SentenceRanker().rank(selected, session=session)
+        resolved = ConflictResolver().resolve(ranked, session=session)
+        templates = TemplateBinder().bind(resolved, session=session)
+        sentences = PlaceholderBinder().bind(templates, context, session=session)
+        pattern = next(s for s in sentences if s.sentence_id == "pattern_named")
+        assert "Chính Quan Cách" in pattern.text
 
     def test_missing_required_placeholder_fails(
         self,
@@ -138,16 +188,42 @@ class TestTemplateAndPlaceholderBinding:
         assert values["current_da_yun_index"] == "2"
 
 
-class TestParagraphBuilder:
+class TestParagraphAndChapterBuilder:
     def test_groups_by_section(self, context: InterpretationContext) -> None:
         session = context.knowledge_session
         selected = SentenceSelector().select(context, session=session)
-        templates = TemplateBinder().bind(selected, session=session)
-        sentences = PlaceholderBinder().bind(templates, context)
+        ranked = SentenceRanker().rank(selected, session=session)
+        resolved = ConflictResolver().resolve(ranked, session=session)
+        templates = TemplateBinder().bind(resolved, session=session)
+        sentences = PlaceholderBinder().bind(templates, context, session=session)
         order = tuple(session.get_asset("interpretation.sections").data["order"])
-        paragraphs = ParagraphBuilder().build(sentences, section_order=order)
+        paragraphs = ParagraphBuilder().build(
+            sentences,
+            section_order=order,
+            session=session,
+        )
         assert paragraphs
         assert all(p.text for p in paragraphs)
+
+    def test_chapter_builder_groups_sections(
+        self,
+        context: InterpretationContext,
+    ) -> None:
+        session = context.knowledge_session
+        selected = SentenceSelector().select(context, session=session)
+        ranked = SentenceRanker().rank(selected, session=session)
+        resolved = ConflictResolver().resolve(ranked, session=session)
+        templates = TemplateBinder().bind(resolved, session=session)
+        sentences = PlaceholderBinder().bind(templates, context, session=session)
+        order = tuple(session.get_asset("interpretation.sections").data["order"])
+        paragraphs = ParagraphBuilder().build(
+            sentences,
+            section_order=order,
+            session=session,
+        )
+        chapters = ChapterBuilder().build(paragraphs, session=session)
+        assert chapters
+        assert chapters[0].chapter_id == "overview_chapter"
 
 
 class TestInterpretationResult:
@@ -166,6 +242,12 @@ class TestInterpretationResult:
         assert "luck" in section_ids
         assert result.confidence.score is not None
         assert result.evidence
+        assert result.chapters
+        assert result.explanations
+        assert result.markdown.startswith("#")
+        assert "<html" in result.html
+        payload = json.loads(result.json_text)
+        assert payload["format"] == "interpretation_json"
 
     def test_roundtrip_dict(
         self,
@@ -207,3 +289,13 @@ class TestInterpretationResult:
         context: InterpretationContext,
     ) -> None:
         assert engine.run(context).to_dict() == engine.interpret(context).to_dict()
+
+    def test_explainable_and_traceable(
+        self,
+        engine: InterpretationEngine,
+        context: InterpretationContext,
+    ) -> None:
+        result = engine.interpret(context)
+        assert all(entry.reason for entry in result.explanations)
+        assert all(entry.conflict_action == "kept" for entry in result.explanations)
+        assert {item.rule_id for item in result.evidence}

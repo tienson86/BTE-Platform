@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from engines.analysis_engine.interpretation_engine import (
     InterpretationContext,
     InterpretationEngine,
@@ -163,6 +165,15 @@ def test_interpretation_deterministic_across_runs() -> None:
         )
         payload = result.to_dict()
         payload.pop("request_id", None)
+        # json_text embeds request_id; normalize for cross-request comparison.
+        envelope = json.loads(payload["json_text"])
+        envelope["interpretation"].pop("request_id", None)
+        payload["json_text"] = json.dumps(
+            envelope,
+            ensure_ascii=False,
+            sort_keys=True,
+            indent=2,
+        ) + "\n"
         return payload
 
     assert once("a") == once("b")
@@ -184,3 +195,28 @@ def test_interpretation_evidence_traces_sentences() -> None:
     rule_ids = {item.rule_id for item in result.evidence}
     assert "overview_intro" in rule_ids
     assert "strength_strong" in rule_ids
+    assert result.chapters
+    assert result.explanations
+    assert result.markdown
+    assert result.html
+    assert result.json_text
+    assert "Chính Quan Cách" in result.markdown or "Chính Quan Cách" in str(
+        [s.body for s in result.sections]
+    )
+
+
+def test_interpretation_outputs_markdown_html_json() -> None:
+    runtime = _build_analysis_runtime()
+    analysis = runtime.run(
+        AnalysisContext(request_id="interp-int-004", chart={"day_master": "Giáp"})
+    )
+    result = InterpretationEngine().interpret(
+        InterpretationContext(
+            analysis_result=analysis,
+            chart={"day_master": "Giáp"},
+            knowledge_session=create_default_knowledge_session(),
+        )
+    )
+    assert "# Luận giải Bát Tự" in result.markdown
+    assert '<html lang="vi">' in result.html
+    assert '"format": "interpretation_json"' in result.json_text

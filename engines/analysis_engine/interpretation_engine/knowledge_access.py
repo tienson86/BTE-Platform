@@ -16,6 +16,9 @@ ASSET_TEMPLATES = "interpretation.templates"
 ASSET_SECTIONS = "interpretation.sections"
 ASSET_PRIORITY = "interpretation.priority"
 ASSET_CONFIDENCE = "interpretation.confidence"
+ASSET_CHAPTERS = "interpretation.chapters"
+ASSET_PHRASES = "interpretation.phrases"
+ASSET_TERMINOLOGY = "interpretation.terminology"
 
 REQUIRED_ASSETS: tuple[str, ...] = (
     ASSET_SENTENCES,
@@ -23,6 +26,9 @@ REQUIRED_ASSETS: tuple[str, ...] = (
     ASSET_SECTIONS,
     ASSET_PRIORITY,
     ASSET_CONFIDENCE,
+    ASSET_CHAPTERS,
+    ASSET_PHRASES,
+    ASSET_TERMINOLOGY,
 )
 
 

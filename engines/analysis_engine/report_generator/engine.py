@@ -16,9 +16,10 @@ from engines.analysis_engine.report_generator.models import (
     ReportGeneratorResult,
 )
 from engines.analysis_engine.report_generator.pdf_serializer import PdfSerializer
+from engines.analysis_engine.report_generator.print_serializer import PrintSerializer
 from engines.analysis_engine.report_generator.report_builder import ReportBuilder
 from engines.analysis_engine.report_generator.template_loader import TemplateLoader
-from engines.analysis_engine.report_generator.theme import ThemeRegistry
+from engines.analysis_engine.report_generator.theme import ThemeManager, ThemeRegistry
 from engines.analysis_engine.report_generator.validators import (
     validate_context,
     validate_format_profile,
@@ -39,8 +40,9 @@ class ReportGenerator:
     Public contract:
         assemble(context: ReportAssemblyContext) -> ReportGeneratorResult
 
-    Supports HTML, Markdown, PDF, and JSON. Uses Report Builder, Section
-    Builder, Theme, and Template Loader. Does not interpret or recompute.
+    Supports HTML, Markdown, PDF, JSON, and Print. Uses Report Builder,
+    Section Builder, Theme Manager, Template Loader, and component
+    renderers. Does not interpret or recompute.
     """
 
     version: str = MODULE_VERSION
@@ -50,22 +52,30 @@ class ReportGenerator:
         *,
         report_builder: ReportBuilder | None = None,
         theme_registry: ThemeRegistry | None = None,
+        theme_manager: ThemeManager | None = None,
         template_loader: TemplateLoader | None = None,
         html_serializer: HtmlSerializer | None = None,
         markdown_serializer: MarkdownSerializer | None = None,
         json_serializer: JsonSerializer | None = None,
         pdf_serializer: PdfSerializer | None = None,
+        print_serializer: PrintSerializer | None = None,
         version: str | None = None,
         pdf_output_dir: str | Path | None = None,
     ) -> None:
         self.version = version or MODULE_VERSION
         self._report_builder = report_builder or ReportBuilder()
         self._themes = theme_registry or ThemeRegistry()
+        self._theme_manager = theme_manager or ThemeManager(self._themes)
         self._templates = template_loader or TemplateLoader()
-        self._html = html_serializer or HtmlSerializer()
+        self._html = html_serializer or HtmlSerializer(
+            theme_manager=self._theme_manager,
+        )
         self._markdown = markdown_serializer or MarkdownSerializer()
         self._json = json_serializer or JsonSerializer()
         self._pdf = pdf_serializer or PdfSerializer()
+        self._print = print_serializer or PrintSerializer(
+            theme_manager=self._theme_manager,
+        )
         self._pdf_output_dir = Path(pdf_output_dir) if pdf_output_dir else None
 
     def assemble(self, context: ReportAssemblyContext) -> ReportGeneratorResult:
@@ -76,12 +86,18 @@ class ReportGenerator:
         validate_prerequisites(context)
 
         profile = context.format_profile
-        theme = self._themes.get(profile.theme_id)
+        theme = self._theme_manager.get(profile.theme_id)
         template = self._templates.load(profile.template_id)
+        # Print format prefers the print layout when caller kept default template.
+        print_template = template
+        if "print" in profile.formats and profile.template_id == "default":
+            if "print" in self._templates.list_ids():
+                print_template = self._templates.load("print")
 
         structured = self._report_builder.build(
             context,
             theme=theme,
+            template=template,
             module_version=self.version,
         )
         validate_structured_report(structured)
@@ -90,6 +106,7 @@ class ReportGenerator:
         markdown = None
         json_artifact = None
         pdf = None
+        print_artifact = None
         requested = set(profile.formats)
 
         if "html" in requested:
@@ -107,6 +124,12 @@ class ReportGenerator:
             if self._pdf_output_dir is not None:
                 pdf_path = self._pdf_output_dir / f"{context.request_id}.pdf"
             pdf = self._pdf.serialize(structured, output_path=pdf_path)
+        if "print" in requested:
+            print_artifact = self._print.serialize(
+                structured,
+                theme=theme,
+                template=print_template,
+            )
 
         finished = time.perf_counter()
         diagnostics = (
@@ -119,6 +142,8 @@ class ReportGenerator:
                     "formats": list(profile.formats),
                     "section_count": len(structured.sections),
                     "data_block_count": len(structured.data_blocks),
+                    "theme_id": theme.theme_id,
+                    "template_id": template.template_id,
                 },
             ),
         )
@@ -128,6 +153,7 @@ class ReportGenerator:
             pdf=pdf,
             json=json_artifact,
             markdown=markdown,
+            print=print_artifact,
             diagnostics=diagnostics,
             execution_metadata=ExecutionMetadata(
                 request_id=context.request_id,
@@ -155,6 +181,7 @@ class ReportGenerator:
                 "request_id": context.request_id,
                 "formats": list(profile.formats),
                 "section_count": len(structured.sections),
+                "theme_id": theme.theme_id,
             },
         )
         return result

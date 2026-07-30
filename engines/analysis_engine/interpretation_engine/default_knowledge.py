@@ -6,11 +6,14 @@ from types import MappingProxyType
 from typing import Any, Mapping
 
 from engines.analysis_engine.interpretation_engine.knowledge_access import (
+    ASSET_CHAPTERS,
     ASSET_CONFIDENCE,
+    ASSET_PHRASES,
     ASSET_PRIORITY,
     ASSET_SECTIONS,
     ASSET_SENTENCES,
     ASSET_TEMPLATES,
+    ASSET_TERMINOLOGY,
     MODULE_ID,
     REQUIRED_ASSETS,
     AssetView,
@@ -189,6 +192,102 @@ def build_default_interpretation_knowledge() -> dict[str, AssetView]:
 
     section_order = list(_SECTION_TITLES.keys())
 
+    chapters = {
+        "order": ["overview_chapter", "analysis_chapter", "guidance_chapter"],
+        "definitions": {
+            "overview_chapter": {
+                "title": "Tổng quan",
+                "section_ids": ["overview"],
+            },
+            "analysis_chapter": {
+                "title": "Phân tích chuyên sâu",
+                "section_ids": [
+                    "strength",
+                    "temperature",
+                    "pattern",
+                    "useful_god",
+                    "ten_gods",
+                    "combination",
+                    "shensha",
+                    "luck",
+                ],
+            },
+            "guidance_chapter": {
+                "title": "Khuyến nghị",
+                "section_ids": ["recommendations"],
+            },
+        },
+    }
+
+    phrases = [
+        {
+            "id": "OPEN_OVERVIEW",
+            "text": "Xét tổng thể mệnh cục,",
+            "type": "opening",
+            "style": "standard",
+            "priority": 1,
+            "tags": ["overview", "general"],
+            "enabled": True,
+        },
+        {
+            "id": "OPEN_ANALYSIS",
+            "text": "Dựa trên cấu trúc tứ trụ,",
+            "type": "opening",
+            "style": "standard",
+            "priority": 1,
+            "tags": ["strength", "temperature", "pattern", "general"],
+            "enabled": True,
+        },
+        {
+            "id": "OPEN_GUIDANCE",
+            "text": "Từ góc độ vận dụng,",
+            "type": "opening",
+            "style": "standard",
+            "priority": 1,
+            "tags": ["recommendations", "luck", "useful_god"],
+            "enabled": True,
+        },
+    ]
+
+    terminology = [
+        {
+            "term_id": "zheng_guan_ge",
+            "display_name": "Chính Quan Cách",
+            "domain": "pattern",
+            "status": "active",
+        },
+        {
+            "term_id": "zheng_guan",
+            "display_name": "Chính Quan",
+            "domain": "ten_gods",
+            "status": "active",
+        },
+        {
+            "term_id": "shi_shen",
+            "display_name": "Thực Thần",
+            "domain": "ten_gods",
+            "status": "active",
+        },
+        {
+            "term_id": "strong",
+            "display_name": "vượng",
+            "domain": "strength",
+            "status": "active",
+        },
+        {
+            "term_id": "weak",
+            "display_name": "nhược",
+            "domain": "strength",
+            "status": "active",
+        },
+        {
+            "term_id": "balanced",
+            "display_name": "điều hòa",
+            "domain": "temperature",
+            "status": "active",
+        },
+    ]
+
     return {
         ASSET_SENTENCES: AssetView(
             asset_id=ASSET_SENTENCES,
@@ -214,7 +313,18 @@ def build_default_interpretation_knowledge() -> dict[str, AssetView]:
         ASSET_PRIORITY: AssetView(
             asset_id=ASSET_PRIORITY,
             version=KNOWLEDGE_VERSION,
-            data=_freeze({"tie_break": ["priority_desc", "sentence_id_asc"]}),
+            data=_freeze(
+                {
+                    "tie_break": ["priority_desc", "sentence_id_asc"],
+                    "exclusive_groups": [
+                        {
+                            "group_id": "strength_classification",
+                            "sentence_ids": ["strength_strong", "strength_weak"],
+                            "strategy": "highest_priority",
+                        }
+                    ],
+                }
+            ),
         ),
         ASSET_CONFIDENCE: AssetView(
             asset_id=ASSET_CONFIDENCE,
@@ -227,6 +337,21 @@ def build_default_interpretation_knowledge() -> dict[str, AssetView]:
                     "max_score": 0.95,
                 }
             ),
+        ),
+        ASSET_CHAPTERS: AssetView(
+            asset_id=ASSET_CHAPTERS,
+            version=KNOWLEDGE_VERSION,
+            data=_freeze(chapters),
+        ),
+        ASSET_PHRASES: AssetView(
+            asset_id=ASSET_PHRASES,
+            version=KNOWLEDGE_VERSION,
+            data=_freeze({"rows": phrases}),
+        ),
+        ASSET_TERMINOLOGY: AssetView(
+            asset_id=ASSET_TERMINOLOGY,
+            version=KNOWLEDGE_VERSION,
+            data=_freeze({"rows": terminology}),
         ),
     }
 

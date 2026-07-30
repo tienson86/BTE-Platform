@@ -5,6 +5,7 @@ from __future__ import annotations
 from engines.analysis_engine.report_generator.models import (
     FormatHints,
     FormatProfile,
+    LayoutTemplate,
     ReportAssemblyContext,
     ReportMetadata,
     ReportSection,
@@ -30,12 +31,14 @@ class ReportBuilder:
         *,
         theme: ReportTheme,
         module_version: str,
+        template: LayoutTemplate | None = None,
     ) -> StructuredReport:
         """Assemble StructuredReport from context without reinterpretation."""
         profile = context.format_profile
         sections = self._section_builder.build(
             context.interpretation_result,
             profile=profile,
+            section_order=None if template is None else template.section_order,
         )
         data_blocks = self._bind_data_blocks(context.analysis_result, profile)
         metadata = ReportMetadata(
@@ -52,7 +55,12 @@ class ReportBuilder:
             theme_id=theme.theme_id,
             template_id=profile.template_id,
             css_variables=dict(theme.css_variables),
-            details={"font_family": theme.font_family},
+            details={
+                "font_family": theme.font_family,
+                "template_family": (
+                    None if template is None else template.metadata.get("family")
+                ),
+            },
         )
         source_trace = {
             "interpretation_request_id": context.interpretation_result.request_id,

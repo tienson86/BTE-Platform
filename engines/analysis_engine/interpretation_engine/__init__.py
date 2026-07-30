@@ -1,7 +1,7 @@
 """Interpretation Engine package.
 
 Importable implementation that consumes AnalysisResult and produces
-InterpretationResult for Report Generator.
+InterpretationResult (Markdown / HTML / JSON) for Report Generator.
 
 Does not belong to Analysis Runtime stage modules (01–09).
 """
@@ -31,6 +31,8 @@ from engines.analysis_engine.interpretation_engine.models import (
     REQUIRED_ANALYSIS_STAGES,
     BoundSentence,
     BoundTemplate,
+    ExplanationEntry,
+    InterpretationChapter,
     InterpretationContext,
     InterpretationParagraph,
     InterpretationResult,
@@ -47,8 +49,10 @@ __all__ = [
     "AssetView",
     "BoundSentence",
     "BoundTemplate",
+    "ExplanationEntry",
     "InMemoryKnowledgeSession",
     "InterpretationBindingError",
+    "InterpretationChapter",
     "InterpretationContext",
     "InterpretationEngine",
     "InterpretationEngineError",

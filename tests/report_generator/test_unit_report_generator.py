@@ -7,6 +7,9 @@ import json
 import pytest
 
 from engines.analysis_engine.report_generator import (
+    CATALOG_THEME_IDS,
+    ChartRenderer,
+    ComponentRenderer,
     FormatProfile,
     ReportAssemblyContext,
     ReportBindingError,
@@ -16,7 +19,11 @@ from engines.analysis_engine.report_generator import (
     ReportPrerequisiteError,
     ReportValidationError,
     SectionBuilder,
+    SectionRenderer,
+    StructuredDataBlock,
+    TableRenderer,
     TemplateLoader,
+    ThemeManager,
     ThemeRegistry,
 )
 
@@ -74,6 +81,121 @@ class TestThemeAndTemplate:
         template = TemplateLoader().load("default")
         assert "{title}" in template.html_shell
         assert "{sections}" in template.markdown_shell
+
+    def test_catalog_themes_available(self) -> None:
+        manager = ThemeManager()
+        for theme_id in CATALOG_THEME_IDS:
+            theme = manager.get(theme_id)
+            assert theme.theme_id == theme_id
+            assert theme.css_variables["--bg"]
+            assert manager.print_css(theme_id)
+        catalog = manager.list_catalog()
+        assert [item.theme_id for item in catalog] == list(CATALOG_THEME_IDS)
+
+    def test_template_loader_catalog_and_print(self) -> None:
+        loader = TemplateLoader()
+        for template_id in ("classic", "modern", "professional", "dark", "print"):
+            template = loader.load(template_id)
+            assert template.template_id == template_id
+            assert "{sections}" in template.html_shell
+
+
+class TestRenderers:
+    def test_section_renderer_html_and_markdown(self, interpretation_result) -> None:
+        sections = SectionBuilder().build(
+            interpretation_result,
+            profile=FormatProfile(mandatory_sections=("overview",)),
+        )
+        html = SectionRenderer().render_html(sections[0])
+        md = SectionRenderer().render_markdown(sections[0])
+        assert 'class="report-section"' in html
+        assert sections[0].title in md
+
+    def test_table_and_chart_renderers(self) -> None:
+        block = StructuredDataBlock(
+            block_id="data:strength",
+            stage_id="strength",
+            title="Strength",
+            payload={"classification": "strong", "score": 0.82, "support": 12},
+            order=0,
+        )
+        table_html = TableRenderer().render_html(block)
+        chart_html = ChartRenderer().render_html(block)
+        table_md = TableRenderer().render_markdown(block)
+        chart_md = ChartRenderer().render_markdown(block)
+        assert "report-table" in table_html
+        assert "chart-bar-fill" in chart_html
+        assert "| Field | Value |" in table_md
+        assert "Strength Chart" in chart_md
+
+    def test_component_renderer_composes_blocks(self) -> None:
+        block = StructuredDataBlock(
+            block_id="data:luck",
+            stage_id="luck",
+            title="Luck",
+            payload={
+                "summary": {"active_count": 4, "current_da_yun_index": 2},
+            },
+            order=0,
+        )
+        html = ComponentRenderer().render_data_blocks_html((block,))
+        md = ComponentRenderer().render_data_blocks_markdown((block,))
+        assert "Analytical Data" in html
+        assert "Analytical Data" in md
+
+
+class TestTemplateSystemAssemble:
+    @pytest.mark.parametrize("theme_id", list(CATALOG_THEME_IDS))
+    def test_assemble_with_catalog_theme(
+        self,
+        generator: ReportGenerator,
+        interpretation_result,
+        analysis_result,
+        theme_id: str,
+    ) -> None:
+        result = generator.assemble(
+            ReportAssemblyContext(
+                interpretation_result=interpretation_result,
+                analysis_result=analysis_result,
+                format_profile=FormatProfile(
+                    formats=("html", "markdown"),
+                    theme_id=theme_id,
+                    template_id=theme_id,
+                    include_structured_data=True,
+                    mandatory_sections=("overview",),
+                ),
+            )
+        )
+        assert result.html is not None
+        assert f"--accent" in result.html.content or ":root" in result.html.content
+        assert result.summary["theme_id"] == theme_id
+        assert "report-table" in result.html.content
+        assert result.markdown is not None
+
+    def test_print_format_artifact(
+        self,
+        generator: ReportGenerator,
+        interpretation_result,
+        analysis_result,
+    ) -> None:
+        result = generator.assemble(
+            ReportAssemblyContext(
+                interpretation_result=interpretation_result,
+                analysis_result=analysis_result,
+                format_profile=FormatProfile(
+                    formats=("print", "html", "pdf", "markdown"),
+                    theme_id="professional",
+                    template_id="professional",
+                    include_structured_data=True,
+                    mandatory_sections=("overview",),
+                ),
+            )
+        )
+        assert result.print is not None
+        assert "print-document" in result.print.content or "@media print" in result.print.content
+        assert result.html is not None
+        assert result.pdf is not None
+        assert result.markdown is not None
 
 
 class TestSectionAndReportBuilder:

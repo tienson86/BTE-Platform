@@ -29,7 +29,10 @@ AnalysisResult
 Sentence Selection
         │
         ▼
-Template Binding
+Sentence Ranking
+        │
+        ▼
+Conflict Resolution
         │
         ▼
 Placeholder Binding
@@ -38,16 +41,30 @@ Placeholder Binding
 Paragraph Builder
         │
         ▼
-Interpretation Builder
+Chapter Builder
+        │
+        ▼
+Explanation Builder
+        │
+        ▼
+Markdown / HTML / JSON Builders
         │
         ▼
 InterpretationResult
 ```
 
+## Knowledge consumption
+
+- Knowledge SDK session (`get_module` / `get_asset`)
+- Sentence Library (`interpretation.sentences` + templates)
+- Phrase Library (`interpretation.phrases`)
+- Terminology Library (`interpretation.terminology`)
+
 ## Behavior
 
 - Consumes published `AnalysisResult` only (read-only)
-- Selects sentences from Knowledge SDK (`interpretation_knowledge`)
-- Binds templates and placeholders deterministically
+- Rule-based only — no AI generation
+- Deterministic, explainable, and traceable via `explanations` + `evidence`
+- Outputs `InterpretationResult` with `markdown`, `html`, and `json_text`
 - Does not recompute analytical stages
-- Does not render HTML/PDF reports
+- Does not render PDF (Report Generator responsibility)

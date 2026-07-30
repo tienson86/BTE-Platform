@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import html
-import json
 
+from engines.analysis_engine.report_generator.component_renderer import (
+    ComponentRenderer,
+)
 from engines.analysis_engine.report_generator.exceptions import ReportSerializationError
 from engines.analysis_engine.report_generator.models import (
     HtmlReportArtifact,
@@ -12,10 +14,20 @@ from engines.analysis_engine.report_generator.models import (
     ReportTheme,
     StructuredReport,
 )
+from engines.analysis_engine.report_generator.theme import ThemeManager
 
 
 class HtmlSerializer:
     """Serialize StructuredReport to HTML using layout template + theme."""
+
+    def __init__(
+        self,
+        *,
+        component_renderer: ComponentRenderer | None = None,
+        theme_manager: ThemeManager | None = None,
+    ) -> None:
+        self._components = component_renderer or ComponentRenderer()
+        self._themes = theme_manager or ThemeManager()
 
     def serialize(
         self,
@@ -26,39 +38,20 @@ class HtmlSerializer:
     ) -> HtmlReportArtifact:
         """Render deterministic HTML artifact."""
         try:
-            sections_html = "\n".join(
-                (
-                    f'  <section id="{html.escape(section.section_id)}">\n'
-                    f"    <h2>{html.escape(section.title)}</h2>\n"
-                    f"    <p>{html.escape(section.body)}</p>\n"
-                    f"  </section>"
-                )
-                for section in report.sections
-            )
-            data_html = ""
-            if report.data_blocks:
-                blocks = ["  <aside class=\"structured-data\">", "    <h2>Analytical Data</h2>"]
-                for block in report.data_blocks:
-                    payload = html.escape(
-                        json.dumps(dict(block.payload), ensure_ascii=False, sort_keys=True)
-                    )
-                    blocks.append(
-                        f'    <div class="data-block" id="{html.escape(block.block_id)}">\n'
-                        f"      <h3>{html.escape(block.title)}</h3>\n"
-                        f"      <pre>{payload}</pre>\n"
-                        f"    </div>"
-                    )
-                blocks.append("  </aside>")
-                data_html = "\n".join(blocks)
-
-            content = template.html_shell.format(
-                title=html.escape(report.metadata.title),
-                overview=html.escape(report.overview),
-                theme_css=theme.css_block(),
-                font_family=html.escape(theme.font_family),
-                sections=sections_html,
-                data_blocks=data_html,
-            )
+            sections_html = self._components.render_sections_html(report.sections)
+            data_html = self._components.render_data_blocks_html(report.data_blocks)
+            print_css = self._themes.print_css(theme.theme_id)
+            format_kwargs = {
+                "title": html.escape(report.metadata.title),
+                "overview": html.escape(report.overview),
+                "theme_css": theme.css_block(),
+                "font_family": html.escape(theme.font_family),
+                "sections": sections_html,
+                "data_blocks": data_html,
+            }
+            if "{print_css}" in template.html_shell:
+                format_kwargs["print_css"] = print_css
+            content = template.html_shell.format(**format_kwargs)
         except (KeyError, ValueError, TypeError) as exc:
             raise ReportSerializationError(
                 "HTML serialization failed",

@@ -8,7 +8,6 @@ from engines.analysis_engine.interpretation_engine.exceptions import (
     InterpretationKnowledgeError,
 )
 from engines.analysis_engine.interpretation_engine.knowledge_access import (
-    ASSET_SECTIONS,
     ASSET_SENTENCES,
     KnowledgeSession,
 )
@@ -21,7 +20,10 @@ from engines.analysis_engine.runtime.models import AnalysisResult
 
 
 class SentenceSelector:
-    """Select deterministic sentence candidates from knowledge."""
+    """Select deterministic sentence candidates from knowledge.
+
+    Ranking and conflict limits are handled by later pipeline stages.
+    """
 
     def select(
         self,
@@ -29,7 +31,7 @@ class SentenceSelector:
         *,
         session: KnowledgeSession,
     ) -> tuple[SelectedSentence, ...]:
-        """Select matching sentences ordered by priority then sentence_id."""
+        """Select matching sentences ordered by sentence_id for determinism."""
         analysis = context.analysis_result
         rows = list(session.get_asset(ASSET_SENTENCES).data.get("rows") or [])
         if not rows:
@@ -37,26 +39,14 @@ class SentenceSelector:
                 "interpretation.sentences has no rows",
             )
 
-        section_cfg = session.get_asset(ASSET_SECTIONS).data
-        max_per_section = int(section_cfg.get("max_sentences_per_section") or 3)
-
         matched: list[SelectedSentence] = []
         for row in rows:
             selected = self._try_match(row, analysis)
             if selected is not None:
                 matched.append(selected)
 
-        matched.sort(key=lambda item: (-item.priority, item.sentence_id))
-
-        limited: list[SelectedSentence] = []
-        counts: dict[str, int] = {}
-        for item in matched:
-            count = counts.get(item.section_id, 0)
-            if count >= max_per_section:
-                continue
-            limited.append(item)
-            counts[item.section_id] = count + 1
-        return tuple(limited)
+        matched.sort(key=lambda item: item.sentence_id)
+        return tuple(matched)
 
     def _try_match(
         self,

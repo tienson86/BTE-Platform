@@ -127,6 +127,7 @@ def validate_result(
         "pdf": result.pdf,
         "json": result.json,
         "markdown": result.markdown,
+        "print": result.print,
     }
     missing = [fmt for fmt in required if artifacts.get(fmt) is None]
     if missing:
@@ -140,6 +141,8 @@ def validate_result(
         raise ReportSchemaError("Markdown artifact content is empty")
     if result.json is not None and not result.json.content.strip():
         raise ReportSchemaError("JSON artifact content is empty")
+    if result.print is not None and not result.print.content.strip():
+        raise ReportSchemaError("Print artifact content is empty")
     if result.pdf is not None:
         if not result.pdf.content.startswith(b"%PDF"):
             raise ReportSchemaError("PDF artifact is not a valid PDF")

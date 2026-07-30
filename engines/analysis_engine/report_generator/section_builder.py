@@ -18,8 +18,9 @@ class SectionBuilder:
         interpretation: InterpretationResult,
         *,
         profile: FormatProfile,
+        section_order: tuple[str, ...] | None = None,
     ) -> tuple[ReportSection, ...]:
-        """Bind interpretation sections in published order."""
+        """Bind interpretation sections in published or template order."""
         if not interpretation.sections:
             raise ReportBindingError(
                 "InterpretationResult has no sections to bind",
@@ -37,8 +38,19 @@ class SectionBuilder:
                 details={"missing": missing},
             )
 
+        by_id = {section.section_id: section for section in interpretation.sections}
+        ordered_ids: list[str]
+        if section_order:
+            ordered_ids = [section_id for section_id in section_order if section_id in by_id]
+            for section_id in by_id:
+                if section_id not in ordered_ids:
+                    ordered_ids.append(section_id)
+        else:
+            ordered_ids = [section.section_id for section in interpretation.sections]
+
         sections: list[ReportSection] = []
-        for order, section in enumerate(interpretation.sections):
+        for order, section_id in enumerate(ordered_ids):
+            section = by_id[section_id]
             body = section.body.strip()
             if not body:
                 raise ReportBindingError(

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-import json
-
+from engines.analysis_engine.report_generator.component_renderer import (
+    ComponentRenderer,
+)
 from engines.analysis_engine.report_generator.exceptions import ReportSerializationError
 from engines.analysis_engine.report_generator.models import (
     LayoutTemplate,
@@ -15,6 +16,13 @@ from engines.analysis_engine.report_generator.models import (
 class MarkdownSerializer:
     """Serialize StructuredReport to Markdown using layout template."""
 
+    def __init__(
+        self,
+        *,
+        component_renderer: ComponentRenderer | None = None,
+    ) -> None:
+        self._components = component_renderer or ComponentRenderer()
+
     def serialize(
         self,
         report: StructuredReport,
@@ -23,33 +31,8 @@ class MarkdownSerializer:
     ) -> MarkdownReportArtifact:
         """Render deterministic Markdown artifact."""
         try:
-            section_parts: list[str] = []
-            for section in report.sections:
-                section_parts.append(f"## {section.title}")
-                section_parts.append("")
-                section_parts.append(section.body)
-                section_parts.append("")
-            sections_md = "\n".join(section_parts).rstrip() + "\n"
-
-            data_md = ""
-            if report.data_blocks:
-                lines = ["## Analytical Data", ""]
-                for block in report.data_blocks:
-                    lines.append(f"### {block.title}")
-                    lines.append("")
-                    lines.append("```json")
-                    lines.append(
-                        json.dumps(
-                            dict(block.payload),
-                            ensure_ascii=False,
-                            sort_keys=True,
-                            indent=2,
-                        )
-                    )
-                    lines.append("```")
-                    lines.append("")
-                data_md = "\n".join(lines)
-
+            sections_md = self._components.render_sections_markdown(report.sections)
+            data_md = self._components.render_data_blocks_markdown(report.data_blocks)
             content = template.markdown_shell.format(
                 title=report.metadata.title,
                 overview=report.overview,

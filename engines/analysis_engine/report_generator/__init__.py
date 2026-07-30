@@ -6,11 +6,15 @@ Architecture documentation lives in:
 ``engines/analysis_engine/10_report_generator/``
 
 Consumes InterpretationResult (+ optional AnalysisResult) and publishes
-ReportGeneratorResult with HTML / Markdown / PDF / JSON artifacts.
+ReportGeneratorResult with HTML / Markdown / PDF / JSON / Print artifacts.
 """
 
 from __future__ import annotations
 
+from engines.analysis_engine.report_generator.chart_renderer import ChartRenderer
+from engines.analysis_engine.report_generator.component_renderer import (
+    ComponentRenderer,
+)
 from engines.analysis_engine.report_generator.engine import (
     ReportEngine,
     ReportGenerator,
@@ -35,6 +39,7 @@ from engines.analysis_engine.report_generator.models import (
     LayoutTemplate,
     MarkdownReportArtifact,
     PdfReportArtifact,
+    PrintReportArtifact,
     ReportAssemblyContext,
     ReportGeneratorResult,
     ReportMetadata,
@@ -45,12 +50,21 @@ from engines.analysis_engine.report_generator.models import (
 )
 from engines.analysis_engine.report_generator.report_builder import ReportBuilder
 from engines.analysis_engine.report_generator.section_builder import SectionBuilder
+from engines.analysis_engine.report_generator.section_renderer import SectionRenderer
+from engines.analysis_engine.report_generator.table_renderer import TableRenderer
 from engines.analysis_engine.report_generator.template_loader import TemplateLoader
-from engines.analysis_engine.report_generator.theme import ThemeRegistry
+from engines.analysis_engine.report_generator.theme import (
+    CATALOG_THEME_IDS,
+    ThemeManager,
+    ThemeRegistry,
+)
 
 __all__ = [
+    "CATALOG_THEME_IDS",
     "FULL_PUBLICATION_FORMATS",
     "SUPPORTED_FORMATS",
+    "ChartRenderer",
+    "ComponentRenderer",
     "FormatHints",
     "FormatProfile",
     "HtmlReportArtifact",
@@ -58,6 +72,7 @@ __all__ = [
     "LayoutTemplate",
     "MarkdownReportArtifact",
     "PdfReportArtifact",
+    "PrintReportArtifact",
     "ReportAssemblyContext",
     "ReportBindingError",
     "ReportBuilder",
@@ -75,9 +90,12 @@ __all__ = [
     "ReportTheme",
     "ReportValidationError",
     "SectionBuilder",
+    "SectionRenderer",
     "StructuredDataBlock",
     "StructuredReport",
+    "TableRenderer",
     "TemplateLoader",
+    "ThemeManager",
     "ThemeRegistry",
 ]
 

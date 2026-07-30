@@ -1,0 +1,787 @@
+{
+  "chapters": [
+    {
+      "body": "Xét tổng thể mệnh cục, Bản luận giải cho Nhật Chủ Giáp được tổng hợp từ toàn bộ kết quả phân tích.",
+      "chapter_id": "overview_chapter",
+      "section_ids": [
+        "overview"
+      ],
+      "title": "Tổng quan"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Nhật Chủ Giáp thuộc loại vượng, lực lượng vững.\n\nDựa trên cấu trúc tứ trụ, Khí hậu cục diện ở trạng thái điều hòa.\n\nDựa trên cấu trúc tứ trụ, Cách cục chủ đạo là Chính Quan Cách.\n\nTừ góc độ vận dụng, Dụng thần ưu tiên gồm: Chính Quan, Thực Thần.\n\nDựa trên cấu trúc tứ trụ, Thập thần hiện diện với 1 mục chính.\n\nDựa trên cấu trúc tứ trụ, Các quan hệ hợp xung đã được đánh giá theo Rule Database.\n\nDựa trên cấu trúc tứ trụ, Thần sát ghi nhận 1 dấu hiệu liên quan.\n\nTừ góc độ vận dụng, Lớp vận hạn đang hoạt động: 4, Đại vận hiện tại index 2.",
+      "chapter_id": "analysis_chapter",
+      "section_ids": [
+        "strength",
+        "temperature",
+        "pattern",
+        "useful_god",
+        "ten_gods",
+        "combination",
+        "shensha",
+        "luck"
+      ],
+      "title": "Phân tích chuyên sâu"
+    },
+    {
+      "body": "Từ góc độ vận dụng, Nên theo dõi biến động vận hạn gắn với Nhật Chủ Giáp.",
+      "chapter_id": "guidance_chapter",
+      "section_ids": [
+        "recommendations"
+      ],
+      "title": "Khuyến nghị"
+    }
+  ],
+  "confidence": {
+    "details": {
+      "base_score": 0.75,
+      "per_section_bonus": 0.02,
+      "section_count": 10
+    },
+    "level": "high",
+    "score": 0.95
+  },
+  "diagnostics": [
+    {
+      "code": "interpretation.assembled",
+      "details": {
+        "chapter_count": 3,
+        "explanation_count": 10,
+        "section_count": 10,
+        "sentence_count": 10
+      },
+      "level": "info",
+      "message": "InterpretationResult assembled",
+      "stage_id": "interpretation"
+    }
+  ],
+  "evidence": [
+    {
+      "category": "overview",
+      "details": {
+        "bound_values": {
+          "day_master": "Giáp"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_OVERVIEW",
+        "rank": 1,
+        "source_stage": "summary",
+        "terminology_ids": []
+      },
+      "priority": 100,
+      "reference": "tpl_overview_intro",
+      "rule_id": "overview_intro",
+      "version": "1.0.0"
+    },
+    {
+      "category": "strength",
+      "details": {
+        "bound_values": {
+          "classification": "vượng",
+          "day_master": "Giáp"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_ANALYSIS",
+        "rank": 2,
+        "source_stage": "strength",
+        "terminology_ids": [
+          "strong"
+        ]
+      },
+      "priority": 90,
+      "reference": "tpl_strength_strong",
+      "rule_id": "strength_strong",
+      "version": "1.0.0"
+    },
+    {
+      "category": "pattern",
+      "details": {
+        "bound_values": {
+          "pattern_id": "Chính Quan Cách"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_ANALYSIS",
+        "rank": 3,
+        "source_stage": "pattern",
+        "terminology_ids": [
+          "zheng_guan_ge"
+        ]
+      },
+      "priority": 88,
+      "reference": "tpl_pattern_named",
+      "rule_id": "pattern_named",
+      "version": "1.0.0"
+    },
+    {
+      "category": "temperature",
+      "details": {
+        "bound_values": {
+          "classification": "điều hòa"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_ANALYSIS",
+        "rank": 4,
+        "source_stage": "temperature",
+        "terminology_ids": [
+          "balanced"
+        ]
+      },
+      "priority": 85,
+      "reference": "tpl_temperature_balanced",
+      "rule_id": "temperature_balanced",
+      "version": "1.0.0"
+    },
+    {
+      "category": "useful_god",
+      "details": {
+        "bound_values": {
+          "useful_gods": "Chính Quan, Thực Thần"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_GUIDANCE",
+        "rank": 5,
+        "source_stage": "useful_god",
+        "terminology_ids": [
+          "zheng_guan",
+          "shi_shen"
+        ]
+      },
+      "priority": 80,
+      "reference": "tpl_useful_god_list",
+      "rule_id": "useful_god_list",
+      "version": "1.0.0"
+    },
+    {
+      "category": "luck",
+      "details": {
+        "bound_values": {
+          "active_count": "4",
+          "current_da_yun_index": "2"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_GUIDANCE",
+        "rank": 6,
+        "source_stage": "luck",
+        "terminology_ids": []
+      },
+      "priority": 78,
+      "reference": "tpl_luck_active",
+      "rule_id": "luck_active",
+      "version": "1.0.0"
+    },
+    {
+      "category": "ten_gods",
+      "details": {
+        "bound_values": {
+          "presence_count": "1"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_ANALYSIS",
+        "rank": 7,
+        "source_stage": "ten_gods",
+        "terminology_ids": []
+      },
+      "priority": 75,
+      "reference": "tpl_ten_gods_presence",
+      "rule_id": "ten_gods_presence",
+      "version": "1.0.0"
+    },
+    {
+      "category": "shensha",
+      "details": {
+        "bound_values": {
+          "presence_count": "1"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_ANALYSIS",
+        "rank": 8,
+        "source_stage": "shensha",
+        "terminology_ids": []
+      },
+      "priority": 72,
+      "reference": "tpl_shensha_presence",
+      "rule_id": "shensha_presence",
+      "version": "1.0.0"
+    },
+    {
+      "category": "combination",
+      "details": {
+        "bound_values": {},
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_ANALYSIS",
+        "rank": 9,
+        "source_stage": "combination",
+        "terminology_ids": []
+      },
+      "priority": 70,
+      "reference": "tpl_combination_summary",
+      "rule_id": "combination_summary",
+      "version": "1.0.0"
+    },
+    {
+      "category": "recommendations",
+      "details": {
+        "bound_values": {
+          "day_master": "Giáp"
+        },
+        "conflict_action": "kept",
+        "phrase_id": "OPEN_GUIDANCE",
+        "rank": 10,
+        "source_stage": "summary",
+        "terminology_ids": []
+      },
+      "priority": 60,
+      "reference": "tpl_recommendations_close",
+      "rule_id": "recommendations_close",
+      "version": "1.0.0"
+    }
+  ],
+  "explanations": [
+    {
+      "bound_values": {
+        "day_master": "Giáp"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_OVERVIEW",
+      "priority": 100,
+      "rank": 1,
+      "reason": "Matched stage 'summary', ranked #1, conflict=kept",
+      "section_id": "overview",
+      "sentence_id": "overview_intro",
+      "source_stage": "summary",
+      "template_id": "tpl_overview_intro",
+      "terminology_ids": [],
+      "text": "Bản luận giải cho Nhật Chủ Giáp được tổng hợp từ toàn bộ kết quả phân tích."
+    },
+    {
+      "bound_values": {
+        "classification": "vượng",
+        "day_master": "Giáp"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_ANALYSIS",
+      "priority": 90,
+      "rank": 2,
+      "reason": "Matched stage 'strength', ranked #2, conflict=kept",
+      "section_id": "strength",
+      "sentence_id": "strength_strong",
+      "source_stage": "strength",
+      "template_id": "tpl_strength_strong",
+      "terminology_ids": [
+        "strong"
+      ],
+      "text": "Nhật Chủ Giáp thuộc loại vượng, lực lượng vững."
+    },
+    {
+      "bound_values": {
+        "pattern_id": "Chính Quan Cách"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_ANALYSIS",
+      "priority": 88,
+      "rank": 3,
+      "reason": "Matched stage 'pattern', ranked #3, conflict=kept",
+      "section_id": "pattern",
+      "sentence_id": "pattern_named",
+      "source_stage": "pattern",
+      "template_id": "tpl_pattern_named",
+      "terminology_ids": [
+        "zheng_guan_ge"
+      ],
+      "text": "Cách cục chủ đạo là Chính Quan Cách."
+    },
+    {
+      "bound_values": {
+        "classification": "điều hòa"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_ANALYSIS",
+      "priority": 85,
+      "rank": 4,
+      "reason": "Matched stage 'temperature', ranked #4, conflict=kept",
+      "section_id": "temperature",
+      "sentence_id": "temperature_balanced",
+      "source_stage": "temperature",
+      "template_id": "tpl_temperature_balanced",
+      "terminology_ids": [
+        "balanced"
+      ],
+      "text": "Khí hậu cục diện ở trạng thái điều hòa."
+    },
+    {
+      "bound_values": {
+        "useful_gods": "Chính Quan, Thực Thần"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_GUIDANCE",
+      "priority": 80,
+      "rank": 5,
+      "reason": "Matched stage 'useful_god', ranked #5, conflict=kept",
+      "section_id": "useful_god",
+      "sentence_id": "useful_god_list",
+      "source_stage": "useful_god",
+      "template_id": "tpl_useful_god_list",
+      "terminology_ids": [
+        "zheng_guan",
+        "shi_shen"
+      ],
+      "text": "Dụng thần ưu tiên gồm: Chính Quan, Thực Thần."
+    },
+    {
+      "bound_values": {
+        "active_count": "4",
+        "current_da_yun_index": "2"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_GUIDANCE",
+      "priority": 78,
+      "rank": 6,
+      "reason": "Matched stage 'luck', ranked #6, conflict=kept",
+      "section_id": "luck",
+      "sentence_id": "luck_active",
+      "source_stage": "luck",
+      "template_id": "tpl_luck_active",
+      "terminology_ids": [],
+      "text": "Lớp vận hạn đang hoạt động: 4, Đại vận hiện tại index 2."
+    },
+    {
+      "bound_values": {
+        "presence_count": "1"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_ANALYSIS",
+      "priority": 75,
+      "rank": 7,
+      "reason": "Matched stage 'ten_gods', ranked #7, conflict=kept",
+      "section_id": "ten_gods",
+      "sentence_id": "ten_gods_presence",
+      "source_stage": "ten_gods",
+      "template_id": "tpl_ten_gods_presence",
+      "terminology_ids": [],
+      "text": "Thập thần hiện diện với 1 mục chính."
+    },
+    {
+      "bound_values": {
+        "presence_count": "1"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_ANALYSIS",
+      "priority": 72,
+      "rank": 8,
+      "reason": "Matched stage 'shensha', ranked #8, conflict=kept",
+      "section_id": "shensha",
+      "sentence_id": "shensha_presence",
+      "source_stage": "shensha",
+      "template_id": "tpl_shensha_presence",
+      "terminology_ids": [],
+      "text": "Thần sát ghi nhận 1 dấu hiệu liên quan."
+    },
+    {
+      "bound_values": {},
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_ANALYSIS",
+      "priority": 70,
+      "rank": 9,
+      "reason": "Matched stage 'combination', ranked #9, conflict=kept",
+      "section_id": "combination",
+      "sentence_id": "combination_summary",
+      "source_stage": "combination",
+      "template_id": "tpl_combination_summary",
+      "terminology_ids": [],
+      "text": "Các quan hệ hợp xung đã được đánh giá theo Rule Database."
+    },
+    {
+      "bound_values": {
+        "day_master": "Giáp"
+      },
+      "conflict_action": "kept",
+      "phrase_id": "OPEN_GUIDANCE",
+      "priority": 60,
+      "rank": 10,
+      "reason": "Matched stage 'summary', ranked #10, conflict=kept",
+      "section_id": "recommendations",
+      "sentence_id": "recommendations_close",
+      "source_stage": "summary",
+      "template_id": "tpl_recommendations_close",
+      "terminology_ids": [],
+      "text": "Nên theo dõi biến động vận hạn gắn với Nhật Chủ Giáp."
+    }
+  ],
+  "knowledge_version": "1.0.0",
+  "module_version": "1.0.0",
+  "overview": "Xét tổng thể mệnh cục, Bản luận giải cho Nhật Chủ Giáp được tổng hợp từ toàn bộ kết quả phân tích.",
+  "request_id": "interp-golden-001",
+  "sections": [
+    {
+      "body": "Xét tổng thể mệnh cục, Bản luận giải cho Nhật Chủ Giáp được tổng hợp từ toàn bộ kết quả phân tích.",
+      "chapter_id": "overview_chapter",
+      "paragraphs": [
+        {
+          "section_id": "overview",
+          "sentences": [
+            {
+              "bound_values": {
+                "day_master": "Giáp"
+              },
+              "metadata": {
+                "terminology_ids": []
+              },
+              "priority": 100,
+              "section_id": "overview",
+              "sentence_id": "overview_intro",
+              "source_stage": "summary",
+              "template_id": "tpl_overview_intro",
+              "text": "Bản luận giải cho Nhật Chủ Giáp được tổng hợp từ toàn bộ kết quả phân tích."
+            }
+          ],
+          "text": "Xét tổng thể mệnh cục, Bản luận giải cho Nhật Chủ Giáp được tổng hợp từ toàn bộ kết quả phân tích."
+        }
+      ],
+      "section_id": "overview",
+      "sentence_ids": [
+        "overview_intro"
+      ],
+      "source_stages": [
+        "summary"
+      ],
+      "title": "Tổng quan"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Nhật Chủ Giáp thuộc loại vượng, lực lượng vững.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "strength",
+          "sentences": [
+            {
+              "bound_values": {
+                "classification": "vượng",
+                "day_master": "Giáp"
+              },
+              "metadata": {
+                "terminology_ids": [
+                  "strong"
+                ]
+              },
+              "priority": 90,
+              "section_id": "strength",
+              "sentence_id": "strength_strong",
+              "source_stage": "strength",
+              "template_id": "tpl_strength_strong",
+              "text": "Nhật Chủ Giáp thuộc loại vượng, lực lượng vững."
+            }
+          ],
+          "text": "Dựa trên cấu trúc tứ trụ, Nhật Chủ Giáp thuộc loại vượng, lực lượng vững."
+        }
+      ],
+      "section_id": "strength",
+      "sentence_ids": [
+        "strength_strong"
+      ],
+      "source_stages": [
+        "strength"
+      ],
+      "title": "Vượng suy"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Khí hậu cục diện ở trạng thái điều hòa.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "temperature",
+          "sentences": [
+            {
+              "bound_values": {
+                "classification": "điều hòa"
+              },
+              "metadata": {
+                "terminology_ids": [
+                  "balanced"
+                ]
+              },
+              "priority": 85,
+              "section_id": "temperature",
+              "sentence_id": "temperature_balanced",
+              "source_stage": "temperature",
+              "template_id": "tpl_temperature_balanced",
+              "text": "Khí hậu cục diện ở trạng thái điều hòa."
+            }
+          ],
+          "text": "Dựa trên cấu trúc tứ trụ, Khí hậu cục diện ở trạng thái điều hòa."
+        }
+      ],
+      "section_id": "temperature",
+      "sentence_ids": [
+        "temperature_balanced"
+      ],
+      "source_stages": [
+        "temperature"
+      ],
+      "title": "Hàn nhiệt"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Cách cục chủ đạo là Chính Quan Cách.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "pattern",
+          "sentences": [
+            {
+              "bound_values": {
+                "pattern_id": "Chính Quan Cách"
+              },
+              "metadata": {
+                "terminology_ids": [
+                  "zheng_guan_ge"
+                ]
+              },
+              "priority": 88,
+              "section_id": "pattern",
+              "sentence_id": "pattern_named",
+              "source_stage": "pattern",
+              "template_id": "tpl_pattern_named",
+              "text": "Cách cục chủ đạo là Chính Quan Cách."
+            }
+          ],
+          "text": "Dựa trên cấu trúc tứ trụ, Cách cục chủ đạo là Chính Quan Cách."
+        }
+      ],
+      "section_id": "pattern",
+      "sentence_ids": [
+        "pattern_named"
+      ],
+      "source_stages": [
+        "pattern"
+      ],
+      "title": "Cách cục"
+    },
+    {
+      "body": "Từ góc độ vận dụng, Dụng thần ưu tiên gồm: Chính Quan, Thực Thần.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "useful_god",
+          "sentences": [
+            {
+              "bound_values": {
+                "useful_gods": "Chính Quan, Thực Thần"
+              },
+              "metadata": {
+                "terminology_ids": [
+                  "zheng_guan",
+                  "shi_shen"
+                ]
+              },
+              "priority": 80,
+              "section_id": "useful_god",
+              "sentence_id": "useful_god_list",
+              "source_stage": "useful_god",
+              "template_id": "tpl_useful_god_list",
+              "text": "Dụng thần ưu tiên gồm: Chính Quan, Thực Thần."
+            }
+          ],
+          "text": "Từ góc độ vận dụng, Dụng thần ưu tiên gồm: Chính Quan, Thực Thần."
+        }
+      ],
+      "section_id": "useful_god",
+      "sentence_ids": [
+        "useful_god_list"
+      ],
+      "source_stages": [
+        "useful_god"
+      ],
+      "title": "Dụng thần"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Thập thần hiện diện với 1 mục chính.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "ten_gods",
+          "sentences": [
+            {
+              "bound_values": {
+                "presence_count": "1"
+              },
+              "metadata": {
+                "terminology_ids": []
+              },
+              "priority": 75,
+              "section_id": "ten_gods",
+              "sentence_id": "ten_gods_presence",
+              "source_stage": "ten_gods",
+              "template_id": "tpl_ten_gods_presence",
+              "text": "Thập thần hiện diện với 1 mục chính."
+            }
+          ],
+          "text": "Dựa trên cấu trúc tứ trụ, Thập thần hiện diện với 1 mục chính."
+        }
+      ],
+      "section_id": "ten_gods",
+      "sentence_ids": [
+        "ten_gods_presence"
+      ],
+      "source_stages": [
+        "ten_gods"
+      ],
+      "title": "Thập thần"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Các quan hệ hợp xung đã được đánh giá theo Rule Database.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "combination",
+          "sentences": [
+            {
+              "bound_values": {},
+              "metadata": {
+                "terminology_ids": []
+              },
+              "priority": 70,
+              "section_id": "combination",
+              "sentence_id": "combination_summary",
+              "source_stage": "combination",
+              "template_id": "tpl_combination_summary",
+              "text": "Các quan hệ hợp xung đã được đánh giá theo Rule Database."
+            }
+          ],
+          "text": "Dựa trên cấu trúc tứ trụ, Các quan hệ hợp xung đã được đánh giá theo Rule Database."
+        }
+      ],
+      "section_id": "combination",
+      "sentence_ids": [
+        "combination_summary"
+      ],
+      "source_stages": [
+        "combination"
+      ],
+      "title": "Hợp xung"
+    },
+    {
+      "body": "Dựa trên cấu trúc tứ trụ, Thần sát ghi nhận 1 dấu hiệu liên quan.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "shensha",
+          "sentences": [
+            {
+              "bound_values": {
+                "presence_count": "1"
+              },
+              "metadata": {
+                "terminology_ids": []
+              },
+              "priority": 72,
+              "section_id": "shensha",
+              "sentence_id": "shensha_presence",
+              "source_stage": "shensha",
+              "template_id": "tpl_shensha_presence",
+              "text": "Thần sát ghi nhận 1 dấu hiệu liên quan."
+            }
+          ],
+          "text": "Dựa trên cấu trúc tứ trụ, Thần sát ghi nhận 1 dấu hiệu liên quan."
+        }
+      ],
+      "section_id": "shensha",
+      "sentence_ids": [
+        "shensha_presence"
+      ],
+      "source_stages": [
+        "shensha"
+      ],
+      "title": "Thần sát"
+    },
+    {
+      "body": "Từ góc độ vận dụng, Lớp vận hạn đang hoạt động: 4, Đại vận hiện tại index 2.",
+      "chapter_id": "analysis_chapter",
+      "paragraphs": [
+        {
+          "section_id": "luck",
+          "sentences": [
+            {
+              "bound_values": {
+                "active_count": "4",
+                "current_da_yun_index": "2"
+              },
+              "metadata": {
+                "terminology_ids": []
+              },
+              "priority": 78,
+              "section_id": "luck",
+              "sentence_id": "luck_active",
+              "source_stage": "luck",
+              "template_id": "tpl_luck_active",
+              "text": "Lớp vận hạn đang hoạt động: 4, Đại vận hiện tại index 2."
+            }
+          ],
+          "text": "Từ góc độ vận dụng, Lớp vận hạn đang hoạt động: 4, Đại vận hiện tại index 2."
+        }
+      ],
+      "section_id": "luck",
+      "sentence_ids": [
+        "luck_active"
+      ],
+      "source_stages": [
+        "luck"
+      ],
+      "title": "Vận hạn"
+    },
+    {
+      "body": "Từ góc độ vận dụng, Nên theo dõi biến động vận hạn gắn với Nhật Chủ Giáp.",
+      "chapter_id": "guidance_chapter",
+      "paragraphs": [
+        {
+          "section_id": "recommendations",
+          "sentences": [
+            {
+              "bound_values": {
+                "day_master": "Giáp"
+              },
+              "metadata": {
+                "terminology_ids": []
+              },
+              "priority": 60,
+              "section_id": "recommendations",
+              "sentence_id": "recommendations_close",
+              "source_stage": "summary",
+              "template_id": "tpl_recommendations_close",
+              "text": "Nên theo dõi biến động vận hạn gắn với Nhật Chủ Giáp."
+            }
+          ],
+          "text": "Từ góc độ vận dụng, Nên theo dõi biến động vận hạn gắn với Nhật Chủ Giáp."
+        }
+      ],
+      "section_id": "recommendations",
+      "sentence_ids": [
+        "recommendations_close"
+      ],
+      "source_stages": [
+        "summary"
+      ],
+      "title": "Khuyến nghị"
+    }
+  ],
+  "summary": {
+    "chapter_count": 3,
+    "chapter_ids": [
+      "overview_chapter",
+      "analysis_chapter",
+      "guidance_chapter"
+    ],
+    "section_count": 10,
+    "section_ids": [
+      "overview",
+      "strength",
+      "temperature",
+      "pattern",
+      "useful_god",
+      "ten_gods",
+      "combination",
+      "shensha",
+      "luck",
+      "recommendations"
+    ],
+    "sentence_count": 10
+  }
+}
