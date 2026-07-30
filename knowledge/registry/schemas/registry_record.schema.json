@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bte://registry/schemas/registry_record.schema.json",
+  "title": "BTE Registry Record",
+  "description": "Canonical JSON schema for Registry Records (REGISTRY_JSON_SCHEMA.md).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "identity",
+    "metadata",
+    "object",
+    "classification",
+    "dependencies",
+    "validation",
+    "governance",
+    "traceability",
+    "revision_history"
+  ],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry_id",
+        "object_id",
+        "namespace"
+      ],
+      "properties": {
+        "registry_id": {
+          "type": "string",
+          "pattern": "^(REG|GREG|KREG|RREG|SREG|TREG|DREG|PREG|REFREG)-[0-9]{6}$"
+        },
+        "object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "namespace": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "status",
+        "owner",
+        "created_date",
+        "updated_date"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "validated",
+            "approved",
+            "registered",
+            "published",
+            "deprecated",
+            "archived"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_date": {
+          "type": "string"
+        },
+        "updated_date": {
+          "type": "string"
+        },
+        "review_date": {
+          "type": "string"
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_name",
+        "object_type",
+        "uri",
+        "path",
+        "checksum"
+      ],
+      "properties": {
+        "canonical_name": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string"
+        },
+        "checksum": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "file_size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "schema_version": {
+          "type": "string"
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "category",
+        "tags"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(REG|GREG|KREG|RREG|SREG|TREG|DREG|PREG|REFREG)-[0-9]{6}$"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_valid",
+        "dependency_valid",
+        "checksum_valid"
+      ],
+      "properties": {
+        "schema_valid": {
+          "type": "boolean"
+        },
+        "dependency_valid": {
+          "type": "boolean"
+        },
+        "checksum_valid": {
+          "type": "boolean"
+        },
+        "reference_valid": {
+          "type": "boolean"
+        },
+        "integrity_valid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer",
+        "approval_status",
+        "next_review"
+      ],
+      "properties": {
+        "reviewer": {
+          "type": "string"
+        },
+        "approval_status": {
+          "type": "string"
+        },
+        "next_review": {
+          "type": "string"
+        },
+        "review_notes": {
+          "type": "string"
+        },
+        "publication_date": {
+          "type": "string"
+        }
+      }
+    },
+    "traceability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_id",
+        "audit_id"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audit_id": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "modified_by": {
+          "type": "string"
+        }
+      }
+    },
+    "revision_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "date",
+          "summary"
+        ],
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,26 +1,30 @@
-# BTE Global Knowledge Registry Framework
+# BTE Registry Module
 
-**Module:** Knowledge Global Registry  
+**Module:** Knowledge Registry  
+**Path:** `knowledge/registry/`  
 **Version:** V1.0.0  
-**Status:** Official Framework  
+**Status:** Official Implementation Scaffold  
 **Governance Alignment:** Governance V1.0 (frozen — not modified)  
 
-Frozen modules (not modified by this framework):
+Architecture specifications (read-only references):
 
-- Governance V1.0 (including `knowledge/governance/registry/`)
-- Reference Library
-- Terminology Framework
-- Knowledge Canon Framework
-- Rule Database Framework
-- Sentence Library Framework
-- Golden Dataset Framework
-- Report Template Framework
+- `knowledge/knowledge_canon/registry/REGISTRY_SPEC.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_TEMPLATE.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_MAPPING_STANDARD.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_TRACEABILITY_SPEC.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_QUALITY_STANDARD.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_REVIEW_GUIDE.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_JSON_SCHEMA.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_ID_STANDARD.md`
+- `knowledge/knowledge_canon/registry/REGISTRY_STATE_MODEL.md`
+- `knowledge/knowledge_canon/registry/CHANGELOG.md`
+- `knowledge/knowledge_canon/registry/EDGE_CASES.md`
 
 ---
 
 ## Purpose
 
-The Global Knowledge Registry Framework provides a unified, documentary catalog layer for locating Knowledge Infrastructure identities across modules.
+The Registry Module is the authoritative **metadata catalog** for canonical objects managed by the BTE Platform.
 
 It indexes:
 
@@ -31,27 +35,9 @@ It indexes:
 - Sentences
 - Datasets
 - Reports
-- Versions
-- Traceability links
+- Cross-domain Global Registry metadata
 
-This release is **framework only**. It does not create actual registry entries.
-
----
-
-## Scope
-
-In scope:
-
-- Global registry architecture
-- Per-registry README / INDEX / TEMPLATE / SPEC
-- Cross-module identity conventions
-
-Out of scope:
-
-- Populating registry rows
-- Modifying domain module registries already frozen
-- Modifying Governance registries
-- Runtime registry services
+This release is an **implementation scaffold**. Catalog `records` arrays are empty by design. No business logic, Rule Engine, or Interpretation Engine is included.
 
 ---
 
@@ -61,66 +47,165 @@ Out of scope:
 knowledge/registry/
 ├── README.md
 ├── CHANGELOG.md
-├── references/
-├── terminology/
-├── knowledge_assets/
-├── rules/
-├── sentences/
-├── datasets/
-├── reports/
-├── versions/
-└── traceability/
+├── schemas/
+│   ├── registry_record.schema.json
+│   └── registry_container.schema.json
+├── samples/
+│   └── empty_registry_record.json
+├── global_registry/
+├── knowledge_registry/
+├── rule_registry/
+├── sentence_registry/
+├── reference_registry/
+├── terminology_registry/
+├── dataset_registry/
+├── report_registry/
+├── references/              # Prior locator framework (preserved)
+├── terminology/             # Prior locator framework (preserved)
+├── knowledge_assets/        # Prior locator framework (preserved)
+├── rules/                   # Prior locator framework (preserved)
+├── sentences/               # Prior locator framework (preserved)
+├── datasets/                # Prior locator framework (preserved)
+├── reports/                 # Prior locator framework (preserved)
+├── versions/                # Prior locator framework (preserved)
+└── traceability/            # Prior locator framework (preserved)
 ```
 
-Each registry module contains:
+---
+
+## Registry Domains (V1.0 Implementation)
+
+| Directory | Prefix | Object ID | Source Module |
+|-----------|--------|-----------|---------------|
+| `global_registry/` | `GREG` | `REG-*` | Cross-domain |
+| `knowledge_registry/` | `KREG` | `KNO-*` | `knowledge/knowledge_canon/` |
+| `rule_registry/` | `RREG` | `RUL-*` | `knowledge/rule_database/` |
+| `sentence_registry/` | `SREG` | `SEN-*` | `knowledge/sentence_library/` |
+| `reference_registry/` | `REFREG` | `REF-*` | `knowledge/references/` |
+| `terminology_registry/` | `TREG` | `TERM-*` | `knowledge/terminology/` |
+| `dataset_registry/` | `DREG` | `CASE-*` | `knowledge/golden_dataset/` |
+| `report_registry/` | `PREG` | `RPT-*` | `knowledge/report_templates/` |
+
+Each domain registry contains:
 
 - `README.md`
-- `INDEX.md`
-- `TEMPLATE.md`
-- `SPEC.md`
+- Domain `*_REGISTRY_SPEC.md`
+- Primary `*_registry.json`
+- Index JSON files
+- `samples/empty_registry_record.json`
+
+---
+
+## Global Registry Artifacts
+
+| File | Role |
+|------|------|
+| `global_registry/GLOBAL_REGISTRY_SPEC.md` | Domain specification |
+| `global_registry/global_registry.json` | Global catalog |
+| `global_registry/namespace_registry.json` | Canonical namespaces |
+| `global_registry/object_type_registry.json` | Canonical object types |
+| `global_registry/registry_index.json` | Master domain index |
+| `global_registry/registry_statistics.json` | Aggregate statistics |
 
 ---
 
 ## Identity Prefix Map
 
-| Registry | Primary ID Pattern | Source Module |
-|----------|--------------------|---------------|
-| references | `REF-NNNNNN` | `knowledge/references/` |
-| terminology | `TERM-NNNNNN` | `knowledge/terminology/` |
-| knowledge_assets | `KNO-NNNNNN` | `knowledge/knowledge_canon/` |
-| rules | `RUL-NNNNNN` | `knowledge/rule_database/` |
-| sentences | `SEN-NNNNNN` | `knowledge/sentence_library/` |
-| datasets | `CASE-NNNNNN` | `knowledge/golden_dataset/` |
-| reports | `RPT-NNNNNN` | `knowledge/report_templates/` |
-| versions | Version labels (`V#.#.#`) + asset ID | Cross-module |
-| traceability | Trace records linking IDs | Cross-module |
+| Registry | Registry Prefix | Object ID Pattern |
+|----------|-----------------|-------------------|
+| Global | `GREG` | `REG-NNNNNN` |
+| Knowledge | `KREG` | `KNO-NNNNNN` |
+| Rule | `RREG` | `RUL-NNNNNN` |
+| Sentence | `SREG` | `SEN-NNNNNN` |
+| Terminology | `TREG` | `TERM-NNNNNN` |
+| Dataset | `DREG` | `CASE-NNNNNN` |
+| Report | `PREG` | `RPT-NNNNNN` |
+| Reference | `REFREG` | `REF-NNNNNN` |
+| Generic | `REG` | — |
 
 ---
 
 ## Design Principles
 
 1. **Index, do not own content** — authoritative records remain in domain modules
-2. **One ID, one row** — no duplicate catalog identities
-3. **Empty over fake** — no invented entries in framework phase
-4. **Governance compatibility** — complements Governance registries without editing them
-5. **Frozen boundaries** — do not modify completed modules
+2. **One Registry Record ↔ One Canonical Object**
+3. **Empty over fake** — no invented catalog entries
+4. **Schema-validated structure** — records conform to `schemas/registry_record.schema.json`
+5. **Governance compatibility** — complements Governance registries without editing them
+6. **Frozen boundaries** — do not modify completed source modules
 
 ---
 
-## How Registries Relate to Domain Modules
+## Authority Model
 
 ```
 Domain Module Record (authoritative)
             ↓
-   Global Registry INDEX (locator)
+   Registry Catalog (metadata / locator)
             ↓
  Governance Registry (policy/control plane; frozen)
 ```
 
-If a Global Registry INDEX and a domain module INDEX disagree, the **domain module record wins** until reconciliation.
+If a Registry catalog and a domain module disagree, the **domain module record wins** until reconciliation.
 
 ---
 
-## Framework Phase Status
+## Schema Validation
 
-All registry INDEX tables are empty by design in V1.0.0.
+- Record contract: `schemas/registry_record.schema.json`
+- Container contract: `schemas/registry_container.schema.json`
+- Empty structural sample: `samples/empty_registry_record.json`
+
+Status values follow `REGISTRY_STATE_MODEL.md`:
+
+`draft` → `validated` → `approved` → `registered` → `published` → `deprecated` → `archived`
+
+---
+
+## Prior Locator Framework
+
+Directories `references/`, `terminology/`, `knowledge_assets/`, `rules/`, `sentences/`, `datasets/`, `reports/`, `versions/`, and `traceability/` remain as the earlier framework-phase locator docs.
+
+They are preserved for backward compatibility. New registration work SHALL use the `*_registry/` catalogs above.
+
+---
+
+## Out of Scope (V1.0)
+
+- Business logic
+- Rule Engine
+- Interpretation Engine
+- Populated catalog records
+- Runtime Registry Service
+- Changes to Knowledge Canon content
+- Changes to frozen Governance registries
+
+---
+
+## Infrastructure Layer (V1.1)
+
+Runtime services (do not modify catalogs' architecture contracts):
+
+- `services/registry_*.py`
+- `registry_cli.py`
+- Docs: `docs/registry/`
+- Tests: `tests/registry/`
+- CI: `.github/workflows/registry.yml`
+
+```bash
+python registry_cli.py validate --include-samples
+python registry_cli.py stats
+```
+
+## TODOs
+
+- TODO: Root architecture Markdown specs currently reside under `knowledge/knowledge_canon/registry/` while Document Module declares `knowledge/registry`. Confirm canonical documentation home with Chief Architect (no move performed).
+- TODO: Confirm minimal index sets for Reference / Terminology / Dataset / Report registries.
+- TODO: Confirm language-code enumeration for Sentence `language_index.json`.
+- See also `docs/registry/ISSUE_REPORT.md` for infrastructure TODOs.
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).

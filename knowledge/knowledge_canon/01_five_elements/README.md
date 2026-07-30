@@ -1,185 +1,65 @@
-# Five Elements — Knowledge Canon Domain
+# Five Elements Knowledge Canon
 
-**Module:** `knowledge/knowledge_canon`  
-**Domain:** `01_five_elements`  
-**Version:** V1.0.0  
-**Status:** Official Framework  
-**Root Specification:** `knowledge/knowledge_canon/KNOWLEDGE_SPEC.md`  
+## Purpose
 
----
+This module contains the canonical academic knowledge of the Five Elements (Wu Xing) used by the BTE Platform.
 
-## 1. Overview
+The purpose of this module is to define standardized knowledge assets for Wood, Fire, Earth, Metal and Water.
 
-This domain is a framework container within **Knowledge Canon**.
-
-It holds indexes and templates for future `KNO` records related to **Five Elements**.
-
-No content records are allocated in the current framework phase.
+This module contains no runtime logic.
 
 ---
 
-## 2. Purpose
+## Scope
 
-Provide a stable domain boundary for **Five Elements** so authors can:
+Included
 
-- allocate IDs from the reserved range
-- register future records consistently
-- maintain mapping and traceability hooks
-- keep Governance V1.0 alignment without modifying frozen modules
+- Five Elements
+- Properties
+- Yin/Yang classification
+- Seasonal correspondence
+- Direction correspondence
+- Color correspondence
+- Climate correspondence
+- Organ correspondence
+- Emotion correspondence
+- Taste correspondence
+- Generating cycle
+- Controlling cycle
+- Overacting cycle
+- Insulting cycle
 
----
+Excluded
 
-## 3. Scope
-
-In scope:
-
-- Domain README / INDEX / template scaffolding
-- ID allocation metadata
-- Mapping and traceability placeholders
-- Versioning and expansion notes
-
-Out of scope:
-
-- Academic content
-- Populated Knowledge Assets, Rules, Sentences, Datasets, or Reports
-- Runtime implementation
-- Edits to frozen root specifications or other modules
-
----
-
-## 4. Included Topics
-
-Framework topic placeholders for this domain:
-
-- Framework records for Five Elements concepts
-- Classification and relationship placeholders
-- Traceability hooks to References / Terminology / Rules / Sentences
-
-Concrete records are not authored in this refinement phase.
+- Rule Engine
+- Interpretation
+- Scoring
+- Useful God
+- Ten Gods
+- Pattern Analysis
 
 ---
 
-## 5. Excluded Topics
+## Dependencies
 
-- Full doctrinal extraction or commentary
-- Engine algorithms and scoring implementation
-- Cross-module content owned by other domains
-- Operational packs outside this framework domain (when coexisting)
+None
 
 ---
 
-## 6. Dependencies
+## Used By
 
-This domain depends on:
+Heavenly Stems
 
-- Governance V1.0 (read-only)
-- Root specification: `knowledge/knowledge_canon/KNOWLEDGE_SPEC.md`
-- Reference Library (`REF-*`)
-- Terminology Framework (`TERM-*`)
+Earthly Branches
 
----
+Ten Gods
 
-## 7. Relationships with other domains
+Strength
 
-- Adjacent Knowledge Canon domains as needed
-- Downstream Rule Database and Sentence Library domains for Five Elements topics
-- Upstream References and Terminology
+Useful God
 
-Domain relationships are organizational. Content links are added only when records exist.
+Patterns
 
----
+Luck Cycle
 
-## 8. Knowledge Boundaries
-
-- This domain owns only **Five Elements** framework placement under `knowledge/knowledge_canon/01_five_elements/`.
-- It does not redefine other modules' authoritative records.
-- Global registry locators (if used) remain secondary to domain records.
-
----
-
-## 9. Naming Convention
-
-| Item | Convention |
-|------|------------|
-| Domain directory | `01_five_elements` |
-| Record files (future) | `KNO-NNNNNN_<ENGLISH_SNAKE>.md` |
-| Template file | `TEMPLATE.md` |
-| Index file | `INDEX.md` |
-
----
-
-## 10. ID Allocation
-
-| Field | Value |
-|-------|-------|
-| ID Prefix | `KNO` |
-| Reserved Range | `KNO-000001 – KNO-000099` |
-| Next Free ID | **KNO-000001** |
-| Allocated Records | None (framework phase) |
-
-IDs are immutable once published. Reuse is prohibited.
-
----
-
-## 11. Mapping
-
-Future records in this domain SHOULD support links to:
-
-- References (`REF-*`)
-- Terminology (`TERM-*`)
-- Knowledge Assets (`KNO-*`)
-- Rules (`RUL-*`)
-- Sentences (`SEN-*`)
-
-Exact required link sets follow `knowledge/knowledge_canon/KNOWLEDGE_SPEC.md` and related mapping standards.
-
----
-
-## 12. Traceability
-
-Traceability for future Official records SHOULD follow the module traceability specification and declare:
-
-- upstream source links
-- downstream consumer links where applicable
-- version / status / review evidence
-
-Framework phase traceability level: **L0** (scaffolding only).
-
----
-
-## 13. Versioning
-
-| Field | Value |
-|-------|-------|
-| Domain Framework Version | V1.0.0 |
-| Record Versioning | `V#.#.#` per record when content exists |
-| Compatibility | Align with root specification updates |
-
-Root specifications remain the source of truth. Domain documents must stay aligned when roots change.
-
----
-
-## 14. Future Expansion
-
-- Allocate IDs from the reserved range
-- Create records from `TEMPLATE.md`
-- Update `INDEX.md` and module/global registries
-- Advance Status through Draft → Review → Official
-
-No expansion content is created in this refinement task.
-
----
-
-## Domain Files
-
-| File | Role |
-|------|------|
-| [INDEX.md](INDEX.md) | Domain catalog |
-| [TEMPLATE.md](TEMPLATE.md) | Record template |
-
----
-
-## See Also
-
-- [../README.md](../README.md)
-- [../KNOWLEDGE_SPEC.md](../KNOWLEDGE_SPEC.md)
+Interpretation Engine

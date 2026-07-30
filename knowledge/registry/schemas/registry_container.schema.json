@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bte://registry/schemas/registry_container.schema.json",
+  "title": "BTE Registry Container",
+  "description": "Container format for registry.json catalog files.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "version",
+    "records"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "registry_name": {
+      "type": "string"
+    },
+    "registry_prefix": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "string"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "registry_record.schema.json"
+      }
+    }
+  }
+}
