@@ -1,14 +1,32 @@
-﻿# Transformations Knowledge Index
+# Transformations — Index
 
+**Module:** `knowledge/knowledge_canon`  
 **Domain:** `14_transformations`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-| Knowledge ID | Canonical Name | English | Status | File |
-|--------------|----------------|---------|--------|------|
-| — | — | — | No assets in V1.0.0 | — |
+## Catalog
 
-Next free ID: **KNO-001300**
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
-Use [TEMPLATE.md](TEMPLATE.md) when adding content later. Update this index and [../registry/INDEX.md](../registry/INDEX.md).
+---
+
+## Allocation
+
+| Field | Value |
+|-------|-------|
+| ID Prefix | `KNO` |
+| Reserved Range | `KNO-001300 – KNO-001399` |
+| Next Free ID | **KNO-001300** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/knowledge_canon/KNOWLEDGE_SPEC.md`.

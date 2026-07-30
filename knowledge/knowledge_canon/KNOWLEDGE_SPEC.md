@@ -1,211 +1,532 @@
 # Knowledge Canon Specification
 
-**Document:** KNOWLEDGE_SPEC  
-**Module:** knowledge/knowledge_canon  
-**Version:** V1.0.0  
-**Status:** Official  
-**Governance Alignment:** Governance V1.0 (frozen — not modified)  
-**Reference Library:** V1.0 (frozen — not modified)  
-**Terminology Framework:** referenced only — not modified  
+> **Document ID:** KC-SPEC-001
+>
+> **Module:** `knowledge/knowledge_canon`
+>
+> **Version:** V1.0.0
+>
+> **Status:** Official
+>
+> **Document Type:** Root Specification
+>
+> **Language:** English
+>
+> **Governance:** Governance V1.0
 
 ---
 
-## 1. Purpose
+# 1. Purpose
 
-Define identifiers, metadata, domain placement, lifecycle, mapping, and traceability rules for Knowledge Assets in the BTE Knowledge Canon.
+This specification defines the architecture, structure, governance, lifecycle, and interoperability of the BTE Knowledge Canon.
 
-This specification is **framework only**. No Knowledge Asset content is authored in V1.0.0.
+The Knowledge Canon is the authoritative repository of normalized knowledge used throughout the BTE Platform.
 
----
-
-## 2. Normative Language
-
-The key words SHALL, MUST, SHOULD, and MAY are requirements for Knowledge Canon authors and reviewers.
+This document is the primary specification governing every Knowledge Asset.
 
 ---
 
-## 3. Design Principles
+# 2. Objectives
 
-1. **Single Source of Truth** — one concept, one Knowledge Asset
-2. **Reference driven** — cite approved Reference IDs
-3. **Atomic knowledge** — one asset = one concept
-4. **Explainability** — full traceability chain
-5. **Version immutability** — published versions do not silently change
-6. **Machine-readable structure** — stable fields and IDs
-7. **Frozen boundaries** — do not edit Governance, Reference, or Terminology modules
+The Knowledge Canon shall:
+
+- Standardize all domain knowledge.
+- Normalize concepts extracted from references.
+- Eliminate duplicated knowledge.
+- Support explainable interpretation.
+- Support traceability.
+- Support version control.
+- Provide a stable foundation for all engines.
 
 ---
 
-## 4. Knowledge ID
+# 3. Scope
 
-### 4.1 Format
+This specification applies to:
+
+- Knowledge Assets
+- Knowledge Domains
+- Metadata
+- Relationships
+- Evidence
+- References
+- Rule Mapping
+- Sentence Mapping
+- Governance
+- Traceability
+
+This specification does not define:
+
+- Rule implementation
+- Sentence implementation
+- Report templates
+- Runtime engine behavior
+
+---
+
+# 4. Position within BTE Architecture
 
 ```
-KNO-<6-digit-number>
+Reference Library
+        │
+        ▼
+Terminology
+        │
+        ▼
+Knowledge Canon
+        │
+ ┌──────┼──────────────┐
+ ▼      ▼              ▼
+Rules  Sentences    Score Models
+        │
+        ▼
+Interpretation Engine
+        │
+        ▼
+Report Engine
 ```
+
+The Knowledge Canon is the central semantic layer of the platform.
+
+---
+
+# 5. Core Principles
+
+## Single Source of Truth
+
+Every concept shall exist only once.
+
+---
+
+## Atomic Knowledge
+
+Each Knowledge Asset represents one and only one concept.
+
+---
+
+## Evidence Driven
+
+Every Knowledge Asset shall reference at least one approved source.
+
+---
+
+## Explainability
+
+Every interpretation shall be traceable.
+
+---
+
+## Version Controlled
+
+Knowledge is immutable.
+
+Updates create new versions.
+
+---
+
+## Machine Readable
+
+Knowledge Assets must be usable by software without manual interpretation.
+
+---
+
+# 6. Knowledge Lifecycle
+
+```
+Reference
+
+↓
+
+Extraction
+
+↓
+
+Normalization
+
+↓
+
+Review
+
+↓
+
+Publication
+
+↓
+
+Consumption
+
+↓
+
+Revision
+
+↓
+
+Archive
+```
+
+---
+
+# 7. Knowledge Asset
+
+A Knowledge Asset is the smallest reusable unit of normalized knowledge.
 
 Examples:
 
+- Wood
+- Jia Wood
+- Direct Wealth
+- Seven Killings
+- Seasonal Qi
+- Combination
+- Clash
+
+A Knowledge Asset is not a document.
+
+It is a structured knowledge object.
+
+---
+
+# 8. Knowledge Domains
+
+Current domains include:
+
+- Five Elements
+- Heavenly Stems
+- Earthly Branches
+- Hidden Stems
+- Yin Yang
+- Ten Gods
+- Strength
+- Patterns
+- Useful Gods
+- Combinations
+- Clashes
+- Punishments
+- Harms
+- Transformations
+- Seasonal Qi
+- Temperature
+- Shen Sha
+- Luck Cycles
+- Special Cases
+
+---
+
+# 9. Knowledge Object Model
+
+Every Knowledge Asset shall contain the following logical sections.
+
+```
+Knowledge Asset
+
+├── Identity
+├── Metadata
+├── Definition
+├── Classification
+├── Relationships
+├── Evidence
+├── References
+├── Terminology Links
+├── Rule Links
+├── Sentence Links
+├── Traceability
+└── Governance
+```
+
+---
+
+# 10. Identity Model
+
+Mandatory:
+
+- Knowledge ID
+- Canonical Name
+- Domain
+- Category
+
+Identifiers shall be globally unique.
+
+---
+
+# 11. Metadata Model
+
+Mandatory metadata:
+
+- Version
+- Status
+- Language
+- Author
+- Reviewer
+- Created Date
+- Updated Date
+
+Optional:
+
+- Notes
+- Tags
+- Keywords
+
+---
+
+# 12. Canonical Naming
+
+Each concept shall have one canonical name.
+
+Aliases shall not replace the canonical name.
+
+Names shall remain stable across versions.
+
+---
+
+# 13. Identifier Specification
+
+Format
+
 ```
 KNO-000001
-KNO-000002
 ```
 
-### 4.2 Rules
+Identifiers are immutable.
 
-- Numbers SHALL be unique within the Knowledge Canon.
-- Numbers SHALL be zero-padded to six digits.
-- Published IDs are immutable.
-- Reuse of retired IDs is prohibited.
-- Domain MUST NOT be encoded in the ID string.
-
-### 4.3 Governance Compatibility
-
-Governance V1.0 describes structured Knowledge IDs such as `KID-…`.
-
-This Canon Framework uses sequential `KNO-NNNNNN` IDs as the **catalog primary key** for Knowledge Assets.
-
-Compatibility SHALL be maintained by:
-
-- Storing domain / category in metadata
-- Optional later dual-label notes in metadata
-- Never editing frozen Governance documents
+Deleted identifiers shall never be reused.
 
 ---
 
-## 5. Mandatory Knowledge Asset Support
+# 14. Classification
 
-Every Knowledge Asset MUST support:
+Knowledge may be classified by:
 
-| Field / Concern | Description |
-|-----------------|-------------|
-| Metadata | Bibliographic / administrative metadata block |
-| Canonical Name | Official display name |
-| Chinese | Chinese label |
-| Vietnamese | Vietnamese label |
-| English | English label |
-| Definition | Canonical definition |
-| Domain | Canon domain directory |
-| Category | Classification label |
-| Relationships | Links to related Knowledge Assets |
-| Terminology Links | `TERM-*` IDs |
-| Reference Links | `REF-*` IDs |
-| Rule Links | Rule IDs |
-| Sentence Links | Sentence IDs |
-| Confidence | Confidence level |
-| Evidence | Evidence notes / pointers |
-| Version | `V#.#.#` |
-| Status | Lifecycle status |
-| Traceability | Trace fields / chain completeness |
+- Domain
+- Category
+- Complexity
+- Confidence
+- Source Priority
 
 ---
 
-## 6. Controlled Enumerations
+# 15. Relationship Model
 
-### 6.1 Status
+Supported relationships:
 
-`Placeholder` | `Draft` | `Review` | `Official` | `Deprecated`
+- Parent
+- Child
+- Related
+- Equivalent
+- Derived From
+- Depends On
+- Contradicts
+- Extends
 
-### 6.2 Confidence
-
-`High` | `Medium` | `Low` | `Unverified`
-
-### 6.3 Category (examples)
-
-`Core Concept` | `Relationship` | `Classification` | `Procedure` | `Special Case` | `Other`
-
----
-
-## 7. Domains
-
-| # | Directory | Domain |
-|---|-----------|--------|
-| 01 | `01_five_elements/` | Five Elements |
-| 02 | `02_heavenly_stems/` | Heavenly Stems |
-| 03 | `03_earthly_branches/` | Earthly Branches |
-| 04 | `04_hidden_stems/` | Hidden Stems |
-| 05 | `05_yin_yang/` | Yin Yang |
-| 06 | `06_ten_gods/` | Ten Gods |
-| 07 | `07_strength/` | Strength |
-| 08 | `08_patterns/` | Patterns |
-| 09 | `09_useful_gods/` | Useful Gods |
-| 10 | `10_combinations/` | Combinations |
-| 11 | `11_clashes/` | Clashes |
-| 12 | `12_punishments/` | Punishments |
-| 13 | `13_harms/` | Harms |
-| 14 | `14_transformations/` | Transformations |
-| 15 | `15_seasonal_qi/` | Seasonal Qi |
-| 16 | `16_temperature/` | Temperature |
-| 17 | `17_shensha/` | ShenSha |
-| 18 | `18_luck_cycles/` | Luck Cycles |
-| 19 | `19_special_cases/` | Special Cases |
-
-Registry lives under `registry/`.
+Relationships shall be directional where applicable.
 
 ---
 
-## 8. ID Allocation Ranges (Reserved)
+# 16. Evidence Model
 
-| Range | Domain |
-|-------|--------|
-| KNO-000001 – KNO-000099 | 01_five_elements |
-| KNO-000100 – KNO-000199 | 02_heavenly_stems |
-| KNO-000200 – KNO-000299 | 03_earthly_branches |
-| KNO-000300 – KNO-000399 | 04_hidden_stems |
-| KNO-000400 – KNO-000499 | 05_yin_yang |
-| KNO-000500 – KNO-000599 | 06_ten_gods |
-| KNO-000600 – KNO-000699 | 07_strength |
-| KNO-000700 – KNO-000799 | 08_patterns |
-| KNO-000800 – KNO-000899 | 09_useful_gods |
-| KNO-000900 – KNO-000999 | 10_combinations |
-| KNO-001000 – KNO-001099 | 11_clashes |
-| KNO-001100 – KNO-001199 | 12_punishments |
-| KNO-001200 – KNO-001299 | 13_harms |
-| KNO-001300 – KNO-001399 | 14_transformations |
-| KNO-001400 – KNO-001499 | 15_seasonal_qi |
-| KNO-001500 – KNO-001599 | 16_temperature |
-| KNO-001600 – KNO-001799 | 17_shensha |
-| KNO-001800 – KNO-001899 | 18_luck_cycles |
-| KNO-001900 – KNO-001999 | 19_special_cases |
-| KNO-002000+ | Future expansion |
+Every Knowledge Asset shall include evidence.
 
-No Knowledge Asset IDs are allocated in framework V1.0.0.
+Evidence consists of:
+
+- References
+- Citations
+- Source Passages
+- Reviewer Notes
+
+Evidence quality shall be recorded.
 
 ---
 
-## 9. Lifecycle
+# 17. Reference Integration
+
+Every Knowledge Asset shall reference one or more approved sources.
+
+Current approved references include:
+
+- Yuan Hai Zi Ping
+- Di Tian Sui
+- San Ming Tong Hui
+- Qiong Tong Bao Jian
+- Zi Ping Zhen Quan
+
+---
+
+# 18. Terminology Integration
+
+Knowledge Assets shall reference standardized terminology.
+
+Terminology remains independent.
+
+Knowledge Assets consume terminology.
+
+---
+
+# 19. Rule Integration
+
+Knowledge Assets do not contain executable rules.
+
+Rules reference Knowledge Assets.
+
+One Knowledge Asset may support multiple Rules.
+
+---
+
+# 20. Sentence Integration
+
+Knowledge Assets do not contain interpretation sentences.
+
+Sentences reference Knowledge Assets.
+
+---
+
+# 21. Confidence Model
+
+Confidence Levels
+
+- High
+- Medium
+- Low
+
+Confidence shall consider:
+
+- Number of References
+- Academic Consensus
+- Review Status
+
+---
+
+# 22. Traceability
+
+Every Knowledge Asset shall support complete bidirectional traceability.
 
 ```
-Placeholder / Draft
-        ↓
-     Review
-        ↓
-    Official
-        ↓
-   Deprecated (optional)
+Reference
+
+↓
+
+Chapter
+
+↓
+
+Paragraph
+
+↓
+
+Knowledge Asset
+
+↓
+
+Rule
+
+↓
+
+Sentence
+
+↓
+
+Interpretation
+
+↓
+
+Report
 ```
 
-Transitions follow `KNOWLEDGE_REVIEW_GUIDE.md` and Governance procedures without editing frozen Governance files.
+---
+
+# 23. Validation
+
+Every Knowledge Asset shall pass validation before publication.
+
+Validation includes:
+
+- Metadata completeness
+- Reference integrity
+- Identifier uniqueness
+- Relationship consistency
+- Traceability completeness
 
 ---
 
-## 10. Prohibitions
+# 24. Governance
 
-Authors MUST NOT:
+Knowledge Assets are governed by:
 
-- Modify Governance, Reference Library, or Terminology Framework
-- Create actual knowledge content in this framework phase
-- Extract concepts into assets yet
-- Create rules or terminology records here
-- Duplicate Knowledge IDs
-- Invent fake `REF-*` / `TERM-*` / Rule / Sentence IDs
+- Governance V1.0
+- Review Guide
+- Quality Standard
+- Mapping Standard
+- Traceability Specification
 
 ---
 
-## 11. Acceptance Criteria (Framework V1.0.0)
+# 25. Versioning
 
-- [ ] Root framework documents exist
-- [ ] All 19 domains contain README / INDEX / TEMPLATE
-- [ ] Registry scaffolding exists
-- [ ] No Knowledge Asset content records created
-- [ ] Frozen modules untouched
+Semantic Versioning shall be used.
+
+- MAJOR
+- MINOR
+- PATCH
+
+Knowledge Assets are immutable by version.
+
+---
+
+# 26. Directory Structure
+
+```
+knowledge_canon/
+
+README.md
+
+KNOWLEDGE_SPEC.md
+
+KNOWLEDGE_TEMPLATE.md
+
+KNOWLEDGE_MAPPING_STANDARD.md
+
+KNOWLEDGE_TRACEABILITY_SPEC.md
+
+KNOWLEDGE_REVIEW_GUIDE.md
+
+KNOWLEDGE_QUALITY_STANDARD.md
+
+CHANGELOG.md
+
+EDGE_CASES.md
+
+01_five_elements/
+02_heavenly_stems/
+...
+registry/
+```
+
+---
+
+# 27. Future Extensions
+
+The Knowledge Canon is designed to support future domains including:
+
+- Feng Shui
+- Qi Men Dun Jia
+- Liu Yao
+- Zi Wei Dou Shu
+- I Ching
+- Knowledge Graph
+- AI-assisted Retrieval
+
+without breaking compatibility.
+
+---
+
+# 28. Compliance
+
+Every module consuming Knowledge Assets shall comply with this specification.
+
+No module may redefine the Knowledge Object Model.
+
+---
+
+# 29. Revision History
+
+| Version | Status | Description |
+|----------|--------|-------------|
+| V1.0.0 | Official | Initial specification |

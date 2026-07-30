@@ -1,27 +1,179 @@
-# Internal References Collection
+# Internal — Reference Library Domain
 
-**Category:** Internal  
+**Module:** `knowledge/references`  
+**Domain:** `internal`  
 **Version:** V1.0.0  
 **Status:** Official Framework  
+**Root Specification:** `knowledge/references/REFERENCE_SPEC.md`  
 
 ---
 
-## Purpose
+## 1. Overview
 
-Catalog BTE-internal reference notes, memos, and controlled internal sources that support Knowledge Canon authorship.
+This domain is a framework container within **Reference Library**.
 
-Internal references are not substitutes for classical or academic authorities.
+It holds indexes and templates for future `REF` records related to **Internal**.
+
+No content records are allocated in the current framework phase.
 
 ---
 
-## Contents
+## 2. Purpose
+
+Provide a stable domain boundary for **Internal** so authors can:
+
+- allocate IDs from the reserved range
+- register future records consistently
+- maintain mapping and traceability hooks
+- keep Governance V1.0 alignment without modifying frozen modules
+
+---
+
+## 3. Scope
+
+In scope:
+
+- Domain README / INDEX / template scaffolding
+- ID allocation metadata
+- Mapping and traceability placeholders
+- Versioning and expansion notes
+
+Out of scope:
+
+- Academic content
+- Populated Knowledge Assets, Rules, Sentences, Datasets, or Reports
+- Runtime implementation
+- Edits to frozen root specifications or other modules
+
+---
+
+## 4. Included Topics
+
+Framework topic placeholders for this domain:
+
+- Internal reference scaffolding
+- Metadata and index placeholders
+
+Concrete records are not authored in this refinement phase.
+
+---
+
+## 5. Excluded Topics
+
+- Full doctrinal extraction or commentary
+- Engine algorithms and scoring implementation
+- Cross-module content owned by other domains
+- Operational packs outside this framework domain (when coexisting)
+
+---
+
+## 6. Dependencies
+
+This domain depends on:
+
+- Governance V1.0 (read-only)
+- Root specification: `knowledge/references/REFERENCE_SPEC.md`
+- Governance Reference Standard (read-only)
+- Reference root indexes and quality guides
+
+---
+
+## 7. Relationships with other domains
+
+- Cited by Terminology, Knowledge, Rules, Sentences, Datasets, and Reports
+- Mapping registries under `mapping/` remain separate files (unchanged by this task except domain docs)
+
+Domain relationships are organizational. Content links are added only when records exist.
+
+---
+
+## 8. Knowledge Boundaries
+
+- This domain owns only **Internal** framework placement under `knowledge/references/internal/`.
+- It does not redefine other modules' authoritative records.
+- Global registry locators (if used) remain secondary to domain records.
+
+---
+
+## 9. Naming Convention
+
+| Item | Convention |
+|------|------------|
+| Domain directory | `internal` |
+| Record files (future) | `REF-NNNNNN_<ENGLISH_SNAKE>.md` |
+| Template file | `TEMPLATE.md` |
+| Index file | `INDEX.md` |
+
+---
+
+## 10. ID Allocation
+
+| Field | Value |
+|-------|-------|
+| ID Prefix | `REF` |
+| Reserved Range | `REF-000800 – REF-000999` |
+| Next Free ID | **REF-000800** |
+| Allocated Records | None (framework phase) |
+
+IDs are immutable once published. Reuse is prohibited.
+
+---
+
+## 11. Mapping
+
+Future records in this domain SHOULD support links to:
+
+- References (`REF-*`)
+- Terminology (`TERM-*`)
+- Knowledge Assets (`KNO-*`)
+- Rules (`RUL-*`)
+- Sentences (`SEN-*`)
+
+Exact required link sets follow `knowledge/references/REFERENCE_SPEC.md` and related mapping standards.
+
+---
+
+## 12. Traceability
+
+Traceability for future Official records SHOULD follow the module traceability specification and declare:
+
+- upstream source links
+- downstream consumer links where applicable
+- version / status / review evidence
+
+Framework phase traceability level: **L0** (scaffolding only).
+
+---
+
+## 13. Versioning
+
+| Field | Value |
+|-------|-------|
+| Domain Framework Version | V1.0.0 |
+| Record Versioning | `V#.#.#` per record when content exists |
+| Compatibility | Align with root specification updates |
+
+Root specifications remain the source of truth. Domain documents must stay aligned when roots change.
+
+---
+
+## 14. Future Expansion
+
+- Allocate IDs from the reserved range
+- Create records from `TEMPLATE.md`
+- Update `INDEX.md` and module/global registries
+- Advance Status through Draft → Review → Official
+
+No expansion content is created in this refinement task.
+
+---
+
+## Domain Files
 
 | File | Role |
 |------|------|
-| [INDEX.md](INDEX.md) | Internal catalog |
-| [TEMPLATE.md](TEMPLATE.md) | New internal reference template |
-
-No internal Reference IDs are allocated in V1.0.0. Reserved range: REF-000800 – REF-000999.
+| [INDEX.md](INDEX.md) | Domain catalog |
+| [TEMPLATE.md](TEMPLATE.md) | Record template |
 
 ---
 
@@ -29,4 +181,3 @@ No internal Reference IDs are allocated in V1.0.0. Reserved range: REF-000800 �
 
 - [../README.md](../README.md)
 - [../REFERENCE_SPEC.md](../REFERENCE_SPEC.md)
-- [../EDGE_CASES.md](../EDGE_CASES.md)

@@ -1,8 +1,14 @@
-﻿# Combinations Knowledge Asset Template
+# Combinations — Record Template
 
-Copy this template for a new **Combinations** Knowledge Asset.
+**Module:** `knowledge/knowledge_canon`  
+**Domain:** `10_combinations`  
+**Template File:** `TEMPLATE.md`  
 
-Allocate the next free ID from this domain range (see domain INDEX and `KNOWLEDGE_SPEC.md`).
+Copy this template for a new **Combinations** record.
+
+Allocate the next free ID from `INDEX.md` / `knowledge/knowledge_canon/KNOWLEDGE_SPEC.md` before writing.
+
+Framework refinement only — do not invent academic or operational content here.
 
 ---
 
@@ -14,30 +20,92 @@ Allocate the next free ID from this domain range (see domain INDEX and `KNOWLEDG
 
 | Field | Value |
 |-------|-------|
-| Knowledge ID | KNO-NNNNNN |
+| ID | KNO-NNNNNN |
 | Canonical Name | |
+| Aliases | |
 | Chinese | |
+| Traditional Chinese | |
+| Simplified Chinese | |
 | Vietnamese | |
 | English | |
 | Definition | |
+| Description | |
+| Classification | |
 | Domain | 10_combinations |
 | Category | |
 | Relationships | |
+| Dependencies | |
+| Evidence | |
+| References | |
 | Terminology Links | |
-| Reference Links | |
+| Knowledge Links | |
 | Rule Links | |
 | Sentence Links | |
 | Confidence | Unverified |
-| Evidence | |
+| Review | Not reviewed |
 | Version | V1.0.0 |
 | Status | Placeholder |
 | Traceability | L0 |
 
 ---
 
+## Canonical Name
+
+_TBD_
+
+---
+
+## Aliases
+
+_TBD_
+
+---
+
+## Chinese
+
+_TBD_
+
+---
+
+## Traditional Chinese
+
+_TBD_
+
+---
+
+## Simplified Chinese
+
+_TBD_
+
+---
+
+## Vietnamese
+
+_TBD_
+
+---
+
+## English
+
+_TBD_
+
+---
+
 ## Definition
 
-_Canonical definition TBD._
+_TBD_
+
+---
+
+## Description
+
+_TBD_
+
+---
+
+## Classification
+
+_TBD_
 
 ---
 
@@ -47,25 +115,7 @@ _TBD_
 
 ---
 
-## Terminology Links
-
-_TBD — `TERM-*`_
-
----
-
-## Reference Links
-
-_TBD — `REF-*`_
-
----
-
-## Rule Links
-
-_TBD_
-
----
-
-## Sentence Links
+## Dependencies
 
 _TBD_
 
@@ -77,7 +127,66 @@ _TBD_
 
 ---
 
-## Traceability Notes
+## References
+
+_TBD — `REF-*`_
+
+---
+
+## Terminology Links
+
+_TBD — `TERM-*`_
+
+---
+
+## Knowledge Links
+
+_TBD — `KNO-*`_
+
+---
+
+## Rule Links
+
+_TBD — `RUL-*`_
+
+---
+
+## Sentence Links
+
+_TBD — `SEN-*`_
+
+---
+
+## Confidence
+
+Unverified
+
+---
+
+## Review
+
+| Field | Value |
+|-------|-------|
+| Reviewer | |
+| Review Date | |
+| Outcome | |
+| Notes | |
+
+---
+
+## Version
+
+V1.0.0
+
+---
+
+## Status
+
+Placeholder
+
+---
+
+## Traceability
 
 _TBD_
 
@@ -87,4 +196,4 @@ _TBD_
 
 | Version | Date | Notes |
 |---------|------|-------|
-| V1.0.0 | YYYY-MM-DD | Initial placeholder |
+| V1.0.0 | YYYY-MM-DD | Framework template placeholder |

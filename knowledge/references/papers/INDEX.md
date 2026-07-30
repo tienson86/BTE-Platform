@@ -1,14 +1,32 @@
-# Papers Index
+# Papers — Index
 
-**Category:** Paper  
+**Module:** `knowledge/references`  
+**Domain:** `papers`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-| Reference ID | File | Title | Status |
-|--------------|------|-------|--------|
-| — | — | No paper records in V1.0.0 | Reserved |
+## Catalog
 
-Next free papers-range candidate: **REF-000500**
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
-Use [TEMPLATE.md](TEMPLATE.md) to add records, then update this index, `../REFERENCE_INDEX.md`, and `../REFERENCE_METADATA.yaml`.
+---
+
+## Allocation
+
+| Field | Value |
+|-------|-------|
+| ID Prefix | `REF` |
+| Reserved Range | `REF-000500 – REF-000799` |
+| Next Free ID | **REF-000500** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/references/REFERENCE_SPEC.md`.

@@ -1,12 +1,18 @@
-# Classic Reference Template
+# Classics — Record Template
 
-Copy this template for a new classical reference.
+**Module:** `knowledge/references`  
+**Domain:** `classics`  
+**Template File:** `TEMPLATE.md`  
 
-Replace all `<...>` placeholders. Allocate the next Reference ID before writing.
+Copy this template for a new **Classics** record.
+
+Allocate the next free ID from `INDEX.md` / `knowledge/references/REFERENCE_SPEC.md` before writing.
+
+Framework refinement only — do not invent academic or operational content here.
 
 ---
 
-# <English Title> (<Chinese Title>)
+# <Canonical Name>
 
 ---
 
@@ -14,58 +20,175 @@ Replace all `<...>` placeholders. Allocate the next Reference ID before writing.
 
 | Field | Value |
 |-------|-------|
-| Reference ID | REF-NNNNNN |
-| Title | |
-| Chinese Title | |
-| English Title | |
-| Vietnamese Title | |
-| Author | |
-| Dynasty | |
-| School | |
-| Language | Classical Chinese |
-| Category | Classic |
-| Reliability | Unverified |
-| Edition | Unspecified |
-| Translator | N/A |
-| Publisher | N/A |
-| ISBN | N/A |
-| Year | Unspecified |
-| Status | Placeholder |
+| ID | REF-NNNNNN |
+| Canonical Name | |
+| Aliases | |
+| Chinese | |
+| Traditional Chinese | |
+| Simplified Chinese | |
+| Vietnamese | |
+| English | |
+| Definition | |
+| Description | |
+| Classification | |
+| Domain | classics |
+| Category | |
+| Relationships | |
+| Dependencies | |
+| Evidence | |
+| References | |
+| Terminology Links | |
+| Knowledge Links | |
+| Rule Links | |
+| Sentence Links | |
+| Confidence | Unverified |
+| Review | Not reviewed |
 | Version | V1.0.0 |
-| License | Rights not evaluated |
-| Keywords | |
-| Summary | Placeholder summary. Academic body not authored in framework phase. |
-| Related References | |
-| Related Knowledge | |
-| Related Rules | |
-| Related Sentences | |
+| Status | Placeholder |
+| Traceability | L0 |
 
 ---
 
-## Structural Outline (Placeholders)
-
-### Historical Context
-
-_TBD_
-
-### Major Themes
-
-_TBD_
-
-### Transmission / Editions
-
-_TBD_
-
-### Relevance to BTE Knowledge Modules
+## Canonical Name
 
 _TBD_
 
 ---
 
-## Notes
+## Aliases
 
-- Do not paste full classical text into this framework record unless a later content project explicitly authorizes it.
-- Update `../REFERENCE_INDEX.md`, `../REFERENCE_METADATA.yaml`, and `INDEX.md` when creating the record.
+_TBD_
+
+---
+
+## Chinese
+
+_TBD_
+
+---
+
+## Traditional Chinese
+
+_TBD_
+
+---
+
+## Simplified Chinese
+
+_TBD_
+
+---
+
+## Vietnamese
+
+_TBD_
+
+---
+
+## English
+
+_TBD_
+
+---
+
+## Definition
+
+_TBD_
+
+---
+
+## Description
+
+_TBD_
+
+---
+
+## Classification
+
+_TBD_
+
+---
+
+## Relationships
+
+_TBD_
+
+---
+
+## Dependencies
+
+_TBD_
+
+---
+
+## Evidence
+
+_TBD_
+
+---
+
+## References
+
+_TBD — `REF-*`_
+
+---
+
+## Terminology Links
+
+_TBD — `TERM-*`_
+
+---
+
+## Knowledge Links
+
+_TBD — `KNO-*`_
+
+---
+
+## Rule Links
+
+_TBD — `RUL-*`_
+
+---
+
+## Sentence Links
+
+_TBD — `SEN-*`_
+
+---
+
+## Confidence
+
+Unverified
+
+---
+
+## Review
+
+| Field | Value |
+|-------|-------|
+| Reviewer | |
+| Review Date | |
+| Outcome | |
+| Notes | |
+
+---
+
+## Version
+
+V1.0.0
+
+---
+
+## Status
+
+Placeholder
+
+---
+
+## Traceability
+
+_TBD_
 
 ---
 
@@ -73,4 +196,4 @@ _TBD_
 
 | Version | Date | Notes |
 |---------|------|-------|
-| V1.0.0 | YYYY-MM-DD | Initial placeholder |
+| V1.0.0 | YYYY-MM-DD | Framework template placeholder |

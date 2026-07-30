@@ -1,37 +1,32 @@
-﻿# Knowledge Canon Registry Index
+# Canon Registry — Index
 
+**Module:** `knowledge/knowledge_canon`  
+**Domain:** `registry`  
 **Version:** V1.0.0  
+**Status:** Official Framework  
 
 ---
 
-## Allocated Knowledge Assets
+## Catalog
 
-| Knowledge ID | Domain | Canonical Name | Status | Path |
-|--------------|--------|----------------|--------|------|
-| — | — | No assets allocated in V1.0.0 | — | — |
+| ID | Canonical Name | Status | Version | Reference Count | Rule Count | Sentence Count | Last Updated |
+|----|----------------|--------|---------|-----------------|------------|----------------|--------------|
+| — | — | No records in framework phase | — | 0 | 0 | 0 | — |
 
 ---
 
-## Domain Next-Free Summary
+## Allocation
 
-| Domain | Next Free ID |
-|--------|--------------|
-| 01_five_elements | KNO-000001 |
-| 02_heavenly_stems | KNO-000100 |
-| 03_earthly_branches | KNO-000200 |
-| 04_hidden_stems | KNO-000300 |
-| 05_yin_yang | KNO-000400 |
-| 06_ten_gods | KNO-000500 |
-| 07_strength | KNO-000600 |
-| 08_patterns | KNO-000700 |
-| 09_useful_gods | KNO-000800 |
-| 10_combinations | KNO-000900 |
-| 11_clashes | KNO-001000 |
-| 12_punishments | KNO-001100 |
-| 13_harms | KNO-001200 |
-| 14_transformations | KNO-001300 |
-| 15_seasonal_qi | KNO-001400 |
-| 16_temperature | KNO-001500 |
-| 17_shensha | KNO-001600 |
-| 18_luck_cycles | KNO-001800 |
-| 19_special_cases | KNO-001900 |
+| Field | Value |
+|-------|-------|
+| ID Prefix | `KNO` |
+| Reserved Range | `Cross-domain locator` |
+| Next Free ID | **See domain ranges** |
+
+---
+
+## Notes
+
+- Counts remain `0` until content records are created.
+- Use [TEMPLATE.md](TEMPLATE.md) for future records.
+- Keep this INDEX aligned with `knowledge/knowledge_canon/KNOWLEDGE_SPEC.md`.
