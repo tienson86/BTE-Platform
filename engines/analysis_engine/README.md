@@ -1,393 +1,139 @@
-# 01 Strength Engine
+# Analysis Engine
 
-**Version:** V1.0.0 (Architecture Baseline)  
-**Status:** Active (Frozen)  
-**Module Type:** Analysis Engine  
-**Owner:** BTE Platform
-
----
-
-# 1. Overview
-
-The **Strength Engine** is the first analytical module within the BTE Analysis Engine pipeline.
-
-Its sole responsibility is to evaluate the overall strength of the **Day Master (Nhật Chủ)** based on the natal chart and the official Strength Rule Database.
-
-The evaluation result becomes a foundational input for all subsequent analytical engines, including Temperature, Pattern, Useful God, Ten Gods, Combination, ShenSha, Luck, and Summary.
-
-The Strength Engine is a **pure analytical component**. It performs no interpretation, recommendation, or report generation.
+| Field | Value |
+|-------|-------|
+| Module Path | `engines/analysis_engine` |
+| Module Type | Core Analysis Pipeline |
+| Layer | Domain Analysis |
+| Version | 1.0.0 |
+| Status | Frozen |
 
 ---
 
-# 2. Purpose
+# 1. Purpose
 
-The purpose of this module is to produce a standardized, reproducible, and explainable evaluation of Day Master strength.
+The Analysis Engine is the core analytical subsystem of the BTE Platform.
 
-The engine must provide a single source of truth regarding:
+Its responsibility is to transform a validated BaZi chart into a structured, deterministic, explainable analytical model.
 
-- Overall Day Master strength
-- Individual contributing factors
-- Rule matching results
-- Confidence level
-- Supporting evidence
-- Intermediate analytical data required by downstream modules
+The Analysis Engine performs domain analysis only.
 
-Every execution using identical inputs and rule versions must produce identical outputs.
+It does not generate natural-language interpretation or presentation output.
 
 ---
 
-# 3. Responsibilities
+# 2. Responsibilities
 
-The Strength Engine is responsible for:
+The Analysis Engine is responsible for:
 
-- Evaluating seasonal influence.
-- Evaluating hidden stem rooting.
-- Evaluating Heavenly Stem support.
-- Evaluating Earthly Branch support.
-- Evaluating production, control, and draining effects.
-- Applying official Strength Rules.
-- Calculating normalized strength scores.
-- Calculating confidence levels.
-- Producing a complete `StrengthResult`.
-- Providing traceable reasoning for every score.
+- Coordinating the execution of all analytical stages.
+- Managing the shared AnalysisContext.
+- Producing immutable analysis results.
+- Enforcing stage ordering.
+- Preserving deterministic execution.
+- Maintaining cross-stage consistency.
+- Publishing the final AnalysisResult.
 
 ---
 
-# 4. Out of Scope
+# 3. Architecture Overview
 
-The Strength Engine must **NOT** perform any of the following:
+The Analysis Engine consists of multiple independent analytical stages.
 
-- Determine Pattern (Cách Cục)
-- Select Useful God (Dụng Thần)
-- Evaluate Ten Gods quality
-- Analyze combinations or clashes
-- Analyze ShenSha
-- Analyze Luck Pillars
-- Generate interpretations
-- Generate reports
-- Render templates
-- Rewrite natural language
-- Modify chart data
-- Modify rule data
+Each stage has:
 
-These responsibilities belong to dedicated downstream engines.
+- One responsibility.
+- One public contract.
+- Immutable inputs.
+- Immutable outputs.
+- No knowledge of downstream implementation.
 
 ---
 
-# 5. Architecture Position
+# 4. Pipeline Overview
 
-The Strength Engine is the first analytical stage after chart construction.
+Execution order:
 
-```text
-Calendar Engine
-        │
-        ▼
-Bazi Engine
-        │
-        ▼
-AnalysisContext
-        │
-        ▼
-Strength Engine
-        │
-        ▼
-Temperature Engine
-        │
-        ▼
-Pattern Engine
-        │
-        ▼
-Useful God Engine
-        │
-        ▼
-Ten Gods Engine
-        │
-        ▼
-Combination Engine
-        │
-        ▼
-ShenSha Engine
-        │
-        ▼
-Luck Engine
-        │
-        ▼
-Summary Engine
-        │
-        ▼
-Interpretation Engine
-        │
-        ▼
-Report Engine
-```
+1. Strength Engine
+2. Temperature Engine
+3. Pattern Engine
+4. Useful God Engine
+5. Ten Gods Engine
+6. Combination Engine
+7. ShenSha Engine
+8. Luck Engine
+9. Summary Engine
 
-The Strength Engine never bypasses this pipeline and never invokes downstream engines.
+Interpretation and report generation are external to this module.
 
 ---
 
-# 6. Input
+# 5. Inputs
 
-The module accepts a single immutable input object.
-
-```
-AnalysisContext
-```
-
-The context is expected to contain:
-
-- Calendar information
-- Four Pillars
-- Hidden Stems
-- Five Elements distribution
-- Ten Gods mapping
-- Relationships
-- Metadata
-- Runtime configuration
-
-The Strength Engine never reads raw user input directly.
-
----
-
-# 7. Output
-
-The module returns one standardized object.
-
-```
-StrengthResult
-```
-
-The result includes:
-
-- Overall strength score
-- Strength level
-- Seasonal contribution
-- Root contribution
-- Stem contribution
-- Support contribution
-- Control contribution
-- Drain contribution
-- Weight breakdown
-- Matched rules
-- Confidence level
-- Analytical reasoning
-- Execution metadata
-
-The output is immutable after creation.
-
----
-
-# 8. Dependencies
-
-The Strength Engine depends on:
-
-## Upstream
-
-- Calendar Engine
-- Bazi Engine
-- Rule Database
-- Rule Loader
-- Rule Registry
-
-## Internal
-
-- Validator
-- Analyzer Pipeline
-- Score Calculator
-- Result Builder
-
-The engine does not depend on Interpretation Engine or Report Engine.
-
----
-
-# 9. Public API
-
-The module exposes a single public entry point.
-
-```
-StrengthEngine.evaluate(context)
-```
-
-Input:
+Primary input:
 
 - AnalysisContext
 
-Output:
+Produced after:
+
+- Calendar Engine
+- BaZi Engine
+
+---
+
+# 6. Outputs
+
+Primary output:
+
+- AnalysisResult
+
+Containing:
 
 - StrengthResult
-
-No other public execution interface is guaranteed to remain stable.
-
----
-
-# 10. Internal Components
-
-The implementation is internally divided into specialized components.
-
-- Context Validator
-- Rule Adapter
-- Season Analyzer
-- Root Analyzer
-- Stem Analyzer
-- Support Analyzer
-- Control Analyzer
-- Score Calculator
-- Confidence Evaluator
-- Result Builder
-
-Each component has a single responsibility.
+- TemperatureResult
+- PatternResult
+- UsefulGodResult
+- TenGodResult
+- CombinationResult
+- ShenShaResult
+- LuckResult
+- SummaryResult
 
 ---
 
-# 11. Directory Structure
+# 7. Module Structure
 
-```
-01_strength_engine/
-
-README.md
-ARCHITECTURE.md
-SPECIFICATION.md
-FLOW.md
-MODELS.md
-PUBLIC_API.md
-RULE_MAPPING.md
-ALGORITHM.md
-VALIDATION.md
-ERROR_HANDLING.md
-CACHE.md
-CHANGELOG.md
-
-engine.py
-service.py
-validator.py
-loader.py
-registry.py
-models.py
-interfaces.py
-exceptions.py
-cache.py
-
-analyzers/
-calculator/
-tests/
+```text
+analysis_engine/
+│
+├── shared/
+├── 01_strength_engine/
+├── 02_temperature_engine/
+├── ...
+└── 10_report_generator/
 ```
 
-The documentation defines the architecture. The implementation must conform to these specifications.
+---
+
+# 8. Public API
+
+The module exposes one orchestration interface.
+
+Downstream consumers interact only through the published AnalysisResult.
 
 ---
 
-# 12. Execution Flow
+# 9. Related Documents
 
-The Strength Engine follows a deterministic processing pipeline.
-
-```
-Validate Context
-        │
-        ▼
-Load Rules
-        │
-        ▼
-Analyze Season
-        │
-        ▼
-Analyze Roots
-        │
-        ▼
-Analyze Heavenly Stems
-        │
-        ▼
-Analyze Support & Control
-        │
-        ▼
-Calculate Score
-        │
-        ▼
-Evaluate Confidence
-        │
-        ▼
-Build StrengthResult
-```
-
-Every stage produces deterministic intermediate results.
+- ARCHITECTURE.md
+- PIPELINE.md
+- SHARED_MODELS.md
+- PUBLIC_API.md
+- CHANGELOG.md
 
 ---
 
-# 13. Design Principles
+# 10. Version
 
-The Strength Engine follows the following architectural principles.
-
-## Single Responsibility
-
-Only evaluates Day Master strength.
-
-## Deterministic
-
-Same input always produces the same output.
-
-## Explainable
-
-Every score must be traceable to rules.
-
-## Immutable
-
-Inputs and outputs remain unchanged after creation.
-
-## Extensible
-
-New rules can be added without changing engine behavior.
-
-## Rule-Driven
-
-Business knowledge resides in the Rule Database.
-
-## Testable
-
-Every analyzer can be tested independently.
-
----
-
-# 14. Future Extensions
-
-Future versions may introduce:
-
-- Alternative strength algorithms
-- Regional calculation variants
-- Multiple scoring strategies
-- Rule version switching
-- Parallel evaluation
-- Performance optimizations
-- Explainability enhancements
-- Statistical calibration
-- Plugin-based analyzers
-
-All future extensions must preserve the public API unless a major version is released.
-
----
-
-# 15. Versioning Policy
-
-This document defines the official architecture baseline of the Strength Engine.
-
-- Current Version: **V1.0.0**
-- Status: **Frozen**
-- Compatibility: Analysis Engine V1.x
-- Public API Stability: Guaranteed within V1.x
-
-Breaking architectural changes require a major version increment.
-
----
-
-# 16. Definition of Done
-
-The Strength Engine V1.0 is considered complete only when:
-
-- Architecture documentation is finalized.
-- Domain models are frozen.
-- Public API is frozen.
-- Rule mappings are documented.
-- Algorithms are specified.
-- Validation rules are documented.
-- Error handling is documented.
-- Test strategy is documented.
-- All downstream engines can consume `StrengthResult` without requiring architectural changes.
-
-Only after these conditions are satisfied may implementation begin.
+Architecture Baseline V1.0.0
+Frozen.
