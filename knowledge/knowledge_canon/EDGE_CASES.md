@@ -1,84 +1,333 @@
 # Knowledge Canon Edge Cases
 
-**Document:** EDGE_CASES  
-**Module:** knowledge/knowledge_canon  
-**Version:** V1.0.0  
-**Status:** Official  
+> **Module:** `knowledge/knowledge_canon`
+>
+> **Document ID:** KC-EDGE-001
+>
+> **Version:** V1.0.0
+>
+> **Status:** Official
+>
+> **Document Type:** Edge Case Specification
+>
+> **Language:** English
 
 ---
 
-## Purpose
+# Purpose
 
-Document recurring edge cases for Knowledge Asset identity, domain placement, confidence, and cross-links.
+This document defines exceptional situations that may occur during the creation, maintenance, validation, or consumption of Knowledge Assets.
 
----
-
-## 1. Same Concept Across Domains
-
-**Rule:** Choose one primary Domain; link secondary perspectives via Relationships.
+Its objective is to ensure consistent handling of uncommon, ambiguous, or conflicting knowledge scenarios.
 
 ---
 
-## 2. Homographs / Shared Labels
+# Scope
 
-**Rule:** Separate `KNO-*` IDs; disambiguate Canonical Name / English / Definition.
+This specification applies to:
 
----
-
-## 3. Contested Classical Meaning
-
-**Rule:** Lower Confidence; record Evidence; cite multiple References when needed.
-
----
-
-## 4. Missing Terminology Link
-
-**Rule:** Allowed in Draft. Prefer adding `TERM-*` before Official for lexical concepts.
+- Knowledge Assets
+- References
+- Terminology
+- Mapping
+- Traceability
+- Governance
+- Validation
 
 ---
 
-## 5. Missing Reference Link
+# Edge Case Categories
 
-**Rule:** Block Official for doctrinal assets. Foundational meta-assets require justification in Evidence.
+The Knowledge Canon recognizes the following categories:
 
----
-
-## 6. Governance KID vs Canon KNO
-
-**Rule:** Catalog primary key is `KNO-NNNNNN`. Do not edit Governance to force format changes.
-
----
-
-## 7. Partial Rule / Sentence Coverage
-
-**Rule:** Empty Rule/Sentence links are valid until consumers exist.
-
----
-
-## 8. Special Cases Overflow
-
-**Rule:** Use `19_special_cases/` only when no primary domain fits; graduate out when a stable domain emerges.
+- Missing Information
+- Conflicting Sources
+- Duplicate Knowledge
+- Circular Relationships
+- Version Conflicts
+- Deprecated Knowledge
+- Unverified Knowledge
+- Ambiguous Terminology
+- Cross-Domain Knowledge
+- Incomplete Traceability
 
 ---
 
-## 9. Duplicate Extraction Risk
+# EC-001 Missing Required Metadata
 
-**Rule:** Search domain INDEX and registry before creating a new asset.
+## Description
+
+Mandatory metadata is missing.
+
+## Expected Handling
+
+Publication shall be blocked.
 
 ---
 
-## 10. Multilingual Label Gaps
+# EC-002 Missing Reference
 
-**Rule:** Use explicit `N/A` temporarily; treat missing Vietnamese/Chinese as quality defects before localization milestones.
+## Description
+
+No approved reference exists.
+
+## Expected Handling
+
+Asset status shall remain Draft.
 
 ---
 
-## Resolution Log Template
+# EC-003 Multiple Conflicting References
 
-| Field | Value |
-|-------|-------|
-| Date | YYYY-MM-DD |
-| Knowledge ID | KNO-NNNNNN |
-| Edge Case | section title |
-| Decision | short statement |
-| Follow-up | index / registry updates |
+## Description
+
+Different canonical references provide different conclusions.
+
+## Expected Handling
+
+- Preserve every viewpoint.
+- Record evidence.
+- Assign confidence.
+- Escalate to review.
+
+---
+
+# EC-004 Duplicate Knowledge Asset
+
+## Description
+
+Two Knowledge Assets describe the same canonical concept.
+
+## Expected Handling
+
+Merge if equivalent.
+
+Otherwise establish an explicit relationship.
+
+---
+
+# EC-005 Circular Relationship
+
+## Description
+
+Relationship graph forms a cycle.
+
+## Expected Handling
+
+Reject unless explicitly allowed by governance.
+
+---
+
+# EC-006 Invalid Mapping
+
+## Description
+
+Mapping points to a non-existent identifier.
+
+## Expected Handling
+
+Validation failure.
+
+---
+
+# EC-007 Broken Traceability
+
+## Description
+
+Traceability chain cannot reach the originating reference.
+
+## Expected Handling
+
+Publication blocked.
+
+---
+
+# EC-008 Invalid Version
+
+## Description
+
+Version format does not comply with Semantic Versioning.
+
+## Expected Handling
+
+Validation failure.
+
+---
+
+# EC-009 Deprecated Knowledge
+
+## Description
+
+Knowledge Asset has been deprecated.
+
+## Expected Handling
+
+Retain historical record.
+
+Recommend replacement.
+
+---
+
+# EC-010 Ambiguous Terminology
+
+## Description
+
+Multiple terms refer to different concepts.
+
+## Expected Handling
+
+Use canonical terminology.
+
+Store aliases separately.
+
+---
+
+# EC-011 Cross-Domain Knowledge
+
+## Description
+
+One Knowledge Asset belongs to multiple domains.
+
+## Expected Handling
+
+Assign one canonical domain.
+
+Create explicit cross-domain mappings.
+
+---
+
+# EC-012 Incomplete Evidence
+
+## Description
+
+Evidence exists but is insufficient for publication.
+
+## Expected Handling
+
+Return to author for completion.
+
+---
+
+# EC-013 Reviewer Disagreement
+
+## Description
+
+Reviewers cannot reach consensus.
+
+## Expected Handling
+
+Escalate to Domain Expert.
+
+If unresolved, escalate to Governance.
+
+---
+
+# EC-014 Historical Revision Conflict
+
+## Description
+
+Historical revisions contradict newer revisions.
+
+## Expected Handling
+
+Preserve both.
+
+Mark superseded versions appropriately.
+
+---
+
+# EC-015 Unsupported Extension
+
+## Description
+
+A Knowledge Asset introduces undocumented fields.
+
+## Expected Handling
+
+Reject until governance approval.
+
+---
+
+# Validation Rules
+
+Every edge case shall define:
+
+- Detection method
+- Severity
+- Resolution
+- Responsible role
+- Review requirement
+
+---
+
+# Severity Levels
+
+| Severity | Publication |
+|----------|-------------|
+| Critical | Blocked |
+| Major | Correction Required |
+| Minor | Improvement Recommended |
+| Informational | No Blocking |
+
+---
+
+# Resolution Workflow
+
+```text
+Detect
+
+↓
+
+Classify
+
+↓
+
+Assign Severity
+
+↓
+
+Review
+
+↓
+
+Resolve
+
+↓
+
+Validate
+
+↓
+
+Approve
+
+↓
+
+Close
+```
+
+---
+
+# Governance
+
+Only Governance may approve exceptions to this specification.
+
+All exceptions shall be documented.
+
+---
+
+# Future Extensions
+
+Future versions may include:
+
+- AI-assisted edge case detection
+- Automated conflict resolution
+- Knowledge health monitoring
+- Graph consistency analysis
+
+---
+
+# Revision History
+
+| Version | Status | Description |
+|----------|--------|-------------|
+| V1.0.0 | Official | Initial edge case specification |
