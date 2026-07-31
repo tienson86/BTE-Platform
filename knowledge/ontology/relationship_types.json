@@ -1,0 +1,1728 @@
+{
+    "schema_version":  "1.0.0",
+    "status":  "official",
+    "document_id":  "ONT-RELTYPE-001",
+    "title":  "BTE Relationship Types",
+    "description":  "Canonical relationship types for the Knowledge Canon ontology.",
+    "updated_at":  "2026-07-31",
+    "document_kind":  "relationship_types",
+    "relationship_types":  [
+                               {
+                                   "id":  "RELTYPE-000001",
+                                   "canonical_name":  "FOUNDATIONAL_FOR",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type FOUNDATIONAL_FOR.",
+                                   "inverse_relationship":  null,
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  "FOUNDATIONAL_FOR"
+                               },
+                               {
+                                   "id":  "RELTYPE-000002",
+                                   "canonical_name":  "DEPENDS_ON",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DEPENDS_ON.",
+                                   "inverse_relationship":  null,
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  "DEPENDS_ON"
+                               },
+                               {
+                                   "id":  "RELTYPE-000003",
+                                   "canonical_name":  "CLASSIFIES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CLASSIFIES.",
+                                   "inverse_relationship":  "CLASSIFIED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Classification",
+                                   "compatible_graph_edge":  "CLASSIFIES"
+                               },
+                               {
+                                   "id":  "RELTYPE-000004",
+                                   "canonical_name":  "CLASSIFIED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CLASSIFIED_BY.",
+                                   "inverse_relationship":  "CLASSIFIES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Classification",
+                                   "compatible_graph_edge":  "CLASSIFIES"
+                               },
+                               {
+                                   "id":  "RELTYPE-000005",
+                                   "canonical_name":  "REFERENCES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type REFERENCES.",
+                                   "inverse_relationship":  "REFERENCED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  "REFERENCES"
+                               },
+                               {
+                                   "id":  "RELTYPE-000006",
+                                   "canonical_name":  "REFERENCED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type REFERENCED_BY.",
+                                   "inverse_relationship":  "REFERENCES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  "REFERENCES"
+                               },
+                               {
+                                   "id":  "RELTYPE-000007",
+                                   "canonical_name":  "SUPPORTED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type SUPPORTED_BY.",
+                                   "inverse_relationship":  "SUPPORTS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Support",
+                                   "compatible_graph_edge":  "SUPPORTED_BY"
+                               },
+                               {
+                                   "id":  "RELTYPE-000008",
+                                   "canonical_name":  "SUPPORTS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type SUPPORTS.",
+                                   "inverse_relationship":  "SUPPORTED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Support",
+                                   "compatible_graph_edge":  "SUPPORTED_BY"
+                               },
+                               {
+                                   "id":  "RELTYPE-000009",
+                                   "canonical_name":  "RELATED_TO",
+                                   "direction":  "bidirectional",
+                                   "description":  "Canonical relationship type RELATED_TO.",
+                                   "inverse_relationship":  "RELATED_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  "RELATED_TO"
+                               },
+                               {
+                                   "id":  "RELTYPE-000010",
+                                   "canonical_name":  "CONFLICTS_WITH",
+                                   "direction":  "bidirectional",
+                                   "description":  "Canonical relationship type CONFLICTS_WITH.",
+                                   "inverse_relationship":  "CONFLICTS_WITH",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  "CONFLICTS_WITH"
+                               },
+                               {
+                                   "id":  "RELTYPE-000011",
+                                   "canonical_name":  "IMPLEMENTS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type IMPLEMENTS.",
+                                   "inverse_relationship":  "IMPLEMENTED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Implementation",
+                                   "compatible_graph_edge":  "IMPLEMENTS"
+                               },
+                               {
+                                   "id":  "RELTYPE-000012",
+                                   "canonical_name":  "IMPLEMENTED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type IMPLEMENTED_BY.",
+                                   "inverse_relationship":  "IMPLEMENTS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Implementation",
+                                   "compatible_graph_edge":  "IMPLEMENTS"
+                               },
+                               {
+                                   "id":  "RELTYPE-000013",
+                                   "canonical_name":  "INHERITS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type INHERITS.",
+                                   "inverse_relationship":  "INHERITED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000014",
+                                   "canonical_name":  "INHERITED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type INHERITED_BY.",
+                                   "inverse_relationship":  "INHERITS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000015",
+                                   "canonical_name":  "BELONGS_TO",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type BELONGS_TO.",
+                                   "inverse_relationship":  "CONTAINS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Membership",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000016",
+                                   "canonical_name":  "MEMBER_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type MEMBER_OF.",
+                                   "inverse_relationship":  "HAS_MEMBER",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Membership",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000017",
+                                   "canonical_name":  "HAS_MEMBER",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_MEMBER.",
+                                   "inverse_relationship":  "MEMBER_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Membership",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000018",
+                                   "canonical_name":  "CONTAINS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONTAINS.",
+                                   "inverse_relationship":  "BELONGS_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000019",
+                                   "canonical_name":  "CONTAINED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONTAINED_BY.",
+                                   "inverse_relationship":  "CONTAINS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000020",
+                                   "canonical_name":  "USES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type USES.",
+                                   "inverse_relationship":  "USED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000021",
+                                   "canonical_name":  "USED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type USED_BY.",
+                                   "inverse_relationship":  "USES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000022",
+                                   "canonical_name":  "GENERATES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type GENERATES.",
+                                   "inverse_relationship":  "GENERATED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000023",
+                                   "canonical_name":  "GENERATED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type GENERATED_BY.",
+                                   "inverse_relationship":  "GENERATES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000024",
+                                   "canonical_name":  "PARALLEL_TO",
+                                   "direction":  "bidirectional",
+                                   "description":  "Canonical relationship type PARALLEL_TO.",
+                                   "inverse_relationship":  "PARALLEL_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000025",
+                                   "canonical_name":  "ASSOCIATED_WITH",
+                                   "direction":  "bidirectional",
+                                   "description":  "Canonical relationship type ASSOCIATED_WITH.",
+                                   "inverse_relationship":  "ASSOCIATED_WITH",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000026",
+                                   "canonical_name":  "VALIDATES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type VALIDATES.",
+                                   "inverse_relationship":  "VALIDATED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Validation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000027",
+                                   "canonical_name":  "VALIDATED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type VALIDATED_BY.",
+                                   "inverse_relationship":  "VALIDATES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Validation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000028",
+                                   "canonical_name":  "PROVIDES_INPUT",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type PROVIDES_INPUT.",
+                                   "inverse_relationship":  "RECEIVES_INPUT",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000029",
+                                   "canonical_name":  "RECEIVES_INPUT",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type RECEIVES_INPUT.",
+                                   "inverse_relationship":  "PROVIDES_INPUT",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000030",
+                                   "canonical_name":  "HAS_PROPERTY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_PROPERTY.",
+                                   "inverse_relationship":  null,
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000031",
+                                   "canonical_name":  "HAS_NODE",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_NODE.",
+                                   "inverse_relationship":  "NODE_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000032",
+                                   "canonical_name":  "NODE_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type NODE_OF.",
+                                   "inverse_relationship":  "HAS_NODE",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000033",
+                                   "canonical_name":  "HAS_EDGE",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_EDGE.",
+                                   "inverse_relationship":  "EDGE_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000034",
+                                   "canonical_name":  "EDGE_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type EDGE_OF.",
+                                   "inverse_relationship":  "HAS_EDGE",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000035",
+                                   "canonical_name":  "CONNECTS_TO",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONNECTS_TO.",
+                                   "inverse_relationship":  "CONNECTED_FROM",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000036",
+                                   "canonical_name":  "CONNECTED_FROM",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONNECTED_FROM.",
+                                   "inverse_relationship":  "CONNECTS_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000037",
+                                   "canonical_name":  "SEE_ALSO",
+                                   "direction":  "bidirectional",
+                                   "description":  "Canonical relationship type SEE_ALSO.",
+                                   "inverse_relationship":  "SEE_ALSO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000038",
+                                   "canonical_name":  "DERIVES_FROM",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DERIVES_FROM.",
+                                   "inverse_relationship":  "DERIVES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000039",
+                                   "canonical_name":  "DERIVES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DERIVES.",
+                                   "inverse_relationship":  "DERIVES_FROM",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000040",
+                                   "canonical_name":  "SPECIALIZES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type SPECIALIZES.",
+                                   "inverse_relationship":  "GENERALIZES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000041",
+                                   "canonical_name":  "GENERALIZES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type GENERALIZES.",
+                                   "inverse_relationship":  "SPECIALIZES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000042",
+                                   "canonical_name":  "INSTANCE_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type INSTANCE_OF.",
+                                   "inverse_relationship":  "HAS_INSTANCE",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Classification",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000043",
+                                   "canonical_name":  "HAS_INSTANCE",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_INSTANCE.",
+                                   "inverse_relationship":  "INSTANCE_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Classification",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000044",
+                                   "canonical_name":  "PART_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type PART_OF.",
+                                   "inverse_relationship":  "HAS_PART",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000045",
+                                   "canonical_name":  "HAS_PART",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_PART.",
+                                   "inverse_relationship":  "PART_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000046",
+                                   "canonical_name":  "REQUIRES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type REQUIRES.",
+                                   "inverse_relationship":  "REQUIRED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000047",
+                                   "canonical_name":  "REQUIRED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type REQUIRED_BY.",
+                                   "inverse_relationship":  "REQUIRES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000048",
+                                   "canonical_name":  "EXTENDS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type EXTENDS.",
+                                   "inverse_relationship":  "EXTENDED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000049",
+                                   "canonical_name":  "EXTENDED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type EXTENDED_BY.",
+                                   "inverse_relationship":  "EXTENDS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000050",
+                                   "canonical_name":  "OVERRIDES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type OVERRIDES.",
+                                   "inverse_relationship":  "OVERRIDDEN_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000051",
+                                   "canonical_name":  "OVERRIDDEN_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type OVERRIDDEN_BY.",
+                                   "inverse_relationship":  "OVERRIDES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000052",
+                                   "canonical_name":  "MAPS_TO",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type MAPS_TO.",
+                                   "inverse_relationship":  "MAPPED_FROM",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000053",
+                                   "canonical_name":  "MAPPED_FROM",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type MAPPED_FROM.",
+                                   "inverse_relationship":  "MAPS_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000054",
+                                   "canonical_name":  "EQUIVALENT_TO",
+                                   "direction":  "bidirectional",
+                                   "description":  "Canonical relationship type EQUIVALENT_TO.",
+                                   "inverse_relationship":  "EQUIVALENT_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000055",
+                                   "canonical_name":  "NARROWER_THAN",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type NARROWER_THAN.",
+                                   "inverse_relationship":  "BROADER_THAN",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Classification",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000056",
+                                   "canonical_name":  "BROADER_THAN",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type BROADER_THAN.",
+                                   "inverse_relationship":  "NARROWER_THAN",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Classification",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000057",
+                                   "canonical_name":  "PRECEDES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type PRECEDES.",
+                                   "inverse_relationship":  "FOLLOWS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000058",
+                                   "canonical_name":  "FOLLOWS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type FOLLOWS.",
+                                   "inverse_relationship":  "PRECEDES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000059",
+                                   "canonical_name":  "TRANSFORMS_TO",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type TRANSFORMS_TO.",
+                                   "inverse_relationship":  "TRANSFORMS_FROM",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000060",
+                                   "canonical_name":  "TRANSFORMS_FROM",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type TRANSFORMS_FROM.",
+                                   "inverse_relationship":  "TRANSFORMS_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000061",
+                                   "canonical_name":  "CONTROLS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONTROLS.",
+                                   "inverse_relationship":  "CONTROLLED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000062",
+                                   "canonical_name":  "CONTROLLED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONTROLLED_BY.",
+                                   "inverse_relationship":  "CONTROLS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000063",
+                                   "canonical_name":  "GENERATES_CYCLE",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type GENERATES_CYCLE.",
+                                   "inverse_relationship":  null,
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000064",
+                                   "canonical_name":  "CONTROLS_CYCLE",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONTROLS_CYCLE.",
+                                   "inverse_relationship":  null,
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000065",
+                                   "canonical_name":  "HIDDEN_IN",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HIDDEN_IN.",
+                                   "inverse_relationship":  "HAS_HIDDEN",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000066",
+                                   "canonical_name":  "HAS_HIDDEN",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_HIDDEN.",
+                                   "inverse_relationship":  "HIDDEN_IN",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000067",
+                                   "canonical_name":  "EXPRESSED_AS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type EXPRESSED_AS.",
+                                   "inverse_relationship":  "EXPRESSION_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000068",
+                                   "canonical_name":  "EXPRESSION_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type EXPRESSION_OF.",
+                                   "inverse_relationship":  "EXPRESSED_AS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000069",
+                                   "canonical_name":  "LOCATED_IN",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type LOCATED_IN.",
+                                   "inverse_relationship":  "LOCATES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000070",
+                                   "canonical_name":  "LOCATES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type LOCATES.",
+                                   "inverse_relationship":  "LOCATED_IN",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000071",
+                                   "canonical_name":  "OWNS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type OWNS.",
+                                   "inverse_relationship":  "OWNED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Membership",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000072",
+                                   "canonical_name":  "OWNED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type OWNED_BY.",
+                                   "inverse_relationship":  "OWNS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Membership",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000073",
+                                   "canonical_name":  "GOVERNS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type GOVERNS.",
+                                   "inverse_relationship":  "GOVERNED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Validation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000074",
+                                   "canonical_name":  "GOVERNED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type GOVERNED_BY.",
+                                   "inverse_relationship":  "GOVERNS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Validation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000075",
+                                   "canonical_name":  "COMPILES_TO",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type COMPILES_TO.",
+                                   "inverse_relationship":  "COMPILED_FROM",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Implementation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000076",
+                                   "canonical_name":  "COMPILED_FROM",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type COMPILED_FROM.",
+                                   "inverse_relationship":  "COMPILES_TO",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Implementation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000077",
+                                   "canonical_name":  "INDEXES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type INDEXES.",
+                                   "inverse_relationship":  "INDEXED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000078",
+                                   "canonical_name":  "INDEXED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type INDEXED_BY.",
+                                   "inverse_relationship":  "INDEXES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000079",
+                                   "canonical_name":  "DOCUMENTS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DOCUMENTS.",
+                                   "inverse_relationship":  "DOCUMENTED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000080",
+                                   "canonical_name":  "DOCUMENTED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DOCUMENTED_BY.",
+                                   "inverse_relationship":  "DOCUMENTS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000081",
+                                   "canonical_name":  "ASSERTS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type ASSERTS.",
+                                   "inverse_relationship":  "ASSERTED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Support",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000082",
+                                   "canonical_name":  "ASSERTED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type ASSERTED_BY.",
+                                   "inverse_relationship":  "ASSERTS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Support",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000083",
+                                   "canonical_name":  "CITES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CITES.",
+                                   "inverse_relationship":  "CITED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000084",
+                                   "canonical_name":  "CITED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CITED_BY.",
+                                   "inverse_relationship":  "CITES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000085",
+                                   "canonical_name":  "SUPERSEDES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type SUPERSEDES.",
+                                   "inverse_relationship":  "SUPERSEDED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000086",
+                                   "canonical_name":  "SUPERSEDED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type SUPERSEDED_BY.",
+                                   "inverse_relationship":  "SUPERSEDES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000087",
+                                   "canonical_name":  "DEPLOYS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DEPLOYS.",
+                                   "inverse_relationship":  "DEPLOYED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Implementation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000088",
+                                   "canonical_name":  "DEPLOYED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type DEPLOYED_BY.",
+                                   "inverse_relationship":  "DEPLOYS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Implementation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000089",
+                                   "canonical_name":  "TRIGGERS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type TRIGGERS.",
+                                   "inverse_relationship":  "TRIGGERED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000090",
+                                   "canonical_name":  "TRIGGERED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type TRIGGERED_BY.",
+                                   "inverse_relationship":  "TRIGGERS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Association",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000091",
+                                   "canonical_name":  "CONSTRAINS",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONSTRAINS.",
+                                   "inverse_relationship":  "CONSTRAINED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Validation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000092",
+                                   "canonical_name":  "CONSTRAINED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type CONSTRAINED_BY.",
+                                   "inverse_relationship":  "CONSTRAINS",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Validation",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000093",
+                                   "canonical_name":  "ANNOTATES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type ANNOTATES.",
+                                   "inverse_relationship":  "ANNOTATED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000094",
+                                   "canonical_name":  "ANNOTATED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type ANNOTATED_BY.",
+                                   "inverse_relationship":  "ANNOTATES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Reference",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000095",
+                                   "canonical_name":  "AGGREGATES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type AGGREGATES.",
+                                   "inverse_relationship":  "AGGREGATED_BY",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000096",
+                                   "canonical_name":  "AGGREGATED_BY",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type AGGREGATED_BY.",
+                                   "inverse_relationship":  "AGGREGATES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000097",
+                                   "canonical_name":  "VERSION_OF",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type VERSION_OF.",
+                                   "inverse_relationship":  "HAS_VERSION",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000098",
+                                   "canonical_name":  "HAS_VERSION",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type HAS_VERSION.",
+                                   "inverse_relationship":  "VERSION_OF",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Inheritance",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000099",
+                                   "canonical_name":  "RELEASES",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type RELEASES.",
+                                   "inverse_relationship":  "RELEASED_IN",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000100",
+                                   "canonical_name":  "RELEASED_IN",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type RELEASED_IN.",
+                                   "inverse_relationship":  "RELEASES",
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Containment",
+                                   "compatible_graph_edge":  null
+                               },
+                               {
+                                   "id":  "RELTYPE-000101",
+                                   "canonical_name":  "SEMANTICALLY_DEPENDS_ON",
+                                   "direction":  "forward",
+                                   "description":  "Canonical relationship type SEMANTICALLY_DEPENDS_ON.",
+                                   "inverse_relationship":  null,
+                                   "allowed_source":  [
+                                                          "*"
+                                                      ],
+                                   "allowed_target":  [
+                                                          "*"
+                                                      ],
+                                   "status":  "official",
+                                   "version":  "1.0.0",
+                                   "edge_category":  "Dependency",
+                                   "compatible_graph_edge":  null
+                               }
+                           ]
+}
