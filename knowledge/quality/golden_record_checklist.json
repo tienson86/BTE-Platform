@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "checklist_id": "QC-GOLDEN-001",
+  "title": "Golden Knowledge Record Checklist",
+  "description": "Quality gate checklist for promoting a Knowledge Record to golden / official reference status. Specification only. Does not modify golden datasets or KR files.",
+  "applies_to": "golden_knowledge_record_candidate",
+  "required_metric_pass": [
+    "QM-COMPLETENESS",
+    "QM-CONSISTENCY",
+    "QM-TRACEABILITY",
+    "QM-COMPILER_COMPATIBILITY",
+    "QM-RELATIONSHIP_INTEGRITY",
+    "QM-BIBLIOGRAPHY_INTEGRITY",
+    "QM-GRAPH_INTEGRITY",
+    "QM-GOVERNANCE_COMPLIANCE"
+  ],
+  "minimum_overall_score": 90,
+  "items": [
+    {
+      "item_id": "GR-001",
+      "requirement": "Record ID immutable and registered",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-GOVERNANCE_COMPLIANCE",
+        "QM-GRAPH_INTEGRITY"
+      ]
+    },
+    {
+      "item_id": "GR-002",
+      "requirement": "Academic scorecard pass (>= 80) with no blocking bibliography gaps",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-COMPLETENESS",
+        "QM-CONSISTENCY",
+        "QM-TRACEABILITY",
+        "QM-BIBLIOGRAPHY_INTEGRITY"
+      ]
+    },
+    {
+      "item_id": "GR-003",
+      "requirement": "Technical scorecard pass (>= 80) including compiler and relationship checks",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-COMPILER_COMPATIBILITY",
+        "QM-RELATIONSHIP_INTEGRITY",
+        "QM-GRAPH_INTEGRITY"
+      ]
+    },
+    {
+      "item_id": "GR-004",
+      "requirement": "Governance scorecard pass; approval approved; freeze frozen or freeze candidate accepted",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-GOVERNANCE_COMPLIANCE"
+      ]
+    },
+    {
+      "item_id": "GR-005",
+      "requirement": "All master review checklist mandatory items (RC-*) satisfied",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-COMPLETENESS",
+        "QM-GOVERNANCE_COMPLIANCE"
+      ]
+    },
+    {
+      "item_id": "GR-006",
+      "requirement": "No open TODO_REVIEW items on claims marked high confidence",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-TRACEABILITY"
+      ]
+    },
+    {
+      "item_id": "GR-007",
+      "requirement": "Graph projection has unique canonical Concept node and no dependency cycles",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-GRAPH_INTEGRITY"
+      ]
+    },
+    {
+      "item_id": "GR-008",
+      "requirement": "Golden promotion does not rewrite locked snapshots or expected outputs",
+      "mandatory": true,
+      "metric_ids": [
+        "QM-GOVERNANCE_COMPLIANCE"
+      ]
+    }
+  ],
+  "promotion_policy": {
+    "all_mandatory_items_required": true,
+    "overall_score_minimum": 90,
+    "blocking_on_any_metric_below": 80
+  }
+}
