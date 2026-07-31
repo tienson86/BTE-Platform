@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "document_name": "bte_source_priority",
+    "description": "Centralized Academic Source hierarchy for Compiler, Validation Engine, and Documentation Generator.",
+    "owner": "Knowledge Canon Committee",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "levels": [
+    {
+      "level_id": "Level1",
+      "name": "Classical Canonical Sources",
+      "description": "Highest-priority classical canon sources for Knowledge Canon citations.",
+      "priority": 1,
+      "allowed_categories": [
+        "classical_canon"
+      ],
+      "source_ids": [
+        "SRC-000001",
+        "SRC-000002",
+        "SRC-000003",
+        "SRC-000005",
+        "SRC-000006",
+        "SRC-000008"
+      ],
+      "notes": "Extend by appending validated source_ids only after Academic Approval."
+    },
+    {
+      "level_id": "Level2",
+      "name": "Classical Commentaries and Classical References",
+      "description": "Authoritative commentaries and classical reference works supporting Level1 texts.",
+      "priority": 2,
+      "allowed_categories": [
+        "classical_commentary",
+        "classical_reference"
+      ],
+      "source_ids": [
+        "SRC-000004",
+        "SRC-000007",
+        "SRC-000009"
+      ],
+      "notes": "May support but not silently override Level1 without conflict registry entry."
+    },
+    {
+      "level_id": "Level3",
+      "name": "Modern Academic Publications",
+      "description": "Peer-reviewed or formally published modern academic works.",
+      "priority": 3,
+      "allowed_categories": [
+        "modern_academic"
+      ],
+      "source_ids": [],
+      "notes": "Empty in v1.0.0 placeholders. Extend when modern sources are registered."
+    },
+    {
+      "level_id": "Level4",
+      "name": "Internal BTE Standards",
+      "description": "Internal BTE standards and governance documents cited as process sources.",
+      "priority": 4,
+      "allowed_categories": [
+        "internal_standard"
+      ],
+      "source_ids": [
+        "SRC-000010"
+      ],
+      "notes": "Must not replace classical evidence for academic claims."
+    }
+  ],
+  "resolution_defaults": {
+    "prefer_lower_priority_number": true,
+    "require_conflict_registry_on_override": true,
+    "allow_equal_level_multi_cite": true
+  }
+}
