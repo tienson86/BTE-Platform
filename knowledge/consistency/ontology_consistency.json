@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "CON-ONT-001",
+  "title": "Ontology Consistency Spec",
+  "description": "Alignment of Knowledge Records with graph ontology node/edge types. Specification only.",
+  "allowed_node_types": [
+    "Concept",
+    "Entity",
+    "Rule",
+    "Pattern",
+    "Example",
+    "Source",
+    "Pack",
+    "Module"
+  ],
+  "allowed_edge_types": [
+    "FOUNDATIONAL_FOR",
+    "DEPENDS_ON",
+    "CLASSIFIES",
+    "REFERENCES",
+    "SUPPORTED_BY",
+    "RELATED_TO",
+    "CONFLICTS_WITH",
+    "IMPLEMENTS"
+  ],
+  "rules": [
+    {
+      "rule_id": "ONT-001",
+      "severity": "error",
+      "statement": "Foundational Concept records MUST map to node_type Concept."
+    },
+    {
+      "rule_id": "ONT-002",
+      "severity": "error",
+      "statement": "Entity catalog records MUST map to Entity (or an approved Concept-as-entity-set documented in pack design)."
+    },
+    {
+      "rule_id": "ONT-003",
+      "severity": "error",
+      "statement": "Pack/Module MUST NOT be used as substitutes for Concept identity."
+    },
+    {
+      "rule_id": "ONT-004",
+      "severity": "error",
+      "statement": "record_id bound to a Concept node is immutable (GRAPH-C-003)."
+    },
+    {
+      "rule_id": "ONT-005",
+      "severity": "error",
+      "statement": "Unknown node_type or edge_type values fail ontology consistency."
+    },
+    {
+      "rule_id": "ONT-006",
+      "severity": "warning",
+      "statement": "Example nodes SHOULD reference a parent Concept/Rule/Entity via REFERENCES or RELATED_TO."
+    }
+  ],
+  "related": [
+    "knowledge/graph/node_types.json",
+    "knowledge/graph/edge_types.json",
+    "knowledge/graph/ontology_registry.json"
+  ]
+}
