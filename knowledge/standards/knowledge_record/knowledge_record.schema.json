@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/standards/knowledge_record/knowledge_record.schema.json",
+  "title": "BTE Knowledge Record (Standards Master Schema)",
+  "description": "Master schema every Knowledge Record (KR-*) MUST satisfy under knowledge/standards/knowledge_record/.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "identity",
+    "classification",
+    "canonical_definition",
+    "academic_context",
+    "characteristics",
+    "relationships",
+    "examples",
+    "computational_metadata",
+    "validation",
+    "governance",
+    "release"
+  ],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_id",
+        "canonical_name",
+        "vietnamese_name",
+        "status",
+        "version"
+      ],
+      "properties": {
+        "record_id": {
+          "type": "string",
+          "pattern": "^KR-[0-9]{6}$",
+          "description": "Immutable Knowledge Record ID."
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vietnamese_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chinese_name": {
+          "type": "string"
+        },
+        "pinyin": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "official",
+            "deprecated",
+            "archived"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2
+        },
+        "primary_author": {
+          "type": "string"
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "discipline",
+        "module_id",
+        "pack_id",
+        "knowledge_type",
+        "primary_category"
+      ],
+      "properties": {
+        "discipline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "type": "string"
+        },
+        "module_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pack_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "knowledge_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary_category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "secondary_category": {
+          "type": "string"
+        },
+        "academic_layer": {
+          "type": "string"
+        },
+        "computational_layer": {
+          "type": "string"
+        },
+        "hierarchy_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "canonical_definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition",
+        "scope"
+      ],
+      "properties": {
+        "definition": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Canonical definition text (single string)."
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "out_of_scope": {
+          "type": "string"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "academic_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_source_ids",
+        "assertions"
+      ],
+      "properties": {
+        "primary_source_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-[0-9]{6}$"
+          }
+        },
+        "secondary_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-[0-9]{6}$"
+          }
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "$ref": "assertion.schema.json"
+          }
+        },
+        "conflict_notes": {
+          "type": "string"
+        },
+        "todo_review": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "characteristics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "value"
+            ],
+            "properties": {
+              "key": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "relationship.schema.json"
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "example.schema.json"
+          }
+        }
+      }
+    },
+    "computational_metadata": {
+      "allOf": [
+        {
+          "$ref": "metadata.schema.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "engine_compatibility": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explainability_contract": {
+              "type": "string"
+            },
+            "knowledge_nature": {
+              "type": "string",
+              "enum": [
+                "foundational",
+                "derived",
+                "procedural",
+                "interpretive",
+                "hybrid"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id",
+        "checklist_status",
+        "errors",
+        "warnings"
+      ],
+      "properties": {
+        "schema_id": {
+          "type": "string",
+          "const": "https://bte-platform.org/schema/standards/knowledge_record/knowledge_record.schema.json"
+        },
+        "checklist_status": {
+          "type": "string",
+          "enum": [
+            "not_run",
+            "pass",
+            "fail",
+            "partial"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validated_at": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "review"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stewards": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "change_policy": {
+          "type": "string"
+        },
+        "review": {
+          "$ref": "review.schema.json"
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "release_status",
+        "canon_version"
+      ],
+      "properties": {
+        "release_status": {
+          "type": "string",
+          "enum": [
+            "unreleased",
+            "candidate",
+            "released",
+            "superseded",
+            "withdrawn"
+          ]
+        },
+        "canon_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "released_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "changelog": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
