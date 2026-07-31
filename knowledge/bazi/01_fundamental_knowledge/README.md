@@ -96,6 +96,8 @@ FIELD_GUIDE.md
 
 KNOWLEDGE_INVENTORY.md
 
+design/
+
 knowledge_records/
 
 examples/
