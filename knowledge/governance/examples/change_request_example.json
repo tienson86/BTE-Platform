@@ -1,0 +1,35 @@
+{
+  "change_request_id": "CR-000001",
+  "title": "Fixture: nominate draft KR for review (non-production)",
+  "target_record_id": "KR-000000",
+  "target_version": "0.1.0",
+  "change_type": "status_transition",
+  "requested_by": "Sprint 3E Infrastructure",
+  "requested_at": "2026-07-31",
+  "status": "draft",
+  "rationale": "Synthetic change request demonstrating schema shape. Does not modify any authored Knowledge Record.",
+  "impact": {
+    "breaks_freeze": false,
+    "requires_re_review": true,
+    "affects_indexes": false,
+    "affects_graph": false,
+    "downstream_record_ids": [],
+    "notes": "Infrastructure fixture only."
+  },
+  "proposed_transition": {
+    "from_state": "draft",
+    "to_state": "review",
+    "transition_id": "TR-SUBMIT-REVIEW"
+  },
+  "approvals": [
+    {
+      "role": "Knowledge Author",
+      "actor": "Sprint 3E Infrastructure",
+      "decision": "pending"
+    }
+  ],
+  "related_documents": [
+    "approval_matrix.json",
+    "review_workflow.json"
+  ]
+}
