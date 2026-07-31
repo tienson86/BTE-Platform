@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "policy_id": "GOV-RET-001",
+  "title": "Knowledge Record Retirement Policy",
+  "description": "Deprecation, archive, and retirement rules for Knowledge Records. Specification only.",
+  "applies_to": "knowledge_record",
+  "states": [
+    {
+      "state": "deprecated",
+      "meaning": "Still resolvable; replacement planned or advised; new dependents SHOULD NOT target it.",
+      "entry_requires": [
+        "Approved change_request with change_type=deprecate",
+        "Governance Owner approval"
+      ],
+      "allowed_actions": [
+        "Point consumers to successor_record_id",
+        "Keep indexes with deprecated status flag"
+      ]
+    },
+    {
+      "state": "archived",
+      "meaning": "Read-only historical record; not for active compilation into new official packages.",
+      "entry_requires": [
+        "Prior deprecated state (or exceptional Governance waiver)",
+        "Release Manager + Governance Owner approval"
+      ],
+      "allowed_actions": [
+        "Read for audit and provenance",
+        "Cite historically with explicit archived status"
+      ]
+    },
+    {
+      "state": "retired",
+      "meaning": "Lifecycle closed. record_id remains reserved forever; content retained for audit.",
+      "entry_requires": [
+        "Prior archived state",
+        "Governance Owner approval",
+        "change_request change_type=retire"
+      ],
+      "allowed_actions": [
+        "Audit retrieval only"
+      ]
+    }
+  ],
+  "hard_rules": [
+    {
+      "rule_id": "RET-001",
+      "severity": "error",
+      "statement": "Retirement MUST NOT reuse or reassign the retired record_id."
+    },
+    {
+      "rule_id": "RET-002",
+      "severity": "error",
+      "statement": "Retirement MUST NOT silently delete academic provenance; files remain under governance retention."
+    },
+    {
+      "rule_id": "RET-003",
+      "severity": "error",
+      "statement": "Supersede REQUIRES successor_record_id and cross_reference updates."
+    },
+    {
+      "rule_id": "RET-004",
+      "severity": "warning",
+      "statement": "Downstream DEPENDS_ON / FOUNDATIONAL_FOR edges SHOULD be remapped or marked before archive."
+    }
+  ],
+  "successor_fields": {
+    "successor_record_id": {
+      "pattern": "^KR-[0-9]{6}$",
+      "required_when": [
+        "supersede",
+        "deprecate_with_replacement"
+      ]
+    }
+  },
+  "related": [
+    "policies/05_DEPRECATION_POLICY.md",
+    "policies/06_ARCHIVE_POLICY.md",
+    "approval_matrix.json",
+    "change_request.schema.json"
+  ]
+}
