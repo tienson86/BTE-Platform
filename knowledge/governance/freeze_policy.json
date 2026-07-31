@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "policy_id": "GOV-FRZ-001",
+  "title": "Knowledge Record Freeze Policy",
+  "description": "Rules for freezing Knowledge Record content. Specification only.",
+  "applies_to": "knowledge_record",
+  "freeze_statuses": [
+    "unfrozen",
+    "candidate",
+    "frozen"
+  ],
+  "rules": [
+    {
+      "rule_id": "FRZ-001",
+      "severity": "error",
+      "statement": "Frozen records MUST NOT change academic content, assertions, or canonical definition without an approved change request that explicitly unfreezes or supersedes."
+    },
+    {
+      "rule_id": "FRZ-002",
+      "severity": "error",
+      "statement": "record_id remains immutable whether frozen or not."
+    },
+    {
+      "rule_id": "FRZ-003",
+      "severity": "error",
+      "statement": "release_status=released REQUIRES freeze.status=frozen."
+    },
+    {
+      "rule_id": "FRZ-004",
+      "severity": "warning",
+      "statement": "freeze.status=candidate MAY be used after governance approval pending final Release Manager confirmation."
+    },
+    {
+      "rule_id": "FRZ-005",
+      "severity": "error",
+      "statement": "Unfreeze of an official frozen record REQUIRES Governance Owner approval and a registered change request."
+    },
+    {
+      "rule_id": "FRZ-006",
+      "severity": "error",
+      "statement": "Metadata-only typo fixes on frozen records REQUIRE Technical Reviewer + Governance Owner; academic substance changes REQUIRE full re-review."
+    }
+  ],
+  "allowed_while_frozen": [
+    "Index path corrections that do not alter record content",
+    "Cross-reference registry updates that do not rewrite the KR body",
+    "Deprecation / retirement annotations via change request"
+  ],
+  "forbidden_while_frozen": [
+    "Silent redefinition of canonical meaning",
+    "ID remapping",
+    "Deletion of the record file to force a new ID"
+  ],
+  "related_schemas": [
+    "knowledge/standards/knowledge_record/review.schema.json"
+  ]
+}
