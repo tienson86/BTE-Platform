@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "CON-REL-001",
+  "title": "Relationship Consistency Spec",
+  "description": "Intra- and inter-record relationship consistency. Specification only.",
+  "rules": [
+    {
+      "rule_id": "REL-C-001",
+      "severity": "error",
+      "statement": "Every relationship type MUST be in the ontology edge type registry."
+    },
+    {
+      "rule_id": "REL-C-002",
+      "severity": "error",
+      "statement": "No duplicate (type, source, target) triples."
+    },
+    {
+      "rule_id": "REL-C-003",
+      "severity": "error",
+      "statement": "FOUNDATIONAL_FOR and DEPENDS_ON subgraphs MUST be acyclic."
+    },
+    {
+      "rule_id": "REL-C-004",
+      "severity": "warning",
+      "statement": "RELATED_TO SHOULD NOT be used where FOUNDATIONAL_FOR or DEPENDS_ON is required for definition correctness."
+    },
+    {
+      "rule_id": "REL-C-005",
+      "severity": "error",
+      "statement": "Self-relationships (source=target) are forbidden except explicitly documented reflective cases (default: forbid)."
+    },
+    {
+      "rule_id": "REL-C-006",
+      "severity": "error",
+      "statement": "CONFLICTS_WITH MUST be paired with conflict notes or governance conflict registry entry when assertions disagree."
+    },
+    {
+      "rule_id": "REL-C-007",
+      "severity": "warning",
+      "statement": "Relationship endpoints SHOULD agree with dependency_manifest level_id when both are declared."
+    }
+  ],
+  "severity_edge_types": [
+    "FOUNDATIONAL_FOR",
+    "DEPENDS_ON"
+  ],
+  "related": [
+    "knowledge/graph/edge_types.json",
+    "knowledge/graph/graph_constraints.json",
+    "knowledge/dependency/dependency_rules.json",
+    "knowledge/manifest/dependency_manifest.json"
+  ]
+}
