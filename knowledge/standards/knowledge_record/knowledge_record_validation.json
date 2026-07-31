@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "draft": "2020-12",
+  "master_schema": "knowledge_record.schema.json",
+  "satellite_schemas": [
+    "relationship.schema.json",
+    "metadata.schema.json",
+    "assertion.schema.json",
+    "example.schema.json",
+    "review.schema.json"
+  ],
+  "id_patterns": {
+    "knowledge_record": "^KR-[0-9]{6}$",
+    "relationship": "^REL-[0-9]{6}$",
+    "assertion": "^ASR-[0-9]{6}$",
+    "example": "^EX-[0-9]{6}$",
+    "bibliography_source": "^SRC-[0-9]{6}$"
+  },
+  "required_top_level_sections": [
+    "identity",
+    "classification",
+    "canonical_definition",
+    "academic_context",
+    "characteristics",
+    "relationships",
+    "examples",
+    "computational_metadata",
+    "validation",
+    "governance",
+    "release"
+  ],
+  "validation_rules": [
+    {
+      "rule_id": "KR-VAL-001",
+      "severity": "error",
+      "description": "record_id MUST match ^KR-[0-9]{6}$ and remain immutable after first approval."
+    },
+    {
+      "rule_id": "KR-VAL-002",
+      "severity": "error",
+      "description": "canonical_definition.definition MUST be a non-empty string."
+    },
+    {
+      "rule_id": "KR-VAL-003",
+      "severity": "error",
+      "description": "Every assertion.source_ids entry MUST reference an existing SRC-* bibliography ID."
+    },
+    {
+      "rule_id": "KR-VAL-004",
+      "severity": "error",
+      "description": "relationships.items entries MUST validate against relationship.schema.json."
+    },
+    {
+      "rule_id": "KR-VAL-005",
+      "severity": "error",
+      "description": "governance.review MUST include academic_review, technical_review, governance_review, approval, and freeze."
+    },
+    {
+      "rule_id": "KR-VAL-006",
+      "severity": "warning",
+      "description": "examples.items SHOULD include at least one illustrative example before official status."
+    },
+    {
+      "rule_id": "KR-VAL-007",
+      "severity": "error",
+      "description": "release.release_status=released REQUIRES freeze.status=frozen and approval.status=approved."
+    },
+    {
+      "rule_id": "KR-VAL-008",
+      "severity": "warning",
+      "description": "This standards schema coexists with knowledge/schema/knowledge_record.schema.json; compiler mapping is out of scope for Sprint 3A."
+    }
+  ],
+  "pass_criteria": {
+    "json_parse": true,
+    "draft_2020_12_schema_valid": true,
+    "example_instance_valid": true,
+    "locked_paths_untouched": [
+      "knowledge/bazi/**",
+      "knowledge/bibliography/**",
+      "knowledge/compiler/**",
+      "PACK_01_DESIGN.md",
+      "Any Knowledge Record"
+    ]
+  }
+}
