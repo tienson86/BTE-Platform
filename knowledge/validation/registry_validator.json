@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-REGISTRY",
+  "title": "Registry & Cross-Reference Validator",
+  "dimensions": [
+    "registry",
+    "cross_reference"
+  ],
+  "applies_to": [
+    "concept_registry",
+    "entity_registry",
+    "record_index",
+    "canonical_index",
+    "pack_registry",
+    "module_registry",
+    "canon_manifest",
+    "bibliography"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000071",
+      "title": "Missing Entity ID In Registry",
+      "description": "Referenced entity/concept ID absent from registry.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if ID used but not registered.",
+      "recommended_resolution": "Register entity/concept or fix reference.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000072",
+      "title": "Duplicate Entity ID In Registry",
+      "description": "Same entity/concept ID registered twice.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL on duplicate registry keys.",
+      "recommended_resolution": "Deduplicate registry entries.",
+      "lifecycle_stages": ["LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000073",
+      "title": "Invalid Registry Document",
+      "description": "Registry JSON fails its schema/shape contract.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if required registry fields missing.",
+      "recommended_resolution": "Repair registry against package/index schemas.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000074",
+      "title": "Immutable ID Violation In Registry",
+      "description": "Registry attempts to change meaning of existing KR-*/ENT-* id.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL on identity remap of published IDs.",
+      "recommended_resolution": "Preserve IDs; deprecate instead of remap.",
+      "lifecycle_stages": ["LC-GOVERNANCE", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000075",
+      "title": "Registry Completeness Gap",
+      "description": "Manifest lists record not present in record_index/canonical_index.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if canon_manifest.records ⊄ indexes (except explicitly deferred).",
+      "recommended_resolution": "Sync indexes at publication (PB-03).",
+      "lifecycle_stages": ["LC-COMPILER", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000076",
+      "title": "Concept Registry Missing Entry",
+      "description": "Concept KR missing from concept/canonical registry views.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if Concept type absent from canonical_index.",
+      "recommended_resolution": "Add canonical_key entry.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000077",
+      "title": "Entity Registry Missing Entry",
+      "description": "Entity catalog KR missing from entity registry view.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if Entity type not indexed when required.",
+      "recommended_resolution": "Register entity catalog record.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000078",
+      "title": "Broken Cross Reference",
+      "description": "Cross-reference target does not resolve.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if xref target missing and not planned.",
+      "recommended_resolution": "Fix target_id or mark planned.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000079",
+      "title": "Missing Cross Reference",
+      "description": "Required see-also / foundation xref absent vs pack design.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if pack design lists xref not present in cross_reference_index.",
+      "recommended_resolution": "Add XREF/REL entries.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000080",
+      "title": "Invalid Cross Reference",
+      "description": "Xref relation type invalid.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if relation not in allowed relation enum.",
+      "recommended_resolution": "Use ontology edge types or SEE_ALSO.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000081",
+      "title": "Unknown Record Reference",
+      "description": "Reference to unknown KR-* outside manifests.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if KR-* not in canon_manifest/record_index and not planned.",
+      "recommended_resolution": "Register record or remove reference.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000082",
+      "title": "Canonical Key Collision",
+      "description": "Two record_ids share one canonical_key.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL uniqueness on canonical_index.canonical_key.",
+      "recommended_resolution": "Disambiguate keys; one concept one key.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000083",
+      "title": "Alias Maps To Multiple Records",
+      "description": "Same normalized alias points to different KR-*.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL alias uniqueness.",
+      "recommended_resolution": "Disambiguate aliases.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000084",
+      "title": "Pack Registry Orphan Module",
+      "description": "pack.module_id not in module_registry.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL pack→module FK.",
+      "recommended_resolution": "Register module or fix pack.module_id.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000085",
+      "title": "Manifest Discovery Path Broken",
+      "description": "canon_manifest.discovery.* path missing on disk.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if discovery target file absent.",
+      "recommended_resolution": "Fix discovery paths in canon_manifest.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000086",
+      "title": "Bibliography Source Missing",
+      "description": "SRC-* cited but absent from bibliography.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL SRC FK check.",
+      "recommended_resolution": "Add source to bibliography or remove citation.",
+      "lifecycle_stages": ["LC-ACADEMIC", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000087",
+      "title": "Record Path Missing For Authored Status",
+      "description": "status=draft/review/official but path empty.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if authored status and path blank.",
+      "recommended_resolution": "Set filesystem path or set status=planned.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000088",
+      "title": "Index Record Pack Mismatch",
+      "description": "record_index.pack_id ≠ pack_registry membership.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL cross-registry membership check.",
+      "recommended_resolution": "Sync pack_id lists.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000089",
+      "title": "Concept Registry Incomplete For Pack Release",
+      "description": "Pack release candidate missing concept registry coverage.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if releasing pack with unindexed concepts.",
+      "recommended_resolution": "Complete canonical/record indexes before release.",
+      "lifecycle_stages": ["LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000090",
+      "title": "Entity Registry Incomplete For Pack Release",
+      "description": "Entity-type records in pack not present in entity registry view.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL entity coverage on pack release.",
+      "recommended_resolution": "Register all entity catalogs in pack.",
+      "lifecycle_stages": ["LC-RELEASE"]
+    }
+  ]
+}
