@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "example_name": "validation_report_sample",
+    "document_name": "validation_report_sample",
+    "description": "Non-normative sample validation_report artifact shaped for Validation Engine / Compiler.",
+    "version": "1.0.0",
+    "created_at": "2026-07-31"
+  },
+  "version": "1.0.0",
+  "artifact_id": "validation_report",
+  "run_id": "RUN-EXAMPLE-0002",
+  "stage_id": "STAGE-VALIDATE",
+  "status": "failed",
+  "summary": {
+    "errors": 2,
+    "warnings": 1,
+    "info": 0
+  },
+  "findings": [
+    {
+      "code": "SCH-000001",
+      "title": "Schema Validation Failed",
+      "severity": "error",
+      "description": "JSON does not validate against the required Knowledge Record or overlay schema.",
+      "recommended_action": "Fix schema violations listed in validation_report and re-validate.",
+      "target": "record_drafts/example.json",
+      "path": "/identity/knowledge_id"
+    },
+    {
+      "code": "REF-000001",
+      "title": "Unknown Academic Source",
+      "severity": "error",
+      "description": "Cited SRC-* is not present in bibliography.json.",
+      "recommended_action": "Register the source via bibliography governance or remove the invalid citation.",
+      "target": "record_drafts/example.json",
+      "path": "/references/0/reference_id"
+    },
+    {
+      "code": "REF-000002",
+      "title": "Placeholder Source Used",
+      "severity": "warning",
+      "description": "Citation references a bibliography source with status placeholder.",
+      "recommended_action": "Allow for draft compiles; block Official until source metadata is promoted.",
+      "target": "record_drafts/example.json",
+      "path": "/references/1/reference_id"
+    }
+  ],
+  "notes": [
+    "Example only — does not represent a real compile of PACK_01 or KR records.",
+    "Finding codes MUST exist in error_registry.json.",
+    "Severity/title/description/recommended_action should be copied from the registry at emit time."
+  ]
+}
