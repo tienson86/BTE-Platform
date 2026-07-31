@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "document_name": "bte_compiler_plugin_registry",
+    "document_kind": "plugin_registry",
+    "description": "Extensibility hooks for the Knowledge Compiler (metadata only; no plugin code).",
+    "owner": "Platform Engineering",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "plugins": [
+    {
+      "plugin_id": "PLUGIN-VALIDATOR-SCHEMA",
+      "name": "Schema Validator Hook",
+      "stage_ids": [
+        "STAGE-VALIDATE",
+        "STAGE-VERIFY"
+      ],
+      "enabled": true,
+      "interface": "validate_schema",
+      "notes": "Reserved for future runtime binding."
+    },
+    {
+      "plugin_id": "PLUGIN-VALIDATOR-BIBLIOGRAPHY",
+      "name": "Bibliography Citation Validator Hook",
+      "stage_ids": [
+        "STAGE-VALIDATE"
+      ],
+      "enabled": true,
+      "interface": "validate_citations",
+      "notes": "Consumes knowledge/bibliography registries."
+    },
+    {
+      "plugin_id": "PLUGIN-TRANSFORM-MAPPING",
+      "name": "Design-to-JSON Mapping Hook",
+      "stage_ids": [
+        "STAGE-TRANSFORM"
+      ],
+      "enabled": true,
+      "interface": "transform_mapping",
+      "notes": "Maps approved design IR to Knowledge Record shape."
+    },
+    {
+      "plugin_id": "PLUGIN-GENERATE-GRAPH",
+      "name": "Knowledge Graph Emitter Hook",
+      "stage_ids": [
+        "STAGE-GENERATE"
+      ],
+      "enabled": true,
+      "interface": "generate_graph",
+      "notes": "Controlled by compiler_config.graph_generation."
+    },
+    {
+      "plugin_id": "PLUGIN-GENERATE-SEARCH",
+      "name": "Search Index Emitter Hook",
+      "stage_ids": [
+        "STAGE-GENERATE"
+      ],
+      "enabled": true,
+      "interface": "generate_search_index",
+      "notes": "Controlled by compiler_config.search_index_generation."
+    },
+    {
+      "plugin_id": "PLUGIN-GENERATE-REPORT",
+      "name": "Compile Report Emitter Hook",
+      "stage_ids": [
+        "STAGE-GENERATE"
+      ],
+      "enabled": true,
+      "interface": "generate_report",
+      "notes": "Controlled by compiler_config.report_generation."
+    }
+  ]
+}
