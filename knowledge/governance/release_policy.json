@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "policy_id": "GOV-REL-001",
+  "title": "Knowledge Record Release Policy",
+  "description": "Machine-readable release gates for Knowledge Records. Complements RELEASE_POLICY.md. Specification only.",
+  "applies_to": "knowledge_record",
+  "release_statuses": [
+    "unreleased",
+    "candidate",
+    "released",
+    "superseded",
+    "withdrawn"
+  ],
+  "gates": [
+    {
+      "gate_id": "REL-G-001",
+      "name": "Reviews complete",
+      "severity": "error",
+      "requirement": "academic_review, technical_review, and governance_review are approved or explicitly waived per policy."
+    },
+    {
+      "gate_id": "REL-G-002",
+      "name": "Approval present",
+      "severity": "error",
+      "requirement": "approval.status MUST be approved."
+    },
+    {
+      "gate_id": "REL-G-003",
+      "name": "Freeze bound",
+      "severity": "error",
+      "requirement": "freeze.status MUST be frozen before release_status=released."
+    },
+    {
+      "gate_id": "REL-G-004",
+      "name": "Quality threshold",
+      "severity": "error",
+      "requirement": "Overall quality score >= 80; blocking metrics Traceability, Bibliography Integrity, Governance Compliance pass."
+    },
+    {
+      "gate_id": "REL-G-005",
+      "name": "Schema and indexes",
+      "severity": "error",
+      "requirement": "Record indexed in record_index; IDs valid; no invented SRC-* citations."
+    },
+    {
+      "gate_id": "REL-G-006",
+      "name": "Changelog",
+      "severity": "warning",
+      "requirement": "Release notes / changelog entry exists for the version being published."
+    },
+    {
+      "gate_id": "REL-G-007",
+      "name": "No TODO_REVIEW on high-confidence claims",
+      "severity": "error",
+      "requirement": "Assertions with confidence=high MUST NOT remain TODO_REVIEW."
+    }
+  ],
+  "package_contents": [
+    "Knowledge Record artifact (markdown and/or compiled JSON)",
+    "Updated knowledge/index registries as applicable",
+    "Review / quality evidence",
+    "CHANGELOG or release note entry"
+  ],
+  "post_release": [
+    "Set identity.status and release.release_status to official/released",
+    "Notify consumers of ID or semantic changes",
+    "Retain prior versions per version policy"
+  ],
+  "related_documents": [
+    "RELEASE_POLICY.md",
+    "policies/04_RELEASE_POLICY.md",
+    "procedures/08_RELEASE_WORKFLOW.md",
+    "knowledge/quality/governance_scorecard.json"
+  ]
+}
