@@ -1,0 +1,171 @@
+{
+    "schema_version":  "1.0.0",
+    "status":  "official",
+    "document_id":  "ONT-RELCONST-001",
+    "title":  "BTE Relationship Constraints",
+    "description":  "Ontology relationship constraints and cardinalities.",
+    "updated_at":  "2026-07-31",
+    "document_kind":  "relationship_constraints",
+    "constraints":  [
+                        {
+                            "constraint_id":  "ONT-C-001",
+                            "name":  "No circular inheritance",
+                            "severity":  "ERROR",
+                            "description":  "INHERITS/SPECIALIZES/EXTENDS/DERIVES_FROM subgraphs must be DAGs.",
+                            "detection_rule":  "Detect cycles among inheritance-category edges.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-002",
+                            "name":  "No orphan nodes",
+                            "severity":  "WARNING",
+                            "description":  "Every non-root node SHOULD have at least one membership or dependency edge.",
+                            "detection_rule":  "Warn if degree==0 outside designated roots.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-003",
+                            "name":  "No duplicate relationships",
+                            "severity":  "ERROR",
+                            "description":  "At most one edge for (type,source,target).",
+                            "detection_rule":  "Unique triple check.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-004",
+                            "name":  "Allowed source/target classes",
+                            "severity":  "ERROR",
+                            "description":  "Edge endpoints must satisfy allowed_source/allowed_target when not wildcard.",
+                            "detection_rule":  "Type-check endpoints against relationship_types.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-005",
+                            "name":  "Hard dependency acyclicity",
+                            "severity":  "ERROR",
+                            "description":  "FOUNDATIONAL_FOR and DEPENDS_ON must be acyclic.",
+                            "detection_rule":  "DAG check on dependency edges.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-006",
+                            "name":  "Cardinality one canonical parent",
+                            "severity":  "ERROR",
+                            "description":  "A Concept may have at most one primary INHERITS parent unless documented multi-inheritance.",
+                            "detection_rule":  "Count INHERITS outbound \u003c= 1 by default.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-007",
+                            "name":  "Immutable identity properties",
+                            "severity":  "CRITICAL",
+                            "description":  "record_id and entity_id immutable after official.",
+                            "detection_rule":  "Detect identity field mutation.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-008",
+                            "name":  "Inverse consistency",
+                            "severity":  "WARNING",
+                            "description":  "If inverse_relationship set, reverse edge SHOULD exist or be implied.",
+                            "detection_rule":  "Check inverse pairs.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-009",
+                            "name":  "Self-loop forbidden",
+                            "severity":  "ERROR",
+                            "description":  "source!=target unless reflective types explicitly allowed.",
+                            "detection_rule":  "Reject self loops by default.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-010",
+                            "name":  "Namespace membership",
+                            "severity":  "WARNING",
+                            "description":  "Typed entities SHOULD declare a registered namespace.",
+                            "detection_rule":  "Namespace registry FK check.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-011",
+                            "name":  "Unique canonical class names",
+                            "severity":  "ERROR",
+                            "description":  "ontology class canonical_name unique.",
+                            "detection_rule":  "Uniqueness on classes.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        },
+                        {
+                            "constraint_id":  "ONT-C-012",
+                            "name":  "Unique relationship type names",
+                            "severity":  "ERROR",
+                            "description":  "relationship type canonical_name unique.",
+                            "detection_rule":  "Uniqueness on relationship_types.",
+                            "applies_to":  [
+                                               "relationship",
+                                               "graph",
+                                               "ontology"
+                                           ]
+                        }
+                    ],
+    "cardinality_defaults":  {
+                                 "DEPENDS_ON":  "0..*",
+                                 "RELATED_TO":  "0..*",
+                                 "FOUNDATIONAL_FOR":  "0..*",
+                                 "INHERITS":  "0..1",
+                                 "REFERENCES":  "0..*",
+                                 "BELONGS_TO":  "1..*",
+                                 "MEMBER_OF":  "0..*"
+                             },
+    "forbidden_patterns":  [
+                               "circular_inheritance",
+                               "duplicate_relationship_triple",
+                               "hard_dependency_cycle",
+                               "identity_remapping",
+                               "unregistered_relationship_type"
+                           ]
+}
