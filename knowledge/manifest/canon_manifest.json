@@ -1,0 +1,169 @@
+{
+  "manifest_id": "MF-CANON-001",
+  "manifest_kind": "canon",
+  "schema_version": "1.0.0",
+  "status": "draft",
+  "title": "BTE Knowledge Canon Manifest",
+  "description": "Top-level discovery document for Modules, Packs, Knowledge Records, Artifacts, and Releases. Compiler entrypoint (spec).",
+  "updated_at": "2026-07-31",
+  "canon_version": "0.1.0-draft",
+  "discovery": {
+    "pack_registry": "knowledge/package/pack_registry.json",
+    "module_registry": "knowledge/package/module_registry.json",
+    "record_index": "knowledge/index/record_index.json",
+    "artifact_manifest": "knowledge/manifest/artifact_manifest.json",
+    "release_manifest": "knowledge/manifest/release_manifest.json",
+    "dependency_manifest": "knowledge/manifest/dependency_manifest.json",
+    "build_manifest": "knowledge/manifest/build_manifest.json"
+  },
+  "modules": [
+    {
+      "module_id": "01_fundamental_knowledge",
+      "path": "knowledge/bazi/01_fundamental_knowledge/",
+      "status": "in_progress",
+      "pack_ids": [
+        "PACK_01",
+        "PACK_02",
+        "PACK_03",
+        "PACK_04",
+        "PACK_05",
+        "PACK_06",
+        "PACK_07"
+      ]
+    }
+  ],
+  "packs": [
+    {
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge",
+      "status": "in_progress",
+      "record_ids": [
+        "KR-000001",
+        "KR-000002",
+        "KR-000003",
+        "KR-000004",
+        "KR-000005"
+      ],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_01/"
+    },
+    {
+      "pack_id": "PACK_02",
+      "module_id": "01_fundamental_knowledge",
+      "status": "planned",
+      "record_ids": [],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_02/"
+    },
+    {
+      "pack_id": "PACK_03",
+      "module_id": "01_fundamental_knowledge",
+      "status": "planned",
+      "record_ids": [],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_03/"
+    },
+    {
+      "pack_id": "PACK_04",
+      "module_id": "01_fundamental_knowledge",
+      "status": "planned",
+      "record_ids": [],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_04/"
+    },
+    {
+      "pack_id": "PACK_05",
+      "module_id": "01_fundamental_knowledge",
+      "status": "planned",
+      "record_ids": [],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_05/"
+    },
+    {
+      "pack_id": "PACK_06",
+      "module_id": "01_fundamental_knowledge",
+      "status": "planned",
+      "record_ids": [],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_06/"
+    },
+    {
+      "pack_id": "PACK_07",
+      "module_id": "01_fundamental_knowledge",
+      "status": "planned",
+      "record_ids": [],
+      "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_07/"
+    }
+  ],
+  "records": [
+    {
+      "record_id": "KR-000001",
+      "canonical_name": "Yin Yang",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge",
+      "path": "knowledge/bazi/01_fundamental_knowledge/records/KR-000001_YIN_YANG.md",
+      "status": "draft"
+    },
+    {
+      "record_id": "KR-000002",
+      "canonical_name": "Qi",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge",
+      "path": "knowledge/bazi/01_fundamental_knowledge/records/KR-000002_QI.md",
+      "status": "draft"
+    },
+    {
+      "record_id": "KR-000003",
+      "canonical_name": "Wu Xing",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge",
+      "path": "knowledge/bazi/01_fundamental_knowledge/records/KR-000003_WU_XING.md",
+      "status": "draft"
+    },
+    {
+      "record_id": "KR-000004",
+      "canonical_name": "Heavenly Stems",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge",
+      "path": "",
+      "status": "planned"
+    },
+    {
+      "record_id": "KR-000005",
+      "canonical_name": "Earthly Branches",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge",
+      "path": "",
+      "status": "planned"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "ART-000001",
+      "artifact_type": "manifest",
+      "path": "knowledge/manifest/canon_manifest.json",
+      "status": "draft",
+      "producer": "specification"
+    },
+    {
+      "artifact_id": "ART-000002",
+      "artifact_type": "index_registry",
+      "path": "knowledge/index/record_index.json",
+      "status": "draft",
+      "producer": "specification"
+    },
+    {
+      "artifact_id": "ART-000003",
+      "artifact_type": "knowledge_record_markdown",
+      "path": "knowledge/bazi/01_fundamental_knowledge/records/KR-000001_YIN_YANG.md",
+      "status": "draft",
+      "producer": "author"
+    }
+  ],
+  "releases": [
+    {
+      "release_id": "RLS-000001",
+      "release_status": "unreleased",
+      "scope": "canon",
+      "target_ids": [
+        "0.1.0-draft"
+      ],
+      "canon_version": "0.1.0-draft",
+      "notes": "Canon not yet officially released."
+    }
+  ]
+}
