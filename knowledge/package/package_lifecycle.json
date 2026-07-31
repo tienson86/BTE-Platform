@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "PKG-LIFE-001",
+  "title": "Knowledge Package Lifecycle",
+  "description": "Lifecycle for Packs and Modules. Aligns with Knowledge Record governance but operates at package granularity. Specification only.",
+  "applies_to": [
+    "Pack",
+    "Module"
+  ],
+  "states": [
+    {
+      "state": "planned",
+      "description": "Pack/module identified; design workspace may exist; no official records required."
+    },
+    {
+      "state": "in_progress",
+      "description": "Active authoring of Knowledge Records and design docs."
+    },
+    {
+      "state": "review",
+      "description": "Package-level academic/technical/governance review of contained records."
+    },
+    {
+      "state": "approved",
+      "description": "Package accepted for freeze/release candidate."
+    },
+    {
+      "state": "released",
+      "description": "Package published; release.release_status typically released."
+    },
+    {
+      "state": "deprecated",
+      "description": "Superseded or scheduled for retirement; still resolvable."
+    },
+    {
+      "state": "retired",
+      "description": "Lifecycle closed; IDs remain reserved."
+    }
+  ],
+  "transitions": [
+    {
+      "from": "planned",
+      "to": "in_progress",
+      "requires": [
+        "module_id and pack_id registered"
+      ]
+    },
+    {
+      "from": "in_progress",
+      "to": "review",
+      "requires": [
+        "Core P0 records drafted or explicitly deferred"
+      ]
+    },
+    {
+      "from": "review",
+      "to": "approved",
+      "requires": [
+        "Package review gates pass",
+        "Hard dependencies between packs acyclic"
+      ]
+    },
+    {
+      "from": "approved",
+      "to": "released",
+      "requires": [
+        "release.release_status=released",
+        "Compatibility declared",
+        "Indexes updated for contained KR-*"
+      ]
+    },
+    {
+      "from": "released",
+      "to": "deprecated",
+      "requires": [
+        "Successor pack or deprecation rationale"
+      ]
+    },
+    {
+      "from": "deprecated",
+      "to": "retired",
+      "requires": [
+        "Governance approval"
+      ]
+    }
+  ],
+  "version_policy": {
+    "pack_and_module": "SemVer",
+    "knowledge_record": "Independent SemVer per KR; pack release MAY pin a set of KR versions",
+    "compatibility": "Declare canon_version_min/max and breaking_changes on MAJOR bumps after release"
+  },
+  "release_unit": {
+    "may_release": [
+      "single Pack",
+      "Module bundle of Packs"
+    ],
+    "must_not": [
+      "Release a Pack while Hard Dependency packs are unreleased if depends_on_packs requires them"
+    ]
+  },
+  "related": [
+    "knowledge/governance/publication_workflow.json",
+    "knowledge/governance/release_policy.json",
+    "knowledge/dependency/dependency_levels.json"
+  ]
+}
