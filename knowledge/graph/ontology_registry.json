@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "description": "Ontology registry for the BTE Knowledge Graph — indexes node types, edge types, and constraint documents. Specification only.",
+  "ontology_id": "BTE-KG-ONTOLOGY-001",
+  "title": "BTE Knowledge Graph Ontology",
+  "version": "1.0.0",
+  "documents": {
+    "node_types": "node_types.json",
+    "edge_types": "edge_types.json",
+    "constraints": "graph_constraints.json",
+    "graph_schema": "graph_schema.json"
+  },
+  "node_type_ids": [
+    "Concept",
+    "Entity",
+    "Rule",
+    "Pattern",
+    "Example",
+    "Source",
+    "Pack",
+    "Module"
+  ],
+  "edge_type_ids": [
+    "FOUNDATIONAL_FOR",
+    "DEPENDS_ON",
+    "CLASSIFIES",
+    "REFERENCES",
+    "SUPPORTED_BY",
+    "RELATED_TO",
+    "CONFLICTS_WITH",
+    "IMPLEMENTS"
+  ],
+  "constraint_ids": [
+    "GRAPH-C-001",
+    "GRAPH-C-002",
+    "GRAPH-C-003",
+    "GRAPH-C-004"
+  ],
+  "dependency_edge_types": [
+    "FOUNDATIONAL_FOR",
+    "DEPENDS_ON"
+  ],
+  "id_conventions": {
+    "graph": "^GRAPH-[0-9]{6}$",
+    "edge": "^EDGE-[0-9]{6}$",
+    "knowledge_record": "^KR-[0-9]{6}$",
+    "bibliography_source": "^SRC-[0-9]{6}$",
+    "example": "^EX-[0-9]{6}$"
+  },
+  "related_standards": [
+    "knowledge/standards/knowledge_record/",
+    "knowledge/bibliography/",
+    "knowledge/standards/parts/PART_03_KNOWLEDGE_RECORD_STANDARD.md"
+  ],
+  "out_of_scope": [
+    "Graph database runtime",
+    "Compiler plugin",
+    "Cycle-detection implementation",
+    "Mutation of Knowledge Records or PACK designs"
+  ],
+  "notes": [
+    "SUPPORTED_BY is the registry edge type for support links; markdown KR prose may historically say SUPPORTS — map at authoring time, do not rewrite locked records in this sprint.",
+    "This registry is declarative SSOT for type names used by future graph tooling."
+  ]
+}
