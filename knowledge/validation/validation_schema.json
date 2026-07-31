@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "VAL-SCHEMA-001",
+  "title": "BTE Knowledge Validation Master Schema",
+  "description": "Master contract: Validation → Validator → Rules → Severity → Output → Report. Specification only.",
+  "architecture": {
+    "layers": [
+      "Validation",
+      "Validator",
+      "Rules",
+      "Severity",
+      "Output",
+      "Report"
+    ],
+    "flow": "A Validation run selects one or more Validators. Each Validator evaluates Rules identified by VAL-* codes. Each finding carries a Severity. Findings aggregate into Output, then a human Report."
+  },
+  "severity_levels": [
+    {
+      "level": "INFO",
+      "definition": "Informational observation that does not indicate defect.",
+      "intended_usage": "Traceability notes, successful optional checks, advisory hints.",
+      "compiler_behaviour": "Log only; never blocks LOAD, VALIDATE, COMPILE, or PUBLISH."
+    },
+    {
+      "level": "WARNING",
+      "definition": "Potential completeness or quality gap that does not prove incorrectness.",
+      "intended_usage": "Planned IDs, soft dependencies missing, optional sections empty.",
+      "compiler_behaviour": "Surface in report; MAY block Release Validation if release policy elevates the code; does not block draft compile by default."
+    },
+    {
+      "level": "ERROR",
+      "definition": "Deterministic violation of Knowledge Canon validation rules for a unit.",
+      "intended_usage": "Missing required fields, invalid IDs, duplicate triples, broken required refs.",
+      "compiler_behaviour": "Blocks COMPILE/PUBLISH of the affected record/pack; build may continue for unrelated units if configured."
+    },
+    {
+      "level": "CRITICAL",
+      "definition": "Canon-threatening integrity failure.",
+      "intended_usage": "ID remapping attempts, registry corruption, cyclic hard-dependency graphs at package scope, release with frozen-definition rewrite.",
+      "compiler_behaviour": "Fails the entire Validation run and blocks Release Validation / canon publish."
+    }
+  ],
+  "lifecycle": {
+    "stages": [
+      {
+        "stage_id": "LC-DRAFT",
+        "name": "Draft",
+        "description": "Authoring in progress; full validation optional."
+      },
+      {
+        "stage_id": "LC-AUTHOR",
+        "name": "Author Validation",
+        "description": "Author self-check: required sections, placeholders, basic IDs."
+      },
+      {
+        "stage_id": "LC-ACADEMIC",
+        "name": "Academic Validation",
+        "description": "Sources, assertions, definition honesty, TODO_REVIEW policy."
+      },
+      {
+        "stage_id": "LC-SEMANTIC",
+        "name": "Semantic Validation",
+        "description": "Consistency with terminology, contradictions, duplicate definitions."
+      },
+      {
+        "stage_id": "LC-ONTOLOGY",
+        "name": "Ontology Validation",
+        "description": "Node/edge types, parent/child/layer consistency."
+      },
+      {
+        "stage_id": "LC-COMPILER",
+        "name": "Compiler Validation",
+        "description": "Compile/graph/search/docs/release readiness flags."
+      },
+      {
+        "stage_id": "LC-GOVERNANCE",
+        "name": "Governance Validation",
+        "description": "Review, approval, freeze alignment."
+      },
+      {
+        "stage_id": "LC-RELEASE",
+        "name": "Release Validation",
+        "description": "Publication gates; ERROR/CRITICAL must be clear."
+      },
+      {
+        "stage_id": "LC-RESULT",
+        "name": "PASS / FAIL",
+        "description": "Terminal result of the validation run."
+      }
+    ],
+    "order": [
+      "LC-DRAFT",
+      "LC-AUTHOR",
+      "LC-ACADEMIC",
+      "LC-SEMANTIC",
+      "LC-ONTOLOGY",
+      "LC-COMPILER",
+      "LC-GOVERNANCE",
+      "LC-RELEASE",
+      "LC-RESULT"
+    ]
+  },
+  "validators": [
+    {
+      "validator_id": "VLD-RECORD",
+      "file": "record_validator.json",
+      "dimensions": [
+        "record",
+        "canonical_definition"
+      ]
+    },
+    {
+      "validator_id": "VLD-ONTOLOGY",
+      "file": "ontology_validator.json",
+      "dimensions": [
+        "ontology"
+      ]
+    },
+    {
+      "validator_id": "VLD-RELATIONSHIP",
+      "file": "relationship_validator.json",
+      "dimensions": [
+        "relationship"
+      ]
+    },
+    {
+      "validator_id": "VLD-DEPENDENCY",
+      "file": "dependency_validator.json",
+      "dimensions": [
+        "dependency"
+      ]
+    },
+    {
+      "validator_id": "VLD-REGISTRY",
+      "file": "registry_validator.json",
+      "dimensions": [
+        "registry",
+        "cross_reference"
+      ]
+    },
+    {
+      "validator_id": "VLD-METADATA",
+      "file": "metadata_validator.json",
+      "dimensions": [
+        "metadata"
+      ]
+    },
+    {
+      "validator_id": "VLD-COMPILER",
+      "file": "compiler_validation.json",
+      "dimensions": [
+        "compiler"
+      ]
+    }
+  ],
+  "rule_object_shape": {
+    "required_fields": [
+      "code",
+      "title",
+      "description",
+      "severity",
+      "detection_rule",
+      "recommended_resolution"
+    ],
+    "optional_fields": [
+      "lifecycle_stages",
+      "applies_to",
+      "related_consistency_rules",
+      "related_governance"
+    ]
+  },
+  "output_schema": {
+    "description": "Machine-readable validation output contract",
+    "required_fields": [
+      "validation_run_id",
+      "schema_version",
+      "status",
+      "started_at",
+      "finished_at",
+      "target",
+      "summary",
+      "findings"
+    ],
+    "summary_fields": [
+      "total_checks",
+      "passed",
+      "info",
+      "warnings",
+      "errors",
+      "critical",
+      "result"
+    ],
+    "finding_fields": [
+      "code",
+      "severity",
+      "message",
+      "path",
+      "record_id",
+      "recommended_resolution"
+    ],
+    "result_enum": [
+      "PASS",
+      "PASS_WITH_WARNINGS",
+      "FAIL"
+    ]
+  },
+  "report_schema": {
+    "document": "VALIDATION_REPORT.md",
+    "required_sections": [
+      "Summary",
+      "Validation Matrix",
+      "Coverage",
+      "Passed Checks",
+      "Warnings",
+      "Errors",
+      "Critical Errors",
+      "Recommendations",
+      "PASS Criteria",
+      "FAIL Criteria"
+    ]
+  },
+  "pass_fail_criteria": {
+    "PASS": [
+      "critical == 0",
+      "errors == 0",
+      "All mandatory validators executed for the selected scope"
+    ],
+    "PASS_WITH_WARNINGS": [
+      "critical == 0",
+      "errors == 0",
+      "warnings >= 1"
+    ],
+    "FAIL": [
+      "critical >= 1 OR errors >= 1",
+      "OR mandatory validator not executed"
+    ]
+  },
+  "code_index": {
+    "pattern": "^VAL-[0-9]{6}$",
+    "ranges": [
+      {
+        "from": "VAL-000001",
+        "to": "VAL-000025",
+        "group": "record_and_definition",
+        "file": "record_validator.json"
+      },
+      {
+        "from": "VAL-000026",
+        "to": "VAL-000040",
+        "group": "ontology",
+        "file": "ontology_validator.json"
+      },
+      {
+        "from": "VAL-000041",
+        "to": "VAL-000055",
+        "group": "relationship",
+        "file": "relationship_validator.json"
+      },
+      {
+        "from": "VAL-000056",
+        "to": "VAL-000070",
+        "group": "dependency",
+        "file": "dependency_validator.json"
+      },
+      {
+        "from": "VAL-000071",
+        "to": "VAL-000090",
+        "group": "registry_and_xref",
+        "file": "registry_validator.json"
+      },
+      {
+        "from": "VAL-000091",
+        "to": "VAL-000100",
+        "group": "metadata",
+        "file": "metadata_validator.json"
+      },
+      {
+        "from": "VAL-000101",
+        "to": "VAL-000112",
+        "group": "compiler",
+        "file": "compiler_validation.json"
+      }
+    ],
+    "total_codes_target_min": 80,
+    "total_codes_target_max": 120
+  },
+  "compatibility": [
+    "knowledge/templates/",
+    "knowledge/authoring/",
+    "knowledge/governance/",
+    "knowledge/dependency/",
+    "knowledge/package/",
+    "knowledge/manifest/",
+    "knowledge/consistency/",
+    "knowledge/standards/knowledge_record/",
+    "Golden Knowledge Records (KR-*)"
+  ]
+}
