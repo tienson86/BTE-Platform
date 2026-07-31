@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "workflow_id": "GOV-WF-REVIEW-001",
+  "title": "Knowledge Record Review Workflow",
+  "description": "Formal review stages for every Knowledge Record. Specification only.",
+  "applies_to": "knowledge_record",
+  "stages": [
+    {
+      "stage_id": "RV-01-SUBMIT",
+      "name": "Submit for review",
+      "entry_state": "draft",
+      "exit_state": "review",
+      "actors": [
+        "Knowledge Author"
+      ],
+      "required_artifacts": [
+        "Knowledge Record draft",
+        "Self-checklist against review_checklist.json"
+      ],
+      "exit_criteria": [
+        "Author confirms readiness",
+        "record_id assigned and unique"
+      ]
+    },
+    {
+      "stage_id": "RV-02-ACADEMIC",
+      "name": "Academic review",
+      "entry_state": "review",
+      "exit_state": "review",
+      "actors": [
+        "Academic Reviewer"
+      ],
+      "required_artifacts": [
+        "Academic scorecard result"
+      ],
+      "exit_criteria": [
+        "academic_review.status in {approved, waived}",
+        "No invented classical claims"
+      ]
+    },
+    {
+      "stage_id": "RV-03-TECHNICAL",
+      "name": "Technical review",
+      "entry_state": "review",
+      "exit_state": "review",
+      "actors": [
+        "Technical Reviewer"
+      ],
+      "required_artifacts": [
+        "Technical scorecard result",
+        "Schema / index / graph integrity notes"
+      ],
+      "exit_criteria": [
+        "technical_review.status = approved"
+      ]
+    },
+    {
+      "stage_id": "RV-04-GOVERNANCE",
+      "name": "Governance review",
+      "entry_state": "review",
+      "exit_state": "approved",
+      "actors": [
+        "Governance Owner"
+      ],
+      "required_artifacts": [
+        "Governance scorecard result",
+        "Approval matrix satisfaction"
+      ],
+      "exit_criteria": [
+        "governance_review.status = approved",
+        "approval.status = approved"
+      ]
+    }
+  ],
+  "parallelism": {
+    "academic_and_technical": "MAY run in parallel after RV-01-SUBMIT",
+    "governance": "MUST follow successful academic (or waived) and technical stages"
+  },
+  "rejection_policy": {
+    "on_reject": "Return to draft",
+    "requires": "Written findings referencing RC-* or GR-* checklist items when applicable"
+  },
+  "related": [
+    "approval_matrix.json",
+    "knowledge/quality/review_checklist.json",
+    "REVIEW_PROCESS.md"
+  ]
+}
