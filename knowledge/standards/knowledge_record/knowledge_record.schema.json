@@ -265,35 +265,7 @@
       }
     },
     "computational_metadata": {
-      "allOf": [
-        {
-          "$ref": "metadata.schema.json"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "engine_compatibility": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "explainability_contract": {
-              "type": "string"
-            },
-            "knowledge_nature": {
-              "type": "string",
-              "enum": [
-                "foundational",
-                "derived",
-                "procedural",
-                "interpretive",
-                "hybrid"
-              ]
-            }
-          }
-        }
-      ]
+      "$ref": "metadata.schema.json"
     },
     "validation": {
       "type": "object",
