@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "CON-DEF-001",
+  "title": "Canonical Definition Consistency Rules",
+  "description": "Rules for Canonical Definition uniqueness, non-duplication, and non-contradiction. Specification only.",
+  "rules": [
+    {
+      "rule_id": "DEF-001",
+      "severity": "error",
+      "statement": "A Knowledge Record MUST contain exactly one Canonical Definition (single definition string/section)."
+    },
+    {
+      "rule_id": "DEF-002",
+      "severity": "error",
+      "statement": "Canonical Definition MUST include Scope and SHOULD include Out of scope."
+    },
+    {
+      "rule_id": "DEF-003",
+      "severity": "error",
+      "statement": "Canonical Definition MUST NOT embed engine scoring logic or application if/else substitutes for rule database content."
+    },
+    {
+      "rule_id": "DEF-004",
+      "severity": "error",
+      "statement": "After freeze, Canonical Definition changes REQUIRE an approved change request and re-review."
+    },
+    {
+      "rule_id": "DEF-005",
+      "severity": "error",
+      "statement": "Duplicate Canonical Definitions across two active (non-deprecated) KR-* for the same concept are forbidden."
+    },
+    {
+      "rule_id": "DEF-006",
+      "severity": "error",
+      "statement": "Internal contradictions between Canonical Definition and high-confidence assertions in the same record are forbidden."
+    },
+    {
+      "rule_id": "DEF-007",
+      "severity": "warning",
+      "statement": "Definitions that presuppose another concept SHOULD declare Hard or Semantic Dependency accordingly."
+    },
+    {
+      "rule_id": "DEF-008",
+      "severity": "error",
+      "statement": "Uncertain classical attributions inside the definition MUST be marked TODO_REVIEW — never invented."
+    }
+  ],
+  "uniqueness_key": [
+    "normalized_canonical_name",
+    "discipline",
+    "primary_category"
+  ],
+  "related": [
+    "knowledge/authoring/AUTHORING_GUIDE.md",
+    "knowledge/templates/knowledge_record_template.md",
+    "knowledge/standards/knowledge_record/knowledge_record.schema.json"
+  ]
+}
