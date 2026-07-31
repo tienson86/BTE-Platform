@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-COMPILER",
+  "title": "Compiler Readiness Validator",
+  "dimensions": [
+    "compiler"
+  ],
+  "applies_to": [
+    "knowledge_record",
+    "pack",
+    "module",
+    "canon_manifest",
+    "build_manifest"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000101",
+      "title": "Not Compile Ready",
+      "description": "Record fails structural checks required for COMPILE_RECORDS.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if any ERROR from record/ontology/relationship validators present.",
+      "recommended_resolution": "Clear ERROR findings before compile.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000102",
+      "title": "Not Graph Ready",
+      "description": "Graph projection would violate ontology/graph constraints.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if cycles, duplicate edges, or invalid node types remain.",
+      "recommended_resolution": "Fix graph-related VAL-* errors.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000103",
+      "title": "Not Search Ready",
+      "description": "canonical_key / aliases / keywords missing for search indexes.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if canonical_index/alias/keyword entries absent for draft+ records.",
+      "recommended_resolution": "Provide index hints; sync at PB-03.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000104",
+      "title": "Not Documentation Ready",
+      "description": "Required doc fields (definition, scope, examples policy) incomplete for docs generator.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if docs-critical sections incomplete.",
+      "recommended_resolution": "Complete definition/scope/examples.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000105",
+      "title": "Not Release Ready",
+      "description": "Release Validation gates not satisfied.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if approval≠approved or freeze≠frozen or ERROR/CRITICAL remain.",
+      "recommended_resolution": "Complete governance publication workflow.",
+      "lifecycle_stages": ["LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000106",
+      "title": "Build Manifest Inputs Unresolved",
+      "description": "build_manifest input refs cannot be discovered.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if input.ref missing.",
+      "recommended_resolution": "Fix build_manifest inputs.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000107",
+      "title": "Canon Manifest Incomplete",
+      "description": "canon_manifest missing modules/packs/records/artifacts/releases arrays.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL if any required discovery array absent.",
+      "recommended_resolution": "Repair canon_manifest.json.",
+      "lifecycle_stages": ["LC-COMPILER", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000108",
+      "title": "Artifact Manifest Gap",
+      "description": "Authored KR markdown not listed in artifact_manifest when compile expects it.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if authored path not in artifacts[].",
+      "recommended_resolution": "Register artifact ART-*.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000109",
+      "title": "Compiler Status Blocked",
+      "description": "compiler_status=blocked.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL compile when blocked.",
+      "recommended_resolution": "Resolve blocking findings; unset blocked.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000110",
+      "title": "Schema Contract Drift",
+      "description": "Record shape incompatible with standards knowledge_record.schema.json.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL JSON Schema validation against KR master schema.",
+      "recommended_resolution": "Align fields to standards schema.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000111",
+      "title": "Search Index Alias Drift",
+      "description": "Alias index canonical_name disagrees with record identity.",
+      "severity": "WARNING",
+      "detection_rule": "WARN on alias→record canonical_name mismatch.",
+      "recommended_resolution": "Sync alias_index with record.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000112",
+      "title": "Documentation Generator Missing Topic",
+      "description": "Record not attached to any topic_index entry for docs browse.",
+      "severity": "INFO",
+      "detection_rule": "INFO if no TOPIC-* includes record_id.",
+      "recommended_resolution": "Optional: add topic membership.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    }
+  ]
+}
