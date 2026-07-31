@@ -1,0 +1,1726 @@
+{
+    "schema_version":  "1.0.0",
+    "status":  "official",
+    "document_id":  "ONT-PROP-001",
+    "title":  "BTE Property Definitions",
+    "description":  "Reusable canonical property definitions.",
+    "updated_at":  "2026-07-31",
+    "document_kind":  "property_definitions",
+    "properties":  [
+                       {
+                           "name":  "entity_id",
+                           "datatype":  "string",
+                           "required":  true,
+                           "immutable":  true,
+                           "description":  "Immutable entity identifier.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "record_id",
+                           "datatype":  "string",
+                           "required":  true,
+                           "immutable":  true,
+                           "description":  "Immutable Knowledge Record ID (KR-*).",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "canonical_name",
+                           "datatype":  "string",
+                           "required":  true,
+                           "immutable":  false,
+                           "description":  "Official canonical name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "display_name",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Human display label.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "description",
+                           "datatype":  "string",
+                           "required":  true,
+                           "immutable":  false,
+                           "description":  "Descriptive text.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "version",
+                           "datatype":  "string",
+                           "required":  true,
+                           "immutable":  false,
+                           "description":  "SemVer version string.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "status",
+                           "datatype":  "enum",
+                           "required":  true,
+                           "immutable":  false,
+                           "description":  "Lifecycle status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ],
+                           "enum_values":  [
+                                               "draft",
+                                               "review",
+                                               "approved",
+                                               "official",
+                                               "deprecated",
+                                               "archived"
+                                           ]
+                       },
+                       {
+                           "name":  "immutable",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Whether the object identity/content is frozen.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "parent",
+                           "datatype":  "id_ref",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Parent object reference.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "namespace",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Canonical namespace.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "ontology_class",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Ontology class canonical name or id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "ontology_class_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Ontology class id OCL-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "entity_type",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Entity type canonical name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "entity_type_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Entity type id ENTT-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "relationship_type",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Relationship type canonical name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "relationship_type_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Relationship type id RELTYPE-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "graph_node",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Graph node id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "graph_edge",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Graph edge id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "yin_yang",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Yin or Yang polarity.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ],
+                           "enum_values":  [
+                                               "yin",
+                                               "yang"
+                                           ]
+                       },
+                       {
+                           "name":  "wu_xing",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Five phases element.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ],
+                           "enum_values":  [
+                                               "wood",
+                                               "fire",
+                                               "earth",
+                                               "metal",
+                                               "water"
+                                           ]
+                       },
+                       {
+                           "name":  "season",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Season association.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "order",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Ordering index.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "priority",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Priority weight.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "created_at",
+                           "datatype":  "date",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Creation date.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "updated_at",
+                           "datatype":  "date",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Last update date.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "vietnamese_name",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Vietnamese name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "chinese_name",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Chinese name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "pinyin",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Pinyin romanization.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "aliases",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Alias list.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "language",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Primary language code.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "pack_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Pack identifier.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "module_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Module identifier.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "discipline",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Discipline name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "domain",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Domain name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "knowledge_type",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Knowledge type.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "primary_category",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Primary category.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "secondary_category",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Secondary category.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "academic_layer",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Academic layer.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "computational_layer",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Computational layer.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "definition",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Canonical definition text.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "scope",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Scope statement.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "out_of_scope",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Out of scope statement.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "constraints",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Constraint strings.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "primary_source_ids",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Primary SRC-* ids.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "secondary_source_ids",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Secondary SRC-* ids.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "assertion_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Assertion id ASR-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "statement",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Assertion statement.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "source_ids",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Source ids for assertion.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "confidence",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Assertion confidence.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ],
+                           "enum_values":  [
+                                               "high",
+                                               "medium",
+                                               "low",
+                                               "pending_review"
+                                           ]
+                       },
+                       {
+                           "name":  "relationship_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Relationship instance id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "source",
+                           "datatype":  "id_ref",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Relationship source.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "target",
+                           "datatype":  "id_ref",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Relationship target.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "direction",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Edge direction.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ],
+                           "enum_values":  [
+                                               "forward",
+                                               "backward",
+                                               "bidirectional",
+                                               "undirected"
+                                           ]
+                       },
+                       {
+                           "name":  "strength",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Relationship strength.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ],
+                           "enum_values":  [
+                                               "required",
+                                               "strong",
+                                               "moderate",
+                                               "weak",
+                                               "informational"
+                                           ]
+                       },
+                       {
+                           "name":  "example_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Example id EX-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "example_kind",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Example kind.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "schema_version",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Schema version.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "owner",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Owner role or team.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "authors",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Author list.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "tags",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Tag list.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "compiler_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Compiler status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "knowledge_nature",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Knowledge nature.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "engine_compatibility",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Engine compatibility tags.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "explainability_contract",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Explainability contract.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "checklist_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Checklist status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "validation_errors",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Validation error list.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "validation_warnings",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Validation warning list.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "release_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Release status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "canon_version",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Canon version label.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "freeze_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Freeze status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "approval_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Approval status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "academic_review_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Academic review status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "technical_review_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Technical review status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "governance_review_status",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Governance review status.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "dependency_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Dependency id DEP-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "dependency_level",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Dependency level id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "edge_category",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Ontology edge category.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "compatible_graph_edge",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Compatible graph edge type.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "compatible_graph_node",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Compatible graph node type.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "semantic_level",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Semantic hierarchy level.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "parent_class",
+                           "datatype":  "id_ref",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Parent ontology class.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "parent_level",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Parent semantic level.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "path",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Filesystem or URI path.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "design_path",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Design workspace path.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "root_path",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Module root path.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "manifest_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Manifest id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "manifest_kind",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Manifest kind.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "artifact_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Artifact id ART-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "artifact_type",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Artifact type.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "producer",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Artifact producer.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "release_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Release id RLS-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "build_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Build id BUILD-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "change_request_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Change request id CR-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "topic_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  true,
+                           "description":  "Topic id TOPIC-*.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "canonical_key",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "snake_case canonical key.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "normalized_alias",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Normalized alias key.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "alias_kind",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Alias kind.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "hierarchy_path",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Hierarchy path segments.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "notes",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Free-form notes.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "todo_review",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "TODO_REVIEW items.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "hidden_stems",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Hidden stem members.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "element_mapping",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Element mapping.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "branch_order",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Earthly branch order 1-12.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "stem_order",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Heavenly stem order 1-10.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "solar_term_index",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Solar term index.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "pillar_type",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Year/Month/Day/Hour pillar.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "luck_cycle_index",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Luck cycle index.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "rule_priority",
+                           "datatype":  "integer",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Rule priority.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "rule_code",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Stable rule code.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "cardinality",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Cardinality expression.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "required",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Whether a property/field is required.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "datatype",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Property datatype.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "inverse_relationship",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Inverse relationship name.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "allowed_source",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Allowed source classes/types.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "allowed_target",
+                           "datatype":  "array",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Allowed target classes/types.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "uri",
+                           "datatype":  "uri",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "External or internal URI.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "checksum",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Content checksum.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "locale",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Locale tag.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "visibility",
+                           "datatype":  "enum",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Visibility scope.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "deprecated_by",
+                           "datatype":  "id_ref",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Successor id when deprecated.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "successor_record_id",
+                           "datatype":  "string",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Successor KR id.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "is_root",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Whether node is ontology/graph root.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "is_official",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Whether officially released.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "search_weight",
+                           "datatype":  "number",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Search ranking weight.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "documentation_ready",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Docs generator readiness.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "graph_ready",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Graph projection readiness.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "compile_ready",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Compiler readiness.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "release_ready",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Release readiness.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       },
+                       {
+                           "name":  "search_ready",
+                           "datatype":  "boolean",
+                           "required":  false,
+                           "immutable":  false,
+                           "description":  "Search index readiness.",
+                           "applies_to":  [
+                                              "knowledge_record",
+                                              "entity",
+                                              "relationship",
+                                              "ontology"
+                                          ]
+                       }
+                   ]
+}
