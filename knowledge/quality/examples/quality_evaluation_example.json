@@ -1,0 +1,85 @@
+{
+  "example_id": "QE-000001",
+  "title": "Synthetic quality evaluation fixture",
+  "description": "Illustrative scored evaluation for Sprint 3C. Not a real review of KR-000001.",
+  "target": {
+    "record_id": "KR-000000",
+    "version": "0.1.0",
+    "status": "draft"
+  },
+  "evaluated_at": "2026-07-31",
+  "evaluator": "Sprint 3C Infrastructure",
+  "metric_scores": [
+    {
+      "metric_id": "QM-COMPLETENESS",
+      "score": 85,
+      "notes": "Fixture sections complete for infrastructure example."
+    },
+    {
+      "metric_id": "QM-CONSISTENCY",
+      "score": 90,
+      "notes": "IDs and labels consistent within fixture."
+    },
+    {
+      "metric_id": "QM-TRACEABILITY",
+      "score": 70,
+      "notes": "Uses SRC-000001 stub; academic claims waived for fixture."
+    },
+    {
+      "metric_id": "QM-COMPILER_COMPATIBILITY",
+      "score": 95,
+      "notes": "Aligns with standards KR schema fixture shape."
+    },
+    {
+      "metric_id": "QM-RELATIONSHIP_INTEGRITY",
+      "score": 88,
+      "notes": "Single informational RELATED_TO edge in graph fixture."
+    },
+    {
+      "metric_id": "QM-BIBLIOGRAPHY_INTEGRITY",
+      "score": 75,
+      "notes": "Stub source only; not golden-ready."
+    },
+    {
+      "metric_id": "QM-GRAPH_INTEGRITY",
+      "score": 92,
+      "notes": "No dependency cycle in example subgraph."
+    },
+    {
+      "metric_id": "QM-GOVERNANCE_COMPLIANCE",
+      "score": 60,
+      "notes": "Reviews pending / academic waived for fixture."
+    }
+  ],
+  "scorecards": {
+    "academic": {
+      "scorecard_id": "SC-ACADEMIC-001",
+      "overall_score": 80,
+      "recommendation": "publish_after_minor_revision"
+    },
+    "technical": {
+      "scorecard_id": "SC-TECHNICAL-001",
+      "overall_score": 91,
+      "recommendation": "approve_technical"
+    },
+    "governance": {
+      "scorecard_id": "SC-GOVERNANCE-001",
+      "overall_score": 64,
+      "recommendation": "hold_for_governance"
+    }
+  },
+  "golden_checklist": {
+    "checklist_id": "QC-GOLDEN-001",
+    "eligible": false,
+    "blocking_items": [
+      "GR-002",
+      "GR-004",
+      "GR-006"
+    ]
+  },
+  "overall_weighted_score": 81,
+  "gate_result": "fail_publish",
+  "notes": [
+    "Fixture demonstrates metric coverage; do not use as academic evidence."
+  ]
+}
