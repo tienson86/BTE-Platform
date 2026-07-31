@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "DEP-RULES-001",
+  "title": "Knowledge Dependency Rules",
+  "description": "Hard rules for declaring and validating dependencies between Knowledge Records. Specification only.",
+  "rules": [
+    {
+      "rule_id": "DEP-R-001",
+      "severity": "error",
+      "statement": "Hard Dependency targets MUST resolve to an existing or planned KR-* / approved asset ID before official release."
+    },
+    {
+      "rule_id": "DEP-R-002",
+      "severity": "error",
+      "statement": "The directed graph of Hard Dependency and Inheritance edges MUST be acyclic."
+    },
+    {
+      "rule_id": "DEP-R-003",
+      "severity": "error",
+      "statement": "A record MUST NOT declare a Hard Dependency on a downstream pack that itself hard-depends on the record (pack-level cycle)."
+    },
+    {
+      "rule_id": "DEP-R-004",
+      "severity": "error",
+      "statement": "Duplicate dependency declarations for the same (level, source, target) triple are forbidden."
+    },
+    {
+      "rule_id": "DEP-R-005",
+      "severity": "error",
+      "statement": "Dependency level MUST be one of the registered levels in dependency_levels.json."
+    },
+    {
+      "rule_id": "DEP-R-006",
+      "severity": "warning",
+      "statement": "Soft Dependency SHOULD be upgraded to Hard Dependency when the target is required for canonical definition correctness."
+    },
+    {
+      "rule_id": "DEP-R-007",
+      "severity": "error",
+      "statement": "Reference-level links MUST NOT be used to satisfy Hard Dependency publication gates."
+    },
+    {
+      "rule_id": "DEP-R-008",
+      "severity": "warning",
+      "statement": "Semantic Dependency SHOULD be documented explicitly when meaning presupposes another concept but load order is not blocking."
+    },
+    {
+      "rule_id": "DEP-R-009",
+      "severity": "error",
+      "statement": "Extensions MUST name their base record; the base Canonical Definition remains authoritative."
+    },
+    {
+      "rule_id": "DEP-R-010",
+      "severity": "error",
+      "statement": "record_id immutability is independent of dependency changes; remapping KR-* to fix dependencies is forbidden."
+    }
+  ],
+  "declaration_shape": {
+    "required_fields": [
+      "dependency_id",
+      "level_id",
+      "source_record_id",
+      "target_record_id",
+      "status"
+    ],
+    "dependency_id_pattern": "^DEP-[0-9]{6}$",
+    "optional_fields": [
+      "edge_type",
+      "rationale",
+      "override_ref"
+    ]
+  }
+}
