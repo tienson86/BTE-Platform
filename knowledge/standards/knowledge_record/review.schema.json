@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/standards/knowledge_record/review.schema.json",
+  "title": "BTE Knowledge Record Review",
+  "description": "Academic, technical, and governance review state for a Knowledge Record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "academic_review",
+    "technical_review",
+    "governance_review",
+    "approval",
+    "freeze"
+  ],
+  "properties": {
+    "academic_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "in_review",
+            "approved",
+            "rejected",
+            "waived"
+          ]
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "technical_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "in_review",
+            "approved",
+            "rejected",
+            "waived"
+          ]
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "governance_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "in_review",
+            "approved",
+            "rejected",
+            "waived"
+          ]
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_approved",
+            "conditionally_approved",
+            "approved"
+          ]
+        },
+        "approver": {
+          "type": "string"
+        },
+        "approved_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "freeze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "unfrozen",
+            "candidate",
+            "frozen"
+          ]
+        },
+        "frozen_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "frozen_by": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
