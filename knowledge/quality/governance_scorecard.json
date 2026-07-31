@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "scorecard_id": "SC-GOVERNANCE-001",
+  "title": "Governance Scorecard",
+  "description": "Governance compliance scoring for reviews, approval, freeze, and release. Specification only.",
+  "review_type": "governance",
+  "scale": {
+    "min": 0,
+    "max": 100,
+    "pass_threshold": 80
+  },
+  "dimensions": [
+    {
+      "metric_id": "QM-GOVERNANCE_COMPLIANCE",
+      "weight": 0.7,
+      "criteria": [
+        "Academic review status recorded",
+        "Technical review status recorded",
+        "Governance review status recorded",
+        "Approval status consistent with review outcomes",
+        "Freeze status consistent with release policy"
+      ]
+    },
+    {
+      "metric_id": "QM-TRACEABILITY",
+      "weight": 0.15,
+      "criteria": [
+        "Review decisions cite checklist item IDs",
+        "Waivers documented with rationale"
+      ]
+    },
+    {
+      "metric_id": "QM-COMPLETENESS",
+      "weight": 0.15,
+      "criteria": [
+        "Owner and stewards assigned",
+        "Change policy referenced for official records"
+      ]
+    }
+  ],
+  "recommendation_bands": [
+    {
+      "min": 90,
+      "max": 100,
+      "recommendation": "approve_and_freeze_candidate"
+    },
+    {
+      "min": 80,
+      "max": 89,
+      "recommendation": "approve_with_conditions"
+    },
+    {
+      "min": 60,
+      "max": 79,
+      "recommendation": "hold_for_governance"
+    },
+    {
+      "min": 0,
+      "max": 59,
+      "recommendation": "reject_governance"
+    }
+  ],
+  "release_gates": {
+    "released_requires": {
+      "approval.status": "approved",
+      "freeze.status": "frozen",
+      "minimum_overall_score": 80
+    }
+  }
+}
