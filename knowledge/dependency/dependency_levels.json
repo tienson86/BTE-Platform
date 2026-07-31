@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "DEP-LEVELS-001",
+  "title": "Knowledge Dependency Levels",
+  "description": "Canonical dependency levels between Knowledge Records and related assets. Specification only — no runtime resolver.",
+  "levels": [
+    {
+      "level_id": "hard_dependency",
+      "code": "Hard Dependency",
+      "severity": "blocking",
+      "description": "Target MUST exist and be academically established before the source can be approved or compiled as official. Missing target blocks publication.",
+      "typical_edge_types": [
+        "FOUNDATIONAL_FOR",
+        "DEPENDS_ON"
+      ],
+      "blocks_publication_if_missing": true,
+      "participates_in_cycle_check": true,
+      "allows_override": false
+    },
+    {
+      "level_id": "soft_dependency",
+      "code": "Soft Dependency",
+      "severity": "warning",
+      "description": "Target SHOULD exist for full interpretation. Missing target produces warnings but may allow draft progression.",
+      "typical_edge_types": [
+        "RELATED_TO",
+        "CLASSIFIES"
+      ],
+      "blocks_publication_if_missing": false,
+      "participates_in_cycle_check": false,
+      "allows_override": true
+    },
+    {
+      "level_id": "reference",
+      "code": "Reference",
+      "severity": "informational",
+      "description": "Citation or pointer to another record or bibliography source without implying foundation or load order.",
+      "typical_edge_types": [
+        "REFERENCES",
+        "SUPPORTED_BY"
+      ],
+      "blocks_publication_if_missing": false,
+      "participates_in_cycle_check": false,
+      "allows_override": true
+    },
+    {
+      "level_id": "inheritance",
+      "code": "Inheritance",
+      "severity": "structural",
+      "description": "Source inherits structural or classificatory properties from a parent concept, pack, or module template.",
+      "typical_edge_types": [
+        "CLASSIFIES",
+        "IMPLEMENTS"
+      ],
+      "blocks_publication_if_missing": true,
+      "participates_in_cycle_check": true,
+      "allows_override": true
+    },
+    {
+      "level_id": "extension",
+      "code": "Extension",
+      "severity": "additive",
+      "description": "Source extends a base record with additional scope without replacing the base canonical definition.",
+      "typical_edge_types": [
+        "DEPENDS_ON",
+        "RELATED_TO",
+        "IMPLEMENTS"
+      ],
+      "blocks_publication_if_missing": true,
+      "participates_in_cycle_check": false,
+      "allows_override": true
+    },
+    {
+      "level_id": "semantic_dependency",
+      "code": "Semantic Dependency",
+      "severity": "interpretive",
+      "description": "Source's meaning presupposes understanding of the target, even when not a hard load-order dependency.",
+      "typical_edge_types": [
+        "FOUNDATIONAL_FOR",
+        "RELATED_TO",
+        "REFERENCES"
+      ],
+      "blocks_publication_if_missing": false,
+      "participates_in_cycle_check": false,
+      "allows_override": true
+    }
+  ],
+  "ordering_hint": [
+    "hard_dependency",
+    "inheritance",
+    "extension",
+    "semantic_dependency",
+    "soft_dependency",
+    "reference"
+  ]
+}
