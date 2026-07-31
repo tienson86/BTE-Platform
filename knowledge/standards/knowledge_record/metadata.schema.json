@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/standards/knowledge_record/metadata.schema.json",
+  "title": "BTE Knowledge Record Metadata",
+  "description": "Computational and administrative metadata for a Knowledge Record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "status",
+    "schema_version",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "official",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "pack_id": {
+      "type": "string"
+    },
+    "module_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "compiler_status": {
+      "type": "string",
+      "enum": [
+        "not_compiled",
+        "compiled_draft",
+        "compiled_verified",
+        "published",
+        "blocked"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
