@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-RECORD",
+  "title": "Record & Canonical Definition Validator",
+  "dimensions": [
+    "record",
+    "canonical_definition"
+  ],
+  "applies_to": [
+    "knowledge_record"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000001",
+      "title": "Missing Record ID",
+      "description": "identity.record_id is absent or empty.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if record_id missing or blank.",
+      "recommended_resolution": "Assign immutable KR-NNNNNN before submit.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000002",
+      "title": "Duplicate Record ID",
+      "description": "Two artifacts claim the same KR-* identity.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL if record_id appears more than once in record_index/canon_manifest.",
+      "recommended_resolution": "Keep one record; deprecate or re-ID the duplicate (never remap meaning of existing KR-*).",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000003",
+      "title": "Missing Canonical Definition",
+      "description": "canonical_definition.definition is missing or empty.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if definition string length == 0.",
+      "recommended_resolution": "Write a single Canonical Definition with scope.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000004",
+      "title": "Invalid Record ID Pattern",
+      "description": "record_id does not match ^KR-[0-9]{6}$.",
+      "severity": "ERROR",
+      "detection_rule": "Regex mismatch on record_id.",
+      "recommended_resolution": "Use zero-padded KR-NNNNNN form.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000005",
+      "title": "Missing Canonical Name",
+      "description": "identity.canonical_name is missing.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if canonical_name absent/blank.",
+      "recommended_resolution": "Set unique Canonical Name per concept.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000006",
+      "title": "Missing Version",
+      "description": "identity.version or metadata.version missing.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if SemVer version absent.",
+      "recommended_resolution": "Set MAJOR.MINOR.PATCH.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000007",
+      "title": "Invalid Version Format",
+      "description": "Version is not SemVer MAJOR.MINOR.PATCH.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL unless ^[0-9]+\\.[0-9]+\\.[0-9]+$.",
+      "recommended_resolution": "Correct to SemVer.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000008",
+      "title": "Missing Required Status",
+      "description": "identity.status missing or not in allowed enum.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if status not in draft|review|approved|official|deprecated|archived.",
+      "recommended_resolution": "Set allowed lifecycle status.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-GOVERNANCE"]
+    },
+    {
+      "code": "VAL-000009",
+      "title": "Missing Required Sections",
+      "description": "One or more mandatory KR schema top-level sections missing.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if any of identity,classification,canonical_definition,academic_context,characteristics,relationships,examples,computational_metadata,validation,governance,release absent.",
+      "recommended_resolution": "Complete all mandatory sections per standards KR schema / template.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000010",
+      "title": "Missing Required Summary Scope",
+      "description": "canonical_definition.scope is missing (required summary of coverage).",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if scope blank.",
+      "recommended_resolution": "Add Scope describing what the record covers.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000011",
+      "title": "Missing Required References",
+      "description": "academic_context.primary_source_ids empty.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if primary_source_ids length == 0.",
+      "recommended_resolution": "Cite ≥1 existing SRC-* or mark pending with TODO_REVIEW policy exception documented.",
+      "lifecycle_stages": ["LC-ACADEMIC", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000012",
+      "title": "Unresolved Placeholder Tokens",
+      "description": "Submitted record still contains {{PLACEHOLDER}} tokens.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if /\\{\\{[A-Z0-9_]+\\}\\}/ matches content.",
+      "recommended_resolution": "Replace placeholders or convert to TODO_REVIEW notes.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000013",
+      "title": "Missing Vietnamese Name",
+      "description": "vietnamese_name required for classical BaZi foundational records when language policy requires it.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if vietnamese_name blank and discipline=Bazi foundational.",
+      "recommended_resolution": "Fill Vietnamese Name or document waiver.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000014",
+      "title": "Missing Classification Pack/Module",
+      "description": "classification.pack_id or module_id missing.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if pack_id or module_id blank.",
+      "recommended_resolution": "Assign Pack and Module IDs from package registry.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000015",
+      "title": "Missing Knowledge Type",
+      "description": "classification.knowledge_type missing.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if knowledge_type blank.",
+      "recommended_resolution": "Set Foundational Concept / Entity / Rule / etc.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000016",
+      "title": "Multiple Canonical Definitions",
+      "description": "More than one competing canonical definition block in one record.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if multiple primary definition fields/sections detected.",
+      "recommended_resolution": "Keep a single definition string; move alternatives to notes/assertions.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000017",
+      "title": "Duplicate Definition Across Records",
+      "description": "Near-identical Canonical Definition used by two active KR-*.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if normalized definition hash collides across non-deprecated records.",
+      "recommended_resolution": "Merge concepts or differentiate definitions; deprecate duplicate.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000018",
+      "title": "Definition Conflict With Assertion",
+      "description": "High-confidence assertion contradicts Canonical Definition.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL on contradictory high-confidence assertions vs definition without conflict notes.",
+      "recommended_resolution": "Reconcile text, lower confidence, or add CONFLICTS_WITH / conflict notes.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000019",
+      "title": "Definition Missing Out Of Scope",
+      "description": "Out of scope not provided for foundational records.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if out_of_scope blank for Foundational Concept.",
+      "recommended_resolution": "State what the record deliberately does not answer.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000020",
+      "title": "Invented Source Citation",
+      "description": "primary/secondary source_id not present in bibliography SSOT.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if SRC-* not found in bibliography registry.",
+      "recommended_resolution": "Use real SRC-* or remove claim; never invent sources.",
+      "lifecycle_stages": ["LC-ACADEMIC", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000021",
+      "title": "Assertion Missing Source IDs",
+      "description": "Assertion lacks source_ids array or it is empty.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if any assertion.source_ids length == 0.",
+      "recommended_resolution": "Attach ≥1 SRC-* or mark assertion pending_review with TODO_REVIEW.",
+      "lifecycle_stages": ["LC-ACADEMIC"]
+    },
+    {
+      "code": "VAL-000022",
+      "title": "High Confidence With TODO_REVIEW",
+      "description": "Assertion confidence=high while TODO_REVIEW remains open on that claim.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if confidence=high and linked TODO_REVIEW present.",
+      "recommended_resolution": "Lower confidence or resolve TODO_REVIEW before release.",
+      "lifecycle_stages": ["LC-ACADEMIC", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000023",
+      "title": "Missing Characteristics Container",
+      "description": "characteristics.items missing.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if characteristics.items absent.",
+      "recommended_resolution": "Add characteristic key/value items or document N/A.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000024",
+      "title": "Record ID Mutation Detected",
+      "description": "Attempt to change an already published record_id.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL if published record_id differs from immutable registry binding.",
+      "recommended_resolution": "Never remap; create new KR-* and deprecate old.",
+      "lifecycle_stages": ["LC-GOVERNANCE", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000025",
+      "title": "Missing Validation Block",
+      "description": "validation section missing checklist_status / schema_id.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if validation object incomplete.",
+      "recommended_resolution": "Populate validation section per KR schema.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    }
+  ]
+}
