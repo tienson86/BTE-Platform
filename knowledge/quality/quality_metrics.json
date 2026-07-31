@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "description": "Canonical quality scoring dimensions for BTE Knowledge Records and related artifacts. Specification only — no scoring engine runtime.",
+  "scale": {
+    "min": 0,
+    "max": 100,
+    "pass_threshold": 80,
+    "units": "points"
+  },
+  "aggregation": {
+    "method": "weighted_average",
+    "rounding": "nearest_integer",
+    "missing_metric_policy": "fail_validation"
+  },
+  "metrics": [
+    {
+      "metric_id": "QM-COMPLETENESS",
+      "name": "Completeness",
+      "code": "Completeness",
+      "description": "All required KR sections, fields, and checklist items are present and non-empty where mandatory.",
+      "default_weight": 0.15,
+      "applies_to": [
+        "knowledge_record",
+        "pack",
+        "module"
+      ],
+      "primary_scorecard": "academic_scorecard"
+    },
+    {
+      "metric_id": "QM-CONSISTENCY",
+      "name": "Consistency",
+      "code": "Consistency",
+      "description": "Internal consistency of names, classifications, definitions, and cross-section statements within the record.",
+      "default_weight": 0.15,
+      "applies_to": [
+        "knowledge_record",
+        "pack"
+      ],
+      "primary_scorecard": "academic_scorecard"
+    },
+    {
+      "metric_id": "QM-TRACEABILITY",
+      "name": "Traceability",
+      "code": "Traceability",
+      "description": "Assertions and claims are traceable to bibliography sources (SRC-*) and review decisions.",
+      "default_weight": 0.15,
+      "applies_to": [
+        "knowledge_record",
+        "assertion"
+      ],
+      "primary_scorecard": "academic_scorecard"
+    },
+    {
+      "metric_id": "QM-COMPILER_COMPATIBILITY",
+      "name": "Compiler Compatibility",
+      "code": "Compiler Compatibility",
+      "description": "Record structure and IDs are compatible with compiler artifact contracts and standards KR schema expectations.",
+      "default_weight": 0.1,
+      "applies_to": [
+        "knowledge_record",
+        "compiler_artifact"
+      ],
+      "primary_scorecard": "technical_scorecard"
+    },
+    {
+      "metric_id": "QM-RELATIONSHIP_INTEGRITY",
+      "name": "Relationship Integrity",
+      "code": "Relationship Integrity",
+      "description": "Declared relationships use approved types, valid endpoints, and non-duplicate links.",
+      "default_weight": 0.1,
+      "applies_to": [
+        "knowledge_record",
+        "relationship"
+      ],
+      "primary_scorecard": "technical_scorecard"
+    },
+    {
+      "metric_id": "QM-BIBLIOGRAPHY_INTEGRITY",
+      "name": "Bibliography Integrity",
+      "code": "Bibliography Integrity",
+      "description": "All cited SRC-* IDs exist in bibliography SSOT; citation rules are followed; no invented sources.",
+      "default_weight": 0.1,
+      "applies_to": [
+        "knowledge_record",
+        "bibliography"
+      ],
+      "primary_scorecard": "academic_scorecard"
+    },
+    {
+      "metric_id": "QM-GRAPH_INTEGRITY",
+      "name": "Graph Integrity",
+      "code": "Graph Integrity",
+      "description": "Graph projection respects node/edge ontology and constraints (acyclicity, unique canonical node, immutable IDs, no duplicate edges).",
+      "default_weight": 0.1,
+      "applies_to": [
+        "knowledge_record",
+        "knowledge_graph"
+      ],
+      "primary_scorecard": "technical_scorecard"
+    },
+    {
+      "metric_id": "QM-GOVERNANCE_COMPLIANCE",
+      "name": "Governance Compliance",
+      "code": "Governance Compliance",
+      "description": "Academic, technical, and governance reviews, approval, and freeze states comply with canon policy.",
+      "default_weight": 0.15,
+      "applies_to": [
+        "knowledge_record",
+        "review",
+        "release"
+      ],
+      "primary_scorecard": "governance_scorecard"
+    }
+  ],
+  "weight_sum_must_equal": 1.0,
+  "notes": [
+    "Weights are defaults for overall rollup; scorecards may override weights within their scope.",
+    "Sprint 3C defines metrics only; no automated scorer is shipped."
+  ]
+}
