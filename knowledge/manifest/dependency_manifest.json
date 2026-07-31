@@ -1,0 +1,64 @@
+{
+  "manifest_id": "MF-DEP-001",
+  "manifest_kind": "dependency",
+  "schema_version": "1.0.0",
+  "status": "draft",
+  "title": "Knowledge Canon Dependency Manifest",
+  "description": "Compiler-discoverable dependency edges (levels from knowledge/dependency/). Specification only.",
+  "updated_at": "2026-07-31",
+  "source_documents": [
+    "knowledge/dependency/dependency_levels.json",
+    "knowledge/dependency/examples/dependency_pack01_example.json",
+    "knowledge/index/cross_reference_index.json"
+  ],
+  "dependencies": [
+    {
+      "dependency_id": "DEP-000001",
+      "level_id": "hard_dependency",
+      "source_id": "KR-000002",
+      "target_id": "KR-000001",
+      "edge_type": "FOUNDATIONAL_FOR",
+      "status": "draft"
+    },
+    {
+      "dependency_id": "DEP-000002",
+      "level_id": "hard_dependency",
+      "source_id": "KR-000003",
+      "target_id": "KR-000001",
+      "edge_type": "FOUNDATIONAL_FOR",
+      "status": "draft"
+    },
+    {
+      "dependency_id": "DEP-000003",
+      "level_id": "semantic_dependency",
+      "source_id": "KR-000003",
+      "target_id": "KR-000002",
+      "edge_type": "RELATED_TO",
+      "status": "draft"
+    },
+    {
+      "dependency_id": "DEP-000004",
+      "level_id": "inheritance",
+      "source_id": "KR-000001",
+      "target_id": "PACK_01",
+      "edge_type": "CLASSIFIES",
+      "status": "draft"
+    },
+    {
+      "dependency_id": "DEP-000005",
+      "level_id": "hard_dependency",
+      "source_id": "PACK_02",
+      "target_id": "PACK_01",
+      "edge_type": "DEPENDS_ON",
+      "status": "planned"
+    },
+    {
+      "dependency_id": "DEP-000006",
+      "level_id": "reference",
+      "source_id": "KR-000001",
+      "target_id": "SRC-000001",
+      "edge_type": "SUPPORTED_BY",
+      "status": "draft"
+    }
+  ]
+}
