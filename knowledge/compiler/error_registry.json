@@ -1,0 +1,283 @@
+{
+  "metadata": {
+    "document_name": "bte_compiler_error_registry",
+    "document_kind": "error_registry",
+    "description": "Stable compiler error registry with namespaced placeholder ranges (Sprint 2C).",
+    "owner": "Platform Engineering",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "namespaces": [
+    {
+      "id": "VAL",
+      "name": "Validation",
+      "description": "Schema, policy, and content validation errors.",
+      "range_start": "VAL-000001",
+      "range_end": "VAL-000100",
+      "related_stages": [
+        "STAGE-VALIDATE",
+        "STAGE-VERIFY"
+      ]
+    },
+    {
+      "id": "PAR",
+      "name": "Parse",
+      "description": "Input parsing and normalization errors.",
+      "range_start": "PAR-000001",
+      "range_end": "PAR-000100",
+      "related_stages": [
+        "STAGE-PARSE"
+      ]
+    },
+    {
+      "id": "DEP",
+      "name": "Dependency",
+      "description": "Cross-record and cross-module dependency resolution errors.",
+      "range_start": "DEP-000001",
+      "range_end": "DEP-000100",
+      "related_stages": [
+        "STAGE-DEPENDENCY"
+      ]
+    },
+    {
+      "id": "REF",
+      "name": "Reference / Citation",
+      "description": "Academic Source and Foundation reference citation errors.",
+      "range_start": "REF-000001",
+      "range_end": "REF-000100",
+      "related_stages": [
+        "STAGE-VALIDATE",
+        "STAGE-VERIFY"
+      ],
+      "notes": "WARNING: code prefix REF- overlaps Foundation Reference IDs; treat as error-namespace codes in compiler context only."
+    },
+    {
+      "id": "SCH",
+      "name": "Schema",
+      "description": "JSON Schema conformance and overlay errors.",
+      "range_start": "SCH-000001",
+      "range_end": "SCH-000100",
+      "related_stages": [
+        "STAGE-VALIDATE",
+        "STAGE-VERIFY"
+      ]
+    },
+    {
+      "id": "CMP",
+      "name": "Compile / Transform / Generate",
+      "description": "Mapping, transform, and generation errors.",
+      "range_start": "CMP-000001",
+      "range_end": "CMP-000100",
+      "related_stages": [
+        "STAGE-TRANSFORM",
+        "STAGE-GENERATE"
+      ]
+    },
+    {
+      "id": "PUB",
+      "name": "Publish",
+      "description": "Authorization and publish-gate errors.",
+      "range_start": "PUB-000001",
+      "range_end": "PUB-000100",
+      "related_stages": [
+        "STAGE-PUBLISH"
+      ]
+    },
+    {
+      "id": "SYS",
+      "name": "System",
+      "description": "Load, configuration, and infrastructure errors.",
+      "range_start": "SYS-000001",
+      "range_end": "SYS-000100",
+      "related_stages": [
+        "STAGE-LOAD",
+        "STAGE-GENERATE",
+        "STAGE-PUBLISH"
+      ]
+    }
+  ],
+  "allocation_policy": {
+    "format": "{NAMESPACE}-{NNNNNN}",
+    "placeholder_range_size": 100,
+    "next_free": {
+      "VAL": "VAL-000006",
+      "PAR": "PAR-000003",
+      "DEP": "DEP-000003",
+      "REF": "REF-000004",
+      "SCH": "SCH-000003",
+      "CMP": "CMP-000005",
+      "PUB": "PUB-000003",
+      "SYS": "SYS-000004"
+    },
+    "notes": [
+      "Ranges VAL-000001..VAL-000100 (and peers) are reserved placeholder capacity.",
+      "Only explicitly listed entries in errors[] are defined codes.",
+      "Unused codes in each range remain unallocated placeholders."
+    ]
+  },
+  "errors": [
+    {
+      "code": "VAL-000001",
+      "title": "Validation Failed",
+      "severity": "error",
+      "description": "A validation gate failed for the target artifact or record.",
+      "recommended_action": "Inspect validation_report details, fix the failing rule, and re-run STAGE-VALIDATE."
+    },
+    {
+      "code": "VAL-000002",
+      "title": "Validation Policy Violation",
+      "severity": "error",
+      "description": "An enabled citation or compile policy rule was violated.",
+      "recommended_action": "Compare findings against citation_rules.json / compiler policy and correct the record design inputs."
+    },
+    {
+      "code": "VAL-000003",
+      "title": "Validation Warning Threshold Exceeded",
+      "severity": "warning",
+      "description": "Warning count exceeded the configured threshold for Official promotion.",
+      "recommended_action": "Resolve warnings or obtain Governance exception before STAGE-PUBLISH."
+    },
+    {
+      "code": "VAL-000004",
+      "title": "Integrity Check Failed",
+      "severity": "error",
+      "description": "Post-checks detected integrity inconsistency (duplicate IDs, broken invariants).",
+      "recommended_action": "Review verify_report integrity section and remediate duplicate or inconsistent identifiers."
+    },
+    {
+      "code": "VAL-000005",
+      "title": "Placeholder Content Not Allowed For Official",
+      "severity": "error",
+      "description": "Official publish attempted while placeholder/TODO_REVIEW markers remain disallowed by policy.",
+      "recommended_action": "Complete Academic Review fields or keep status as draft until placeholders are cleared."
+    },
+    {
+      "code": "PAR-000001",
+      "title": "Parse Failure",
+      "severity": "error",
+      "description": "Input could not be parsed into normalized intermediate representation.",
+      "recommended_action": "Fix malformed input at the reported path and re-run STAGE-PARSE."
+    },
+    {
+      "code": "PAR-000002",
+      "title": "Unsupported Input Format",
+      "severity": "error",
+      "description": "Loaded input format is not supported by the current compiler version.",
+      "recommended_action": "Convert input to a supported pack/format version listed in version_registry.json."
+    },
+    {
+      "code": "DEP-000001",
+      "title": "Unresolved Dependency",
+      "severity": "error",
+      "description": "A required planning ID or knowledge ID dependency could not be resolved.",
+      "recommended_action": "Add the missing dependency target or remove the invalid relationship link."
+    },
+    {
+      "code": "DEP-000002",
+      "title": "Dependency Cycle Detected",
+      "severity": "warning",
+      "description": "A cyclic dependency was detected among records or modules.",
+      "recommended_action": "Break the cycle or provide Academic justification and Governance approval for allowed cycles."
+    },
+    {
+      "code": "REF-000001",
+      "title": "Unknown Academic Source",
+      "severity": "error",
+      "description": "Cited SRC-* is not present in bibliography.json.",
+      "recommended_action": "Register the source via bibliography governance or remove the invalid citation."
+    },
+    {
+      "code": "REF-000002",
+      "title": "Placeholder Source Used",
+      "severity": "warning",
+      "description": "Citation references a bibliography source with status placeholder.",
+      "recommended_action": "Allow for draft compiles; block Official until source metadata is promoted."
+    },
+    {
+      "code": "REF-000003",
+      "title": "Foundation Reference Crosswalk Unverified",
+      "severity": "warning",
+      "description": "SRC↔REF crosswalk exists but is not marked verified for Official use.",
+      "recommended_action": "Complete Academic verification of crosswalk or omit Foundation expansion in Official docs."
+    },
+    {
+      "code": "SCH-000001",
+      "title": "Schema Validation Failed",
+      "severity": "error",
+      "description": "JSON does not validate against the required Knowledge Record or overlay schema.",
+      "recommended_action": "Fix schema violations listed in validation_report and re-validate."
+    },
+    {
+      "code": "SCH-000002",
+      "title": "Schema Version Incompatible",
+      "severity": "error",
+      "description": "Record schema_version is incompatible with compiler compatibility set.",
+      "recommended_action": "Align metadata.schema_version with version_registry.json COMPAT set."
+    },
+    {
+      "code": "CMP-000001",
+      "title": "Transform Mapping Incomplete",
+      "severity": "error",
+      "description": "Required design-to-JSON mapping field is missing or incomplete.",
+      "recommended_action": "Complete RECORD_MAPPING_TEMPLATE for the failing field and re-run STAGE-TRANSFORM."
+    },
+    {
+      "code": "CMP-000002",
+      "title": "Generate Output Failed",
+      "severity": "error",
+      "description": "Failed to generate a required compile artifact.",
+      "recommended_action": "Inspect stage logs for the artifact id and retry STAGE-GENERATE after fixing inputs."
+    },
+    {
+      "code": "CMP-000003",
+      "title": "Graph Generation Disabled",
+      "severity": "info",
+      "description": "knowledge_graph artifact skipped because graph_generation is false.",
+      "recommended_action": "Enable compiler_config.graph_generation if graph output is required."
+    },
+    {
+      "code": "CMP-000004",
+      "title": "Search Index Generation Disabled",
+      "severity": "info",
+      "description": "search_index artifact skipped because search_index_generation is false.",
+      "recommended_action": "Enable compiler_config.search_index_generation if search output is required."
+    },
+    {
+      "code": "PUB-000001",
+      "title": "Publish Unauthorized",
+      "severity": "error",
+      "description": "STAGE-PUBLISH blocked because publish_authorization is missing or invalid.",
+      "recommended_action": "Obtain Governance authorization artifact before publishing Official records."
+    },
+    {
+      "code": "PUB-000002",
+      "title": "Publish Blocked By Verify Report",
+      "severity": "error",
+      "description": "Verify stage reported blocking errors; publish cannot proceed.",
+      "recommended_action": "Clear STAGE-VERIFY errors and re-run verify before publish."
+    },
+    {
+      "code": "SYS-000001",
+      "title": "Load Input Missing",
+      "severity": "error",
+      "description": "A required input artifact was missing during STAGE-LOAD.",
+      "recommended_action": "Provide the missing artifact path/id listed in load_manifest errors."
+    },
+    {
+      "code": "SYS-000002",
+      "title": "Compiler Config Invalid",
+      "severity": "error",
+      "description": "compiler_config.json failed schema or compatibility checks.",
+      "recommended_action": "Fix compiler_config.json against compiler.schema.json and version_registry compatibility."
+    },
+    {
+      "code": "SYS-000003",
+      "title": "Internal Compiler Registry Inconsistency",
+      "severity": "error",
+      "description": "Compiler control-plane registries are inconsistent (pipeline vs artifact/error registries).",
+      "recommended_action": "Repair registry metadata under knowledge/compiler/ before running compile."
+    }
+  ]
+}
