@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "workflow_id": "GOV-WF-PUB-001",
+  "title": "Knowledge Record Publication Workflow",
+  "description": "Formal publication path from approved to official/released. Specification only.",
+  "applies_to": "knowledge_record",
+  "stages": [
+    {
+      "stage_id": "PB-01-FREEZE-CANDIDATE",
+      "name": "Nominate freeze candidate",
+      "actors": [
+        "Governance Owner"
+      ],
+      "actions": [
+        "Set freeze.status = candidate",
+        "Confirm release_policy gates are green or tracked"
+      ],
+      "exit_criteria": [
+        "Record state is approved",
+        "No open blocking change requests"
+      ]
+    },
+    {
+      "stage_id": "PB-02-FREEZE",
+      "name": "Freeze content",
+      "actors": [
+        "Governance Owner",
+        "Release Manager"
+      ],
+      "actions": [
+        "Set freeze.status = frozen",
+        "Record frozen_at / frozen_by"
+      ],
+      "exit_criteria": [
+        "freeze_policy FRZ-003 prerequisites met"
+      ]
+    },
+    {
+      "stage_id": "PB-03-INDEX-SYNC",
+      "name": "Synchronize indexes",
+      "actors": [
+        "Platform Maintainer",
+        "Release Manager"
+      ],
+      "actions": [
+        "Update record_index, canonical_index, alias/keyword/topic as needed",
+        "Update cross_reference_index if relationships changed"
+      ],
+      "exit_criteria": [
+        "Indexes reference the published record_id",
+        "No orphan canonical keys"
+      ]
+    },
+    {
+      "stage_id": "PB-04-RELEASE",
+      "name": "Release",
+      "actors": [
+        "Release Manager",
+        "Governance Owner"
+      ],
+      "actions": [
+        "Set release.release_status = released",
+        "Set identity.status = official",
+        "Publish release note / changelog"
+      ],
+      "exit_criteria": [
+        "All REL-G-* error gates pass",
+        "Approval matrix TR-PUBLISH satisfied"
+      ]
+    },
+    {
+      "stage_id": "PB-05-POST-RELEASE",
+      "name": "Post-release verification",
+      "actors": [
+        "Release Manager",
+        "Platform Maintainer"
+      ],
+      "actions": [
+        "Verify consumers can resolve record via indexes",
+        "Confirm freeze remains frozen"
+      ],
+      "exit_criteria": [
+        "No ERROR-severity validation regressions attributed to the release"
+      ]
+    }
+  ],
+  "forbidden": [
+    "Publishing without freeze",
+    "Publishing with pending_review high-confidence assertions",
+    "Changing record_id at publication time"
+  ],
+  "related": [
+    "release_policy.json",
+    "freeze_policy.json",
+    "approval_matrix.json",
+    "publication_workflow.json"
+  ]
+}
