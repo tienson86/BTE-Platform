@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "example_name": "conflict_registry_usage_sample",
+    "description": "Sample consumption of conflict_registry.json by Validation Engine / Compiler.",
+    "version": "1.0.0",
+    "created_at": "2026-07-31"
+  },
+  "version": "1.0.0",
+  "lookup": {
+    "conflict_id": "CFL-000001",
+    "selected_source": "SRC-000003",
+    "competing_sources": [
+      "SRC-000003",
+      "SRC-000004"
+    ],
+    "decision": "prefer_level1_over_commentary_pending_review",
+    "status": "example"
+  },
+  "compiler_behavior": {
+    "when_conflict_unresolved": "block_official",
+    "when_conflict_example_only": "ignore_for_production_warn_in_ci",
+    "emit_in_documentation": false
+  },
+  "notes": [
+    "CFL-000001 is an infrastructure example entry.",
+    "Replace with real Academic Review decisions before production use."
+  ]
+}
