@@ -1,0 +1,86 @@
+{
+  "example_id": "IDX-EX-000001",
+  "title": "Lookup walkthrough fixture",
+  "description": "Illustrates how consumers resolve alias → canonical → record → pack → topic without runtime code. Not a search engine.",
+  "scenario": "User searches 'Chi'",
+  "steps": [
+    {
+      "step": 1,
+      "index": "alias_index.json",
+      "query": {
+        "alias": "Chi"
+      },
+      "result": {
+        "record_id": "KR-000002",
+        "canonical_name": "Qi"
+      }
+    },
+    {
+      "step": 2,
+      "index": "canonical_index.json",
+      "query": {
+        "canonical_key": "qi"
+      },
+      "result": {
+        "record_id": "KR-000002",
+        "pack_id": "PACK_01"
+      }
+    },
+    {
+      "step": 3,
+      "index": "record_index.json",
+      "query": {
+        "record_id": "KR-000002"
+      },
+      "result": {
+        "path": "knowledge/bazi/01_fundamental_knowledge/records/KR-000002_QI.md",
+        "compiler_status": "not_compiled"
+      }
+    },
+    {
+      "step": 4,
+      "index": "pack_index.json",
+      "query": {
+        "pack_id": "PACK_01"
+      },
+      "result": {
+        "module_id": "01_fundamental_knowledge",
+        "design_path": "knowledge/bazi/01_fundamental_knowledge/design/PACK_01/"
+      }
+    },
+    {
+      "step": 5,
+      "index": "topic_index.json",
+      "query": {
+        "topic_id": "TOPIC-000002"
+      },
+      "result": {
+        "label": "Vital Force / Qi",
+        "record_ids": [
+          "KR-000002"
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "index": "cross_reference_index.json",
+      "query": {
+        "source_record_id": "KR-000001",
+        "relation": "FOUNDATIONAL_FOR"
+      },
+      "result": {
+        "targets": [
+          "KR-000002",
+          "KR-000003"
+        ]
+      }
+    }
+  ],
+  "supported_purposes": [
+    "fast_lookup",
+    "compiler_support",
+    "documentation_generator",
+    "semantic_search",
+    "knowledge_browser"
+  ]
+}
