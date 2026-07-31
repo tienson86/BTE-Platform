@@ -1,0 +1,318 @@
+{
+  "metadata": {
+    "document_name": "bte_compiler_artifact_registry",
+    "document_kind": "artifact_registry",
+    "description": "Registry of every Knowledge Compiler artifact type (Sprint 2B).",
+    "owner": "Platform Engineering",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "artifacts": [
+    {
+      "id": "knowledge_record_json",
+      "name": "Knowledge Record JSON",
+      "description": "Compiled Knowledge Record JSON conforming to the base knowledge record schema (and module overlays when authorized).",
+      "version": "1.0.0",
+      "schema": "knowledge/schema/knowledge_record.schema.json",
+      "producer": [
+        "STAGE-GENERATE",
+        "STAGE-PUBLISH"
+      ],
+      "consumer": [
+        "STAGE-VERIFY",
+        "STAGE-PUBLISH",
+        "documentation_generator",
+        "knowledge_graph",
+        "future_api"
+      ]
+    },
+    {
+      "id": "knowledge_graph",
+      "name": "Knowledge Graph",
+      "description": "Graph edges/nodes derived from Knowledge Record relationships and cross-module links.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/knowledge_graph.schema.json",
+      "producer": [
+        "STAGE-GENERATE"
+      ],
+      "consumer": [
+        "knowledge_graph",
+        "future_api",
+        "documentation_generator"
+      ]
+    },
+    {
+      "id": "dependency_graph",
+      "name": "Dependency Graph",
+      "description": "Resolved dependency graph among planning IDs / knowledge IDs prior to transform.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/dependency_graph.schema.json",
+      "producer": [
+        "STAGE-DEPENDENCY"
+      ],
+      "consumer": [
+        "STAGE-TRANSFORM",
+        "STAGE-GENERATE",
+        "validation_engine"
+      ]
+    },
+    {
+      "id": "metadata_index",
+      "name": "Metadata Index",
+      "description": "Index of record metadata (IDs, status, owner, version, pack/module placement) for discovery and incremental builds.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/metadata_index.schema.json",
+      "producer": [
+        "STAGE-GENERATE"
+      ],
+      "consumer": [
+        "STAGE-PUBLISH",
+        "future_api",
+        "search_services"
+      ]
+    },
+    {
+      "id": "search_index",
+      "name": "Search Index",
+      "description": "Search documents emitted for full-text / faceted discovery of Knowledge Records.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/search_index.schema.json",
+      "producer": [
+        "STAGE-GENERATE"
+      ],
+      "consumer": [
+        "search_services",
+        "future_api"
+      ]
+    },
+    {
+      "id": "validation_report",
+      "name": "Validation Report",
+      "description": "Structured validation findings from schema, citation, relationship, and integrity checks.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/validation_report.schema.json",
+      "producer": [
+        "STAGE-VALIDATE",
+        "STAGE-VERIFY"
+      ],
+      "consumer": [
+        "STAGE-DEPENDENCY",
+        "STAGE-PUBLISH",
+        "validation_engine",
+        "ci"
+      ]
+    },
+    {
+      "id": "compilation_report",
+      "name": "Compilation Report",
+      "description": "End-to-end compile report covering mapping, generation, gates, and authorization outcomes.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/compilation_report.schema.json",
+      "producer": [
+        "STAGE-GENERATE"
+      ],
+      "consumer": [
+        "STAGE-VERIFY",
+        "STAGE-PUBLISH",
+        "ci",
+        "governance"
+      ]
+    },
+    {
+      "id": "statistics_report",
+      "name": "Statistics Report",
+      "description": "Run-level or cumulative statistics snapshot conforming to statistics.json model.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/statistics.json",
+      "producer": [
+        "STAGE-GENERATE",
+        "STAGE-PUBLISH"
+      ],
+      "consumer": [
+        "ci",
+        "governance",
+        "future_api"
+      ]
+    },
+    {
+      "id": "design_pack",
+      "name": "Design Pack Input",
+      "description": "Authorized design pack inputs loaded at STAGE-LOAD.",
+      "version": "1.0.0",
+      "schema": "knowledge/bazi/**/design",
+      "producer": [
+        "academic_design"
+      ],
+      "consumer": [
+        "STAGE-LOAD"
+      ]
+    },
+    {
+      "id": "compiler_config",
+      "name": "Compiler Config Input",
+      "description": "Compiler configuration document.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/compiler.schema.json",
+      "producer": [
+        "platform_engineering"
+      ],
+      "consumer": [
+        "STAGE-LOAD",
+        "STAGE-GENERATE"
+      ]
+    },
+    {
+      "id": "bibliography_registry",
+      "name": "Bibliography Registry Input",
+      "description": "Frozen Academic Source bibliography registry.",
+      "version": "1.0.0",
+      "schema": "knowledge/bibliography/bibliography.schema.json",
+      "producer": [
+        "bibliography"
+      ],
+      "consumer": [
+        "STAGE-LOAD",
+        "STAGE-VALIDATE"
+      ]
+    },
+    {
+      "id": "foundation_references",
+      "name": "Foundation References Input",
+      "description": "Foundation REF-* reference library input.",
+      "version": "1.0.0",
+      "schema": "knowledge/references/references.json",
+      "producer": [
+        "knowledge_foundation"
+      ],
+      "consumer": [
+        "STAGE-LOAD"
+      ]
+    },
+    {
+      "id": "knowledge_schema",
+      "name": "Knowledge Schema Input",
+      "description": "Base and module Knowledge Record schemas.",
+      "version": "1.0.0",
+      "schema": "knowledge/schema/knowledge_record.schema.json",
+      "producer": [
+        "schema_owners"
+      ],
+      "consumer": [
+        "STAGE-LOAD",
+        "STAGE-VALIDATE",
+        "STAGE-VERIFY"
+      ]
+    },
+    {
+      "id": "citation_rules",
+      "name": "Citation Rules Input",
+      "description": "Bibliography citation policy configuration.",
+      "version": "1.0.0",
+      "schema": "knowledge/bibliography/citation_rules.json",
+      "producer": [
+        "bibliography"
+      ],
+      "consumer": [
+        "STAGE-VALIDATE"
+      ]
+    },
+    {
+      "id": "mapping_rules",
+      "name": "Mapping Rules Input",
+      "description": "Design-to-JSON mapping rules for STAGE-TRANSFORM.",
+      "version": "1.0.0",
+      "schema": "knowledge/tools/record_builder/mapping_rules.md",
+      "producer": [
+        "record_builder"
+      ],
+      "consumer": [
+        "STAGE-TRANSFORM"
+      ]
+    },
+    {
+      "id": "load_manifest",
+      "name": "Load Manifest",
+      "description": "Manifest of inputs discovered and loaded during STAGE-LOAD.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/load_manifest.schema.json",
+      "producer": [
+        "STAGE-LOAD"
+      ],
+      "consumer": [
+        "STAGE-PARSE"
+      ]
+    },
+    {
+      "id": "raw_input_bundle",
+      "name": "Raw Input Bundle",
+      "description": "Bundled raw inputs prior to parse normalization.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/raw_input_bundle.schema.json",
+      "producer": [
+        "STAGE-LOAD"
+      ],
+      "consumer": [
+        "STAGE-PARSE"
+      ]
+    },
+    {
+      "id": "parsed_ir",
+      "name": "Parsed Intermediate Representation",
+      "description": "Normalized IR produced by STAGE-PARSE; no academic invention permitted at this stage.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/parsed_ir.schema.json",
+      "producer": [
+        "STAGE-PARSE"
+      ],
+      "consumer": [
+        "STAGE-VALIDATE",
+        "STAGE-DEPENDENCY",
+        "STAGE-TRANSFORM"
+      ]
+    },
+    {
+      "id": "record_drafts",
+      "name": "Record Drafts",
+      "description": "Pre-generation Knowledge Record shaped drafts from STAGE-TRANSFORM.",
+      "version": "1.0.0",
+      "schema": "knowledge/schema/knowledge_record.schema.json",
+      "producer": [
+        "STAGE-TRANSFORM"
+      ],
+      "consumer": [
+        "STAGE-GENERATE"
+      ]
+    },
+    {
+      "id": "publish_authorization",
+      "name": "Publish Authorization",
+      "description": "Authorization record required before STAGE-PUBLISH writes Official outputs.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/publish_authorization.schema.json",
+      "producer": [
+        "governance"
+      ],
+      "consumer": [
+        "STAGE-PUBLISH"
+      ]
+    },
+    {
+      "id": "publish_receipt",
+      "name": "Publish Receipt",
+      "description": "Receipt emitted after a successful Official publish.",
+      "version": "1.0.0",
+      "schema": "knowledge/compiler/schemas/publish_receipt.schema.json",
+      "producer": [
+        "STAGE-PUBLISH"
+      ],
+      "consumer": [
+        "ci",
+        "governance",
+        "future_api"
+      ]
+    }
+  ]
+}
+
