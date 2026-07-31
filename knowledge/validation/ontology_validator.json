@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-ONTOLOGY",
+  "title": "Ontology Validator",
+  "dimensions": [
+    "ontology"
+  ],
+  "applies_to": [
+    "knowledge_record",
+    "knowledge_graph"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000026",
+      "title": "Missing Ontology Type",
+      "description": "Node/knowledge type not declared.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if node_type / knowledge_type absent.",
+      "recommended_resolution": "Set Concept|Entity|Rule|Pattern|Example|Source|Pack|Module appropriately.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000027",
+      "title": "Invalid Ontology Type",
+      "description": "Type not in ontology registry.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if type ∉ allowed_node_types.",
+      "recommended_resolution": "Use registered ontology types only.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000028",
+      "title": "Missing Parent Link",
+      "description": "Required parent (pack/module/concept parent) missing for specialization/inheritance.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if inheritance/specialization declared without parent target.",
+      "recommended_resolution": "Declare parent Pack/Module/Concept dependency.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000029",
+      "title": "Invalid Parent Reference",
+      "description": "Parent ID does not resolve.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if parent_id not in manifests/registries.",
+      "recommended_resolution": "Fix parent ID or mark planned with notes.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000030",
+      "title": "Invalid Child Reference",
+      "description": "Declared child ID does not resolve.",
+      "severity": "WARNING",
+      "detection_rule": "WARN/FAIL policy: WARN if planned; ERROR if claimed official.",
+      "recommended_resolution": "Correct child ID or defer until authored.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000031",
+      "title": "Missing Academic Layer",
+      "description": "classification.academic_layer missing when required by pack policy.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if academic_layer blank for Pack 01 concepts.",
+      "recommended_resolution": "Set academic layer consistently.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000032",
+      "title": "Missing Computational Layer",
+      "description": "computational_layer missing for compiler-bound records.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if computational_layer blank.",
+      "recommended_resolution": "Declare computational layer (e.g. Base Knowledge Node).",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000033",
+      "title": "Ontology Layer Conflict",
+      "description": "Academic and computational layers contradict pack architecture.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if layer pair violates pack layer matrix.",
+      "recommended_resolution": "Align layers with PACK design architecture.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000034",
+      "title": "Ontology Consistency Mismatch",
+      "description": "Declared type inconsistent with template family / graph node.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if Foundational Concept ≠ Concept node, etc.",
+      "recommended_resolution": "Align knowledge_type with graph node_type.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000035",
+      "title": "Duplicate Canonical Concept Node",
+      "description": "Two Concept nodes share one record_id or canonical key.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL Unique Canonical Node constraint.",
+      "recommended_resolution": "Merge nodes; retain authoritative record_id.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000036",
+      "title": "Pack Used As Concept Identity",
+      "description": "Pack/Module ID used where Concept KR-* required.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if concept slot filled with PACK_*/module_id only.",
+      "recommended_resolution": "Use KR-* for concepts; Pack/Module are organizational.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000037",
+      "title": "Invalid Hierarchy Path",
+      "description": "hierarchy_path inconsistent with module/pack placement.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if hierarchy_path contradicts classification IDs.",
+      "recommended_resolution": "Rebuild hierarchy path from canon tree.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000038",
+      "title": "Orphan Ontology Node",
+      "description": "Node has no pack/module and no relationships.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if isolated from package and graph.",
+      "recommended_resolution": "Attach to Pack and declare relationships.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000039",
+      "title": "Example Without Parent Concept",
+      "description": "Example node lacks REFERENCES/RELATED_TO parent KR.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if Example has no parent link.",
+      "recommended_resolution": "Link EX-* to parent KR-*.",
+      "lifecycle_stages": ["LC-ONTOLOGY"]
+    },
+    {
+      "code": "VAL-000040",
+      "title": "Unknown Edge Type In Ontology Context",
+      "description": "Edge type not in ontology edge registry.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if edge_type ∉ allowed_edge_types.",
+      "recommended_resolution": "Use FOUNDATIONAL_FOR, DEPENDS_ON, CLASSIFIES, REFERENCES, SUPPORTED_BY, RELATED_TO, CONFLICTS_WITH, IMPLEMENTS.",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-COMPILER"]
+    }
+  ]
+}
