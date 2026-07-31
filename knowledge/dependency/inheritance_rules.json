@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "DEP-INH-001",
+  "title": "Knowledge Inheritance Rules",
+  "description": "Rules for Inheritance-level dependencies (structural/classificatory parentage). Specification only.",
+  "inheritance_kinds": [
+    {
+      "kind_id": "concept_from_pack",
+      "description": "Concept inherits pack-level constraints and design scope.",
+      "source_node_types": [
+        "Concept",
+        "Entity",
+        "Rule",
+        "Pattern"
+      ],
+      "target_node_types": [
+        "Pack"
+      ]
+    },
+    {
+      "kind_id": "concept_from_module",
+      "description": "Concept inherits module identity and module standards.",
+      "source_node_types": [
+        "Concept",
+        "Entity",
+        "Rule",
+        "Pattern"
+      ],
+      "target_node_types": [
+        "Module"
+      ]
+    },
+    {
+      "kind_id": "specialization",
+      "description": "Child concept specializes a parent concept without replacing the parent definition.",
+      "source_node_types": [
+        "Concept",
+        "Pattern",
+        "Rule"
+      ],
+      "target_node_types": [
+        "Concept"
+      ]
+    },
+    {
+      "kind_id": "template_inheritance",
+      "description": "Record structure inherits from an authoring template family (documentation-level).",
+      "source_node_types": [
+        "Concept",
+        "Entity",
+        "Rule",
+        "Example"
+      ],
+      "target_node_types": [
+        "Pack",
+        "Module"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "INH-001",
+      "severity": "error",
+      "statement": "Inheritance MUST NOT mutate the parent Canonical Definition."
+    },
+    {
+      "rule_id": "INH-002",
+      "severity": "error",
+      "statement": "Specialization children MUST declare Hard or Inheritance dependency on the parent concept."
+    },
+    {
+      "rule_id": "INH-003",
+      "severity": "error",
+      "statement": "Multiple inheritance of conflicting classificatory parents REQUIRES conflict notes or CONFLICTS_WITH tracking."
+    },
+    {
+      "rule_id": "INH-004",
+      "severity": "error",
+      "statement": "Inheritance edges participate in acyclicity checks with Hard Dependency."
+    },
+    {
+      "rule_id": "INH-005",
+      "severity": "warning",
+      "statement": "Pack/Module inheritance is organizational; it does not replace Concept-to-Concept foundation links."
+    }
+  ],
+  "override_interaction": "Field-level overrides of inherited metadata follow override_policy.json; academic substance overrides require change request after freeze."
+}
