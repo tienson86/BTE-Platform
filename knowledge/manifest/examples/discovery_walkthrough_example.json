@@ -1,0 +1,63 @@
+{
+  "example_id": "MF-EX-000001",
+  "title": "Compiler discovery walkthrough (specification)",
+  "description": "Illustrates how a future compiler would discover packs, modules, records, artifacts, and releases from manifests. No runtime.",
+  "entrypoint": "knowledge/manifest/canon_manifest.json",
+  "steps": [
+    {
+      "step": 1,
+      "action": "load_canon_manifest",
+      "discovers": [
+        "modules",
+        "packs",
+        "records",
+        "artifacts",
+        "releases"
+      ]
+    },
+    {
+      "step": 2,
+      "action": "follow_discovery_links",
+      "refs": [
+        "knowledge/package/pack_registry.json",
+        "knowledge/package/module_registry.json",
+        "knowledge/index/record_index.json"
+      ]
+    },
+    {
+      "step": 3,
+      "action": "load_dependency_manifest",
+      "ref": "knowledge/manifest/dependency_manifest.json"
+    },
+    {
+      "step": 4,
+      "action": "load_build_manifest",
+      "ref": "knowledge/manifest/build_manifest.json",
+      "stages": [
+        "LOAD",
+        "VALIDATE",
+        "RESOLVE_DEPENDENCIES",
+        "COMPILE_RECORDS",
+        "EMIT_ARTIFACTS",
+        "PUBLISH"
+      ]
+    },
+    {
+      "step": 5,
+      "action": "enumerate_artifacts",
+      "ref": "knowledge/manifest/artifact_manifest.json"
+    },
+    {
+      "step": 6,
+      "action": "enumerate_releases",
+      "ref": "knowledge/manifest/release_manifest.json"
+    }
+  ],
+  "expected_discovery_counts_min": {
+    "modules": 1,
+    "packs": 7,
+    "records": 5,
+    "artifacts": 1,
+    "releases": 1
+  }
+}
