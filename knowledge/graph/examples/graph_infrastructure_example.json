@@ -1,0 +1,96 @@
+{
+  "graph_id": "GRAPH-000001",
+  "schema_version": "1.0.0",
+  "status": "draft",
+  "title": "Sprint 3B illustrative subgraph",
+  "description": "Synthetic example only. Demonstrates node/edge shape and constraint intent. Not academic canon and does not modify KR-000001.",
+  "constraints_ref": "graph_constraints.json",
+  "ontology_ref": "ontology_registry.json",
+  "nodes": [
+    {
+      "node_id": "KR-000000",
+      "node_type": "Concept",
+      "label": "Infrastructure Example Concept",
+      "record_id": "KR-000000",
+      "status": "draft",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge"
+    },
+    {
+      "node_id": "KR-000001",
+      "node_type": "Concept",
+      "label": "Yin Yang",
+      "record_id": "KR-000001",
+      "status": "draft",
+      "pack_id": "PACK_01",
+      "module_id": "01_fundamental_knowledge"
+    },
+    {
+      "node_id": "SRC-000001",
+      "node_type": "Source",
+      "label": "Bibliography Source Stub",
+      "status": "draft"
+    },
+    {
+      "node_id": "PACK_01",
+      "node_type": "Pack",
+      "label": "Pack 01 — Fundamental Knowledge",
+      "status": "draft"
+    },
+    {
+      "node_id": "01_fundamental_knowledge",
+      "node_type": "Module",
+      "label": "Fundamental Knowledge Module",
+      "status": "draft"
+    },
+    {
+      "node_id": "EX-000001",
+      "node_type": "Example",
+      "label": "Graph fixture example",
+      "status": "draft"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EDGE-000001",
+      "edge_type": "RELATED_TO",
+      "source_node_id": "KR-000000",
+      "target_node_id": "KR-000001",
+      "status": "draft",
+      "strength": "informational",
+      "notes": "Fixture association only."
+    },
+    {
+      "edge_id": "EDGE-000002",
+      "edge_type": "SUPPORTED_BY",
+      "source_node_id": "KR-000000",
+      "target_node_id": "SRC-000001",
+      "status": "draft",
+      "strength": "weak"
+    },
+    {
+      "edge_id": "EDGE-000003",
+      "edge_type": "CLASSIFIES",
+      "source_node_id": "PACK_01",
+      "target_node_id": "KR-000000",
+      "status": "draft",
+      "strength": "moderate"
+    },
+    {
+      "edge_id": "EDGE-000004",
+      "edge_type": "DEPENDS_ON",
+      "source_node_id": "01_fundamental_knowledge",
+      "target_node_id": "PACK_01",
+      "status": "draft",
+      "strength": "required"
+    },
+    {
+      "edge_id": "EDGE-000005",
+      "edge_type": "REFERENCES",
+      "source_node_id": "EX-000001",
+      "target_node_id": "KR-000000",
+      "status": "draft",
+      "strength": "informational"
+    }
+  ]
+}
