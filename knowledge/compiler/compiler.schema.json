@@ -1,0 +1,525 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/knowledge/compiler.schema.json",
+  "title": "BTE Knowledge Compiler Registries",
+  "description": "JSON Schema for Knowledge Compiler control-plane documents under knowledge/compiler/ (config, artifact registry, version registry, statistics).",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/compiler_config"
+    },
+    {
+      "$ref": "#/$defs/artifact_registry"
+    },
+    {
+      "$ref": "#/$defs/version_registry"
+    },
+    {
+      "$ref": "#/$defs/statistics"
+    }
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "iso_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "metadata_base": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_name",
+        "document_kind",
+        "description",
+        "owner",
+        "status"
+      ],
+      "properties": {
+        "document_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "official",
+            "deprecated"
+          ]
+        }
+      }
+    },
+    "compiler_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metadata",
+        "compiler_name",
+        "compiler_version",
+        "schema_version",
+        "supported_pack_versions",
+        "supported_languages",
+        "incremental_build",
+        "graph_generation",
+        "search_index_generation",
+        "validation_enabled",
+        "report_generation",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "metadata": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/metadata_base"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "document_kind": {
+                  "const": "compiler_config"
+                }
+              }
+            }
+          ]
+        },
+        "compiler_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compiler_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "schema_version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "supported_pack_versions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semver"
+          }
+        },
+        "supported_languages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 16
+          }
+        },
+        "incremental_build": {
+          "type": "boolean"
+        },
+        "graph_generation": {
+          "type": "boolean"
+        },
+        "search_index_generation": {
+          "type": "boolean"
+        },
+        "validation_enabled": {
+          "type": "boolean"
+        },
+        "report_generation": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "artifact_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "description",
+        "version",
+        "schema",
+        "producer",
+        "consumer"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producer": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "consumer": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "artifact_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metadata",
+        "version",
+        "created_at",
+        "updated_at",
+        "artifacts"
+      ],
+      "properties": {
+        "metadata": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/metadata_base"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "document_kind": {
+                  "const": "artifact_registry"
+                }
+              }
+            }
+          ]
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "created_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifact_entry"
+          }
+        }
+      }
+    },
+    "version_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component_id",
+        "name",
+        "version",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "component_id": {
+          "type": "string",
+          "enum": [
+            "compiler",
+            "pipeline",
+            "schema",
+            "pack",
+            "knowledge_canon",
+            "artifact_registry",
+            "bibliography"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "deprecated",
+            "planned"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "version_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metadata",
+        "version",
+        "created_at",
+        "updated_at",
+        "components",
+        "compatibility_sets"
+      ],
+      "properties": {
+        "metadata": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/metadata_base"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "document_kind": {
+                  "const": "version_registry"
+                }
+              }
+            }
+          ]
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "created_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "components": {
+          "type": "array",
+          "minItems": 7,
+          "items": {
+            "$ref": "#/$defs/version_component"
+          }
+        },
+        "compatibility_sets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "compatibility_id",
+              "status",
+              "requires"
+            ],
+            "properties": {
+              "compatibility_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "active",
+                  "deprecated",
+                  "planned"
+                ]
+              },
+              "requires": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/semver"
+                }
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metadata",
+        "version",
+        "created_at",
+        "updated_at",
+        "model",
+        "current"
+      ],
+      "properties": {
+        "metadata": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/metadata_base"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "document_kind": {
+                  "const": "statistics"
+                }
+              }
+            }
+          ]
+        },
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "created_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/iso_date"
+        },
+        "last_run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "records",
+            "packs",
+            "modules",
+            "relationships",
+            "sources",
+            "warnings",
+            "errors",
+            "artifacts",
+            "compile_duration",
+            "generated_files"
+          ],
+          "properties": {
+            "records": {
+              "type": "object"
+            },
+            "packs": {
+              "type": "object"
+            },
+            "modules": {
+              "type": "object"
+            },
+            "relationships": {
+              "type": "object"
+            },
+            "sources": {
+              "type": "object"
+            },
+            "warnings": {
+              "type": "object"
+            },
+            "errors": {
+              "type": "object"
+            },
+            "artifacts": {
+              "type": "object"
+            },
+            "compile_duration": {
+              "type": "object"
+            },
+            "generated_files": {
+              "type": "object"
+            }
+          }
+        },
+        "current": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "records",
+            "packs",
+            "modules",
+            "relationships",
+            "sources",
+            "warnings",
+            "errors",
+            "artifacts",
+            "compile_duration",
+            "generated_files"
+          ],
+          "properties": {
+            "records": {
+              "type": "object"
+            },
+            "packs": {
+              "type": "object"
+            },
+            "modules": {
+              "type": "object"
+            },
+            "relationships": {
+              "type": "object"
+            },
+            "sources": {
+              "type": "object"
+            },
+            "warnings": {
+              "type": "object"
+            },
+            "errors": {
+              "type": "object"
+            },
+            "artifacts": {
+              "type": "object"
+            },
+            "compile_duration": {
+              "type": "object"
+            },
+            "generated_files": {
+              "type": "object"
+            }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
