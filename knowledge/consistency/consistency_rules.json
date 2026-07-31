@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "CON-RULES-001",
+  "title": "Knowledge Consistency Rules",
+  "description": "Master consistency rules for Knowledge Records. Specification only — no runtime checker.",
+  "dimensions": [
+    "canonical_definition_uniqueness",
+    "terminology_consistency",
+    "ontology_consistency",
+    "relationship_consistency",
+    "cross_references",
+    "dependency_integrity",
+    "duplicate_definitions",
+    "contradictions"
+  ],
+  "rules": [
+    {
+      "rule_id": "CON-001",
+      "dimension": "canonical_definition_uniqueness",
+      "severity": "error",
+      "statement": "Each KR-* MUST have exactly one Canonical Definition block; competing definitions in the same record are forbidden."
+    },
+    {
+      "rule_id": "CON-002",
+      "dimension": "canonical_definition_uniqueness",
+      "severity": "error",
+      "statement": "Two distinct KR-* MUST NOT share the same Canonical Name for the same concept identity."
+    },
+    {
+      "rule_id": "CON-003",
+      "dimension": "terminology_consistency",
+      "severity": "error",
+      "statement": "Canonical Name, aliases, and glossary preferred forms MUST NOT contradict each other without conflict notes."
+    },
+    {
+      "rule_id": "CON-004",
+      "dimension": "terminology_consistency",
+      "severity": "warning",
+      "statement": "Vietnamese / Chinese / Pinyin renderings SHOULD remain stable across records that cite the same concept."
+    },
+    {
+      "rule_id": "CON-005",
+      "dimension": "ontology_consistency",
+      "severity": "error",
+      "statement": "Declared knowledge/node type MUST match the ontology registry (Concept, Entity, Rule, Pattern, Example, Source, Pack, Module)."
+    },
+    {
+      "rule_id": "CON-006",
+      "dimension": "ontology_consistency",
+      "severity": "error",
+      "statement": "Exactly one canonical Concept node per record_id (Unique Canonical Node)."
+    },
+    {
+      "rule_id": "CON-007",
+      "dimension": "relationship_consistency",
+      "severity": "error",
+      "statement": "Relationship types MUST be registered edge types; synonyms are forbidden in new declarations."
+    },
+    {
+      "rule_id": "CON-008",
+      "dimension": "relationship_consistency",
+      "severity": "error",
+      "statement": "Duplicate (edge_type, source, target) triples are forbidden."
+    },
+    {
+      "rule_id": "CON-009",
+      "dimension": "cross_references",
+      "severity": "error",
+      "statement": "Cross-referenced KR-* / SRC-* / EX-* IDs MUST resolve in indexes, manifests, or bibliography SSOT (or be explicitly marked planned)."
+    },
+    {
+      "rule_id": "CON-010",
+      "dimension": "dependency_integrity",
+      "severity": "error",
+      "statement": "Hard Dependency and Inheritance edges MUST form a DAG; cycles are forbidden."
+    },
+    {
+      "rule_id": "CON-011",
+      "dimension": "dependency_integrity",
+      "severity": "error",
+      "statement": "Reference-level links MUST NOT satisfy Hard Dependency publication gates."
+    },
+    {
+      "rule_id": "CON-012",
+      "dimension": "duplicate_definitions",
+      "severity": "error",
+      "statement": "Near-duplicate Canonical Definitions across two KR-* for the same concept MUST be merged or one deprecated."
+    },
+    {
+      "rule_id": "CON-013",
+      "dimension": "contradictions",
+      "severity": "error",
+      "statement": "Assertions marked confidence=high MUST NOT contradict each other within the same record without CONFLICTS_WITH / conflict notes."
+    },
+    {
+      "rule_id": "CON-014",
+      "dimension": "contradictions",
+      "severity": "warning",
+      "statement": "Cross-record contradictions MUST be tracked via CONFLICTS_WITH or governance conflict registry."
+    },
+    {
+      "rule_id": "CON-015",
+      "dimension": "cross_references",
+      "severity": "warning",
+      "statement": "Index canonical_key, alias, and record_index entries SHOULD agree on record_id for the same concept."
+    }
+  ],
+  "related": [
+    "knowledge/graph/graph_constraints.json",
+    "knowledge/dependency/dependency_rules.json",
+    "knowledge/quality/quality_metrics.json",
+    "knowledge/authoring/ANTI_PATTERNS.md"
+  ]
+}
