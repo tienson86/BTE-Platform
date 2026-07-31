@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/standards/knowledge_record/assertion.schema.json",
+  "title": "BTE Knowledge Record Assertion",
+  "description": "Traceable academic assertion bound to bibliography source IDs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assertion_id",
+    "statement",
+    "source_ids",
+    "confidence",
+    "status"
+  ],
+  "properties": {
+    "assertion_id": {
+      "type": "string",
+      "pattern": "^ASR-[0-9]{6}$"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^SRC-[0-9]{6}$"
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "pending_review"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "official",
+        "deprecated",
+        "contested"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
