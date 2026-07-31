@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "document_name": "bte_compiler_version_registry",
+    "document_kind": "version_registry",
+    "description": "Registered versions for Compiler ecosystem components (Sprint 2B).",
+    "owner": "Platform Engineering",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "components": [
+    {
+      "component_id": "compiler",
+      "name": "Compiler",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/compiler/compiler_config.json",
+      "notes": "Compiler control-plane metadata version."
+    },
+    {
+      "component_id": "pipeline",
+      "name": "Pipeline",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/compiler/pipeline.json",
+      "notes": "PIPE-KNO-001 stage graph version."
+    },
+    {
+      "component_id": "schema",
+      "name": "Schema",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/schema/knowledge_record.schema.json",
+      "notes": "Base Knowledge Record schema version consumed by compile/verify."
+    },
+    {
+      "component_id": "pack",
+      "name": "Pack",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/compiler/compiler_config.json#supported_pack_versions",
+      "notes": "Supported design pack version family."
+    },
+    {
+      "component_id": "knowledge_canon",
+      "name": "Knowledge Canon",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/knowledge_canon",
+      "notes": "Canon framework version pin for compiler compatibility (Canon content locked in this sprint)."
+    },
+    {
+      "component_id": "artifact_registry",
+      "name": "Artifact Registry",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/compiler/artifact_registry.json",
+      "notes": "Sprint 2B artifact catalog version."
+    },
+    {
+      "component_id": "bibliography",
+      "name": "Bibliography",
+      "version": "1.0.0",
+      "status": "active",
+      "source": "knowledge/bibliography/bibliography.json",
+      "notes": "Frozen bibliography infrastructure v1.0.0."
+    }
+  ],
+  "compatibility_sets": [
+    {
+      "compatibility_id": "COMPAT-001",
+      "status": "active",
+      "requires": {
+        "compiler": "1.0.0",
+        "pipeline": "1.0.0",
+        "schema": "1.0.0",
+        "pack": "1.0.0",
+        "knowledge_canon": "1.0.0",
+        "artifact_registry": "1.0.0",
+        "bibliography": "1.0.0"
+      },
+      "notes": "Initial aligned compatibility set for Sprint 2A/2B."
+    }
+  ]
+}
