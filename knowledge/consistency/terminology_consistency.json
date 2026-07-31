@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "CON-TERM-001",
+  "title": "Terminology Consistency Spec",
+  "description": "Rules ensuring Canonical Names, aliases, and multilingual forms stay consistent. Specification only.",
+  "rules": [
+    {
+      "rule_id": "TERM-001",
+      "severity": "error",
+      "statement": "One Canonical Name per KR-*; aliases never create a second canonical identity."
+    },
+    {
+      "rule_id": "TERM-002",
+      "severity": "error",
+      "statement": "canonical_index.canonical_key MUST be unique and map to exactly one record_id."
+    },
+    {
+      "rule_id": "TERM-003",
+      "severity": "error",
+      "statement": "If glossary preferred form exists, Canonical Name MUST match or document an approved deviation."
+    },
+    {
+      "rule_id": "TERM-004",
+      "severity": "warning",
+      "statement": "Same concept cited in multiple records SHOULD use identical Vietnamese/Chinese/Pinyin strings when known."
+    },
+    {
+      "rule_id": "TERM-005",
+      "severity": "error",
+      "statement": "Deprecated spellings belong in alias_index with alias_kind deprecated/historical — not as new KR-*."
+    },
+    {
+      "rule_id": "TERM-006",
+      "severity": "warning",
+      "statement": "Edge type synonyms in prose (e.g. SUPPORTS) SHOULD map to SUPPORTED_BY at index/manifest time."
+    }
+  ],
+  "normalized_comparison": {
+    "casefold": true,
+    "strip_diacritics_for_collision_check": false,
+    "canonical_key_form": "snake_case_ascii"
+  },
+  "related": [
+    "knowledge/authoring/TERMINOLOGY_GUIDE.md",
+    "knowledge/authoring/NAMING_CONVENTIONS.md",
+    "knowledge/index/alias_index.json",
+    "knowledge/index/canonical_index.json"
+  ]
+}
