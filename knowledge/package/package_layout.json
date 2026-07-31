@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "PKG-LAYOUT-001",
+  "title": "Knowledge Package Layout",
+  "description": "Canonical containment hierarchy: Module → Pack → Section → Knowledge Record. Specification only.",
+  "hierarchy": [
+    {
+      "unit": "Module",
+      "id_pattern": "^[0-9]{2}_[a-z0-9_]+$",
+      "contains": [
+        "Pack"
+      ],
+      "description": "Top-level knowledge domain folder under a discipline tree (e.g. knowledge/bazi/)."
+    },
+    {
+      "unit": "Pack",
+      "id_pattern": "^PACK_[0-9]{2}$",
+      "contains": [
+        "Section",
+        "Knowledge Record"
+      ],
+      "description": "Design and publication bundle of related Knowledge Records."
+    },
+    {
+      "unit": "Section",
+      "id_pattern": "^SEC-[0-9]{6}$",
+      "contains": [
+        "Knowledge Record"
+      ],
+      "description": "Logical grouping within a Pack for docs and navigation."
+    },
+    {
+      "unit": "Knowledge Record",
+      "id_pattern": "^KR-[0-9]{6}$",
+      "contains": [],
+      "description": "Smallest independently governed academic unit."
+    },
+    {
+      "unit": "Release",
+      "id_pattern": null,
+      "contains": [],
+      "description": "Publication event bound to Pack and/or Module via release fields."
+    },
+    {
+      "unit": "Version",
+      "id_pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "contains": [],
+      "description": "SemVer for Pack, Module, and Knowledge Record artifacts."
+    },
+    {
+      "unit": "Compatibility",
+      "id_pattern": null,
+      "contains": [],
+      "description": "Declared version ranges and breaking-change notes between packs/modules/canon."
+    }
+  ],
+  "directory_conventions": {
+    "module_root": "knowledge/<discipline>/<module_id>/",
+    "records": "<module_root>/records/KR-NNNNNN_KEY.md",
+    "pack_design": "<module_root>/design/PACK_NN/",
+    "indexes": "knowledge/index/",
+    "package_registry": "knowledge/package/"
+  },
+  "rules": [
+    {
+      "rule_id": "LAY-001",
+      "severity": "error",
+      "statement": "Every Pack MUST belong to exactly one Module."
+    },
+    {
+      "rule_id": "LAY-002",
+      "severity": "error",
+      "statement": "Every Knowledge Record in a Pack MUST appear in pack.record_ids."
+    },
+    {
+      "rule_id": "LAY-003",
+      "severity": "warning",
+      "statement": "Sections SHOULD partition record_ids without overlap unless cross-listed with notes."
+    },
+    {
+      "rule_id": "LAY-004",
+      "severity": "error",
+      "statement": "Version fields MUST use SemVer MAJOR.MINOR.PATCH."
+    },
+    {
+      "rule_id": "LAY-005",
+      "severity": "error",
+      "statement": "Compatibility.breaking_changes MUST be non-empty when MAJOR version increments for a released Pack."
+    }
+  ]
+}
