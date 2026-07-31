@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "DEP-OVR-001",
+  "title": "Knowledge Dependency Override Policy",
+  "description": "When a declared dependency may be waived, softened, or overridden. Specification only.",
+  "default_policy": "deny_override_for_hard_dependency",
+  "policies": [
+    {
+      "level_id": "hard_dependency",
+      "override_allowed": false,
+      "requires_change_request": true,
+      "approvers": [
+        "Governance Owner",
+        "Academic Reviewer"
+      ],
+      "notes": "Hard Dependency cannot be waived for official release."
+    },
+    {
+      "level_id": "soft_dependency",
+      "override_allowed": true,
+      "requires_change_request": false,
+      "approvers": [
+        "Technical Reviewer"
+      ],
+      "notes": "Document rationale in review findings."
+    },
+    {
+      "level_id": "reference",
+      "override_allowed": true,
+      "requires_change_request": false,
+      "approvers": [],
+      "notes": "Missing optional references are warnings only."
+    },
+    {
+      "level_id": "inheritance",
+      "override_allowed": true,
+      "requires_change_request": true,
+      "approvers": [
+        "Governance Owner",
+        "Technical Reviewer"
+      ],
+      "notes": "Structural inheritance overrides must not erase pack/module identity without CR."
+    },
+    {
+      "level_id": "extension",
+      "override_allowed": true,
+      "requires_change_request": true,
+      "approvers": [
+        "Governance Owner",
+        "Academic Reviewer"
+      ],
+      "notes": "Cannot override away the named base record for an Extension."
+    },
+    {
+      "level_id": "semantic_dependency",
+      "override_allowed": true,
+      "requires_change_request": false,
+      "approvers": [
+        "Academic Reviewer"
+      ],
+      "notes": "Semantic gaps should remain TODO_REVIEW when waived."
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "OVR-001",
+      "severity": "error",
+      "statement": "Overrides MUST reference the dependency_id being waived."
+    },
+    {
+      "rule_id": "OVR-002",
+      "severity": "error",
+      "statement": "Overrides MUST NOT silently delete dependency rows; mark status waived/deprecated."
+    },
+    {
+      "rule_id": "OVR-003",
+      "severity": "error",
+      "statement": "Frozen records require an approved CR-* before dependency override that changes academic interpretation."
+    }
+  ]
+}
