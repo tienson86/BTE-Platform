@@ -1,0 +1,482 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/index/index.schema.json",
+  "title": "BTE Knowledge Index Suite Schema",
+  "description": "Draft 2020-12 schemas for knowledge/index registries. Specification only — no runtime indexer.",
+  "$defs": {
+    "index_envelope": {
+      "type": "object",
+      "required": [
+        "index_id",
+        "index_kind",
+        "schema_version",
+        "status",
+        "updated_at",
+        "entries"
+      ],
+      "properties": {
+        "index_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "index_kind": {
+          "type": "string",
+          "enum": [
+            "canonical",
+            "pack",
+            "record",
+            "topic",
+            "keyword",
+            "alias",
+            "cross_reference"
+          ]
+        },
+        "schema_version": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "official",
+            "deprecated"
+          ]
+        },
+        "purpose": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fast_lookup",
+              "compiler_support",
+              "documentation_generator",
+              "semantic_search",
+              "knowledge_browser"
+            ]
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "entries": {
+          "type": "array"
+        }
+      }
+    },
+    "record_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_id"
+      ],
+      "properties": {
+        "record_id": {
+          "type": "string",
+          "pattern": "^KR-[0-9]{6}$"
+        },
+        "canonical_name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "canonical"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "canonical_key",
+                  "record_id",
+                  "canonical_name"
+                ],
+                "properties": {
+                  "canonical_key": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "record_id": {
+                    "type": "string",
+                    "pattern": "^KR-[0-9]{6}$"
+                  },
+                  "canonical_name": {
+                    "type": "string"
+                  },
+                  "vietnamese_name": {
+                    "type": "string"
+                  },
+                  "chinese_name": {
+                    "type": "string"
+                  },
+                  "pinyin": {
+                    "type": "string"
+                  },
+                  "pack_id": {
+                    "type": "string"
+                  },
+                  "module_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "pack"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "pack_id",
+                  "title",
+                  "module_id"
+                ],
+                "properties": {
+                  "pack_id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "module_id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "record_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^KR-[0-9]{6}$"
+                    }
+                  },
+                  "design_path": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "record"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "record_id",
+                  "canonical_name",
+                  "pack_id",
+                  "module_id",
+                  "status"
+                ],
+                "properties": {
+                  "record_id": {
+                    "type": "string",
+                    "pattern": "^KR-[0-9]{6}$"
+                  },
+                  "canonical_name": {
+                    "type": "string"
+                  },
+                  "vietnamese_name": {
+                    "type": "string"
+                  },
+                  "pack_id": {
+                    "type": "string"
+                  },
+                  "module_id": {
+                    "type": "string"
+                  },
+                  "knowledge_type": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "compiler_status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "topic"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "topic_id",
+                  "label",
+                  "record_ids"
+                ],
+                "properties": {
+                  "topic_id": {
+                    "type": "string",
+                    "pattern": "^TOPIC-[0-9]{6}$"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "record_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^KR-[0-9]{6}$"
+                    }
+                  },
+                  "pack_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "keyword"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "keyword",
+                  "record_ids"
+                ],
+                "properties": {
+                  "keyword": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "normalized": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "record_ids": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^KR-[0-9]{6}$"
+                    }
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "alias"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "alias",
+                  "record_id",
+                  "canonical_name"
+                ],
+                "properties": {
+                  "alias": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "normalized": {
+                    "type": "string"
+                  },
+                  "record_id": {
+                    "type": "string",
+                    "pattern": "^KR-[0-9]{6}$"
+                  },
+                  "canonical_name": {
+                    "type": "string"
+                  },
+                  "alias_kind": {
+                    "type": "string",
+                    "enum": [
+                      "spelling",
+                      "vietnamese",
+                      "chinese",
+                      "pinyin",
+                      "historical",
+                      "common",
+                      "deprecated"
+                    ]
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        {
+          "$ref": "#/$defs/index_envelope"
+        },
+        {
+          "properties": {
+            "index_kind": {
+              "const": "cross_reference"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "xref_id",
+                  "source_record_id",
+                  "target_record_id",
+                  "relation"
+                ],
+                "properties": {
+                  "xref_id": {
+                    "type": "string",
+                    "pattern": "^XREF-[0-9]{6}$"
+                  },
+                  "source_record_id": {
+                    "type": "string",
+                    "pattern": "^KR-[0-9]{6}$"
+                  },
+                  "target_record_id": {
+                    "type": "string",
+                    "pattern": "^KR-[0-9]{6}$"
+                  },
+                  "relation": {
+                    "type": "string",
+                    "enum": [
+                      "FOUNDATIONAL_FOR",
+                      "DEPENDS_ON",
+                      "CLASSIFIES",
+                      "REFERENCES",
+                      "SUPPORTED_BY",
+                      "RELATED_TO",
+                      "CONFLICTS_WITH",
+                      "IMPLEMENTS",
+                      "SEE_ALSO"
+                    ]
+                  },
+                  "bidirectional": {
+                    "type": "boolean"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
