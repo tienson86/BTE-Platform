@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-METADATA",
+  "title": "Metadata Validator",
+  "dimensions": [
+    "metadata"
+  ],
+  "applies_to": [
+    "knowledge_record",
+    "computational_metadata"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000091",
+      "title": "Missing Schema Version",
+      "description": "computational_metadata.schema_version missing or not 1.0.0.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL unless schema_version == 1.0.0 for current standards track.",
+      "recommended_resolution": "Set schema_version to 1.0.0.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000092",
+      "title": "Missing Created/Updated Dates",
+      "description": "created_at or updated_at missing.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if dates absent.",
+      "recommended_resolution": "Set ISO dates.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000093",
+      "title": "Invalid Date Format",
+      "description": "Date fields not ISO date.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if format ≠ YYYY-MM-DD.",
+      "recommended_resolution": "Correct date format.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000094",
+      "title": "Missing Owner",
+      "description": "governance.owner or metadata.owner missing on review/official track.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if owner blank when status∈{review,approved,official}.",
+      "recommended_resolution": "Assign owner.",
+      "lifecycle_stages": ["LC-GOVERNANCE"]
+    },
+    {
+      "code": "VAL-000095",
+      "title": "Missing Compiler Status",
+      "description": "compiler_status missing.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if compiler_status absent.",
+      "recommended_resolution": "Set not_compiled|compiled_draft|compiled_verified|published|blocked.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000096",
+      "title": "Metadata Status Mismatch",
+      "description": "identity.status ≠ computational_metadata.status.",
+      "severity": "WARNING",
+      "detection_rule": "WARN on status drift.",
+      "recommended_resolution": "Synchronize status fields.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-GOVERNANCE"]
+    },
+    {
+      "code": "VAL-000097",
+      "title": "Missing Language",
+      "description": "language field missing.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if language blank.",
+      "recommended_resolution": "Set language code (e.g. vi, en).",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000098",
+      "title": "Invalid Knowledge Nature",
+      "description": "knowledge_nature not in enum.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if not foundational|derived|procedural|interpretive|hybrid.",
+      "recommended_resolution": "Pick valid knowledge_nature.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000099",
+      "title": "Missing Governance Review Object",
+      "description": "governance.review missing required academic/technical/governance/approval/freeze.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if review sub-object incomplete on review+ track.",
+      "recommended_resolution": "Complete review.schema.json fields.",
+      "lifecycle_stages": ["LC-GOVERNANCE"]
+    },
+    {
+      "code": "VAL-000100",
+      "title": "Release Freeze Inconsistency",
+      "description": "release_status=released but freeze≠frozen.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL REL-G-003 style gate.",
+      "recommended_resolution": "Freeze before release.",
+      "lifecycle_stages": ["LC-RELEASE"]
+    }
+  ]
+}
