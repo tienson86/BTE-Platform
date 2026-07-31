@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/governance/change_request.schema.json",
+  "title": "BTE Knowledge Record Change Request",
+  "description": "Schema for change requests that alter Knowledge Record lifecycle or frozen content. Draft 2020-12. Specification only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "change_request_id",
+    "title",
+    "target_record_id",
+    "change_type",
+    "requested_by",
+    "requested_at",
+    "status",
+    "rationale",
+    "impact"
+  ],
+  "properties": {
+    "change_request_id": {
+      "type": "string",
+      "pattern": "^CR-[0-9]{6}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_record_id": {
+      "type": "string",
+      "pattern": "^KR-[0-9]{6}$"
+    },
+    "target_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "change_type": {
+      "type": "string",
+      "enum": [
+        "content_update",
+        "metadata_fix",
+        "relationship_update",
+        "status_transition",
+        "unfreeze",
+        "freeze",
+        "deprecate",
+        "archive",
+        "retire",
+        "supersede"
+      ]
+    },
+    "requested_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "in_review",
+        "approved",
+        "rejected",
+        "implemented",
+        "cancelled"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "impact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "breaks_freeze",
+        "requires_re_review",
+        "affects_indexes",
+        "affects_graph"
+      ],
+      "properties": {
+        "breaks_freeze": {
+          "type": "boolean"
+        },
+        "requires_re_review": {
+          "type": "boolean"
+        },
+        "affects_indexes": {
+          "type": "boolean"
+        },
+        "affects_graph": {
+          "type": "boolean"
+        },
+        "downstream_record_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^KR-[0-9]{6}$"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "proposed_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "from_state": {
+          "type": "string"
+        },
+        "to_state": {
+          "type": "string"
+        },
+        "transition_id": {
+          "type": "string"
+        }
+      }
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "decision"
+        ],
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected",
+              "waived"
+            ]
+          },
+          "decided_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "related_documents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
