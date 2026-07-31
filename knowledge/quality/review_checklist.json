@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "description": "Master review checklist mapping quality metrics to review gates. Specification only.",
+  "checklist_id": "QC-MASTER-001",
+  "applies_to": "knowledge_record",
+  "sections": [
+    {
+      "section_id": "RC-IDENTITY",
+      "title": "Identity",
+      "items": [
+        {
+          "item_id": "RC-001",
+          "requirement": "record_id exists and matches KR-NNNNNN",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-COMPLETENESS",
+            "QM-GOVERNANCE_COMPLIANCE"
+          ]
+        },
+        {
+          "item_id": "RC-002",
+          "requirement": "record_id is unique and immutable",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-CONSISTENCY",
+            "QM-GRAPH_INTEGRITY"
+          ]
+        },
+        {
+          "item_id": "RC-003",
+          "requirement": "canonical_name and vietnamese_name present",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-COMPLETENESS"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "RC-DEFINITION",
+      "title": "Canonical Definition",
+      "items": [
+        {
+          "item_id": "RC-010",
+          "requirement": "canonical definition is non-empty and scoped",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-COMPLETENESS",
+            "QM-CONSISTENCY"
+          ]
+        },
+        {
+          "item_id": "RC-011",
+          "requirement": "definition does not invent unsupported academic claims",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-TRACEABILITY",
+            "QM-BIBLIOGRAPHY_INTEGRITY"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "RC-SOURCES",
+      "title": "Sources & Assertions",
+      "items": [
+        {
+          "item_id": "RC-020",
+          "requirement": "primary_source_ids reference existing SRC-* entries",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-BIBLIOGRAPHY_INTEGRITY",
+            "QM-TRACEABILITY"
+          ]
+        },
+        {
+          "item_id": "RC-021",
+          "requirement": "assertions include statement, source_ids, confidence, status",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-COMPLETENESS",
+            "QM-TRACEABILITY"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "RC-RELATIONSHIPS",
+      "title": "Relationships & Graph",
+      "items": [
+        {
+          "item_id": "RC-030",
+          "requirement": "relationship types are from approved ontology",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-RELATIONSHIP_INTEGRITY",
+            "QM-GRAPH_INTEGRITY"
+          ]
+        },
+        {
+          "item_id": "RC-031",
+          "requirement": "no cyclic FOUNDATIONAL_FOR / DEPENDS_ON dependencies",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-GRAPH_INTEGRITY"
+          ]
+        },
+        {
+          "item_id": "RC-032",
+          "requirement": "no duplicate relationship triples",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-RELATIONSHIP_INTEGRITY",
+            "QM-GRAPH_INTEGRITY"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "RC-TECHNICAL",
+      "title": "Technical / Compiler",
+      "items": [
+        {
+          "item_id": "RC-040",
+          "requirement": "record shape satisfies standards knowledge_record schema expectations",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-COMPILER_COMPATIBILITY"
+          ]
+        },
+        {
+          "item_id": "RC-041",
+          "requirement": "IDs and status enums are compiler-safe",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-COMPILER_COMPATIBILITY",
+            "QM-CONSISTENCY"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "RC-GOVERNANCE",
+      "title": "Governance",
+      "items": [
+        {
+          "item_id": "RC-050",
+          "requirement": "academic, technical, and governance reviews recorded",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-GOVERNANCE_COMPLIANCE"
+          ]
+        },
+        {
+          "item_id": "RC-051",
+          "requirement": "approval and freeze states consistent with release status",
+          "mandatory": true,
+          "metric_ids": [
+            "QM-GOVERNANCE_COMPLIANCE"
+          ]
+        }
+      ]
+    }
+  ],
+  "gate_policy": {
+    "publish_requires_all_mandatory": true,
+    "overall_metric_pass_threshold": 80,
+    "blocking_metrics": [
+      "QM-TRACEABILITY",
+      "QM-BIBLIOGRAPHY_INTEGRITY",
+      "QM-GOVERNANCE_COMPLIANCE"
+    ]
+  }
+}
