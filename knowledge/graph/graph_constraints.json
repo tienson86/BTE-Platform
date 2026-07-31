@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "description": "Hard constraints for the BTE Knowledge Graph. Specification only — enforcement is deferred to a future sprint.",
+  "constraints": [
+    {
+      "constraint_id": "GRAPH-C-001",
+      "name": "No cyclic dependency",
+      "severity": "error",
+      "description": "The directed subgraph formed by edges whose type participates_in_dependency_cycle_check MUST be a DAG. Cycles among FOUNDATIONAL_FOR and DEPENDS_ON are forbidden.",
+      "applies_to_edge_types": [
+        "FOUNDATIONAL_FOR",
+        "DEPENDS_ON"
+      ],
+      "check_kind": "acyclicity",
+      "remediation": "Remove or reclassify one edge in the cycle; prefer correcting academic dependency direction over weakening type semantics."
+    },
+    {
+      "constraint_id": "GRAPH-C-002",
+      "name": "Unique Canonical Node",
+      "severity": "error",
+      "description": "Each canonical concept MUST map to exactly one canonical Concept node in the graph. Duplicate nodes representing the same immutable record_id are forbidden.",
+      "applies_to_node_types": [
+        "Concept"
+      ],
+      "check_kind": "unique_canonical_identity",
+      "identity_fields": [
+        "record_id",
+        "node_id"
+      ],
+      "remediation": "Merge duplicates; retain the node whose record_id is authoritative."
+    },
+    {
+      "constraint_id": "GRAPH-C-003",
+      "name": "Immutable Record ID",
+      "severity": "error",
+      "description": "Once a node is bound to a Knowledge Record ID (KR-*), that record_id MUST NOT change for the lifetime of the node. Renames of display labels are allowed; ID remapping is not.",
+      "applies_to_node_types": [
+        "Concept"
+      ],
+      "check_kind": "immutable_field",
+      "immutable_fields": [
+        "record_id",
+        "node_id"
+      ],
+      "remediation": "Create a new node only for a new concept; deprecate the old node via governance — never rewrite its ID."
+    },
+    {
+      "constraint_id": "GRAPH-C-004",
+      "name": "No duplicate relationships",
+      "severity": "error",
+      "description": "At most one edge may exist for the same (edge_type, source_node_id, target_node_id) triple. Duplicate relationship instances are forbidden even if edge_id values differ.",
+      "applies_to_edge_types": [
+        "FOUNDATIONAL_FOR",
+        "DEPENDS_ON",
+        "CLASSIFIES",
+        "REFERENCES",
+        "SUPPORTED_BY",
+        "RELATED_TO",
+        "CONFLICTS_WITH",
+        "IMPLEMENTS"
+      ],
+      "check_kind": "unique_edge_triple",
+      "uniqueness_key": [
+        "edge_type",
+        "source_node_id",
+        "target_node_id"
+      ],
+      "remediation": "Keep a single edge; merge notes into that edge metadata."
+    }
+  ],
+  "notes": [
+    "RELATED_TO and CONFLICTS_WITH may be stored as a single undirected edge or as a normalized bidirectional pair; uniqueness still applies to the logical triple.",
+    "These constraints are declarative. No graph engine, validator binary, or compiler hook is shipped in Sprint 3B."
+  ]
+}
