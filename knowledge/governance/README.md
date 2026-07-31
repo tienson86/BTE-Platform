@@ -1,5 +1,30 @@
 # BTE Knowledge Governance Framework
 
+## Knowledge Record lifecycle specs (Sprint 3E)
+
+Machine-readable lifecycle formalization for every Knowledge Record. **Specification only** — no workflow runtime.
+
+| Artifact | Role |
+|----------|------|
+| [approval_matrix.json](approval_matrix.json) | Required approvers per state transition |
+| [release_policy.json](release_policy.json) | Release gates (REL-G-*) |
+| [freeze_policy.json](freeze_policy.json) | Freeze / unfreeze rules (FRZ-*) |
+| [change_request.schema.json](change_request.schema.json) | Draft 2020-12 change request schema |
+| [review_workflow.json](review_workflow.json) | Academic → technical → governance review stages |
+| [publication_workflow.json](publication_workflow.json) | Freeze → index sync → release |
+| [retirement_policy.json](retirement_policy.json) | Deprecate → archive → retire |
+| [examples/](examples/) | Change request + lifecycle path fixtures |
+
+```text
+draft → review → approved → official (frozen/released)
+                              ↓
+                         deprecated → archived → retired
+```
+
+`record_id` remains immutable across all states. Complements narrative docs below; does not replace them.
+
+---
+
 ## Knowledge Foundation entry documents (V1.0)
 
 | Document | Role |
