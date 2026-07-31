@@ -1,0 +1,77 @@
+{
+  "manifest_id": "MF-BUILD-001",
+  "manifest_kind": "build",
+  "schema_version": "1.0.0",
+  "status": "draft",
+  "title": "Knowledge Canon Build Manifest",
+  "description": "Declares compiler-discoverable inputs, stages, and expected outputs. No compiler implementation in Sprint 4E.",
+  "updated_at": "2026-07-31",
+  "build_id": "BUILD-000001",
+  "stages": [
+    "LOAD",
+    "VALIDATE",
+    "RESOLVE_DEPENDENCIES",
+    "COMPILE_RECORDS",
+    "EMIT_ARTIFACTS",
+    "PUBLISH"
+  ],
+  "inputs": [
+    {
+      "input_id": "IN-001",
+      "kind": "manifest",
+      "ref": "knowledge/manifest/canon_manifest.json"
+    },
+    {
+      "input_id": "IN-002",
+      "kind": "registry",
+      "ref": "knowledge/package/pack_registry.json"
+    },
+    {
+      "input_id": "IN-003",
+      "kind": "registry",
+      "ref": "knowledge/package/module_registry.json"
+    },
+    {
+      "input_id": "IN-004",
+      "kind": "registry",
+      "ref": "knowledge/index/record_index.json"
+    },
+    {
+      "input_id": "IN-005",
+      "kind": "manifest",
+      "ref": "knowledge/manifest/dependency_manifest.json"
+    },
+    {
+      "input_id": "IN-006",
+      "kind": "schema",
+      "ref": "knowledge/standards/knowledge_record/knowledge_record.schema.json"
+    },
+    {
+      "input_id": "IN-007",
+      "kind": "module",
+      "ref": "01_fundamental_knowledge"
+    },
+    {
+      "input_id": "IN-008",
+      "kind": "pack",
+      "ref": "PACK_01"
+    },
+    {
+      "input_id": "IN-009",
+      "kind": "record",
+      "ref": "KR-000001"
+    }
+  ],
+  "outputs": [
+    {
+      "artifact_id": "ART-000010",
+      "artifact_type": "knowledge_record_json",
+      "path": "(planned) compiled/KR-000001.json"
+    },
+    {
+      "artifact_id": "ART-000011",
+      "artifact_type": "manifest",
+      "path": "knowledge/manifest/artifact_manifest.json"
+    }
+  ]
+}
