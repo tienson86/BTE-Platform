@@ -1,0 +1,71 @@
+{
+  "example_id": "DEP-EX-000001",
+  "title": "Pack 01 dependency illustration",
+  "description": "Synthetic dependency declarations for Sprint 4C. Does not modify Knowledge Records.",
+  "schema_version": "1.0.0",
+  "dependencies": [
+    {
+      "dependency_id": "DEP-000001",
+      "level_id": "hard_dependency",
+      "source_record_id": "KR-000002",
+      "target_record_id": "KR-000001",
+      "edge_type": "FOUNDATIONAL_FOR",
+      "status": "draft",
+      "rationale": "Qi framing treats Yin Yang as academic foundation in Pack 01 inventory intent."
+    },
+    {
+      "dependency_id": "DEP-000002",
+      "level_id": "hard_dependency",
+      "source_record_id": "KR-000003",
+      "target_record_id": "KR-000001",
+      "edge_type": "FOUNDATIONAL_FOR",
+      "status": "draft",
+      "rationale": "Wu Xing system framing depends on Yin Yang."
+    },
+    {
+      "dependency_id": "DEP-000003",
+      "level_id": "semantic_dependency",
+      "source_record_id": "KR-000003",
+      "target_record_id": "KR-000002",
+      "edge_type": "RELATED_TO",
+      "status": "draft",
+      "rationale": "Five Phases discourse often presupposes Qi; may be Soft/Semantic until pack freezes Hard."
+    },
+    {
+      "dependency_id": "DEP-000004",
+      "level_id": "inheritance",
+      "source_record_id": "KR-000001",
+      "target_record_id": "PACK_01",
+      "edge_type": "CLASSIFIES",
+      "status": "draft",
+      "rationale": "Concept inherits Pack 01 foundational scope."
+    },
+    {
+      "dependency_id": "DEP-000005",
+      "level_id": "extension",
+      "source_record_id": "KR-000004",
+      "target_record_id": "KR-000001",
+      "edge_type": "DEPENDS_ON",
+      "status": "planned",
+      "rationale": "Heavenly Stems extend polarity classification without replacing Yin Yang definition."
+    },
+    {
+      "dependency_id": "DEP-000006",
+      "level_id": "reference",
+      "source_record_id": "KR-000001",
+      "target_record_id": "SRC-000001",
+      "edge_type": "SUPPORTED_BY",
+      "status": "draft",
+      "rationale": "Bibliography support pointer (fixture source id)."
+    },
+    {
+      "dependency_id": "DEP-000007",
+      "level_id": "soft_dependency",
+      "source_record_id": "KR-000005",
+      "target_record_id": "KR-000004",
+      "edge_type": "RELATED_TO",
+      "status": "planned",
+      "rationale": "Branches commonly paired with Stems; soft until jointly reviewed."
+    }
+  ]
+}
