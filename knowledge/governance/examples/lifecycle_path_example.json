@@ -1,0 +1,54 @@
+{
+  "example_id": "GOV-EX-000001",
+  "title": "KR lifecycle path fixture",
+  "description": "Illustrative happy-path lifecycle for a Knowledge Record. Specification example only.",
+  "record_id": "KR-000000",
+  "path": [
+    {
+      "state": "draft",
+      "workflow": "authoring",
+      "notes": "Author creates KR draft."
+    },
+    {
+      "state": "review",
+      "workflow": "review_workflow.json",
+      "stages": [
+        "RV-01-SUBMIT",
+        "RV-02-ACADEMIC",
+        "RV-03-TECHNICAL",
+        "RV-04-GOVERNANCE"
+      ]
+    },
+    {
+      "state": "approved",
+      "gate": "approval_matrix TR-GOVERNANCE-PASS"
+    },
+    {
+      "state": "official",
+      "workflow": "publication_workflow.json",
+      "stages": [
+        "PB-01-FREEZE-CANDIDATE",
+        "PB-02-FREEZE",
+        "PB-03-INDEX-SYNC",
+        "PB-04-RELEASE",
+        "PB-05-POST-RELEASE"
+      ],
+      "freeze": "frozen",
+      "release_status": "released"
+    },
+    {
+      "state": "deprecated",
+      "policy": "retirement_policy.json",
+      "requires": "CR with change_type=deprecate"
+    },
+    {
+      "state": "archived",
+      "policy": "retirement_policy.json"
+    },
+    {
+      "state": "retired",
+      "policy": "retirement_policy.json",
+      "notes": "record_id remains reserved forever."
+    }
+  ]
+}
