@@ -1,0 +1,150 @@
+{
+  "metadata": {
+    "document_name": "bte_compiler_pipeline",
+    "document_kind": "pipeline",
+    "description": "Ordered Knowledge Compiler pipeline stages (metadata only).",
+    "owner": "Platform Engineering",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "pipeline_id": "PIPE-KNO-001",
+  "pipeline_name": "knowledge_record_compile_pipeline",
+  "stages": [
+    {
+      "id": "STAGE-LOAD",
+      "name": "LOAD",
+      "description": "Load authorized inputs: design artifacts, registries, schemas, bibliography, and configuration.",
+      "inputs": [
+        "design_pack",
+        "compiler_config",
+        "bibliography_registry",
+        "foundation_references",
+        "knowledge_schema"
+      ],
+      "outputs": [
+        "load_manifest",
+        "raw_input_bundle"
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "STAGE-PARSE",
+      "name": "PARSE",
+      "description": "Parse loaded inputs into normalized intermediate representations without academic invention.",
+      "inputs": [
+        "raw_input_bundle",
+        "load_manifest"
+      ],
+      "outputs": [
+        "parsed_ir"
+      ],
+      "dependencies": [
+        "STAGE-LOAD"
+      ]
+    },
+    {
+      "id": "STAGE-VALIDATE",
+      "name": "VALIDATE",
+      "description": "Validate structure, IDs, citation policy, and schema constraints prior to transform.",
+      "inputs": [
+        "parsed_ir",
+        "knowledge_schema",
+        "bibliography_registry",
+        "citation_rules"
+      ],
+      "outputs": [
+        "validation_report"
+      ],
+      "dependencies": [
+        "STAGE-PARSE"
+      ]
+    },
+    {
+      "id": "STAGE-DEPENDENCY",
+      "name": "DEPENDENCY",
+      "description": "Resolve cross-record and cross-module dependency graph from planning/knowledge IDs.",
+      "inputs": [
+        "parsed_ir",
+        "validation_report"
+      ],
+      "outputs": [
+        "dependency_graph"
+      ],
+      "dependencies": [
+        "STAGE-VALIDATE"
+      ]
+    },
+    {
+      "id": "STAGE-TRANSFORM",
+      "name": "TRANSFORM",
+      "description": "Map approved design IR into Knowledge Record shaped objects per mapping rules.",
+      "inputs": [
+        "parsed_ir",
+        "dependency_graph",
+        "mapping_rules"
+      ],
+      "outputs": [
+        "record_drafts"
+      ],
+      "dependencies": [
+        "STAGE-DEPENDENCY"
+      ]
+    },
+    {
+      "id": "STAGE-GENERATE",
+      "name": "GENERATE",
+      "description": "Generate compile artifacts: JSON drafts, optional graph edges, search docs, and reports.",
+      "inputs": [
+        "record_drafts",
+        "compiler_config"
+      ],
+      "outputs": [
+        "knowledge_record_json",
+        "knowledge_graph",
+        "metadata_index",
+        "search_index",
+        "compilation_report",
+        "statistics_report"
+      ],
+      "dependencies": [
+        "STAGE-TRANSFORM"
+      ]
+    },
+    {
+      "id": "STAGE-VERIFY",
+      "name": "VERIFY",
+      "description": "Post-generation verification: schema, references, relationships, integrity, and policy gates.",
+      "inputs": [
+        "knowledge_record_json",
+        "validation_report",
+        "compilation_report"
+      ],
+      "outputs": [
+        "validation_report"
+      ],
+      "dependencies": [
+        "STAGE-GENERATE"
+      ]
+    },
+    {
+      "id": "STAGE-PUBLISH",
+      "name": "PUBLISH",
+      "description": "Publish only when authorized: write Official outputs and update statistics/version registries.",
+      "inputs": [
+        "knowledge_record_json",
+        "validation_report",
+        "publish_authorization"
+      ],
+      "outputs": [
+        "knowledge_record_json",
+        "statistics_report",
+        "publish_receipt"
+      ],
+      "dependencies": [
+        "STAGE-VERIFY"
+      ]
+    }
+  ]
+}
