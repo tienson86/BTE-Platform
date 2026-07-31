@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "matrix_id": "GOV-AM-001",
+  "title": "Knowledge Record Approval Matrix",
+  "description": "Who must approve which KR lifecycle transitions. Specification only.",
+  "applies_to": "knowledge_record",
+  "roles": [
+    "Knowledge Author",
+    "Academic Reviewer",
+    "Technical Reviewer",
+    "Governance Owner",
+    "Release Manager",
+    "Platform Maintainer"
+  ],
+  "lifecycle_states": [
+    "idea",
+    "draft",
+    "review",
+    "approved",
+    "official",
+    "maintained",
+    "deprecated",
+    "archived",
+    "retired"
+  ],
+  "approvals": [
+    {
+      "transition_id": "TR-SUBMIT-REVIEW",
+      "from_state": "draft",
+      "to_state": "review",
+      "required_approvers": [
+        "Knowledge Author"
+      ],
+      "optional_approvers": [],
+      "separation_of_duties": false
+    },
+    {
+      "transition_id": "TR-ACADEMIC-PASS",
+      "from_state": "review",
+      "to_state": "review",
+      "gate": "academic_review.approved",
+      "required_approvers": [
+        "Academic Reviewer"
+      ],
+      "optional_approvers": [],
+      "separation_of_duties": true,
+      "notes": "Author MUST NOT be sole academic approver for official track."
+    },
+    {
+      "transition_id": "TR-TECHNICAL-PASS",
+      "from_state": "review",
+      "to_state": "review",
+      "gate": "technical_review.approved",
+      "required_approvers": [
+        "Technical Reviewer"
+      ],
+      "optional_approvers": [
+        "Platform Maintainer"
+      ],
+      "separation_of_duties": true
+    },
+    {
+      "transition_id": "TR-GOVERNANCE-PASS",
+      "from_state": "review",
+      "to_state": "approved",
+      "gate": "governance_review.approved",
+      "required_approvers": [
+        "Governance Owner"
+      ],
+      "optional_approvers": [],
+      "separation_of_duties": true,
+      "prerequisites": [
+        "academic_review.approved_or_waived",
+        "technical_review.approved"
+      ]
+    },
+    {
+      "transition_id": "TR-PUBLISH",
+      "from_state": "approved",
+      "to_state": "official",
+      "required_approvers": [
+        "Governance Owner",
+        "Release Manager"
+      ],
+      "optional_approvers": [],
+      "separation_of_duties": true,
+      "prerequisites": [
+        "freeze.status=frozen_or_candidate_accepted",
+        "release_policy.gates_pass"
+      ]
+    },
+    {
+      "transition_id": "TR-DEPRECATE",
+      "from_state": "official",
+      "to_state": "deprecated",
+      "required_approvers": [
+        "Governance Owner"
+      ],
+      "optional_approvers": [
+        "Academic Reviewer",
+        "Release Manager"
+      ],
+      "separation_of_duties": true
+    },
+    {
+      "transition_id": "TR-ARCHIVE",
+      "from_state": "deprecated",
+      "to_state": "archived",
+      "required_approvers": [
+        "Governance Owner",
+        "Release Manager"
+      ],
+      "optional_approvers": [],
+      "separation_of_duties": false
+    },
+    {
+      "transition_id": "TR-RETIRE",
+      "from_state": "archived",
+      "to_state": "retired",
+      "required_approvers": [
+        "Governance Owner"
+      ],
+      "optional_approvers": [
+        "Release Manager"
+      ],
+      "separation_of_duties": true,
+      "notes": "Retirement does not delete immutable record_id."
+    }
+  ],
+  "rules": [
+    "Author of a change SHOULD NOT be the sole Approver for Official promotion.",
+    "Technical Review does not replace Academic Review for classical claims.",
+    "Academic Review does not waive Technical validation failures.",
+    "record_id is immutable across all transitions."
+  ]
+}
