@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "description": "Canonical node types for the BTE Knowledge Graph. Specification only — no runtime implementation.",
+  "node_types": [
+    {
+      "type_id": "Concept",
+      "code": "CONCEPT",
+      "description": "Canonical academic concept represented by a Knowledge Record (typically KR-*).",
+      "typical_id_pattern": "^KR-[0-9]{6}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Primary graph citizen for foundational and derived knowledge concepts."
+    },
+    {
+      "type_id": "Entity",
+      "code": "ENTITY",
+      "description": "Named entity within the canon (person, text unit, or catalogued object) distinct from a Concept node.",
+      "typical_id_pattern": "^ENT-[0-9]{6}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Reserved for non-concept entities; ID pattern is provisional until entity registry exists."
+    },
+    {
+      "type_id": "Rule",
+      "code": "RULE",
+      "description": "Formal rule node derived from rule database or rule-bearing Knowledge Records.",
+      "typical_id_pattern": "^RULE-[0-9]{6}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Specification placeholder; does not imply engine execution."
+    },
+    {
+      "type_id": "Pattern",
+      "code": "PATTERN",
+      "description": "Recognized structural or interpretive pattern in BaZi knowledge.",
+      "typical_id_pattern": "^PAT-[0-9]{6}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Distinct from Concept when the unit is a pattern type rather than a foundational concept."
+    },
+    {
+      "type_id": "Example",
+      "code": "EXAMPLE",
+      "description": "Illustrative or boundary example attached to knowledge (typically EX-*).",
+      "typical_id_pattern": "^EX-[0-9]{6}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Examples are not academic authorities by themselves."
+    },
+    {
+      "type_id": "Source",
+      "code": "SOURCE",
+      "description": "Bibliography / citation source node (typically SRC-*).",
+      "typical_id_pattern": "^SRC-[0-9]{6}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Aligns with knowledge/bibliography source IDs when present."
+    },
+    {
+      "type_id": "Pack",
+      "code": "PACK",
+      "description": "Design or publication pack container (e.g. PACK_01).",
+      "typical_id_pattern": "^PACK_[0-9]{2}$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Organizational node; not a substitute for Concept identity."
+    },
+    {
+      "type_id": "Module",
+      "code": "MODULE",
+      "description": "Knowledge module container (e.g. 01_fundamental_knowledge).",
+      "typical_id_pattern": "^[0-9]{2}_[a-z0-9_]+$",
+      "allowed_as_source": true,
+      "allowed_as_target": true,
+      "notes": "Organizational node under the BaZi module map."
+    }
+  ]
+}
