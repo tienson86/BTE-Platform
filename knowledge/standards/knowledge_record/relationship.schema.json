@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/standards/knowledge_record/relationship.schema.json",
+  "title": "BTE Knowledge Record Relationship",
+  "description": "Relationship link between Knowledge Records / planning targets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "relationship_id",
+    "type",
+    "source",
+    "target",
+    "strength",
+    "direction",
+    "status"
+  ],
+  "properties": {
+    "relationship_id": {
+      "type": "string",
+      "pattern": "^REL-[0-9]{6}$",
+      "description": "Stable relationship instance ID."
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relationship type (e.g. depends_on, related_to, generates, controls)."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Source record ID (KR-* or approved planning ID during draft)."
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Target record ID (KR-* or approved planning ID during draft)."
+    },
+    "strength": {
+      "type": "string",
+      "enum": [
+        "required",
+        "strong",
+        "moderate",
+        "weak",
+        "informational"
+      ]
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "forward",
+        "backward",
+        "bidirectional",
+        "undirected"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "official",
+        "deprecated"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
