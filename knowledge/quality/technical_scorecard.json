@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "scorecard_id": "SC-TECHNICAL-001",
+  "title": "Technical Scorecard",
+  "description": "Technical quality scoring for Knowledge Records against schema, compiler, relationship, and graph contracts. Specification only.",
+  "review_type": "technical",
+  "scale": {
+    "min": 0,
+    "max": 100,
+    "pass_threshold": 80
+  },
+  "dimensions": [
+    {
+      "metric_id": "QM-COMPILER_COMPATIBILITY",
+      "weight": 0.35,
+      "criteria": [
+        "Conforms to standards knowledge_record schema sections",
+        "Enums and ID patterns are compiler-safe",
+        "No fields that break known artifact contracts"
+      ]
+    },
+    {
+      "metric_id": "QM-RELATIONSHIP_INTEGRITY",
+      "weight": 0.35,
+      "criteria": [
+        "Relationship types are registered",
+        "Source and target IDs resolve",
+        "No duplicate relationship triples"
+      ]
+    },
+    {
+      "metric_id": "QM-GRAPH_INTEGRITY",
+      "weight": 0.3,
+      "criteria": [
+        "Node type matches ontology",
+        "Dependency edges form a DAG",
+        "Canonical Concept node uniqueness held"
+      ]
+    }
+  ],
+  "recommendation_bands": [
+    {
+      "min": 90,
+      "max": 100,
+      "recommendation": "approve_technical"
+    },
+    {
+      "min": 80,
+      "max": 89,
+      "recommendation": "approve_with_minor_fixes"
+    },
+    {
+      "min": 60,
+      "max": 79,
+      "recommendation": "block_until_fixed"
+    },
+    {
+      "min": 0,
+      "max": 59,
+      "recommendation": "reject_technical"
+    }
+  ]
+}
