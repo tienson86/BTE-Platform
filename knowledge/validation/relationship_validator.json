@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-RELATIONSHIP",
+  "title": "Relationship Validator",
+  "dimensions": [
+    "relationship"
+  ],
+  "applies_to": [
+    "knowledge_record",
+    "knowledge_graph",
+    "cross_reference_index"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000041",
+      "title": "Missing Relationship",
+      "description": "Required foundational relationship absent for record that declares dependents in pack inventory.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if Pack inventory lists foundation edges but record relationships.items empty.",
+      "recommended_resolution": "Declare required FOUNDATIONAL_FOR/DEPENDS_ON links.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000042",
+      "title": "Invalid Relationship Type",
+      "description": "Relationship type not registered.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if type not in edge ontology.",
+      "recommended_resolution": "Replace synonyms (e.g. SUPPORTS → SUPPORTED_BY).",
+      "lifecycle_stages": ["LC-ONTOLOGY", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000043",
+      "title": "Invalid Relationship Direction",
+      "description": "Direction enum invalid or contradicts edge direction semantics.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if direction ∉ forward|backward|bidirectional|undirected.",
+      "recommended_resolution": "Correct direction field.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000044",
+      "title": "Duplicate Relationship",
+      "description": "Duplicate (type, source, target) triple.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL on duplicate uniqueness key.",
+      "recommended_resolution": "Keep one edge; merge notes.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000045",
+      "title": "Circular Relationship",
+      "description": "Cycle detected among FOUNDATIONAL_FOR/DEPENDS_ON.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if dependency edge DFS/BFS finds back-edge.",
+      "recommended_resolution": "Fix edge direction or split concepts.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000046",
+      "title": "Missing Relationship ID",
+      "description": "relationship_id absent or invalid pattern.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL unless REL-NNNNNN.",
+      "recommended_resolution": "Assign REL-* instance id.",
+      "lifecycle_stages": ["LC-AUTHOR", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000047",
+      "title": "Missing Relationship Source",
+      "description": "source endpoint blank.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if source empty.",
+      "recommended_resolution": "Set source record/node id.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000048",
+      "title": "Missing Relationship Target",
+      "description": "target endpoint blank.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if target empty.",
+      "recommended_resolution": "Set target record/node id.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000049",
+      "title": "Self Relationship Forbidden",
+      "description": "source equals target.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if source == target (default policy).",
+      "recommended_resolution": "Remove self-edge or document approved reflective exception.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000050",
+      "title": "Weak Type Hiding Foundation",
+      "description": "RELATED_TO used where Hard foundation required.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if definition presupposes target but only RELATED_TO declared.",
+      "recommended_resolution": "Upgrade to FOUNDATIONAL_FOR or DEPENDS_ON / Semantic Dependency level.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000051",
+      "title": "Missing Relationship Strength",
+      "description": "strength missing when required by schema profile.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if strength absent on official track.",
+      "recommended_resolution": "Set required|strong|moderate|weak|informational.",
+      "lifecycle_stages": ["LC-AUTHOR"]
+    },
+    {
+      "code": "VAL-000052",
+      "title": "Invalid Relationship Status",
+      "description": "status not in allowed enum.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL on unknown status.",
+      "recommended_resolution": "Use draft|review|approved|official|deprecated.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000053",
+      "title": "Conflict Edge Without Notes",
+      "description": "CONFLICTS_WITH present without conflict notes/registry entry.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if CONFLICTS_WITH and notes empty.",
+      "recommended_resolution": "Document conflict rationale.",
+      "lifecycle_stages": ["LC-ACADEMIC", "LC-GOVERNANCE"]
+    },
+    {
+      "code": "VAL-000054",
+      "title": "Relationship Endpoint Unknown",
+      "description": "source/target not found and not marked planned.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if endpoint unresolved and status≠planned.",
+      "recommended_resolution": "Fix ID or mark planned explicitly.",
+      "lifecycle_stages": ["LC-COMPILER", "LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000055",
+      "title": "Bidirectional Pair Duplication",
+      "description": "Undirected relation stored twice as opposing directed duplicates incorrectly.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if RELATED_TO A→B and B→A both present without normalization policy.",
+      "recommended_resolution": "Normalize per graph storage policy.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    }
+  ]
+}
