@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "description": "Canonical edge types for the BTE Knowledge Graph. Specification only — no runtime implementation.",
+  "edge_types": [
+    {
+      "type_id": "FOUNDATIONAL_FOR",
+      "code": "FOUNDATIONAL_FOR",
+      "description": "Source is an academic foundation required to understand or establish the target.",
+      "direction": "directed",
+      "participates_in_dependency_cycle_check": true,
+      "typical_source_node_types": [
+        "Concept"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Pattern",
+        "Rule"
+      ],
+      "cardinality_hint": "one_to_many",
+      "inverse_hint": null
+    },
+    {
+      "type_id": "DEPENDS_ON",
+      "code": "DEPENDS_ON",
+      "description": "Source structurally or academically depends on the target being present and defined.",
+      "direction": "directed",
+      "participates_in_dependency_cycle_check": true,
+      "typical_source_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern",
+        "Pack",
+        "Module"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern",
+        "Pack",
+        "Module",
+        "Source"
+      ],
+      "cardinality_hint": "many_to_many",
+      "inverse_hint": null
+    },
+    {
+      "type_id": "CLASSIFIES",
+      "code": "CLASSIFIES",
+      "description": "Source provides a classification scheme or category applied to the target.",
+      "direction": "directed",
+      "participates_in_dependency_cycle_check": false,
+      "typical_source_node_types": [
+        "Concept",
+        "Pack",
+        "Module"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Entity",
+        "Pattern",
+        "Rule"
+      ],
+      "cardinality_hint": "one_to_many",
+      "inverse_hint": null
+    },
+    {
+      "type_id": "REFERENCES",
+      "code": "REFERENCES",
+      "description": "Source cites or points to the target without implying foundation or dependency.",
+      "direction": "directed",
+      "participates_in_dependency_cycle_check": false,
+      "typical_source_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern",
+        "Example",
+        "Pack",
+        "Module"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Source",
+        "Entity",
+        "Example"
+      ],
+      "cardinality_hint": "many_to_many",
+      "inverse_hint": null
+    },
+    {
+      "type_id": "SUPPORTED_BY",
+      "code": "SUPPORTED_BY",
+      "description": "Source claim or concept is academically supported by the target (often a Source or assertion-bearing Concept).",
+      "direction": "directed",
+      "participates_in_dependency_cycle_check": false,
+      "typical_source_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern",
+        "Example"
+      ],
+      "typical_target_node_types": [
+        "Source",
+        "Concept",
+        "Example"
+      ],
+      "cardinality_hint": "many_to_many",
+      "inverse_hint": null
+    },
+    {
+      "type_id": "RELATED_TO",
+      "code": "RELATED_TO",
+      "description": "Non-hierarchical topical or semantic association between nodes.",
+      "direction": "undirected_or_bidirectional",
+      "participates_in_dependency_cycle_check": false,
+      "typical_source_node_types": [
+        "Concept",
+        "Entity",
+        "Rule",
+        "Pattern",
+        "Example",
+        "Source",
+        "Pack",
+        "Module"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Entity",
+        "Rule",
+        "Pattern",
+        "Example",
+        "Source",
+        "Pack",
+        "Module"
+      ],
+      "cardinality_hint": "many_to_many",
+      "inverse_hint": "RELATED_TO"
+    },
+    {
+      "type_id": "CONFLICTS_WITH",
+      "code": "CONFLICTS_WITH",
+      "description": "Source and target assert incompatible positions that must be tracked in conflict governance.",
+      "direction": "undirected_or_bidirectional",
+      "participates_in_dependency_cycle_check": false,
+      "typical_source_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern",
+        "Source"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern",
+        "Source"
+      ],
+      "cardinality_hint": "many_to_many",
+      "inverse_hint": "CONFLICTS_WITH"
+    },
+    {
+      "type_id": "IMPLEMENTS",
+      "code": "IMPLEMENTS",
+      "description": "Source realizes or operationalizes the target concept, rule, or pattern (specification mapping only).",
+      "direction": "directed",
+      "participates_in_dependency_cycle_check": false,
+      "typical_source_node_types": [
+        "Rule",
+        "Pattern",
+        "Module",
+        "Pack"
+      ],
+      "typical_target_node_types": [
+        "Concept",
+        "Rule",
+        "Pattern"
+      ],
+      "cardinality_hint": "many_to_one",
+      "inverse_hint": null
+    }
+  ]
+}
