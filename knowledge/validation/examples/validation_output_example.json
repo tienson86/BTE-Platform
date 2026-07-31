@@ -1,0 +1,188 @@
+{
+  "validation_run_id": "VRUN-000001",
+  "schema_version": "1.0.0",
+  "status": "completed",
+  "started_at": "2026-07-31",
+  "finished_at": "2026-07-31",
+  "target": {
+    "kind": "knowledge_record",
+    "path": "knowledge/validation/examples/invalid_record.json",
+    "record_id": "(missing)"
+  },
+  "validators_executed": [
+    "VLD-RECORD",
+    "VLD-ONTOLOGY",
+    "VLD-RELATIONSHIP",
+    "VLD-DEPENDENCY",
+    "VLD-REGISTRY",
+    "VLD-METADATA",
+    "VLD-COMPILER"
+  ],
+  "summary": {
+    "total_checks": 112,
+    "passed": 95,
+    "info": 0,
+    "warnings": 2,
+    "errors": 14,
+    "critical": 1,
+    "result": "FAIL"
+  },
+  "findings": [
+    {
+      "code": "VAL-000001",
+      "severity": "ERROR",
+      "message": "Missing Record ID",
+      "path": "identity.record_id",
+      "record_id": null,
+      "recommended_resolution": "Assign immutable KR-NNNNNN before submit."
+    },
+    {
+      "code": "VAL-000003",
+      "severity": "ERROR",
+      "message": "Missing Canonical Definition",
+      "path": "canonical_definition.definition",
+      "record_id": null,
+      "recommended_resolution": "Write a single Canonical Definition with scope."
+    },
+    {
+      "code": "VAL-000005",
+      "severity": "ERROR",
+      "message": "Missing Canonical Name",
+      "path": "identity.canonical_name",
+      "record_id": null,
+      "recommended_resolution": "Set unique Canonical Name per concept."
+    },
+    {
+      "code": "VAL-000007",
+      "severity": "ERROR",
+      "message": "Invalid Version Format",
+      "path": "identity.version",
+      "record_id": null,
+      "recommended_resolution": "Correct to SemVer."
+    },
+    {
+      "code": "VAL-000008",
+      "severity": "ERROR",
+      "message": "Missing Required Status",
+      "path": "identity.status",
+      "record_id": null,
+      "recommended_resolution": "Set allowed lifecycle status."
+    },
+    {
+      "code": "VAL-000011",
+      "severity": "ERROR",
+      "message": "Missing Required References",
+      "path": "academic_context.primary_source_ids",
+      "record_id": null,
+      "recommended_resolution": "Cite ≥1 existing SRC-*."
+    },
+    {
+      "code": "VAL-000021",
+      "severity": "ERROR",
+      "message": "Assertion Missing Source IDs",
+      "path": "academic_context.assertions[0].source_ids",
+      "record_id": null,
+      "recommended_resolution": "Attach ≥1 SRC-*."
+    },
+    {
+      "code": "VAL-000022",
+      "severity": "ERROR",
+      "message": "High Confidence With TODO_REVIEW",
+      "path": "academic_context.assertions[0]",
+      "record_id": null,
+      "recommended_resolution": "Lower confidence or resolve TODO_REVIEW."
+    },
+    {
+      "code": "VAL-000027",
+      "severity": "ERROR",
+      "message": "Invalid Ontology Type",
+      "path": "classification.knowledge_type",
+      "record_id": null,
+      "recommended_resolution": "Use registered ontology types only."
+    },
+    {
+      "code": "VAL-000042",
+      "severity": "ERROR",
+      "message": "Invalid Relationship Type",
+      "path": "relationships.items[0].type",
+      "record_id": null,
+      "recommended_resolution": "Replace SUPPORTS with SUPPORTED_BY."
+    },
+    {
+      "code": "VAL-000043",
+      "severity": "ERROR",
+      "message": "Invalid Relationship Direction",
+      "path": "relationships.items[0].direction",
+      "record_id": null,
+      "recommended_resolution": "Correct direction field."
+    },
+    {
+      "code": "VAL-000044",
+      "severity": "ERROR",
+      "message": "Duplicate Relationship",
+      "path": "relationships.items",
+      "record_id": null,
+      "recommended_resolution": "Keep one edge; merge notes."
+    },
+    {
+      "code": "VAL-000049",
+      "severity": "ERROR",
+      "message": "Self Relationship Forbidden",
+      "path": "relationships.items[0]",
+      "record_id": null,
+      "recommended_resolution": "Remove self-edge."
+    },
+    {
+      "code": "VAL-000054",
+      "severity": "ERROR",
+      "message": "Relationship Endpoint Unknown",
+      "path": "relationships.items[2]",
+      "record_id": null,
+      "recommended_resolution": "Fix ID or mark planned explicitly."
+    },
+    {
+      "code": "VAL-000100",
+      "severity": "ERROR",
+      "message": "Release Freeze Inconsistency",
+      "path": "release.release_status / governance.review.freeze",
+      "record_id": null,
+      "recommended_resolution": "Freeze before release."
+    },
+    {
+      "code": "VAL-000109",
+      "severity": "ERROR",
+      "message": "Compiler Status Blocked",
+      "path": "computational_metadata.compiler_status",
+      "record_id": null,
+      "recommended_resolution": "Resolve blocking findings; unset blocked."
+    },
+    {
+      "code": "VAL-000002",
+      "severity": "CRITICAL",
+      "message": "Illustrative critical class: duplicate identity risk when empty IDs collide in batch imports.",
+      "path": "identity.record_id",
+      "record_id": null,
+      "recommended_resolution": "Assign unique KR-* before any registry write."
+    },
+    {
+      "code": "VAL-000103",
+      "severity": "WARNING",
+      "message": "Not Search Ready",
+      "path": "indexes",
+      "record_id": null,
+      "recommended_resolution": "Provide canonical_key / aliases when ID exists."
+    },
+    {
+      "code": "VAL-000104",
+      "severity": "WARNING",
+      "message": "Not Documentation Ready",
+      "path": "canonical_definition",
+      "record_id": null,
+      "recommended_resolution": "Complete definition/scope/examples."
+    }
+  ],
+  "pass_criteria_applied": {
+    "PASS": "critical == 0 AND errors == 0",
+    "actual": "FAIL"
+  }
+}
