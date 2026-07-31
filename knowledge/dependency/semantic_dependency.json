@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "DEP-SEM-001",
+  "title": "Semantic Dependency Specification",
+  "description": "Semantic Dependency captures meaning presupposition without necessarily imposing hard load-order. Specification only.",
+  "definition": "Record A has a Semantic Dependency on record B when a correct understanding of A's canonical meaning presupposes B, even if A can be stored or drafted without B being official.",
+  "properties": {
+    "blocks_publication_if_missing": false,
+    "participates_in_cycle_check": false,
+    "requires_documentation": true,
+    "typical_edge_types": [
+      "FOUNDATIONAL_FOR",
+      "RELATED_TO",
+      "REFERENCES"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "SEM-001",
+      "severity": "warning",
+      "statement": "Semantic Dependency SHOULD be declared when authors rely on another concept in the definition prose."
+    },
+    {
+      "rule_id": "SEM-002",
+      "severity": "error",
+      "statement": "If semantic presupposition is actually required for correctness of the Canonical Definition, upgrade to Hard Dependency."
+    },
+    {
+      "rule_id": "SEM-003",
+      "severity": "warning",
+      "statement": "Semantic Dependency alone MUST NOT replace bibliography support for academic assertions."
+    },
+    {
+      "rule_id": "SEM-004",
+      "severity": "error",
+      "statement": "Do not encode Semantic Dependency by inventing edge type synonyms; use registered levels and ontology edge types."
+    }
+  ],
+  "examples_of_use": [
+    {
+      "source": "KR-000003",
+      "target": "KR-000001",
+      "note": "Wu Xing framing presupposes Yin Yang polarity conceptually; Pack 01 may also declare Hard Dependency where required."
+    },
+    {
+      "source": "KR-000002",
+      "target": "KR-000001",
+      "note": "Qi discussion often presupposes Yin Yang; classify Hard vs Semantic per pack design."
+    }
+  ],
+  "relationship_to_other_levels": {
+    "vs_hard_dependency": "Hard blocks release; Semantic warns and documents meaning order.",
+    "vs_soft_dependency": "Soft is optional completeness; Semantic is about meaning presupposition.",
+    "vs_reference": "Reference is citation/pointer; Semantic is interpretive necessity."
+  }
+}
