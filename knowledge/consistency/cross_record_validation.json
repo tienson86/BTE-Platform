@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "document_id": "CON-XREC-001",
+  "title": "Cross-Record Validation Spec",
+  "description": "Checks spanning multiple Knowledge Records. Specification only.",
+  "checks": [
+    {
+      "check_id": "XR-001",
+      "name": "Canonical name uniqueness",
+      "severity": "error",
+      "inputs": [
+        "canonical_index",
+        "record_index"
+      ],
+      "procedure": "Group by normalized canonical_name / canonical_key; fail if two record_ids claim the same key."
+    },
+    {
+      "check_id": "XR-002",
+      "name": "Alias collision",
+      "severity": "error",
+      "inputs": [
+        "alias_index"
+      ],
+      "procedure": "Fail if the same alias normalizes to two different record_ids."
+    },
+    {
+      "check_id": "XR-003",
+      "name": "Cross-reference resolution",
+      "severity": "error",
+      "inputs": [
+        "cross_reference_index",
+        "canon_manifest",
+        "bibliography"
+      ],
+      "procedure": "Every target_record_id / SRC-* must exist or be status=planned with notes."
+    },
+    {
+      "check_id": "XR-004",
+      "name": "Pack membership consistency",
+      "severity": "error",
+      "inputs": [
+        "pack_registry",
+        "record_index",
+        "canon_manifest"
+      ],
+      "procedure": "record.pack_id membership must match pack.record_ids and canon_manifest.packs[].record_ids."
+    },
+    {
+      "check_id": "XR-005",
+      "name": "Foundation direction sanity",
+      "severity": "warning",
+      "inputs": [
+        "dependency_manifest",
+        "cross_reference_index"
+      ],
+      "procedure": "FOUNDATIONAL_FOR should point from foundation toward dependent, consistent with Pack design inventory."
+    },
+    {
+      "check_id": "XR-006",
+      "name": "Duplicate definition scan",
+      "severity": "error",
+      "inputs": [
+        "knowledge_records"
+      ],
+      "procedure": "Compare Canonical Definition hashes/normalized text across KR-*; flag near-duplicates with distinct IDs."
+    },
+    {
+      "check_id": "XR-007",
+      "name": "Contradiction scan",
+      "severity": "error",
+      "inputs": [
+        "assertions",
+        "CONFLICTS_WITH edges"
+      ],
+      "procedure": "High-confidence opposing statements without conflict edge/notes fail."
+    }
+  ],
+  "pass_policy": {
+    "error_count_must_be": 0,
+    "warnings_may_remain": true,
+    "planned_targets_allowed": true
+  }
+}
