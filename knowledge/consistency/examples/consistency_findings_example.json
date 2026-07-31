@@ -1,0 +1,60 @@
+{
+  "example_id": "CON-EX-000001",
+  "title": "Consistency findings fixture",
+  "description": "Synthetic consistency scan results for Sprint 4F. Does not judge live KR academic content.",
+  "scanned_at": "2026-07-31",
+  "scope": {
+    "module_ids": [
+      "01_fundamental_knowledge"
+    ],
+    "pack_ids": [
+      "PACK_01"
+    ],
+    "record_ids": [
+      "KR-000001",
+      "KR-000002",
+      "KR-000003",
+      "KR-000004",
+      "KR-000005"
+    ]
+  },
+  "findings": [
+    {
+      "finding_id": "F-000001",
+      "rule_id": "CON-009",
+      "severity": "warning",
+      "dimension": "cross_references",
+      "message": "KR-000004 and KR-000005 are planned; cross-references targeting them remain provisional.",
+      "record_ids": [
+        "KR-000004",
+        "KR-000005"
+      ]
+    },
+    {
+      "finding_id": "F-000002",
+      "rule_id": "DEF-007",
+      "severity": "warning",
+      "dimension": "canonical_definition_uniqueness",
+      "message": "Ensure Semantic/Hard Dependency declarations stay aligned as Pack 01 records mature.",
+      "record_ids": [
+        "KR-000002",
+        "KR-000003"
+      ]
+    }
+  ],
+  "summary": {
+    "errors": 0,
+    "warnings": 2,
+    "dimensions_covered": [
+      "canonical_definition_uniqueness",
+      "terminology_consistency",
+      "ontology_consistency",
+      "relationship_consistency",
+      "cross_references",
+      "dependency_integrity",
+      "duplicate_definitions",
+      "contradictions"
+    ],
+    "result": "PASS_WITH_WARNINGS"
+  }
+}
