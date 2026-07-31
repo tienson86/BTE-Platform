@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "document_name": "bte_citation_rules",
+    "description": "Configurable citation policy for Knowledge Compiler, Validation Engine, and Documentation Generator.",
+    "owner": "Knowledge Canon Committee",
+    "status": "draft"
+  },
+  "version": "1.0.0",
+  "created_at": "2026-07-31",
+  "updated_at": "2026-07-31",
+  "rules": {
+    "minimum_sources": {
+      "enabled": true,
+      "value": 1,
+      "applies_to_status": [
+        "official"
+      ],
+      "notes": "Official Knowledge Records must cite at least one SRC-* unless explicitly exempted."
+    },
+    "require_primary_source": {
+      "enabled": true,
+      "primary_levels": [
+        "Level1"
+      ],
+      "applies_to_status": [
+        "official"
+      ],
+      "notes": "Prefer at least one Level1 source for classical claims when available."
+    },
+    "allow_secondary_source": {
+      "enabled": true,
+      "allowed_levels": [
+        "Level2",
+        "Level3"
+      ],
+      "notes": "Secondary sources allowed as support; may not silently override primary without conflict entry."
+    },
+    "allow_multiple_sources": {
+      "enabled": true,
+      "max_sources": 20,
+      "notes": "Multiple SRC-* citations permitted."
+    },
+    "minimum_confidence": {
+      "enabled": true,
+      "value": "pending_review",
+      "allowed_values": [
+        "high",
+        "medium",
+        "low",
+        "pending_review"
+      ],
+      "official_requires": [
+        "high",
+        "medium"
+      ],
+      "notes": "Official promotion should prefer medium/high confidence sources."
+    },
+    "citation_style": {
+      "style_id": "bte_src_compact",
+      "human_format": "{english_title} ({original_title}), {source_id}",
+      "short_format": "{english_title} [{source_id}]",
+      "json_shape": {
+        "source_id": "required",
+        "title": "optional",
+        "chapter": "optional",
+        "notes": "optional"
+      }
+    },
+    "fallback_policy": {
+      "on_missing_source_id": "error",
+      "on_deprecated_source": "warning_block_official",
+      "on_placeholder_source": "allow_draft_block_official",
+      "on_todo_review_metadata": "warning"
+    },
+    "translation_policy": {
+      "prefer_original_title": true,
+      "require_english_title_for_docs": true,
+      "vietnamese_title_required_for_official": false,
+      "invented_translations_forbidden": true
+    },
+    "cross_reference_policy": {
+      "allow_foundation_ref_crosswalk": true,
+      "foundation_ref_prefix": "REF-",
+      "bibliography_prefix": "SRC-",
+      "require_verified_crosswalk_for_official": true
+    },
+    "review_policy": {
+      "new_source_requires_academic_review": true,
+      "priority_change_requires_committee_approval": true,
+      "conflict_override_requires_approver": true
+    },
+    "validation_policy": {
+      "validate_against_bibliography_schema": true,
+      "validate_source_id_in_registry": true,
+      "validate_priority_membership": true,
+      "validate_category_vs_level": true,
+      "emit_compiler_expansion": true
+    }
+  }
+}
