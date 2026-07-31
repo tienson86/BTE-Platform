@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "validator_id": "VLD-DEPENDENCY",
+  "title": "Dependency Validator",
+  "dimensions": [
+    "dependency"
+  ],
+  "applies_to": [
+    "dependency_manifest",
+    "knowledge_record",
+    "pack"
+  ],
+  "rules": [
+    {
+      "code": "VAL-000056",
+      "title": "Circular Dependency",
+      "description": "Cycle in Hard Dependency / Inheritance graph.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if hard/inheritance subgraph is not a DAG.",
+      "recommended_resolution": "Break cycle; correct academic direction.",
+      "lifecycle_stages": ["LC-SEMANTIC", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000057",
+      "title": "Missing Parent Dependency",
+      "description": "Required parent target missing for hard/inheritance dependency.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if target_id unresolved for level_id=hard_dependency|inheritance.",
+      "recommended_resolution": "Author parent record or downgrade level with override policy.",
+      "lifecycle_stages": ["LC-COMPILER", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000058",
+      "title": "Missing Child Dependency Declaration",
+      "description": "Parent inventory lists child hard-deps but child does not declare DEPENDS_ON/FOUNDATIONAL link.",
+      "severity": "WARNING",
+      "detection_rule": "WARN on asymmetric pack inventory vs child declarations.",
+      "recommended_resolution": "Align child relationship declarations.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000059",
+      "title": "Orphan Node",
+      "description": "Record has neither inbound nor outbound dependencies and is not a designated root.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if degree==0 outside approved roots (e.g. KR-000001).",
+      "recommended_resolution": "Attach dependencies or document root status.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000060",
+      "title": "Invalid Dependency Level",
+      "description": "level_id not in dependency_levels.json.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL on unknown level_id.",
+      "recommended_resolution": "Use hard|soft|reference|inheritance|extension|semantic_dependency.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000061",
+      "title": "Reference Used As Hard Gate",
+      "description": "Reference-level link counted as satisfying Hard Dependency.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if release gate accepts reference as hard.",
+      "recommended_resolution": "Declare Hard Dependency explicitly.",
+      "lifecycle_stages": ["LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000062",
+      "title": "Duplicate Dependency Triple",
+      "description": "Duplicate (level, source, target).",
+      "severity": "ERROR",
+      "detection_rule": "FAIL on duplicate dependency declarations.",
+      "recommended_resolution": "Keep one DEP-* row.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000063",
+      "title": "Dependency Graph Incomplete",
+      "description": "dependency_manifest missing edges required by pack design.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if pack design foundations absent from manifest.",
+      "recommended_resolution": "Sync dependency_manifest with pack inventory.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000064",
+      "title": "Hard Override Attempt",
+      "description": "Attempt to waive Hard Dependency without allowed policy.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL if hard_dependency override_allowed violated.",
+      "recommended_resolution": "Do not waive Hard Dependency for official release.",
+      "lifecycle_stages": ["LC-GOVERNANCE", "LC-RELEASE"]
+    },
+    {
+      "code": "VAL-000065",
+      "title": "Extension Missing Base Record",
+      "description": "Extension level without named base target.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL if level_id=extension and base target blank.",
+      "recommended_resolution": "Name base KR-* for extension.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000066",
+      "title": "Pack Level Dependency Cycle",
+      "description": "Packs hard-depend on each other cyclically.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL if pack depends_on_packs graph cyclic.",
+      "recommended_resolution": "Reorder pack dependencies; Pack 01 must not depend downstream.",
+      "lifecycle_stages": ["LC-RELEASE", "LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000067",
+      "title": "Semantic Dependency Undocumented",
+      "description": "Definition presupposes another concept without semantic/hard declaration.",
+      "severity": "WARNING",
+      "detection_rule": "WARN if prose presupposition without DEP level.",
+      "recommended_resolution": "Declare semantic_dependency or upgrade to hard.",
+      "lifecycle_stages": ["LC-SEMANTIC"]
+    },
+    {
+      "code": "VAL-000068",
+      "title": "Missing Dependency ID",
+      "description": "dependency_id not DEP-NNNNNN.",
+      "severity": "ERROR",
+      "detection_rule": "FAIL on pattern mismatch.",
+      "recommended_resolution": "Assign DEP-* id.",
+      "lifecycle_stages": ["LC-COMPILER"]
+    },
+    {
+      "code": "VAL-000069",
+      "title": "Soft Dependency Elevated Silently",
+      "description": "Soft dependency treated as hard without review.",
+      "severity": "WARNING",
+      "detection_rule": "WARN on silent elevation in gates.",
+      "recommended_resolution": "Change level_id explicitly with rationale.",
+      "lifecycle_stages": ["LC-GOVERNANCE"]
+    },
+    {
+      "code": "VAL-000070",
+      "title": "Dependency Target Immutable ID Violation",
+      "description": "Dependency retargeted by remapping KR-* identity.",
+      "severity": "CRITICAL",
+      "detection_rule": "FAIL if fixing deps by changing record_id.",
+      "recommended_resolution": "Retarget edges; never remap IDs.",
+      "lifecycle_stages": ["LC-GOVERNANCE", "LC-RELEASE"]
+    }
+  ]
+}
