@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specification",
+  "scorecard_id": "SC-ACADEMIC-001",
+  "title": "Academic Scorecard",
+  "description": "Academic quality scoring for Knowledge Records. Specification only.",
+  "review_type": "academic",
+  "scale": {
+    "min": 0,
+    "max": 100,
+    "pass_threshold": 80
+  },
+  "dimensions": [
+    {
+      "metric_id": "QM-COMPLETENESS",
+      "weight": 0.25,
+      "criteria": [
+        "All mandatory academic sections present",
+        "Definition, scope, and characteristics filled",
+        "Examples present when required by record type"
+      ]
+    },
+    {
+      "metric_id": "QM-CONSISTENCY",
+      "weight": 0.25,
+      "criteria": [
+        "Names and classifications agree across sections",
+        "No contradictory academic statements",
+        "Aliases do not collide with other canonical names"
+      ]
+    },
+    {
+      "metric_id": "QM-TRACEABILITY",
+      "weight": 0.25,
+      "criteria": [
+        "Assertions cite SRC-* sources",
+        "Uncertain claims marked TODO_REVIEW / pending_review",
+        "No unsupported classical attributions"
+      ]
+    },
+    {
+      "metric_id": "QM-BIBLIOGRAPHY_INTEGRITY",
+      "weight": 0.25,
+      "criteria": [
+        "Cited sources exist in bibliography SSOT",
+        "Citation priority rules respected",
+        "Conflicts recorded when sources disagree"
+      ]
+    }
+  ],
+  "recommendation_bands": [
+    {
+      "min": 90,
+      "max": 100,
+      "recommendation": "publish"
+    },
+    {
+      "min": 80,
+      "max": 89,
+      "recommendation": "publish_after_minor_revision"
+    },
+    {
+      "min": 60,
+      "max": 79,
+      "recommendation": "major_revision_required"
+    },
+    {
+      "min": 0,
+      "max": 59,
+      "recommendation": "reject"
+    }
+  ]
+}
