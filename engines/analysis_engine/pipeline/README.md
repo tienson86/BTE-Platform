@@ -1,11 +1,13 @@
 # Pipeline Package
 
-Architecture skeleton for Analysis Engine pipeline orchestration.
+> **Path:** `engines/analysis_engine/pipeline/`
 
-## Public Modules
+Pipeline orchestration interfaces and contracts.
 
-| Module | Interface |
-|--------|-----------|
+## Modules
+
+| Module | Surface |
+|--------|---------|
 | `pipeline.py` | `Pipeline` |
 | `stage_base.py` | `StageBase` |
 | `pipeline_context.py` | `PipelineContext` |
@@ -17,5 +19,6 @@ Architecture skeleton for Analysis Engine pipeline orchestration.
 | `stage_validator.py` | `StageValidator` |
 | `stage_executor.py` | `StageExecutor` |
 | `stage_finalizer.py` | `StageFinalizer` |
+| `contracts.py` | Stage/Context/Result/Policy contracts |
 
-Public interfaces only. No algorithms. No BaZi analysis.
+Public interfaces and contracts only. No algorithms.

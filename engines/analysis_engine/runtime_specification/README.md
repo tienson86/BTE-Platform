@@ -122,3 +122,13 @@ Out of scope:
 | Status | Frozen Runtime Baseline |
 
 Breaking runtime-contract changes require a major version increment.
+
+---
+
+## Architecture Coexistence
+
+This directory is part of the **legacy stage documentation/engine tree**.
+
+Canonical architecture skeleton packages live at the Analysis Engine root (`models/`, `pipeline/`, `analyzers/`, `registry/`, `validation/`, …).
+
+See `engines/analysis_engine/README.md` and `ANALYSIS_ENGINE_AUDIT.md`.

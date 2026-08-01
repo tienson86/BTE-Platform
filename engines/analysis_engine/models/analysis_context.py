@@ -1,17 +1,26 @@
-"""Analysis context model skeleton."""
+"""Analysis context model."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Any, Mapping
 
-from engines.analysis_engine.models.analysis_metadata import AnalysisMetadata
+from engines.analysis_engine.models.analysis_metadata import AnalysisMetadata, ModelTimestamps
 
 
-@dataclass(slots=True)
+@dataclass(frozen=True, slots=True)
 class AnalysisContext:
-    """Shared immutable analysis context contract."""
+    """Immutable shared analysis context contract."""
 
-    context_id: str
+    id: str
+    version: str
+    metadata: AnalysisMetadata
+    trace: tuple[str, ...]
+    timestamps: ModelTimestamps
     pipeline_id: str
     chart_id: str | None = None
-    metadata: AnalysisMetadata | None = None
+    attributes: Mapping[str, Any] = field(default_factory=dict)
+
+    def validate(self) -> bool:
+        """Validate analysis context contract."""
+        raise NotImplementedError

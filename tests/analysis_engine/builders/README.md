@@ -1,5 +1,9 @@
-# Builders Directory
+# Builders
 
-Reserved for Analysis Engine test data builders.
+> **Path:** `tests/analysis_engine/builders/`
 
-Public interfaces only. No builder implementation.
+Test builder interfaces for Analysis Engine fixtures.
+
+Modules: `builders.py` (`ContextBuilder`, `ResultBuilder`).
+
+Interfaces only. No builder implementation.

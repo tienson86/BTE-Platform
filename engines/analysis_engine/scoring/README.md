@@ -1,5 +1,9 @@
 # Scoring Package
 
-Architecture skeleton for scoring contracts within the Analysis Engine.
+> **Path:** `engines/analysis_engine/scoring/`
 
-No scoring formulas.
+Architecture skeleton for scoring boundaries.
+
+Related analyzer: `analyzers/scoring/`.
+
+No scoring formulas. Package placeholder only.

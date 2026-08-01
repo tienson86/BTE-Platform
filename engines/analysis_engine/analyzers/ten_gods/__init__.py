@@ -13,11 +13,30 @@ from engines.analysis_engine.analyzers.ten_gods.models import (
 )
 from engines.analysis_engine.analyzers.ten_gods.validator import TenGodsValidator
 
+from engines.analysis_engine.analyzers.ten_gods.contracts import (
+    TenGodsAnalyzerContracts,
+    TenGodsConsumedMetadataContract,
+    TenGodsDependenciesContract,
+    TenGodsInputContextContract,
+    TenGodsOutputResultContract,
+    TenGodsProducedMetadataContract,
+    TenGodsSupportedResultTypesContract,
+    TenGodsSupportedRulesContract,
+)
+
 __all__ = [
     "TenGodsAnalyzer",
+    "TenGodsAnalyzerContracts",
     "TenGodsAnalyzerInput",
     "TenGodsAnalyzerInterface",
     "TenGodsAnalyzerResult",
+    "TenGodsConsumedMetadataContract",
+    "TenGodsDependenciesContract",
+    "TenGodsInputContextContract",
+    "TenGodsOutputResultContract",
+    "TenGodsProducedMetadataContract",
+    "TenGodsSupportedResultTypesContract",
+    "TenGodsSupportedRulesContract",
     "TenGodsValidator",
     "TenGodsValidatorInterface",
 ]

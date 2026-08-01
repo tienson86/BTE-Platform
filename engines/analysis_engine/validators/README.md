@@ -1,8 +1,10 @@
 # Validators Package
 
-Architecture skeleton for the Analysis Engine Validators Layer.
+> **Path:** `engines/analysis_engine/validators/`
 
-## Public Modules
+Architecture skeleton validator layer (TASK 06).
+
+## Modules
 
 | Module | Interface |
 |--------|-----------|
@@ -15,4 +17,4 @@ Architecture skeleton for the Analysis Engine Validators Layer.
 | `pipeline_validator.py` | `PipelineValidator` |
 | `result_validator.py` | `ResultValidator` |
 
-Public interfaces only. No validation logic.
+For expanded contract validators, see `validation/`.

@@ -1,11 +1,13 @@
 # Compiler Package
 
-Architecture skeleton for the Analysis Engine Compiler Layer.
+> **Path:** `engines/analysis_engine/compiler/`
 
-## Public Modules
+Compiler layer architecture interfaces.
 
-| Module | Interface / Model |
-|--------|-------------------|
+## Modules
+
+| Module | Surface |
+|--------|---------|
 | `compiler.py` | `Compiler` |
 | `loader.py` | `Loader` |
 | `normalizer.py` | `Normalizer` |
@@ -16,4 +18,4 @@ Architecture skeleton for the Analysis Engine Compiler Layer.
 | `build_result.py` | `BuildResult`, `BuildArtifact` |
 | `interfaces.py` | ABC contracts |
 
-Public interfaces only. No business logic. No compilation algorithms.
+Interfaces only. No compilation algorithms.

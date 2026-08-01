@@ -1,177 +1,132 @@
 # Analysis Engine
 
-| Field | Value |
-|-------|-------|
-| Module Path | `engines/analysis_engine` |
-| Module Type | Core Analysis Pipeline |
-| Layer | Domain Analysis |
-| Version | 1.0.0 |
-| Status | Frozen |
+> **Path:** `engines/analysis_engine/`
+>
+> **Architecture Version:** `0.0.0-architecture` (`VERSION`)
+>
+> **Status:** Architecture skeleton + legacy stage engines coexist
+>
+> **Depends On:** Pack 01 Registry / Validation / Compiler contracts (read-only)
 
 ---
 
-# 1. Purpose
+## Purpose
 
-The Analysis Engine is the core analytical subsystem of the BTE Platform.
+The Analysis Engine defines the orchestration architecture for analytical stages.
 
-Its responsibility is to transform a validated BaZi chart into a structured, deterministic, explainable analytical model.
-
-The Analysis Engine performs domain analysis only.
-
-It does not generate natural-language interpretation or presentation output.
+This README documents **directory layout and architecture packages only**.
+It does not document BaZi business rules or analysis algorithms.
 
 ---
 
-# 2. Responsibilities
-
-The Analysis Engine is responsible for:
-
-- Coordinating the execution of all analytical stages.
-- Managing the shared AnalysisContext.
-- Producing immutable analysis results.
-- Enforcing stage ordering.
-- Preserving deterministic execution.
-- Maintaining cross-stage consistency.
-- Publishing the final AnalysisResult.
-
----
-
-# 3. Architecture Overview
-
-The Analysis Engine consists of multiple independent analytical stages.
-
-Each stage has:
-
-- One responsibility.
-- One public contract.
-- Immutable inputs.
-- Immutable outputs.
-- No knowledge of downstream implementation.
-
----
-
-# 4. Pipeline Overview
-
-Execution order:
-
-1. Strength Engine
-2. Temperature Engine
-3. Pattern Engine
-4. Useful God Engine
-5. Ten Gods Engine
-6. Combination Engine
-7. ShenSha Engine
-8. Luck Engine
-9. Summary Engine
-
-Interpretation and report generation are external to this module.
-
----
-
-# 5. Inputs
-
-Primary input:
-
-- AnalysisContext
-
-Produced after:
-
-- Calendar Engine
-- BaZi Engine
-
----
-
-# 6. Outputs
-
-Primary output:
-
-- AnalysisResult
-
-Containing:
-
-- StrengthResult
-- TemperatureResult
-- PatternResult
-- UsefulGodResult
-- TenGodResult
-- CombinationResult
-- ShenShaResult
-- LuckResult
-- SummaryResult
-
----
-
-# 7. Module Structure
-
-```text
-analysis_engine/
-│
-├── shared/
-├── 01_strength_engine/
-├── 02_temperature_engine/
-├── ...
-└── 10_report_generator/
-```
-
----
-
-# 8. Public API
-
-The module exposes one orchestration interface.
-
-Downstream consumers interact only through the published AnalysisResult.
-
----
-
-# 9. Related Documents
-
-- ARCHITECTURE.md
-- PIPELINE.md
-- SHARED_MODELS.md
-- PUBLIC_API.md
-- CHANGELOG.md
-
----
-
-# 10. Version
-
-Architecture Baseline V1.0.0
-Frozen.
-
----
-
-# 11. Architecture Skeleton Packages
-
-The following packages define the Analysis Engine architecture skeleton layout.
-They contain package boundaries only and do not implement BaZi analysis.
+## Architecture Layout
 
 ```text
 engines/analysis_engine/
-├── engine.py
+├── engine.py                 # Orchestration skeleton
 ├── config.py
 ├── constants.py
-├── VERSION
-├── models/
-├── context/
-├── pipeline/
-├── analyzers/
-├── scoring/
-├── conflict/
-├── registry/
-├── compiler/
-├── validators/
-├── cache/
-├── metrics/
-├── utils/
-├── exceptions/
-└── adapters/
+├── VERSION / CHANGELOG.md / README.md
+├── ANALYSIS_ENGINE_AUDIT.md
+│
+├── models/                   # Immutable result/context dataclasses
+├── interfaces/               # Public ABC contracts
+├── types/                    # Shared enums / aliases / Literal / TypedDict
+├── exceptions/               # Exception hierarchy
+│
+├── context/                  # Typed context packages
+├── pipeline/                 # Pipeline orchestration interfaces + contracts
+├── analyzers/                # Analyzer module skeletons + contracts
+├── registry/                 # Registry layer (Pack 01 compatible)
+├── compiler/                 # Compiler layer interfaces
+├── validation/               # Expanded validator framework
+├── validators/               # Validator architecture skeleton
+│
+├── scoring/                  # Scoring package skeleton
+├── conflict/                 # Conflict package skeleton
+├── cache/ metrics/ utils/ adapters/
+│
+├── docs/                     # Architecture documentation tree
+└── (legacy stage engines / runtime / api — coexistence)
 ```
 
-Model skeletons live under `models/`:
+---
 
-- `analysis_context.py`
-- `analysis_result.py`
-- `analysis_step.py`
-- `analysis_score.py`
-- `analysis_metadata.py`
-- `analysis_pipeline.py`
+## Core Architecture Packages
+
+| Package | Role |
+|---------|------|
+| `models/` | Immutable dataclasses (`AnalysisContext`, `AnalysisResult`, …) |
+| `interfaces/` | Public ABCs (`AnalysisEngineInterface`, providers, …) |
+| `types/` | Shared type system |
+| `exceptions/` | `AnalysisError` hierarchy |
+| `context/` | Typed context models |
+| `pipeline/` | Pipeline interfaces + `contracts.py` |
+| `analyzers/` | Twelve analyzer skeletons + contracts |
+| `registry/` | Registry interfaces + Pack 01-compatible contracts |
+| `compiler/` | Compiler interfaces |
+| `validation/` | Context/result/decision/score/pipeline/schema/metadata validators |
+| `validators/` | Earlier validator skeleton layer |
+| `docs/` | Architecture docs placeholders |
+| `tests/analysis_engine/` | Pytest framework skeleton |
+
+---
+
+## Analyzers
+
+| Analyzer | Path |
+|----------|------|
+| Strength | `analyzers/strength/` |
+| Pattern | `analyzers/pattern/` |
+| Temperature | `analyzers/temperature/` |
+| Useful God | `analyzers/useful_god/` |
+| Ten Gods | `analyzers/ten_gods/` |
+| Combination | `analyzers/combination/` |
+| Shen Sha | `analyzers/shensha/` |
+| Dayun | `analyzers/dayun/` |
+| Liunian | `analyzers/liunian/` |
+| Liuyue | `analyzers/liuyue/` |
+| Scoring | `analyzers/scoring/` |
+| Conflict | `analyzers/conflict/` |
+
+Each analyzer contains: `README`, `VERSION`, `CHANGELOG`, `SPEC`, `analyzer.py`, `models.py`, `interfaces.py`, `validator.py`, `contracts.py`.
+
+---
+
+## Dependency Direction
+
+```text
+Analysis Engine
+      │
+      ▼
+Pack 02 Analytical Knowledge (when authored)
+      │
+      ▼
+Pack 01 Fundamental Theory / Knowledge Infrastructure
+```
+
+Forbidden: Pack 01 depending on Analysis Engine. Analysis Engine must not mutate Pack 01 source knowledge.
+
+---
+
+## Coexistence Note
+
+Legacy directories (`01_strength_engine` … `10_report_generator`, `runtime`, `api`, etc.) remain present.
+
+New architecture packages are the canonical skeleton for future implementation.
+See `ANALYSIS_ENGINE_AUDIT.md` for consistency status.
+
+---
+
+## Related Architecture Docs
+
+- `docs/architecture/`
+- `docs/pipeline/`
+- `docs/analyzers/`
+- `docs/registry/`
+- `docs/compiler/`
+- `docs/validation/`
+- `docs/api/`
+- `docs/examples/`
+- `ARCHITECTURE.md` (legacy baseline doc)
+- `PIPELINE.md` / `PUBLIC_API.md` / `SHARED_MODELS.md` (legacy baseline docs)

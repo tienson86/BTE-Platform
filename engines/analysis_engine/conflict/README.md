@@ -1,5 +1,10 @@
 # Conflict Package
 
-Architecture skeleton for conflict resolution boundaries.
+> **Path:** `engines/analysis_engine/conflict/`
 
-No resolution algorithms.
+Architecture skeleton for conflict-resolution boundaries.
+
+Related analyzer: `analyzers/conflict/`.
+Related interface: `interfaces/conflict_resolver.py`.
+
+No resolution algorithms. Package placeholder only.

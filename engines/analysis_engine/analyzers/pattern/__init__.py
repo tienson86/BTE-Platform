@@ -13,11 +13,30 @@ from engines.analysis_engine.analyzers.pattern.models import (
 )
 from engines.analysis_engine.analyzers.pattern.validator import PatternValidator
 
+from engines.analysis_engine.analyzers.pattern.contracts import (
+    PatternAnalyzerContracts,
+    PatternConsumedMetadataContract,
+    PatternDependenciesContract,
+    PatternInputContextContract,
+    PatternOutputResultContract,
+    PatternProducedMetadataContract,
+    PatternSupportedResultTypesContract,
+    PatternSupportedRulesContract,
+)
+
 __all__ = [
     "PatternAnalyzer",
+    "PatternAnalyzerContracts",
     "PatternAnalyzerInput",
     "PatternAnalyzerInterface",
     "PatternAnalyzerResult",
+    "PatternConsumedMetadataContract",
+    "PatternDependenciesContract",
+    "PatternInputContextContract",
+    "PatternOutputResultContract",
+    "PatternProducedMetadataContract",
+    "PatternSupportedResultTypesContract",
+    "PatternSupportedRulesContract",
     "PatternValidator",
     "PatternValidatorInterface",
 ]

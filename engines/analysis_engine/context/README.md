@@ -1,11 +1,13 @@
 # Context Package
 
-Architecture skeleton for Analysis Engine typed contexts.
+> **Path:** `engines/analysis_engine/context/`
 
-## Public Modules
+Typed context architecture for the Analysis Engine.
 
-| Module | Interface / Model |
-|--------|-------------------|
+## Modules
+
+| Module | Type |
+|--------|------|
 | `interfaces.py` | `ContextInterface`, `ContextBuilderInterface` |
 | `chart_context.py` | `ChartContext` |
 | `strength_context.py` | `StrengthContext` |
@@ -16,4 +18,4 @@ Architecture skeleton for Analysis Engine typed contexts.
 | `liunian_context.py` | `LiunianContext` |
 | `runtime_context.py` | `RuntimeContext` |
 
-Public interfaces only. No implementation. No BaZi analysis.
+Architecture contracts only. No BaZi analysis.

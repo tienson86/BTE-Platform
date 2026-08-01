@@ -13,11 +13,30 @@ from engines.analysis_engine.analyzers.temperature.models import (
 )
 from engines.analysis_engine.analyzers.temperature.validator import TemperatureValidator
 
+from engines.analysis_engine.analyzers.temperature.contracts import (
+    TemperatureAnalyzerContracts,
+    TemperatureConsumedMetadataContract,
+    TemperatureDependenciesContract,
+    TemperatureInputContextContract,
+    TemperatureOutputResultContract,
+    TemperatureProducedMetadataContract,
+    TemperatureSupportedResultTypesContract,
+    TemperatureSupportedRulesContract,
+)
+
 __all__ = [
     "TemperatureAnalyzer",
+    "TemperatureAnalyzerContracts",
     "TemperatureAnalyzerInput",
     "TemperatureAnalyzerInterface",
     "TemperatureAnalyzerResult",
+    "TemperatureConsumedMetadataContract",
+    "TemperatureDependenciesContract",
+    "TemperatureInputContextContract",
+    "TemperatureOutputResultContract",
+    "TemperatureProducedMetadataContract",
+    "TemperatureSupportedResultTypesContract",
+    "TemperatureSupportedRulesContract",
     "TemperatureValidator",
     "TemperatureValidatorInterface",
 ]

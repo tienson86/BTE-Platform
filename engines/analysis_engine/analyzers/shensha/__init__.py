@@ -13,11 +13,30 @@ from engines.analysis_engine.analyzers.shensha.models import (
 )
 from engines.analysis_engine.analyzers.shensha.validator import ShenshaValidator
 
+from engines.analysis_engine.analyzers.shensha.contracts import (
+    ShenshaAnalyzerContracts,
+    ShenshaConsumedMetadataContract,
+    ShenshaDependenciesContract,
+    ShenshaInputContextContract,
+    ShenshaOutputResultContract,
+    ShenshaProducedMetadataContract,
+    ShenshaSupportedResultTypesContract,
+    ShenshaSupportedRulesContract,
+)
+
 __all__ = [
     "ShenshaAnalyzer",
+    "ShenshaAnalyzerContracts",
     "ShenshaAnalyzerInput",
     "ShenshaAnalyzerInterface",
     "ShenshaAnalyzerResult",
+    "ShenshaConsumedMetadataContract",
+    "ShenshaDependenciesContract",
+    "ShenshaInputContextContract",
+    "ShenshaOutputResultContract",
+    "ShenshaProducedMetadataContract",
+    "ShenshaSupportedResultTypesContract",
+    "ShenshaSupportedRulesContract",
     "ShenshaValidator",
     "ShenshaValidatorInterface",
 ]

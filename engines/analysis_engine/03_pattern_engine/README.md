@@ -518,3 +518,13 @@ Extension constraints:
 This README is the official V1.0 architecture baseline for `engines/analysis_engine/03_pattern_engine`.
 
 Breaking architectural changes require an explicit major version increment and a replacement architecture baseline.
+
+---
+
+## Architecture Coexistence
+
+This directory is part of the **legacy stage documentation/engine tree**.
+
+Canonical architecture skeleton packages live at the Analysis Engine root (`models/`, `pipeline/`, `analyzers/`, `registry/`, `validation/`, …).
+
+See `engines/analysis_engine/README.md` and `ANALYSIS_ENGINE_AUDIT.md`.

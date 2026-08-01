@@ -1,5 +1,7 @@
 # Adapters Package
 
-Architecture skeleton for external system adapters used by the Analysis Engine.
+> **Path:** `engines/analysis_engine/adapters/`
+
+Architecture skeleton for external system adapters.
 
 No adapter implementations.

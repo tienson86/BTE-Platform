@@ -1,33 +1,38 @@
 # Scoring Analyzer
 
+> **Path:** `engines/analysis_engine/analyzers/scoring/`
+>
 > **Analyzer ID:** `scoring`
 >
-> **Pack / Engine:** Analysis Engine
+> **Version:** see `VERSION`
 >
-> **Version:** 0.0.0
->
-> **Status:** Initialized (Structure Only)
+> **Status:** Architecture skeleton
 
----
+## Package Files
 
-## Purpose
+| File | Role |
+|------|------|
+| `analyzer.py` | Analyzer class skeleton |
+| `models.py` | Input/result dataclasses |
+| `interfaces.py` | Analyzer/validator ABCs |
+| `validator.py` | Validator skeleton |
+| `contracts.py` | Input/output/dependency/metadata/rules/result contracts |
+| `SPEC.md` | Specification placeholder |
+| `VERSION` / `CHANGELOG.md` | Versioning |
 
-Architecture skeleton for the **Scoring** analyzer.
+## Architecture Position
 
----
+```text
+Analysis Engine Pipeline
+        │
+        ▼
+analyzers/scoring/
+        │
+        ▼
+Registry / Validation contracts
+        │
+        ▼
+Pack 01 (read-only)
+```
 
-## Contents
-
-- `SPEC.md` — empty specification skeleton
-- `interfaces.py` — public interfaces
-- `models.py` — dataclass skeletons
-- `analyzer.py` — analyzer class skeleton
-- `validator.py` — validator class skeleton
-
----
-
-## Non-Goals
-
-- No business logic
-- No BaZi analysis algorithms
-- No scoring formulas
+Architecture and contracts only. No analysis logic.

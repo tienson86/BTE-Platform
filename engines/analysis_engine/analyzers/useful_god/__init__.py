@@ -13,11 +13,30 @@ from engines.analysis_engine.analyzers.useful_god.models import (
 )
 from engines.analysis_engine.analyzers.useful_god.validator import UsefulGodValidator
 
+from engines.analysis_engine.analyzers.useful_god.contracts import (
+    UsefulGodAnalyzerContracts,
+    UsefulGodConsumedMetadataContract,
+    UsefulGodDependenciesContract,
+    UsefulGodInputContextContract,
+    UsefulGodOutputResultContract,
+    UsefulGodProducedMetadataContract,
+    UsefulGodSupportedResultTypesContract,
+    UsefulGodSupportedRulesContract,
+)
+
 __all__ = [
     "UsefulGodAnalyzer",
+    "UsefulGodAnalyzerContracts",
     "UsefulGodAnalyzerInput",
     "UsefulGodAnalyzerInterface",
     "UsefulGodAnalyzerResult",
+    "UsefulGodConsumedMetadataContract",
+    "UsefulGodDependenciesContract",
+    "UsefulGodInputContextContract",
+    "UsefulGodOutputResultContract",
+    "UsefulGodProducedMetadataContract",
+    "UsefulGodSupportedResultTypesContract",
+    "UsefulGodSupportedRulesContract",
     "UsefulGodValidator",
     "UsefulGodValidatorInterface",
 ]

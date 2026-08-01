@@ -1,5 +1,7 @@
-# Golden Dataset Directory
+# Golden
 
-Reserved for Analysis Engine golden inputs and expected outputs.
+> **Path:** `tests/analysis_engine/golden/`
 
-No golden data authored in this framework skeleton.
+Reserved for Analysis Engine golden inputs/outputs.
+
+No golden datasets authored in the architecture skeleton phase.

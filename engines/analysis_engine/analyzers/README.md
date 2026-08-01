@@ -1,25 +1,27 @@
 # Analyzers Package
 
-Architecture skeleton for Analysis Engine analyzers.
+> **Path:** `engines/analysis_engine/analyzers/`
+
+Analyzer module skeletons for the Analysis Engine.
 
 ## Analyzer Modules
 
 | Directory | Analyzer |
 |-----------|----------|
-| `strength/` | Strength Analyzer |
-| `pattern/` | Pattern Analyzer |
-| `temperature/` | Temperature Analyzer |
-| `useful_god/` | Useful God Analyzer |
-| `ten_gods/` | Ten Gods Analyzer |
-| `combination/` | Combination Analyzer |
-| `shensha/` | Shen Sha Analyzer |
-| `dayun/` | Dayun Analyzer |
-| `liunian/` | Liunian Analyzer |
-| `liuyue/` | Liuyue Analyzer |
-| `scoring/` | Scoring Analyzer |
-| `conflict/` | Conflict Analyzer |
+| `strength/` | Strength |
+| `pattern/` | Pattern |
+| `temperature/` | Temperature |
+| `useful_god/` | Useful God |
+| `ten_gods/` | Ten Gods |
+| `combination/` | Combination |
+| `shensha/` | Shen Sha |
+| `dayun/` | Dayun |
+| `liunian/` | Liunian |
+| `liuyue/` | Liuyue |
+| `scoring/` | Scoring |
+| `conflict/` | Conflict |
 
-Each analyzer contains:
+## Per-analyzer files
 
 ```text
 README.md
@@ -30,6 +32,8 @@ analyzer.py
 models.py
 interfaces.py
 validator.py
+contracts.py
+__init__.py
 ```
 
-Public interfaces only. No business logic. No BaZi analysis.
+Architecture and contracts only. No business logic.
