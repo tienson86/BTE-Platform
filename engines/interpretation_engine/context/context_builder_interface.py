@@ -13,11 +13,16 @@ if TYPE_CHECKING:
 
 
 class InterpretationContextBuilderInterface(ABC):
-    """Build interpretation context from Pack 02 final analysis input only."""
+    """Build interpretation context from Pack 02 final analysis input only.
+
+    ``build`` returns the architecture model shell.
+    Runtime builders also expose ``build_context`` / ``build_from_final_result``
+    returning Pack 03 ``InterpretationContext``.
+    """
 
     @abstractmethod
     def build(self, final_input: FinalAnalysisInput) -> InterpretationContextModel:
-        """Build an immutable interpretation context."""
+        """Build an immutable interpretation context architecture model."""
 
     @abstractmethod
     def validate(self, final_input: FinalAnalysisInput) -> bool:

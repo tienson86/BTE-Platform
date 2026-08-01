@@ -1,20 +1,45 @@
-"""Interpretation context architecture package.
+"""Interpretation context architecture and runtime package.
 
 Re-exports legacy ``InterpretationContext`` for backward compatibility.
+Pack 03 runtime context is ``PackInterpretationContext`` (alias) and also
+available as ``context.interpretation_context.InterpretationContext``.
 """
 
 from __future__ import annotations
 
+from engines.interpretation_engine.context.builder import ContextBuilder, utc_now
 from engines.interpretation_engine.context.context_builder_interface import (
     InterpretationContextBuilderInterface,
 )
 from engines.interpretation_engine.context.context_provider_interface import (
     InterpretationContextProviderInterface,
 )
+from engines.interpretation_engine.context.factory import ContextFactory
+from engines.interpretation_engine.context.history import ContextHistory
+from engines.interpretation_engine.context.interpretation_context import (
+    InterpretationContext as PackInterpretationContext,
+)
+from engines.interpretation_engine.context.manager import ContextManager
+from engines.interpretation_engine.context.revision import (
+    ContextLifecyclePhase,
+    ContextRevision,
+)
+from engines.interpretation_engine.context.serializer import ContextSerializer
+from engines.interpretation_engine.context.snapshot import ContextSnapshot
 from engines.interpretation_engine.legacy_runtime.context import InterpretationContext
 
 __all__ = [
+    "ContextBuilder",
+    "ContextFactory",
+    "ContextHistory",
+    "ContextLifecyclePhase",
+    "ContextManager",
+    "ContextRevision",
+    "ContextSerializer",
+    "ContextSnapshot",
     "InterpretationContext",
     "InterpretationContextBuilderInterface",
     "InterpretationContextProviderInterface",
+    "PackInterpretationContext",
+    "utc_now",
 ]
