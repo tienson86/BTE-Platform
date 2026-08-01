@@ -79,13 +79,15 @@ class StrengthInterpretationRuleEngine:
         self.database_path = database_path or DEFAULT_PACK01_STRENGTH_DB
         self.loader = loader or StrengthLoader(self.database_path)
         self.matcher = matcher or StrengthMatcher()
+        self._config: dict[str, float] | None = None
+        self._level_rules: list[dict[str, Any]] | None = None
+        self._grouped: dict[str, list[dict[str, Any]]] | None = None
 
     def evaluate(self, facts: StrengthFacts) -> StrengthRuleEngineResult:
         """Evaluate Pack 01 rules against extracted Pack 02 facts."""
-        config = self.loader.load_config()
-        level_rules = self.loader.load_level_rules()
-        grouped = self.loader.load_rule_groups()
-
+        config = self._get_config()
+        level_rules = self._get_level_rules()
+        grouped = self._get_grouped_rules()
         # Ensure matcher sees normalized strength_score for level rules.
         score_for_level = self._normalize_score(
             facts.final_strength_score or facts.body_strength,
@@ -174,8 +176,17 @@ class StrengthInterpretationRuleEngine:
         grouped: dict[str, list[dict[str, Any]]],
     ) -> tuple[StrengthRuleMatch, ...]:
         """Match Pack 01 component rules when Pack 02 exposes label fields."""
+        eligible: dict[str, bool] = {
+            "season": bool(facts.month_status),
+            "root": bool(facts.root_level),
+            "support": bool(facts.support_type),
+            "drain": bool(facts.drain_type),
+            "control": bool(facts.control_type),
+        }
         matches: list[StrengthRuleMatch] = []
-        for group_name in ("season", "root", "support", "drain", "control"):
+        for group_name, enabled in eligible.items():
+            if not enabled:
+                continue
             for rule in grouped.get(group_name, ()):
                 if not self.matcher.is_active(rule):
                     continue
@@ -191,6 +202,24 @@ class StrengthInterpretationRuleEngine:
                 )
         matches.sort(key=lambda item: item.priority, reverse=True)
         return tuple(matches)
+
+    def _get_config(self) -> dict[str, float]:
+        """Lazy-load Pack 01 config once per engine instance."""
+        if self._config is None:
+            self._config = self.loader.load_config()
+        return self._config
+
+    def _get_level_rules(self) -> list[dict[str, Any]]:
+        """Lazy-load Pack 01 level rules once per engine instance."""
+        if self._level_rules is None:
+            self._level_rules = self.loader.load_level_rules()
+        return self._level_rules
+
+    def _get_grouped_rules(self) -> dict[str, list[dict[str, Any]]]:
+        """Lazy-load Pack 01 rule groups once per engine instance."""
+        if self._grouped is None:
+            self._grouped = self.loader.load_rule_groups()
+        return self._grouped
 
     def _safe_match(self, facts: StrengthFacts, rule: dict[str, Any]) -> bool:
         """Match Pack 01 rule; missing fact fields never raise."""
