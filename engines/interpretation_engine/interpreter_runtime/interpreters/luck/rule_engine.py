@@ -364,6 +364,37 @@ class LuckInterpretationRuleEngine:
                     return row
         return pool[0] if pool else None
 
+    def _match_interaction_score(
+        self,
+        effect: str,
+        upstream_class: str,
+    ) -> dict[str, Any] | None:
+        """Match combination or clash score by effect text."""
+        blob = self._norm(f"{effect} {upstream_class}")
+        effect_tokens = self._token_set(effect)
+        use_clash = bool(
+            effect_tokens & {self._norm(t) for t in ATTACK_EFFECT_TOKENS}
+            or any(token in blob for token in ("clash", "xung", "hai", "pha", "destroy"))
+        )
+        use_combine = bool(
+            effect_tokens & {self._norm(t) for t in SUPPORT_EFFECT_TOKENS}
+            or any(token in blob for token in ("combine", "hop", "hợp", "support"))
+        )
+        rules = (
+            self.loader.load_clash_rules()
+            if use_clash and not use_combine
+            else self.loader.load_combination_rules()
+        )
+        best = self._best_token_match(rules, blob, extra_tokens=effect_tokens)
+        if best is not None:
+            return best
+        alt = (
+            self.loader.load_combination_rules()
+            if use_clash
+            else self.loader.load_clash_rules()
+        )
+        return self._best_token_match(alt, blob, extra_tokens=effect_tokens)
+
     def _match_interpretation(
         self,
         luck_type: str,
