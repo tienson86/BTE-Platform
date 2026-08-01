@@ -144,7 +144,7 @@ class ScoringInterpretationRuleEngine:
         weight_total = 0.0
         for item in facts.dimensions:
             row = weight_lookup.get(item.dimension.upper())
-            weight = float((row or {}).get("weight") or 0.0)
+            weight = self._safe_float((row or {}).get("weight"), default=0.0)
             if weight <= 0.0:
                 continue
             weighted_sum += float(item.value) * weight
@@ -172,7 +172,9 @@ class ScoringInterpretationRuleEngine:
                 level=grade or level,
                 rating=level,
                 score=overall_score,
-                priority=int(float((grade_row or {}).get("min_score") or 0)),
+                priority=int(
+                    self._safe_float((grade_row or {}).get("min_score"), default=0.0)
+                ),
                 description=str((grade_row or {}).get("description") or ""),
                 recommendation=str((reco_row or {}).get("recommendation") or ""),
                 attributes={
@@ -181,6 +183,9 @@ class ScoringInterpretationRuleEngine:
                     "recommendation_rule_id": str((reco_row or {}).get("id") or ""),
                     "recommendation_level": str(
                         (reco_row or {}).get("recommendation_level") or ""
+                    ),
+                    "min_score": self._safe_float(
+                        (grade_row or {}).get("min_score"), default=0.0
                     ),
                 },
             ),
@@ -196,8 +201,8 @@ class ScoringInterpretationRuleEngine:
         dimension = fact.dimension.upper()
         rating_row = self._match_rating(dimension, fact.value)
         weight_row = weight_lookup.get(dimension)
-        weight = float((weight_row or {}).get("weight") or 0.0)
-        priority = int(float((weight_row or {}).get("priority") or 0))
+        weight = self._safe_float((weight_row or {}).get("weight"), default=0.0)
+        priority = int(self._safe_float((weight_row or {}).get("priority"), default=0.0))
         return ScoringItemResult(
             item_id=dimension,
             item_type="dimension",
@@ -236,7 +241,9 @@ class ScoringInterpretationRuleEngine:
                 level=level,
                 rating=level,
                 score=confidence_value,
-                priority=int(float((row or {}).get("min_value") or 0)),
+                priority=int(
+                    self._safe_float((row or {}).get("min_value"), default=0.0)
+                ),
                 description=str((row or {}).get("description") or ""),
                 attributes={
                     "confidence_rule_id": str((row or {}).get("id") or ""),
@@ -310,22 +317,21 @@ class ScoringInterpretationRuleEngine:
         for row in self.loader.load_grade_rules():
             if hint and str(row.get("grade") or "").upper() == hint:
                 return row
-        for row in self.loader.load_grade_rules():
-            low = float(row.get("min_score") or 0.0)
-            high = float(row.get("max_score") or 100.0)
-            if low <= score <= high:
-                return row
-        return None
+        return self._match_score_band(
+            self.loader.load_grade_rules(),
+            score,
+            min_key="min_score",
+            max_key="max_score",
+        )
 
     def _match_recommendation(self, score: float) -> dict[str, Any] | None:
         """Match Pack 01 recommendation band by overall score."""
-        for row in self.loader.load_recommendation_rules():
-            low = float(row.get("min_score") or 0.0)
-            high = float(row.get("max_score") or 100.0)
-            if low <= score <= high:
-                return row
-        return None
-
+        return self._match_score_band(
+            self.loader.load_recommendation_rules(),
+            score,
+            min_key="min_score",
+            max_key="max_score",
+        )
     def _match_rating(
         self,
         dimension: str,
@@ -377,8 +383,21 @@ class ScoringInterpretationRuleEngine:
     ) -> dict[str, Any] | None:
         """Find first band containing score."""
         for row in rows:
-            low = float(row.get(min_key) or 0.0)
-            high = float(row.get(max_key) or 100.0)
+            try:
+                low = float(row.get(min_key))
+                high = float(row.get(max_key))
+            except (TypeError, ValueError):
+                continue
             if low <= score <= high:
                 return row
         return None
+
+    @staticmethod
+    def _safe_float(value: Any, *, default: float = 0.0) -> float:
+        """Parse float from Pack 01 cells; invalid -> default."""
+        try:
+            if value in (None, ""):
+                return default
+            return float(value)
+        except (TypeError, ValueError):
+            return default
