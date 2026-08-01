@@ -3,9 +3,14 @@
 from __future__ import annotations
 
 from engines.analysis_engine.registry.cache_contract import RegistryCacheContract
+from engines.analysis_engine.registry.cache_service import CacheService
+from engines.analysis_engine.registry.dependency_graph import DependencyGraph
 from engines.analysis_engine.registry.loader_contract import RegistryLoaderContract
+from engines.analysis_engine.registry.metadata_loader import MetadataLoader
+from engines.analysis_engine.registry.module_loader import ModuleLoader
 from engines.analysis_engine.registry.provider_contract import RegistryProviderContract
 from engines.analysis_engine.registry.query_contract import RegistryQueryContract
+from engines.analysis_engine.registry.query_engine import QueryEngine
 from engines.analysis_engine.registry.registry import Registry
 from engines.analysis_engine.registry.registry_builder import RegistryBuilder
 from engines.analysis_engine.registry.registry_cache import RegistryCache
@@ -19,9 +24,16 @@ from engines.analysis_engine.registry.registry_models import (
     RegistrySnapshot,
 )
 from engines.analysis_engine.registry.registry_query import RegistryQuery
+from engines.analysis_engine.registry.registry_service import RegistryService
 from engines.analysis_engine.registry.registry_validator import RegistryValidator
+from engines.analysis_engine.registry.version_resolver import VersionResolver
 
 __all__ = [
+    "CacheService",
+    "DependencyGraph",
+    "MetadataLoader",
+    "ModuleLoader",
+    "QueryEngine",
     "Registry",
     "RegistryBuilder",
     "RegistryCache",
@@ -36,6 +48,8 @@ __all__ = [
     "RegistryQuery",
     "RegistryQueryContract",
     "RegistryQuerySpec",
+    "RegistryService",
     "RegistrySnapshot",
     "RegistryValidator",
+    "VersionResolver",
 ]

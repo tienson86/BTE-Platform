@@ -5,7 +5,19 @@
 Registry layer compatible with Pack 01 Registry responsibilities
 (register / index / manage / lookup / resolve / serve).
 
-## Modules
+## Runtime Services
+
+| Module | Surface |
+|--------|---------|
+| `registry_service.py` | `RegistryService` |
+| `query_engine.py` | `QueryEngine` |
+| `dependency_graph.py` | `DependencyGraph` |
+| `module_loader.py` | `ModuleLoader` |
+| `cache_service.py` | `CacheService` |
+| `version_resolver.py` | `VersionResolver` |
+| `metadata_loader.py` | `MetadataLoader` |
+
+## Facades & Contracts
 
 | Module | Surface |
 |--------|---------|
@@ -24,4 +36,4 @@ Registry layer compatible with Pack 01 Registry responsibilities
 | `cache_contract.py` | `RegistryCacheContract` |
 | `provider_contract.py` | `RegistryProviderContract` |
 
-Interfaces only. No Pack 01 mutation.
+Runtime services only. No business rules. No Pack 01 mutation.

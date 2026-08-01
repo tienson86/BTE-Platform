@@ -100,7 +100,6 @@ class DependencyGraph:
         # Restrict edges to registered nodes for cycle detection / load order.
         indegree: dict[str, int] = {node: 0 for node in self._nodes}
         adjacency: dict[str, set[str]] = defaultdict(set)
-        reverse: dict[str, set[str]] = defaultdict(set)
 
         for source, targets in self._outgoing.items():
             if source not in self._nodes:
@@ -110,7 +109,6 @@ class DependencyGraph:
                     continue
                 # source depends on target → target precedes source
                 adjacency[target].add(source)
-                reverse[source].add(target)
                 indegree[source] += 1
 
         queue: deque[str] = deque(

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from engines.analysis_engine.registry.registry import Registry
 from engines.analysis_engine.registry.registry_models import RegistryEntry, RegistrySnapshot
+from engines.analysis_engine.registry.registry_service import RegistryService
 
 
 class RegistryBuilder:
@@ -11,12 +12,13 @@ class RegistryBuilder:
 
     def create(self) -> Registry:
         """Create an empty registry instance."""
-        raise NotImplementedError
+        return Registry(RegistryService())
 
     def add_entry(self, registry: Registry, entry: RegistryEntry) -> Registry:
         """Add an entry during registry construction."""
-        raise NotImplementedError
+        registry.register(entry)
+        return registry
 
     def build_snapshot(self, registry: Registry) -> RegistrySnapshot:
         """Build an immutable snapshot from a registry."""
-        raise NotImplementedError
+        return registry.snapshot()
