@@ -7,11 +7,10 @@ Loads:
 
 from __future__ import annotations
 
+import csv
 import logging
 from pathlib import Path
 from typing import Any
-
-import pandas as pd
 
 logger = logging.getLogger(__name__)
 
@@ -124,8 +123,6 @@ class ScoringRuleLoader:
 
         Pack 01 final-score descriptions sometimes contain unquoted commas.
         """
-        import csv
-
         if not path.exists():
             logger.warning("scoring_rule_csv_missing", extra={"path": str(path)})
             return []
@@ -158,18 +155,3 @@ class ScoringRuleLoader:
                 extra={"path": str(path), "error": str(exc)},
             )
             return []
-
-    @staticmethod
-    def _load_csv(path: Path) -> list[dict[str, Any]]:
-        """Load a CSV file as list[dict]; missing/empty file -> empty."""
-        if not path.exists():
-            logger.warning("scoring_rule_csv_missing", extra={"path": str(path)})
-            return []
-        try:
-            df = pd.read_csv(path, encoding="utf-8")
-        except pd.errors.EmptyDataError:
-            logger.warning("scoring_rule_csv_empty", extra={"path": str(path)})
-            return []
-        if df.empty:
-            return []
-        return df.to_dict("records")
