@@ -13,10 +13,10 @@ from engines.analysis_engine.models.final_result import FinalResult
 
 
 @dataclass(frozen=True, slots=True)
-class InterpretationContext:
-    """Immutable Interpretation Context produced from Pack 02 final analysis.
+class PackInterpretationContext:
+    """Immutable Pack 03 Interpretation Context from Pack 02 final analysis.
 
-    This is the Pack 03 architecture/runtime context.
+    Canonical Pack 03 runtime context name.
     Legacy BaZi-field context remains under ``legacy_runtime.context``.
     """
 
@@ -43,3 +43,7 @@ class InterpretationContext:
         if self.final_result.id != self.source_final_result_id:
             return False
         return self.final_result.validate()
+
+
+# Backward-compatible Pack 03 alias (prefer PackInterpretationContext in new code).
+InterpretationContext = PackInterpretationContext
