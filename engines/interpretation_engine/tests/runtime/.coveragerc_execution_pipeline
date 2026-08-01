@@ -1,0 +1,21 @@
+# Coverage for Pack 03 runtime execution pipeline.
+
+[run]
+branch = False
+source =
+    engines/interpretation_engine/orchestration
+
+omit =
+    */__init__.py
+    engines/interpretation_engine/orchestration/runtime_pipeline.py
+    engines/interpretation_engine/orchestration/execution_manager.py
+
+[report]
+show_missing = True
+skip_empty = True
+fail_under = 95
+include =
+    engines/interpretation_engine/orchestration/execution_pipeline.py
+    engines/interpretation_engine/orchestration/section_collector.py
+    engines/interpretation_engine/orchestration/error_isolation.py
+    engines/interpretation_engine/orchestration/async_executor.py
