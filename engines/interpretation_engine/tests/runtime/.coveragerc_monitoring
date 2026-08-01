@@ -1,0 +1,18 @@
+# Coverage for Pack 03 runtime monitoring.
+
+[run]
+branch = False
+source =
+    engines/interpretation_engine/monitoring
+
+omit =
+    */__init__.py
+
+[report]
+show_missing = True
+skip_empty = True
+fail_under = 95
+include =
+    engines/interpretation_engine/monitoring/monitor.py
+    engines/interpretation_engine/monitoring/models.py
+    engines/interpretation_engine/monitoring/memory.py
