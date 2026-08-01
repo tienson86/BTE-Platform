@@ -51,19 +51,24 @@ class ScoringRuleLoader:
     def load_grade_rules(self) -> list[dict[str, Any]]:
         """Load overall grade bands."""
         if self._grade_rules is None:
-            self._grade_rules = self._load_csv(self.final_score_root / "01_grade.csv")
+            # Descriptions may contain unquoted commas — use flexible CSV parse.
+            self._grade_rules = self._load_csv_flexible(
+                self.final_score_root / "01_grade.csv"
+            )
         return self._grade_rules
 
     def load_rating_rules(self) -> list[dict[str, Any]]:
         """Load dimension star-rating bands."""
         if self._rating_rules is None:
-            self._rating_rules = self._load_csv(self.final_score_root / "02_rating.csv")
+            self._rating_rules = self._load_csv_flexible(
+                self.final_score_root / "02_rating.csv"
+            )
         return self._rating_rules
 
     def load_confidence_rules(self) -> list[dict[str, Any]]:
         """Load confidence level bands."""
         if self._confidence_rules is None:
-            self._confidence_rules = self._load_csv(
+            self._confidence_rules = self._load_csv_flexible(
                 self.final_score_root / "03_confidence.csv"
             )
         return self._confidence_rules
@@ -71,7 +76,7 @@ class ScoringRuleLoader:
     def load_dimension_weights(self) -> list[dict[str, Any]]:
         """Load final-score dimension weights."""
         if self._dimension_weights is None:
-            self._dimension_weights = self._load_csv(
+            self._dimension_weights = self._load_csv_flexible(
                 self.final_score_root / "04_dimension_weight.csv"
             )
         return self._dimension_weights
@@ -79,7 +84,7 @@ class ScoringRuleLoader:
     def load_recommendation_rules(self) -> list[dict[str, Any]]:
         """Load recommendation bands by overall score."""
         if self._recommendation_rules is None:
-            self._recommendation_rules = self._load_csv(
+            self._recommendation_rules = self._load_csv_flexible(
                 self.final_score_root / "05_recommendation.csv"
             )
         return self._recommendation_rules
@@ -87,7 +92,7 @@ class ScoringRuleLoader:
     def load_output_mapping(self) -> list[dict[str, Any]]:
         """Load score output field mapping."""
         if self._output_mapping is None:
-            self._output_mapping = self._load_csv(
+            self._output_mapping = self._load_csv_flexible(
                 self.final_score_root / "06_output_mapping.csv"
             )
         return self._output_mapping
@@ -95,7 +100,7 @@ class ScoringRuleLoader:
     def load_module_weights(self) -> list[dict[str, Any]]:
         """Load module weight table."""
         if self._module_weights is None:
-            rows = self._load_csv(self.module_weight_csv)
+            rows = self._load_csv_flexible(self.module_weight_csv)
             self._module_weights = [
                 row
                 for row in rows
@@ -112,6 +117,47 @@ class ScoringRuleLoader:
             if module:
                 lookup[module] = row
         return lookup
+
+    @staticmethod
+    def _load_csv_flexible(path: Path) -> list[dict[str, Any]]:
+        """Load CSV; merge overflow fields into the last header column.
+
+        Pack 01 final-score descriptions sometimes contain unquoted commas.
+        """
+        import csv
+
+        if not path.exists():
+            logger.warning("scoring_rule_csv_missing", extra={"path": str(path)})
+            return []
+        try:
+            with path.open("r", encoding="utf-8", newline="") as handle:
+                reader = csv.reader(handle)
+                try:
+                    headers = next(reader)
+                except StopIteration:
+                    return []
+                headers = [str(item).strip() for item in headers if str(item).strip()]
+                if not headers:
+                    return []
+                rows: list[dict[str, Any]] = []
+                for parts in reader:
+                    if not parts or all(not str(part).strip() for part in parts):
+                        continue
+                    values = [str(part).strip() for part in parts]
+                    if len(values) > len(headers):
+                        head = values[: len(headers) - 1]
+                        tail = ",".join(values[len(headers) - 1 :])
+                        values = head + [tail]
+                    elif len(values) < len(headers):
+                        values = values + [""] * (len(headers) - len(values))
+                    rows.append(dict(zip(headers, values, strict=False)))
+                return rows
+        except OSError as exc:
+            logger.warning(
+                "scoring_rule_csv_read_failed",
+                extra={"path": str(path), "error": str(exc)},
+            )
+            return []
 
     @staticmethod
     def _load_csv(path: Path) -> list[dict[str, Any]]:
