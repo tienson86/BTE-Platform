@@ -1,0 +1,69 @@
+flowchart LR
+  NS_dataset["dataset"]
+  NS_generic["generic"]
+  NS_global["global"]
+  NS_knowledge["knowledge"]
+  NS_reference["reference"]
+  NS_report["report"]
+  NS_rule["rule"]
+  NS_sentence["sentence"]
+  NS_terminology["terminology"]
+  OTYPE_api["api"]
+  OTYPE_golden_dataset["golden_dataset"]
+  OTYPE_knowledge_asset["knowledge_asset"]
+  OTYPE_priority_rule["priority_rule"]
+  OTYPE_reference["reference"]
+  OTYPE_report_template["report_template"]
+  OTYPE_rule["rule"]
+  OTYPE_runtime_component["runtime_component"]
+  OTYPE_sentence_template["sentence_template"]
+  OTYPE_terminology["terminology"]
+  OTYPE_validator["validator"]
+  REGDOM_dataset_registry["dataset_registry"]
+  REGDOM_global_registry["global_registry"]
+  REGDOM_knowledge_registry["knowledge_registry"]
+  REGDOM_reference_registry["reference_registry"]
+  REGDOM_report_registry["report_registry"]
+  REGDOM_rule_registry["rule_registry"]
+  REGDOM_sentence_registry["sentence_registry"]
+  REGDOM_terminology_registry["terminology_registry"]
+  REGISTRY_ROOT["BTE Registry Root"]
+  NS_dataset -->|BELONGS_TO| REGISTRY_ROOT
+  NS_generic -->|BELONGS_TO| REGISTRY_ROOT
+  NS_global -->|BELONGS_TO| REGISTRY_ROOT
+  NS_knowledge -->|BELONGS_TO| REGISTRY_ROOT
+  NS_reference -->|BELONGS_TO| REGISTRY_ROOT
+  NS_report -->|BELONGS_TO| REGISTRY_ROOT
+  NS_rule -->|BELONGS_TO| REGISTRY_ROOT
+  NS_sentence -->|BELONGS_TO| REGISTRY_ROOT
+  NS_terminology -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_api -->|IN_NAMESPACE| NS_global
+  OTYPE_golden_dataset -->|IN_NAMESPACE| NS_dataset
+  OTYPE_knowledge_asset -->|IN_NAMESPACE| NS_knowledge
+  OTYPE_priority_rule -->|IN_NAMESPACE| NS_rule
+  OTYPE_reference -->|IN_NAMESPACE| NS_reference
+  OTYPE_report_template -->|IN_NAMESPACE| NS_report
+  OTYPE_rule -->|IN_NAMESPACE| NS_rule
+  OTYPE_runtime_component -->|IN_NAMESPACE| NS_global
+  OTYPE_sentence_template -->|IN_NAMESPACE| NS_sentence
+  OTYPE_terminology -->|IN_NAMESPACE| NS_terminology
+  OTYPE_validator -->|IN_NAMESPACE| NS_global
+  OTYPE_api -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_golden_dataset -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_knowledge_asset -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_priority_rule -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_reference -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_report_template -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_rule -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_runtime_component -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_sentence_template -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_terminology -->|BELONGS_TO| REGISTRY_ROOT
+  OTYPE_validator -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_dataset_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_global_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_knowledge_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_reference_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_report_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_rule_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_sentence_registry -->|BELONGS_TO| REGISTRY_ROOT
+  REGDOM_terminology_registry -->|BELONGS_TO| REGISTRY_ROOT

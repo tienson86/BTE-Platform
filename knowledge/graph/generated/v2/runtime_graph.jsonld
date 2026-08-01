@@ -1,0 +1,478 @@
+{
+  "@context": {
+    "@vocab": "https://bte-platform.org/graph#",
+    "edge_type": "https://bte-platform.org/graph#edgeType",
+    "label": "https://schema.org/name",
+    "node_id": "@id",
+    "node_type": "@type",
+    "source": {
+      "@id": "https://bte-platform.org/graph#source",
+      "@type": "@id"
+    },
+    "target": {
+      "@id": "https://bte-platform.org/graph#target",
+      "@type": "@id"
+    }
+  },
+  "@id": "GRAPH-RT-000001",
+  "@type": "KnowledgeGraph",
+  "edges": [
+    {
+      "@id": "RT-LOAD-KR-000001",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000001",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000002",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000002",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000003",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000003",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000004",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000004",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000005",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000005",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000006",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000006",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000007",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000007",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000008",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000008",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000009",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000009",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000010",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000010",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000011",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000011",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000012",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000012",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000013",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000013",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000014",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000014",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-LOAD-KR-000015",
+      "@type": "Edge",
+      "edge_type": "LOADED_BY",
+      "source": "RT-KR-000015",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-NEXT-000001",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-PARSE",
+      "target": "STAGE-LOAD"
+    },
+    {
+      "@id": "RT-NEXT-000002",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-VALIDATE",
+      "target": "STAGE-PARSE"
+    },
+    {
+      "@id": "RT-NEXT-000003",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-DEPENDENCY",
+      "target": "STAGE-VALIDATE"
+    },
+    {
+      "@id": "RT-NEXT-000004",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-TRANSFORM",
+      "target": "STAGE-DEPENDENCY"
+    },
+    {
+      "@id": "RT-NEXT-000005",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-GENERATE",
+      "target": "STAGE-TRANSFORM"
+    },
+    {
+      "@id": "RT-NEXT-000006",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-VERIFY",
+      "target": "STAGE-GENERATE"
+    },
+    {
+      "@id": "RT-NEXT-000007",
+      "@type": "Edge",
+      "edge_type": "FOLLOWS",
+      "source": "STAGE-PUBLISH",
+      "target": "STAGE-VERIFY"
+    },
+    {
+      "@id": "RT-SEQ-000001",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000002",
+      "target": "RT-KR-000001"
+    },
+    {
+      "@id": "RT-SEQ-000002",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000003",
+      "target": "RT-KR-000002"
+    },
+    {
+      "@id": "RT-SEQ-000003",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000004",
+      "target": "RT-KR-000003"
+    },
+    {
+      "@id": "RT-SEQ-000004",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000005",
+      "target": "RT-KR-000004"
+    },
+    {
+      "@id": "RT-SEQ-000005",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000006",
+      "target": "RT-KR-000005"
+    },
+    {
+      "@id": "RT-SEQ-000006",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000007",
+      "target": "RT-KR-000006"
+    },
+    {
+      "@id": "RT-SEQ-000007",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000008",
+      "target": "RT-KR-000007"
+    },
+    {
+      "@id": "RT-SEQ-000008",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000009",
+      "target": "RT-KR-000008"
+    },
+    {
+      "@id": "RT-SEQ-000009",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000010",
+      "target": "RT-KR-000009"
+    },
+    {
+      "@id": "RT-SEQ-000010",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000011",
+      "target": "RT-KR-000010"
+    },
+    {
+      "@id": "RT-SEQ-000011",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000012",
+      "target": "RT-KR-000011"
+    },
+    {
+      "@id": "RT-SEQ-000012",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000013",
+      "target": "RT-KR-000012"
+    },
+    {
+      "@id": "RT-SEQ-000013",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000014",
+      "target": "RT-KR-000013"
+    },
+    {
+      "@id": "RT-SEQ-000014",
+      "@type": "Edge",
+      "edge_type": "LOADS_AFTER",
+      "source": "RT-KR-000015",
+      "target": "RT-KR-000014"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-DEPENDENCY",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-DEPENDENCY",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-GENERATE",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-GENERATE",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-LOAD",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-LOAD",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-PARSE",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-PARSE",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-PUBLISH",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-PUBLISH",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-TRANSFORM",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-TRANSFORM",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-VALIDATE",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-VALIDATE",
+      "target": "RUNTIME-ROOT"
+    },
+    {
+      "@id": "RT-STAGE-STAGE-VERIFY",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "STAGE-VERIFY",
+      "target": "RUNTIME-ROOT"
+    }
+  ],
+  "graph_type": "runtime_graph",
+  "nodes": [
+    {
+      "@id": "RT-KR-000001",
+      "@type": "RuntimeRecord",
+      "label": "Yin Yang System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000002",
+      "@type": "RuntimeRecord",
+      "label": "Qi System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000003",
+      "@type": "RuntimeRecord",
+      "label": "Wu Xing System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000004",
+      "@type": "RuntimeRecord",
+      "label": "Heavenly Stem System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000005",
+      "@type": "RuntimeRecord",
+      "label": "Earthly Branch System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000006",
+      "@type": "RuntimeRecord",
+      "label": "Hidden Stem System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000007",
+      "@type": "RuntimeRecord",
+      "label": "Sexagenary Cycle System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000008",
+      "@type": "RuntimeRecord",
+      "label": "Na Yin System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000009",
+      "@type": "RuntimeRecord",
+      "label": "Void Branch System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000010",
+      "@type": "RuntimeRecord",
+      "label": "Cycle Mapping System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000011",
+      "@type": "RuntimeRecord",
+      "label": "Ten Gods System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000012",
+      "@type": "RuntimeRecord",
+      "label": "Twelve Growth Phases System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000013",
+      "@type": "RuntimeRecord",
+      "label": "Shen Sha System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000014",
+      "@type": "RuntimeRecord",
+      "label": "Stem & Branch Relationship System",
+      "status": "official"
+    },
+    {
+      "@id": "RT-KR-000015",
+      "@type": "RuntimeRecord",
+      "label": "Seasonal Influence & Climate Context System",
+      "status": "official"
+    },
+    {
+      "@id": "RUNTIME-ROOT",
+      "@type": "RuntimeRoot",
+      "label": "Pack 01 Runtime Pipeline",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-DEPENDENCY",
+      "@type": "CompilerStage",
+      "label": "DEPENDENCY",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-GENERATE",
+      "@type": "CompilerStage",
+      "label": "GENERATE",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-LOAD",
+      "@type": "CompilerStage",
+      "label": "LOAD",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-PARSE",
+      "@type": "CompilerStage",
+      "label": "PARSE",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-PUBLISH",
+      "@type": "CompilerStage",
+      "label": "PUBLISH",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-TRANSFORM",
+      "@type": "CompilerStage",
+      "label": "TRANSFORM",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-VALIDATE",
+      "@type": "CompilerStage",
+      "label": "VALIDATE",
+      "status": "official"
+    },
+    {
+      "@id": "STAGE-VERIFY",
+      "@type": "CompilerStage",
+      "label": "VERIFY",
+      "status": "official"
+    }
+  ],
+  "timestamp": "2026-08-01T00:00:00Z",
+  "title": "Pack 01 Runtime Graph"
+}

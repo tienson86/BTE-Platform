@@ -1,0 +1,473 @@
+{
+  "@context": {
+    "@vocab": "https://bte-platform.org/graph#",
+    "edge_type": "https://bte-platform.org/graph#edgeType",
+    "label": "https://schema.org/name",
+    "node_id": "@id",
+    "node_type": "@type",
+    "source": {
+      "@id": "https://bte-platform.org/graph#source",
+      "@type": "@id"
+    },
+    "target": {
+      "@id": "https://bte-platform.org/graph#target",
+      "@type": "@id"
+    }
+  },
+  "@id": "GRAPH-REG-000001",
+  "@type": "KnowledgeGraph",
+  "edges": [
+    {
+      "@id": "NS-BELONGS-dataset",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-dataset",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-generic",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-generic",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-global",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-global",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-knowledge",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-knowledge",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-reference",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-reference",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-report",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-report",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-rule",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-rule",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-sentence",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-sentence",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "NS-BELONGS-terminology",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "NS-terminology",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-NS-api",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-api",
+      "target": "NS-global"
+    },
+    {
+      "@id": "OTYPE-NS-golden_dataset",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-golden_dataset",
+      "target": "NS-dataset"
+    },
+    {
+      "@id": "OTYPE-NS-knowledge_asset",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-knowledge_asset",
+      "target": "NS-knowledge"
+    },
+    {
+      "@id": "OTYPE-NS-priority_rule",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-priority_rule",
+      "target": "NS-rule"
+    },
+    {
+      "@id": "OTYPE-NS-reference",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-reference",
+      "target": "NS-reference"
+    },
+    {
+      "@id": "OTYPE-NS-report_template",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-report_template",
+      "target": "NS-report"
+    },
+    {
+      "@id": "OTYPE-NS-rule",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-rule",
+      "target": "NS-rule"
+    },
+    {
+      "@id": "OTYPE-NS-runtime_component",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-runtime_component",
+      "target": "NS-global"
+    },
+    {
+      "@id": "OTYPE-NS-sentence_template",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-sentence_template",
+      "target": "NS-sentence"
+    },
+    {
+      "@id": "OTYPE-NS-terminology",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-terminology",
+      "target": "NS-terminology"
+    },
+    {
+      "@id": "OTYPE-NS-validator",
+      "@type": "Edge",
+      "edge_type": "IN_NAMESPACE",
+      "source": "OTYPE-validator",
+      "target": "NS-global"
+    },
+    {
+      "@id": "OTYPE-ROOT-api",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-api",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-golden_dataset",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-golden_dataset",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-knowledge_asset",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-knowledge_asset",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-priority_rule",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-priority_rule",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-reference",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-reference",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-report_template",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-report_template",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-rule",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-rule",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-runtime_component",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-runtime_component",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-sentence_template",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-sentence_template",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-terminology",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-terminology",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "OTYPE-ROOT-validator",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "OTYPE-validator",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-dataset_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-dataset_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-global_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-global_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-knowledge_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-knowledge_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-reference_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-reference_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-report_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-report_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-rule_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-rule_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-sentence_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-sentence_registry",
+      "target": "REGISTRY-ROOT"
+    },
+    {
+      "@id": "REG-BELONGS-terminology_registry",
+      "@type": "Edge",
+      "edge_type": "BELONGS_TO",
+      "source": "REGDOM-terminology_registry",
+      "target": "REGISTRY-ROOT"
+    }
+  ],
+  "graph_type": "registry_graph",
+  "nodes": [
+    {
+      "@id": "NS-dataset",
+      "@type": "Namespace",
+      "label": "dataset",
+      "status": "official"
+    },
+    {
+      "@id": "NS-generic",
+      "@type": "Namespace",
+      "label": "generic",
+      "status": "official"
+    },
+    {
+      "@id": "NS-global",
+      "@type": "Namespace",
+      "label": "global",
+      "status": "official"
+    },
+    {
+      "@id": "NS-knowledge",
+      "@type": "Namespace",
+      "label": "knowledge",
+      "status": "official"
+    },
+    {
+      "@id": "NS-reference",
+      "@type": "Namespace",
+      "label": "reference",
+      "status": "official"
+    },
+    {
+      "@id": "NS-report",
+      "@type": "Namespace",
+      "label": "report",
+      "status": "official"
+    },
+    {
+      "@id": "NS-rule",
+      "@type": "Namespace",
+      "label": "rule",
+      "status": "official"
+    },
+    {
+      "@id": "NS-sentence",
+      "@type": "Namespace",
+      "label": "sentence",
+      "status": "official"
+    },
+    {
+      "@id": "NS-terminology",
+      "@type": "Namespace",
+      "label": "terminology",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-api",
+      "@type": "ObjectType",
+      "label": "api",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-golden_dataset",
+      "@type": "ObjectType",
+      "label": "golden_dataset",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-knowledge_asset",
+      "@type": "ObjectType",
+      "label": "knowledge_asset",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-priority_rule",
+      "@type": "ObjectType",
+      "label": "priority_rule",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-reference",
+      "@type": "ObjectType",
+      "label": "reference",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-report_template",
+      "@type": "ObjectType",
+      "label": "report_template",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-rule",
+      "@type": "ObjectType",
+      "label": "rule",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-runtime_component",
+      "@type": "ObjectType",
+      "label": "runtime_component",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-sentence_template",
+      "@type": "ObjectType",
+      "label": "sentence_template",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-terminology",
+      "@type": "ObjectType",
+      "label": "terminology",
+      "status": "official"
+    },
+    {
+      "@id": "OTYPE-validator",
+      "@type": "ObjectType",
+      "label": "validator",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-dataset_registry",
+      "@type": "RegistryDomain",
+      "label": "dataset_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-global_registry",
+      "@type": "RegistryDomain",
+      "label": "global_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-knowledge_registry",
+      "@type": "RegistryDomain",
+      "label": "knowledge_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-reference_registry",
+      "@type": "RegistryDomain",
+      "label": "reference_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-report_registry",
+      "@type": "RegistryDomain",
+      "label": "report_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-rule_registry",
+      "@type": "RegistryDomain",
+      "label": "rule_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-sentence_registry",
+      "@type": "RegistryDomain",
+      "label": "sentence_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGDOM-terminology_registry",
+      "@type": "RegistryDomain",
+      "label": "terminology_registry",
+      "status": "official"
+    },
+    {
+      "@id": "REGISTRY-ROOT",
+      "@type": "RegistryRoot",
+      "label": "BTE Registry Root",
+      "status": "official"
+    }
+  ],
+  "timestamp": "2026-08-01T00:00:00Z",
+  "title": "Pack 01 Registry Graph"
+}
