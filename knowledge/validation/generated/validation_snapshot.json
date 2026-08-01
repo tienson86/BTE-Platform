@@ -1,0 +1,826 @@
+{
+  "artifact": "validation_snapshot",
+  "coverage": {
+    "rules_total": 112,
+    "rules_with_severity": 112,
+    "validator_coverage_ratio": 1.0,
+    "validators_total": 7,
+    "validators_with_rules": 7
+  },
+  "pack_id": "PACK_01",
+  "schema_version": "1.0.0",
+  "severity": {
+    "distribution": {
+      "CRITICAL": 10,
+      "ERROR": 72,
+      "INFO": 1,
+      "WARNING": 29
+    },
+    "levels": [
+      {
+        "compiler_behaviour": "Log only; never blocks LOAD, VALIDATE, COMPILE, or PUBLISH.",
+        "definition": "Informational observation that does not indicate defect.",
+        "intended_usage": "Traceability notes, successful optional checks, advisory hints.",
+        "level": "INFO"
+      },
+      {
+        "compiler_behaviour": "Surface in report; MAY block Release Validation if release policy elevates the code; does not block draft compile by default.",
+        "definition": "Potential completeness or quality gap that does not prove incorrectness.",
+        "intended_usage": "Planned IDs, soft dependencies missing, optional sections empty.",
+        "level": "WARNING"
+      },
+      {
+        "compiler_behaviour": "Blocks COMPILE/PUBLISH of the affected record/pack; build may continue for unrelated units if configured.",
+        "definition": "Deterministic violation of Knowledge Canon validation rules for a unit.",
+        "intended_usage": "Missing required fields, invalid IDs, duplicate triples, broken required refs.",
+        "level": "ERROR"
+      },
+      {
+        "compiler_behaviour": "Fails the entire Validation run and blocks Release Validation / canon publish.",
+        "definition": "Canon-threatening integrity failure.",
+        "intended_usage": "ID remapping attempts, registry corruption, cyclic hard-dependency graphs at package scope, release with frozen-definition rewrite.",
+        "level": "CRITICAL"
+      }
+    ]
+  },
+  "statistics": {
+    "file_count": 8,
+    "rule_count": 112,
+    "severity_distribution": {
+      "CRITICAL": 10,
+      "ERROR": 72,
+      "INFO": 1,
+      "WARNING": 29
+    },
+    "severity_level_count": 4,
+    "stage_count": 9,
+    "validator_count": 7
+  },
+  "timestamp": "2026-08-01T00:00:00Z",
+  "validation_rules": [
+    {
+      "code": "VAL-000001",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Record ID"
+    },
+    {
+      "code": "VAL-000002",
+      "severity": "CRITICAL",
+      "source_file": "record_validator.json",
+      "title": "Duplicate Record ID"
+    },
+    {
+      "code": "VAL-000003",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Canonical Definition"
+    },
+    {
+      "code": "VAL-000004",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Invalid Record ID Pattern"
+    },
+    {
+      "code": "VAL-000005",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Canonical Name"
+    },
+    {
+      "code": "VAL-000006",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Version"
+    },
+    {
+      "code": "VAL-000007",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Invalid Version Format"
+    },
+    {
+      "code": "VAL-000008",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Required Status"
+    },
+    {
+      "code": "VAL-000009",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Required Sections"
+    },
+    {
+      "code": "VAL-000010",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Required Summary Scope"
+    },
+    {
+      "code": "VAL-000011",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Required References"
+    },
+    {
+      "code": "VAL-000012",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Unresolved Placeholder Tokens"
+    },
+    {
+      "code": "VAL-000013",
+      "severity": "WARNING",
+      "source_file": "record_validator.json",
+      "title": "Missing Vietnamese Name"
+    },
+    {
+      "code": "VAL-000014",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Classification Pack/Module"
+    },
+    {
+      "code": "VAL-000015",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Missing Knowledge Type"
+    },
+    {
+      "code": "VAL-000016",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Multiple Canonical Definitions"
+    },
+    {
+      "code": "VAL-000017",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Duplicate Definition Across Records"
+    },
+    {
+      "code": "VAL-000018",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Definition Conflict With Assertion"
+    },
+    {
+      "code": "VAL-000019",
+      "severity": "WARNING",
+      "source_file": "record_validator.json",
+      "title": "Definition Missing Out Of Scope"
+    },
+    {
+      "code": "VAL-000020",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Invented Source Citation"
+    },
+    {
+      "code": "VAL-000021",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "Assertion Missing Source IDs"
+    },
+    {
+      "code": "VAL-000022",
+      "severity": "ERROR",
+      "source_file": "record_validator.json",
+      "title": "High Confidence With TODO_REVIEW"
+    },
+    {
+      "code": "VAL-000023",
+      "severity": "WARNING",
+      "source_file": "record_validator.json",
+      "title": "Missing Characteristics Container"
+    },
+    {
+      "code": "VAL-000024",
+      "severity": "CRITICAL",
+      "source_file": "record_validator.json",
+      "title": "Record ID Mutation Detected"
+    },
+    {
+      "code": "VAL-000025",
+      "severity": "WARNING",
+      "source_file": "record_validator.json",
+      "title": "Missing Validation Block"
+    },
+    {
+      "code": "VAL-000026",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Missing Ontology Type"
+    },
+    {
+      "code": "VAL-000027",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Invalid Ontology Type"
+    },
+    {
+      "code": "VAL-000028",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Missing Parent Link"
+    },
+    {
+      "code": "VAL-000029",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Invalid Parent Reference"
+    },
+    {
+      "code": "VAL-000030",
+      "severity": "WARNING",
+      "source_file": "ontology_validator.json",
+      "title": "Invalid Child Reference"
+    },
+    {
+      "code": "VAL-000031",
+      "severity": "WARNING",
+      "source_file": "ontology_validator.json",
+      "title": "Missing Academic Layer"
+    },
+    {
+      "code": "VAL-000032",
+      "severity": "WARNING",
+      "source_file": "ontology_validator.json",
+      "title": "Missing Computational Layer"
+    },
+    {
+      "code": "VAL-000033",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Ontology Layer Conflict"
+    },
+    {
+      "code": "VAL-000034",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Ontology Consistency Mismatch"
+    },
+    {
+      "code": "VAL-000035",
+      "severity": "CRITICAL",
+      "source_file": "ontology_validator.json",
+      "title": "Duplicate Canonical Concept Node"
+    },
+    {
+      "code": "VAL-000036",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Pack Used As Concept Identity"
+    },
+    {
+      "code": "VAL-000037",
+      "severity": "WARNING",
+      "source_file": "ontology_validator.json",
+      "title": "Invalid Hierarchy Path"
+    },
+    {
+      "code": "VAL-000038",
+      "severity": "WARNING",
+      "source_file": "ontology_validator.json",
+      "title": "Orphan Ontology Node"
+    },
+    {
+      "code": "VAL-000039",
+      "severity": "WARNING",
+      "source_file": "ontology_validator.json",
+      "title": "Example Without Parent Concept"
+    },
+    {
+      "code": "VAL-000040",
+      "severity": "ERROR",
+      "source_file": "ontology_validator.json",
+      "title": "Unknown Edge Type In Ontology Context"
+    },
+    {
+      "code": "VAL-000071",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Missing Entity ID In Registry"
+    },
+    {
+      "code": "VAL-000072",
+      "severity": "CRITICAL",
+      "source_file": "registry_validator.json",
+      "title": "Duplicate Entity ID In Registry"
+    },
+    {
+      "code": "VAL-000073",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Invalid Registry Document"
+    },
+    {
+      "code": "VAL-000074",
+      "severity": "CRITICAL",
+      "source_file": "registry_validator.json",
+      "title": "Immutable ID Violation In Registry"
+    },
+    {
+      "code": "VAL-000075",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Registry Completeness Gap"
+    },
+    {
+      "code": "VAL-000076",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Concept Registry Missing Entry"
+    },
+    {
+      "code": "VAL-000077",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Entity Registry Missing Entry"
+    },
+    {
+      "code": "VAL-000078",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Broken Cross Reference"
+    },
+    {
+      "code": "VAL-000079",
+      "severity": "WARNING",
+      "source_file": "registry_validator.json",
+      "title": "Missing Cross Reference"
+    },
+    {
+      "code": "VAL-000080",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Invalid Cross Reference"
+    },
+    {
+      "code": "VAL-000081",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Unknown Record Reference"
+    },
+    {
+      "code": "VAL-000082",
+      "severity": "CRITICAL",
+      "source_file": "registry_validator.json",
+      "title": "Canonical Key Collision"
+    },
+    {
+      "code": "VAL-000083",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Alias Maps To Multiple Records"
+    },
+    {
+      "code": "VAL-000084",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Pack Registry Orphan Module"
+    },
+    {
+      "code": "VAL-000085",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Manifest Discovery Path Broken"
+    },
+    {
+      "code": "VAL-000086",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Bibliography Source Missing"
+    },
+    {
+      "code": "VAL-000087",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Record Path Missing For Authored Status"
+    },
+    {
+      "code": "VAL-000088",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Index Record Pack Mismatch"
+    },
+    {
+      "code": "VAL-000089",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Concept Registry Incomplete For Pack Release"
+    },
+    {
+      "code": "VAL-000090",
+      "severity": "ERROR",
+      "source_file": "registry_validator.json",
+      "title": "Entity Registry Incomplete For Pack Release"
+    },
+    {
+      "code": "VAL-000041",
+      "severity": "WARNING",
+      "source_file": "relationship_validator.json",
+      "title": "Missing Relationship"
+    },
+    {
+      "code": "VAL-000042",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Invalid Relationship Type"
+    },
+    {
+      "code": "VAL-000043",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Invalid Relationship Direction"
+    },
+    {
+      "code": "VAL-000044",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Duplicate Relationship"
+    },
+    {
+      "code": "VAL-000045",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Circular Relationship"
+    },
+    {
+      "code": "VAL-000046",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Missing Relationship ID"
+    },
+    {
+      "code": "VAL-000047",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Missing Relationship Source"
+    },
+    {
+      "code": "VAL-000048",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Missing Relationship Target"
+    },
+    {
+      "code": "VAL-000049",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Self Relationship Forbidden"
+    },
+    {
+      "code": "VAL-000050",
+      "severity": "WARNING",
+      "source_file": "relationship_validator.json",
+      "title": "Weak Type Hiding Foundation"
+    },
+    {
+      "code": "VAL-000051",
+      "severity": "WARNING",
+      "source_file": "relationship_validator.json",
+      "title": "Missing Relationship Strength"
+    },
+    {
+      "code": "VAL-000052",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Invalid Relationship Status"
+    },
+    {
+      "code": "VAL-000053",
+      "severity": "WARNING",
+      "source_file": "relationship_validator.json",
+      "title": "Conflict Edge Without Notes"
+    },
+    {
+      "code": "VAL-000054",
+      "severity": "ERROR",
+      "source_file": "relationship_validator.json",
+      "title": "Relationship Endpoint Unknown"
+    },
+    {
+      "code": "VAL-000055",
+      "severity": "WARNING",
+      "source_file": "relationship_validator.json",
+      "title": "Bidirectional Pair Duplication"
+    },
+    {
+      "code": "VAL-000056",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Circular Dependency"
+    },
+    {
+      "code": "VAL-000057",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Missing Parent Dependency"
+    },
+    {
+      "code": "VAL-000058",
+      "severity": "WARNING",
+      "source_file": "dependency_validator.json",
+      "title": "Missing Child Dependency Declaration"
+    },
+    {
+      "code": "VAL-000059",
+      "severity": "WARNING",
+      "source_file": "dependency_validator.json",
+      "title": "Orphan Node"
+    },
+    {
+      "code": "VAL-000060",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Invalid Dependency Level"
+    },
+    {
+      "code": "VAL-000061",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Reference Used As Hard Gate"
+    },
+    {
+      "code": "VAL-000062",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Duplicate Dependency Triple"
+    },
+    {
+      "code": "VAL-000063",
+      "severity": "WARNING",
+      "source_file": "dependency_validator.json",
+      "title": "Dependency Graph Incomplete"
+    },
+    {
+      "code": "VAL-000064",
+      "severity": "CRITICAL",
+      "source_file": "dependency_validator.json",
+      "title": "Hard Override Attempt"
+    },
+    {
+      "code": "VAL-000065",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Extension Missing Base Record"
+    },
+    {
+      "code": "VAL-000066",
+      "severity": "CRITICAL",
+      "source_file": "dependency_validator.json",
+      "title": "Pack Level Dependency Cycle"
+    },
+    {
+      "code": "VAL-000067",
+      "severity": "WARNING",
+      "source_file": "dependency_validator.json",
+      "title": "Semantic Dependency Undocumented"
+    },
+    {
+      "code": "VAL-000068",
+      "severity": "ERROR",
+      "source_file": "dependency_validator.json",
+      "title": "Missing Dependency ID"
+    },
+    {
+      "code": "VAL-000069",
+      "severity": "WARNING",
+      "source_file": "dependency_validator.json",
+      "title": "Soft Dependency Elevated Silently"
+    },
+    {
+      "code": "VAL-000070",
+      "severity": "CRITICAL",
+      "source_file": "dependency_validator.json",
+      "title": "Dependency Target Immutable ID Violation"
+    },
+    {
+      "code": "VAL-000091",
+      "severity": "ERROR",
+      "source_file": "metadata_validator.json",
+      "title": "Missing Schema Version"
+    },
+    {
+      "code": "VAL-000092",
+      "severity": "WARNING",
+      "source_file": "metadata_validator.json",
+      "title": "Missing Created/Updated Dates"
+    },
+    {
+      "code": "VAL-000093",
+      "severity": "ERROR",
+      "source_file": "metadata_validator.json",
+      "title": "Invalid Date Format"
+    },
+    {
+      "code": "VAL-000094",
+      "severity": "ERROR",
+      "source_file": "metadata_validator.json",
+      "title": "Missing Owner"
+    },
+    {
+      "code": "VAL-000095",
+      "severity": "WARNING",
+      "source_file": "metadata_validator.json",
+      "title": "Missing Compiler Status"
+    },
+    {
+      "code": "VAL-000096",
+      "severity": "WARNING",
+      "source_file": "metadata_validator.json",
+      "title": "Metadata Status Mismatch"
+    },
+    {
+      "code": "VAL-000097",
+      "severity": "WARNING",
+      "source_file": "metadata_validator.json",
+      "title": "Missing Language"
+    },
+    {
+      "code": "VAL-000098",
+      "severity": "ERROR",
+      "source_file": "metadata_validator.json",
+      "title": "Invalid Knowledge Nature"
+    },
+    {
+      "code": "VAL-000099",
+      "severity": "ERROR",
+      "source_file": "metadata_validator.json",
+      "title": "Missing Governance Review Object"
+    },
+    {
+      "code": "VAL-000100",
+      "severity": "ERROR",
+      "source_file": "metadata_validator.json",
+      "title": "Release Freeze Inconsistency"
+    },
+    {
+      "code": "VAL-000101",
+      "severity": "ERROR",
+      "source_file": "compiler_validation.json",
+      "title": "Not Compile Ready"
+    },
+    {
+      "code": "VAL-000102",
+      "severity": "ERROR",
+      "source_file": "compiler_validation.json",
+      "title": "Not Graph Ready"
+    },
+    {
+      "code": "VAL-000103",
+      "severity": "WARNING",
+      "source_file": "compiler_validation.json",
+      "title": "Not Search Ready"
+    },
+    {
+      "code": "VAL-000104",
+      "severity": "WARNING",
+      "source_file": "compiler_validation.json",
+      "title": "Not Documentation Ready"
+    },
+    {
+      "code": "VAL-000105",
+      "severity": "ERROR",
+      "source_file": "compiler_validation.json",
+      "title": "Not Release Ready"
+    },
+    {
+      "code": "VAL-000106",
+      "severity": "ERROR",
+      "source_file": "compiler_validation.json",
+      "title": "Build Manifest Inputs Unresolved"
+    },
+    {
+      "code": "VAL-000107",
+      "severity": "CRITICAL",
+      "source_file": "compiler_validation.json",
+      "title": "Canon Manifest Incomplete"
+    },
+    {
+      "code": "VAL-000108",
+      "severity": "WARNING",
+      "source_file": "compiler_validation.json",
+      "title": "Artifact Manifest Gap"
+    },
+    {
+      "code": "VAL-000109",
+      "severity": "ERROR",
+      "source_file": "compiler_validation.json",
+      "title": "Compiler Status Blocked"
+    },
+    {
+      "code": "VAL-000110",
+      "severity": "ERROR",
+      "source_file": "compiler_validation.json",
+      "title": "Schema Contract Drift"
+    },
+    {
+      "code": "VAL-000111",
+      "severity": "WARNING",
+      "source_file": "compiler_validation.json",
+      "title": "Search Index Alias Drift"
+    },
+    {
+      "code": "VAL-000112",
+      "severity": "INFO",
+      "source_file": "compiler_validation.json",
+      "title": "Documentation Generator Missing Topic"
+    }
+  ],
+  "validation_stages": [
+    {
+      "description": "Authoring in progress; full validation optional.",
+      "name": "Draft",
+      "stage_id": "LC-DRAFT"
+    },
+    {
+      "description": "Author self-check: required sections, placeholders, basic IDs.",
+      "name": "Author Validation",
+      "stage_id": "LC-AUTHOR"
+    },
+    {
+      "description": "Sources, assertions, definition honesty, TODO_REVIEW policy.",
+      "name": "Academic Validation",
+      "stage_id": "LC-ACADEMIC"
+    },
+    {
+      "description": "Consistency with terminology, contradictions, duplicate definitions.",
+      "name": "Semantic Validation",
+      "stage_id": "LC-SEMANTIC"
+    },
+    {
+      "description": "Node/edge types, parent/child/layer consistency.",
+      "name": "Ontology Validation",
+      "stage_id": "LC-ONTOLOGY"
+    },
+    {
+      "description": "Compile/graph/search/docs/release readiness flags.",
+      "name": "Compiler Validation",
+      "stage_id": "LC-COMPILER"
+    },
+    {
+      "description": "Review, approval, freeze alignment.",
+      "name": "Governance Validation",
+      "stage_id": "LC-GOVERNANCE"
+    },
+    {
+      "description": "Publication gates; ERROR/CRITICAL must be clear.",
+      "name": "Release Validation",
+      "stage_id": "LC-RELEASE"
+    },
+    {
+      "description": "Terminal result of the validation run.",
+      "name": "PASS / FAIL",
+      "stage_id": "LC-RESULT"
+    }
+  ],
+  "validators": [
+    {
+      "filename": "record_validator.json",
+      "rule_count": 25,
+      "title": "Record & Canonical Definition Validator",
+      "validator_id": "VLD-RECORD"
+    },
+    {
+      "filename": "ontology_validator.json",
+      "rule_count": 15,
+      "title": "Ontology Validator",
+      "validator_id": "VLD-ONTOLOGY"
+    },
+    {
+      "filename": "registry_validator.json",
+      "rule_count": 20,
+      "title": "Registry & Cross-Reference Validator",
+      "validator_id": "VLD-REGISTRY"
+    },
+    {
+      "filename": "relationship_validator.json",
+      "rule_count": 15,
+      "title": "Relationship Validator",
+      "validator_id": "VLD-RELATIONSHIP"
+    },
+    {
+      "filename": "dependency_validator.json",
+      "rule_count": 15,
+      "title": "Dependency Validator",
+      "validator_id": "VLD-DEPENDENCY"
+    },
+    {
+      "filename": "metadata_validator.json",
+      "rule_count": 10,
+      "title": "Metadata Validator",
+      "validator_id": "VLD-METADATA"
+    },
+    {
+      "filename": "compiler_validation.json",
+      "rule_count": 12,
+      "title": "Compiler Readiness Validator",
+      "validator_id": "VLD-COMPILER"
+    }
+  ],
+  "version": "1.0.0"
+}

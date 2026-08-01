@@ -1,0 +1,178 @@
+{
+  "artifact": "compiler_snapshot",
+  "compiler_stages": [
+    {
+      "code": "LOAD",
+      "enabled": true,
+      "pipeline_order": 1,
+      "stable": true,
+      "stage_id": "STAGE-LOAD"
+    },
+    {
+      "code": "PARSE",
+      "enabled": true,
+      "pipeline_order": 2,
+      "stable": true,
+      "stage_id": "STAGE-PARSE"
+    },
+    {
+      "code": "VALIDATE",
+      "enabled": true,
+      "pipeline_order": 3,
+      "stable": true,
+      "stage_id": "STAGE-VALIDATE"
+    },
+    {
+      "code": "DEPENDENCY",
+      "enabled": true,
+      "pipeline_order": 4,
+      "stable": true,
+      "stage_id": "STAGE-DEPENDENCY"
+    },
+    {
+      "code": "TRANSFORM",
+      "enabled": true,
+      "pipeline_order": 5,
+      "stable": true,
+      "stage_id": "STAGE-TRANSFORM"
+    },
+    {
+      "code": "GENERATE",
+      "enabled": true,
+      "pipeline_order": 6,
+      "stable": true,
+      "stage_id": "STAGE-GENERATE"
+    },
+    {
+      "code": "VERIFY",
+      "enabled": true,
+      "pipeline_order": 7,
+      "stable": true,
+      "stage_id": "STAGE-VERIFY"
+    },
+    {
+      "code": "PUBLISH",
+      "enabled": true,
+      "pipeline_order": 8,
+      "stable": true,
+      "stage_id": "STAGE-PUBLISH"
+    }
+  ],
+  "contracts": [
+    {
+      "contract_id": "pipeline.json",
+      "exists": true,
+      "path": "knowledge/compiler/pipeline.json",
+      "sha256": "280705c8302229e09eb2ce545373fabc4fad66b051d0e39fa1ae29c161093077"
+    },
+    {
+      "contract_id": "stage_registry.json",
+      "exists": true,
+      "path": "knowledge/compiler/stage_registry.json",
+      "sha256": "40d39152aaa77a369b2ab19be728e6810dc6425289861e85724f31dc79e81f29"
+    },
+    {
+      "contract_id": "compiler_config.json",
+      "exists": true,
+      "path": "knowledge/compiler/compiler_config.json",
+      "sha256": "5f700a622db98505093290d26310669616678cb355c4c99e59f00d7107fcc3c9"
+    },
+    {
+      "contract_id": "artifact_registry.json",
+      "exists": true,
+      "path": "knowledge/compiler/artifact_registry.json",
+      "sha256": "bbde2f36e9321d09f06288de1de544bfb9a72b465ce58f1e175733ea833e22fa"
+    },
+    {
+      "contract_id": "plugin_registry.json",
+      "exists": true,
+      "path": "knowledge/compiler/plugin_registry.json",
+      "sha256": "a40f2891fd01de7b619a81a2daacd3b1108d6109717e27cbe19bff870b5e94db"
+    },
+    {
+      "contract_id": "error_registry.json",
+      "exists": true,
+      "path": "knowledge/compiler/error_registry.json",
+      "sha256": "24c52a832b50ec47293f5c9c6dd740eceb1881e102b69c3e2c6cb2c77d9fface"
+    },
+    {
+      "contract_id": "version_registry.json",
+      "exists": true,
+      "path": "knowledge/compiler/version_registry.json",
+      "sha256": "ab9d5c3308ef1ea0278fad90389d4cc4bd14b53643b83ea37794f6a5cefdaa6f"
+    },
+    {
+      "contract_id": "compiler.schema.json",
+      "exists": true,
+      "path": "knowledge/compiler/compiler.schema.json",
+      "sha256": "f9b9f02fc1757d6dab73762464f07c6aaf5e7278ffe336cad40d5b201eb56ec4"
+    },
+    {
+      "contract_id": "statistics.json",
+      "exists": true,
+      "path": "knowledge/compiler/statistics.json",
+      "sha256": "c1172aaa88f2307eaef11a5c61a2167bc62172de7c8a2a7ca73f208419a709ee"
+    }
+  ],
+  "generated_artifacts": [
+    "compiler_snapshot.json",
+    "compiler_validation_report.json",
+    "knowledge/compiler/generated/compiler_snapshot.json"
+  ],
+  "inputs": [
+    "design_pack",
+    "compiler_config",
+    "bibliography_registry",
+    "foundation_references",
+    "knowledge_schema",
+    "raw_input_bundle",
+    "load_manifest",
+    "parsed_ir",
+    "citation_rules",
+    "validation_report",
+    "dependency_graph",
+    "mapping_rules",
+    "record_drafts",
+    "knowledge_record_json",
+    "compilation_report",
+    "publish_authorization"
+  ],
+  "outputs": [
+    "load_manifest",
+    "raw_input_bundle",
+    "parsed_ir",
+    "validation_report",
+    "dependency_graph",
+    "record_drafts",
+    "knowledge_record_json",
+    "knowledge_graph",
+    "metadata_index",
+    "search_index",
+    "compilation_report",
+    "statistics_report",
+    "publish_receipt"
+  ],
+  "pack_id": "PACK_01",
+  "pipeline": {
+    "pipeline_id": "PIPE-KNO-001",
+    "pipeline_name": "knowledge_record_compile_pipeline",
+    "stage_order": [
+      "STAGE-LOAD",
+      "STAGE-PARSE",
+      "STAGE-VALIDATE",
+      "STAGE-DEPENDENCY",
+      "STAGE-TRANSFORM",
+      "STAGE-GENERATE",
+      "STAGE-VERIFY",
+      "STAGE-PUBLISH"
+    ],
+    "version": "1.0.0"
+  },
+  "schema_version": "1.0.0",
+  "statistics": {
+    "file_count": 9,
+    "stage_count": 8
+  },
+  "timestamp": "2026-08-01T00:00:00Z",
+  "version": "1.1.0"
+}

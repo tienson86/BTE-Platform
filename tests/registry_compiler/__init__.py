@@ -1,0 +1,1 @@
+"""Registry compiler test package."""
