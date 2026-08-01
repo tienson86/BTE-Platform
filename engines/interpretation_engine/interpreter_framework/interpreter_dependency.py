@@ -75,8 +75,7 @@ class DependencyResolver:
         edges: dict[str, list[str]] = {item: [] for item in interpreter_ids}
         for interpreter_id in interpreter_ids:
             for dep in required.get(interpreter_id, ()):
-                if dep not in available:
-                    continue
+                # Required deps were validated above to exist in ``available``.
                 edges[dep].append(interpreter_id)
                 incoming[interpreter_id] += 1
 
