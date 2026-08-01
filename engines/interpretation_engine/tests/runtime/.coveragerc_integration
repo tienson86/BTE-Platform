@@ -1,0 +1,87 @@
+# Integration coverage for Pack 03 Interpretation Runtime infrastructure.
+# Target: >=97%
+
+[run]
+branch = False
+source =
+    engines/interpretation_engine
+
+omit =
+    */__init__.py
+    engines/interpretation_engine/legacy_runtime/*
+    engines/interpretation_engine/knowledge/*
+    engines/interpretation_engine/templates/*
+    engines/interpretation_engine/template/*
+    engines/interpretation_engine/builders/*
+    engines/interpretation_engine/services/*
+    engines/interpretation_engine/core/*
+    engines/interpretation_engine/data/*
+    engines/interpretation_engine/matcher/*
+    engines/interpretation_engine/rule_engine/*
+    engines/interpretation_engine/renderer/*
+    engines/interpretation_engine/schema/*
+    engines/interpretation_engine/interpreter/*
+    engines/interpretation_engine/interfaces/*
+    engines/interpretation_engine/interpreters/*
+    engines/interpretation_engine/api/*
+    engines/interpretation_engine/utils/*
+    engines/interpretation_engine/validators/*
+    engines/interpretation_engine/contracts/*
+    engines/interpretation_engine/explanation_engine/*
+    engines/interpretation_engine/report/*
+    engines/interpretation_engine/output/*
+    engines/interpretation_engine/exceptions/*
+    engines/interpretation_engine/tests/*
+    engines/interpretation_engine/pipeline/*
+    engines/interpretation_engine/registry/*
+    engines/interpretation_engine/sentence_engine/*
+    engines/interpretation_engine/template_engine/*
+    engines/interpretation_engine/placeholder_engine/*
+    engines/interpretation_engine/context/*
+    engines/interpretation_engine/models/*
+    engines/interpretation_engine/engine.py
+    engines/interpretation_engine/bootstrap.py
+    engines/interpretation_engine/builder.py
+    engines/interpretation_engine/calculator.py
+    engines/interpretation_engine/formatter.py
+    engines/interpretation_engine/validator.py
+    engines/interpretation_engine/rule_loader.py
+    engines/interpretation_engine/rule_matcher.py
+    engines/interpretation_engine/knowledge_rule_loader.py
+    engines/interpretation_engine/sentence_generator.py
+    engines/interpretation_engine/template_loader.py
+    engines/interpretation_engine/template_renderer.py
+    engines/interpretation_engine/interpretation_builder.py
+    engines/interpretation_engine/legacy_builder.py
+    engines/interpretation_engine/portal_view.py
+    engines/interpretation_engine/context.py
+    engines/interpretation_engine/metrics/metrics_interface.py
+    engines/interpretation_engine/events/event_bus_interface.py
+    engines/interpretation_engine/cache/cache_interface.py
+
+[report]
+show_missing = True
+skip_empty = True
+fail_under = 97
+include =
+    engines/interpretation_engine/runtime/*
+    engines/interpretation_engine/interpreter_runtime/*
+    engines/interpretation_engine/sentence_runtime/*
+    engines/interpretation_engine/template_runtime/*
+    engines/interpretation_engine/placeholder_runtime/*
+    engines/interpretation_engine/explanation_runtime/*
+    engines/interpretation_engine/orchestration/*
+    engines/interpretation_engine/health/*
+    engines/interpretation_engine/validation/*
+    engines/interpretation_engine/metrics/runtime_metrics.py
+    engines/interpretation_engine/monitoring/*
+    engines/interpretation_engine/events/event_bus.py
+    engines/interpretation_engine/events/event_types.py
+    engines/interpretation_engine/events/event_model.py
+    engines/interpretation_engine/cache/memory_cache.py
+    engines/interpretation_engine/cache/context_cache.py
+    engines/interpretation_engine/cache/sentence_cache.py
+    engines/interpretation_engine/cache/template_cache.py
+    engines/interpretation_engine/cache/placeholder_cache.py
+    engines/interpretation_engine/cache/registry_cache.py
+    engines/interpretation_engine/cache/cache_manager.py
