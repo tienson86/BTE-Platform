@@ -1,0 +1,23 @@
+# Coverage for Pack 03 memory cache infrastructure.
+
+[run]
+branch = False
+source =
+    engines/interpretation_engine/cache
+
+omit =
+    */__init__.py
+    engines/interpretation_engine/cache/cache_interface.py
+
+[report]
+show_missing = True
+skip_empty = True
+fail_under = 95
+include =
+    engines/interpretation_engine/cache/memory_cache.py
+    engines/interpretation_engine/cache/context_cache.py
+    engines/interpretation_engine/cache/sentence_cache.py
+    engines/interpretation_engine/cache/template_cache.py
+    engines/interpretation_engine/cache/placeholder_cache.py
+    engines/interpretation_engine/cache/registry_cache.py
+    engines/interpretation_engine/cache/cache_manager.py
