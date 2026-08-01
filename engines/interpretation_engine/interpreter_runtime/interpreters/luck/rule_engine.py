@@ -279,6 +279,42 @@ class LuckInterpretationRuleEngine:
             return float(facts.luck_score)
         return total
 
+    def _polarity(self, favorability: str) -> tuple[bool, bool]:
+        """Return (use_support, use_attack) from favorability text."""
+        fav = self._norm(favorability)
+        fav_tokens = self._token_set(favorability)
+        support_norms = {self._norm(token) for token in FAVORABLE_TOKENS}
+        attack_norms = {self._norm(token) for token in UNFAVORABLE_TOKENS}
+        use_support = bool(fav_tokens & support_norms) or any(
+            token in fav
+            for token in (
+                "dung_than",
+                "hy_than",
+                "favorable",
+                "support",
+                "useful",
+                "good",
+                "cat",
+            )
+        )
+        use_attack = bool(fav_tokens & attack_norms) or any(
+            token in fav
+            for token in (
+                "ky_than",
+                "unfavorable",
+                "attack",
+                "clash",
+                "destroy",
+                "hung",
+                "bad",
+            )
+        )
+        if use_attack and use_support and "unfavorable" in fav:
+            use_support = False
+        if use_attack and use_support and "ky_than" in fav:
+            use_support = False
+        return use_support, use_attack
+
     def _match_layer_score(
         self,
         favorability: str,
@@ -286,12 +322,21 @@ class LuckInterpretationRuleEngine:
         layer: str,
     ) -> dict[str, Any] | None:
         """Pick support or attack score row from Pack 01 luck tables."""
-        fav_tokens = self._token_set(favorability)
+        use_support, use_attack = self._polarity(favorability)
         god_tokens = self._token_set(ten_god)
-        use_attack = bool(fav_tokens & {self._norm(t) for t in UNFAVORABLE_TOKENS})
-        use_support = bool(fav_tokens & {self._norm(t) for t in FAVORABLE_TOKENS})
-        if use_attack and use_support and "unfavorable" in self._norm(favorability):
-            use_support = False
+        fav_tokens = self._token_set(favorability)
+
+        # Neutral layers: no forced default support/attack score.
+        if not use_support and not use_attack:
+            blob = self._norm(f"{favorability} {ten_god} {layer}")
+            return self._best_token_match(
+                [
+                    *self.loader.load_support_rules(),
+                    *self.loader.load_attack_rules(),
+                ],
+                blob,
+                extra_tokens=fav_tokens | god_tokens,
+            )
 
         rules = (
             self.loader.load_attack_rules()
@@ -303,7 +348,6 @@ class LuckInterpretationRuleEngine:
         if best is not None:
             return best
 
-        # Fallback defaults for clear polarity.
         defaults = (
             ("USEFUL_GOD_ATTACK", "DAY_MASTER_ATTACK", "GOOD_LUCK")
             if use_attack and not use_support
@@ -320,37 +364,6 @@ class LuckInterpretationRuleEngine:
                     return row
         return pool[0] if pool else None
 
-    def _match_interaction_score(
-        self,
-        effect: str,
-        upstream_class: str,
-    ) -> dict[str, Any] | None:
-        """Match combination or clash score by effect text."""
-        blob = self._norm(f"{effect} {upstream_class}")
-        effect_tokens = self._token_set(effect)
-        use_clash = bool(
-            effect_tokens & {self._norm(t) for t in ATTACK_EFFECT_TOKENS}
-            or any(token in blob for token in ("clash", "xung", "hai", "pha", "destroy"))
-        )
-        use_combine = bool(
-            effect_tokens & {self._norm(t) for t in SUPPORT_EFFECT_TOKENS}
-            or any(token in blob for token in ("combine", "hop", "hợp", "support"))
-        )
-        rules = (
-            self.loader.load_clash_rules()
-            if use_clash and not use_combine
-            else self.loader.load_combination_rules()
-        )
-        best = self._best_token_match(rules, blob, extra_tokens=effect_tokens)
-        if best is not None:
-            return best
-        alt = (
-            self.loader.load_combination_rules()
-            if use_clash
-            else self.loader.load_clash_rules()
-        )
-        return self._best_token_match(alt, blob, extra_tokens=effect_tokens)
-
     def _match_interpretation(
         self,
         luck_type: str,
@@ -360,11 +373,9 @@ class LuckInterpretationRuleEngine:
         """Match Pack 01 luck_rules.csv by luck_type + favorability heuristic."""
         type_n = self._norm(luck_type)
         fav = self._norm(favorability)
-        fav_tokens = self._token_set(favorability)
-        want_ky = bool(fav_tokens & {self._norm(t) for t in UNFAVORABLE_TOKENS})
-        want_dung = bool(fav_tokens & {self._norm(t) for t in FAVORABLE_TOKENS})
-        if want_ky and want_dung and "unfavorable" in fav:
-            want_dung = False
+        use_support, use_attack = self._polarity(favorability)
+        want_dung = use_support
+        want_ky = use_attack
 
         candidates = [
             row
@@ -399,10 +410,10 @@ class LuckInterpretationRuleEngine:
         if not rules:
             return None
         fav = self._norm(favorability)
-        fav_tokens = self._token_set(favorability)
-        if fav_tokens & {self._norm(t) for t in UNFAVORABLE_TOKENS} or "ky" in fav:
-            target = 50 if any(t in fav for t in ("destroy", "pha", "phá")) else 60
-        elif fav_tokens & {self._norm(t) for t in FAVORABLE_TOKENS}:
+        use_support, use_attack = self._polarity(favorability)
+        if use_attack:
+            target = 50 if any(token in fav for token in ("destroy", "pha", "phá")) else 60
+        elif use_support:
             target = 100 if "dung" in fav or "useful" in fav else 90
         else:
             target = 85
