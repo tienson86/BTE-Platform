@@ -1,4 +1,8 @@
-﻿"""Legacy runtime modules relocated for Pack 03 architecture coexistence."""
+﻿"""Legacy runtime modules relocated for Pack 03 architecture coexistence.
+
+LEGACY — retained for backward compatibility. Do not delete.
+New Pack 03 runtime code must use PackInterpretationContext and *_runtime packages.
+"""
 
 from __future__ import annotations
 
