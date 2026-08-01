@@ -137,3 +137,41 @@ Downstream consumers interact only through the published AnalysisResult.
 
 Architecture Baseline V1.0.0
 Frozen.
+
+---
+
+# 11. Architecture Skeleton Packages
+
+The following packages define the Analysis Engine architecture skeleton layout.
+They contain package boundaries only and do not implement BaZi analysis.
+
+```text
+engines/analysis_engine/
+├── engine.py
+├── config.py
+├── constants.py
+├── VERSION
+├── models/
+├── context/
+├── pipeline/
+├── analyzers/
+├── scoring/
+├── conflict/
+├── registry/
+├── compiler/
+├── validators/
+├── cache/
+├── metrics/
+├── utils/
+├── exceptions/
+└── adapters/
+```
+
+Model skeletons live under `models/`:
+
+- `analysis_context.py`
+- `analysis_result.py`
+- `analysis_step.py`
+- `analysis_score.py`
+- `analysis_metadata.py`
+- `analysis_pipeline.py`

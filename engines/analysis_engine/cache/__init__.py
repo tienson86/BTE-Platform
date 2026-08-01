@@ -1,0 +1,1 @@
+"""Cache package architecture skeleton."""

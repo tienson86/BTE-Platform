@@ -55,3 +55,21 @@ Stable throughout Version 1.x.
 All analytical stages shall conform to the architecture and contracts defined by the Analysis Engine documentation set.
 
 Any breaking architectural change requires a major version increment and corresponding documentation updates.
+
+---
+
+# Version 0.0.0-architecture
+
+**Status:** Architecture Skeleton Initialized
+
+## Added
+
+- Root skeleton files: `engine.py`, `config.py`, `constants.py`, `VERSION`
+- Architecture packages: `models`, `context`, `pipeline`, `analyzers`, `scoring`, `conflict`, `registry`, `compiler`, `validators`, `cache`, `metrics`, `utils`, `exceptions`, `adapters`
+- Dataclass model skeletons under `models/`
+
+## Notes
+
+- No BaZi analysis implementation
+- No business logic
+- Existing runtime and stage documentation remain unchanged

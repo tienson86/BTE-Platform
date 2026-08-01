@@ -1,0 +1,1 @@
+"""Conflict package architecture skeleton."""
