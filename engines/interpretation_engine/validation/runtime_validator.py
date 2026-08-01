@@ -7,26 +7,13 @@ Infrastructure only. No BaZi interpretation.
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 from engines.interpretation_engine.runtime.contracts import RuntimeContract
 from engines.interpretation_engine.runtime.registry_base import BaseRegistry
+from engines.interpretation_engine.validation.models import ValidationReport
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass(frozen=True, slots=True)
-class ValidationReport:
-    """Immutable validation report."""
-
-    success: bool
-    messages: tuple[str, ...] = ()
-    details: Mapping[str, Any] = field(default_factory=dict)
-
-    def validate(self) -> bool:
-        """Validate report structural integrity."""
-        return True
 
 
 class RuntimeValidator:
@@ -37,19 +24,32 @@ class RuntimeValidator:
     ) -> ValidationReport:
         """Validate runtime configuration mapping."""
         if config is None:
-            return ValidationReport(success=False, messages=("configuration_required",))
+            return ValidationReport(
+                success=False,
+                messages=("configuration_required",),
+                domain="configuration",
+            )
         if "runtime_id" in config and not config.get("runtime_id"):
-            return ValidationReport(success=False, messages=("runtime_id_invalid",))
+            return ValidationReport(
+                success=False,
+                messages=("runtime_id_invalid",),
+                domain="configuration",
+            )
         return ValidationReport(
             success=True,
             messages=("configuration_ok",),
             details=dict(config),
+            domain="configuration",
         )
 
     def validate_registry(self, registry: BaseRegistry[Any]) -> ValidationReport:
         """Validate registry contract readiness."""
         if registry is None:
-            return ValidationReport(success=False, messages=("registry_required",))
+            return ValidationReport(
+                success=False,
+                messages=("registry_required",),
+                domain="registries",
+            )
         ok = registry.validate()
         return ValidationReport(
             success=ok,
@@ -58,6 +58,7 @@ class RuntimeValidator:
                 "registry_id": registry.registry_id,
                 "entries": list(registry.list()),
             },
+            domain="registries",
         )
 
     def validate_dependencies(
@@ -73,11 +74,13 @@ class RuntimeValidator:
                 success=False,
                 messages=("dependencies_missing",),
                 details={"missing": list(missing)},
+                domain="dependencies",
             )
         return ValidationReport(
             success=True,
             messages=("dependencies_ok",),
             details={"required": list(required), "available": list(available)},
+            domain="dependencies",
         )
 
     def validate_contract(self, runtime: RuntimeContract) -> ValidationReport:
@@ -89,6 +92,7 @@ class RuntimeValidator:
                 success=False,
                 messages=("contract_methods_missing",),
                 details={"missing": missing},
+                domain="contracts",
             )
         try:
             ok = bool(runtime.validate())
@@ -97,11 +101,13 @@ class RuntimeValidator:
             return ValidationReport(
                 success=False,
                 messages=(f"contract_validate_error:{type(exc).__name__}",),
+                domain="contracts",
             )
         return ValidationReport(
             success=ok,
             messages=("contract_ok",) if ok else ("contract_invalid_state",),
             details={"health": getattr(runtime.health(), "value", str(runtime.health()))},
+            domain="contracts",
         )
 
     def validate_runtime_state(self, runtime: RuntimeContract) -> ValidationReport:
@@ -109,7 +115,11 @@ class RuntimeValidator:
         health = runtime.health()
         metrics = runtime.metrics()
         if not metrics.validate():
-            return ValidationReport(success=False, messages=("metrics_invalid",))
+            return ValidationReport(
+                success=False,
+                messages=("metrics_invalid",),
+                domain="contracts",
+            )
         return ValidationReport(
             success=True,
             messages=("runtime_state_ok",),
@@ -119,4 +129,5 @@ class RuntimeValidator:
                 "success_count": metrics.success_count,
                 "failure_count": metrics.failure_count,
             },
+            domain="contracts",
         )
