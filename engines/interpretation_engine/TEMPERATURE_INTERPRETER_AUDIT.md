@@ -143,14 +143,24 @@ When temperature facts **are** present:
 
 ## Smoke Verification (2026-08-02)
 
-See test run below for module regression. Manual smoke expects:
+With temperature module payload (`temperature_score=0.72`, dryness/humidity labels):
 
 ```text
 success True ('temperature_interpreter_ok',)
-components [balance, cold, dry, hot, wet]
+level hot score 0.72
+cold 0.1 hot 0.55 dry 0.2 wet 0.05 balance 0.7
+components ['balance', 'cold', 'dry', 'hot', 'wet']
+matched ('cli_001', 'sea_001', 'dry_001', 'hum_005', 'pri_level_hot')
 validate True
+```
+
+Without temperature payload:
+
+```text
 fallback True ('interpreter_skeleton_ok',) None
 ```
+
+Module regression: `31 passed` (`test_interpreter_skeletons`, `test_execution_pipeline`, `test_registry_integration`).
 
 ---
 
