@@ -129,12 +129,20 @@ def test_interpreter_validate_dispatcher_failure() -> None:
     runtime.initialize()
     assert runtime.validate() is False
 
+    class _BadRegistry:
+        def validate(self) -> bool:
+            return False
+
+        def list(self) -> tuple[str, ...]:
+            return ()
+
+    runtime_bad_registry = InterpreterRuntime(registry=_BadRegistry())  # type: ignore[arg-type]
+    runtime_bad_registry.initialize()
+    assert runtime_bad_registry.validate() is False
+
 
 def test_pipeline_stage_failure_and_manager_property() -> None:
     """Pipeline stops on stage failure; ExecutionManager exposes pipeline."""
-    failing = _FailingStage(runtime_id="interpreter_runtime")
-    pipeline = RuntimePipeline(interpreter_runtime=failing)  # type: ignore[arg-type]
-    # Replace first stage after construction via direct assignment workaround:
     pipeline = RuntimePipeline()
     pipeline._stages = (  # noqa: SLF001 - test injection
         _FailingStage(runtime_id="interpreter_runtime"),
@@ -151,6 +159,19 @@ def test_pipeline_stage_failure_and_manager_property() -> None:
 
     uninit = RuntimePipeline()
     assert uninit.validate() is False
+    invalid = PackInterpretationContext(
+        id="",
+        version="1.0.0",
+        pipeline_id="p",
+        source_final_result_id="fr_x",
+        final_result=make_final_result(result_id="fr_x"),
+        created_at="2026-01-01T00:00:00Z",
+    )
+    pipeline2 = RuntimePipeline()
+    pipeline2.initialize()
+    bad_ctx = pipeline2.execute(invalid)
+    assert bad_ctx.success is False
+    assert "pack_interpretation_context_invalid" in bad_ctx.messages
 
     manager = ExecutionManager(pipeline=RuntimePipeline())
     assert manager.pipeline.runtime_id == "runtime_pipeline"
@@ -222,4 +243,11 @@ def test_validator_edge_cases() -> None:
 
     assert RuntimeMetricsSnapshot(execution_time=-1).validate() is False
     assert RuntimeMetricsSnapshot(average_time=-1).validate() is False
-    assert RuntimeExecuteResult(runtime_id="").validate() is False
+    assert RuntimeExecuteResult(runtime_id="", success=True).validate() is False
+
+    class _Incomplete:
+        pass
+
+    incomplete_report = validator.validate_contract(_Incomplete())  # type: ignore[arg-type]
+    assert incomplete_report.success is False
+    assert "contract_methods_missing" in incomplete_report.messages
