@@ -2,17 +2,23 @@
 
 > **BTE Platform — Knowledge Base Architecture Specification**
 >
-> **Pack:** 01 — Infrastructure Knowledge
+> **Pack:** 01 — Fundamental Theory
 >
-> **Document Version:** 1.1.0
+> **Architecture Domain:** Knowledge Infrastructure
 >
-> **Status:** Stable (Draft for Architecture Freeze)
+> **Document Version:** 1.1.1
+>
+> **Status:** Stable (Synchronized — Ready for Architecture Freeze)
 >
 > **Last Updated:** 2026-08-01
 >
 > **Owner:** BTE Platform
 >
 > **Audience:** Architect, Backend Developer, Knowledge Engineer, Rule Engineer, Analysis Engine Developer
+>
+> **Canonical Content Root:** `knowledge/bazi/01_fundamental_knowledge/`
+>
+> **Governance Root:** `knowledge/governance/pack_01/`
 
 ---
 
@@ -34,9 +40,21 @@
 14. Architectural Constraints
 15. Non-Functional Requirements
 16. Engine Integration
-17. Pack Relationship
+17. Relationship Between Packs
 18. High-Level Architecture
 19. Summary
+20. Directory Structure
+21. Dependency Matrix
+22. Data Flow
+23. Registry Architecture
+24. Versioning Policy
+25. Naming Convention
+26. Knowledge Lifecycle
+27. Validation Lifecycle
+28. Extension Strategy
+29. Enterprise Architecture Principles
+30. Architecture Freeze Criteria
+31. Document Status
 
 ---
 
@@ -44,9 +62,13 @@
 
 ## 1.1 Objective
 
-Pack 01 là tầng **Infrastructure Knowledge Layer** của toàn bộ BTE Platform.
+Pack 01 — **Fundamental Theory** là Golden Foundation Pack của BTE Knowledge Canon.
 
-Đây là nơi định nghĩa toàn bộ dữ liệu nền, quy tắc chuẩn hóa, mô hình dữ liệu và cơ chế cung cấp tri thức cho toàn bộ hệ thống.
+Theo `PACK_01_MANIFEST.md` và package definition, nội dung chuẩn của Pack 01 là các Knowledge Record nền tảng (KR-000001–KR-000015) tại:
+
+`knowledge/bazi/01_fundamental_knowledge/records/`
+
+Tài liệu này định nghĩa **Knowledge Infrastructure Architecture** dùng để chuẩn hóa, kiểm chứng, đăng ký và cung cấp tri thức — không thay đổi nguyên tắc kiến trúc, chỉ đồng bộ với cấu trúc repository hiện tại.
 
 Pack này **không thực hiện bất kỳ hoạt động suy luận, chấm điểm hoặc luận giải nào**.
 
@@ -322,7 +344,7 @@ Kiến trúc tổng thể của BTE được chia thành nhiều Pack.
 ────────────────────────────────────────
                         │
                         ▼
-          Infrastructure Knowledge
+          Fundamental Theory / Knowledge Infrastructure
                   (Pack 01)
 
 ────────────────────────────────────────
@@ -457,30 +479,33 @@ Layer này không có Business Logic.
 
 # 8. Infrastructure Modules
 
-Pack 01 bao gồm các Module sau.
+Pack 01 sử dụng các **logical module** sau (thứ tự dependency được giữ nguyên).
+
+Logical ID không bắt buộc trùng tên thư mục vật lý. Ánh xạ repository hiện tại:
+
+| Logical ID | Role | Repository Path (current) |
+|------------|------|---------------------------|
+| `01_calendar_engine` | Calendar knowledge / calendar data | `database/01_du_lieu_goc/09_calendar/` (runtime: `engines/calendar_engine/`) |
+| `02_dictionary` | Dictionary / Terminology | `knowledge/terminology/` |
+| `03_rule_database` | Rule Database | `knowledge/rule_database/` |
+| `04_sentence_library` | Sentence Library | `knowledge/sentence_library/` |
+| `05_score_database` | Score weight / score data | `database/15_score_engine/` |
+| `06_metadata` | Metadata samples / governance metadata | `knowledge/docs/reference_examples/metadata/` (+ metadata fields in records/registries) |
+| `07_schema` | Schema | `knowledge/schema/` |
+| `08_validation` | Validation | `knowledge/validation/` |
+| `09_registry` | Registry | `knowledge/registry/` |
+| `10_examples` | Examples | `knowledge/bazi/01_fundamental_knowledge/examples/` (+ per-module `examples/`) |
+| `11_documents` | Documents / governance | `knowledge/governance/pack_01/` (+ `knowledge/docs/`) |
+
+Pack content root (Fundamental Theory records):
 
 ```text
-01_calendar_engine/
-
-02_dictionary/
-
-03_rule_database/
-
-04_sentence_library/
-
-05_score_database/
-
-06_metadata/
-
-07_schema/
-
-08_validation/
-
-09_registry/
-
-10_examples/
-
-11_documents/
+knowledge/bazi/01_fundamental_knowledge/
+├── records/          # KR-000001 … KR-000015
+├── examples/
+├── docs/
+├── design/
+└── MODULE_SPEC.md / README.md / …
 ```
 
 Mỗi Module có vòng đời độc lập.
@@ -800,6 +825,8 @@ Không chịu trách nhiệm luận giải.
 
 Quản lý toàn bộ thuật ngữ.
 
+Trong repository hiện tại, vai trò Dictionary được triển khai tại `knowledge/terminology/` (logical ID `02_dictionary`).
+
 Bao gồm
 
 - Thiên Can
@@ -1100,7 +1127,8 @@ Analysis Layer
 ▲
 
 PACK 01
-Infrastructure Knowledge
+Fundamental Theory
+(Knowledge Infrastructure)
 ```
 
 Pack 01 là nền tảng.
@@ -1216,36 +1244,48 @@ Mọi module đều có thể được phát triển, kiểm thử và phát hà
 
 ## 20.2 Standard Directory Layout
 
-```text
-pack_01/
+Logical module IDs (`01_…`–`11_…`) được giữ làm chuẩn kiến trúc.
 
-├── 01_calendar_engine/
-│
-├── 02_dictionary/
-│
-├── 03_rule_database/
-│
-├── 04_sentence_library/
-│
-├── 05_score_database/
-│
-├── 06_metadata/
-│
-├── 07_schema/
-│
-├── 08_validation/
-│
-├── 09_registry/
-│
-├── 10_examples/
-│
-├── 11_documents/
-│
-├── CHANGELOG.md
-├── RELEASE_NOTES.md
-├── VERSION
-└── README.md
+Cấu trúc vật lý hiện tại trong repository (không tồn tại thư mục gốc `pack_01/01_calendar_engine/…`):
+
+```text
+BTE-Platform/
+├── knowledge/
+│   ├── bazi/01_fundamental_knowledge/     # Pack 01 canonical content (KR records)
+│   │   ├── records/
+│   │   ├── examples/                      # logical 10_examples (pack-local)
+│   │   ├── docs/
+│   │   └── design/
+│   ├── terminology/                       # logical 02_dictionary
+│   ├── rule_database/                     # logical 03_rule_database
+│   ├── sentence_library/                  # logical 04_sentence_library
+│   ├── schema/                            # logical 07_schema
+│   ├── validation/                        # logical 08_validation
+│   ├── registry/                          # logical 09_registry
+│   ├── docs/                              # logical 11_documents (shared docs)
+│   │   └── reference_examples/metadata/   # logical 06_metadata (samples)
+│   └── governance/pack_01/                # Pack 01 governance documents
+│       ├── PACK_01_MANIFEST.md
+│       ├── PACK_01_ONTOLOGY.md
+│       ├── PACK_01_DEPENDENCY_GRAPH.md
+│       ├── PACK_01_ARCHITECTURE.md
+│       ├── PACK_01_ARCHITECTURE_AUDIT.md
+│       ├── PACK_01_REGISTRY_INDEX.md
+│       └── PACK_01_VALIDATION.md          # stub (empty)
+├── database/
+│   ├── 01_du_lieu_goc/09_calendar/        # logical 01_calendar_engine (data)
+│   └── 15_score_engine/                   # logical 05_score_database
+└── engines/
+    └── calendar_engine/                   # calendar runtime (not Pack knowledge data)
 ```
+
+Governance documents planned or incomplete:
+
+- `PACK_01_VALIDATION.md` — stub present (empty; not authored)
+- `PACK_01_COMPILER_SPEC.md` — not present
+- `PACK_01_RELEASE_NOTES.md` — not present
+- `PACK_01_CHANGELOG.md` — not present
+- `PACK_01_FREEZE_DECLARATION.md` — not present
 
 ---
 
@@ -1804,12 +1844,17 @@ Các chương tiếp theo sẽ tập trung vào quy trình quản trị tri th�
 - Chương 29 — Enterprise Architecture Principles
 - Chương 30 — Architecture Freeze Criteria
 
-Các chương này sẽ là nền tảng trực tiếp cho các tài liệu:
+Các chương này sẽ là nền tảng trực tiếp cho các tài liệu governance Pack 01:
 
-- `PACK_01_REGISTRY_INDEX.md`
-- `PACK_01_VALIDATION.md`
-- `PACK_01_COMPILER_SPEC.md`
-- `PACK_01_FREEZE_DECLARATION.md`
+| Document | Repository Status |
+|----------|-------------------|
+| `PACK_01_REGISTRY_INDEX.md` | Present |
+| `PACK_01_VALIDATION.md` | Stub present (empty — content not yet authored) |
+| `PACK_01_COMPILER_SPEC.md` | Planned (not yet in repository) |
+| `PACK_01_RELEASE_NOTES.md` | Planned (not yet in repository) |
+| `PACK_01_CHANGELOG.md` | Planned (not yet in repository) |
+| `PACK_01_FREEZE_DECLARATION.md` | Planned (not yet in repository) |
+
 ---
 
 # 25. Naming Convention
@@ -1863,9 +1908,11 @@ Rule 001
 
 ## 25.3 Module Naming
 
-Module sử dụng tiền tố số để thể hiện thứ tự logic.
+Module sử dụng tiền tố số để thể hiện thứ tự logic (logical ID).
 
-Ví dụ
+Logical ID không bắt buộc trùng tên thư mục vật lý. Ánh xạ hiện tại xem Mục 8 và Mục 20.2.
+
+Ví dụ (logical IDs)
 
 ```text
 01_calendar_engine
@@ -2512,7 +2559,7 @@ Mọi tài liệu kỹ thuật thuộc Pack 01 và các Pack kế tiếp phải 
 
 ---
 
-# Document Status
+# 31. Document Status
 
 | Item | Status |
 |------|--------|
@@ -2529,9 +2576,12 @@ Mọi tài liệu kỹ thuật thuộc Pack 01 và các Pack kế tiếp phải 
 | Extension Strategy | ✅ Complete |
 | Enterprise Principles | ✅ Complete |
 | Freeze Criteria | ✅ Complete |
+| Repository Path Synchronization | ✅ Complete (v1.1.1) |
 
 ---
 
-**Document Version:** 1.1.0  
+**Document Version:** 1.1.1  
 **Status:** Ready for Architecture Freeze  
-**Next Document:** `PACK_01_REGISTRY_INDEX.md`
+**Audit Report:** `PACK_01_ARCHITECTURE_AUDIT.md`  
+**Next Document:** `PACK_01_REGISTRY_INDEX.md` (present)  
+**Planned Follow-ons:** `PACK_01_VALIDATION.md` (stub present), `PACK_01_COMPILER_SPEC.md`, `PACK_01_FREEZE_DECLARATION.md`

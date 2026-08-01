@@ -58,6 +58,25 @@ The framework serves as the authoritative foundation for all knowledge-related a
 
 ---
 
+## Pack 01 Governance Documents
+
+Canonical Pack 01 governance lives under [`pack_01/`](pack_01/).
+
+| Document | Role | Status |
+|----------|------|--------|
+| [PACK_01_MANIFEST.md](pack_01/PACK_01_MANIFEST.md) | Governance constitution | Present |
+| [PACK_01_ONTOLOGY.md](pack_01/PACK_01_ONTOLOGY.md) | Semantic constitution | Present |
+| [PACK_01_DEPENDENCY_GRAPH.md](pack_01/PACK_01_DEPENDENCY_GRAPH.md) | Dependency topology | Present |
+| [PACK_01_ARCHITECTURE.md](pack_01/PACK_01_ARCHITECTURE.md) | Technical architecture | Present |
+| [PACK_01_REGISTRY_INDEX.md](pack_01/PACK_01_REGISTRY_INDEX.md) | Registry catalogue | Present |
+| [PACK_01_VALIDATION.md](pack_01/PACK_01_VALIDATION.md) | Validation framework | Stub (empty) |
+| [PACK_01_ARCHITECTURE_AUDIT.md](pack_01/PACK_01_ARCHITECTURE_AUDIT.md) | Architecture sync audit | Present |
+| [PACK_01_REPOSITORY_AUDIT.md](pack_01/PACK_01_REPOSITORY_AUDIT.md) | Repository consistency audit | Present |
+
+Planned (not yet authored): `PACK_01_COMPILER_SPEC.md`, `PACK_01_RELEASE_NOTES.md`, `PACK_01_CHANGELOG.md`, `PACK_01_FREEZE_DECLARATION.md`.
+
+---
+
 # Governance Objectives
 
 The Governance Framework aims to:

@@ -2,15 +2,17 @@
 
 > **BTE Platform — Knowledge Registry Specification**
 >
-> **Pack:** 01 — Infrastructure Knowledge
+> **Pack:** 01 — Fundamental Theory
 >
-> **Document Version:** 1.0.0
+> **Architecture Domain:** Knowledge Infrastructure
+>
+> **Document Version:** 1.0.1
 >
 > **Status:** Stable (Draft)
 >
 > **Depends On:** `PACK_01_ARCHITECTURE.md`
 >
-> **Next Document:** `PACK_01_VALIDATION.md`
+> **Next Document:** `PACK_01_VALIDATION.md` (stub present — content not yet authored)
 
 ---
 
@@ -26,6 +28,28 @@
 8. Registry Components
 9. Registry Object Types
 10. Registry Hierarchy
+11. Registry Entry
+12. Registry Identifier
+13. Registry Metadata
+14. Registry Index
+15. Registry Relationships
+16. Registry Lookup
+17. Registry Query
+18. Registry Cache
+19. Registry Version Resolution
+20. Registration Flow
+21. Update Flow
+22. Deprecation Flow
+23. Removal Policy
+24. Registry Validation
+25. Registry Consistency Rules
+26. Registry Extension
+27. Registry Governance
+28. Registry Security
+29. Registry Best Practices
+30. Registry Freeze Criteria
+31. Document Summary
+32. Document Status
 
 ---
 
@@ -2192,7 +2216,7 @@ Sau khi Freeze:
 
 `PACK_01_REGISTRY_INDEX.md` định nghĩa đặc tả đầy đủ của Registry trong Pack 01.
 
-Registry được xác định là **Knowledge Catalog** trung tâm của Infrastructure Knowledge Layer, chịu trách nhiệm đăng ký, lập chỉ mục, quản lý phiên bản và cung cấp cơ chế truy vấn thống nhất cho mọi Knowledge Object sau khi đã được Validation và Compiler xử lý.
+Registry được xác định là **Knowledge Catalog** trung tâm của Pack 01 (Fundamental Theory) trong Knowledge Infrastructure domain, chịu trách nhiệm đăng ký, lập chỉ mục, quản lý phiên bản và cung cấp cơ chế truy vấn thống nhất cho mọi Knowledge Object sau khi đã được Validation và Compiler xử lý.
 
 Tài liệu này là nền tảng để triển khai:
 
@@ -2220,8 +2244,8 @@ Tài liệu này là nền tảng để triển khai:
 | Registry Security | ✅ Complete |
 | Registry Freeze Criteria | ✅ Complete |
 
-**Document Version:** 1.0.0
+**Document Version:** 1.0.1
 
-**Status:** Ready for Technical Review
+**Status:** Stable (Draft) — Pack identity synchronized
 
-**Next Document:** `PACK_01_VALIDATION.md`
+**Next Document:** `PACK_01_VALIDATION.md` (stub present — content not yet authored)
