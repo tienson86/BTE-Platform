@@ -433,7 +433,7 @@ class LuckInterpretationRuleEngine:
         scored.sort(key=lambda item: (-item[0], str(item[1].get("rule_id") or "")))
         if scored and scored[0][0] > 0:
             return scored[0][1]
-        return candidates[0] if candidates else None
+        return None
 
     def _match_priority_weight(self, favorability: str) -> dict[str, Any] | None:
         """Map favorability to Pack 01 luck priority weight row."""
