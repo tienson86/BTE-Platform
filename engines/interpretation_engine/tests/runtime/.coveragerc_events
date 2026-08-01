@@ -1,0 +1,19 @@
+# Coverage for Pack 03 local Event Bus.
+
+[run]
+branch = False
+source =
+    engines/interpretation_engine/events
+
+omit =
+    */__init__.py
+    engines/interpretation_engine/events/event_bus_interface.py
+
+[report]
+show_missing = True
+skip_empty = True
+fail_under = 95
+include =
+    engines/interpretation_engine/events/event_bus.py
+    engines/interpretation_engine/events/event_types.py
+    engines/interpretation_engine/events/event_model.py
