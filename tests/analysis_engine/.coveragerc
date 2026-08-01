@@ -1,47 +1,10 @@
 # Coverage configuration for Analysis Engine infrastructure runtime modules.
-# Excludes legacy FastAPI routes/services and NotImplemented skeleton stubs.
+# Measures implemented runtime services; omits legacy FastAPI and skeleton stubs.
 
 [run]
+branch = False
 source =
-    engines/analysis_engine/pipeline/executor.py
-    engines/analysis_engine/pipeline/pipeline_executor.py
-    engines/analysis_engine/pipeline/stage_executor.py
-    engines/analysis_engine/pipeline/execution_context.py
-    engines/analysis_engine/pipeline/execution_result.py
-    engines/analysis_engine/pipeline/execution_state.py
-    engines/analysis_engine/pipeline/execution_policy.py
-    engines/analysis_engine/pipeline/execution_hooks.py
-    engines/analysis_engine/pipeline/pipeline.py
-    engines/analysis_engine/pipeline/pipeline_context.py
-    engines/analysis_engine/pipeline/pipeline_result.py
-    engines/analysis_engine/pipeline/stage_finalizer.py
-    engines/analysis_engine/context/context_builder.py
-    engines/analysis_engine/context/context_factory.py
-    engines/analysis_engine/context/context_manager.py
-    engines/analysis_engine/context/context_snapshot.py
-    engines/analysis_engine/context/context_revision.py
-    engines/analysis_engine/context/context_history.py
-    engines/analysis_engine/context/context_serializer.py
-    engines/analysis_engine/context/runtime_context.py
-    engines/analysis_engine/registry/registry_service.py
-    engines/analysis_engine/registry/query_engine.py
-    engines/analysis_engine/registry/dependency_graph.py
-    engines/analysis_engine/registry/module_loader.py
-    engines/analysis_engine/registry/cache_service.py
-    engines/analysis_engine/registry/version_resolver.py
-    engines/analysis_engine/registry/metadata_loader.py
-    engines/analysis_engine/registry/registry.py
-    engines/analysis_engine/registry/registry_builder.py
-    engines/analysis_engine/registry/registry_loader.py
-    engines/analysis_engine/registry/registry_cache.py
-    engines/analysis_engine/registry/registry_query.py
-    engines/analysis_engine/registry/registry_index.py
-    engines/analysis_engine/results
-    engines/analysis_engine/api/analysis_engine.py
-    engines/analysis_engine/api/analysis_service.py
-    engines/analysis_engine/api/analysis_session.py
-    engines/analysis_engine/api/analysis_request.py
-    engines/analysis_engine/api/analysis_response.py
+    engines/analysis_engine
 
 omit =
     */__init__.py
@@ -50,8 +13,71 @@ omit =
     engines/analysis_engine/api/services/*
     engines/analysis_engine/api/auth/*
     engines/analysis_engine/api/schemas.py
+    engines/analysis_engine/api/config.py
+    engines/analysis_engine/api/dependencies.py
+    engines/analysis_engine/api/exceptions.py
+    engines/analysis_engine/api/IMPLEMENTATION.md
+    engines/analysis_engine/context/chart_context.py
+    engines/analysis_engine/context/dayun_context.py
+    engines/analysis_engine/context/liunian_context.py
+    engines/analysis_engine/context/pattern_context.py
+    engines/analysis_engine/context/strength_context.py
+    engines/analysis_engine/context/temperature_context.py
+    engines/analysis_engine/context/ten_gods_context.py
+    engines/analysis_engine/pipeline/execution_graph.py
+    engines/analysis_engine/pipeline/registry.py
+    engines/analysis_engine/pipeline/scheduler.py
+    engines/analysis_engine/pipeline/stage_loader.py
+    engines/analysis_engine/pipeline/stage_validator.py
+    engines/analysis_engine/pipeline/contracts.py
+    engines/analysis_engine/pipeline/stage_base.py
+    engines/analysis_engine/registry/registry_contract.py
+    engines/analysis_engine/registry/query_contract.py
+    engines/analysis_engine/registry/loader_contract.py
+    engines/analysis_engine/registry/cache_contract.py
+    engines/analysis_engine/registry/provider_contract.py
+    engines/analysis_engine/registry/registry_export.py
+    engines/analysis_engine/registry/registry_validator.py
+    engines/analysis_engine/registry/registry_models.py
+    engines/analysis_engine/01_*/*
+    engines/analysis_engine/02_*/*
+    engines/analysis_engine/03_*/*
+    engines/analysis_engine/04_*/*
+    engines/analysis_engine/05_*/*
+    engines/analysis_engine/06_*/*
+    engines/analysis_engine/07_*/*
+    engines/analysis_engine/08_*/*
+    engines/analysis_engine/09_*/*
+    engines/analysis_engine/10_*/*
+    engines/analysis_engine/runtime/*
+    engines/analysis_engine/analyzers/*
+    engines/analysis_engine/compiler/*
+    engines/analysis_engine/validation/*
+    engines/analysis_engine/validators/*
+    engines/analysis_engine/scoring/*
+    engines/analysis_engine/conflict/*
+    engines/analysis_engine/cache/*
+    engines/analysis_engine/metrics/*
+    engines/analysis_engine/events/*
+    engines/analysis_engine/utils/*
+    engines/analysis_engine/adapters/*
+    engines/analysis_engine/docs/*
+    engines/analysis_engine/models/*
+    engines/analysis_engine/types/*
+    engines/analysis_engine/interfaces/*
+    engines/analysis_engine/exceptions/*
+    engines/analysis_engine/engine.py
+    engines/analysis_engine/config.py
+    engines/analysis_engine/constants.py
+    engines/analysis_engine/summary_engine.py
 
 [report]
 show_missing = True
 skip_empty = True
 fail_under = 90
+include =
+    engines/analysis_engine/pipeline/*
+    engines/analysis_engine/context/*
+    engines/analysis_engine/registry/*
+    engines/analysis_engine/results/*
+    engines/analysis_engine/api/analysis_*.py

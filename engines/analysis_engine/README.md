@@ -28,6 +28,8 @@ engines/analysis_engine/
 ├── constants.py
 ├── VERSION / CHANGELOG.md / README.md
 ├── ANALYSIS_ENGINE_AUDIT.md
+├── ANALYSIS_ENGINE_AUDIT_V2.md
+├── ANALYSIS_ENGINE_FREEZE_REPORT.md
 │
 ├── models/                   # Immutable result/context dataclasses
 ├── interfaces/               # Public ABC contracts

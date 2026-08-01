@@ -168,13 +168,20 @@ class TestRegistryInfrastructureEdges:
         )
         resolved = resolver.resolve(
             entries,
-            requested_version="1.0.0",
+            requested_version="1.0.5",
             allow_compatible=True,
             allow_deprecated=False,
         )
         assert resolved.entry_id == "b"
         with pytest.raises(RegistryError):
             resolver.resolve(entries, requested_version="9.0.0", allow_compatible=False)
+        deprecated = resolver.resolve(
+            (entries[0],),
+            requested_version="1.0.0",
+            allow_compatible=False,
+            allow_deprecated=True,
+        )
+        assert deprecated.entry_id == "a"
 
     def test_dependency_missing_and_index_query(self) -> None:
         """Missing dependencies and index/query facades should work."""

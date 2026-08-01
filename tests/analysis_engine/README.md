@@ -28,3 +28,12 @@ Runtime integration tests use mock analyzers only. No real BaZi rules.
 ```bash
 python -m pytest tests/analysis_engine -q
 ```
+
+Infrastructure coverage (pipeline / context / registry / results / API facade):
+
+```bash
+python -m coverage run --rcfile=tests/analysis_engine/.coveragerc -m pytest tests/analysis_engine -q
+python -m coverage report --rcfile=tests/analysis_engine/.coveragerc
+```
+
+Target: >90% on implemented infrastructure runtime modules.
