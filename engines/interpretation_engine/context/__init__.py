@@ -1,8 +1,7 @@
 """Interpretation context architecture and runtime package.
 
 Re-exports legacy ``InterpretationContext`` for backward compatibility.
-Pack 03 runtime context is ``PackInterpretationContext`` (alias) and also
-available as ``context.interpretation_context.InterpretationContext``.
+Pack 03 runtime context is ``PackInterpretationContext`` (canonical).
 """
 
 from __future__ import annotations
@@ -17,7 +16,7 @@ from engines.interpretation_engine.context.context_provider_interface import (
 from engines.interpretation_engine.context.factory import ContextFactory
 from engines.interpretation_engine.context.history import ContextHistory
 from engines.interpretation_engine.context.interpretation_context import (
-    InterpretationContext as PackInterpretationContext,
+    PackInterpretationContext,
 )
 from engines.interpretation_engine.context.manager import ContextManager
 from engines.interpretation_engine.context.revision import (
