@@ -2,23 +2,30 @@
 
 > **Path:** `engines/analysis_engine/pipeline/`
 
-Pipeline orchestration interfaces and contracts.
+Pipeline orchestration runtime and contracts.
 
 ## Modules
 
 | Module | Surface |
 |--------|---------|
+| `executor.py` | `Executor` |
+| `pipeline_executor.py` | `PipelineExecutor` |
+| `stage_executor.py` | `StageExecutor` |
+| `execution_context.py` | `ExecutionContext` |
+| `execution_result.py` | `ExecutionResult` |
+| `execution_state.py` | `ExecutionState` |
+| `execution_policy.py` | `ExecutionPolicy` |
+| `execution_hooks.py` | `ExecutionHooks`, `NoOpExecutionHooks` |
 | `pipeline.py` | `Pipeline` |
 | `stage_base.py` | `StageBase` |
 | `pipeline_context.py` | `PipelineContext` |
 | `pipeline_result.py` | `PipelineResult`, `StageOutcome` |
+| `stage_finalizer.py` | `StageFinalizer` |
 | `registry.py` | `StageRegistry` |
 | `execution_graph.py` | `ExecutionGraph` |
 | `scheduler.py` | `Scheduler` |
 | `stage_loader.py` | `StageLoader` |
 | `stage_validator.py` | `StageValidator` |
-| `stage_executor.py` | `StageExecutor` |
-| `stage_finalizer.py` | `StageFinalizer` |
 | `contracts.py` | Stage/Context/Result/Policy contracts |
 
-Public interfaces and contracts only. No algorithms.
+Orchestration only. No rule evaluation, BaZi logic, or scoring algorithms.

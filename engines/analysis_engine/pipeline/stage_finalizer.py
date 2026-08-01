@@ -1,4 +1,4 @@
-"""Pipeline stage finalizer interface skeleton."""
+"""Stage finalizer for orchestration."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from engines.analysis_engine.pipeline.stage_base import StageBase
 
 
 class StageFinalizer:
-    """Public interface for finalizing stage and pipeline outcomes."""
+    """Finalizes stage and pipeline outcomes for orchestration."""
 
     def finalize_stage(
         self,
@@ -19,8 +19,9 @@ class StageFinalizer:
         context: PipelineContext,
         outcome: StageOutcome,
     ) -> None:
-        """Finalize a single stage outcome."""
-        raise NotImplementedError
+        """Record stage payload onto the pipeline context when successful."""
+        if outcome.success:
+            context.stage_outputs[stage.stage_id] = dict(outcome.payload)
 
     def finalize_pipeline(
         self,
@@ -28,4 +29,16 @@ class StageFinalizer:
         outcomes: tuple[StageOutcome, ...],
     ) -> PipelineResult:
         """Finalize the full pipeline into a public result contract."""
-        raise NotImplementedError
+        errors = tuple(
+            message
+            for outcome in outcomes
+            if not outcome.success
+            for message in outcome.messages
+        )
+        success = all(outcome.success for outcome in outcomes) if outcomes else True
+        return PipelineResult(
+            pipeline_id=context.pipeline_id,
+            success=success,
+            outcomes=outcomes,
+            errors=errors,
+        )

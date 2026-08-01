@@ -1,4 +1,4 @@
-"""Pipeline context model skeleton."""
+"""Pipeline context model for orchestration."""
 
 from __future__ import annotations
 
@@ -18,12 +18,12 @@ class PipelineContext:
 
     def get_attribute(self, key: str) -> Any:
         """Return a context attribute by key."""
-        raise NotImplementedError
+        return self.attributes.get(key)
 
     def set_attribute(self, key: str, value: Any) -> None:
         """Assign a context attribute by key."""
-        raise NotImplementedError
+        self.attributes[key] = value
 
     def get_stage_output(self, stage_id: str) -> Any:
         """Return output produced by a prior stage."""
-        raise NotImplementedError
+        return self.stage_outputs.get(stage_id)

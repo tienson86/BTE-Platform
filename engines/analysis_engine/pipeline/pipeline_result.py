@@ -1,4 +1,4 @@
-"""Pipeline result model skeleton."""
+"""Pipeline result model for orchestration."""
 
 from __future__ import annotations
 
@@ -27,8 +27,11 @@ class PipelineResult:
 
     def stage_ids(self) -> tuple[str, ...]:
         """Return ordered stage identifiers present in the result."""
-        raise NotImplementedError
+        return tuple(outcome.stage_id for outcome in self.outcomes)
 
     def outcome_for(self, stage_id: str) -> StageOutcome | None:
         """Return the outcome for a specific stage identifier."""
-        raise NotImplementedError
+        for outcome in self.outcomes:
+            if outcome.stage_id == stage_id:
+                return outcome
+        return None
