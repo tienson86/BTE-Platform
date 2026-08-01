@@ -20,16 +20,16 @@ class RuntimeContext(ContextInterface):
 
     def context_id(self) -> str:
         """Return the context identifier."""
-        raise NotImplementedError
+        return self.id
 
     def get(self, key: str) -> Any:
         """Return a context value by key."""
-        raise NotImplementedError
+        return self.attributes.get(key)
 
     def set(self, key: str, value: Any) -> None:
         """Assign a context value by key."""
-        raise NotImplementedError
+        self.attributes[key] = value
 
     def get_stage_output(self, stage_id: str) -> Any:
         """Return output produced by a prior stage."""
-        raise NotImplementedError
+        return self.stage_outputs.get(stage_id)

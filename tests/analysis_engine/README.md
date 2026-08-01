@@ -2,13 +2,19 @@
 
 > **Path:** `tests/analysis_engine/`
 
-Pytest architecture framework for the Analysis Engine.
+Pytest framework for Analysis Engine infrastructure.
 
 ## Layout
 
 ```text
 tests/analysis_engine/
 ├── conftest.py
+├── mocks/              # Mock stages/analyzers (no BaZi rules)
+├── pipeline/           # Pipeline orchestration integration tests
+├── context/            # Context lifecycle integration tests
+├── registry/           # Registry runtime integration tests
+├── results/            # Result infrastructure integration tests
+├── api/                # Public API facade integration tests
 ├── unit/
 ├── integration/
 ├── golden/
@@ -17,8 +23,8 @@ tests/analysis_engine/
 └── snapshots/
 ```
 
-Framework scaffolding only. No analysis assertions authored yet.
+Runtime integration tests use mock analyzers only. No real BaZi rules.
 
 ```bash
-pytest tests/analysis_engine -q
+python -m pytest tests/analysis_engine -q
 ```

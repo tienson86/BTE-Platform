@@ -28,5 +28,11 @@ class AnalysisResult:
     decisions: tuple[AnalysisDecision, ...] = ()
 
     def validate(self) -> bool:
-        """Validate analysis result contract."""
-        raise NotImplementedError
+        """Validate analysis result structural contract."""
+        if not self.id or not self.pipeline_id or not self.version:
+            return False
+        if not self.timestamps.created_at:
+            return False
+        if not self.metadata.id:
+            return False
+        return True

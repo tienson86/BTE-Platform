@@ -2,9 +2,23 @@
 
 > **Path:** `engines/analysis_engine/context/`
 
-Typed context architecture for the Analysis Engine.
+Typed context architecture and lifecycle runtime for the Analysis Engine.
 
-## Modules
+## Lifecycle Runtime
+
+| Module | Surface |
+|--------|---------|
+| `context_builder.py` | `ContextBuilder`, `utc_now` |
+| `context_factory.py` | `ContextFactory` |
+| `context_manager.py` | `ContextManager` |
+| `context_snapshot.py` | `ContextSnapshot` |
+| `context_revision.py` | `ContextRevision`, `ContextLifecyclePhase` |
+| `context_history.py` | `ContextHistory` |
+| `context_serializer.py` | `ContextSerializer` |
+
+Lifecycle: Create → Initialize → Expand → Validate → Finalize → Dispose.
+
+## Typed Context Contracts
 
 | Module | Type |
 |--------|------|
@@ -18,4 +32,4 @@ Typed context architecture for the Analysis Engine.
 | `liunian_context.py` | `LiunianContext` |
 | `runtime_context.py` | `RuntimeContext` |
 
-Architecture contracts only. No BaZi analysis.
+Context lifecycle only. No analyzer / BaZi logic.

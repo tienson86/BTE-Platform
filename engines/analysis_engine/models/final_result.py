@@ -29,5 +29,11 @@ class FinalResult:
     summary_codes: tuple[str, ...] = ()
 
     def validate(self) -> bool:
-        """Validate final result contract."""
-        raise NotImplementedError
+        """Validate final result structural contract."""
+        if not self.id or not self.pipeline_id or not self.version:
+            return False
+        if not self.timestamps.created_at:
+            return False
+        if not self.metadata.id:
+            return False
+        return True

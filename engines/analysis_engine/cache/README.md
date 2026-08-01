@@ -2,8 +2,19 @@
 
 > **Path:** `engines/analysis_engine/cache/`
 
-Architecture skeleton for Analysis Engine caching boundaries.
+In-memory cache subsystem for Analysis Engine runtime.
 
-Related registry cache contracts: `registry/cache_contract.py`.
+## Modules
 
-No cache implementation.
+| Module | Surface |
+|--------|---------|
+| `cache_manager.py` | `CacheManager` |
+| `cache_policy.py` | `CachePolicy`, `EvictionPolicy` |
+| `memory_cache.py` | `MemoryCache`, `CacheStats` |
+| `context_cache.py` | `ContextCache` |
+| `registry_cache.py` | `RegistryCache` |
+
+Memory only. No Redis, disk, or network cache backends.
+
+Related registry contract: `registry/cache_contract.py`.
+Distinct from legacy `runtime.cache_manager.CacheManager`.

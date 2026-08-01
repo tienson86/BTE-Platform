@@ -35,6 +35,11 @@ engines/analysis_engine/
 ├── exceptions/               # Exception hierarchy
 │
 ├── context/                  # Typed context packages
+├── results/                  # Result infrastructure runtime
+├── events/                   # Internal in-process event framework
+├── metrics/                  # Infrastructure metrics collectors
+├── cache/                    # In-memory cache subsystem
+├── api/                      # Public API facade (+ legacy FastAPI coexistence)
 ├── pipeline/                 # Pipeline orchestration interfaces + contracts
 ├── analyzers/                # Analyzer module skeletons + contracts
 ├── registry/                 # Registry layer (Pack 01 compatible)
@@ -60,7 +65,12 @@ engines/analysis_engine/
 | `interfaces/` | Public ABCs (`AnalysisEngineInterface`, providers, …) |
 | `types/` | Shared type system |
 | `exceptions/` | `AnalysisError` hierarchy |
-| `context/` | Typed context models |
+| `context/` | Typed context models + lifecycle runtime |
+| `results/` | Result builder/merger/aggregator/serializer/repository |
+| `events/` | Internal in-process event bus / dispatcher / listeners |
+| `metrics/` | Execution / performance / rule / pipeline / result metrics |
+| `cache/` | In-memory cache manager / policy / context / registry caches |
+| `api/` | Public API facade (`AnalysisEngineAPI`) + legacy FastAPI app |
 | `pipeline/` | Pipeline interfaces + `contracts.py` |
 | `analyzers/` | Twelve analyzer skeletons + contracts |
 | `registry/` | Registry interfaces + Pack 01-compatible contracts |

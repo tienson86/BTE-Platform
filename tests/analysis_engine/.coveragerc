@@ -1,0 +1,57 @@
+# Coverage configuration for Analysis Engine infrastructure runtime modules.
+# Excludes legacy FastAPI routes/services and NotImplemented skeleton stubs.
+
+[run]
+source =
+    engines/analysis_engine/pipeline/executor.py
+    engines/analysis_engine/pipeline/pipeline_executor.py
+    engines/analysis_engine/pipeline/stage_executor.py
+    engines/analysis_engine/pipeline/execution_context.py
+    engines/analysis_engine/pipeline/execution_result.py
+    engines/analysis_engine/pipeline/execution_state.py
+    engines/analysis_engine/pipeline/execution_policy.py
+    engines/analysis_engine/pipeline/execution_hooks.py
+    engines/analysis_engine/pipeline/pipeline.py
+    engines/analysis_engine/pipeline/pipeline_context.py
+    engines/analysis_engine/pipeline/pipeline_result.py
+    engines/analysis_engine/pipeline/stage_finalizer.py
+    engines/analysis_engine/context/context_builder.py
+    engines/analysis_engine/context/context_factory.py
+    engines/analysis_engine/context/context_manager.py
+    engines/analysis_engine/context/context_snapshot.py
+    engines/analysis_engine/context/context_revision.py
+    engines/analysis_engine/context/context_history.py
+    engines/analysis_engine/context/context_serializer.py
+    engines/analysis_engine/context/runtime_context.py
+    engines/analysis_engine/registry/registry_service.py
+    engines/analysis_engine/registry/query_engine.py
+    engines/analysis_engine/registry/dependency_graph.py
+    engines/analysis_engine/registry/module_loader.py
+    engines/analysis_engine/registry/cache_service.py
+    engines/analysis_engine/registry/version_resolver.py
+    engines/analysis_engine/registry/metadata_loader.py
+    engines/analysis_engine/registry/registry.py
+    engines/analysis_engine/registry/registry_builder.py
+    engines/analysis_engine/registry/registry_loader.py
+    engines/analysis_engine/registry/registry_cache.py
+    engines/analysis_engine/registry/registry_query.py
+    engines/analysis_engine/registry/registry_index.py
+    engines/analysis_engine/results
+    engines/analysis_engine/api/analysis_engine.py
+    engines/analysis_engine/api/analysis_service.py
+    engines/analysis_engine/api/analysis_session.py
+    engines/analysis_engine/api/analysis_request.py
+    engines/analysis_engine/api/analysis_response.py
+
+omit =
+    */__init__.py
+    engines/analysis_engine/api/app.py
+    engines/analysis_engine/api/routes/*
+    engines/analysis_engine/api/services/*
+    engines/analysis_engine/api/auth/*
+    engines/analysis_engine/api/schemas.py
+
+[report]
+show_missing = True
+skip_empty = True
+fail_under = 90

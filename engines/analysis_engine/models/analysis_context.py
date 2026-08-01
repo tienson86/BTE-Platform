@@ -22,5 +22,15 @@ class AnalysisContext:
     attributes: Mapping[str, Any] = field(default_factory=dict)
 
     def validate(self) -> bool:
-        """Validate analysis context contract."""
-        raise NotImplementedError
+        """Validate analysis context structural contract."""
+        if not self.id:
+            return False
+        if not self.pipeline_id:
+            return False
+        if not self.version:
+            return False
+        if not self.timestamps.created_at:
+            return False
+        if not self.metadata.id:
+            return False
+        return True

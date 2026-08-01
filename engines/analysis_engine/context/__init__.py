@@ -3,6 +3,16 @@
 from __future__ import annotations
 
 from engines.analysis_engine.context.chart_context import ChartContext
+from engines.analysis_engine.context.context_builder import ContextBuilder, utc_now
+from engines.analysis_engine.context.context_factory import ContextFactory
+from engines.analysis_engine.context.context_history import ContextHistory
+from engines.analysis_engine.context.context_manager import ContextManager
+from engines.analysis_engine.context.context_revision import (
+    ContextLifecyclePhase,
+    ContextRevision,
+)
+from engines.analysis_engine.context.context_serializer import ContextSerializer
+from engines.analysis_engine.context.context_snapshot import ContextSnapshot
 from engines.analysis_engine.context.dayun_context import DayunContext
 from engines.analysis_engine.context.interfaces import (
     ContextBuilderInterface,
@@ -17,8 +27,16 @@ from engines.analysis_engine.context.ten_gods_context import TenGodsContext
 
 __all__ = [
     "ChartContext",
+    "ContextBuilder",
     "ContextBuilderInterface",
+    "ContextFactory",
+    "ContextHistory",
     "ContextInterface",
+    "ContextLifecyclePhase",
+    "ContextManager",
+    "ContextRevision",
+    "ContextSerializer",
+    "ContextSnapshot",
     "DayunContext",
     "LiunianContext",
     "PatternContext",
@@ -26,4 +44,5 @@ __all__ = [
     "StrengthContext",
     "TemperatureContext",
     "TenGodsContext",
+    "utc_now",
 ]
