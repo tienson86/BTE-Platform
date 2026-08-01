@@ -1,0 +1,9 @@
+"""Luck interpreter interface skeleton."""
+
+from __future__ import annotations
+
+from engines.interpretation_engine.interpreters.base import InterpreterInterface
+
+
+class LuckInterpreterInterface(InterpreterInterface):
+    """Luck interpreter contract. No interpretation logic."""

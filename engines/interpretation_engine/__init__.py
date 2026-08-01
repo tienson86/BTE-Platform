@@ -4,15 +4,18 @@ Interpretation Engine Package
 
 Đóng gói module Interpretation Engine.
 
-Export các thành phần chính:
+Export các thành phần chính (legacy runtime):
 
 - InterpretationEngine
 - InterpretationBuilder
 - SentenceGenerator
 - Formatter
 
+Pack 03 architecture skeleton lives in sibling packages
+(``api/``, ``pipeline/``, ``contracts/``, ``interpreters/``, …).
+See ``ARCHITECTURE_README.md``. Legacy public exports below are unchanged.
 
-Sử dụng:
+Sử dụng (legacy):
 
 from engines.interpretation_engine import InterpretationEngine
 

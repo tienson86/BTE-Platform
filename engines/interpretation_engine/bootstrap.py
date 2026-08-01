@@ -18,7 +18,7 @@ from .core.registry import Registry
 from .core.plugin_manager import PluginManager
 from .core.engine_validator import EngineValidator
 
-from .pipeline import InterpretationPipeline
+from .legacy_runtime.pipeline import InterpretationPipeline
 from .engine import InterpretationEngine
 
 

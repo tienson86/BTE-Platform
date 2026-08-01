@@ -17,7 +17,7 @@ from .models import (
     Sentence,
 )
 
-from .exceptions import (
+from .legacy_runtime.exceptions import (
     InterpretationValidationError,
     InvalidContextError,
     InvalidTemplateError,
