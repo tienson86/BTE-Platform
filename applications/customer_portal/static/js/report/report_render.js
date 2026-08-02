@@ -335,27 +335,11 @@
   }
 
   function renderInterpretation(model) {
-    var chapters = (model.interpretation && model.interpretation.chapters) || [];
-    var conf = model.interpretation && model.interpretation.confidence;
     var body =
-      '<div class="rpt-interp-meta"><span class="rpt-caption">' +
-      esc(t("interpretation.confidence", { value: show(conf) })) +
-      "</span></div>" +
-      chapters
-        .map(function (ch) {
-          var content = ch.available
-            ? '<div class="rpt-body">' +
-              esc(ch.body).replace(/\n/g, "<br>") +
-              "</div>"
-            : unavailable(t(ch.titleKey));
-          return largeSection(
-            "interp-" + ch.id,
-            t(ch.titleKey),
-            content,
-            { collapsed: !ch.available }
-          );
-        })
-        .join("");
+      window.BteInterpretationDoc &&
+      typeof window.BteInterpretationDoc.render === "function"
+        ? window.BteInterpretationDoc.render(model)
+        : '<p class="rpt-caption">' + esc(t("report.unavailable")) + "</p>";
     return tierWrap(
       "tier-interpretation",
       t("report.tier.interpretation"),
@@ -466,6 +450,12 @@
     }
     if (window.BteAnalysis && typeof window.BteAnalysis.bind === "function") {
       window.BteAnalysis.bind(root);
+    }
+    if (
+      window.BteInterpretationDoc &&
+      typeof window.BteInterpretationDoc.bind === "function"
+    ) {
+      window.BteInterpretationDoc.bind(root);
     }
   }
 
