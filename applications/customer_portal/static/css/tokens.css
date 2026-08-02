@@ -1,0 +1,156 @@
+/* BTE Portal Design System — Tokens (Commercial Enterprise) */
+:root {
+  /* Brand — Linear/Stripe blue primary */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-soft: #eff6ff;
+  --secondary: #475569;
+  --secondary-soft: #f1f5f9;
+
+  /* Status */
+  --success: #16a34a;
+  --success-soft: #f0fdf4;
+  --warning: #ea580c;
+  --warning-soft: #fff7ed;
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+  --info: #4f46e5;
+  --info-soft: #eef2ff;
+
+  /* Neutrals / surfaces */
+  --bg: #f8fafc;
+  --bg-accent: #f1f5f9;
+  --panel: #ffffff;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --card-value: #0f172a;
+
+  /* Compat aliases used by existing presenters */
+  --brand: var(--primary);
+  --brand-2: #0284c7;
+  --ok: var(--success);
+
+  /* Type */
+  --font: "Segoe UI", "Inter", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --mono: "Cascadia Code", "SF Mono", Consolas, ui-monospace, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.35rem;
+  --text-2xl: 1.75rem;
+
+  /* Space / radius / elevation */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.1);
+  --header-h: 56px;
+  --content-max: 1200px;
+  --z-header: 40;
+  --z-toast: 80;
+  --z-modal: 100;
+  --focus: 0 0 0 3px rgba(37, 99, 235, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #60a5fa;
+    --primary-hover: #93c5fd;
+    --primary-soft: #172554;
+    --secondary: #94a3b8;
+    --secondary-soft: #1e293b;
+    --success: #4ade80;
+    --success-soft: #14532d;
+    --warning: #fb923c;
+    --warning-soft: #7c2d12;
+    --danger: #fb7185;
+    --danger-soft: #7f1d1d;
+    --info: #a5b4fc;
+    --info-soft: #312e81;
+    --bg: #0b1220;
+    --bg-accent: #0f172a;
+    --panel: #111827;
+    --card: #152033;
+    --line: #243247;
+    --line-strong: #334155;
+    --ink: #e8eef7;
+    --muted: #94a3b8;
+    --card-value: #f8fafc;
+    --brand: var(--primary);
+    --brand-2: #38bdf8;
+    --ok: var(--success);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+}
+
+[data-theme="dark"] {
+  --primary: #60a5fa;
+  --primary-hover: #93c5fd;
+  --primary-soft: #172554;
+  --secondary: #94a3b8;
+  --secondary-soft: #1e293b;
+  --success: #4ade80;
+  --success-soft: #14532d;
+  --warning: #fb923c;
+  --warning-soft: #7c2d12;
+  --danger: #fb7185;
+  --danger-soft: #7f1d1d;
+  --info: #a5b4fc;
+  --info-soft: #312e81;
+  --bg: #0b1220;
+  --bg-accent: #0f172a;
+  --panel: #111827;
+  --card: #152033;
+  --line: #243247;
+  --line-strong: #334155;
+  --ink: #e8eef7;
+  --muted: #94a3b8;
+  --card-value: #f8fafc;
+  --brand: var(--primary);
+  --brand-2: #38bdf8;
+  --ok: var(--success);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-soft: #eff6ff;
+  --secondary: #475569;
+  --secondary-soft: #f1f5f9;
+  --success: #16a34a;
+  --success-soft: #f0fdf4;
+  --warning: #ea580c;
+  --warning-soft: #fff7ed;
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+  --info: #4f46e5;
+  --info-soft: #eef2ff;
+  --bg: #f8fafc;
+  --bg-accent: #f1f5f9;
+  --panel: #ffffff;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --card-value: #0f172a;
+  --brand: var(--primary);
+  --brand-2: #0284c7;
+  --ok: var(--success);
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+}
