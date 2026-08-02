@@ -185,6 +185,410 @@
     return null;
   }
 
+  function asList(raw) {
+    if (!raw) return [];
+    if (Array.isArray(raw)) return raw;
+    if (typeof raw === "object") return [raw];
+    if (typeof raw === "string" && raw.trim()) return [raw.trim()];
+    return [];
+  }
+
+  /** Display-safe rule rows — never invent; prefer title over raw id. */
+  function extractRules(containers) {
+    var out = [];
+    (containers || []).forEach(function (obj) {
+      if (!obj || typeof obj !== "object") return;
+      var lists = []
+        .concat(asList(obj.rules))
+        .concat(asList(obj.applied_rules))
+        .concat(asList(obj.rule_trace))
+        .concat(asList(obj.priority_rules));
+      lists.forEach(function (r) {
+        if (r == null) return;
+        if (typeof r === "string") {
+          out.push({
+            name: r,
+            id: null,
+            priority: null,
+            reason: null,
+          });
+          return;
+        }
+        if (typeof r !== "object") return;
+        var name =
+          r.display_name ||
+          r.name ||
+          r.title ||
+          r.rule_name ||
+          r.label ||
+          null;
+        var id = r.rule_id || r.id || r.code || null;
+        /* Consumer: prefer name; hide bare internal ids */
+        if (!name && id) name = null;
+        if (!name && !r.reason && r.priority == null) return;
+        out.push({
+          name: name,
+          id: name ? id : null,
+          priority: r.priority != null ? r.priority : r.rank != null ? r.rank : null,
+          reason: r.reason || r.explanation || r.why || r.description || null,
+        });
+      });
+    });
+    return out;
+  }
+
+  function extractEvidence(containers) {
+    var out = [];
+    (containers || []).forEach(function (obj) {
+      if (!obj || typeof obj !== "object") return;
+      asList(obj.evidence)
+        .concat(asList(obj.evidences))
+        .concat(asList(obj.proofs))
+        .concat(asList(obj.citations))
+        .forEach(function (e) {
+          if (e == null) return;
+          if (typeof e === "string") {
+            out.push({ label: e, reference: null });
+            return;
+          }
+          if (typeof e !== "object") return;
+          var label =
+            e.label || e.text || e.summary || e.body || e.name || e.title || null;
+          if (!label) return;
+          out.push({
+            label: String(label),
+            reference: e.reference || e.source || e.citation || null,
+          });
+        });
+    });
+    return out;
+  }
+
+  function pickConfidence(containers) {
+    for (var i = 0; i < (containers || []).length; i++) {
+      var obj = containers[i];
+      if (!obj || typeof obj !== "object") continue;
+      if (obj.confidence != null && obj.confidence !== "") return obj.confidence;
+      if (obj.confidence_score != null) return obj.confidence_score;
+    }
+    return null;
+  }
+
+  function knowledgeRef(knowledge) {
+    if (!knowledge || typeof knowledge !== "object") return null;
+    var citation =
+      knowledge.citation ||
+      knowledge.reference ||
+      knowledge.knowledge_reference ||
+      knowledge.title ||
+      null;
+    var link =
+      knowledge.link ||
+      knowledge.url ||
+      knowledge.href ||
+      null;
+    if (!citation && !link && knowledge.status == null) return null;
+    return {
+      citation: citation ? String(citation) : null,
+      link: link ? String(link) : "#tier-knowledge",
+      status: knowledge.status != null ? String(knowledge.status) : null,
+    };
+  }
+
+  function seriesFactors(series) {
+    return (series || [])
+      .filter(function (x) {
+        return x && Number(x.value) > 0;
+      })
+      .map(function (x) {
+        return x.label + ": " + x.value;
+      });
+  }
+
+  function makeBlock(opts) {
+    var conclusion = opts.conclusion;
+    var hasConclusion = conclusion != null && conclusion !== "" && conclusion !== MISSING;
+    var factors = opts.factors || [];
+    var rules = opts.rules || [];
+    var evidence = opts.evidence || [];
+    var status = "unavailable";
+    if (hasConclusion) {
+      status =
+        factors.length || rules.length || evidence.length || opts.summary
+          ? "available"
+          : "partial";
+    }
+    return {
+      id: opts.id,
+      titleKey: opts.titleKey,
+      status: status,
+      conclusion: hasConclusion ? String(conclusion) : null,
+      summary: opts.summary || null,
+      factors: factors,
+      rules: rules,
+      evidence: evidence,
+      confidence: opts.confidence != null ? opts.confidence : null,
+      knowledge: opts.knowledge || null,
+      open: !!opts.open,
+    };
+  }
+
+  function buildAnalysisBlocks(ctx) {
+    var overview = ctx.overview || {};
+    var pattern = ctx.pattern || {};
+    var score = ctx.score || {};
+    var interpretation = ctx.interpretation || {};
+    var knowledge = ctx.knowledge;
+    var relations = ctx.relations || {};
+    var baseContainers = [pattern, score, ctx.payload];
+    var kRef = knowledgeRef(knowledge);
+    var interpConf = interpretation.confidence;
+
+    function scoped(extra) {
+      return baseContainers.concat(extra || []);
+    }
+
+    var blocks = [];
+
+    var elFactors = seriesFactors(ctx.elements);
+    blocks.push(
+      makeBlock({
+        id: "elements",
+        titleKey: "report.an_elements",
+        open: true,
+        conclusion: elFactors.length ? elFactors.join(" · ") : null,
+        summary: chartInsightText(interpretation, [
+          "five_element",
+          "ngu_hanh",
+          "wuxing",
+          "element",
+        ]),
+        factors: elFactors,
+        rules: extractRules(scoped([pattern.ngu_hanh, pattern.elements, score.wuxing])),
+        evidence: extractEvidence(scoped([pattern.ngu_hanh, pattern.elements])),
+        confidence: pickConfidence(scoped([pattern.ngu_hanh])),
+        knowledge: kRef,
+      })
+    );
+
+    var godFactors = seriesFactors(ctx.tenGods);
+    blocks.push(
+      makeBlock({
+        id: "ten_gods",
+        titleKey: "report.an_gods",
+        open: true,
+        conclusion: godFactors.length ? godFactors.join(" · ") : null,
+        summary: chartInsightText(interpretation, [
+          "ten_god",
+          "thap_than",
+          "shi_shen",
+        ]),
+        factors: godFactors,
+        rules: extractRules(scoped([pattern.thap_than, score.ten_gods])),
+        evidence: extractEvidence(scoped([pattern.thap_than])),
+        confidence: pickConfidence(scoped([pattern.thap_than])),
+        knowledge: kRef,
+      })
+    );
+
+    var cach =
+      overview.cach_cuc && overview.cach_cuc !== MISSING
+        ? overview.cach_cuc
+        : present(pick(pattern, ["cach_cuc", "pattern_name", "ge_ju", "main_pattern"]));
+    var tong =
+      overview.tong_cach && overview.tong_cach !== MISSING
+        ? overview.tong_cach
+        : present(pick(pattern, ["tong_cach", "follow_pattern"]));
+    var patternConclusion =
+      cach !== MISSING
+        ? tong !== MISSING
+          ? cach + " · " + tong
+          : cach
+        : null;
+    blocks.push(
+      makeBlock({
+        id: "pattern",
+        titleKey: "report.an_pattern",
+        open: true,
+        conclusion: patternConclusion,
+        summary: chartInsightText(interpretation, ["pattern", "cach", "ge_ju"]),
+        factors: [cach !== MISSING ? cach : null, tong !== MISSING ? tong : null].filter(
+          Boolean
+        ),
+        rules: extractRules(scoped([pattern])),
+        evidence: extractEvidence(scoped([pattern])),
+        confidence: pickConfidence(scoped([pattern])),
+        knowledge: kRef,
+      })
+    );
+
+    var than = overview.than_strength || overview.than;
+    blocks.push(
+      makeBlock({
+        id: "than",
+        titleKey: "report.an_than",
+        open: true,
+        conclusion: than && than !== MISSING ? than : null,
+        summary: chartInsightText(interpretation, ["strength", "than", "body"]),
+        factors: than && than !== MISSING ? [than] : [],
+        rules: extractRules(scoped([pattern.than, pattern.strength])),
+        evidence: extractEvidence(scoped([pattern.than])),
+        confidence: pickConfidence(scoped([pattern.than, score])),
+        knowledge: kRef,
+      })
+    );
+
+    [
+      {
+        id: "dung",
+        titleKey: "report.an_dung",
+        value: overview.dung_than,
+        hints: ["useful", "dung", "yong"],
+        open: false,
+      },
+      {
+        id: "hy",
+        titleKey: "report.an_hy",
+        value: overview.hy_than,
+        hints: ["favor", "hy", "xi"],
+        open: false,
+      },
+      {
+        id: "ky",
+        titleKey: "report.an_ky",
+        value: overview.ky_than,
+        hints: ["unfavor", "ky", "ji", "avoid"],
+        open: false,
+      },
+    ].forEach(function (spec) {
+      var v = spec.value && spec.value !== MISSING ? spec.value : null;
+      blocks.push(
+        makeBlock({
+          id: spec.id,
+          titleKey: spec.titleKey,
+          open: spec.open,
+          conclusion: v,
+          summary: chartInsightText(interpretation, spec.hints),
+          factors: v
+            ? [v].concat(
+                overview.dieu_hau && overview.dieu_hau !== MISSING
+                  ? [overview.dieu_hau]
+                  : []
+              )
+            : [],
+          rules: extractRules(scoped([pattern.useful_god, pattern.dung_than])),
+          evidence: extractEvidence(scoped([pattern.useful_god])),
+          confidence: pickConfidence(scoped([pattern.useful_god])),
+          knowledge: kRef,
+        })
+      );
+    });
+
+    [
+      { id: "hop", titleKey: "report.rel_hop", keys: ["hop", "he", "combinations"] },
+      { id: "xung", titleKey: "report.rel_xung", keys: ["xung", "chong", "conflicts"] },
+      { id: "hinh", titleKey: "report.rel_hinh", keys: ["hinh"] },
+      { id: "hai", titleKey: "report.rel_hai", keys: ["hai"] },
+      { id: "pha", titleKey: "report.rel_pha", keys: ["pha"] },
+    ].forEach(function (rel) {
+      var raw = null;
+      for (var i = 0; i < rel.keys.length; i++) {
+        if (relations[rel.keys[i]] != null && relations[rel.keys[i]] !== "") {
+          raw = relations[rel.keys[i]];
+          break;
+        }
+      }
+      var text =
+        raw == null
+          ? null
+          : typeof raw === "string" || typeof raw === "number"
+            ? String(raw)
+            : JSON.stringify(raw);
+      blocks.push(
+        makeBlock({
+          id: rel.id,
+          titleKey: rel.titleKey,
+          open: false,
+          conclusion: text,
+          summary: null,
+          factors: text ? [text] : [],
+          rules: extractRules(scoped([])),
+          evidence: extractEvidence(scoped([])),
+          confidence: null,
+          knowledge: kRef,
+        })
+      );
+    });
+
+    var shensha = (ctx.shensha || [])
+      .map(function (s) {
+        if (s == null) return null;
+        if (typeof s === "string") return s;
+        return s.name || s.label || s.title || null;
+      })
+      .filter(Boolean);
+    blocks.push(
+      makeBlock({
+        id: "shensha",
+        titleKey: "report.an_shensha",
+        open: false,
+        conclusion: shensha.length ? shensha.join(" · ") : null,
+        summary: chartInsightText(interpretation, ["shen", "than_sat"]),
+        factors: shensha,
+        rules: extractRules(scoped([pattern.shensha, ctx.payload && ctx.payload.bazi])),
+        evidence: extractEvidence(scoped([pattern.shensha])),
+        confidence: pickConfidence(scoped([pattern.shensha])),
+        knowledge: kRef,
+      })
+    );
+
+    var priorityRules = extractRules([
+      pattern,
+      score,
+      knowledge,
+      ctx.payload && ctx.payload.priority_rules,
+    ]);
+    var priorityText = null;
+    if (knowledge && typeof knowledge === "object") {
+      if (knowledge.status != null) priorityText = String(knowledge.status);
+      else if (knowledge.message) priorityText = String(knowledge.message);
+    }
+    if (!priorityText && priorityRules.length) {
+      priorityText = priorityRules
+        .map(function (r) {
+          return r.name || r.reason;
+        })
+        .filter(Boolean)
+        .join(" · ");
+    }
+    var statusFactors = [];
+    if (knowledge && typeof knowledge === "object") {
+      Object.keys(knowledge).forEach(function (k) {
+        /* Hide engine-ish keys */
+        if (/engine|class|module|traceback/i.test(k)) return;
+        var val = knowledge[k];
+        if (val == null || typeof val === "object") return;
+        statusFactors.push(k + ": " + String(val));
+      });
+    }
+    blocks.push(
+      makeBlock({
+        id: "priority_knowledge",
+        titleKey: "report.an_priority_knowledge",
+        open: false,
+        conclusion: priorityText,
+        summary: null,
+        factors: statusFactors,
+        rules: priorityRules,
+        evidence: extractEvidence([knowledge, score]),
+        confidence: pickConfidence([knowledge, { confidence: interpConf }]),
+        knowledge: kRef || (knowledge ? { citation: null, link: "#tier-knowledge", status: null } : null),
+      })
+    );
+
+    return blocks;
+  }
+
   function tenGodSeries(pillars, scoreModel) {
     if (scoreModel && scoreModel.length && scoreModel[0].label !== "Thập thần") {
       return scoreModel;
@@ -559,6 +963,18 @@
         relations: relations,
         knowledge_status: knowledge,
         pattern: payload.pattern || null,
+        blocks: buildAnalysisBlocks({
+          elements: elements,
+          tenGods: tenGods,
+          overview: overview,
+          relations: relations,
+          shensha: (summary && summary.shensha) || [],
+          knowledge: knowledge,
+          pattern: payload.pattern || null,
+          score: score,
+          interpretation: interpretation,
+          payload: payload,
+        }),
       },
       interpretation: {
         confidence: interpretation.confidence != null ? present(interpretation.confidence) : MISSING,
