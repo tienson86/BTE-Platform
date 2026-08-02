@@ -11,6 +11,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
+from importlib import import_module
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,12 @@ from runtime.dependencies import (
     REQUIRED_DISTRIBUTIONS,
     check_required_packages,
     resolve_package_spec,
+)
+from runtime.diagnostics import (
+    build_startup_diagnostics,
+    format_dependency_table,
+    format_environment_report,
+    write_diagnostics_files,
 )
 
 
@@ -168,9 +175,29 @@ def check_python() -> CheckResult:
 
 
 def check_requirements() -> CheckResult:
-    """Verify required third-party packages are importable."""
-    ok, message, _results = check_required_packages()
-    return CheckResult(ok, message)
+    """Verify required third-party packages via Dependency Resolver V2."""
+    diag = build_startup_diagnostics()
+    write_diagnostics_files(diag)
+    if diag.dependencies.ok:
+        return CheckResult(True, diag.dependencies.summary)
+    message = (
+        diag.dependencies.summary
+        + "\n"
+        + format_dependency_table(diag.dependencies)
+    )
+    return CheckResult(False, message)
+
+
+def print_startup_diagnostics() -> None:
+    """Print environment + dependency diagnostics to stdout."""
+    diag = build_startup_diagnostics()
+    print("[Environment]")
+    print(format_environment_report(diag.environment))
+    print()
+    print("[Dependencies]")
+    print(diag.dependencies.summary)
+    print(format_dependency_table(diag.dependencies))
+    write_diagnostics_files(diag)
 
 
 def check_configuration() -> CheckResult:
@@ -514,7 +541,7 @@ def start_all(*, open_browser: bool = True) -> int:
         mark = "OK" if result.ok else "FAIL"
         print(f"[{mark}] {label}: {result.message}")
         if not result.ok:
-            print("\nStartup aborted.")
+            print("\nStartup aborted. See runtime/logs/startup_diagnostics_latest.txt")
             return 1
 
     env = load_environment()
