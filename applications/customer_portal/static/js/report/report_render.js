@@ -30,7 +30,9 @@
 
   function listOrMissing(items) {
     if (!items || !items.length) {
-      return '<p class="rpt-caption">' + esc(MISSING) + "</p>";
+      return (
+        '<p class="rpt-caption rpt-miss">' + esc(t("report.unavailable")) + "</p>"
+      );
     }
     return (
       "<ul class=\"rpt-list\">" +
@@ -52,20 +54,6 @@
       '<p class="rpt-caption">' +
       esc(t("report.unavailable")) +
       "</p></div>"
-    );
-  }
-
-  function metric(label, value, accent) {
-    return (
-      '<div class="rpt-metric' +
-      (accent ? " rpt-accent-" + accent : "") +
-      '">' +
-      '<div class="rpt-caption">' +
-      esc(label) +
-      "</div>" +
-      '<div class="rpt-metric-value">' +
-      esc(show(value)) +
-      "</div></div>"
     );
   }
 
@@ -198,10 +186,14 @@
       "</div>" +
       '<button type="button" class="secondary rpt-collapse-btn" data-rpt-collapse aria-expanded="' +
       (collapsed === "true" ? "false" : "true") +
+      '" aria-label="' +
+      esc(t("report.collapse_section")) +
       '">' +
       icon("chevron") +
       "</button></header>" +
-      '<div class="rpt-large-body">' +
+      '<div class="rpt-large-body" id="' +
+      esc(id) +
+      '-body">' +
       body +
       "</div></section>"
     );
@@ -272,58 +264,12 @@
     return tierWrap("tier-bazi", t("report.tier.bazi"), "pillar", body);
   }
 
-  function row(label, value) {
-    return (
-      '<div class="rpt-pillar-row"><span class="rpt-caption">' +
-      esc(label) +
-      '</span><span class="rpt-body">' +
-      esc(show(value)) +
-      "</span></div>"
-    );
-  }
-
   function renderCharts(model) {
     var body =
       window.BteMetrics && typeof window.BteMetrics.render === "function"
         ? window.BteMetrics.render(model)
         : '<p class="rpt-caption">' + esc(t("report.unavailable")) + "</p>";
     return tierWrap("tier-charts", t("report.tier.charts"), "chart", body);
-  }
-
-  function formatRelation(relations) {
-    var labels = [
-      { key: "hop", title: t("report.rel_hop") },
-      { key: "xung", title: t("report.rel_xung") },
-      { key: "hinh", title: t("report.rel_hinh") },
-      { key: "hai", title: t("report.rel_hai") },
-      { key: "pha", title: t("report.rel_pha") },
-    ];
-    var any = false;
-    var html = labels
-      .map(function (row) {
-        var v = relations && relations[row.key];
-        if (v == null) {
-          return (
-            '<div class="rpt-rel-row"><strong>' +
-            esc(row.title) +
-            '</strong><span class="rpt-caption">' +
-            esc(t("report.unavailable")) +
-            "</span></div>"
-          );
-        }
-        any = true;
-        var text =
-          typeof v === "object" ? JSON.stringify(v) : String(v);
-        return (
-          '<div class="rpt-rel-row"><strong>' +
-          esc(row.title) +
-          "</strong><span>" +
-          esc(text) +
-          "</span></div>"
-        );
-      })
-      .join("");
-    return { html: html, any: any };
   }
 
   function renderAnalysis(model) {
@@ -401,7 +347,9 @@
             esc(it.id) +
             '" data-rpt-nav="' +
             esc(it.id) +
-            '">' +
+            '"' +
+            (idx === 0 ? ' aria-current="true"' : "") +
+            ">" +
             icon(it.icon) +
             "<span>" +
             esc(t("report.tier." + it.key)) +
