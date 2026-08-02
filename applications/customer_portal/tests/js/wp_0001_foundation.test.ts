@@ -11,18 +11,18 @@ import {
   semanticSpacing,
   semanticTypography,
   themeColorCatalog,
-} from "../src/tokens";
+} from "../../src/tokens";
 import {
   applyThemeMode,
   getThemePalette,
   resolveThemeMode,
   toggleThemeMode,
-} from "../src/theme";
-import { resolveBreakpoint, spacingScaleFactor } from "../src/constants/breakpoints";
-import { layoutClassNames, sectionWidthClass } from "../src/layouts";
-import { cx } from "../src/utils/cx";
+} from "../../src/theme";
+import { resolveBreakpoint, spacingScaleFactor } from "../../src/constants/breakpoints";
+import { layoutClassNames, sectionWidthClass } from "../../src/layouts";
+import { cx } from "../../src/utils/cx";
 
-const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 
 function readCss(relativePath: string): string {
   return readFileSync(resolve(rootDir, relativePath), "utf8");
