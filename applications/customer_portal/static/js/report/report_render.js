@@ -476,7 +476,7 @@
         btn.setAttribute("aria-expanded", collapsed ? "true" : "false");
       });
     });
-    if (window.BteUI && BteUI.bindCollapsible) BteUI.bindCollapsible(root);
+    if (window.BteUI && window.BteUI.bindCollapsible) window.BteUI.bindCollapsible(root);
   }
 
   global.BteReportRender = {
