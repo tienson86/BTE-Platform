@@ -13,3 +13,5 @@ export const DARK_THEME_STYLES_ENTRY = "./themes/dark.css" as const;
 export const BASE_COMPONENTS_STYLES_ENTRY = "./components/base/index.css" as const;
 export const SHARED_COMPONENTS_STYLES_ENTRY = "./components/shared/index.css" as const;
 export const BUSINESS_COMPONENTS_STYLES_ENTRY = "./components/business/index.css" as const;
+export const NAVIGATION_COMPONENTS_STYLES_ENTRY =
+  "./components/navigation/index.css" as const;

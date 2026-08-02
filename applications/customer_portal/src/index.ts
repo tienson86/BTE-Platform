@@ -1,6 +1,6 @@
 /**
- * Commercial UI V3 — public API (WP-0001 … WP-0010).
- * Screens and business components are presentation-only.
+ * Commercial UI V3 — public API (WP-0001 … WP-0011).
+ * Screens and navigation components are presentation-only.
  */
 
 export * from "./tokens";
@@ -29,3 +29,4 @@ export const metricsWorkPackageId = "WP-0007" as const;
 export const explainableAnalysisWorkPackageId = "WP-0008" as const;
 export const consultationReportWorkPackageId = "WP-0009" as const;
 export const appendixWorkPackageId = "WP-0010" as const;
+export const navigationWorkPackageId = "WP-0011" as const;

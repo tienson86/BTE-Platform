@@ -10,3 +10,4 @@ export * from "./metrics";
 export * from "./explainable_analysis";
 export * from "./consultation_report";
 export * from "./appendix";
+export * from "./navigation";

@@ -1,0 +1,178 @@
+/**
+ * Commercial UI V3 — Final polish (WP-0012).
+ * Responsive, accessibility, print, motion, and performance refinements.
+ * Token-driven only. No visual redesign. No reading-order changes.
+ */
+
+/* —— Global reading comfort —— */
+
+html {
+  font-size: calc(100% * var(--type-scale));
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* —— Focus polish —— */
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* —— Long-form performance —— */
+
+.cui-biz-report-section,
+.cui-biz-analysis-section,
+.cui-biz-metric-section,
+.cui-chapter,
+.cui-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 32rem;
+}
+
+/* —— Navigation responsive shell (Pack 03 / Pack 06) —— */
+
+@media (min-width: 1280px) {
+  .cui-nav-reading-navigation {
+    display: grid;
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+    column-gap: calc(var(--space-block) * var(--space-scale));
+    row-gap: calc(var(--space-paragraph) * var(--space-scale));
+    align-items: start;
+  }
+
+  .cui-nav-skip-link {
+    grid-column: 1 / -1;
+  }
+
+  .cui-nav-reading-navigation__chrome {
+    position: sticky;
+    top: calc(var(--space-paragraph) * var(--space-scale));
+    max-height: calc(100vh - (var(--space-block) * var(--space-scale)));
+    overflow: auto;
+    gap: calc(var(--space-paragraph) * var(--space-scale));
+  }
+
+  .cui-nav-reading-navigation__divider {
+    display: none;
+  }
+
+  .cui-nav-reading-navigation__content,
+  .cui-nav-print-navigator,
+  .cui-nav-back-to-top {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 1279px) {
+  .cui-nav-reading-navigation__chrome {
+    gap: calc(var(--space-paragraph) * var(--space-scale));
+  }
+}
+
+@media (max-width: 767px) {
+  .cui-nav-reading-navigation__chrome {
+    gap: calc(var(--space-list) * var(--space-scale));
+  }
+
+  .cui-nav-skip-link {
+    min-height: var(--touch-target-min);
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* —— Surface / whitespace rhythm —— */
+
+.cui-report-sheet > * + * {
+  margin-top: calc(var(--space-section) * var(--space-scale));
+}
+
+.cui-prose {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+/* —— Print / A4 —— */
+
+@page {
+  size: A4;
+  margin: var(--print-margin);
+}
+
+@media print {
+  html {
+    font-size: 100%;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: var(--surface-report-paper);
+    color: var(--text-primary);
+  }
+
+  .cui-top-bar,
+  .cui-reading-rail,
+  .cui-page-footer,
+  .cui-nav-reading-navigation__chrome,
+  .cui-nav-reading-navigation__divider,
+  .cui-nav-back-to-top,
+  .cui-nav-skip-link {
+    display: none !important;
+  }
+
+  .cui-application-frame {
+    display: block;
+    min-height: 0;
+    background: transparent;
+  }
+
+  .cui-report-sheet,
+  .cui-nav-reading-navigation,
+  .cui-nav-reading-navigation__content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .cui-nav-print-navigator,
+  .cui-biz-print-header,
+  .cui-biz-print-footer {
+    display: block !important;
+  }
+
+  .cui-chapter,
+  .cui-biz-report-section,
+  .cui-biz-analysis-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cui-chapter + .cui-chapter,
+  .cui-biz-report-section + .cui-biz-report-section {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  a[href]::after {
+    content: none;
+  }
+}

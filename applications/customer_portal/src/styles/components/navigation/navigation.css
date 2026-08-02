@@ -1,0 +1,72 @@
+/**
+ * Commercial UI V3 — Navigation styles (WP-0011).
+ * Token-driven layout helpers + print presentation.
+ */
+
+.cui-nav-reading-navigation,
+.cui-nav-navigation-screen,
+.cui-nav-reading-rail,
+.cui-nav-table-of-contents,
+.cui-nav-scroll-spy,
+.cui-nav-reading-progress,
+.cui-nav-current-section,
+.cui-nav-jump-navigator,
+.cui-nav-anchor-navigation,
+.cui-nav-back-to-top,
+.cui-nav-reading-breadcrumb,
+.cui-nav-print-navigator {
+  width: 100%;
+}
+
+.cui-nav-reading-navigation__chrome {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-block) * var(--space-scale));
+  width: 100%;
+}
+
+.cui-nav-reading-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-inline) * var(--space-scale));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cui-nav-skip-link {
+  position: absolute;
+  inset-inline-start: calc(var(--space-paragraph) * var(--space-scale));
+  inset-block-start: calc(var(--space-paragraph) * var(--space-scale));
+  transform: translateY(-200%);
+  padding: calc(var(--space-inline) * var(--space-scale))
+    calc(var(--space-list) * var(--space-scale));
+  background: var(--surface-overlay);
+  color: var(--text-primary);
+  z-index: var(--z-focus);
+}
+
+.cui-nav-skip-link:focus {
+  transform: translateY(0);
+}
+
+@media print {
+  .cui-nav-reading-navigation__chrome,
+  .cui-nav-reading-navigation__divider,
+  .cui-nav-back-to-top,
+  .cui-nav-skip-link {
+    display: none;
+  }
+
+  .cui-nav-print-navigator {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-nav-skip-link,
+  .cui-nav-reading-navigation {
+    transition: none;
+    scroll-behavior: auto;
+  }
+}

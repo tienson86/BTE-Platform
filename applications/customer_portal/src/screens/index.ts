@@ -22,3 +22,6 @@ export type { ConsultationReportScreenProps } from "./ConsultationReportScreen";
 
 export { AppendixScreen } from "./AppendixScreen";
 export type { AppendixScreenProps } from "./AppendixScreen";
+
+export { NavigationScreen } from "./NavigationScreen";
+export type { NavigationScreenProps } from "./NavigationScreen";
