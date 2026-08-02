@@ -813,13 +813,73 @@
 
   function interpChapters(interpretation) {
     var map = [
-      { id: "highlights", titleKey: "report.ch_highlights", chapterIds: ["overview", "summary", "tong_quan"] },
-      { id: "career", titleKey: "report.ch_career", chapterIds: ["career", "su_nghiep"] },
-      { id: "wealth", titleKey: "report.ch_wealth", chapterIds: ["wealth", "tai_van"] },
-      { id: "marriage", titleKey: "report.ch_marriage", chapterIds: ["marriage", "hon_nhan"] },
-      { id: "health", titleKey: "report.ch_health", chapterIds: ["health", "suc_khoe"] },
-      { id: "personality", titleKey: "report.ch_personality", chapterIds: ["bazi", "personality", "five_elements", "ten_gods"] },
-      { id: "advice", titleKey: "report.ch_advice", chapterIds: ["conclusion", "recommendations", "useful_god"] },
+      {
+        id: "overview",
+        titleKey: "report.ch_overview",
+        number: 1,
+        chapterIds: ["overview", "summary", "tong_quan", "highlights"],
+      },
+      {
+        id: "personality",
+        titleKey: "report.ch_personality",
+        number: 2,
+        chapterIds: ["personality", "tinh_cach", "bazi", "five_elements", "ten_gods"],
+      },
+      {
+        id: "career",
+        titleKey: "report.ch_career",
+        number: 3,
+        chapterIds: ["career", "su_nghiep"],
+      },
+      {
+        id: "wealth",
+        titleKey: "report.ch_wealth",
+        number: 4,
+        chapterIds: ["wealth", "tai_van"],
+      },
+      {
+        id: "marriage",
+        titleKey: "report.ch_marriage",
+        number: 5,
+        chapterIds: ["marriage", "hon_nhan"],
+      },
+      {
+        id: "health",
+        titleKey: "report.ch_health",
+        number: 6,
+        chapterIds: ["health", "suc_khoe"],
+      },
+      {
+        id: "advice",
+        titleKey: "report.ch_advice",
+        number: 7,
+        chapterIds: [
+          "conclusion",
+          "recommendations",
+          "advice",
+          "useful_god",
+          "ket_luan",
+        ],
+      },
+      {
+        id: "classical",
+        titleKey: "report.ch_classical",
+        number: 8,
+        chapterIds: [
+          "classical",
+          "co_thu",
+          "cot_thu",
+          "cang_thu",
+          "books",
+          "bibliography",
+        ],
+      },
+      {
+        id: "references",
+        titleKey: "report.ch_references",
+        number: 9,
+        chapterIds: ["references", "citations", "reference", "sources"],
+      },
     ];
 
     var byId = {};
@@ -834,26 +894,137 @@
         byId[id] = {
           title: sec.title || sec.name || id,
           body: body ? String(body) : "",
+          callout: sec.callout || sec.insight || sec.caution || null,
+          citations: asList(sec.citations)
+            .concat(asList(sec.references))
+            .concat(asList(sec.evidence)),
+          knowledge: sec.knowledge_reference || sec.knowledge || null,
         };
       });
     }
 
-    return map.map(function (ch) {
-      var body = "";
+    function firstSentence(text) {
+      if (!text) return null;
+      var s = String(text)
+        .split(/[.!?。…]\s+|\n+/)
+        .map(function (x) {
+          return x.trim();
+        })
+        .filter(Boolean)[0];
+      return s || null;
+    }
+
+    function normalizeCitations(rawList) {
+      return (rawList || [])
+        .map(function (c) {
+          if (c == null) return null;
+          if (typeof c === "string") return { label: c, reference: null };
+          if (typeof c !== "object") return null;
+          var label =
+            c.label ||
+            c.text ||
+            c.title ||
+            c.name ||
+            c.citation ||
+            c.reference ||
+            null;
+          if (!label) return null;
+          return {
+            label: String(label),
+            reference: c.source || c.book || c.reference || null,
+          };
+        })
+        .filter(Boolean);
+    }
+
+    var chapters = map.map(function (ch) {
+      var hit = null;
       for (var i = 0; i < ch.chapterIds.length; i++) {
-        var hit = byId[ch.chapterIds[i]];
-        if (hit && hit.body) {
-          body = hit.body;
+        if (byId[ch.chapterIds[i]] && byId[ch.chapterIds[i]].body) {
+          hit = byId[ch.chapterIds[i]];
           break;
         }
       }
+      if (!hit && ch.id === "references") {
+        for (var j = 0; j < ch.chapterIds.length; j++) {
+          if (byId[ch.chapterIds[j]]) {
+            hit = byId[ch.chapterIds[j]];
+            break;
+          }
+        }
+      }
+      var body = hit && hit.body ? hit.body : "";
+      var citations = normalizeCitations(hit && hit.citations);
+      var callout = hit && hit.callout ? String(hit.callout) : null;
+      if (!callout && ch.id === "advice" && body) {
+        callout = firstSentence(body);
+      }
+      var available = !!body || (ch.id === "references" && citations.length > 0);
       return {
         id: ch.id,
+        number: ch.number,
         titleKey: ch.titleKey,
+        anchor: "interp-" + ch.id,
         body: body,
-        available: !!body,
+        summary: firstSentence(body),
+        callout: callout,
+        citations: citations,
+        knowledge: hit && hit.knowledge ? String(hit.knowledge) : null,
+        available: available,
       };
     });
+
+    var docRefs = normalizeCitations(
+      asList(interpretation && interpretation.references).concat(
+        asList(interpretation && interpretation.citations)
+      )
+    );
+    var refChapter = null;
+    for (var r = 0; r < chapters.length; r++) {
+      if (chapters[r].id === "references") {
+        refChapter = chapters[r];
+        break;
+      }
+    }
+    if (refChapter && docRefs.length) {
+      refChapter.citations = refChapter.citations.concat(docRefs);
+      refChapter.available = true;
+    }
+
+    return chapters;
+  }
+
+  function buildInterpretationDocument(interpretation) {
+    var chapters = interpChapters(interpretation);
+    var overview = null;
+    for (var i = 0; i < chapters.length; i++) {
+      if (chapters[i].id === "overview") {
+        overview = chapters[i];
+        break;
+      }
+    }
+    var availableCount = chapters.filter(function (c) {
+      return c.available;
+    }).length;
+    return {
+      chapters: chapters,
+      executive: {
+        available: !!(overview && overview.available),
+        summary: overview && overview.summary ? overview.summary : null,
+        callout: overview && overview.callout ? overview.callout : null,
+        body: overview && overview.body ? overview.body : null,
+      },
+      toc: chapters.map(function (c) {
+        return {
+          id: c.id,
+          anchor: c.anchor,
+          number: c.number,
+          titleKey: c.titleKey,
+          available: c.available,
+        };
+      }),
+      showToc: availableCount >= 2 || chapters.length >= 2,
+    };
   }
 
   function buildReportModel(data, options) {
