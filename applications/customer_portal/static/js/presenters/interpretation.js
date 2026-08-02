@@ -332,9 +332,31 @@
 
   function chapterCard(chapter, body, index) {
     var empty = isEmptyBody(body);
+    var title =
+      String(index + 1) + ". " + t(chapter.titleKey);
     var bodyHtml = empty
-      ? '<p class="muted">' + esc(t("interpretation.chapter_empty")) + "</p>"
-      : esc(body).replace(/\n/g, "<br>");
+      ? window.BteUI
+        ? BteUI.emptyState(t("interpretation.chapter_empty"), "")
+        : '<p class="muted">' + esc(t("interpretation.chapter_empty")) + "</p>"
+      : '<div class="bte-interp-body">' + esc(body).replace(/\n/g, "<br>") + "</div>";
+    if (window.BteUI && typeof BteUI.sectionCard === "function") {
+      return (
+        '<div data-section="' +
+        esc(chapter.id) +
+        '" id="interp-' +
+        esc(chapter.id) +
+        '">' +
+        BteUI.sectionCard({
+          id: "section-" + chapter.id,
+          title: title,
+          description: empty ? t("interpretation.chapter_empty") : "",
+          badge: empty ? "—" : "",
+          body: bodyHtml,
+          collapsed: empty || index > 2,
+        }) +
+        "</div>"
+      );
+    }
     return (
       '<article class="bte-card bte-interp-card' +
       (empty ? " bte-interp-empty" : "") +
