@@ -134,9 +134,10 @@
 }
 
 .rpt-metric-value {
-  font-size: 1.25rem;
+  font-size: var(--text-xl);
   font-weight: 750;
   color: var(--ink);
+  line-height: 1.2;
 }
 
 .rpt-metric-sm {
@@ -258,13 +259,6 @@
   color: var(--muted) !important;
   font-weight: 500 !important;
   font-style: italic;
-}
-
-.rpt-metric-value {
-  font-size: var(--text-xl);
-  font-weight: 750;
-  color: var(--ink);
-  line-height: 1.2;
 }
 
 .rpt-accent-day .rpt-metric-value,
@@ -894,7 +888,7 @@
 }
 
 .ax-conclusion-value {
-  font-size: 1.15rem;
+  font-size: var(--text-lg);
   font-weight: 750;
   color: var(--ink);
   line-height: 1.45;
@@ -904,8 +898,19 @@
   margin-bottom: var(--space-3);
 }
 
+.ax-body {
+  overflow: hidden;
+  max-height: 4000px;
+  opacity: 1;
+  transition: opacity 0.22s ease, max-height 0.22s ease;
+}
+
 .ax-block[data-collapsed="true"] .ax-body {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
 }
 
 .ax-section {
@@ -940,8 +945,7 @@
 }
 
 .ax-miss {
-  color: var(--muted) !important;
-  font-weight: 500 !important;
+  /* unified via .rpt-miss recipe */
 }
 
 .ax-footer {
