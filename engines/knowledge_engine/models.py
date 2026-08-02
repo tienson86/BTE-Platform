@@ -56,6 +56,9 @@ class KnowledgeRecord:
     confidence: float
     reference: str
     source_file: str = ""
+    chapter: str = ""
+    page: str = ""
+    citation_id: str = ""
 
     def keyword_tokens(self) -> list[str]:
         """Split keyword field into normalized search tokens."""
@@ -67,6 +70,14 @@ class KnowledgeRecord:
                 parts.append(token)
         return parts
 
+    def citation_fields(self) -> dict[str, str]:
+        """Return citation-related fields for Citation Engine consumers."""
+        return {
+            "reference": self.reference,
+            "chapter": self.chapter,
+            "page": self.page,
+            "citation_id": self.citation_id,
+        }
 
 @dataclass(slots=True)
 class RetrievalTraceEntry:
@@ -143,6 +154,9 @@ class KnowledgeResult:
                     "priority": hit.record.priority,
                     "confidence": hit.record.confidence,
                     "reference": hit.record.reference,
+                    "chapter": hit.record.chapter,
+                    "page": hit.record.page,
+                    "citation_id": hit.record.citation_id,
                     "source_file": hit.record.source_file,
                     "keyword_score": hit.keyword_score,
                     "condition_score": hit.condition_score,

@@ -52,6 +52,7 @@ class StructuredPrompt:
 
     sections: dict[str, PromptSection]
     metadata: dict[str, Any] = field(default_factory=dict)
+    appendix: str = ""
 
     def section(self, key: str) -> PromptSection | None:
         """Return one section by key."""
@@ -69,6 +70,9 @@ class StructuredPrompt:
             if not body:
                 body = "(none)"
             blocks.append(f"## {section.title}\n{body}")
+        appendix = str(self.appendix or "").strip()
+        if appendix:
+            blocks.append(appendix)
         return "\n\n".join(blocks).strip() + "\n"
 
     def to_dict(self) -> dict[str, Any]:
@@ -76,5 +80,6 @@ class StructuredPrompt:
         return {
             "sections": {key: section.to_dict() for key, section in self.sections.items()},
             "text": self.text,
+            "appendix": self.appendix,
             "metadata": dict(self.metadata),
         }

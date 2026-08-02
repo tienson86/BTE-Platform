@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import logging
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 
 from applications.api.dependencies import get_orchestrator
 from applications.api.routes._helpers import attach_presentation_metadata, run_birth_stage
-from applications.api.schemas.common import APIResponse, BirthRequest
+from applications.api.schemas.common import APIResponse, BirthRequest, DiscussionRequest
+from applications.api.services.knowledge_expert_service import KnowledgeExpertService
 from applications.api.services.orchestrator import OrchestratorService
+from engines.knowledge_engine import KnowledgePipeline
 
 router = APIRouter(tags=["engines"])
 logger = logging.getLogger(__name__)
@@ -142,15 +144,68 @@ def analyze_endpoint(
         gender=body.gender,
         timezone=body.timezone,
     )
+    payload = attach_presentation_metadata(data, body)
+    # Additive Knowledge Expert status — does not alter pipeline/narrative.
+    payload["knowledge_expert"] = KnowledgePipeline.portal_status()
     logger.info(
         "api.analyze response pattern_keys=%s interpretation_keys=%s section_count=%s",
-        sorted((data.get("pattern") or {}).keys()),
-        sorted((data.get("interpretation") or {}).keys()),
-        (data.get("interpretation") or {}).get("section_count", 0),
+        sorted((payload.get("pattern") or {}).keys()),
+        sorted((payload.get("interpretation") or {}).keys()),
+        (payload.get("interpretation") or {}).get("section_count", 0),
     )
     return APIResponse(
         success=True,
         message="Analyze OK",
-        data=attach_presentation_metadata(data, body),
+        data=payload,
+        request_id=getattr(request.state, "request_id", None),
+    )
+
+
+@router.post("/discussion", response_model=APIResponse)
+def discussion_endpoint(
+    request: Request,
+    body: DiscussionRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Knowledge Expert discussion endpoint (Evidence/Knowledge/Reasoning grounded)."""
+    questions = list(body.questions or [])
+    if body.question:
+        questions = [body.question, *questions]
+    if not questions:
+        raise HTTPException(status_code=422, detail="question or questions is required")
+
+    service = KnowledgeExpertService(orchestrator=orchestrator)
+    if len(questions) == 1:
+        data = service.discuss(
+            year=body.year,
+            month=body.month,
+            day=body.day,
+            hour=body.hour,
+            minute=body.minute,
+            gender=body.gender,
+            timezone=body.timezone,
+            question=questions[0],
+            show_citations=body.show_citations,
+        )
+        message = "Discussion OK"
+    else:
+        data = service.converse(
+            year=body.year,
+            month=body.month,
+            day=body.day,
+            hour=body.hour,
+            minute=body.minute,
+            gender=body.gender,
+            timezone=body.timezone,
+            questions=questions,
+            show_citations=body.show_citations,
+        )
+        message = "Discussion conversation OK"
+
+    payload = attach_presentation_metadata(data, body)
+    return APIResponse(
+        success=True,
+        message=message,
+        data=payload,
         request_id=getattr(request.state, "request_id", None),
     )

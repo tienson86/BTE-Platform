@@ -13,6 +13,8 @@ import logging
 import re
 from typing import Any, Mapping
 
+from engines.knowledge_engine.citation_engine import CitationEngine
+from engines.knowledge_engine.citation_models import CitationPackage
 from engines.knowledge_engine.evidence_models import (
     CATEGORY_LABELS,
     EvidenceItem,
@@ -70,6 +72,7 @@ _DEFAULT_WRITING_STYLE: tuple[str, ...] = (
     "Do not mention internal identifiers, file names, rule codes, or system engines.",
     "Avoid marketing language, fortune-telling hype, and emotional speculation.",
     "When uncertain, state the limit of evidence instead of forcing a conclusion.",
+    "Use Internal Sources for grounding only; do not show citations unless requested.",
 )
 
 
@@ -87,6 +90,8 @@ class PromptBuilder:
         knowledge: KnowledgeResult | Mapping[str, Any] | list[Any] | None = None,
         reasoning: ReasoningGraph | Mapping[str, Any] | None = None,
         chart: Mapping[str, Any] | Any | None = None,
+        citations: CitationPackage | None = None,
+        show_citations: bool = False,
     ) -> StructuredPrompt:
         """Build a structured prompt from evidence, knowledge, reasoning, and chart.
 
@@ -95,6 +100,10 @@ class PromptBuilder:
             knowledge: KnowledgeResult, mapping, or list of hits/records.
             reasoning: ReasoningGraph or mapping with nodes/edges/conclusions.
             chart: Chart mapping, object with ``to_dict``, or RuleContext-like dict.
+            citations: Optional prebuilt citation package. When omitted, citations
+                are derived from ``knowledge`` for internal AI grounding.
+            show_citations: When True, append a visible bibliography. Default False
+                keeps citations internal-only.
 
         Returns:
             ``StructuredPrompt`` with separated sections and redacted text.
@@ -104,6 +113,23 @@ class PromptBuilder:
         knowledge_lines = self._build_knowledge(knowledge)
         reasoning_lines = self._build_reasoning(reasoning)
         style_lines = [self._sanitize(line) for line in self._writing_style if line.strip()]
+
+        citation_package = citations
+        if citation_package is None and knowledge is not None:
+            citation_package = CitationEngine().build(knowledge)
+        appendix = ""
+        if citation_package is not None and citation_package.citations:
+            rendered = CitationEngine().render(
+                citation_package,
+                visible=bool(show_citations),
+            )
+            # Keep classical titles; strip CSV / engine residue from appendix text.
+            appendix = "\n".join(
+                self._sanitize(line) if not line.startswith("##") else line
+                for line in rendered.splitlines()
+            ).strip()
+            if appendix:
+                appendix += "\n"
 
         sections = {
             "facts": PromptSection("facts", PROMPT_SECTION_TITLES["facts"], facts_lines),
@@ -123,12 +149,15 @@ class PromptBuilder:
 
         prompt = StructuredPrompt(
             sections=sections,
+            appendix=appendix,
             metadata={
                 "section_keys": list(PROMPT_SECTION_KEYS),
                 "fact_count": len(facts_lines),
                 "evidence_count": len(evidence_lines),
                 "knowledge_count": len(knowledge_lines),
                 "reasoning_count": len(reasoning_lines),
+                "citation_count": len(citation_package.citations) if citation_package else 0,
+                "citations_visible": bool(show_citations),
                 "redaction_applied": True,
             },
         )
@@ -236,8 +265,7 @@ class PromptBuilder:
             keyword = self._sanitize(record.keyword)
             classical = self._sanitize(record.classical_text)
             modern = self._sanitize(record.modern_interpretation)
-            reference = self._sanitize(self._public_reference(record.reference))
-            # Intentionally omit record.id and source_file.
+            # Citations stay internal via CitationEngine; do not expose here.
             header = f"{index}. Topic: {topic}" if topic else f"{index}. Knowledge entry"
             lines.append(header)
             if keyword:
@@ -246,8 +274,6 @@ class PromptBuilder:
                 lines.append(f"   Classical: {classical}")
             if modern:
                 lines.append(f"   Modern: {modern}")
-            if reference:
-                lines.append(f"   Reference: {reference}")
             lines.append(f"   Confidence: {float(record.confidence):.2f}")
         return lines
 
@@ -404,6 +430,9 @@ class PromptBuilder:
                 confidence=float(item.get("confidence") or 0.0),
                 reference=str(item.get("reference") or ""),
                 source_file=str(item.get("source_file") or ""),
+                chapter=str(item.get("chapter") or ""),
+                page=str(item.get("page") or ""),
+                citation_id=str(item.get("citation_id") or ""),
             )
         return None
 

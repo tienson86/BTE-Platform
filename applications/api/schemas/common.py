@@ -27,11 +27,28 @@ class BirthRequest(BaseModel):
     customer_id: str | None = Field(
         None,
         description="Optional link to a future Customer Profile record.",
-        examples=["cust-001"],
     )
     metadata: dict[str, Any] | None = Field(
         default=None,
         description="Opaque customer/chart metadata for presentation layers.",
+    )
+
+
+class DiscussionRequest(BirthRequest):
+    """Additive Discussion / Knowledge Expert request (Epic 03 Milestone 10)."""
+
+    question: str | None = Field(
+        None,
+        description="Single discussion question (Why/How/Evidence/...).",
+        examples=["Why is Suitable Career favored?"],
+    )
+    questions: list[str] | None = Field(
+        default=None,
+        description="Optional multi-turn question list for converse mode.",
+    )
+    show_citations: bool = Field(
+        False,
+        description="When true, include visible bibliography in prompt grounding.",
     )
 
 
