@@ -116,17 +116,13 @@
     });
   }
 
-  function strengthGaugeValue(overview, score) {
+  function strengthGaugeValue(_overview, score) {
     var raw = pick(score || {}, [
       "strength_score",
       "body_strength_score",
       "than_score",
     ]);
     if (raw != null && Number.isFinite(Number(raw))) return Number(raw);
-    var label = present(overview && overview.than_strength);
-    if (/vượng|strong|旺/i.test(label)) return 78;
-    if (/nhu|weak|弱/i.test(label)) return 32;
-    if (/cân|balance|中/i.test(label)) return 55;
     return null;
   }
 
