@@ -1,9 +1,26 @@
 /**
- * Calendar presentation layer (Sprint 1).
- * Renders calendar JSON into cards — no business logic.
+ * Calendar presentation layer (Lịch Việt).
+ * Exactly 9 cards — no duplicated Feng Shui outside this tab.
  */
 (function (global) {
   const MISSING = "--";
+
+  const GUA_ELEMENT = {
+    Càn: "Kim",
+    Đoài: "Kim",
+    Doai: "Kim",
+    Cấn: "Thổ",
+    Gen: "Thổ",
+    Khôn: "Thổ",
+    Khon: "Thổ",
+    Chấn: "Mộc",
+    Chan: "Mộc",
+    Tốn: "Mộc",
+    Ton: "Mộc",
+    Ly: "Hỏa",
+    Khảm: "Thủy",
+    Kham: "Thủy",
+  };
 
   function t(key, vars) {
     return window.BteI18n ? BteI18n.t(key, vars) : key;
@@ -135,21 +152,67 @@
     return pieces.length ? pieces.join("\n") : MISSING;
   }
 
-  function formatField(cal, keys) {
-    if (!cal || typeof cal !== "object") return MISSING;
-    for (var i = 0; i < keys.length; i++) {
-      var value = cal[keys[i]];
-      if (value !== null && value !== undefined && value !== "") return present(value);
-    }
-    return MISSING;
-  }
-
   function formatTimezone(cal, options) {
     const opts = options || {};
     const fromCal =
       (cal && (cal.timezone || cal.tz || cal.time_zone)) || null;
     const fromOpts = opts.timezone || opts.tz || null;
     return present(fromCal || fromOpts || null);
+  }
+
+  function resolveBatTrach(options, cal) {
+    var bt =
+      window.BtePresenters && BtePresenters.resolveBatTrach
+        ? BtePresenters.resolveBatTrach((options && options.data) || {})
+        : null;
+    if (bt && (bt.cung_phi !== MISSING || bt.menh_quai !== MISSING || bt.nhom_trach !== MISSING)) {
+      return bt;
+    }
+    // Fallback: calendar-echoed fields only (never invent).
+    var cung =
+      (cal && (cal.cung_phi || cal.gua_name)) || null;
+    var menh =
+      (cal && (cal.menh_quai || cal.gua_name)) || null;
+    var nhom =
+      (cal && (cal.nhom_trach || cal.group)) || null;
+    return {
+      cung_phi: present(cung),
+      menh_quai: present(menh),
+      nhom_trach: present(nhom),
+    };
+  }
+
+  function guaElement(name) {
+    if (!name || name === MISSING) return MISSING;
+    var raw = String(name).trim();
+    if (GUA_ELEMENT[raw]) return GUA_ELEMENT[raw];
+    var key = Object.keys(GUA_ELEMENT).find(function (k) {
+      return raw.toLowerCase().indexOf(k.toLowerCase()) >= 0;
+    });
+    return key ? GUA_ELEMENT[key] : MISSING;
+  }
+
+  function formatCungMenh(bt) {
+    var cung = bt.cung_phi;
+    var menh = bt.menh_quai;
+    if (cung !== MISSING && menh !== MISSING && cung === menh) return cung;
+    if (cung !== MISSING && menh !== MISSING) return cung + " / " + menh;
+    if (cung !== MISSING) return cung;
+    if (menh !== MISSING) return menh;
+    return MISSING;
+  }
+
+  function formatNguHanhCung(bt) {
+    var name =
+      bt.menh_quai !== MISSING
+        ? bt.menh_quai
+        : bt.cung_phi !== MISSING
+          ? bt.cung_phi
+          : MISSING;
+    if (name === MISSING) return MISSING;
+    var el = guaElement(name);
+    if (el === MISSING) return name;
+    return name + " (" + el + ")";
   }
 
   function card(label, value, hint) {
@@ -171,7 +234,7 @@
 
   /**
    * @param {object|null|undefined} calendar - calendar JSON from analyze result
-   * @param {{ timezone?: string }} [options]
+   * @param {{ timezone?: string, data?: object }} [options]
    * @returns {string} HTML
    */
   function renderCalendar(calendar, options) {
@@ -185,8 +248,8 @@
       const no = t("common.no");
       const leapHint =
         leap === yes ? t("calendar.leap_yes_hint") : leap === no ? t("calendar.leap_no_hint") : "";
+      const bt = resolveBatTrach(options, cal);
 
-      // Julian Day is technical — hidden from customer Portal.
       return (
         '<section class="bte-calendar" aria-label="' + esc(t("calendar.title")) + '">' +
         '<header class="bte-calendar-head">' +
@@ -198,8 +261,9 @@
         card(t("calendar.lunar"), formatLunar(cal), t("calendar.hint_lunar")) +
         card(t("calendar.can_chi"), formatCanChi(cal)) +
         card(t("calendar.solar_term"), formatSolarTerm(cal), t("calendar.hint_term")) +
-        card(t("chart.cung_phi"), formatField(cal, ["cung_phi", "gua_name"])) +
-        card(t("chart.menh_quai"), formatField(cal, ["menh_quai", "gua_name"])) +
+        card(t("calendar.cung_menh"), formatCungMenh(bt)) +
+        card(t("calendar.ngu_hanh_cung"), formatNguHanhCung(bt)) +
+        card(t("chart.nhom_trach"), bt.nhom_trach) +
         card(t("calendar.timezone"), formatTimezone(cal, options), t("calendar.hint_tz")) +
         card(t("calendar.leap_month"), leap, leapHint) +
         "</div>" +
@@ -213,8 +277,9 @@
         card(t("calendar.lunar"), MISSING) +
         card(t("calendar.can_chi"), MISSING) +
         card(t("calendar.solar_term"), MISSING) +
-        card(t("chart.cung_phi"), MISSING) +
-        card(t("chart.menh_quai"), MISSING) +
+        card(t("calendar.cung_menh"), MISSING) +
+        card(t("calendar.ngu_hanh_cung"), MISSING) +
+        card(t("chart.nhom_trach"), MISSING) +
         card(t("calendar.timezone"), MISSING) +
         card(t("calendar.leap_month"), MISSING) +
         "</div>" +

@@ -78,7 +78,7 @@
         },
         calendar: data.calendar ? "present" : "missing",
         bazi: data.bazi ? "present" : "missing",
-        report: data.narrative ? "present" : "missing",
+        report: data.narrative || data.report ? "present" : "missing",
       };
     } catch (_) { /* ignore */ }
 
@@ -108,78 +108,72 @@
       meta.classList.add("result-meta-friendly");
     }
 
-    var chartHost = document.getElementById("chartInfoHost");
-    if (chartHost && window.BtePresenters && BtePresenters.chartHeader) {
-      chartHost.hidden = false;
-      chartHost.innerHTML = BtePresenters.chartHeader(data, {
-        input: input,
-        titleKey: "chart.info_title",
-      });
-    }
+    var STAGE_IDS = [
+      "basic",
+      "calendar",
+      "bazi",
+      "score",
+      "interpretation",
+      "discussion",
+    ];
 
     function show(stage) {
       document.querySelectorAll(".tab").forEach(function (tab) {
         tab.classList.toggle("active", tab.getAttribute("data-stage") === stage);
       });
-      var payload = data[stage];
       var presenters = window.BtePresenters || {};
       debugLog("ui_render_start", {
         stage: stage,
-        payload_keys: payload && typeof payload === "object" ? Object.keys(payload) : [],
+        payload_keys:
+          data[stage] && typeof data[stage] === "object"
+            ? Object.keys(data[stage])
+            : [],
       });
 
       var map = {
+        basic: presenters.basicInfo,
         calendar: presenters.calendar,
         bazi: presenters.bazi,
-        pattern: presenters.pattern,
         score: presenters.score,
         interpretation: presenters.interpretation,
-        narrative: presenters.narrative,
+        discussion: presenters.discussion,
       };
 
       if (map[stage]) {
         view.classList.remove("pre");
         view.classList.add("stage-view");
-        if (stage === "calendar") {
-          view.innerHTML = map[stage](payload, {
+        var html = "";
+        if (stage === "basic") {
+          html = map[stage](data, { input: input });
+        } else if (stage === "calendar") {
+          html = map[stage](data.calendar, {
             timezone: input.timezone || null,
+            data: data,
           });
-        } else if (stage === "narrative") {
-          var narrativeHtml = map[stage](payload);
-          var execHtml =
-            presenters.executive && data
-              ? presenters.executive(data, {
-                  input: input,
-                  chartTitleKey: "executive.basic",
-                  includeLunar: true,
-                })
-              : "";
-          view.innerHTML =
-            (execHtml || "") +
-            (execHtml ? '<hr class="bte-exec-page-break" />' : "") +
-            narrativeHtml;
+        } else if (stage === "bazi") {
+          html = map[stage](data.bazi, { data: data });
+        } else if (stage === "score") {
+          html = map[stage](data.score, { data: data, input: input });
+        } else if (stage === "interpretation") {
+          html = map[stage](data.interpretation, { data: data });
+        } else if (stage === "discussion") {
+          html = map[stage](data.narrative || data.report, { data: data, input: input });
         } else {
-          view.innerHTML = map[stage](payload);
+          html = map[stage](data[stage]);
         }
+        view.innerHTML = html;
         debugLog("ui_render_done", {
           stage: stage,
           rendered: true,
           html_length: (view.innerHTML || "").length,
         });
-        if (stage === "narrative" && presenters.bindNarrative) {
+        if (stage === "discussion" && presenters.bindNarrative) {
           presenters.bindNarrative(view);
         }
         return;
       }
 
-      if (
-        stage === "calendar" ||
-        stage === "bazi" ||
-        stage === "pattern" ||
-        stage === "score" ||
-        stage === "interpretation" ||
-        stage === "narrative"
-      ) {
+      if (STAGE_IDS.indexOf(stage) >= 0) {
         view.classList.remove("pre");
         view.classList.add("stage-view");
         view.innerHTML =
@@ -207,7 +201,7 @@
         show(btn.getAttribute("data-stage"));
       });
     });
-    show("calendar");
+    show("basic");
     BtePortal.showFlash(flash, t("result.showing_latest"), "success");
   }
 

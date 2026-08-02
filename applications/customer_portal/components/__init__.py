@@ -9,12 +9,12 @@ def stage_tabs(locale: str = DEFAULT_LOCALE) -> str:
     """Result stage tab buttons (labels from i18n)."""
     catalog = load_catalog(locale)
     stages = (
+        "basic",
         "calendar",
         "bazi",
-        "pattern",
         "score",
         "interpretation",
-        "narrative",
+        "discussion",
     )
     parts: list[str] = []
     for index, stage in enumerate(stages):

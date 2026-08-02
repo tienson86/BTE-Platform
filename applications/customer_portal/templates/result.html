@@ -1,14 +1,13 @@
 <div class="panel">
   <h1 data-i18n="result.title"></h1>
   <p class="muted" id="resultMeta" data-i18n="result.empty"></p>
-  <div id="chartInfoHost" class="bte-chart-header" hidden></div>
   <div class="tabs" id="stageTabs">
-    <button type="button" class="tab active" data-stage="calendar" data-i18n="stages.calendar"></button>
+    <button type="button" class="tab active" data-stage="basic" data-i18n="stages.basic"></button>
+    <button type="button" class="tab" data-stage="calendar" data-i18n="stages.calendar"></button>
     <button type="button" class="tab" data-stage="bazi" data-i18n="stages.bazi"></button>
-    <button type="button" class="tab" data-stage="pattern" data-i18n="stages.pattern"></button>
     <button type="button" class="tab" data-stage="score" data-i18n="stages.score"></button>
     <button type="button" class="tab" data-stage="interpretation" data-i18n="stages.interpretation"></button>
-    <button type="button" class="tab" data-stage="narrative" data-i18n="stages.narrative"></button>
+    <button type="button" class="tab" data-stage="discussion" data-i18n="stages.discussion"></button>
   </div>
   <div id="stageView" class="stage-view"></div>
   <div class="toolbar">
@@ -16,13 +15,14 @@
     <a class="btn secondary" href="/analyze" data-i18n="common.new_analyze"></a>
   </div>
 </div>
+<script src="/static/js/presenters/basic_info.js"></script>
 <script src="/static/js/presenters/calendar.js"></script>
 <script src="/static/js/presenters/bazi.js"></script>
-<script src="/static/js/presenters/pattern.js"></script>
 <script src="/static/js/presenters/score.js"></script>
 <script src="/static/js/presenters/interpretation.js"></script>
 <script src="/static/js/presenters/chart_info.js"></script>
 <script src="/static/js/presenters/summary_builder.js"></script>
 <script src="/static/js/presenters/executive.js"></script>
 <script src="/static/js/presenters/narrative.js"></script>
+<script src="/static/js/presenters/discussion.js"></script>
 <script src="/static/js/result.js"></script>
