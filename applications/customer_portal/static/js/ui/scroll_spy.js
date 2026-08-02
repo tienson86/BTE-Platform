@@ -15,7 +15,10 @@
 
     function setActive(id) {
       links.forEach(function (a) {
-        a.classList.toggle("is-active", a.getAttribute("data-rpt-nav") === id);
+        var on = a.getAttribute("data-rpt-nav") === id;
+        a.classList.toggle("is-active", on);
+        if (on) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
       });
     }
 
