@@ -37,7 +37,9 @@
 
   async function load() {
     if (!BtePortal.getToken()) {
-      view.textContent = t("profile.not_signed_in");
+      view.innerHTML = window.BteUI
+        ? BteUI.emptyState(t("profile.not_signed_in"), t("profile.go_login"))
+        : t("profile.not_signed_in");
       return;
     }
     try {
