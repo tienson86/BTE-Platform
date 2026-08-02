@@ -7,6 +7,7 @@
     const flash = document.getElementById("globalFlash");
     const form = document.getElementById("analyzeForm");
     const btn = document.getElementById("btnAnalyze");
+    const loading = document.getElementById("analyzeLoading");
 
     if (!window.BtePortal) {
       if (flash) {
@@ -18,6 +19,26 @@
     if (!form || !btn) {
       BtePortal.showFlash(flash, t("analyze.form_missing"), "error");
       return;
+    }
+
+    function clearFieldErrors() {
+      form.querySelectorAll(".field-error").forEach(function (el) {
+        el.hidden = true;
+        el.textContent = "";
+      });
+      form.querySelectorAll("[aria-invalid]").forEach(function (el) {
+        el.removeAttribute("aria-invalid");
+      });
+    }
+
+    function setFieldError(id, message) {
+      var input = document.getElementById(id);
+      var err = document.getElementById("err_" + id);
+      if (input) input.setAttribute("aria-invalid", "true");
+      if (err) {
+        err.hidden = false;
+        err.textContent = message;
+      }
     }
 
     function readInput() {
@@ -35,16 +56,36 @@
     }
 
     function validate(input) {
-      if (!input.full_name) return t("analyze.full_name_required");
-      if (!input.birth_place) return t("analyze.birth_place_required");
-      if (!Number.isFinite(input.year) || input.year < 1) return t("analyze.year_required");
+      clearFieldErrors();
+      var first = "";
+      if (!input.full_name) {
+        first = t("analyze.full_name_required");
+        setFieldError("full_name", first);
+      }
+      if (!input.birth_place) {
+        var placeMsg = t("analyze.birth_place_required");
+        setFieldError("birth_place", placeMsg);
+        if (!first) first = placeMsg;
+      }
+      if (!Number.isFinite(input.year) || input.year < 1) {
+        var yearMsg = t("analyze.year_required");
+        if (!first) first = yearMsg;
+      }
       if (!Number.isFinite(input.month) || input.month < 1 || input.month > 12) {
-        return t("analyze.month_range");
+        var monthMsg = t("analyze.month_range");
+        if (!first) first = monthMsg;
       }
       if (!Number.isFinite(input.day) || input.day < 1 || input.day > 31) {
-        return t("analyze.day_range");
+        var dayMsg = t("analyze.day_range");
+        if (!first) first = dayMsg;
       }
-      return "";
+      return first;
+    }
+
+    function setLoading(on) {
+      btn.disabled = on;
+      if (loading) loading.hidden = !on;
+      if (!on) btn.textContent = t("analyze.run");
     }
 
     function startFriendlyLoading() {
@@ -74,7 +115,7 @@
         return;
       }
 
-      btn.disabled = true;
+      setLoading(true);
       var loadingTimer = startFriendlyLoading();
 
       try {
@@ -90,7 +131,6 @@
         if (!saved) {
           throw new Error(t("analyze.failed"));
         }
-        // Confirm store is readable before navigate (same-tab sessionStorage).
         var verify = BtePortal.ResultStore.load();
         if (!verify || !verify.data) {
           throw new Error(t("analyze.failed"));
@@ -98,10 +138,9 @@
         window.location.assign("/result");
       } catch (err) {
         clearInterval(loadingTimer);
+        setLoading(false);
         const message = (err && err.message) || t("analyze.failed");
         BtePortal.showFlash(flash, message, "error");
-        btn.disabled = false;
-        btn.textContent = t("analyze.run");
       }
     }
 
