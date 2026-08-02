@@ -1,0 +1,44 @@
+{
+  "name": "@bte/design-system",
+  "private": true,
+  "version": "1.0.0",
+  "description": "BTE Platform shared Design System & Layout Foundation (UI Sprint 01)",
+  "type": "module",
+  "main": "./dist/bte-design-system.js",
+  "module": "./dist/bte-design-system.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/bte-design-system.js"
+    },
+    "./styles.css": "./src/styles/index.css",
+    "./tokens.css": "./src/styles/tokens.css"
+  },
+  "files": [
+    "dist",
+    "src/styles"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "dev": "vite build --watch"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.4.0"
+  }
+}
