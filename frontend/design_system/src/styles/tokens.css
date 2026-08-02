@@ -1,0 +1,155 @@
+/* BTE Design System — Color / Space / Type / Elevation tokens
+ * Single source of truth. Components must not hard-code hex values.
+ */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Brand */
+  --bte-color-primary: #2563eb;
+  --bte-color-primary-hover: #1d4ed8;
+  --bte-color-primary-soft: #eff6ff;
+  --bte-color-secondary: #475569;
+  --bte-color-secondary-soft: #f1f5f9;
+
+  /* Status */
+  --bte-color-success: #16a34a;
+  --bte-color-success-soft: #f0fdf4;
+  --bte-color-warning: #ea580c;
+  --bte-color-warning-soft: #fff7ed;
+  --bte-color-danger: #dc2626;
+  --bte-color-danger-soft: #fef2f2;
+  --bte-color-info: #4f46e5;
+  --bte-color-info-soft: #eef2ff;
+  --bte-color-neutral: #64748b;
+
+  /* Surfaces */
+  --bte-color-bg: #f8fafc;
+  --bte-color-bg-accent: #f1f5f9;
+  --bte-color-panel: #ffffff;
+  --bte-color-card: #ffffff;
+  --bte-color-line: #e2e8f0;
+  --bte-color-line-strong: #cbd5e1;
+  --bte-color-ink: #0f172a;
+  --bte-color-muted: #64748b;
+
+  /* Portal compat aliases (same values) */
+  --primary: var(--bte-color-primary);
+  --primary-hover: var(--bte-color-primary-hover);
+  --primary-soft: var(--bte-color-primary-soft);
+  --secondary: var(--bte-color-secondary);
+  --success: var(--bte-color-success);
+  --warning: var(--bte-color-warning);
+  --danger: var(--bte-color-danger);
+  --info: var(--bte-color-info);
+  --bg: var(--bte-color-bg);
+  --bg-accent: var(--bte-color-bg-accent);
+  --panel: var(--bte-color-panel);
+  --card: var(--bte-color-card);
+  --line: var(--bte-color-line);
+  --ink: var(--bte-color-ink);
+  --muted: var(--bte-color-muted);
+
+  /* Typography */
+  --bte-font-sans: "Segoe UI", "Inter", "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --bte-font-mono: "Cascadia Code", "SF Mono", Consolas, ui-monospace, monospace;
+  --bte-text-h1: 1.85rem;
+  --bte-text-h2: 1.45rem;
+  --bte-text-h3: 1.15rem;
+  --bte-text-subtitle: 1.05rem;
+  --bte-text-body: 1rem;
+  --bte-text-caption: 0.8125rem;
+  --bte-text-metric: 1.5rem;
+  --bte-text-label: 0.75rem;
+  --font: var(--bte-font-sans);
+
+  /* Spacing scale */
+  --bte-space-1: 0.25rem;
+  --bte-space-2: 0.5rem;
+  --bte-space-3: 0.75rem;
+  --bte-space-4: 1rem;
+  --bte-space-5: 1.25rem;
+  --bte-space-6: 1.5rem;
+  --bte-space-8: 2rem;
+  --bte-space-10: 2.5rem;
+  --bte-space-12: 3rem;
+  --space-1: var(--bte-space-1);
+  --space-2: var(--bte-space-2);
+  --space-3: var(--bte-space-3);
+  --space-4: var(--bte-space-4);
+  --space-5: var(--bte-space-5);
+  --space-6: var(--bte-space-6);
+  --space-8: var(--bte-space-8);
+  --space-10: var(--bte-space-10);
+
+  /* Radius / shadow / z */
+  --bte-radius-sm: 6px;
+  --bte-radius-md: 10px;
+  --bte-radius-lg: 14px;
+  --bte-radius-xl: 18px;
+  --radius: var(--bte-radius-md);
+  --radius-lg: var(--bte-radius-lg);
+  --radius-xl: var(--bte-radius-xl);
+  --bte-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --bte-shadow-md: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --bte-shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.1);
+  --shadow: var(--bte-shadow-md);
+  --shadow-lg: var(--bte-shadow-lg);
+
+  --bte-z-header: 40;
+  --bte-z-sidebar: 45;
+  --bte-z-dropdown: 60;
+  --bte-z-toast: 80;
+  --bte-z-modal: 100;
+  --bte-z-tooltip: 110;
+
+  --bte-header-h: 56px;
+  --bte-sidebar-w: 240px;
+  --bte-inspector-w: 320px;
+  --bte-content-max: 1200px;
+
+  --bte-motion-fast: 120ms;
+  --bte-motion-base: 180ms;
+  --bte-motion-slow: 280ms;
+  --bte-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bte-focus-ring: 0 0 0 3px color-mix(in srgb, var(--bte-color-primary) 28%, transparent);
+}
+
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+  --bte-color-primary: #60a5fa;
+  --bte-color-primary-hover: #93c5fd;
+  --bte-color-primary-soft: #172554;
+  --bte-color-secondary: #94a3b8;
+  --bte-color-secondary-soft: #1e293b;
+  --bte-color-success: #4ade80;
+  --bte-color-success-soft: #14532d;
+  --bte-color-warning: #fb923c;
+  --bte-color-warning-soft: #7c2d12;
+  --bte-color-danger: #fb7185;
+  --bte-color-danger-soft: #7f1d1d;
+  --bte-color-info: #a5b4fc;
+  --bte-color-info-soft: #312e81;
+  --bte-color-neutral: #94a3b8;
+  --bte-color-bg: #0b1220;
+  --bte-color-bg-accent: #111827;
+  --bte-color-panel: #111827;
+  --bte-color-card: #0f172a;
+  --bte-color-line: #1f2937;
+  --bte-color-line-strong: #334155;
+  --bte-color-ink: #e5e7eb;
+  --bte-color-muted: #94a3b8;
+  --bte-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --bte-shadow-md: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --bte-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --bte-motion-fast: 0ms;
+    --bte-motion-base: 0ms;
+    --bte-motion-slow: 0ms;
+  }
+}
