@@ -391,8 +391,8 @@
       : unavailable(t("report.knowledge_status"));
 
     var discussHtml = "";
-    if (window.BtePresenters && typeof BtePresenters.discussion === "function") {
-      discussHtml = BtePresenters.discussion(k.narrative, {
+    if (window.BtePresenters && typeof window.BtePresenters.discussion === "function") {
+      discussHtml = window.BtePresenters.discussion(k.narrative, {
         data: model.raw,
         input: model.input,
       });
