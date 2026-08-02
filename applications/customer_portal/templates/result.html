@@ -1,19 +1,16 @@
-<div class="panel">
-  <h1 data-i18n="result.title"></h1>
-  <p class="muted" id="resultMeta" data-i18n="result.empty"></p>
-  <div class="tabs" id="stageTabs">
-    <button type="button" class="tab active" data-stage="basic" data-i18n="stages.basic"></button>
-    <button type="button" class="tab" data-stage="calendar" data-i18n="stages.calendar"></button>
-    <button type="button" class="tab" data-stage="bazi" data-i18n="stages.bazi"></button>
-    <button type="button" class="tab" data-stage="score" data-i18n="stages.score"></button>
-    <button type="button" class="tab" data-stage="interpretation" data-i18n="stages.interpretation"></button>
-    <button type="button" class="tab" data-stage="discussion" data-i18n="stages.discussion"></button>
+<div class="panel result-workspace">
+  <div class="result-toolbar">
+    <div>
+      <h1 data-i18n="result.title"></h1>
+      <p class="muted" id="resultMeta" data-i18n="result.empty"></p>
+    </div>
+    <div class="toolbar" style="margin-top:0">
+      <a class="btn secondary" href="/reports" data-i18n="common.open_reports"></a>
+      <a class="btn secondary" href="/analyze" data-i18n="common.new_analyze"></a>
+    </div>
   </div>
-  <div id="stageView" class="stage-view"></div>
-  <div class="toolbar">
-    <a class="btn secondary" href="/reports" data-i18n="common.open_reports"></a>
-    <a class="btn secondary" href="/analyze" data-i18n="common.new_analyze"></a>
-  </div>
+  <div class="tabs ui-tabs" id="stageTabs" role="tablist" aria-label="Result stages"></div>
+  <div id="stageView" class="stage-view" role="tabpanel"></div>
 </div>
 <script src="/static/js/presenters/basic_info.js"></script>
 <script src="/static/js/presenters/calendar.js"></script>
