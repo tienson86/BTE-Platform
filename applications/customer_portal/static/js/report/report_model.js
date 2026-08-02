@@ -251,8 +251,8 @@
     var payload = data && typeof data === "object" ? data : {};
     var input = (options && options.input) || {};
     var summary =
-      window.BteSummaryBuilder && typeof BteSummaryBuilder.build === "function"
-        ? BteSummaryBuilder.build(payload, { input: input })
+      window.BteSummaryBuilder && typeof window.BteSummaryBuilder.build === "function"
+        ? window.BteSummaryBuilder.build(payload, { input: input })
         : null;
 
     var dm = (summary && summary.day_master) || {};
