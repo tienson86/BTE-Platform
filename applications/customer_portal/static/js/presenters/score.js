@@ -368,6 +368,20 @@
     return out;
   }
 
+  function wrapSection(title, body, opts) {
+    opts = opts || {};
+    if (window.BteUI && typeof BteUI.sectionCard === "function") {
+      return BteUI.sectionCard({
+        title: title,
+        description: opts.description || "",
+        badge: opts.badge || "",
+        body: body,
+        collapsed: !!opts.collapsed,
+      });
+    }
+    return sectionHead(title) + body;
+  }
+
   /**
    * @param {object|null|undefined} score
    * @param {{ data?: object }} [options]
@@ -435,26 +449,28 @@
         esc(t("score.subtitle")) +
         "</p>" +
         "</header>" +
-        sectionHead(t("score.section_overall")) +
-        overallBlock(data) +
-        sectionHead(t("score.section_categories")) +
-        categoryCards(data) +
-        sectionHead(t("score.section_checklist")) +
-        '<div class="bte-card bte-checklist-card">' +
-        summaryChecklist(gods, shensha) +
-        "</div>" +
-        sectionHead(t("score.section_strengths")) +
-        '<div class="bte-card">' +
-        bulletList(strengths, "score.empty_strengths") +
-        "</div>" +
-        sectionHead(t("score.section_weaknesses")) +
-        '<div class="bte-card">' +
-        bulletList(weaknesses, "score.empty_weaknesses") +
-        "</div>" +
-        sectionHead(t("score.section_recommendations")) +
-        '<div class="bte-card">' +
-        bulletList(recommendations, "score.empty_recommendations") +
-        "</div>" +
+        wrapSection(t("score.section_overall"), overallBlock(data)) +
+        wrapSection(t("score.section_categories"), categoryCards(data)) +
+        wrapSection(
+          t("score.section_checklist"),
+          '<div class="bte-checklist-card">' + summaryChecklist(gods, shensha) + "</div>",
+          { collapsed: true }
+        ) +
+        wrapSection(
+          t("score.section_strengths"),
+          bulletList(strengths, "score.empty_strengths"),
+          { collapsed: !strengths.length }
+        ) +
+        wrapSection(
+          t("score.section_weaknesses"),
+          bulletList(weaknesses, "score.empty_weaknesses"),
+          { collapsed: !weaknesses.length }
+        ) +
+        wrapSection(
+          t("score.section_recommendations"),
+          bulletList(recommendations, "score.empty_recommendations"),
+          { collapsed: !recommendations.length }
+        ) +
         "</section>"
       );
     } catch (_) {
