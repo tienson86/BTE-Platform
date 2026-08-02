@@ -944,10 +944,6 @@
   font-weight: 700;
 }
 
-.ax-miss {
-  /* unified via .rpt-miss recipe */
-}
-
 .ax-footer {
   padding-top: var(--space-3);
   border-top: 1px solid var(--line);
@@ -1185,7 +1181,7 @@
 
 .kw-insight {
   margin: 0.35rem 0 0;
-  font-size: 1.12rem;
+  font-size: var(--text-lg);
   font-weight: 700;
   line-height: 1.45;
   color: var(--ink);
@@ -1199,8 +1195,17 @@
   flex-shrink: 0;
 }
 
+.kw-body-wrap {
+  overflow: hidden;
+  max-height: 5000px;
+  opacity: 1;
+  transition: opacity 0.22s ease, max-height 0.22s ease;
+}
+
 .kw-block[data-collapsed="true"] .kw-body-wrap {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .kw-toolbar {
@@ -1278,8 +1283,7 @@
 }
 
 .kw-miss {
-  color: var(--muted);
-  font-style: italic;
+  /* unified via shared miss recipe */
 }
 
 .kw-empty {
