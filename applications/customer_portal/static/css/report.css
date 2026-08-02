@@ -66,12 +66,20 @@
   flex-direction: column;
   gap: var(--space-8);
   min-width: 0;
+  max-width: min(1100px, 100%);
 }
 
 .rpt-tier {
   scroll-margin-top: var(--space-5);
-  animation: rpt-fade-in 0.35s ease both;
+  animation: rpt-fade-in 0.32s ease both;
 }
+
+.rpt-tier:nth-child(1) { animation-delay: 0ms; }
+.rpt-tier:nth-child(2) { animation-delay: 40ms; }
+.rpt-tier:nth-child(3) { animation-delay: 80ms; }
+.rpt-tier:nth-child(4) { animation-delay: 120ms; }
+.rpt-tier:nth-child(5) { animation-delay: 160ms; }
+.rpt-tier:nth-child(6) { animation-delay: 200ms; }
 
 @keyframes rpt-fade-in {
   from { opacity: 0; transform: translateY(6px); }
@@ -236,6 +244,27 @@
   font-weight: 500 !important;
   color: var(--muted) !important;
   line-height: 1.35;
+}
+
+/* Shared unavailable / miss recipe (Sprint 07) */
+.rpt-miss,
+.ax-miss,
+.kw-miss,
+.mx-metric-miss,
+.fp-field-miss,
+.fp-cell-miss,
+.idoc-toc-miss,
+.idoc-empty {
+  color: var(--muted) !important;
+  font-weight: 500 !important;
+  font-style: italic;
+}
+
+.rpt-metric-value {
+  font-size: var(--text-xl);
+  font-weight: 750;
+  color: var(--ink);
+  line-height: 1.2;
 }
 
 .rpt-accent-day .rpt-metric-value,
