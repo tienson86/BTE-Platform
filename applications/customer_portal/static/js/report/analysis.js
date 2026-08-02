@@ -199,7 +199,7 @@
       '<article class="ax-block" data-component="AnalysisBlock" data-ax-id="' +
       esc(block.id) +
       '" data-collapsed="' +
-      open === "true" ? "false" : "true" +
+      (open === "true" ? "false" : "true") +
       '">' +
       AnalysisHeader(block, title) +
       '<div class="ax-conclusion">' +
