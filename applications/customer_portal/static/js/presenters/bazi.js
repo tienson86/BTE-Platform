@@ -641,6 +641,20 @@
     );
   }
 
+  function wrapSection(title, body, opts) {
+    opts = opts || {};
+    if (window.BteUI && typeof BteUI.sectionCard === "function") {
+      return BteUI.sectionCard({
+        title: title,
+        description: opts.description || "",
+        badge: opts.badge || "",
+        body: body,
+        collapsed: !!opts.collapsed,
+      });
+    }
+    return sectionHead(title) + body;
+  }
+
   /**
    * @param {object|null|undefined} bazi
    * @param {{ data?: object }} [options]
@@ -669,8 +683,7 @@
       var dmYy = dayMasterYinYang(data, dm);
       var cx = resolveCanXuong(full);
 
-      var summary =
-        sectionHead(t("bazi.section_summary")) +
+      var summaryBody =
         '<div class="bte-card-grid bte-bazi-summary-grid">' +
         summaryCard(t("bazi.day_master"), esc(dm), dmEl) +
         summaryCard(t("bazi.element"), esc(dmEl), dmEl) +
@@ -678,8 +691,7 @@
         summaryCard(t("bazi.can_xuong"), canXuongHtml(cx)) +
         "</div>";
 
-      var pillarsHtml =
-        sectionHead(t("bazi.section_pillars")) +
+      var pillarsBody =
         '<div class="bte-pillar-grid">' +
         PILLARS.map(function (spec, index) {
           return pillarCard(
@@ -712,8 +724,7 @@
       );
       var elementCounts = collectElementCounts(data, score);
 
-      var analysisHtml =
-        sectionHead(t("bazi.section_analysis")) +
+      var analysisBody =
         '<div class="bte-card-grid bte-bazi-analysis-grid">' +
         analysisCard(t("bazi.than_strength"), strength) +
         '<article class="bte-card bte-el-dist-card">' +
@@ -729,15 +740,13 @@
       var godsPresent = collectPresentGods(data, pillarObjs);
       var shenshaState = collectPresentShensha(data);
 
-      var tenGodsHtml =
-        sectionHead(t("bazi.section_ten_gods")) +
-        '<div class="bte-card bte-checklist-card">' +
+      var tenGodsBody =
+        '<div class="bte-checklist-card">' +
         checklistHtml(TEN_GOD_CATALOG, godsPresent, false) +
         "</div>";
 
-      var shenshaHtml =
-        sectionHead(t("bazi.section_shensha")) +
-        '<div class="bte-card bte-checklist-card">' +
+      var shenshaBody =
+        '<div class="bte-checklist-card">' +
         checklistHtml(SHENSHA_CATALOG, shenshaState.present, shenshaState.unknown) +
         "</div>";
 
@@ -753,11 +762,11 @@
         esc(t("bazi.subtitle")) +
         "</p>" +
         "</header>" +
-        summary +
-        pillarsHtml +
-        analysisHtml +
-        tenGodsHtml +
-        shenshaHtml +
+        wrapSection(t("bazi.section_summary"), summaryBody) +
+        wrapSection(t("bazi.section_pillars"), pillarsBody) +
+        wrapSection(t("bazi.section_analysis"), analysisBody) +
+        wrapSection(t("bazi.section_ten_gods"), tenGodsBody, { collapsed: true }) +
+        wrapSection(t("bazi.section_shensha"), shenshaBody, { collapsed: true }) +
         "</section>"
       );
     } catch (_) {
