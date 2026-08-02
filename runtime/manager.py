@@ -11,9 +11,14 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
-from importlib import import_module
 from pathlib import Path
 from typing import Any
+
+from runtime.dependencies import (
+    REQUIRED_DISTRIBUTIONS,
+    check_required_packages,
+    resolve_package_spec,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,16 +29,10 @@ SERVICES_CONFIG = ROOT / "configs" / "services.json"
 VERSION_FILE = ROOT / "VERSION"
 PORTAL_URL = "http://localhost:8081"
 
-REQUIRED_IMPORTS: tuple[str, ...] = (
-    "fastapi",
-    "uvicorn",
-    "pydantic",
-    "httpx",
-    "pandas",
-    "numpy",
-    "yaml",
-    "openpyxl",
-    "dateutil",
+# Backward-compatible alias: historical name listed import modules;
+# canonical source of truth is REQUIRED_DISTRIBUTIONS (pip names).
+REQUIRED_IMPORTS: tuple[str, ...] = tuple(
+    resolve_package_spec(name).import_name for name in REQUIRED_DISTRIBUTIONS
 )
 
 HEALTH_TIMEOUT_SEC = 45.0
@@ -170,21 +169,8 @@ def check_python() -> CheckResult:
 
 def check_requirements() -> CheckResult:
     """Verify required third-party packages are importable."""
-    missing: list[str] = []
-    for name in REQUIRED_IMPORTS:
-        try:
-            import_module(name)
-        except Exception:
-            missing.append(name)
-    if missing:
-        return CheckResult(
-            False,
-            "Missing packages: "
-            + ", ".join(missing)
-            + ". Install with: pip install -r requirements.txt "
-            "-r applications/requirements.txt",
-        )
-    return CheckResult(True, f"Required packages OK ({len(REQUIRED_IMPORTS)})")
+    ok, message, _results = check_required_packages()
+    return CheckResult(ok, message)
 
 
 def check_configuration() -> CheckResult:
