@@ -1,0 +1,53 @@
+/**
+ * Commercial UI V3 — Consultation Report business styles (WP-0009).
+ * Token-driven layout helpers + print presentation.
+ */
+
+.cui-biz-consultation-report,
+.cui-biz-report-container,
+.cui-biz-report-header,
+.cui-biz-report-section,
+.cui-biz-report-footer,
+.cui-biz-report-progress,
+.cui-biz-section-transition,
+.cui-biz-table-of-contents,
+.cui-biz-report-closing {
+  width: 100%;
+}
+
+.cui-biz-print-header,
+.cui-biz-print-footer {
+  display: none;
+}
+
+.cui-biz-section-transition {
+  padding-block: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+@media print {
+  .cui-biz-print-header,
+  .cui-biz-print-footer {
+    display: block;
+    width: 100%;
+  }
+
+  .cui-biz-table-of-contents,
+  .cui-biz-report-progress,
+  .cui-biz-section-transition {
+    break-inside: avoid;
+  }
+
+  .cui-biz-report-section {
+    break-before: page;
+  }
+
+  .cui-biz-report-section:first-of-type {
+    break-before: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-biz-consultation-report {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,34 @@
+/**
+ * Commercial UI V3 — Explainable Analysis business styles (WP-0008).
+ * Token-driven layout helpers only.
+ */
+
+.cui-biz-explainable-analysis-screen,
+.cui-biz-explainable-analysis,
+.cui-biz-analysis-section,
+.cui-biz-analysis-summary,
+.cui-biz-conclusion-panel,
+.cui-biz-explanation-panel,
+.cui-biz-evidence-panel,
+.cui-biz-rule-reference-panel,
+.cui-biz-knowledge-reference-panel {
+  width: 100%;
+}
+
+.cui-biz-explainable-analysis__blocks {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-section) * var(--space-scale));
+  width: 100%;
+}
+
+.cui-biz-explainable-transition {
+  width: 100%;
+  padding-block: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-biz-explainable-analysis-screen {
+    scroll-behavior: auto;
+  }
+}

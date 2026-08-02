@@ -1,5 +1,5 @@
 /**
- * Business Component Library — WP-0004 … WP-0007.
+ * Business Component Library — WP-0004 … WP-0009.
  * Composes Shared Components only. Presentation ViewModels only.
  */
 
@@ -93,3 +93,57 @@ export type { ConfidencePanelProps } from "./ConfidencePanel";
 
 export { BalancePanel } from "./BalancePanel";
 export type { BalancePanelProps } from "./BalancePanel";
+
+export { ExplainableAnalysis } from "./ExplainableAnalysis";
+export type { ExplainableAnalysisProps } from "./ExplainableAnalysis";
+
+export { AnalysisSection } from "./AnalysisSection";
+export type { AnalysisSectionProps } from "./AnalysisSection";
+
+export { ConclusionPanel } from "./ConclusionPanel";
+export type { ConclusionPanelProps } from "./ConclusionPanel";
+
+export { ExplanationPanel } from "./ExplanationPanel";
+export type { ExplanationPanelProps } from "./ExplanationPanel";
+
+export { EvidencePanel } from "./EvidencePanel";
+export type { EvidencePanelProps } from "./EvidencePanel";
+
+export { RuleReferencePanel } from "./RuleReferencePanel";
+export type { RuleReferencePanelProps } from "./RuleReferencePanel";
+
+export { KnowledgeReferencePanel } from "./KnowledgeReferencePanel";
+export type { KnowledgeReferencePanelProps } from "./KnowledgeReferencePanel";
+
+export { AnalysisSummary } from "./AnalysisSummary";
+export type { AnalysisSummaryProps } from "./AnalysisSummary";
+
+export { ConsultationReport } from "./ConsultationReport";
+export type { ConsultationReportProps } from "./ConsultationReport";
+
+export { ReportContainer } from "./ReportContainer";
+export type { ReportContainerProps } from "./ReportContainer";
+
+export { ReportHeader } from "./ReportHeader";
+export type { ReportHeaderProps } from "./ReportHeader";
+
+export { ReportSection } from "./ReportSection";
+export type { ReportSectionProps } from "./ReportSection";
+
+export { ReportFooter } from "./ReportFooter";
+export type { ReportFooterProps } from "./ReportFooter";
+
+export { ReportProgress } from "./ReportProgress";
+export type { ReportProgressProps } from "./ReportProgress";
+
+export { SectionTransition } from "./SectionTransition";
+export type { SectionTransitionProps } from "./SectionTransition";
+
+export { TableOfContents } from "./TableOfContents";
+export type { TableOfContentsProps } from "./TableOfContents";
+
+export { PrintHeader } from "./PrintHeader";
+export type { PrintHeaderProps } from "./PrintHeader";
+
+export { PrintFooter } from "./PrintFooter";
+export type { PrintFooterProps } from "./PrintFooter";

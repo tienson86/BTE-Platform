@@ -13,3 +13,9 @@ export type { ExecutiveInsightScreenProps } from "./ExecutiveInsightScreen";
 
 export { MetricsScreen } from "./MetricsScreen";
 export type { MetricsScreenProps } from "./MetricsScreen";
+
+export { ExplainableAnalysisScreen } from "./ExplainableAnalysisScreen";
+export type { ExplainableAnalysisScreenProps } from "./ExplainableAnalysisScreen";
+
+export { ConsultationReportScreen } from "./ConsultationReportScreen";
+export type { ConsultationReportScreenProps } from "./ConsultationReportScreen";
