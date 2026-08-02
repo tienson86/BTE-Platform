@@ -1,0 +1,55 @@
+/* BTE Portal — Base / typography / a11y */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--panel);
+  color: var(--ink);
+  padding: var(--space-2) var(--space-4);
+  z-index: calc(var(--z-modal) + 1);
+  border-radius: var(--radius-sm);
+}
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+a { color: var(--brand-2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-3);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+h1 { font-size: var(--text-2xl); font-weight: 700; }
+h2 { font-size: var(--text-xl); font-weight: 650; }
+h3 { font-size: var(--text-lg); font-weight: 600; }
+
+.muted { color: var(--muted); }
+.pre { white-space: pre-wrap; font-family: var(--mono); font-size: var(--text-sm); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+button, .btn, input, select, textarea {
+  font: inherit;
+}
