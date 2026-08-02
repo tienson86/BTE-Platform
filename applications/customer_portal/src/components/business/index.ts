@@ -1,5 +1,5 @@
 /**
- * Business Component Library — WP-0004 … WP-0009.
+ * Business Component Library — WP-0004 … WP-0010.
  * Composes Shared Components only. Presentation ViewModels only.
  */
 
@@ -147,3 +147,30 @@ export type { PrintHeaderProps } from "./PrintHeader";
 
 export { PrintFooter } from "./PrintFooter";
 export type { PrintFooterProps } from "./PrintFooter";
+
+export { AppendixContainer } from "./AppendixContainer";
+export type { AppendixContainerProps } from "./AppendixContainer";
+
+export { AppendixSummary } from "./AppendixSummary";
+export type { AppendixSummaryProps } from "./AppendixSummary";
+
+export { GlossarySection } from "./GlossarySection";
+export type { GlossarySectionProps } from "./GlossarySection";
+
+export { TerminologySection } from "./TerminologySection";
+export type { TerminologySectionProps } from "./TerminologySection";
+
+export { KnowledgeReferenceSection } from "./KnowledgeReferenceSection";
+export type { KnowledgeReferenceSectionProps } from "./KnowledgeReferenceSection";
+
+export { RuleReferenceSection } from "./RuleReferenceSection";
+export type { RuleReferenceSectionProps } from "./RuleReferenceSection";
+
+export { CitationSection } from "./CitationSection";
+export type { CitationSectionProps } from "./CitationSection";
+
+export { CreditsSection } from "./CreditsSection";
+export type { CreditsSectionProps } from "./CreditsSection";
+
+export { VersionInformation } from "./VersionInformation";
+export type { VersionInformationProps } from "./VersionInformation";

@@ -19,3 +19,6 @@ export type { ExplainableAnalysisScreenProps } from "./ExplainableAnalysisScreen
 
 export { ConsultationReportScreen } from "./ConsultationReportScreen";
 export type { ConsultationReportScreenProps } from "./ConsultationReportScreen";
+
+export { AppendixScreen } from "./AppendixScreen";
+export type { AppendixScreenProps } from "./AppendixScreen";

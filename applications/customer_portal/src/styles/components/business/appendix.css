@@ -1,0 +1,46 @@
+/**
+ * Commercial UI V3 — Appendix business styles (WP-0010).
+ * Token-driven layout helpers + print presentation.
+ */
+
+.cui-biz-appendix-screen,
+.cui-biz-appendix-container,
+.cui-biz-appendix-summary,
+.cui-biz-glossary-section,
+.cui-biz-terminology-section,
+.cui-biz-knowledge-reference-section,
+.cui-biz-rule-reference-section,
+.cui-biz-citation-section,
+.cui-biz-credits-section,
+.cui-biz-version-information {
+  width: 100%;
+}
+
+.cui-biz-terminology-item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-list) * var(--space-scale));
+  width: 100%;
+}
+
+@media print {
+  .cui-biz-appendix-screen {
+    width: 100%;
+  }
+
+  .cui-biz-glossary-section,
+  .cui-biz-terminology-section,
+  .cui-biz-knowledge-reference-section,
+  .cui-biz-rule-reference-section,
+  .cui-biz-citation-section,
+  .cui-biz-credits-section,
+  .cui-biz-version-information {
+    break-inside: avoid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-biz-appendix-screen {
+    scroll-behavior: auto;
+  }
+}
