@@ -8,6 +8,7 @@ import signal
 import subprocess
 import sys
 import time
+import traceback
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
@@ -176,7 +177,10 @@ def check_python() -> CheckResult:
 
 def check_requirements() -> CheckResult:
     """Verify required third-party packages via Dependency Resolver V2."""
+    # Single call site from start_all preflight (see Startup Call Graph).
+    print("STEP 5.3a: build_startup_diagnostics() [Dependency Resolver once]", flush=True)
     diag = build_startup_diagnostics()
+    print("STEP 5.3b: write_diagnostics_files()", flush=True)
     write_diagnostics_files(diag)
     if diag.dependencies.ok:
         return CheckResult(True, diag.dependencies.summary)
@@ -223,7 +227,7 @@ def check_configuration() -> CheckResult:
             )
     return CheckResult(
         True,
-        f"Config OK — {len(services)} services, version {read_version()}",
+        f"Config OK - {len(services)} services, version {read_version()}",
     )
 
 
@@ -470,7 +474,7 @@ def stop_service(spec: ServiceSpec) -> str:
         if health.running:
             return (
                 f"{spec.label}: health still OK but PID unknown "
-                f"(port {spec.port}) — stop manually"
+                f"(port {spec.port}) - stop manually"
             )
         return f"{spec.label}: already Down"
 
@@ -517,7 +521,7 @@ def wait_healthy(spec: ServiceSpec, timeout: float = HEALTH_TIMEOUT_SEC) -> Heal
         time.sleep(HEALTH_POLL_SEC)
     return HealthResult(
         False,
-        f"timeout after {timeout:.0f}s — {last.reason}",
+        f"timeout after {timeout:.0f}s - {last.reason}",
     )
 
 
@@ -527,70 +531,85 @@ def start_all(*, open_browser: bool = True) -> int:
 
     Returns process exit code (0 = success).
     """
+    print("STEP 5.1: ensure_dirs()", flush=True)
     ensure_dirs()
-    print("BTE Runtime — preflight")
-    print("-" * 40)
+    print("BTE Runtime - preflight", flush=True)
+    print("-" * 40, flush=True)
 
     checks = (
         ("Python", check_python),
         ("Requirements", check_requirements),
         ("Configuration", check_configuration),
     )
-    for label, fn in checks:
+    for index, (label, fn) in enumerate(checks, start=2):
+        print(f"STEP 5.{index}: preflight {label}", flush=True)
         result = fn()
         mark = "OK" if result.ok else "FAIL"
-        print(f"[{mark}] {label}: {result.message}")
+        print(f"[{mark}] {label}: {result.message}", flush=True)
         if not result.ok:
-            print("\nStartup aborted. See runtime/logs/startup_diagnostics_latest.txt")
-            print("If import_error: see runtime/logs/import_forensics_latest.txt")
+            print("\nStartup aborted. See runtime/logs/startup_diagnostics_latest.txt", flush=True)
+            print("If import_error: see runtime/logs/import_forensics_latest.txt", flush=True)
+            print(f"STEP STOP: preflight failed at {label}", flush=True)
             return 1
 
+    print("STEP 5.5: load_environment + load_services", flush=True)
     env = load_environment()
     services = load_services()
-    print("-" * 40)
-    print("Starting services...")
+    print("-" * 40, flush=True)
+    print("Starting services...", flush=True)
 
     for spec in services:
-        print(f"  → {spec.label} ({spec.base_url})")
+        print(f"STEP 5.6: start {spec.key}", flush=True)
+        print(f"  -> {spec.label} ({spec.base_url})", flush=True)
         try:
             _start_service(spec, env)
-        except Exception as exc:
-            print(f"FAIL starting {spec.label}: {exc}")
+        except Exception:
+            print(f"FAIL starting {spec.label}", flush=True)
+            traceback.print_exc()
+            print(f"STEP STOP: service start failed at {spec.key}", flush=True)
             return 1
 
-    print("Waiting for health...")
+    print("STEP 5.7: wait_healthy", flush=True)
+    print("Waiting for health...", flush=True)
     failed = False
     for spec in services:
         health = wait_healthy(spec)
         if health.running:
-            print(f"  ✓ {spec.label}: Running")
+            print(f"  OK {spec.label}: Running", flush=True)
         else:
             failed = True
-            print(f"  ✗ {spec.label}: Down")
-            print(f"    Reason: {health.reason}")
+            print(f"  FAIL {spec.label}: Down", flush=True)
+            print(f"    Reason: {health.reason}", flush=True)
 
     if failed:
-        print("\nStartup incomplete — see runtime/logs/ for details.")
+        print("\nStartup incomplete - see runtime/logs/ for details.", flush=True)
+        print("STEP STOP: health check failed", flush=True)
         return 1
 
     if open_browser:
-        from launcher.open_browser import open_portal
+        print("STEP 5.8: open_browser", flush=True)
+        try:
+            from launcher.open_browser import open_portal
 
-        open_portal(PORTAL_URL)
+            open_portal(PORTAL_URL)
+        except Exception:
+            print("WARN: open_browser failed (non-fatal)", flush=True)
+            traceback.print_exc()
 
     version = read_version()
-    print()
-    print(f"BTE Platform {version}")
+    print(flush=True)
+    print(f"BTE Platform {version}", flush=True)
     for spec in services:
-        print(f"{spec.label:<6} {spec.base_url}")
-    print("READY")
+        print(f"{spec.label:<6} {spec.base_url}", flush=True)
+    print("READY", flush=True)
+    print("STEP FINAL: READY", flush=True)
     return 0
 
 
 def stop_all() -> int:
     """Stop all managed services."""
     ensure_dirs()
-    print("BTE Runtime — stopping services")
+    print("BTE Runtime - stopping services")
     print("-" * 40)
     try:
         services = load_services()
@@ -607,7 +626,7 @@ def status_all() -> int:
     """Print Running/Down status for each service."""
     ensure_dirs()
     version = read_version()
-    print(f"BTE Platform {version} — status")
+    print(f"BTE Platform {version} - status")
     print("-" * 40)
     try:
         services = load_services()

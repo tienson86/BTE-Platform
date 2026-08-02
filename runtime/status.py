@@ -9,9 +9,23 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-_ROOT = Path(__file__).resolve().parents[1]
+_SCRIPT_DIR = Path(__file__).resolve().parent
+_ROOT = _SCRIPT_DIR.parent
+_SCRIPT_S = str(_SCRIPT_DIR)
 _ROOT_S = str(_ROOT)
-sys.path[:] = [p for p in sys.path if p != _ROOT_S]
+
+
+def _path_key(entry: str) -> str:
+    if not entry:
+        return entry
+    try:
+        return str(Path(entry).resolve())
+    except OSError:
+        return entry
+
+
+_SKIP = {_ROOT_S, _SCRIPT_S, str(_ROOT.resolve()), str(_SCRIPT_DIR.resolve())}
+sys.path[:] = [p for p in sys.path if _path_key(p) not in _SKIP]
 sys.path.insert(0, _ROOT_S)
 
 from runtime.manager import status_all  # noqa: E402

@@ -1,8 +1,8 @@
 """Shared sys.path bootstrap for Runtime entrypoints.
 
-Project root must be importable as ``runtime``, but putting the repo at
-``sys.path[0]`` can shadow third-party packages if a same-named folder/file
-exists. Preflight Dependency Resolver probes for that class of failure.
+``python runtime/*.py`` puts ``.../runtime`` on ``sys.path[0]``.
+That must be replaced by the repo root so third-party imports are not
+shadowed by top-level modules living under ``runtime/``.
 """
 
 from __future__ import annotations
@@ -17,17 +17,21 @@ def project_root() -> Path:
 
 
 def ensure_project_root_on_sys_path() -> Path:
-    """
-    Ensure the repository root is on ``sys.path`` for ``import runtime``.
-
-    Uses insert(0) so the local ``runtime`` package wins over any site
-    package with the same name. Dependency preflight must detect shadowing
-    of third-party import names (e.g. ``dateutil``) if they ever appear
-    under the project root.
-    """
-    root = project_root()
+    """Put repo root at ``sys.path[0]`` and remove the ``runtime/`` script dir."""
+    script_dir = Path(__file__).resolve().parent
+    root = script_dir.parent
     root_s = str(root)
-    # Keep a single occurrence at the front.
-    sys.path[:] = [p for p in sys.path if p != root_s]
+    script_s = str(script_dir)
+
+    def key(entry: str) -> str:
+        if not entry:
+            return entry
+        try:
+            return str(Path(entry).resolve())
+        except OSError:
+            return entry
+
+    skip = {root_s, script_s, str(root.resolve()), str(script_dir.resolve())}
+    sys.path[:] = [p for p in sys.path if key(p) not in skip]
     sys.path.insert(0, root_s)
     return root
