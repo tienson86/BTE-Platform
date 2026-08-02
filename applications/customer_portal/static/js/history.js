@@ -9,7 +9,9 @@
   function render() {
     const items = BtePortal.getHistory();
     if (!items.length) {
-      list.innerHTML = '<p class="muted">' + t("history.empty") + "</p>";
+      list.innerHTML = window.BteUI
+        ? BteUI.emptyState(t("history.empty"), t("common.new_analyze"))
+        : '<p class="muted">' + t("history.empty") + "</p>";
       return;
     }
     list.innerHTML = items
@@ -19,7 +21,7 @@
           [input.year, input.month, input.day].filter(Boolean).join("-") ||
           item.id;
         return (
-          '<div class="list-item">' +
+          '<div class="list-item bte-card">' +
           "<div><strong>" +
           label +
           '</strong><div class="muted">' +
