@@ -52,8 +52,9 @@
     if (!host) return;
     const hist = (BtePortal.getHistory() || []).slice(0, 10);
     if (!hist.length) {
-      host.innerHTML =
-        '<p class="muted dash-empty">' + esc(t("dashboard.no_recent")) + "</p>";
+      host.innerHTML = window.BteUI
+        ? BteUI.emptyState(t("dashboard.no_recent"), t("dashboard.analyze_new_hint"))
+        : '<p class="muted dash-empty">' + esc(t("dashboard.no_recent")) + "</p>";
       return;
     }
     host.innerHTML = hist
@@ -106,12 +107,15 @@
   }
 
   function statCard(label, value) {
+    if (window.BteUI && typeof BteUI.metricCard === "function") {
+      return BteUI.metricCard(label, present(value));
+    }
     return (
-      '<article class="bte-card dash-stat">' +
-      '<div class="bte-card-label">' +
+      '<article class="bte-card dash-stat ui-metric">' +
+      '<div class="bte-card-label ui-metric-label">' +
       esc(label) +
       "</div>" +
-      '<div class="bte-card-value">' +
+      '<div class="bte-card-value ui-metric-value">' +
       esc(present(value)) +
       "</div>" +
       "</article>"
