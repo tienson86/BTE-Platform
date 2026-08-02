@@ -1,5 +1,6 @@
 /**
- * Screens barrel — populated by screen Work Packages.
+ * Screens barrel — WP-0004+.
  */
 
-export {};
+export { ExecutiveSummaryScreen } from "./ExecutiveSummaryScreen";
+export type { ExecutiveSummaryScreenProps } from "./ExecutiveSummaryScreen";

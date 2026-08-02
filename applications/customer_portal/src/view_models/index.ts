@@ -1,5 +1,6 @@
 /**
- * View Models barrel — populated by later Work Packages.
+ * Presentation ViewModels — WP-0004+.
+ * Presentation-ready contracts only. No engine entities.
  */
 
-export {};
+export * from "./executive_summary";
