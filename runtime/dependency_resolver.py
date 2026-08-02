@@ -9,8 +9,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 from importlib import import_module
+from importlib import util as importlib_util
 from importlib.metadata import PackageNotFoundError, distribution, version
+from pathlib import Path
 from typing import Sequence
+import sys
 
 from runtime.dependency_policy import (
     PolicyRequirement,
@@ -147,6 +150,133 @@ def suggested_install_command(requirement: PolicyRequirement) -> str:
     return f'python -m pip install "{requirement.pip_token}"'
 
 
+def suggested_reinstall_command(requirement: PolicyRequirement) -> str:
+    """Suggested repair when distribution metadata exists but import fails."""
+    name = requirement.distribution
+    token = requirement.pip_token
+    return (
+        f'python -m pip uninstall -y {name} && '
+        f'python -m pip install "{token}"'
+    )
+
+
+def find_shadow_candidates(import_name: str) -> list[str]:
+    """
+    Find ``import_name.py`` / ``import_name/`` entries on ``sys.path``.
+
+    Earlier path entries win and can shadow a healthy site-packages install.
+    """
+    hits: list[str] = []
+    top = import_name.split(".", 1)[0]
+    for entry in sys.path:
+        base = Path(entry) if entry else Path.cwd()
+        try:
+            file_hit = base / f"{top}.py"
+            dir_hit = base / top
+            if file_hit.is_file():
+                hits.append(str(file_hit.resolve()))
+            if dir_hit.is_dir():
+                hits.append(str(dir_hit.resolve()))
+        except OSError:
+            continue
+    # Preserve order, drop duplicates
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for item in hits:
+        if item not in seen:
+            seen.add(item)
+            ordered.append(item)
+    return ordered
+
+
+def distribution_init_path(distribution_name: str, import_name: str) -> Path | None:
+    """Return expected ``<import>/__init__.py`` path from distribution metadata."""
+    try:
+        dist = distribution(distribution_name)
+    except PackageNotFoundError:
+        return None
+    top = import_name.split(".", 1)[0]
+    try:
+        located = Path(str(dist.locate_file(f"{top}/__init__.py")))
+    except Exception:
+        return None
+    return located if located.is_file() else None
+
+
+def probe_import(
+    import_name: str,
+    *,
+    distribution_name: str | None = None,
+) -> dict[str, object]:
+    """
+    Deep import probe for RCA: find_spec, origin, shadows, dist init path.
+    """
+    spec = importlib_util.find_spec(import_name)
+    shadows = find_shadow_candidates(import_name)
+    dist_init = (
+        distribution_init_path(distribution_name, import_name)
+        if distribution_name
+        else None
+    )
+    origin = spec.origin if spec is not None else None
+    shadowed = False
+    if origin and dist_init is not None:
+        try:
+            shadowed = Path(origin).resolve() != dist_init.resolve()
+        except OSError:
+            shadowed = False
+    elif shadows and dist_init is not None:
+        try:
+            dist_key = str(dist_init.parent.resolve())
+            shadowed = any(Path(s).resolve() != Path(dist_key) for s in shadows[:1])
+        except OSError:
+            shadowed = False
+
+    error: str | None = None
+    importable = False
+    module_file: str | None = None
+    try:
+        module = import_module(import_name)
+        importable = True
+        module_file = getattr(module, "__file__", None)
+    except Exception as exc:  # noqa: BLE001
+        error = f"{type(exc).__name__}: {exc}"
+
+    dist_importable = None
+    dist_error = None
+    if not importable and dist_init is not None and dist_init.is_file():
+        # Isolate package health from sys.path shadowing.
+        try:
+            isolated = importlib_util.spec_from_file_location(
+                f"_bte_probe_{import_name.replace('.', '_')}",
+                dist_init,
+            )
+            if isolated and isolated.loader:
+                mod = importlib_util.module_from_spec(isolated)
+                isolated.loader.exec_module(mod)
+                dist_importable = True
+            else:
+                dist_importable = False
+                dist_error = "spec_from_file_location failed"
+        except Exception as exc:  # noqa: BLE001
+            dist_importable = False
+            dist_error = f"{type(exc).__name__}: {exc}"
+
+    return {
+        "importable": importable,
+        "error": error,
+        "find_spec": spec is not None,
+        "origin": origin,
+        "module_file": module_file,
+        "shadows": shadows,
+        "shadowed": shadowed,
+        "distribution_init": str(dist_init) if dist_init else None,
+        "distribution_importable": dist_importable,
+        "distribution_error": dist_error,
+        "sys_path_head": list(sys.path[:8]),
+    }
+
+
 def _top_level_modules(dist_name: str) -> list[str]:
     """Read top-level import names from distribution metadata when present."""
     try:
@@ -276,15 +406,51 @@ class DependencyResolver:
                 resolve_source=names.source,
             )
 
-        import_error: str | None = None
-        importable = False
-        try:
-            import_module(names.import_name)
-            importable = True
-        except Exception as exc:  # noqa: BLE001 — classify honestly
-            import_error = f"{type(exc).__name__}: {exc}"
+        probe = probe_import(
+            names.import_name,
+            distribution_name=names.distribution,
+        )
+        importable = bool(probe["importable"])
+        reinstall = suggested_reinstall_command(
+            PolicyRequirement(
+                distribution=names.distribution,
+                specifier=requirement.specifier,
+                extras=requirement.extras,
+            )
+        )
 
         if not importable:
+            details: list[str] = []
+            if probe.get("error"):
+                details.append(str(probe["error"]))
+            if probe.get("shadowed") or (
+                probe.get("shadows")
+                and probe.get("distribution_init")
+                and str(probe["shadows"][0])
+                != str(Path(str(probe["distribution_init"])).parent)
+            ):
+                details.append(
+                    "possible sys.path shadowing: " + ", ".join(probe["shadows"][:3])  # type: ignore[index]
+                )
+            if probe.get("origin"):
+                details.append(f"find_spec.origin={probe['origin']}")
+            if probe.get("distribution_init"):
+                details.append(f"dist_init={probe['distribution_init']}")
+            if probe.get("distribution_importable") is True:
+                details.append(
+                    "distribution files import OK in isolation - fix sys.path/shadow"
+                )
+                suggested = (
+                    "Remove shadowing module from sys.path / project root, "
+                    f"then retry. sys.path head={probe.get('sys_path_head')}"
+                )
+            elif probe.get("distribution_importable") is False:
+                details.append(
+                    f"distribution isolated import failed: {probe.get('distribution_error')}"
+                )
+                suggested = reinstall
+            else:
+                suggested = reinstall
             return PackageDiagnosis(
                 package=names.distribution,
                 import_name=names.import_name,
@@ -292,7 +458,7 @@ class DependencyResolver:
                 required=requirement.specifier or "(any)",
                 status=DependencyStatus.IMPORT_ERROR,
                 suggested_command=suggested,
-                error=import_error,
+                error="; ".join(details) if details else "import failed",
                 distribution_found=True,
                 importable=False,
                 resolve_source=names.source,

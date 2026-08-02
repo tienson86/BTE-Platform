@@ -128,7 +128,11 @@ class TestCheckPackage:
         assert ok is False
         assert "pandas" in message
         assert "import_error" in message
-        assert "pip install" in message
+        assert (
+            "pip install" in message
+            or "sys.path" in message
+            or "shadow" in message.lower()
+        )
 
 
 class TestCheckRequirementsIntegration:

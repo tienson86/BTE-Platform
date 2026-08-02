@@ -16,6 +16,7 @@ from runtime.dependency_resolver import (
     DependencyStatus,
     PackageDiagnosis,
 )
+from runtime.import_forensics import write_import_forensics_from_diagnoses
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -242,6 +243,18 @@ def write_diagnostics_files(
     """Persist JSON + text diagnostics under runtime/logs."""
     target = log_dir or LOG_DIR
     target.mkdir(parents=True, exist_ok=True)
+
+    # Import Forensics V3 — durable evidence for even a single import_error.
+    forensics_paths = write_import_forensics_from_diagnoses(
+        diag.dependencies.packages,
+        log_dir=target,
+    )
+    if forensics_paths is not None:
+        diag.notes.append(
+            "Import forensics written: "
+            f"{forensics_paths[0].name} / {forensics_paths[1].name}"
+        )
+
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     json_path = target / f"startup_diagnostics_{stamp}.json"
     text_path = target / f"startup_diagnostics_{stamp}.txt"

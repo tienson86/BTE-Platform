@@ -112,8 +112,39 @@ On failure, `check_requirements()` prints:
 
 ---
 
-## 6. Related documents
+## 7. Import Forensics V3
+
+When any package status is `import_error`, Runtime also writes:
+
+| File | Role |
+|------|------|
+| `runtime/logs/import_forensics_latest.json` | Machine-readable forensic bundle |
+| `runtime/logs/import_forensics_latest.txt` | Human-readable forensic bundle |
+| `runtime/logs/import_forensics_<UTC>.*` | Run archive |
+
+Each record includes:
+
+1. `sys.executable`  
+2. Python version  
+3. CWD  
+4. Full `sys.path`  
+5. `find_spec()` payload  
+6. Distribution metadata (version, requires, top_level, locate_init)  
+7. `module.__file__` when partially available  
+8. Full traceback  
+9. Timestamp (UTC)  
+10. Platform information  
+11. Env: `PYTHONPATH`, `VIRTUAL_ENV`, `PYTHONHOME`, …  
+12. Dependency chain (e.g. `pandas → python-dateutil → dateutil`)
+
+Module: `runtime/import_forensics.py`.
+
+Goal: even a **single** transient ImportError leaves enough evidence for post-incident investigation.
+
+---
+
+## 8. Related documents
 
 - [runtime_startup_spec.md](runtime_startup_spec.md)
 - [runtime_dependency_policy.md](runtime_dependency_policy.md)
-- RCA (historical): `docs/reports/runtime_preflight_dependency_rca.md`
+- RCA L2: `docs/reports/runtime_dateutil_import_rca_l2.md`

@@ -120,6 +120,8 @@ Do not compare `pip` from Python A with Runtime from Python B.
 |----------|------|
 | Latest diagnostics (JSON) | `runtime/logs/startup_diagnostics_latest.json` |
 | Latest diagnostics (text) | `runtime/logs/startup_diagnostics_latest.txt` |
-| Per-run copies | `runtime/logs/startup_diagnostics_<UTC>.{json,txt}` |
+| Import forensics (JSON) | `runtime/logs/import_forensics_latest.json` |
+| Import forensics (text) | `runtime/logs/import_forensics_latest.txt` |
+| Per-run copies | `runtime/logs/startup_diagnostics_<UTC>.*`, `import_forensics_<UTC>.*` |
 | Service logs | `runtime/logs/*.log` |
 | PID files | `runtime/run/*.pid` |

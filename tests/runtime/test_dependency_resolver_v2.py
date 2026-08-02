@@ -124,6 +124,15 @@ class TestResolverDiagnosis:
         assert all(item.ok for item in results), results
         assert all(item.status is DependencyStatus.OK for item in results)
 
+    def test_probe_import_dateutil_healthy(self) -> None:
+        from runtime.dependency_resolver import probe_import
+
+        probe = probe_import("dateutil", distribution_name="python-dateutil")
+        assert probe["importable"] is True
+        assert probe["find_spec"] is True
+        assert probe["distribution_init"]
+        assert probe["shadowed"] is False
+
     def test_not_installed_status(self) -> None:
         resolver = DependencyResolver()
         req = PolicyRequirement(distribution="no-such-bte-pkg-xyz", specifier=">=1.0")

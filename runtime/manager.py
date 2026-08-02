@@ -542,6 +542,7 @@ def start_all(*, open_browser: bool = True) -> int:
         print(f"[{mark}] {label}: {result.message}")
         if not result.ok:
             print("\nStartup aborted. See runtime/logs/startup_diagnostics_latest.txt")
+            print("If import_error: see runtime/logs/import_forensics_latest.txt")
             return 1
 
     env = load_environment()
