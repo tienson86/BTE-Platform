@@ -350,13 +350,10 @@
 
   function renderKnowledge(model) {
     var k = model.knowledge || {};
-    var statusHtml = k.status
-      ? '<div class="rpt-knowledge-status"><div class="rpt-subtitle">' +
-        esc(t("report.knowledge_status")) +
-        '</div><pre class="rpt-pre">' +
-        esc(JSON.stringify(k.status, null, 2)) +
-        "</pre></div>"
-      : unavailable(t("report.knowledge_status"));
+    var workspaceHtml =
+      window.BteKnowledge && typeof window.BteKnowledge.render === "function"
+        ? window.BteKnowledge.render(model)
+        : unavailable(t("report.tier.knowledge"));
 
     var discussHtml = "";
     if (window.BtePresenters && typeof window.BtePresenters.discussion === "function") {
@@ -369,7 +366,7 @@
     }
 
     var body =
-      largeSection("knowledge-sources", t("report.knowledge_sources"), statusHtml) +
+      workspaceHtml +
       largeSection(
         "knowledge-expert",
         t("report.knowledge_expert"),
@@ -456,6 +453,9 @@
       typeof window.BteInterpretationDoc.bind === "function"
     ) {
       window.BteInterpretationDoc.bind(root);
+    }
+    if (window.BteKnowledge && typeof window.BteKnowledge.bind === "function") {
+      window.BteKnowledge.bind(root, root.__rptModel || null);
     }
   }
 
