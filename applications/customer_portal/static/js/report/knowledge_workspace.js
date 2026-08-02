@@ -481,6 +481,24 @@
         else if (kind === "rule") copyText(formatRules(block));
       });
     });
+
+    workspace.querySelectorAll(".kw-related-link").forEach(function (link) {
+      if (link.__kwBound) return;
+      link.__kwBound = true;
+      link.addEventListener("click", function (ev) {
+        var href = link.getAttribute("href") || "";
+        if (href.indexOf("#analysis-") === 0) {
+          var axId = href.slice("#analysis-".length);
+          var target =
+            document.querySelector('.ax-block[data-ax-id="' + axId + '"]') ||
+            document.getElementById("tier-analysis");
+          if (target) {
+            ev.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
+      });
+    });
   }
 
   global.BteKnowledge = {
