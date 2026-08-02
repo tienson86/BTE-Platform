@@ -12,15 +12,26 @@
   <script src="/static/js/i18n.js"></script>
   <script src="/static/js/result_store.js"></script>
   <script src="/static/js/api.js"></script>
+  <script src="/static/js/ui/components.js"></script>
+  <script src="/static/js/ui/module_registry.js"></script>
+  <script src="/static/js/ui/shell.js"></script>
 </head>
 <body>
-  <div class="shell">
-    <div class="top">
-      <div class="brand">BTE <span>Portal</span></div>
-      <nav class="nav">{{NAV}}</nav>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="app-brand" href="/dashboard">BTE <span>Portal</span></a>
+      <nav class="app-nav nav" aria-label="Primary">{{NAV}}</nav>
+      <div class="app-header-actions">
+        <button type="button" id="btnThemeToggle" class="secondary" aria-pressed="false">Dark</button>
+      </div>
+    </header>
+    <div class="app-main">
+      <div id="globalFlash" class="flash" role="status"></div>
+      <main id="mainContent">
+        {{CONTENT}}
+      </main>
     </div>
-    <div id="globalFlash" class="flash"></div>
-    {{CONTENT}}
   </div>
   <script>if (window.BteI18n) BteI18n.apply(document);</script>
 </body>
