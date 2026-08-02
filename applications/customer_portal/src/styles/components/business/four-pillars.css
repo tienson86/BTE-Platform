@@ -1,0 +1,64 @@
+/**
+ * Commercial UI V3 — Four Pillars business styles (WP-0005).
+ * Token-driven layout helpers only.
+ */
+
+.cui-biz-four-pillars {
+  width: 100%;
+}
+
+.cui-biz-four-pillars-chart,
+.cui-biz-chart-metadata,
+.cui-biz-chart-legend {
+  width: 100%;
+}
+
+.cui-biz-four-pillars-chart__grid {
+  width: 100%;
+}
+
+.cui-biz-pillar-column {
+  width: 100%;
+  min-width: 0;
+  outline: none;
+}
+
+.cui-biz-pillar-column:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.cui-biz-pillar-column[data-day-master="true"] {
+  /* Subtle Day Master emphasis via surface hierarchy only */
+  position: relative;
+}
+
+.cui-biz-pillar-header,
+.cui-biz-stem-cell,
+.cui-biz-branch-cell,
+.cui-biz-hidden-stems,
+.cui-biz-nayin,
+.cui-biz-life-stage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-biz-four-pillars-transition {
+  width: 100%;
+  padding-block: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+/* Tablet: 2 × 2 adaptive layout (Pack 03 / Pack 06) */
+@media (max-width: 1279px) and (min-width: 768px) {
+  .cui-biz-four-pillars-chart__grid.cui-base-grid[data-columns="4"],
+  .cui-biz-four-pillars-chart__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-biz-pillar-column {
+    transition: none;
+  }
+}

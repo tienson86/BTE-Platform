@@ -4,3 +4,4 @@
  */
 
 export * from "./executive_summary";
+export * from "./four_pillars";
