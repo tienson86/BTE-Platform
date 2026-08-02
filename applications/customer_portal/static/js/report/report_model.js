@@ -1027,6 +1027,299 @@
     };
   }
 
+  function buildKnowledgeWorkspace(payload, analysisBlocks, interpChapters) {
+    var blocks = [];
+    var ke =
+      payload.knowledge_expert && typeof payload.knowledge_expert === "object"
+        ? payload.knowledge_expert
+        : null;
+    var pattern =
+      payload.pattern && typeof payload.pattern === "object" ? payload.pattern : {};
+    var score =
+      payload.score && typeof payload.score === "object" ? payload.score : {};
+    var knowledgeRoot =
+      payload.knowledge && typeof payload.knowledge === "object"
+        ? payload.knowledge
+        : {};
+
+    function mapSourceType(raw) {
+      var s = String(raw || "unknown").toLowerCase();
+      if (s.indexOf("rule") !== -1) return "rule";
+      if (s.indexOf("classic") !== -1 || s.indexOf("book") !== -1 || s === "co_thu") {
+        return "classical";
+      }
+      if (s.indexOf("reason") !== -1) return "reasoning";
+      if (s.indexOf("status") !== -1) return "status";
+      return "unknown";
+    }
+
+    function mapEvidence(list) {
+      return asList(list)
+        .map(function (e) {
+          if (e == null) return null;
+          if (typeof e === "string") {
+            return {
+              label: e,
+              reason: null,
+              condition: null,
+              source_type: "unknown",
+              reference: null,
+            };
+          }
+          if (typeof e !== "object") return null;
+          var label =
+            e.label || e.text || e.claim || e.summary || e.body || e.name || null;
+          if (!label) return null;
+          return {
+            label: String(label),
+            reason: e.reason || e.why || null,
+            condition: e.condition || e.when || null,
+            source_type: mapSourceType(e.source_type || e.type),
+            reference: e.reference || e.source || e.citation || null,
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function mapRules(list) {
+      return asList(list)
+        .map(function (r) {
+          if (r == null) return null;
+          if (typeof r === "string") {
+            return {
+              name: r,
+              category: null,
+              priority: null,
+              description: null,
+            };
+          }
+          if (typeof r !== "object") return null;
+          var name =
+            r.display_name || r.name || r.title || r.rule_name || r.label || null;
+          /* Hide bare internal ids */
+          if (!name) return null;
+          if (/engine|traceback|classname/i.test(String(name))) return null;
+          return {
+            name: String(name),
+            category: r.category || r.group || r.family || null,
+            priority: r.priority != null ? r.priority : r.rank != null ? r.rank : null,
+            description: r.description || r.reason || r.explanation || null,
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function mapClassical(list) {
+      return asList(list)
+        .map(function (c) {
+          if (c == null) return null;
+          if (typeof c === "string") {
+            return {
+              book: c,
+              chapter: null,
+              section: null,
+              passage: null,
+              quote: null,
+            };
+          }
+          if (typeof c !== "object") return null;
+          var book =
+            c.book || c.title || c.name || c.work || c.classical || c.label || null;
+          if (!book && !c.quote && !c.excerpt) return null;
+          return {
+            book: book ? String(book) : null,
+            chapter: c.chapter || c.thien || null,
+            section: c.section || c.chuong || null,
+            passage: c.passage || c.doan || null,
+            quote: c.quote || c.excerpt || c.text || null,
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function mapRelated(raw) {
+      return asList(raw)
+        .map(function (x) {
+          if (!x || typeof x !== "object") return null;
+          var type = String(x.type || x.kind || "").toLowerCase();
+          var id = x.id || x.section_id || x.block_id || null;
+          if (!id) return null;
+          if (type === "analysis" || type === "tier-analysis") {
+            return {
+              type: "analysis",
+              id: String(id),
+              label: x.label || x.title || String(id),
+              href: "#analysis-" + id,
+            };
+          }
+          if (
+            type === "interpretation" ||
+            type === "interp" ||
+            type === "tier-interpretation"
+          ) {
+            return {
+              type: "interpretation",
+              id: String(id),
+              label: x.label || x.title || String(id),
+              href: "#interp-" + id,
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+    }
+
+    function pushBlock(raw, idx) {
+      if (!raw || typeof raw !== "object") return;
+      var insight =
+        raw.insight ||
+        raw.conclusion ||
+        raw.summary ||
+        raw.title ||
+        raw.label ||
+        null;
+      var evidence = mapEvidence(
+        raw.evidence || raw.evidences || raw.proofs || raw.claims
+      );
+      var rules = mapRules(raw.rules || raw.applied_rules || raw.rule_trace);
+      var classical = mapClassical(
+        raw.classical ||
+          raw.classical_references ||
+          raw.citations ||
+          raw.bibliography
+      );
+      var knowledgeRef =
+        raw.knowledge ||
+        raw.knowledge_reference ||
+        raw.knowledge_ref ||
+        raw.reference ||
+        null;
+      if (knowledgeRef && typeof knowledgeRef === "object") {
+        knowledgeRef =
+          knowledgeRef.title ||
+          knowledgeRef.label ||
+          knowledgeRef.name ||
+          null;
+      }
+      var confidence =
+        raw.confidence != null
+          ? raw.confidence
+          : raw.confidence_score != null
+            ? raw.confidence_score
+            : null;
+      var related = mapRelated(
+        raw.related ||
+          raw.related_sections ||
+          raw.related_analysis ||
+          raw.related_interpretation
+      );
+      if (
+        !insight &&
+        !evidence.length &&
+        !rules.length &&
+        !classical.length &&
+        !knowledgeRef &&
+        confidence == null
+      ) {
+        return;
+      }
+      blocks.push({
+        id: String(raw.id || raw.key || "kb-" + idx),
+        insight: insight ? String(insight) : null,
+        summary: raw.description ? String(raw.description) : null,
+        evidence: evidence,
+        rules: rules,
+        knowledge_ref: knowledgeRef ? String(knowledgeRef) : null,
+        classical: classical,
+        confidence: confidence,
+        related: related,
+        open: idx < 2,
+      });
+    }
+
+    var collections = []
+      .concat(asList(payload.knowledge_blocks))
+      .concat(asList(knowledgeRoot.blocks))
+      .concat(asList(knowledgeRoot.insights))
+      .concat(asList(ke && ke.blocks))
+      .concat(asList(ke && ke.insights))
+      .concat(asList(ke && ke.evidence_trace))
+      .concat(asList(payload.evidence_trace))
+      .concat(asList(payload.traceability));
+
+    collections.forEach(function (item, idx) {
+      pushBlock(item, idx);
+    });
+
+    /* Honest pattern/score trace block when explicit rules/evidence exist */
+    var patternRules = mapRules(pattern.rules || pattern.applied_rules);
+    var patternEvidence = mapEvidence(pattern.evidence || pattern.evidences);
+    var patternClassical = mapClassical(
+      pattern.classical || pattern.citations || payload.classical_references
+    );
+    if (patternRules.length || patternEvidence.length || patternClassical.length) {
+      var insight =
+        pattern.cach_cuc ||
+        pattern.pattern_name ||
+        pattern.insight ||
+        null;
+      blocks.push({
+        id: "pattern-trace",
+        insight: insight ? String(insight) : null,
+        summary: pattern.summary ? String(pattern.summary) : null,
+        evidence: patternEvidence,
+        rules: patternRules,
+        knowledge_ref: null,
+        classical: patternClassical,
+        confidence: pattern.confidence != null ? pattern.confidence : null,
+        related: mapRelated(pattern.related_sections),
+        open: blocks.length === 0,
+      });
+    }
+
+    /* Status-only knowledge_expert as last resort status block */
+    if (!blocks.length && ke) {
+      var statusFactors = [];
+      Object.keys(ke).forEach(function (k) {
+        if (/engine|class|module|traceback/i.test(k)) return;
+        var val = ke[k];
+        if (val == null || typeof val === "object") return;
+        statusFactors.push(k + ": " + String(val));
+      });
+      blocks.push({
+        id: "knowledge-status",
+        insight: ke.status != null ? String(ke.status) : null,
+        summary: ke.message ? String(ke.message) : null,
+        evidence: statusFactors.map(function (s) {
+          return {
+            label: s,
+            reason: null,
+            condition: null,
+            source_type: "status",
+            reference: null,
+          };
+        }),
+        rules: mapRules(ke.rules),
+        knowledge_ref: ke.citation || ke.reference || null,
+        classical: mapClassical(ke.classical || ke.citations),
+        confidence: ke.confidence != null ? ke.confidence : null,
+        related: mapRelated(ke.related_sections),
+        open: true,
+      });
+    }
+
+    var filters = {
+      source_types: ["rule", "classical", "reasoning", "status", "unknown"],
+    };
+
+    return {
+      blocks: blocks,
+      status: ke,
+      filters: filters,
+      hasExpert: true,
+    };
+  }
+
   function buildReportModel(data, options) {
     var payload = data && typeof data === "object" ? data : {};
     var input = (options && options.input) || {};
@@ -1074,6 +1367,25 @@
     if (wuxingScalar == null && summary && summary.wuxing && summary.wuxing.length === 1) {
       wuxingScalar = summary.wuxing[0].value;
     }
+
+    var analysisBlocks = buildAnalysisBlocks({
+      elements: elements,
+      tenGods: tenGods,
+      overview: overview,
+      relations: relations,
+      shensha: (summary && summary.shensha) || [],
+      knowledge: knowledge,
+      pattern: payload.pattern || null,
+      score: score,
+      interpretation: interpretation,
+      payload: payload,
+    });
+    var interpretationDocument = buildInterpretationDocument(interpretation);
+    var knowledgeWorkspace = buildKnowledgeWorkspace(
+      payload,
+      analysisBlocks,
+      interpretationDocument.chapters
+    );
 
     return {
       input: input,
@@ -1134,34 +1446,23 @@
         relations: relations,
         knowledge_status: knowledge,
         pattern: payload.pattern || null,
-        blocks: buildAnalysisBlocks({
-          elements: elements,
-          tenGods: tenGods,
-          overview: overview,
-          relations: relations,
-          shensha: (summary && summary.shensha) || [],
-          knowledge: knowledge,
-          pattern: payload.pattern || null,
-          score: score,
-          interpretation: interpretation,
-          payload: payload,
-        }),
+        blocks: analysisBlocks,
       },
-      interpretation: (function () {
-        var doc = buildInterpretationDocument(interpretation);
-        return {
-          confidence:
-            interpretation.confidence != null
-              ? present(interpretation.confidence)
-              : MISSING,
-          document: doc,
-          chapters: doc.chapters,
-        };
-      })(),
+      interpretation: {
+        confidence:
+          interpretation.confidence != null
+            ? present(interpretation.confidence)
+            : MISSING,
+        document: interpretationDocument,
+        chapters: interpretationDocument.chapters,
+      },
       knowledge: {
         status: knowledge,
         narrative: payload.narrative || payload.report || null,
         validation_hint: payload.knowledge_expert || null,
+        blocks: knowledgeWorkspace.blocks,
+        filters: knowledgeWorkspace.filters,
+        hasExpert: knowledgeWorkspace.hasExpert,
       },
       raw: payload,
     };
