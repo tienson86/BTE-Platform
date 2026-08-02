@@ -96,6 +96,95 @@
     });
   }
 
+  /** Prefer score series; else display-only pillar counts (Binding Index). */
+  function elementSeries(score, pillars, summaryWuxing) {
+    var fromScore = namedSeries(score, [
+      "wuxing_series",
+      "element_series",
+      "five_elements",
+      "ngu_hanh",
+      "wuxing",
+      "element_scores",
+      "wuxing_scores",
+    ]);
+    if (fromScore && fromScore.length) {
+      return { series: fromScore, source: "score" };
+    }
+    if (
+      Array.isArray(summaryWuxing) &&
+      summaryWuxing.length &&
+      summaryWuxing[0] &&
+      summaryWuxing[0].label !== "Ngũ hành"
+    ) {
+      return { series: summaryWuxing, source: "score" };
+    }
+    var counts = elementCountsFromPillars(pillars);
+    var has = counts.some(function (x) {
+      return Number(x.value) > 0;
+    });
+    return {
+      series: has ? counts : [],
+      source: has ? "pillars" : "none",
+    };
+  }
+
+  function namedSeries(obj, keys) {
+    if (!obj || typeof obj !== "object") return null;
+    for (var i = 0; i < keys.length; i++) {
+      var v = obj[keys[i]];
+      if (!v) continue;
+      if (Array.isArray(v) && v.length) {
+        var mapped = v
+          .map(function (it) {
+            if (it == null) return null;
+            if (typeof it === "number") return null;
+            if (typeof it === "string") return null;
+            var label = it.label || it.name || it.element || it.key;
+            var value = it.value != null ? it.value : it.score != null ? it.score : it.count;
+            if (label == null || value == null || !Number.isFinite(Number(value))) {
+              return null;
+            }
+            return { label: String(label), value: Number(value) };
+          })
+          .filter(Boolean);
+        if (mapped.length) return mapped;
+      }
+      if (typeof v === "object" && !Array.isArray(v)) {
+        var fromObj = Object.keys(v)
+          .map(function (k) {
+            var num = Number(v[k]);
+            if (!Number.isFinite(num)) return null;
+            return { label: k, value: num };
+          })
+          .filter(Boolean);
+        if (fromObj.length) return fromObj;
+      }
+    }
+    return null;
+  }
+
+  function chartInsightText(interpretation, idHints) {
+    var sections = (interpretation && interpretation.sections) || [];
+    if (!Array.isArray(sections)) return null;
+    for (var i = 0; i < sections.length; i++) {
+      var sec = sections[i];
+      if (!sec) continue;
+      var id = String(sec.id || sec.section || sec.name || "").toLowerCase();
+      var hit = idHints.some(function (h) {
+        return id.indexOf(h) !== -1;
+      });
+      if (!hit) continue;
+      var body =
+        sec.body || sec.text || sec.content || sec.summary || sec.description || "";
+      if (Array.isArray(body)) body = body.join(" ");
+      body = String(body || "").trim();
+      if (!body) continue;
+      var first = body.split(/[.!?。…]\s+|\n+/)[0].trim();
+      return first || null;
+    }
+    return null;
+  }
+
   function tenGodSeries(pillars, scoreModel) {
     if (scoreModel && scoreModel.length && scoreModel[0].label !== "Thập thần") {
       return scoreModel;
@@ -138,6 +227,81 @@
     return MISSING;
   }
 
+  /** Addendum A.2 / Localization L — display-only quality caption. */
+  function qualityVerdict(score, interpretation) {
+    var grade = pick(score || {}, ["grade", "quality", "quality_grade"]);
+    if (grade != null) {
+      var gradeNum = Number(grade);
+      if (Number.isFinite(gradeNum)) {
+        return qualityBandFromScore(gradeNum);
+      }
+      return {
+        mode: "grade",
+        available: true,
+        caption: t("report.quality_verdict.grade", { grade: String(grade) }),
+        band: null,
+      };
+    }
+    var total = pick(score || {}, ["total_score", "overall_score", "score"]);
+    if (total != null && Number.isFinite(Number(total))) {
+      return qualityBandFromScore(Number(total));
+    }
+    var conf = interpretation && interpretation.confidence;
+    if (conf != null && conf !== "") {
+      return {
+        mode: "confidence",
+        available: true,
+        caption: t("report.quality_verdict.confidence_only", {
+          value: String(conf),
+        }),
+        band: null,
+      };
+    }
+    return { mode: "unavailable", available: false, caption: null, band: null };
+  }
+
+  function qualityBandFromScore(score) {
+    var band = "mid";
+    if (score >= 70) band = "high";
+    else if (score < 40) band = "low";
+    return {
+      mode: "band",
+      available: true,
+      caption: t("report.quality_verdict." + band),
+      band: band,
+    };
+  }
+
+  /** Addendum A.3 — first recommendation only; never invent. */
+  function firstRecommendation(score, interpretation) {
+    var fromScore = extractList(score || {}, [
+      "recommendations",
+      "recommendation",
+    ]);
+    if (fromScore.length) return fromScore[0];
+
+    var chapters = interpChapters(interpretation);
+    var prefer = ["advice", "highlights"];
+    for (var p = 0; p < prefer.length; p++) {
+      for (var i = 0; i < chapters.length; i++) {
+        if (
+          chapters[i].id === prefer[p] &&
+          chapters[i].available &&
+          chapters[i].body
+        ) {
+          var first = String(chapters[i].body)
+            .split(/[.!?。…]\s+|\n+/)
+            .map(function (s) {
+              return s.trim();
+            })
+            .filter(Boolean)[0];
+          if (first) return first;
+        }
+      }
+    }
+    return null;
+  }
+
   function summarySentence(dm, overview) {
     var parts = [];
     if (dm && dm.stem && dm.stem !== MISSING) {
@@ -158,6 +322,33 @@
     return parts.join(" ");
   }
 
+  function splitTokens(raw) {
+    if (raw === null || raw === undefined || raw === "" || raw === MISSING) {
+      return [];
+    }
+    if (Array.isArray(raw)) {
+      return raw
+        .map(function (x) {
+          if (x == null || x === "") return null;
+          if (typeof x === "object") {
+            return x.name || x.label || x.stem || x.text || null;
+          }
+          return String(x).trim();
+        })
+        .filter(function (x) {
+          return x && x !== MISSING;
+        });
+    }
+    return String(raw)
+      .split(/[,;/|、]+/)
+      .map(function (s) {
+        return s.trim();
+      })
+      .filter(function (s) {
+        return s && s !== MISSING;
+      });
+  }
+
   function pillarColumns(pillars) {
     var labels = [
       t("executive.col_year"),
@@ -165,17 +356,31 @@
       t("executive.col_day"),
       t("executive.col_hour"),
     ];
+    var roleKeys = ["year", "month", "day", "hour"];
     return PILLAR_KEYS.map(function (_k, i) {
+      var hiddenRaw = pillars.tang_can && pillars.tang_can[i];
+      var tenGodRaw = pillars.thap_than && pillars.thap_than[i];
+      var tenGodList = splitTokens(tenGodRaw);
+      var isDay = i === 2;
       return {
         id: PILLAR_KEYS[i],
         label: labels[i],
-        isDay: i === 2,
+        role_key: roleKeys[i],
+        isDay: isDay,
         stem: present(pillars.stems && pillars.stems[i]),
         branch: present(pillars.branches && pillars.branches[i]),
-        hidden: present(pillars.tang_can && pillars.tang_can[i]),
-        ten_god: present(pillars.thap_than && pillars.thap_than[i]),
+        hidden: present(hiddenRaw),
+        hidden_list: splitTokens(hiddenRaw),
+        ten_god: present(tenGodRaw),
+        ten_god_list: tenGodList,
         chang_sheng: present(pillars.truong_sinh && pillars.truong_sinh[i]),
         nap_am: present(pillars.nap_am && pillars.nap_am[i]),
+        /* Thập thần = quan hệ với Nhật Chủ khi payload có; không suy diễn thêm. */
+        relation_to_day_master: isDay
+          ? t("bazi.day_master")
+          : tenGodList.length
+            ? tenGodList.join(" · ")
+            : MISSING,
       };
     });
   }
@@ -266,11 +471,34 @@
 
     var strengths = extractList(score, ["strengths", "uu_diem", "pros"]);
     var weaknesses = extractList(score, ["weaknesses", "nhuoc_diem", "cons", "warnings"]);
-    var elements = elementCountsFromPillars(pillars);
-    var tenGods = tenGodSeries(pillars, (summary && summary.ten_gods) || []);
+    var elementPack = elementSeries(score, pillars, summary && summary.wuxing);
+    var elements = elementPack.series;
+    var tenGodsFromScore = namedSeries(score, [
+      "ten_god_series",
+      "ten_gods",
+      "thap_than",
+      "ten_god_scores",
+      "shi_shen",
+    ]);
+    var tenGods = tenGodSeries(
+      pillars,
+      tenGodsFromScore || (summary && summary.ten_gods) || []
+    );
+    var tenGodSource =
+      tenGodsFromScore && tenGodsFromScore.length
+        ? "score"
+        : tenGods.length
+          ? "pillars"
+          : "none";
     var gauge = strengthGaugeValue(overview, score);
     var relations = relationsUnavailable(payload);
     var knowledge = payload.knowledge_expert || null;
+    var quality = qualityLabel(score, interpretation);
+    var thanLabel = present(overview.than_strength || overview.than);
+    var wuxingScalar = pick(score, ["wuxing_score"]);
+    if (wuxingScalar == null && summary && summary.wuxing && summary.wuxing.length === 1) {
+      wuxingScalar = summary.wuxing[0].value;
+    }
 
     return {
       input: input,
@@ -279,22 +507,49 @@
         day_master: present(dm.stem),
         element: present(dm.element),
         yin_yang: present(dm.yin_yang),
-        than: present(overview.than_strength || overview.than),
+        than: thanLabel,
         strengths: strengths,
         weaknesses: weaknesses,
         dung_than: present(overview.dung_than),
         hy_than: present(overview.hy_than),
         ky_than: present(overview.ky_than),
         cach_cuc: present(overview.cach_cuc),
-        quality: qualityLabel(score, interpretation),
+        quality: quality,
+        quality_verdict: qualityVerdict(score, interpretation),
+        first_recommendation: firstRecommendation(score, interpretation),
         sentence: summarySentence(dm, overview),
       },
       pillars: pillarColumns(pillars),
       charts: {
         elements: elements,
+        elements_source: elementPack.source,
         ten_gods: tenGods,
+        ten_gods_source: tenGodSource,
         strength_gauge: gauge,
-        wuxing_score: summary && summary.wuxing,
+        than_label: thanLabel,
+        quality: quality,
+        wuxing_score:
+          wuxingScalar != null && Number.isFinite(Number(wuxingScalar))
+            ? Number(wuxingScalar)
+            : null,
+        insights: {
+          elements: chartInsightText(interpretation, [
+            "five_element",
+            "ngu_hanh",
+            "wuxing",
+            "element",
+          ]),
+          strength: chartInsightText(interpretation, [
+            "strength",
+            "than",
+            "body",
+          ]),
+          ten_gods: chartInsightText(interpretation, [
+            "ten_god",
+            "thap_than",
+            "shi_shen",
+          ]),
+        },
       },
       analysis: {
         elements: elements,
