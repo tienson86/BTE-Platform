@@ -73,7 +73,15 @@
 
     return (
       '<div class="rpt-chart rpt-chart-radar">' +
-      '<svg viewBox="0 0 200 200" role="img" aria-label="Radar">' +
+      '<svg viewBox="0 0 200 200" role="img" aria-label="' +
+      esc(
+        items
+          .map(function (it) {
+            return it.label + " " + it.value;
+          })
+          .join(", ")
+      ) +
+      '" tabindex="0">' +
       grid +
       '<polygon class="rpt-radar-fill" points="' +
       dataPts.join(" ") +
@@ -138,8 +146,8 @@
     return (
       '<div class="rpt-chart rpt-chart-gauge">' +
       '<svg viewBox="0 0 140 90" role="img" aria-label="' +
-      esc(label) +
-      '">' +
+      esc(label + " " + Math.round(n)) +
+      '" tabindex="0">' +
       '<path class="rpt-gauge-track" d="' +
       track +
       '" fill="none" stroke-width="10" stroke-linecap="round"/>' +
@@ -169,13 +177,23 @@
     });
     if (max <= 0) max = 1;
     return (
-      '<div class="rpt-chart rpt-chart-bars">' +
+      '<div class="rpt-chart rpt-chart-bars" role="list" aria-label="' +
+      esc(
+        items
+          .map(function (it) {
+            return it.label + " " + it.value;
+          })
+          .join(", ")
+      ) +
+      '" tabindex="0">' +
       items
         .map(function (it) {
           var v = Math.abs(Number(it.value) || 0);
           var pct = Math.round((v / max) * 100);
           return (
-            '<div class="rpt-bar-row">' +
+            '<div class="rpt-bar-row" role="listitem" title="' +
+            esc(it.label + ": " + it.value) +
+            '">' +
             '<span class="rpt-caption">' +
             esc(it.label) +
             "</span>" +
