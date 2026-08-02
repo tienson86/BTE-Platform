@@ -28,7 +28,7 @@
   }
 
   function displayOrUnavailable(value) {
-    return unavailable(value) ? t("report.unavailable") : String(value);
+    return unavailable(value) ? MISSING : String(value);
   }
 
   function StemBadge(stem, isDay) {
@@ -78,8 +78,8 @@
         '<div class="fp-hidden" data-component="HiddenStemGroup">' +
         '<span class="fp-field-label">' +
         esc(t("bazi.hidden")) +
-        '</span><span class="fp-chip fp-chip-miss">' +
-        esc(t("report.unavailable")) +
+        '</span><span class="fp-plain fp-slot-miss">' +
+        esc(MISSING) +
         "</span></div>"
       );
     }
@@ -91,7 +91,7 @@
       items
         .map(function (stem) {
           return (
-            '<span class="fp-chip" role="listitem" title="' +
+            '<span class="fp-plain" role="listitem" title="' +
             esc(t("bazi.hidden") + ": " + stem) +
             '">' +
             esc(stem) +
@@ -110,8 +110,8 @@
         '<div class="fp-tengod" data-component="TenGodBadge">' +
         '<span class="fp-field-label">' +
         esc(t("bazi.ten_god")) +
-        '</span><span class="fp-badge fp-badge-miss">' +
-        esc(t("report.unavailable")) +
+        '</span><span class="fp-plain fp-slot-miss">' +
+        esc(MISSING) +
         "</span></div>"
       );
     }
@@ -123,7 +123,7 @@
       items
         .map(function (god) {
           return (
-            '<span class="fp-badge" title="' +
+            '<span class="fp-plain" title="' +
             esc(t("bazi.ten_god") + ": " + god) +
             '">' +
             esc(god) +
@@ -226,14 +226,14 @@
       "</div>" +
       HiddenStemGroup(hiddenList) +
       TenGodBadge(tenList) +
-      DayMasterRelation(col) +
-      '<details class="fp-meta" data-fp-meta open>' +
+      '<details class="fp-meta" data-fp-meta>' +
       "<summary>" +
       esc(t("bazi.pillar_meta")) +
       "</summary>" +
       '<div class="fp-meta-body">' +
       LifeStageLabel(col.chang_sheng) +
       NaYinLabel(col.nap_am) +
+      (isDay ? "" : DayMasterRelation(col)) +
       "</div></details></article>"
     );
   }

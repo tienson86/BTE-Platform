@@ -225,15 +225,18 @@
         "</p></section>"
       );
     }
+    /* Commercial V2: teaser XOR long body — avoid duplicating chapter prose */
+    var teaser = exec.summary
+      ? '<p class="idoc-section-summary">' + esc(exec.summary) + "</p>"
+      : exec.body
+        ? paragraphs(exec.body)
+        : "";
     return (
       '<section class="idoc-exec" data-component="ExecutiveSummary" id="interp-exec">' +
       '<h2 class="idoc-h2">' +
       esc(t("report.idoc_exec_summary")) +
       "</h2>" +
-      (exec.summary
-        ? '<p class="idoc-section-summary">' + esc(exec.summary) + "</p>"
-        : "") +
-      (exec.body ? paragraphs(exec.body) : "") +
+      teaser +
       CalloutBox(exec.callout, "insight") +
       "</section>"
     );

@@ -64,7 +64,7 @@
   function metricSlot(label, value, accent) {
     var missing = slotUnavailable(value);
     return (
-      '<div class="rpt-metric' +
+      '<div class="rpt-metric rpt-glance' +
       (accent ? " rpt-accent-" + accent : "") +
       (missing ? " rpt-metric-unavailable" : "") +
       '" role="group" aria-label="' +
@@ -76,7 +76,7 @@
       '<div class="rpt-metric-value' +
       (missing ? " rpt-slot-unavailable" : "") +
       '">' +
-      esc(missing ? t("report.unavailable") : String(value)) +
+      esc(missing ? MISSING : String(value)) +
       "</div></div>"
     );
   }
@@ -171,7 +171,7 @@
     opts = opts || {};
     var collapsed = opts.collapsed ? "true" : "false";
     return (
-      '<section class="rpt-large-card" id="' +
+      '<section class="rpt-large-card rpt-appendix-block" id="' +
       esc(id) +
       '" data-collapsed="' +
       collapsed +
@@ -200,19 +200,24 @@
   }
 
   function tierWrap(id, title, iconName, body) {
+    var isCover = id === "tier-executive";
     return (
-      '<section class="rpt-tier" id="' +
+      '<section class="rpt-tier rpt-chapter' +
+      (isCover ? " rpt-chapter-cover" : "") +
+      '" id="' +
       esc(id) +
       '" data-tier="' +
       esc(id) +
       '">' +
-      '<header class="rpt-tier-head">' +
-      icon(iconName) +
-      '<div><h2 class="rpt-title">' +
-      esc(title) +
-      '</h2><p class="rpt-caption">' +
-      esc(t("report.tier_hint." + id.replace("tier-", ""))) +
-      "</p></div></header>" +
+      (isCover
+        ? ""
+        : '<header class="rpt-tier-head rpt-chapter-head">' +
+          '<span class="rpt-chapter-icon" aria-hidden="true">' +
+          icon(iconName) +
+          "</span>" +
+          '<div><h2 class="rpt-title">' +
+          esc(title) +
+          "</h2></div></header>") +
       '<div class="rpt-tier-body">' +
       body +
       "</div></section>"
@@ -231,8 +236,10 @@
       renderQualityVerdictCaption(ex) +
       '<p class="rpt-body rpt-hero-sentence">' +
       esc(ex.sentence || t("report.summary_fallback")) +
-      "</p></div>" +
-      '<div class="rpt-hero-grid" data-component="SummaryMetricRow">' +
+      "</p>" +
+      renderFirstRecommendation(ex) +
+      "</div>" +
+      '<div class="rpt-hero-grid rpt-hero-glance" data-component="SummaryMetricRow">' +
       metricSlot(t("report.than"), ex.than, "than") +
       metricSlot(t("executive.dung_than"), ex.dung_than, "dung") +
       metricSlot(t("executive.hy_than"), ex.hy_than, "hy") +
@@ -241,16 +248,15 @@
       metricSlot(t("report.quality"), ex.quality, null) +
       "</div>" +
       '<div class="rpt-hero-sw" data-component="StrengthWeaknessPanel">' +
-      '<div class="rpt-hero-panel"><div class="rpt-subtitle">' +
+      '<div class="rpt-hero-panel"><div class="rpt-caption">' +
       esc(t("report.strengths")) +
       "</div>" +
       listOrMissing(ex.strengths) +
-      '</div><div class="rpt-hero-panel"><div class="rpt-subtitle">' +
+      '</div><div class="rpt-hero-panel"><div class="rpt-caption">' +
       esc(t("report.weaknesses")) +
       "</div>" +
       listOrMissing(ex.weaknesses) +
       "</div></div>" +
-      renderFirstRecommendation(ex) +
       "</div>";
     return tierWrap("tier-executive", t("report.tier.executive"), "spark", body);
   }
@@ -333,7 +339,7 @@
       { id: "tier-knowledge", key: "knowledge", icon: "knowledge" },
     ];
     return (
-      '<nav class="rpt-rail" aria-label="' +
+      '<nav class="rpt-rail rpt-rail--quiet" aria-label="' +
       esc(t("report.nav_aria")) +
       '"><div class="rpt-rail-title">' +
       esc(t("report.nav_title")) +
@@ -363,9 +369,9 @@
 
   function renderReport(model) {
     return (
-      '<div class="rpt-shell">' +
+      '<div class="rpt-shell rpt-shell--v2">' +
       renderRail() +
-      '<div class="rpt-main">' +
+      '<div class="rpt-main rpt-stream">' +
       renderExecutive(model) +
       renderPillars(model) +
       renderCharts(model) +

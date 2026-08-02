@@ -163,11 +163,7 @@
       '<h3 class="rpt-subtitle">' +
       esc(title) +
       "</h3>" +
-      '<p class="rpt-caption">' +
-      esc(t("report.an_block_hint")) +
-      "</p></div>" +
-      StatusBadge(block.status) +
-      "</header>"
+      "</div></header>"
     );
   }
 
@@ -193,7 +189,7 @@
           })
           .join("") +
         "</ul>"
-      : '<p class="rpt-caption ax-miss">' + esc(unavailableText()) + "</p>";
+      : "";
 
     return (
       '<article class="ax-block" data-component="AnalysisBlock" id="analysis-' +
@@ -225,15 +221,11 @@
       (block.summary ? "" : " ax-miss") +
       '">' +
       summary +
-      "</p></div>" +
-      '<div class="ax-section">' +
-      '<div class="ax-section-title">' +
-      esc(t("report.an_factors")) +
-      "</div>" +
+      "</p>" +
       factorsHtml +
       "</div>" +
-      RulePanel(block.rules) +
       EvidencePanel(block.evidence) +
+      RulePanel(block.rules) +
       ConfidenceIndicator(block.confidence) +
       AnalysisFooter(block) +
       "</div></article>"

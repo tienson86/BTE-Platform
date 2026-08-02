@@ -23,7 +23,7 @@
   }
 
   function show(v) {
-    return unavailable(v) ? t("report.unavailable") : String(v);
+    return unavailable(v) ? MISSING : String(v);
   }
 
   function TooltipInfo(text) {
@@ -40,6 +40,13 @@
   function panelShell(opts) {
     opts = opts || {};
     var empty = !!opts.empty;
+    var insightHtml = opts.insight
+      ? '<p class="mx-insight rpt-body">' + esc(opts.insight) + "</p>"
+      : empty
+        ? ""
+        : '<p class="mx-insight rpt-caption">' +
+          esc(t("report.chart_insight_none")) +
+          "</p>";
     return (
       '<section class="mx-panel' +
       (empty ? " mx-panel-empty" : "") +
@@ -58,19 +65,10 @@
       "</p></div>" +
       TooltipInfo(opts.tooltip) +
       "</header>" +
-      '<p class="mx-source rpt-caption">' +
-      esc(t("report.chart_source_label") + ": " + (opts.source || t("report.unavailable"))) +
-      "</p>" +
-      '<div class="mx-panel-body">' +
+      insightHtml +
+      '<div class="mx-panel-body mx-visual">' +
       (opts.body || "") +
       "</div>" +
-      (opts.insight
-        ? '<p class="mx-insight rpt-body">' + esc(opts.insight) + "</p>"
-        : empty
-          ? ""
-          : '<p class="mx-insight rpt-caption">' +
-            esc(t("report.chart_insight_none")) +
-            "</p>") +
       (opts.altText
         ? '<p class="mx-alt visually-hidden">' + esc(opts.altText) + "</p>"
         : "") +
@@ -251,13 +249,17 @@
 
   function MetricsWorkspace(model) {
     var charts = (model && model.charts) || {};
+    var lead =
+      (charts.insights &&
+        (charts.insights.strength ||
+          charts.insights.elements ||
+          charts.insights.ten_gods)) ||
+      t("report.chart_workspace_hint");
     return (
       '<div class="mx-workspace" data-component="MetricsWorkspace">' +
-      '<p class="rpt-caption mx-workspace-hint">' +
-      esc(t("report.chart_workspace_hint")) +
+      '<p class="mx-lead rpt-body">' +
+      esc(lead) +
       "</p>" +
-      /* Order frozen: Metrics → Gauge → Radar/Distribution → Ten Gods */
-      SummaryMetricGrid(charts) +
       '<div class="mx-stack">' +
       StrengthGauge(charts) +
       ElementDistribution(charts) +
