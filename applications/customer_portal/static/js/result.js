@@ -91,7 +91,7 @@
     var model = BteReportModel.build(data, { input: input });
     host.classList.remove("rpt-skeleton");
     host.innerHTML = BteReportRender.render(model);
-    BteReportRender.bind(host);
+    BteReportRender.bind(host, model);
 
     if (window.BteScrollSpy) BteScrollSpy.bind(host);
 
