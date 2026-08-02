@@ -428,8 +428,9 @@
     );
   }
 
-  function bindReportInteractions(root) {
+  function bindReportInteractions(root, model) {
     if (!root) return;
+    if (model) root.__rptModel = model;
     root.querySelectorAll("[data-rpt-collapse]").forEach(function (btn) {
       if (btn.__rptBound) return;
       btn.__rptBound = true;
@@ -455,7 +456,7 @@
       window.BteInterpretationDoc.bind(root);
     }
     if (window.BteKnowledge && typeof window.BteKnowledge.bind === "function") {
-      window.BteKnowledge.bind(root, root.__rptModel || null);
+      window.BteKnowledge.bind(root, root.__rptModel || model || null);
     }
   }
 
