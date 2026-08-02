@@ -1,9 +1,14 @@
-<div class="panel">
-  <h1 data-i18n="history.title"></h1>
-  <p class="muted" data-i18n="history.hint"></p>
-  <div class="toolbar">
-    <button type="button" class="secondary" id="btnClearHist" data-i18n="history.clear"></button>
-  </div>
-  <div id="historyList" class="list"></div>
+<div class="panel history-page">
+  <header class="page-hero">
+    <div>
+      <h1 data-i18n="history.title"></h1>
+      <p class="muted" data-i18n="history.hint"></p>
+    </div>
+    <div class="toolbar" style="margin-top:0">
+      <button type="button" class="secondary" id="btnClearHist" data-i18n="history.clear"></button>
+      <a class="btn secondary" href="/analyze" data-i18n="common.new_analyze"></a>
+    </div>
+  </header>
+  <div id="historyList" class="list history-list"></div>
 </div>
 <script src="/static/js/history.js"></script>
