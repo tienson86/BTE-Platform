@@ -77,6 +77,7 @@
     "Hoa Cái",
     "Thiên Ất",
     "Văn Xương",
+    "Quốc Ấn",
     "Dịch Mã",
     "Cô Thần",
     "Quả Tú",

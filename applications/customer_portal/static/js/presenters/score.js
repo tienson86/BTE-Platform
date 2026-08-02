@@ -39,6 +39,7 @@
     "Hoa Cái",
     "Thiên Ất",
     "Văn Xương",
+    "Quốc Ấn",
     "Dịch Mã",
     "Cô Thần",
     "Quả Tú",
@@ -115,8 +116,7 @@
     if (n === null) return MISSING;
     // Existing total_score is typically 0–100; present as /10 without changing math.
     var outOfTen = n <= 10 ? n : Math.round((n / 10) * 10) / 10;
-    if (n > 10) outOfTen = Math.round((n / 10) * 10) / 10;
-    return outOfTen.toFixed(1).replace(/\.0$/, ".0") + " / 10";
+    return Number(outOfTen).toFixed(1) + " / 10";
   }
 
   function normalizeToken(text) {
