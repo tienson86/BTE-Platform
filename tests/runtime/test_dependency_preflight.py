@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from types import SimpleNamespace
 from unittest.mock import patch
 
 import pytest
@@ -90,8 +89,6 @@ class TestCheckPackage:
         assert result.spec.pip_name == "pandas"
 
     def test_missing_reports_pip_name_not_import_alias(self) -> None:
-        spec = PackageSpec(distribution="python-dateutil", import_name="dateutil")
-
         def _boom(_name: str) -> None:
             raise ModuleNotFoundError("No module named 'dateutil'")
 
@@ -102,20 +99,9 @@ class TestCheckPackage:
                 return_value=False,
             ),
         ):
-            result = check_package(spec)
-        assert result.ok is False
-        ok, message, _ = check_required_packages(names=["python-dateutil"])
-        # Re-run with same patches for message shape
-        with (
-            patch("runtime.dependencies.import_module", side_effect=_boom),
-            patch(
-                "runtime.dependencies.is_distribution_installed",
-                return_value=False,
-            ),
-        ):
             ok, message, results = check_required_packages(names=["python-dateutil"])
         assert ok is False
-        assert "python-dateutil" in message
+        assert message.startswith("Missing packages: python-dateutil")
         assert results[0].spec.pip_name == "python-dateutil"
 
     def test_distribution_present_but_import_broken_message(self) -> None:
@@ -150,27 +136,26 @@ class TestCheckRequirementsIntegration:
         assert by_import["yaml"].ok
         assert "Missing packages" not in message
 
-    def test_manager_check_requirements_excludes_installed_aliases(self) -> None:
+    def test_manager_does_not_false_flag_installed_core_libs(self) -> None:
         """
         Full required set may still fail on unrelated packages (e.g. uvicorn),
-        but must not list pandas / python-dateutil / dateutil when importable.
+        but must not list pandas or python-dateutil when they import cleanly.
         """
         result = check_requirements()
-        if not result.ok:
-            assert "pandas" not in result.message
-            assert "dateutil" not in result.message or "python-dateutil" not in (
-                # if dateutil appears it must be the pip name path only when truly missing
-                part
-                for part in result.message.split(",")
-                if "dateutil" in part and "python-dateutil" not in part
-            )
-            # Stronger: installed imports must not appear as bare missing tokens
-            missing_segment = result.message.split("Missing packages:", 1)[-1]
-            missing_segment = missing_segment.split(". Install", 1)[0]
-            tokens = [t.strip() for t in missing_segment.split(",")]
-            bare = {t.split()[0] for t in tokens if t}
-            assert "pandas" not in bare
-            assert "dateutil" not in bare
+        if result.ok:
+            return
+        assert "Missing packages:" in result.message
+        missing_segment = result.message.split("Missing packages:", 1)[1]
+        missing_segment = missing_segment.split(". Install", 1)[0]
+        tokens = []
+        for chunk in missing_segment.split(","):
+            chunk = chunk.strip()
+            if not chunk:
+                continue
+            tokens.append(chunk.split()[0])
+        assert "pandas" not in tokens
+        assert "python-dateutil" not in tokens
+        assert "dateutil" not in tokens
 
     def test_check_required_accepts_mixed_spec_styles(self) -> None:
         ok, message, results = check_required_packages(
