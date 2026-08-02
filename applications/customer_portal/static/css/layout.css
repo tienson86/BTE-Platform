@@ -1,0 +1,127 @@
+/* BTE Portal — App shell layout */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(1200px 400px at 10% -10%, var(--primary-soft), transparent 60%),
+    var(--bg);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 0 var(--space-6);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.app-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.app-brand span {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+.app-nav a, .nav a, .nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius);
+}
+.app-nav a:hover, .nav a:hover, .nav-link:hover {
+  background: var(--secondary-soft);
+  color: var(--ink);
+  text-decoration: none;
+}
+.app-nav a.active, .nav a.active, .nav-link.active {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.app-main {
+  width: min(var(--content-max), calc(100% - 2 * var(--space-6)));
+  margin: 0 auto;
+  padding: var(--space-8) 0 var(--space-10);
+  flex: 1;
+}
+
+/* Legacy shell aliases → new shell */
+.shell {
+  width: min(var(--content-max), calc(100% - 2 * var(--space-6)));
+  margin: 0 auto;
+  padding: var(--space-6) 0 var(--space-10);
+}
+.shell .top {
+  display: none; /* replaced by .app-header outside */
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow);
+}
+.panel h1 { margin-bottom: var(--space-2); }
+.panel > .muted { margin-bottom: var(--space-5); }
+
+.stage-view {
+  min-height: 240px;
+}
+
+.result-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.result-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 980px) {
+  .app-header {
+    height: auto;
+    min-height: var(--header-h);
+    flex-wrap: wrap;
+    padding: var(--space-3) var(--space-4);
+  }
+  .app-main, .shell {
+    width: min(100% - 2 * var(--space-4), var(--content-max));
+  }
+}
