@@ -185,7 +185,7 @@
 
 .rpt-quality-verdict-text {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: var(--text-md);
   font-weight: 650;
   color: var(--ink);
   line-height: 1.45;
@@ -692,7 +692,7 @@
 }
 
 .mx-metric-value {
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
   font-weight: 750;
   color: var(--ink);
   margin-top: 0.25rem;
@@ -1099,7 +1099,7 @@
 }
 
 .idoc-section-summary {
-  font-size: 1.05rem;
+  font-size: var(--text-md);
   font-weight: 650;
   line-height: 1.55;
   color: var(--ink);
@@ -1107,7 +1107,7 @@
 }
 
 .idoc-p {
-  font-size: 1.02rem;
+  font-size: var(--text-md);
   line-height: 1.75;
   margin: 0 0 1.15rem;
   color: var(--ink);
@@ -1282,10 +1282,6 @@
   border-top: 1px dashed var(--line);
 }
 
-.kw-miss {
-  /* unified via shared miss recipe */
-}
-
 .kw-empty {
   margin-bottom: var(--space-4);
 }
@@ -1431,10 +1427,18 @@
 
 .rpt-large-body {
   padding: var(--space-5);
+  overflow: hidden;
+  max-height: 8000px;
+  opacity: 1;
+  transition: opacity 0.22s ease, max-height 0.22s ease;
 }
 
 .rpt-large-card[data-collapsed="true"] .rpt-large-body {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
 }
 
 .rpt-large-card[data-collapsed="true"] .rpt-collapse-btn {
