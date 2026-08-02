@@ -1,5 +1,5 @@
 /**
- * Result stage module registry — presentation only, extensible for future modules.
+ * Result report tier registry — Phase 2 scroll report (presentation only).
  */
 (function (global) {
   var modules = [];
@@ -14,8 +14,9 @@
       labelKey: module.labelKey || module.id,
       presenter: module.presenter || null,
       order: typeof module.order === "number" ? module.order : 100,
-      group: module.group || "core",
+      group: module.group || "report",
       enabled: module.enabled !== false,
+      anchor: module.anchor || ("tier-" + module.id),
     };
     if (existing >= 0) modules[existing] = row;
     else modules.push(row);
@@ -38,36 +39,55 @@
 
   function registerDefaults() {
     [
-      { id: "basic", labelKey: "stages.basic", order: 10, group: "core" },
-      { id: "calendar", labelKey: "stages.calendar", order: 20, group: "core" },
-      { id: "bazi", labelKey: "stages.bazi", order: 30, group: "core" },
-      { id: "score", labelKey: "stages.score", order: 40, group: "analysis" },
+      {
+        id: "executive",
+        labelKey: "report.tier.executive",
+        order: 10,
+        group: "report",
+        anchor: "tier-executive",
+      },
+      {
+        id: "bazi",
+        labelKey: "report.tier.bazi",
+        order: 20,
+        group: "report",
+        anchor: "tier-bazi",
+      },
+      {
+        id: "charts",
+        labelKey: "report.tier.charts",
+        order: 30,
+        group: "report",
+        anchor: "tier-charts",
+      },
+      {
+        id: "analysis",
+        labelKey: "report.tier.analysis",
+        order: 40,
+        group: "report",
+        anchor: "tier-analysis",
+      },
       {
         id: "interpretation",
-        labelKey: "stages.interpretation",
+        labelKey: "report.tier.interpretation",
         order: 50,
-        group: "analysis",
+        group: "report",
+        anchor: "tier-interpretation",
       },
       {
-        id: "discussion",
-        labelKey: "stages.discussion",
+        id: "knowledge",
+        labelKey: "report.tier.knowledge",
         order: 60,
         group: "knowledge",
+        anchor: "tier-knowledge",
       },
-      // Future expansion stubs (disabled until data/modules exist)
       {
         id: "luck_cycle",
         labelKey: "stages.luck_cycle",
         order: 70,
         group: "luck",
         enabled: false,
-      },
-      {
-        id: "shensha",
-        labelKey: "stages.shensha",
-        order: 80,
-        group: "analysis",
-        enabled: false,
+        anchor: "tier-luck",
       },
     ].forEach(register);
   }
