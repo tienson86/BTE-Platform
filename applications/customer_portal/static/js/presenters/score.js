@@ -1,11 +1,6 @@
 /**
- * Score presentation layer (Đánh Giá).
- * Renders score JSON as a dashboard — display only, no extra scoring math.
- *
- * Canonical API fields only (Sprint 2B):
- *   total_score, strength_score, pattern_score, wuxing_score,
- *   ten_god_score, useful_god_score, shensha_score, luck_score,
- *   confidence | confidence_score
+ * Score presentation — Executive Summary (Đánh Giá).
+ * Display-only redesign; keeps existing score fields / calculations.
  */
 (function (global) {
   const MISSING = "--";
@@ -14,75 +9,44 @@
     return window.BteI18n ? BteI18n.t(key, vars) : key;
   }
 
-  /** Summary cards — one key per API field; no incorrect aliases. */
-  const SUMMARY = [
-    {
-      id: "overall",
-      labelKey: "score.overall",
-      keys: ["total_score"],
-      tone: "overall",
-    },
-    {
-      id: "than",
-      labelKey: "score.than",
-      keys: ["strength_score"],
-      tone: "strength",
-    },
-    {
-      id: "pattern",
-      labelKey: "score.pattern",
-      keys: ["pattern_score"],
-      tone: "pattern",
-    },
-    {
-      id: "wuxing",
-      labelKey: "score.wuxing_score",
-      keys: ["wuxing_score"],
-      tone: "wuxing",
-    },
-    {
-      id: "ten_god",
-      labelKey: "score.ten_god_score",
-      keys: ["ten_god_score"],
-      tone: "tengod",
-    },
-    {
-      id: "useful_god",
-      labelKey: "score.useful_god_score",
-      keys: ["useful_god_score"],
-      tone: "useful",
-    },
-    {
-      id: "shensha",
-      labelKey: "score.shensha_score",
-      keys: ["shensha_score"],
-      tone: "shensha",
-    },
-    {
-      id: "luck",
-      labelKey: "score.luck_score",
-      keys: ["luck_score"],
-      tone: "luck",
-    },
+  /** Category cards — bind existing scores where available; placeholders otherwise. */
+  const CATEGORIES = [
+    { id: "than", labelKey: "score.cat_than", keys: ["strength_score"] },
+    { id: "pattern", labelKey: "score.cat_pattern", keys: ["pattern_score"] },
+    { id: "wealth", labelKey: "score.cat_wealth", keys: ["wealth_score", "tai_van_score"] },
+    { id: "official", labelKey: "score.cat_official", keys: ["official_score", "quan_van_score"] },
+    { id: "fame", labelKey: "score.cat_fame", keys: ["fame_score", "danh_tieng_score"] },
+    { id: "leadership", labelKey: "score.cat_leadership", keys: ["leadership_score", "lanh_dao_score"] },
+    { id: "marriage", labelKey: "score.cat_marriage", keys: ["marriage_score", "hon_nhan_score"] },
+    { id: "health", labelKey: "score.cat_health", keys: ["health_score", "suc_khoe_score"] },
+    { id: "luck", labelKey: "score.cat_luck", keys: ["luck_score"] },
   ];
 
-  const ELEMENT_LABELS = {
-    WOOD: "Mộc",
-    FIRE: "Hỏa",
-    EARTH: "Thổ",
-    METAL: "Kim",
-    WATER: "Thủy",
-    Mộc: "Mộc",
-    Hỏa: "Hỏa",
-    Thổ: "Thổ",
-    Kim: "Kim",
-    Thủy: "Thủy",
-    wood: "Mộc",
-    fire: "Hỏa",
-    earth: "Thổ",
-    metal: "Kim",
-    water: "Thủy",
-  };
+  const TEN_GOD_CATALOG = [
+    "Chính Quan",
+    "Thất Sát",
+    "Chính Tài",
+    "Thiên Tài",
+    "Chính Ấn",
+    "Thiên Ấn",
+    "Thực Thần",
+    "Thương Quan",
+    "Tỷ Kiên",
+    "Kiếp Tài",
+  ];
+
+  const SHENSHA_CATALOG = [
+    "Hoa Cái",
+    "Thiên Ất",
+    "Văn Xương",
+    "Dịch Mã",
+    "Cô Thần",
+    "Quả Tú",
+    "Thiên Đức",
+    "Nguyệt Đức",
+    "Hồng Loan",
+    "Đào Hoa",
+  ];
 
   function esc(value) {
     return String(value)
@@ -117,22 +81,7 @@
     return String(value);
   }
 
-  /**
-   * Read first present canonical key. Treats 0 as a valid score.
-   */
-  function pick(data, keys) {
-    if (!data || typeof data !== "object") return null;
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      if (!Object.prototype.hasOwnProperty.call(data, key)) continue;
-      var value = data[key];
-      if (value === null || value === undefined) continue;
-      return value;
-    }
-    return null;
-  }
-
-  function hasScoreField(data, key) {
+  function hasField(data, key) {
     return (
       data &&
       typeof data === "object" &&
@@ -140,6 +89,14 @@
       data[key] !== null &&
       data[key] !== undefined
     );
+  }
+
+  function pick(data, keys) {
+    if (!data || typeof data !== "object") return null;
+    for (var i = 0; i < keys.length; i++) {
+      if (hasField(data, keys[i])) return data[keys[i]];
+    }
+    return null;
   }
 
   function asNumber(value) {
@@ -153,226 +110,321 @@
     return null;
   }
 
-  /** CSS width only — does not change displayed score text. */
-  function barWidth(value) {
-    var n = asNumber(value);
-    if (n === null) return null;
-    if (n < 0) return 0;
-    if (n > 100) return 100;
-    return n;
+  function formatOutOfTen(total) {
+    var n = asNumber(total);
+    if (n === null) return MISSING;
+    // Existing total_score is typically 0–100; present as /10 without changing math.
+    var outOfTen = n <= 10 ? n : Math.round((n / 10) * 10) / 10;
+    if (n > 10) outOfTen = Math.round((n / 10) * 10) / 10;
+    return outOfTen.toFixed(1).replace(/\.0$/, ".0") + " / 10";
   }
 
-  function elementClass(name) {
-    var label = ELEMENT_LABELS[name] || name;
-    var map = { Mộc: "wood", Hỏa: "fire", Thổ: "earth", Kim: "metal", Thủy: "water" };
-    return map[label] || "unknown";
+  function normalizeToken(text) {
+    return String(text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
   }
 
-  function badge(text, tone) {
-    if (text === MISSING || text === null || text === undefined || text === "") {
-      return '<span class="bte-badge bte-badge-muted">' + esc(MISSING) + "</span>";
+  function collectGods(bazi) {
+    var map = {};
+    if (!bazi || typeof bazi !== "object") return map;
+    var pillars = [
+      bazi.year_pillar,
+      bazi.month_pillar,
+      bazi.day_pillar,
+      bazi.hour_pillar,
+    ];
+    pillars.forEach(function (p) {
+      if (!p || typeof p !== "object") return;
+      var g = p.ten_god || p.ten_gods || p.thap_than;
+      if (g == null) return;
+      String(g)
+        .split(/[,;/|]+/)
+        .forEach(function (part) {
+          var token = normalizeToken(part);
+          if (token) map[token] = true;
+        });
+    });
+    if (Array.isArray(bazi.ten_gods)) {
+      bazi.ten_gods.forEach(function (g) {
+        var token = normalizeToken(g);
+        if (token) map[token] = true;
+      });
     }
-    return (
-      '<span class="bte-badge bte-badge-' +
-      esc(tone || "neutral") +
-      '">' +
-      esc(String(text)) +
-      "</span>"
-    );
+    return map;
   }
 
-  function summaryCard(label, value, tone) {
-    var shown = present(value);
-    var width = barWidth(value);
-    var meter =
-      width === null
-        ? ""
-        : '<div class="bte-score-meter" aria-hidden="true">' +
-          '<div class="bte-score-meter-fill" style="width:' +
-          width +
-          '%"></div></div>';
-    return (
-      '<article class="bte-card bte-score-summary bte-tone-' +
-      esc(tone) +
-      '">' +
-      '<div class="bte-card-label">' +
-      esc(label) +
-      "</div>" +
-      '<div class="bte-card-value">' +
-      esc(shown) +
-      "</div>" +
-      meter +
-      "</article>"
-    );
+  function collectShensha(bazi) {
+    var map = {};
+    var unknown = true;
+    if (!bazi || typeof bazi !== "object") return { map: map, unknown: true };
+    var raw = bazi.shensha || bazi.than_sat || bazi.shen_sha;
+    if (raw == null) return { map: map, unknown: true };
+    unknown = false;
+    if (Array.isArray(raw)) {
+      raw.forEach(function (item) {
+        var text =
+          typeof item === "object"
+            ? item.name || item.label || item.title || ""
+            : item;
+        var token = normalizeToken(text);
+        if (token) map[token] = true;
+      });
+      return { map: map, unknown: false };
+    }
+    if (typeof raw === "object") {
+      Object.keys(raw).forEach(function (k) {
+        if (raw[k]) map[normalizeToken(k)] = true;
+      });
+      return { map: map, unknown: false };
+    }
+    map[normalizeToken(raw)] = true;
+    return { map: map, unknown: unknown };
   }
 
-  function progressRow(label, value, elClass) {
-    var shown = present(value);
-    var width = barWidth(value);
-    var fill =
-      width === null
-        ? ""
-        : '<div class="bte-progress"><div class="bte-progress-fill" style="width:' +
-          width +
-          '%"></div></div>';
-    return (
-      '<div class="bte-progress-row' +
-      (elClass ? " bte-el-" + esc(elClass) : "") +
-      '">' +
-      '<div class="bte-progress-meta">' +
-      "<span>" +
-      esc(label) +
-      "</span>" +
-      "<strong>" +
-      esc(shown) +
-      "</strong>" +
-      "</div>" +
-      fill +
-      "</div>"
-    );
-  }
-
-  /**
-   * Element balance / count series for context only — never used as wuxing_score.
-   */
-  function findElementBalanceSeries(data) {
-    var series = data && data.wuxing_series;
-    if (!Array.isArray(series) || !series.length) return null;
-    var rows = [];
-    series.forEach(function (item) {
-      if (!item || typeof item !== "object") return;
-      var label = item.label || item.element || item.name || null;
-      var value = item.value != null ? item.value : item.count;
-      if (label != null && value != null) {
-        rows.push({ label: String(label), value: value });
-      }
+  function matchCatalog(name, map) {
+    var target = normalizeToken(name);
+    if (map[target]) return true;
+    return Object.keys(map).some(function (key) {
+      return key.indexOf(target) >= 0 || target.indexOf(key) >= 0;
     });
-    return rows.length ? rows : null;
   }
 
-  function findTenGodBalanceSeries(data) {
-    var series = data && data.ten_god_series;
-    if (!Array.isArray(series) || !series.length) return null;
-    var rows = [];
-    series.forEach(function (item) {
-      if (!item || typeof item !== "object") return;
-      var label = item.label || item.name || item.ten_god || item.god || null;
-      var value = item.value != null ? item.value : item.count;
-      if (label != null && value != null) {
-        rows.push({ label: String(label), value: value });
-      }
-    });
-    return rows.length ? rows : null;
+  function sectionHead(title) {
+    return '<h3 class="bte-section-title">' + esc(title) + "</h3>";
   }
 
-  function findStrengthValue(data) {
-    if (hasScoreField(data, "strength_score")) return data.strength_score;
-    return null;
-  }
-
-  function findConfidence(data) {
-    // API emits string `confidence` (e.g. "medium"); accept numeric confidence_score too.
-    if (hasScoreField(data, "confidence")) return data.confidence;
-    if (hasScoreField(data, "confidence_score")) return data.confidence_score;
-    return null;
-  }
-
-  function gaugeHtml(value) {
-    var shown = present(value);
-    var width = barWidth(value);
-    var needle = width === null ? 0 : width;
-    var deg = -90 + (needle / 100) * 180;
+  function overallBlock(data) {
+    var grade = present(pick(data, ["grade"]) || MISSING);
+    var total = pick(data, ["total_score"]);
+    var outOfTen = formatOutOfTen(total);
     return (
-      '<article class="bte-card bte-score-gauge-card">' +
+      '<section class="bte-exec-overall bte-card">' +
       '<div class="bte-card-label">' +
-      esc(t("score.strength")) +
+      esc(t("score.overall_title")) +
       "</div>" +
-      '<div class="bte-gauge" role="img" aria-label="' +
-      esc(t("score.strength_aria", { value: shown })) +
-      '">' +
-      '<div class="bte-gauge-arc"></div>' +
-      '<div class="bte-gauge-needle" style="transform:rotate(' +
-      deg +
-      'deg)"></div>' +
-      '<div class="bte-gauge-hub"></div>' +
-      '<div class="bte-gauge-value">' +
-      esc(shown) +
+      '<div class="bte-overall-grade">' +
+      esc(grade) +
       "</div>" +
+      '<div class="bte-overall-score">' +
+      esc(outOfTen) +
       "</div>" +
-      "</article>"
-    );
-  }
-
-  function sectionBars(title, rows, useElementColor) {
-    if (!rows || !rows.length) return "";
-    var body = rows
-      .map(function (row) {
-        var label = ELEMENT_LABELS[row.label] || row.label;
-        var el = useElementColor ? elementClass(row.label) : null;
-        return progressRow(label, row.value, el);
-      })
-      .join("");
-    return (
-      '<section class="bte-card bte-score-panel">' +
-      "<h3>" +
-      esc(title) +
-      "</h3>" +
-      '<div class="bte-progress-list">' +
-      body +
-      "</div>" +
+      (hasField(data, "total_score")
+        ? '<div class="bte-overall-raw muted">' +
+          esc(t("score.raw_total", { value: present(total) })) +
+          "</div>"
+        : "") +
       "</section>"
     );
   }
 
-  function headerMeta(data) {
-    var grade = present(pick(data, ["grade"]) || MISSING);
-    var confidence = present(findConfidence(data) || MISSING);
-    var recommendation = present(pick(data, ["recommendation"]) || MISSING);
+  function categoryCards(data) {
     return (
-      '<div class="bte-score-status">' +
-      badge(t("score.grade", { value: grade }), "pattern") +
-      badge(t("score.confidence", { value: confidence }), "follow") +
-      (recommendation !== MISSING
-        ? '<span class="bte-score-rec">' + esc(recommendation) + "</span>"
-        : "") +
+      '<div class="bte-card-grid bte-score-category-grid">' +
+      CATEGORIES.map(function (cat) {
+        var raw = pick(data, cat.keys);
+        var shown = present(raw);
+        var n = asNumber(raw);
+        var meter =
+          n === null
+            ? ""
+            : '<div class="bte-score-meter" aria-hidden="true"><div class="bte-score-meter-fill" style="width:' +
+              Math.max(0, Math.min(100, n > 10 && n <= 100 ? n : n <= 10 ? n * 10 : n)) +
+              '%"></div></div>';
+        return (
+          '<article class="bte-card bte-score-summary">' +
+          '<div class="bte-card-label">' +
+          esc(t(cat.labelKey)) +
+          "</div>" +
+          '<div class="bte-card-value">' +
+          esc(shown) +
+          "</div>" +
+          meter +
+          "</article>"
+        );
+      }).join("") +
       "</div>"
     );
   }
 
+  function summaryChecklist(gods, shensha) {
+    var rows = [];
+    TEN_GOD_CATALOG.forEach(function (name) {
+      var ok = matchCatalog(name, gods);
+      rows.push({ name: name, state: ok ? "yes" : "no" });
+    });
+    SHENSHA_CATALOG.forEach(function (name) {
+      var state = "unknown";
+      if (!shensha.unknown) {
+        state = matchCatalog(name, shensha.map) ? "yes" : "no";
+      }
+      rows.push({ name: name, state: state });
+    });
+    return (
+      '<ul class="bte-checklist bte-checklist-compact">' +
+      rows
+        .map(function (row) {
+          var mark = row.state === "yes" ? "✓" : row.state === "no" ? "✗" : "?";
+          var label =
+            row.state === "yes"
+              ? t("score.has_yes")
+              : row.state === "no"
+                ? t("score.has_no")
+                : t("score.has_unknown");
+          var tone =
+            row.state === "yes" ? "pos" : row.state === "no" ? "neg" : "unk";
+          return (
+            '<li class="bte-check bte-check-' +
+            tone +
+            '">' +
+            '<span class="bte-check-label">' +
+            esc(row.name) +
+            "</span>" +
+            '<span class="bte-check-mark">' +
+            mark +
+            " " +
+            esc(label) +
+            "</span>" +
+            "</li>"
+          );
+        })
+        .join("") +
+      "</ul>"
+    );
+  }
+
+  function bulletList(items, emptyKey) {
+    if (!items || !items.length) {
+      return '<p class="muted">' + esc(t(emptyKey)) + "</p>";
+    }
+    return (
+      "<ul class=\"bte-bullet-list\">" +
+      items
+        .map(function (item) {
+          return "<li>" + esc(String(item)) + "</li>";
+        })
+        .join("") +
+      "</ul>"
+    );
+  }
+
+  function extractList(source, keys) {
+    if (!source || typeof source !== "object") return [];
+    for (var i = 0; i < keys.length; i++) {
+      var val = source[keys[i]];
+      if (Array.isArray(val) && val.length) {
+        return val
+          .map(function (v) {
+            if (v == null) return null;
+            if (typeof v === "string" || typeof v === "number") return String(v);
+            if (typeof v === "object") {
+              return v.text || v.body || v.content || v.summary || v.name || null;
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+      if (typeof val === "string" && val.trim()) {
+        return val
+          .split(/\n+|;\s*|•\s*/)
+          .map(function (s) {
+            return s.trim();
+          })
+          .filter(Boolean);
+      }
+    }
+    return [];
+  }
+
+  function extractFromInterpretation(interp, ids) {
+    var out = [];
+    if (!interp || typeof interp !== "object") return out;
+    var sections = Array.isArray(interp.sections) ? interp.sections : [];
+    sections.forEach(function (sec) {
+      if (!sec || typeof sec !== "object") return;
+      var id = String(sec.id || "").toLowerCase();
+      var title = String(sec.title || "").toLowerCase();
+      var hit = ids.some(function (want) {
+        return id.indexOf(want) >= 0 || title.indexOf(want) >= 0;
+      });
+      if (!hit) return;
+      var body = sec.body || sec.text || sec.content;
+      if (!body) return;
+      String(body)
+        .split(/\n+|;\s*|•\s*|\d+\.\s+/)
+        .map(function (s) {
+          return s.trim();
+        })
+        .filter(function (s) {
+          return s.length > 2;
+        })
+        .forEach(function (s) {
+          out.push(s);
+        });
+    });
+    return out;
+  }
+
   /**
    * @param {object|null|undefined} score
+   * @param {{ data?: object }} [options]
    * @returns {string} HTML
    */
-  function renderScore(score) {
+  function renderScore(score, options) {
     try {
       var data =
         score && typeof score === "object" && !Array.isArray(score) ? score : {};
+      var full = (options && options.data) || {};
+      var bazi = full.bazi && typeof full.bazi === "object" ? full.bazi : {};
+      var interp =
+        full.interpretation && typeof full.interpretation === "object"
+          ? full.interpretation
+          : {};
 
-      var summary =
-        '<div class="bte-card-grid bte-score-summary-grid">' +
-        SUMMARY.map(function (item) {
-          var raw = hasScoreField(data, item.keys[0]) ? data[item.keys[0]] : null;
-          return summaryCard(t(item.labelKey), raw, item.tone);
-        }).join("") +
-        "</div>";
+      var gods = collectGods(bazi);
+      var shensha = collectShensha(bazi);
 
-      var strengthVal = findStrengthValue(data);
-      var hasStrength = strengthVal !== null && strengthVal !== undefined;
-      // Balance charts are contextual counts — never substitute for *_score cards.
-      var elementBalance = findElementBalanceSeries(data);
-      var tenGodBalance = findTenGodBalanceSeries(data);
-
-      var extras =
-        (hasStrength ? gaugeHtml(strengthVal) : "") +
-        (elementBalance
-          ? sectionBars(t("score.element_balance"), elementBalance, true)
-          : "") +
-        (tenGodBalance
-          ? sectionBars(t("score.ten_god_balance"), tenGodBalance, false)
-          : "");
+      var strengths = extractList(data, ["strengths", "uu_diem", "pros"]);
+      if (!strengths.length) {
+        strengths = extractFromInterpretation(interp, ["strength", "ưu", "uu"]);
+      }
+      var weaknesses = extractList(data, [
+        "weaknesses",
+        "nhuoc_diem",
+        "cons",
+        "warnings",
+      ]);
+      if (!weaknesses.length) {
+        weaknesses = extractFromInterpretation(interp, [
+          "weakness",
+          "nhược",
+          "nhuoc",
+          "warning",
+        ]);
+      }
+      var recommendations = extractList(data, ["recommendations", "suggestions"]);
+      if (!recommendations.length && data.recommendation) {
+        recommendations = String(data.recommendation)
+          .split(/\n+|;\s*/)
+          .map(function (s) {
+            return s.trim();
+          })
+          .filter(Boolean);
+      }
+      if (!recommendations.length) {
+        recommendations = extractFromInterpretation(interp, [
+          "recommend",
+          "khuyến",
+          "khuyen",
+          "conclusion",
+        ]);
+      }
 
       return (
-        '<section class="bte-score" aria-label="' +
+        '<section class="bte-score bte-exec-summary" aria-label="' +
         esc(t("score.title")) +
         '">' +
         '<header class="bte-calendar-head">' +
@@ -383,22 +435,34 @@
         esc(t("score.subtitle")) +
         "</p>" +
         "</header>" +
-        headerMeta(data) +
-        summary +
-        '<div class="bte-score-extras">' +
-        (extras ||
-          '<p class="muted">' + esc(t("score.empty_extras")) + "</p>") +
+        sectionHead(t("score.section_overall")) +
+        overallBlock(data) +
+        sectionHead(t("score.section_categories")) +
+        categoryCards(data) +
+        sectionHead(t("score.section_checklist")) +
+        '<div class="bte-card bte-checklist-card">' +
+        summaryChecklist(gods, shensha) +
+        "</div>" +
+        sectionHead(t("score.section_strengths")) +
+        '<div class="bte-card">' +
+        bulletList(strengths, "score.empty_strengths") +
+        "</div>" +
+        sectionHead(t("score.section_weaknesses")) +
+        '<div class="bte-card">' +
+        bulletList(weaknesses, "score.empty_weaknesses") +
+        "</div>" +
+        sectionHead(t("score.section_recommendations")) +
+        '<div class="bte-card">' +
+        bulletList(recommendations, "score.empty_recommendations") +
         "</div>" +
         "</section>"
       );
     } catch (_) {
       return (
         '<section class="bte-score">' +
-        '<div class="bte-card-grid bte-score-summary-grid">' +
-        SUMMARY.map(function (item) {
-          return summaryCard(t(item.labelKey), MISSING, item.tone);
-        }).join("") +
-        "</div>" +
+        '<div class="bte-card"><div class="bte-card-value">' +
+        esc(MISSING) +
+        "</div></div>" +
         "</section>"
       );
     }

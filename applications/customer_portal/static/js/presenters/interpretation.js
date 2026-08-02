@@ -1,63 +1,127 @@
 /**
- * Interpretation presentation layer (Sprint 5).
- * Renders interpretation JSON as readable cards — display only, no invented text.
+ * Interpretation presentation layer (Luận Giải).
+ * All domain interpretations live here as ordered chapters.
+ * Display only — no invented prose.
  */
 (function (global) {
   const MISSING = "--";
-  // Matches lines that are internal rule codes or raw unaccented Vietnamese text
-  // e.g. "FPR001", "status=...", "Kiep Tai Cach", "Khi mua hien tai..."
   const INTERNAL_LINE =
     /\b(?:FPR|SPR|PAT|PSC|PPR|SER|SDR|CBR|PC)\d+\b|\bstatus\s*=|^[a-z0-9_]+$/i;
-  // Lines that look like raw Latin-only Vietnamese (no diacritics, only ASCII letters + spaces)
-  const RAW_UNACCENTED = /^[A-Za-z][A-Za-z0-9 _\-/()]{4,}$/ ;
+  const RAW_UNACCENTED = /^[A-Za-z][A-Za-z0-9 _\-/()]{4,}$/;
 
   function t(key, vars) {
     return window.BteI18n ? BteI18n.t(key, vars) : key;
   }
 
-  /** Preferred section order (shown only when API provides data). */
-  const KNOWN_SECTIONS = [
+  /** Fixed chapter order for the BaZi report interpretation tab. */
+  const CHAPTERS = [
     {
       id: "overview",
-      title: "Tổng quan",
+      titleKey: "interpretation.ch_overview",
       keys: ["summary", "tong_quan", "overview", "general", "tổng_quan"],
+      sectionIds: ["summary", "overview", "tong_quan", "general"],
+    },
+    {
+      id: "bazi",
+      titleKey: "interpretation.ch_bazi",
+      keys: ["bazi", "bat_tu", "four_pillars"],
+      sectionIds: ["bazi", "bat_tu", "pillars", "four_pillars"],
+    },
+    {
+      id: "five_elements",
+      titleKey: "interpretation.ch_five_elements",
+      keys: ["five_elements", "wuxing", "ngu_hanh", "elements"],
+      sectionIds: ["five_elements", "wuxing", "ngu_hanh", "elements"],
+    },
+    {
+      id: "ten_gods",
+      titleKey: "interpretation.ch_ten_gods",
+      keys: ["ten_gods", "thap_than", "shi_shen"],
+      sectionIds: ["ten_gods", "thap_than", "shi_shen"],
+    },
+    {
+      id: "shensha",
+      titleKey: "interpretation.ch_shensha",
+      keys: ["shensha", "than_sat", "shen_sha"],
+      sectionIds: ["shensha", "than_sat", "shen_sha"],
+    },
+    {
+      id: "useful_god",
+      titleKey: "interpretation.ch_useful_god",
+      keys: ["useful_god", "dung_than", "yong_shen"],
+      sectionIds: ["useful_god", "dung_than", "yong_shen"],
+    },
+    {
+      id: "structure",
+      titleKey: "interpretation.ch_structure",
+      keys: ["structure", "pattern", "cach_cuc", "ge_ju"],
+      sectionIds: ["structure", "pattern", "cach_cuc", "ge_ju"],
     },
     {
       id: "career",
-      title: "Sự nghiệp",
+      titleKey: "interpretation.ch_career",
       keys: ["career", "su_nghiep", "sự_nghiệp", "job", "work"],
+      sectionIds: ["career", "su_nghiep", "job", "work"],
     },
     {
       id: "wealth",
-      title: "Tài vận",
-      keys: ["wealth", "tai_van", "tài_vận", "finance", "money", "tai_chinh"],
+      titleKey: "interpretation.ch_wealth",
+      keys: ["wealth", "tai_van", "tài_vận", "finance", "money"],
+      sectionIds: ["wealth", "tai_van", "finance", "money"],
+    },
+    {
+      id: "official",
+      titleKey: "interpretation.ch_official",
+      keys: ["official", "quan_van", "quan_loc", "office"],
+      sectionIds: ["official", "quan_van", "quan_loc", "office"],
     },
     {
       id: "marriage",
-      title: "Hôn nhân",
-      keys: [
-        "marriage",
-        "relationship",
-        "hon_nhan",
-        "hôn_nhân",
-        "quan_he",
-        "love",
-      ],
+      titleKey: "interpretation.ch_marriage",
+      keys: ["marriage", "relationship", "hon_nhan", "hôn_nhân", "love"],
+      sectionIds: ["marriage", "relationship", "hon_nhan", "love"],
     },
     {
-      id: "health",
-      title: "Sức khỏe",
-      keys: ["health", "suc_khoe", "sức_khỏe", "body"],
+      id: "children",
+      titleKey: "interpretation.ch_children",
+      keys: ["children", "con_cai", "tu_tuc", "offspring"],
+      sectionIds: ["children", "con_cai", "tu_tuc", "offspring"],
     },
     {
-      id: "luck",
-      title: "Đại vận",
-      keys: ["luck", "dai_van", "đại_vận", "major_luck", "da_yun"],
+      id: "parents",
+      titleKey: "interpretation.ch_parents",
+      keys: ["parents", "cha_me", "phu_mau"],
+      sectionIds: ["parents", "cha_me", "phu_mau"],
     },
     {
-      id: "annual",
-      title: "Lưu niên",
+      id: "siblings",
+      titleKey: "interpretation.ch_siblings",
+      keys: ["siblings", "anh_em", "huynh_de"],
+      sectionIds: ["siblings", "anh_em", "huynh_de"],
+    },
+    {
+      id: "luck_cycles",
+      titleKey: "interpretation.ch_luck_cycles",
+      keys: ["luck", "dai_van", "đại_vận", "major_luck", "da_yun", "luck_cycles"],
+      sectionIds: ["luck", "dai_van", "major_luck", "da_yun", "luck_cycles"],
+    },
+    {
+      id: "annual_luck",
+      titleKey: "interpretation.ch_annual_luck",
       keys: ["annual", "luu_nien", "lưu_niên", "yearly", "year_luck", "liu_nian"],
+      sectionIds: ["annual", "luu_nien", "yearly", "liu_nian"],
+    },
+    {
+      id: "feng_shui",
+      titleKey: "interpretation.ch_feng_shui",
+      keys: ["feng_shui", "phong_thuy", "bat_trach", "fengshui"],
+      sectionIds: ["feng_shui", "phong_thuy", "bat_trach", "fengshui"],
+    },
+    {
+      id: "conclusion",
+      titleKey: "interpretation.ch_conclusion",
+      keys: ["conclusion", "ket_luan", "recommendation", "khuyen_nghi"],
+      sectionIds: ["conclusion", "ket_luan", "recommendation", "khuyen_nghi"],
     },
   ];
 
@@ -76,48 +140,6 @@
     request_id: true,
     pipeline: true,
   };
-
-  const TITLE_ALIASES = {};
-  KNOWN_SECTIONS.forEach(function (sec) {
-    TITLE_ALIASES[sec.id] = sec.title;
-    sec.keys.forEach(function (k) {
-      TITLE_ALIASES[String(k).toLowerCase()] = sec.title;
-    });
-  });
-  TITLE_ALIASES.warning = "Cảnh báo";
-  TITLE_ALIASES.personality = "Tính cách";
-  TITLE_ALIASES.useful_god = "Dụng thần";
-  TITLE_ALIASES.pattern = "Cách cục";
-  TITLE_ALIASES.conclusion = "Kết luận";
-  TITLE_ALIASES.analysis = "Phân tích";
-  TITLE_ALIASES.strength = "Ưu điểm";
-  TITLE_ALIASES.weakness = "Nhược điểm";
-  TITLE_ALIASES.recommendation = "Khuyến nghị";
-  TITLE_ALIASES.relationship = "Hôn nhân";
-
-  const TARGET_BLOCKS = [
-    { id: "summary", title: "Tóm tắt", keys: ["summary"], sectionIds: ["summary", "overview"] },
-    { id: "personality", title: "Đặc điểm", sectionIds: ["personality"], keys: ["personality"] },
-    { id: "analysis", title: "Phân tích", keys: ["analysis", "phan_tich"] },
-    { id: "strength", title: "Ưu điểm", sectionIds: ["strength"], keys: ["strength"] },
-    { id: "weakness", title: "Nhược điểm", sectionIds: ["weakness", "warning"], keys: ["weakness"] },
-    { id: "career", title: "Sự nghiệp", sectionIds: ["career"], keys: ["career", "su_nghiep"] },
-    { id: "wealth", title: "Tài vận", sectionIds: ["wealth"], keys: ["wealth", "tai_van"] },
-    {
-      id: "marriage",
-      title: "Hôn nhân",
-      sectionIds: ["relationship", "marriage"],
-      keys: ["marriage", "relationship", "hon_nhan"],
-    },
-    { id: "health", title: "Sức khỏe", sectionIds: ["health"], keys: ["health", "suc_khoe"] },
-    { id: "useful_god", title: "Dụng thần", sectionIds: ["useful_god"], keys: ["useful_god", "dung_than"] },
-    {
-      id: "recommendation",
-      title: "Khuyến nghị",
-      sectionIds: ["conclusion"],
-      keys: ["recommendation", "khuyen_nghi", "conclusion"],
-    },
-  ];
 
   function esc(value) {
     return String(value)
@@ -139,60 +161,6 @@
     return !text || text === MISSING || String(text).trim() === "";
   }
 
-  function humanizeKey(key) {
-    var lower = String(key || "").toLowerCase();
-    if (TITLE_ALIASES[lower]) return TITLE_ALIASES[lower];
-    return null;
-  }
-
-  function extractBadge(node) {
-    if (!node || typeof node !== "object" || Array.isArray(node)) return null;
-    var keys = ["badge", "tag", "status", "level", "severity", "grade", "label"];
-    for (var i = 0; i < keys.length; i++) {
-      var v = node[keys[i]];
-      if (v != null && v !== "" && typeof v !== "object") return String(v);
-    }
-    return null;
-  }
-
-  function extractHighlight(node) {
-    if (!node || typeof node !== "object" || Array.isArray(node)) return false;
-    if (node.highlight === true || node.emphasized === true || node.important === true) {
-      return true;
-    }
-    var level = String(node.level || node.severity || node.status || "").toLowerCase();
-    return (
-      level === "warning" ||
-      level === "high" ||
-      level === "critical" ||
-      level === "danger" ||
-      level === "alert"
-    );
-  }
-
-  function joinSentences(list) {
-    var parts = [];
-    list.forEach(function (item) {
-      if (item == null || item === "") return;
-      if (typeof item === "string" || typeof item === "number") {
-        parts.push(String(item));
-        return;
-      }
-      if (typeof item === "object") {
-        var t =
-          item.sentence ||
-          item.text ||
-          item.content ||
-          item.body ||
-          item.description ||
-          item.summary ||
-          null;
-        if (t != null && t !== "") parts.push(String(t));
-      }
-    });
-    return parts.length ? parts.join("\n\n") : MISSING;
-  }
-
   function cleanBodyText(text) {
     if (text == null || text === "") return "";
     var lines = String(text)
@@ -209,42 +177,37 @@
     return lines.join("\n");
   }
 
-  /**
-   * Normalize any API node into { title?, body, badge?, highlight? }.
-   * Does not invent wording — only reads fields.
-   */
-  function normalizeNode(node, fallbackTitle) {
-    if (node == null || node === "") {
-      return null;
-    }
-    if (typeof node === "string" || typeof node === "number" || typeof node === "boolean") {
-      return {
-        title: fallbackTitle || null,
-        body: present(node),
-        badge: null,
-        highlight: false,
-      };
-    }
-    if (Array.isArray(node)) {
-      var joined = joinSentences(node);
-      if (isEmptyBody(joined)) return null;
-      return {
-        title: fallbackTitle || null,
-        body: joined,
-        badge: null,
-        highlight: false,
-      };
-    }
-    if (typeof node !== "object") return null;
+  function joinSentences(list) {
+    var parts = [];
+    list.forEach(function (item) {
+      if (item == null || item === "") return;
+      if (typeof item === "string" || typeof item === "number") {
+        parts.push(String(item));
+        return;
+      }
+      if (typeof item === "object") {
+        var txt =
+          item.sentence ||
+          item.text ||
+          item.content ||
+          item.body ||
+          item.description ||
+          item.summary ||
+          null;
+        if (txt != null && txt !== "") parts.push(String(txt));
+      }
+    });
+    return parts.length ? parts.join("\n\n") : "";
+  }
 
-    var title =
-      node.title ||
-      node.heading ||
-      node.name ||
-      node.section ||
-      node.label ||
-      fallbackTitle ||
-      null;
+  function normalizeNode(node) {
+    if (node == null || node === "") return "";
+    if (typeof node === "string" || typeof node === "number" || typeof node === "boolean") {
+      return cleanBodyText(present(node));
+    }
+    if (Array.isArray(node)) return cleanBodyText(joinSentences(node));
+    if (typeof node !== "object") return "";
+
     var body =
       node.body != null
         ? node.body
@@ -256,254 +219,110 @@
               ? node.summary
               : node.description != null
                 ? node.description
-                : node.sentence != null
-                  ? node.sentence
-                  : null;
-
+                : null;
     if (Array.isArray(body)) body = joinSentences(body);
     if (body == null && Array.isArray(node.sentences)) body = joinSentences(node.sentences);
     if (body == null && Array.isArray(node.paragraphs)) body = joinSentences(node.paragraphs);
-    if (body == null && Array.isArray(node.rules)) body = joinSentences(node.rules);
     if (body != null && typeof body === "object") {
-      body = present(body.sentence || body.text || body.content || MISSING);
+      body = present(body.sentence || body.text || body.content || "");
     }
-    if (body != null) body = present(body);
+    return cleanBodyText(body == null ? "" : String(body));
+  }
 
-    // Plain object map of nested subsections → render as stacked paragraphs of values only.
-    if (isEmptyBody(body)) {
-      var nested = [];
-      Object.keys(node).forEach(function (k) {
-        if (
-          k === "title" ||
-          k === "heading" ||
-          k === "name" ||
-          k === "section" ||
-          k === "label" ||
-          k === "badge" ||
-          k === "tag" ||
-          k === "status" ||
-          k === "level" ||
-          k === "severity" ||
-          k === "grade" ||
-          k === "highlight" ||
-          k === "emphasized" ||
-          k === "important" ||
-          k === "html"
-        ) {
-          return;
-        }
-        var child = normalizeNode(node[k], humanizeKey(k));
-        if (child && !isEmptyBody(child.body)) {
-          nested.push(
-            (child.title ? child.title + ": " : "") + child.body
-          );
-        }
+  function buildSectionIndex(data) {
+    var byId = {};
+    var byTitle = {};
+    var list = [];
+
+    function add(id, title, body) {
+      if (isEmptyBody(body)) return;
+      var entry = {
+        id: id || "section",
+        title: title || id,
+        body: body,
+      };
+      list.push(entry);
+      if (id) byId[String(id).toLowerCase()] = entry;
+      if (title) byTitle[String(title).toLowerCase()] = entry;
+    }
+
+    if (Array.isArray(data.sections)) {
+      data.sections.forEach(function (item, idx) {
+        if (!item) return;
+        var id = String((item && (item.id || item.section || item.name)) || "sec_" + idx);
+        var title = (item && (item.title || item.name || item.heading)) || id;
+        add(id, title, normalizeNode(item));
       });
-      if (nested.length) body = nested.join("\n\n");
-    }
-
-    body = cleanBodyText(body);
-    if (isEmptyBody(body)) return null;
-
-    return {
-      title: title ? String(title) : fallbackTitle || null,
-      body: body,
-      badge: extractBadge(node),
-      highlight: extractHighlight(node),
-    };
-  }
-
-  function pickKnown(data, keys) {
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      if (Object.prototype.hasOwnProperty.call(data, key) && data[key] != null && data[key] !== "") {
-        return { key: key, value: data[key] };
-      }
-    }
-    return null;
-  }
-
-  function collectSections(data) {
-    var used = {};
-    var out = [];
-
-    function pushSection(id, title, value, fromKey) {
-      var normalized = normalizeNode(value, title);
-      if (!normalized) return;
-      var keyMark = id || fromKey || title;
-      if (used[keyMark]) return;
-      used[keyMark] = true;
-      if (fromKey) used[fromKey] = true;
-      out.push({
-        id: id || fromKey || "section",
-        title: normalized.title || title,
-        body: normalized.body,
-        badge: normalized.badge,
-        highlight: normalized.highlight,
+    } else if (data.sections && typeof data.sections === "object") {
+      Object.keys(data.sections).forEach(function (key) {
+        add(key, key, normalizeNode(data.sections[key]));
       });
     }
 
-    // 1) Preferred known sections from top-level keys
-    KNOWN_SECTIONS.forEach(function (spec) {
-      var found = pickKnown(data, spec.keys);
-      if (!found) return;
-      // summary used as Tổng quan
-      pushSection(spec.id, spec.title, found.value, found.key);
-    });
-
-    // 2) data.sections as object or array
-    if (data.sections && typeof data.sections === "object") {
-      if (Array.isArray(data.sections)) {
-        data.sections.forEach(function (item, idx) {
-          var providedTitle =
-            item && typeof item === "object"
-              ? item.title || item.name || humanizeKey(item.id || item.section)
-              : null;
-          var fallbackTitle = providedTitle || t("interpretation.section_n", { n: idx + 1 });
-          var n = normalizeNode(item, fallbackTitle);
-          if (!n) return;
-          var id = String((item && (item.id || item.section || item.name)) || "sections_" + idx);
-          if (used[id] || used[n.title]) return;
-          pushSection(id, n.title || fallbackTitle, item, id);
-        });
-      } else {
-        Object.keys(data.sections).forEach(function (key) {
-          if (used[key]) return;
-          var title = humanizeKey(key);
-          if (!title) return;
-          pushSection(key, title, data.sections[key], key);
-        });
-      }
-    }
-
-    // 3) Other top-level content keys (known Vietnamese titles only)
     Object.keys(data).forEach(function (key) {
       var lower = String(key).toLowerCase();
-      if (META_KEYS[lower] || used[key] || used[lower]) return;
+      if (META_KEYS[lower]) return;
       if (/_count$/.test(lower)) return;
-      var title = humanizeKey(key);
-      if (!title) return;
       var value = data[key];
       if (value == null || value === "") return;
       if (typeof value === "number" || typeof value === "boolean") return;
-      pushSection(lower, title, value, key);
+      if (byId[lower]) return;
+      add(key, key, normalizeNode(value));
     });
 
-    return out;
+    return { list: list, byId: byId, byTitle: byTitle };
   }
 
-  function sectionMap(data) {
-    var mapped = {};
-    var sections = collectSections(data);
-    sections.forEach(function (section) {
-      var key = String(section.id || "").toLowerCase();
-      if (key && !mapped[key]) mapped[key] = section.body;
-      var titleKey = String(section.title || "").toLowerCase();
-      if (titleKey && !mapped[titleKey]) mapped[titleKey] = section.body;
-    });
-    return mapped;
-  }
-
-  function pickTopLevel(data, keys) {
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      if (!Object.prototype.hasOwnProperty.call(data, key)) continue;
-      var node = normalizeNode(data[key], null);
-      if (node && !isEmptyBody(node.body)) return node.body;
+  function findChapterBody(index, chapter) {
+    var i;
+    if (chapter.sectionIds) {
+      for (i = 0; i < chapter.sectionIds.length; i++) {
+        var id = String(chapter.sectionIds[i]).toLowerCase();
+        if (index.byId[id] && !isEmptyBody(index.byId[id].body)) {
+          return index.byId[id].body;
+        }
+      }
+    }
+    if (chapter.keys) {
+      for (i = 0; i < chapter.keys.length; i++) {
+        var key = String(chapter.keys[i]).toLowerCase();
+        if (index.byId[key] && !isEmptyBody(index.byId[key].body)) {
+          return index.byId[key].body;
+        }
+        if (index.byTitle[key] && !isEmptyBody(index.byTitle[key].body)) {
+          return index.byTitle[key].body;
+        }
+      }
+    }
+    // Fuzzy title match against known Vietnamese titles.
+    var want = t(chapter.titleKey).toLowerCase();
+    if (index.byTitle[want] && !isEmptyBody(index.byTitle[want].body)) {
+      return index.byTitle[want].body;
+    }
+    var titles = Object.keys(index.byTitle);
+    for (i = 0; i < titles.length; i++) {
+      if (titles[i].indexOf(want) >= 0 || want.indexOf(titles[i]) >= 0) {
+        if (!isEmptyBody(index.byTitle[titles[i]].body)) {
+          return index.byTitle[titles[i]].body;
+        }
+      }
     }
     return "";
-  }
-
-  function pickFromSectionIds(map, ids) {
-    for (var i = 0; i < ids.length; i++) {
-      var text = map[String(ids[i]).toLowerCase()];
-      if (!isEmptyBody(text)) return text;
-    }
-    return "";
-  }
-
-  function buildInterpretationBlocks(data) {
-    var map = sectionMap(data);
-    var usedSectionIds = {};
-    var blocks = [];
-
-    TARGET_BLOCKS.forEach(function (spec) {
-      var body = "";
-      if (spec.sectionIds && spec.sectionIds.length) {
-        body = pickFromSectionIds(map, spec.sectionIds);
-        spec.sectionIds.forEach(function (id) {
-          if (!isEmptyBody(map[String(id).toLowerCase()])) {
-            usedSectionIds[String(id).toLowerCase()] = true;
-          }
-        });
-      }
-      if (isEmptyBody(body) && spec.keys && spec.keys.length) {
-        body = pickTopLevel(data, spec.keys);
-      }
-      if (isEmptyBody(body) && spec.id === "title") {
-        body = t("interpretation.title");
-      }
-      if (isEmptyBody(body)) return;
-      blocks.push({
-        id: spec.id,
-        title: spec.title,
-        body: body,
-        badge: null,
-        highlight: spec.id === "warning" || spec.id === "weakness",
-      });
-    });
-
-    // Synthesize "Phân tích" when API did not provide one explicitly.
-    var hasAnalysis = blocks.some(function (b) {
-      return b.id === "analysis";
-    });
-    if (!hasAnalysis) {
-      var analysisParts = [];
-      Object.keys(map).forEach(function (key) {
-        if (usedSectionIds[key]) return;
-        var body = map[key];
-        if (isEmptyBody(body)) return;
-        analysisParts.push(body);
-      });
-      if (analysisParts.length) {
-        blocks.splice(2, 0, {
-          id: "analysis",
-          title: "Phân tích",
-          body: analysisParts.join("\n\n"),
-          badge: null,
-          highlight: false,
-        });
-      }
-    }
-    return blocks;
-  }
-
-  function badgeHtml(text, tone) {
-    if (!text) return "";
-    return (
-      '<span class="bte-badge bte-badge-' +
-      esc(tone || "neutral") +
-      '">' +
-      esc(String(text)) +
-      "</span>"
-    );
   }
 
   function metaBar(data) {
     var bits = [];
-    var confidence = data && data.confidence;
-    if (confidence != null && confidence !== "") {
+    if (data && data.confidence != null && data.confidence !== "") {
       bits.push(
         '<span class="bte-badge bte-badge-follow">' +
-          esc(t("interpretation.confidence", { value: String(confidence) })) +
+          esc(t("interpretation.confidence", { value: String(data.confidence) })) +
           "</span>"
       );
     }
-    var sectionCount = data && data.section_count;
-    if (sectionCount != null && sectionCount > 0) {
+    if (data && data.section_count != null && data.section_count > 0) {
       bits.push(
         '<span class="bte-badge bte-badge-neutral">' +
-          esc(t("interpretation.sections", { value: String(sectionCount) })) +
+          esc(t("interpretation.sections", { value: String(data.section_count) })) +
           "</span>"
       );
     }
@@ -511,25 +330,56 @@
     return '<div class="bte-interp-meta">' + bits.join("") + "</div>";
   }
 
-  function sectionCard(section) {
-    var highlightClass = section.highlight ? " bte-interp-highlight" : "";
-    var bodyHtml = esc(section.body).replace(/\n/g, "<br>");
+  function chapterCard(chapter, body, index) {
+    var empty = isEmptyBody(body);
+    var bodyHtml = empty
+      ? '<p class="muted">' + esc(t("interpretation.chapter_empty")) + "</p>"
+      : esc(body).replace(/\n/g, "<br>");
     return (
       '<article class="bte-card bte-interp-card' +
-      highlightClass +
+      (empty ? " bte-interp-empty" : "") +
       '" data-section="' +
-      esc(section.id) +
+      esc(chapter.id) +
+      '" id="interp-' +
+      esc(chapter.id) +
       '">' +
       '<header class="bte-interp-head">' +
       "<h3>" +
-      esc(section.title) +
+      '<span class="bte-interp-num">' +
+      esc(String(index + 1)) +
+      ".</span> " +
+      esc(t(chapter.titleKey)) +
       "</h3>" +
-      (section.badge ? badgeHtml(section.badge, "pattern") : "") +
       "</header>" +
       '<div class="bte-interp-body">' +
       bodyHtml +
       "</div>" +
       "</article>"
+    );
+  }
+
+  function tocNav(chapters) {
+    return (
+      '<nav class="bte-card bte-interp-toc" aria-label="' +
+      esc(t("interpretation.toc")) +
+      '">' +
+      "<h3>" +
+      esc(t("interpretation.toc")) +
+      "</h3>" +
+      "<ol>" +
+      chapters
+        .map(function (ch, idx) {
+          return (
+            '<li><a href="#interp-' +
+            esc(ch.id) +
+            '">' +
+            esc(String(idx + 1) + ". " + t(ch.titleKey)) +
+            "</a></li>"
+          );
+        })
+        .join("") +
+      "</ol>" +
+      "</nav>"
     );
   }
 
@@ -546,20 +396,25 @@
           ? interpretation
           : {};
 
-      var sections = buildInterpretationBlocks(data);
-      var cards = sections.length
-        ? sections.map(sectionCard).join("")
-        : '<article class="bte-card bte-interp-card"><div class="bte-interp-body">' +
-          esc(MISSING) +
-          "</div></article>";
+      var index = buildSectionIndex(data);
+      var cards = CHAPTERS.map(function (ch, idx) {
+        return chapterCard(ch, findChapterBody(index, ch), idx);
+      }).join("");
 
       return (
-        '<section class="bte-interp" aria-label="' + esc(t("interpretation.title")) + '">' +
+        '<section class="bte-interp" aria-label="' +
+        esc(t("interpretation.title")) +
+        '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>" + esc(t("interpretation.title")) + "</h2>" +
-        '<p class="bte-calendar-sub">' + esc(t("interpretation.subtitle")) + "</p>" +
+        "<h2>" +
+        esc(t("interpretation.title")) +
+        "</h2>" +
+        '<p class="bte-calendar-sub">' +
+        esc(t("interpretation.subtitle")) +
+        "</p>" +
         "</header>" +
         metaBar(data) +
+        tocNav(CHAPTERS) +
         '<div class="bte-interp-stack">' +
         cards +
         "</div>" +

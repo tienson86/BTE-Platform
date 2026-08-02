@@ -1,6 +1,7 @@
 /**
- * Bazi presentation layer (Sprint 2).
- * Renders bazi JSON into pillar cards — no business logic / no Engine calls.
+ * Bazi presentation layer — primary analysis page.
+ * Sections: Summary · Four Pillars · Analysis · Ten Gods · ShenSha.
+ * Pattern fields are displayed here (Cách Cục tab removed). Display only.
  */
 (function (global) {
   const MISSING = "--";
@@ -37,7 +38,6 @@
     Hợi: "Thủy",
   };
 
-  /** Display-only: how flat hidden_stems are grouped per branch in API JSON. */
   const BRANCH_HIDDEN_COUNT = {
     Tý: 1,
     Sửu: 3,
@@ -54,10 +54,46 @@
   };
 
   const PILLARS = [
-    { key: "year_pillar", label: "Năm", alt: ["year", "năm"] },
-    { key: "month_pillar", label: "Tháng", alt: ["month", "tháng"] },
-    { key: "day_pillar", label: "Ngày", alt: ["day", "ngày"] },
-    { key: "hour_pillar", label: "Giờ", alt: ["hour", "giờ", "time_pillar"] },
+    { key: "year_pillar", labelKey: "bazi.pillar_year", alt: ["year", "năm"] },
+    { key: "month_pillar", labelKey: "bazi.pillar_month", alt: ["month", "tháng"] },
+    { key: "day_pillar", labelKey: "bazi.pillar_day", alt: ["day", "ngày"] },
+    { key: "hour_pillar", labelKey: "bazi.pillar_hour", alt: ["hour", "giờ", "time_pillar"] },
+  ];
+
+  const TEN_GOD_CATALOG = [
+    "Chính Quan",
+    "Thất Sát",
+    "Chính Tài",
+    "Thiên Tài",
+    "Chính Ấn",
+    "Thiên Ấn",
+    "Thực Thần",
+    "Thương Quan",
+    "Tỷ Kiên",
+    "Kiếp Tài",
+  ];
+
+  const SHENSHA_CATALOG = [
+    "Hoa Cái",
+    "Thiên Ất",
+    "Văn Xương",
+    "Dịch Mã",
+    "Cô Thần",
+    "Quả Tú",
+    "Thiên Đức",
+    "Nguyệt Đức",
+    "Hồng Loan",
+    "Đào Hoa",
+    "Quý Nhân",
+    "Kiếp Sát",
+  ];
+
+  const ELEMENT_ORDER = [
+    { key: "Mộc", en: "Wood", cls: "wood" },
+    { key: "Hỏa", en: "Fire", cls: "fire" },
+    { key: "Thổ", en: "Earth", cls: "earth" },
+    { key: "Kim", en: "Metal", cls: "metal" },
+    { key: "Thủy", en: "Water", cls: "water" },
   ];
 
   function esc(value) {
@@ -113,6 +149,11 @@
       Thổ: "earth",
       Kim: "metal",
       Thủy: "water",
+      Wood: "wood",
+      Fire: "fire",
+      Earth: "earth",
+      Metal: "metal",
+      Water: "water",
     };
     return map[element] || "unknown";
   }
@@ -162,9 +203,11 @@
 
   function sliceHidden(bazi, pillars) {
     var flat = Array.isArray(bazi.hidden_stems) ? bazi.hidden_stems : null;
-    if (!flat) return pillars.map(function () {
-      return [];
-    });
+    if (!flat) {
+      return pillars.map(function () {
+        return [];
+      });
+    }
     var offset = 0;
     return pillars.map(function (p) {
       var branch = pillarBranch(p);
@@ -230,28 +273,63 @@
       bazi.nhat_chu ||
       null;
     if (dm != null && dm !== "") return present(dm);
-    var stem = pillarStem(dayPillar);
-    return stem;
+    return pillarStem(dayPillar);
   }
 
-  function row(label, value, element) {
-    var cls = element ? ' bte-el-' + elementClass(element) : "";
+  function dayMasterElement(bazi, dm) {
+    var fromApi =
+      bazi.day_master_element || bazi.dayMasterElement || bazi.element || null;
+    if (fromApi != null && fromApi !== "") return present(fromApi);
+    return stemMeta(dm).element;
+  }
+
+  function dayMasterYinYang(bazi, dm) {
+    var fromApi =
+      bazi.day_master_yin_yang || bazi.dayMasterYinYang || bazi.yin_yang || null;
+    if (fromApi != null && fromApi !== "") return present(fromApi);
+    return stemMeta(dm).yinYang;
+  }
+
+  function pickFrom(obj, keys) {
+    if (!obj || typeof obj !== "object") return null;
+    for (var i = 0; i < keys.length; i++) {
+      if (obj[keys[i]] != null && obj[keys[i]] !== "") return obj[keys[i]];
+    }
+    return null;
+  }
+
+  function formatWithElement(name, element) {
+    if (!name || name === MISSING) return MISSING;
+    if (!element || element === MISSING) return name;
+    return name + " (" + element + ")";
+  }
+
+  function elBadge(text, element) {
+    var cls = element && element !== MISSING ? " bte-el-" + elementClass(element) : "";
+    return (
+      '<span class="bte-el-badge' +
+      cls +
+      '">' +
+      esc(text) +
+      "</span>"
+    );
+  }
+
+  function row(label, valueHtml) {
     return (
       '<div class="bte-bazi-row">' +
       '<span class="bte-bazi-row-label">' +
       esc(label) +
       "</span>" +
-      '<span class="bte-bazi-row-value' +
-      cls +
-      '">' +
-      esc(value) +
+      '<span class="bte-bazi-row-value">' +
+      valueHtml +
       "</span>" +
       "</div>"
     );
   }
 
-  function summaryCard(label, value, element) {
-    var elCls = element ? " bte-el-" + elementClass(element) : "";
+  function summaryCard(label, valueHtml, element) {
+    var elCls = element && element !== MISSING ? " bte-el-" + elementClass(element) : "";
     return (
       '<article class="bte-card bte-bazi-summary' +
       elCls +
@@ -260,10 +338,45 @@
       esc(label) +
       "</div>" +
       '<div class="bte-card-value">' +
-      esc(value) +
+      valueHtml +
       "</div>" +
       "</article>"
     );
+  }
+
+  function sectionHead(title) {
+    return '<h3 class="bte-section-title">' + esc(title) + "</h3>";
+  }
+
+  function resolveCanXuong(fullData) {
+    var cx = null;
+    if (window.BteSummaryBuilder && typeof BteSummaryBuilder.build === "function") {
+      try {
+        var model = BteSummaryBuilder.build(fullData || {}, {});
+        cx = model && model.can_xuong;
+      } catch (_) {
+        cx = null;
+      }
+    }
+    if (!cx) return { total: MISSING, poem: MISSING, stars: MISSING, grade: MISSING };
+    var total = cx.total || MISSING;
+    var poem = cx.poem || MISSING;
+    // Optional display fields when API provides them.
+    var stars = present(pickFrom(cx, ["stars", "rating", "sao", "star_rating"]));
+    var grade = present(pickFrom(cx, ["grade", "cach", "level", "rank", "hang"]));
+    return { total: total, poem: poem, stars: stars, grade: grade };
+  }
+
+  function canXuongHtml(cx) {
+    if (cx.total === MISSING && cx.poem === MISSING && cx.stars === MISSING && cx.grade === MISSING) {
+      return esc(MISSING);
+    }
+    var parts = [];
+    if (cx.total !== MISSING) parts.push('<div class="bte-cx-total">' + esc(cx.total) + "</div>");
+    if (cx.stars !== MISSING) parts.push('<div class="bte-cx-stars">' + esc(cx.stars) + "</div>");
+    if (cx.grade !== MISSING) parts.push('<div class="bte-cx-grade">' + esc(cx.grade) + "</div>");
+    if (cx.poem !== MISSING) parts.push('<div class="bte-cx-poem">' + esc(cx.poem) + "</div>");
+    return parts.join("") || esc(MISSING);
   }
 
   function pillarCard(label, pillar, hidden, tenGod) {
@@ -271,12 +384,8 @@
     var branch = pillarBranch(pillar);
     var stemInfo = stemMeta(stem);
     var branchEl = BRANCH_ELEMENT[branch] || MISSING;
-    var titlePair =
-      stem === MISSING && branch === MISSING
-        ? MISSING
-        : (stem === MISSING ? MISSING : stem) +
-          " · " +
-          (branch === MISSING ? MISSING : branch);
+    var stemDisplay = formatWithElement(stem, stemInfo.element);
+    var branchDisplay = formatWithElement(branch, branchEl);
 
     return (
       '<article class="bte-card bte-pillar-card bte-el-' +
@@ -287,49 +396,293 @@
       esc(label) +
       "</div>" +
       '<div class="bte-pillar-pair">' +
-      esc(titlePair) +
+      esc(
+        stem === MISSING && branch === MISSING
+          ? MISSING
+          : (stem === MISSING ? MISSING : stem) +
+              " · " +
+              (branch === MISSING ? MISSING : branch)
+      ) +
       "</div>" +
       "</div>" +
       '<div class="bte-bazi-rows">' +
-      row("Thiên Can", stem, stemInfo.element) +
-      row("Địa Chi", branch, branchEl === MISSING ? null : branchEl) +
-      row("Tàng Can", hiddenAt(pillar, hidden)) +
-      row("Thập Thần", tenGod) +
-      row("Trường Sinh", growthAt(pillar)) +
-      row("Nạp Âm", nayinAt(pillar)) +
+      row(t("bazi.stem"), elBadge(stemDisplay, stemInfo.element)) +
+      row(
+        t("bazi.branch"),
+        elBadge(branchDisplay, branchEl === MISSING ? null : branchEl)
+      ) +
+      row(t("bazi.hidden"), esc(hiddenAt(pillar, hidden))) +
+      row(t("bazi.ten_god"), esc(tenGod)) +
+      row(t("bazi.chang_sheng"), esc(growthAt(pillar))) +
+      row(t("bazi.nap_am"), esc(nayinAt(pillar))) +
       "</div>" +
       "</article>"
     );
   }
 
+  function analysisCard(label, value) {
+    return (
+      '<article class="bte-card">' +
+      '<div class="bte-card-label">' +
+      esc(label) +
+      "</div>" +
+      '<div class="bte-card-value">' +
+      esc(value == null || value === "" ? MISSING : String(value)) +
+      "</div>" +
+      "</article>"
+    );
+  }
+
+  function normalizeElementLabel(label) {
+    var map = {
+      WOOD: "Mộc",
+      FIRE: "Hỏa",
+      EARTH: "Thổ",
+      METAL: "Kim",
+      WATER: "Thủy",
+      wood: "Mộc",
+      fire: "Hỏa",
+      earth: "Thổ",
+      metal: "Kim",
+      water: "Thủy",
+      Mộc: "Mộc",
+      Hỏa: "Hỏa",
+      Thổ: "Thổ",
+      Kim: "Kim",
+      Thủy: "Thủy",
+      Wood: "Mộc",
+      Fire: "Hỏa",
+      Earth: "Thổ",
+      Metal: "Kim",
+      Water: "Thủy",
+    };
+    return map[label] || label;
+  }
+
+  function collectElementCounts(bazi, score) {
+    var counts = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
+    var series = score && Array.isArray(score.wuxing_series) ? score.wuxing_series : null;
+    if (series && series.length) {
+      series.forEach(function (item) {
+        if (!item || typeof item !== "object") return;
+        var label = normalizeElementLabel(item.label || item.element || item.name || "");
+        var value = item.value != null ? item.value : item.count;
+        if (counts[label] != null && value != null && !Number.isNaN(Number(value))) {
+          counts[label] = Number(value);
+        }
+      });
+      return counts;
+    }
+    // Fallback: count stem + branch elements from pillars (display only).
+    PILLARS.forEach(function (spec) {
+      var pillar = pickPillar(bazi, spec);
+      var stem = pillarStem(pillar);
+      var branch = pillarBranch(pillar);
+      var se = stemMeta(stem).element;
+      var be = BRANCH_ELEMENT[branch];
+      if (counts[se] != null) counts[se] += 1;
+      if (counts[be] != null) counts[be] += 1;
+    });
+    return counts;
+  }
+
+  function elementBarsHtml(counts) {
+    var max = 1;
+    ELEMENT_ORDER.forEach(function (el) {
+      if (counts[el.key] > max) max = counts[el.key];
+    });
+    return (
+      '<div class="bte-el-bars">' +
+      ELEMENT_ORDER.map(function (el) {
+        var n = counts[el.key] || 0;
+        var blocks = "";
+        for (var i = 0; i < Math.max(0, Math.round(n)); i++) {
+          blocks += "■";
+        }
+        if (!blocks) blocks = "·";
+        var pct = Math.round((n / max) * 100);
+        return (
+          '<div class="bte-el-bar-row bte-el-' +
+          el.cls +
+          '">' +
+          '<span class="bte-el-bar-label">' +
+          esc(el.en) +
+          "</span>" +
+          '<span class="bte-el-bar-blocks" aria-hidden="true">' +
+          esc(blocks) +
+          "</span>" +
+          '<div class="bte-el-bar-track"><div class="bte-el-bar-fill" style="width:' +
+          pct +
+          '%"></div></div>' +
+          '<span class="bte-el-bar-value">' +
+          esc(String(n)) +
+          "</span>" +
+          "</div>"
+        );
+      }).join("") +
+      "</div>"
+    );
+  }
+
+  function normalizeToken(text) {
+    return String(text || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function collectPresentGods(bazi, pillarObjs) {
+    var present = {};
+    pillarObjs.forEach(function (pillar, index) {
+      var god = tenGodAt(bazi, pillar, index);
+      if (god && god !== MISSING) {
+        String(god)
+          .split(/[,;/|]+/)
+          .forEach(function (part) {
+            var token = normalizeToken(part);
+            if (token) present[token] = true;
+          });
+      }
+    });
+    if (Array.isArray(bazi.ten_gods)) {
+      bazi.ten_gods.forEach(function (g) {
+        var token = normalizeToken(g);
+        if (token) present[token] = true;
+      });
+    }
+    return present;
+  }
+
+  function collectPresentShensha(bazi) {
+    var present = {};
+    var unknown = false;
+    var raw = pickFrom(bazi, ["shensha", "than_sat", "shen_sha", "spirits"]);
+    if (raw == null) {
+      return { present: present, unknown: true };
+    }
+    if (Array.isArray(raw)) {
+      if (!raw.length) return { present: present, unknown: false };
+      raw.forEach(function (item) {
+        var text = presentLabel(item);
+        if (text === MISSING) return;
+        present[normalizeToken(text)] = true;
+      });
+      return { present: present, unknown: false };
+    }
+    if (typeof raw === "object") {
+      Object.keys(raw).forEach(function (k) {
+        var v = raw[k];
+        if (v === true || (v != null && v !== false && v !== "")) {
+          present[normalizeToken(k)] = true;
+          if (typeof v === "string") present[normalizeToken(v)] = true;
+        }
+      });
+      return { present: present, unknown: false };
+    }
+    var one = presentLabel(raw);
+    if (one !== MISSING) present[normalizeToken(one)] = true;
+    return { present: present, unknown: false };
+  }
+
+  function presentLabel(item) {
+    if (item == null || item === "") return MISSING;
+    if (typeof item === "string" || typeof item === "number") return String(item);
+    if (typeof item === "object") {
+      return present(item.name || item.label || item.title || item.id || null);
+    }
+    return MISSING;
+  }
+
+  function matchCatalog(catalogName, presentMap) {
+    var target = normalizeToken(catalogName);
+    if (presentMap[target]) return true;
+    return Object.keys(presentMap).some(function (key) {
+      return key.indexOf(target) >= 0 || target.indexOf(key) >= 0;
+    });
+  }
+
+  function checklistHtml(items, presentMap, unknownAll) {
+    return (
+      '<ul class="bte-checklist">' +
+      items
+        .map(function (name) {
+          var state = "absent";
+          var mark = "✗";
+          var tone = "neg";
+          if (unknownAll) {
+            state = "unknown";
+            mark = "?";
+            tone = "unk";
+          } else if (matchCatalog(name, presentMap)) {
+            state = "present";
+            mark = "✓";
+            tone = "pos";
+          }
+          return (
+            '<li class="bte-check bte-check-' +
+            tone +
+            '" data-state="' +
+            state +
+            '">' +
+            '<span class="bte-check-mark" aria-hidden="true">' +
+            mark +
+            "</span>" +
+            '<span class="bte-check-label">' +
+            esc(name) +
+            "</span>" +
+            "</li>"
+          );
+        })
+        .join("") +
+      "</ul>"
+    );
+  }
+
   /**
    * @param {object|null|undefined} bazi
+   * @param {{ data?: object }} [options]
    * @returns {string} HTML
    */
-  function renderBazi(bazi) {
+  function renderBazi(bazi, options) {
     try {
       var data =
         bazi && typeof bazi === "object" && !Array.isArray(bazi) ? bazi : {};
+      var full = (options && options.data) || {};
+      var pattern =
+        full.pattern && typeof full.pattern === "object" ? full.pattern : {};
+      var score = full.score && typeof full.score === "object" ? full.score : {};
+      var useful =
+        full.useful_god && typeof full.useful_god === "object"
+          ? full.useful_god
+          : {};
+
       var pillarObjs = PILLARS.map(function (spec) {
         return pickPillar(data, spec);
       });
       var hiddenSlices = sliceHidden(data, pillarObjs);
       var dayPillar = pillarObjs[2];
       var dm = dayMaster(data, dayPillar);
-      var dmMeta = stemMeta(dm);
+      var dmEl = dayMasterElement(data, dm);
+      var dmYy = dayMasterYinYang(data, dm);
+      var cx = resolveCanXuong(full);
 
       var summary =
+        sectionHead(t("bazi.section_summary")) +
         '<div class="bte-card-grid bte-bazi-summary-grid">' +
-        summaryCard(t("bazi.day_master"), dm, dmMeta.element) +
-        summaryCard(t("bazi.element"), dmMeta.element, dmMeta.element) +
-        summaryCard(t("bazi.yin_yang"), dmMeta.yinYang) +
+        summaryCard(t("bazi.day_master"), esc(dm), dmEl) +
+        summaryCard(t("bazi.element"), esc(dmEl), dmEl) +
+        summaryCard(t("bazi.yin_yang"), esc(dmYy)) +
+        summaryCard(t("bazi.can_xuong"), canXuongHtml(cx)) +
         "</div>";
 
       var pillarsHtml =
+        sectionHead(t("bazi.section_pillars")) +
         '<div class="bte-pillar-grid">' +
         PILLARS.map(function (spec, index) {
           return pillarCard(
-            spec.label,
+            t(spec.labelKey),
             pillarObjs[index],
             hiddenSlices[index],
             tenGodAt(data, pillarObjs[index], index)
@@ -337,28 +690,83 @@
         }).join("") +
         "</div>";
 
+      var strength = present(
+        pickFrom(pattern, [
+          "than_vuong_nhuoc",
+          "strength",
+          "strength_level",
+          "body_strength",
+          "vuong_nhuoc",
+          "day_master_strength",
+        ]) ||
+          pickFrom(full.strength || {}, ["level", "label", "value", "status"])
+      );
+      var dungThan = present(
+        pickFrom(pattern, ["dung_than", "useful_god", "yong_shen", "yongshen"]) ||
+          pickFrom(useful, ["dung_than", "useful_god", "primary", "name", "element"])
+      );
+      var hyThan = present(
+        pickFrom(pattern, ["hy_than", "xi_shen", "favorable_god", "xi"]) ||
+          pickFrom(useful, ["hy_than", "xi_shen", "favorable"])
+      );
+      var elementCounts = collectElementCounts(data, score);
+
+      var analysisHtml =
+        sectionHead(t("bazi.section_analysis")) +
+        '<div class="bte-card-grid bte-bazi-analysis-grid">' +
+        analysisCard(t("bazi.than_strength"), strength) +
+        '<article class="bte-card bte-el-dist-card">' +
+        '<div class="bte-card-label">' +
+        esc(t("bazi.element_dist")) +
+        "</div>" +
+        elementBarsHtml(elementCounts) +
+        "</article>" +
+        analysisCard(t("bazi.dung_than"), dungThan) +
+        analysisCard(t("bazi.hy_than"), hyThan) +
+        "</div>";
+
+      var godsPresent = collectPresentGods(data, pillarObjs);
+      var shenshaState = collectPresentShensha(data);
+
+      var tenGodsHtml =
+        sectionHead(t("bazi.section_ten_gods")) +
+        '<div class="bte-card bte-checklist-card">' +
+        checklistHtml(TEN_GOD_CATALOG, godsPresent, false) +
+        "</div>";
+
+      var shenshaHtml =
+        sectionHead(t("bazi.section_shensha")) +
+        '<div class="bte-card bte-checklist-card">' +
+        checklistHtml(SHENSHA_CATALOG, shenshaState.present, shenshaState.unknown) +
+        "</div>";
+
       return (
-        '<section class="bte-bazi" aria-label="' + esc(t("bazi.title")) + '">' +
+        '<section class="bte-bazi" aria-label="' +
+        esc(t("bazi.title")) +
+        '">' +
         '<header class="bte-calendar-head">' +
-        "<h2>" + esc(t("bazi.title")) + "</h2>" +
-        '<p class="bte-calendar-sub">' + esc(t("bazi.subtitle")) + "</p>" +
+        "<h2>" +
+        esc(t("bazi.title")) +
+        "</h2>" +
+        '<p class="bte-calendar-sub">' +
+        esc(t("bazi.subtitle")) +
+        "</p>" +
         "</header>" +
         summary +
         pillarsHtml +
+        analysisHtml +
+        tenGodsHtml +
+        shenshaHtml +
         "</section>"
       );
     } catch (_) {
       return (
         '<section class="bte-bazi">' +
         '<div class="bte-card-grid">' +
-        summaryCard(t("bazi.day_master"), MISSING) +
-        summaryCard(t("bazi.element"), MISSING) +
-        summaryCard(t("bazi.yin_yang"), MISSING) +
-        "</div>" +
-        '<div class="bte-pillar-grid">' +
-        PILLARS.map(function (spec) {
-          return pillarCard(spec.label, null, [], MISSING);
-        }).join("") +
+        summaryCard(t("bazi.day_master"), esc(MISSING)) +
+        summaryCard(t("bazi.element"), esc(MISSING)) +
+        summaryCard(t("bazi.yin_yang"), esc(MISSING)) +
+        summaryCard(t("bazi.can_xuong"), esc(MISSING)) +
         "</div>" +
         "</section>"
       );

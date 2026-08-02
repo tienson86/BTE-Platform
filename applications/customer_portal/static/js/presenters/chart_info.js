@@ -298,7 +298,8 @@
   }
 
   /**
-   * Combined card block for Result header (no lunar — matches "Thông tin lá số").
+   * Combined card block for Result header.
+   * Feng Shui / Bát Trạch is intentionally omitted — it belongs on Lịch Việt.
    */
   function renderChartHeader(data, options) {
     var opts = options || {};
@@ -309,7 +310,6 @@
         titleKey: opts.titleKey || "chart.info_title",
         includeLunar: false,
       }) +
-      renderBatTrach(data) +
       "</div>"
     );
   }

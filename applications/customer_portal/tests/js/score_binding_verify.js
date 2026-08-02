@@ -1,5 +1,5 @@
 /**
- * Sprint 2B — verify score presenter bindings (Node, no browser).
+ * Sprint 2B / UI v2 — verify score presenter bindings (Node, no browser).
  */
 const fs = require("fs");
 const path = require("path");
@@ -63,17 +63,29 @@ const score = {
   ten_god_series: [{ label: "Thất Sát", value: 1.0 }],
 };
 
-const html = render(score);
+const html = render(score, {
+  data: {
+    bazi: {
+      year_pillar: { ten_god: "Thất Sát" },
+      month_pillar: { ten_god: "Chính Tài" },
+      day_pillar: { ten_god: "Tỷ Kiên" },
+      hour_pillar: { ten_god: "Thiên Ấn" },
+      shensha: ["Hoa Cái", "Thiên Ất"],
+    },
+    score,
+  },
+});
+
 const checks = [
-  ["total_score card", html.includes("55.25")],
-  ["strength_score card", html.includes(">45<") || html.includes(">45.0<")],
-  ["pattern_score card", html.includes(">100<") || html.includes(">100.0<")],
-  ["useful_god 20", html.includes(">20<") || html.includes(">20.0<")],
-  ["shensha 100 present", /Điểm Thần sát[\s\S]*?>100(\.0)?</.test(html)],
-  ["wuxing_score label", html.includes("Điểm Ngũ hành")],
-  ["wuxing numeric 0 as score card", /Điểm Ngũ hành[\s\S]*?<div class="bte-card-value">0(\.0)?<\/div>/.test(html)],
-  ["not using series as score title alone", html.includes("Phân bố Ngũ hành")],
-  ["confidence medium", html.includes("medium")],
+  ["overall grade D+", html.includes("D+")],
+  ["overall out of 10", html.includes("/ 10")],
+  ["strength category 45", html.includes(">45<") || html.includes(">45.0<")],
+  ["pattern category 100", html.includes(">100<") || html.includes(">100.0<")],
+  ["luck category 0", /Hậu Vận[\s\S]*?>0(\.0)?</.test(html)],
+  ["recommendation shown", html.includes("Nhiều điểm cần cải thiện")],
+  ["checklist present", html.includes("Hoa Cái")],
+  ["checklist yes/no", html.includes("Có") && html.includes("Không")],
+  ["executive section titles", html.includes("Điểm mạnh") && html.includes("Điểm yếu")],
   ["no overall_score alias needed", !html.includes("overall_score")],
 ];
 
@@ -90,7 +102,7 @@ const out = path.join(
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(
   out,
-  `<!doctype html><meta charset="utf-8"><title>Sprint 2B Score Render</title>${html}`,
+  `<!doctype html><meta charset="utf-8"><title>UI v2 Score Render</title>${html}`,
   "utf8"
 );
 console.log("wrote", out);
