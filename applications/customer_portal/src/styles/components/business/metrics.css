@@ -1,0 +1,51 @@
+/**
+ * Commercial UI V3 — Metrics business styles (WP-0007).
+ * Token-driven layout helpers only.
+ */
+
+.cui-biz-metrics {
+  width: 100%;
+}
+
+.cui-biz-metrics-summary,
+.cui-biz-metric-section,
+.cui-biz-metric-explanation,
+.cui-biz-balance-panel,
+.cui-biz-confidence-panel,
+.cui-biz-metric-card,
+.cui-biz-metric-indicator,
+.cui-biz-metrics-indicators {
+  width: 100%;
+}
+
+.cui-biz-metrics-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-block) * var(--space-scale));
+}
+
+.cui-biz-metric-card,
+.cui-biz-metric-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-biz-balance-panel__indicators,
+.cui-biz-confidence-panel__items {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-paragraph) * var(--space-scale));
+  width: 100%;
+}
+
+.cui-biz-metrics-transition {
+  width: 100%;
+  padding-block: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-biz-metrics {
+    scroll-behavior: auto;
+  }
+}

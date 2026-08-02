@@ -7,3 +7,9 @@ export type { ExecutiveSummaryScreenProps } from "./ExecutiveSummaryScreen";
 
 export { FourPillarsScreen } from "./FourPillarsScreen";
 export type { FourPillarsScreenProps } from "./FourPillarsScreen";
+
+export { ExecutiveInsightScreen } from "./ExecutiveInsightScreen";
+export type { ExecutiveInsightScreenProps } from "./ExecutiveInsightScreen";
+
+export { MetricsScreen } from "./MetricsScreen";
+export type { MetricsScreenProps } from "./MetricsScreen";

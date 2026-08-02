@@ -1,0 +1,43 @@
+/**
+ * Commercial UI V3 — Executive Insight business styles (WP-0006).
+ * Token-driven layout helpers only.
+ */
+
+.cui-biz-executive-insight {
+  width: 100%;
+}
+
+.cui-biz-insight-hero,
+.cui-biz-executive-conclusion,
+.cui-biz-insight-summary,
+.cui-biz-insight-section,
+.cui-biz-opportunity-panel,
+.cui-biz-risk-panel,
+.cui-biz-key-insights {
+  width: 100%;
+}
+
+.cui-biz-key-insights {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-block) * var(--space-scale));
+}
+
+.cui-biz-opportunity-item,
+.cui-biz-risk-item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-list) * var(--space-scale));
+  width: 100%;
+}
+
+.cui-biz-insight-transition {
+  width: 100%;
+  padding-block: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-biz-executive-insight {
+    scroll-behavior: auto;
+  }
+}

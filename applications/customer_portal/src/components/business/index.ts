@@ -1,5 +1,5 @@
 /**
- * Business Component Library — WP-0004 / WP-0005.
+ * Business Component Library — WP-0004 … WP-0007.
  * Composes Shared Components only. Presentation ViewModels only.
  */
 
@@ -53,3 +53,43 @@ export type { ChartMetadataProps } from "./ChartMetadata";
 
 export { ChartLegend } from "./ChartLegend";
 export type { ChartLegendProps } from "./ChartLegend";
+
+export { ExecutiveInsightHero } from "./ExecutiveInsightHero";
+export type { ExecutiveInsightHeroProps } from "./ExecutiveInsightHero";
+
+export { ExecutiveConclusion } from "./ExecutiveConclusion";
+export type { ExecutiveConclusionProps } from "./ExecutiveConclusion";
+
+export { InsightSummary } from "./InsightSummary";
+export type { InsightSummaryProps } from "./InsightSummary";
+
+export { InsightSection } from "./InsightSection";
+export type { InsightSectionProps } from "./InsightSection";
+
+export { OpportunityPanel } from "./OpportunityPanel";
+export type { OpportunityPanelProps } from "./OpportunityPanel";
+
+export { RiskPanel } from "./RiskPanel";
+export type { RiskPanelProps } from "./RiskPanel";
+
+export { MetricsSummary } from "./MetricsSummary";
+export type { MetricsSummaryProps } from "./MetricsSummary";
+
+export { MetricSection } from "./MetricSection";
+export type { MetricSectionProps } from "./MetricSection";
+
+/** Pack 06 MetricCard — aliased to avoid collision with Shared MetricCard. */
+export { MetricCard as BusinessMetricCard } from "./MetricCard";
+export type { MetricCardProps as BusinessMetricCardProps } from "./MetricCard";
+
+export { MetricIndicator } from "./MetricIndicator";
+export type { MetricIndicatorProps } from "./MetricIndicator";
+
+export { MetricExplanation } from "./MetricExplanation";
+export type { MetricExplanationProps } from "./MetricExplanation";
+
+export { ConfidencePanel } from "./ConfidencePanel";
+export type { ConfidencePanelProps } from "./ConfidencePanel";
+
+export { BalancePanel } from "./BalancePanel";
+export type { BalancePanelProps } from "./BalancePanel";

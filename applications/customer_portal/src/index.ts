@@ -1,5 +1,5 @@
 /**
- * Commercial UI V3 — public API (WP-0001 … WP-0005).
+ * Commercial UI V3 — public API (WP-0001 … WP-0007).
  * Screens and business components are presentation-only.
  */
 
@@ -24,3 +24,5 @@ export const baseComponentsWorkPackageId = "WP-0002" as const;
 export const sharedComponentsWorkPackageId = "WP-0003" as const;
 export const executiveSummaryWorkPackageId = "WP-0004" as const;
 export const fourPillarsWorkPackageId = "WP-0005" as const;
+export const executiveInsightWorkPackageId = "WP-0006" as const;
+export const metricsWorkPackageId = "WP-0007" as const;
