@@ -69,6 +69,116 @@
     );
   }
 
+  function slotUnavailable(value) {
+    return value === null || value === undefined || value === "" || value === MISSING;
+  }
+
+  function metricSlot(label, value, accent) {
+    var missing = slotUnavailable(value);
+    return (
+      '<div class="rpt-metric' +
+      (accent ? " rpt-accent-" + accent : "") +
+      (missing ? " rpt-metric-unavailable" : "") +
+      '" role="group" aria-label="' +
+      esc(label) +
+      '">' +
+      '<div class="rpt-caption">' +
+      esc(label) +
+      "</div>" +
+      '<div class="rpt-metric-value' +
+      (missing ? " rpt-slot-unavailable" : "") +
+      '">' +
+      esc(missing ? t("report.unavailable") : String(value)) +
+      "</div></div>"
+    );
+  }
+
+  function renderDayMasterDisplay(ex) {
+    var missing = slotUnavailable(ex.day_master);
+    var metaParts = [];
+    if (!slotUnavailable(ex.element)) metaParts.push(ex.element);
+    if (!slotUnavailable(ex.yin_yang)) metaParts.push(ex.yin_yang);
+    var meta =
+      metaParts.length > 0
+        ? metaParts.join(" · ")
+        : missing
+          ? ""
+          : MISSING;
+    return (
+      '<div class="rpt-hero-dm rpt-accent-day" data-component="DayMasterDisplay">' +
+      icon("dayMaster") +
+      "<div>" +
+      '<div class="rpt-caption">' +
+      esc(t("bazi.day_master")) +
+      "</div>" +
+      (missing
+        ? '<div class="rpt-hero-dm-value rpt-slot-unavailable" aria-live="polite">' +
+          esc(t("report.unavailable")) +
+          "</div>"
+        : '<div class="rpt-hero-dm-value">' +
+          esc(String(ex.day_master)) +
+          "</div>") +
+      (meta
+        ? '<div class="rpt-caption">' + esc(meta) + "</div>"
+        : "") +
+      "</div></div>"
+    );
+  }
+
+  function renderQualityVerdictCaption(ex) {
+    var v = ex.quality_verdict || {};
+    if (!v.available || !v.caption) {
+      return (
+        '<div class="rpt-quality-verdict rpt-unavailable" data-component="QualityVerdictCaption" role="status">' +
+        '<p class="rpt-caption">' +
+        esc(t("report.quality")) +
+        "</p>" +
+        '<p class="rpt-body">' +
+        esc(t("report.unavailable")) +
+        "</p></div>"
+      );
+    }
+    return (
+      '<div class="rpt-quality-verdict' +
+      (v.band ? " rpt-quality-" + esc(v.band) : "") +
+      '" data-component="QualityVerdictCaption" role="status">' +
+      '<p class="rpt-caption">' +
+      esc(t("report.quality")) +
+      "</p>" +
+      '<p class="rpt-quality-verdict-text">' +
+      esc(v.caption) +
+      "</p></div>"
+    );
+  }
+
+  function renderFirstRecommendation(ex) {
+    var text = ex.first_recommendation;
+    if (!text) {
+      return (
+        '<aside class="rpt-first-rec rpt-unavailable" data-component="FirstRecommendation" aria-label="' +
+        esc(t("report.first_recommendation")) +
+        '">' +
+        '<div class="rpt-subtitle">' +
+        esc(t("report.first_recommendation")) +
+        "</div>" +
+        '<p class="rpt-caption">' +
+        esc(t("report.unavailable")) +
+        "</p></aside>"
+      );
+    }
+    return (
+      '<aside class="rpt-first-rec" data-component="FirstRecommendation" aria-label="' +
+      esc(t("report.first_recommendation")) +
+      '">' +
+      '<div class="rpt-subtitle">' +
+      esc(t("report.first_recommendation")) +
+      "</div>" +
+      '<p class="rpt-body">' +
+      esc(String(text)) +
+      "</p></aside>"
+    );
+  }
+
   function largeSection(id, title, body, opts) {
     opts = opts || {};
     var collapsed = opts.collapsed ? "true" : "false";
@@ -120,32 +230,25 @@
   function renderExecutive(model) {
     var ex = model.executive || {};
     var body =
-      '<div class="rpt-hero">' +
+      '<div class="rpt-hero" data-component="ExecutiveHero">' +
       '<div class="rpt-hero-main">' +
       '<p class="rpt-eyebrow">' +
       esc(t("report.executive_eyebrow")) +
       "</p>" +
-      '<div class="rpt-hero-dm rpt-accent-day">' +
-      icon("dayMaster") +
-      '<div><div class="rpt-caption">' +
-      esc(t("bazi.day_master")) +
-      '</div><div class="rpt-hero-dm-value">' +
-      esc(show(ex.day_master)) +
-      '</div><div class="rpt-caption">' +
-      esc(show(ex.element) + " · " + show(ex.yin_yang)) +
-      "</div></div></div>" +
+      renderDayMasterDisplay(ex) +
+      renderQualityVerdictCaption(ex) +
       '<p class="rpt-body rpt-hero-sentence">' +
-      esc(ex.sentence) +
+      esc(ex.sentence || t("report.summary_fallback")) +
       "</p></div>" +
-      '<div class="rpt-hero-grid">' +
-      metric(t("report.than"), ex.than, "than") +
-      metric(t("executive.dung_than"), ex.dung_than, "dung") +
-      metric(t("executive.hy_than"), ex.hy_than, "hy") +
-      metric(t("executive.ky_than"), ex.ky_than, "ky") +
-      metric(t("executive.cach_cuc"), ex.cach_cuc, null) +
-      metric(t("report.quality"), ex.quality, null) +
+      '<div class="rpt-hero-grid" data-component="SummaryMetricRow">' +
+      metricSlot(t("report.than"), ex.than, "than") +
+      metricSlot(t("executive.dung_than"), ex.dung_than, "dung") +
+      metricSlot(t("executive.hy_than"), ex.hy_than, "hy") +
+      metricSlot(t("executive.ky_than"), ex.ky_than, "ky") +
+      metricSlot(t("executive.cach_cuc"), ex.cach_cuc, null) +
+      metricSlot(t("report.quality"), ex.quality, null) +
       "</div>" +
-      '<div class="rpt-hero-sw">' +
+      '<div class="rpt-hero-sw" data-component="StrengthWeaknessPanel">' +
       '<div class="rpt-hero-panel"><div class="rpt-subtitle">' +
       esc(t("report.strengths")) +
       "</div>" +
@@ -154,42 +257,18 @@
       esc(t("report.weaknesses")) +
       "</div>" +
       listOrMissing(ex.weaknesses) +
-      "</div></div></div>";
+      "</div></div>" +
+      renderFirstRecommendation(ex) +
+      "</div>";
     return tierWrap("tier-executive", t("report.tier.executive"), "spark", body);
   }
 
   function renderPillars(model) {
     var cols = model.pillars || [];
     var body =
-      '<div class="rpt-pillars">' +
-      cols
-        .map(function (col) {
-          return (
-            '<article class="rpt-pillar' +
-            (col.isDay ? " rpt-pillar-day rpt-accent-day" : "") +
-            '">' +
-            '<div class="rpt-pillar-label">' +
-            icon("pillar") +
-            "<span>" +
-            esc(col.label) +
-            (col.isDay ? " · " + esc(t("bazi.day_master")) : "") +
-            "</span></div>" +
-            '<div class="rpt-pillar-stem">' +
-            esc(show(col.stem)) +
-            "</div>" +
-            '<div class="rpt-pillar-branch">' +
-            esc(show(col.branch)) +
-            "</div>" +
-            '<div class="rpt-pillar-rows">' +
-            row(t("bazi.hidden"), col.hidden) +
-            row(t("bazi.ten_god"), col.ten_god) +
-            row(t("bazi.chang_sheng"), col.chang_sheng) +
-            row(t("bazi.nap_am"), col.nap_am) +
-            "</div></article>"
-          );
-        })
-        .join("") +
-      "</div>";
+      window.BtePillars && typeof window.BtePillars.render === "function"
+        ? window.BtePillars.render(cols)
+        : '<p class="rpt-caption">' + esc(t("report.unavailable")) + "</p>";
     return tierWrap("tier-bazi", t("report.tier.bazi"), "pillar", body);
   }
 
@@ -204,36 +283,10 @@
   }
 
   function renderCharts(model) {
-    var C = window.BteReportCharts || {};
-    var charts = model.charts || {};
-    var strengthLabel = show((model.executive && model.executive.than) || MISSING);
     var body =
-      '<div class="rpt-charts-grid">' +
-      '<div class="rpt-chart-card"><div class="rpt-subtitle">' +
-      esc(t("report.chart_radar")) +
-      "</div>" +
-      (C.radar
-        ? C.radar(charts.elements, t("report.unavailable"))
-        : "") +
-      '</div><div class="rpt-chart-card"><div class="rpt-subtitle">' +
-      esc(t("report.chart_gauge")) +
-      "</div>" +
-      (charts.strength_gauge != null && C.gauge
-        ? C.gauge(charts.strength_gauge, t("report.than"), t("report.unavailable"))
-        : '<div class="rpt-chart-empty"><div class="rpt-metric-value">' +
-          esc(strengthLabel) +
-          '</div><p class="rpt-caption">' +
-          esc(t("report.gauge_text_only")) +
-          "</p></div>") +
-      '</div><div class="rpt-chart-card"><div class="rpt-subtitle">' +
-      esc(t("report.chart_elements")) +
-      "</div>" +
-      (C.bars ? C.bars(charts.elements, t("report.unavailable")) : "") +
-      '</div><div class="rpt-chart-card"><div class="rpt-subtitle">' +
-      esc(t("report.chart_gods")) +
-      "</div>" +
-      (C.bars ? C.bars(charts.ten_gods, t("report.unavailable")) : "") +
-      "</div></div>";
+      window.BteMetrics && typeof window.BteMetrics.render === "function"
+        ? window.BteMetrics.render(model)
+        : '<p class="rpt-caption">' + esc(t("report.unavailable")) + "</p>";
     return tierWrap("tier-charts", t("report.tier.charts"), "chart", body);
   }
 
@@ -477,6 +530,9 @@
       });
     });
     if (window.BteUI && window.BteUI.bindCollapsible) window.BteUI.bindCollapsible(root);
+    if (window.BtePillars && typeof window.BtePillars.bind === "function") {
+      window.BtePillars.bind(root);
+    }
   }
 
   global.BteReportRender = {
