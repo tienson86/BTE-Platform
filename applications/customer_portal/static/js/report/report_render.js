@@ -327,79 +327,10 @@
   }
 
   function renderAnalysis(model) {
-    var a = model.analysis || {};
-    var ov = a.overview || {};
-    var C = window.BteReportCharts || {};
-    var rel = formatRelation(a.relations || {});
-    var knowledgeBody = a.knowledge_status
-      ? '<pre class="rpt-pre">' +
-        esc(JSON.stringify(a.knowledge_status, null, 2)) +
-        "</pre>"
-      : unavailable(t("report.knowledge_status"));
-
     var body =
-      largeSection(
-        "analysis-elements",
-        t("report.an_elements"),
-        C.bars
-          ? C.bars(a.elements, t("report.unavailable"))
-          : unavailable(t("report.an_elements")),
-        { hint: t("report.an_elements_hint") }
-      ) +
-      largeSection(
-        "analysis-gods",
-        t("report.an_gods"),
-        C.bars
-          ? C.bars(a.ten_gods, t("report.unavailable"))
-          : listOrMissing(
-              (a.ten_gods || []).map(function (x) {
-                return x.label + ": " + x.value;
-              })
-            ),
-        { hint: t("report.an_gods_hint") }
-      ) +
-      largeSection(
-        "analysis-pattern",
-        t("report.an_pattern"),
-        '<div class="rpt-hero-grid">' +
-          metric(t("executive.cach_cuc"), ov.cach_cuc) +
-          metric(t("executive.tong_cach"), ov.tong_cach) +
-          metric(t("report.than"), ov.than_strength || ov.than, "than") +
-          "</div>",
-        { hint: t("report.an_pattern_hint") }
-      ) +
-      largeSection(
-        "analysis-useful",
-        t("report.an_useful"),
-        '<div class="rpt-hero-grid">' +
-          metric(t("executive.dung_than"), ov.dung_than, "dung") +
-          metric(t("executive.hy_than"), ov.hy_than, "hy") +
-          metric(t("executive.ky_than"), ov.ky_than, "ky") +
-          metric(t("executive.dieu_hau"), ov.dieu_hau) +
-          "</div>",
-        { hint: t("report.an_useful_hint") }
-      ) +
-      largeSection(
-        "analysis-relations",
-        t("report.an_relations"),
-        rel.html,
-        { hint: t("report.an_relations_hint"), collapsed: true }
-      ) +
-      largeSection(
-        "analysis-shensha",
-        t("report.an_shensha"),
-        a.shensha && a.shensha.length
-          ? listOrMissing(a.shensha)
-          : unavailable(t("report.an_shensha")),
-        { collapsed: true }
-      ) +
-      largeSection(
-        "analysis-knowledge",
-        t("report.an_priority_knowledge"),
-        knowledgeBody,
-        { collapsed: true }
-      );
-
+      window.BteAnalysis && typeof window.BteAnalysis.render === "function"
+        ? window.BteAnalysis.render(model)
+        : '<p class="rpt-caption">' + esc(t("report.unavailable")) + "</p>";
     return tierWrap("tier-analysis", t("report.tier.analysis"), "analyze", body);
   }
 
@@ -532,6 +463,9 @@
     if (window.BteUI && window.BteUI.bindCollapsible) window.BteUI.bindCollapsible(root);
     if (window.BtePillars && typeof window.BtePillars.bind === "function") {
       window.BtePillars.bind(root);
+    }
+    if (window.BteAnalysis && typeof window.BteAnalysis.bind === "function") {
+      window.BteAnalysis.bind(root);
     }
   }
 
