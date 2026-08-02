@@ -1,0 +1,27 @@
+{
+  "name": "@bte/commercial-ui-v3",
+  "private": true,
+  "version": "3.0.0",
+  "description": "BTE Commercial UI V3 — Foundation (WP-0001)",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles/index.css",
+    "./tokens.css": "./src/styles/tokens.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "~5.7.2",
+    "vitest": "^3.0.0"
+  }
+}

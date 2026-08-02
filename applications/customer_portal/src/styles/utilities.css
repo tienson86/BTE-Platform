@@ -1,0 +1,118 @@
+/**
+ * Layout / spacing utilities — token-driven only.
+ * Pack 04 — 06_STYLING_STRATEGY.
+ */
+
+.cui-stack-inline {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-inline) * var(--space-scale));
+}
+
+.cui-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-stack-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+.cui-stack-block {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-block) * var(--space-scale));
+}
+
+.cui-stack-section {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-section) * var(--space-scale));
+}
+
+.cui-row-inline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space-inline) * var(--space-scale));
+}
+
+.cui-row-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-inset-inline {
+  padding: calc(var(--space-inline) * var(--space-scale));
+}
+
+.cui-inset-paragraph {
+  padding: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+.cui-inset-block {
+  padding: calc(var(--space-block) * var(--space-scale));
+}
+
+.cui-mt-paragraph {
+  margin-top: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+.cui-mt-block {
+  margin-top: calc(var(--space-block) * var(--space-scale));
+}
+
+.cui-mt-section {
+  margin-top: calc(var(--space-section) * var(--space-scale));
+}
+
+.cui-mt-chapter {
+  margin-top: calc(var(--space-chapter) * var(--space-scale));
+}
+
+.cui-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cui-touch-target {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+}
+
+.cui-elevation-none {
+  box-shadow: var(--elevation-none);
+}
+
+.cui-elevation-soft {
+  box-shadow: var(--elevation-soft);
+}
+
+.cui-elevation-overlay {
+  box-shadow: var(--elevation-overlay);
+}
+
+.cui-elevation-modal {
+  box-shadow: var(--elevation-modal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-motion-safe {
+    transition: none !important;
+    animation: none !important;
+  }
+}

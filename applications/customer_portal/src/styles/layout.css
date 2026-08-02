@@ -1,0 +1,197 @@
+/**
+ * Global layout shell — Pack 01 Page Layout + Pack 02 Grid System.
+ * Application Frame → Report Sheet → Content Grid → Reading Column.
+ * No business screens. Responsive foundations only.
+ */
+
+.cui-application-frame {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "top top"
+    "rail sheet"
+    "footer footer";
+  min-height: 100vh;
+  background: var(--surface-background);
+  color: var(--text-primary);
+  font-family: var(--font-family-body);
+}
+
+.cui-top-bar {
+  grid-area: top;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--space-inline) * var(--space-scale));
+  min-height: var(--touch-target-min);
+  padding-inline: var(--grid-margin);
+  padding-block: var(--space-3);
+  background: var(--surface-background);
+  border-bottom: 1px solid var(--border-divider);
+}
+
+.cui-reading-rail {
+  grid-area: rail;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: var(--z-rail);
+  width: 220px;
+  max-height: 100vh;
+  overflow: auto;
+  padding: calc(var(--space-block) * var(--space-scale)) var(--space-4);
+  background: var(--surface-background);
+  border-right: 1px solid var(--border-divider);
+}
+
+.cui-report-sheet {
+  grid-area: sheet;
+  width: 100%;
+  max-width: var(--grid-report-max-width);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+  padding-block: calc(var(--space-chapter) * var(--space-scale));
+  background: var(--surface-report-paper);
+  border-radius: var(--radius-paper);
+  box-shadow: var(--elevation-soft);
+  color: var(--text-primary);
+}
+
+.cui-page-footer {
+  grid-area: footer;
+  padding: var(--space-5) var(--grid-margin);
+  border-top: 1px solid var(--border-divider);
+  color: var(--text-muted);
+  font-size: var(--font-caption);
+  background: var(--surface-background);
+}
+
+.cui-content-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  row-gap: calc(var(--space-block) * var(--space-scale));
+  width: 100%;
+}
+
+.cui-reading-column {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: var(--grid-reading-max-width);
+  margin-inline: 0;
+}
+
+.cui-medium-column {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: var(--grid-medium-max-width);
+}
+
+.cui-wide-column {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: var(--grid-wide-max-width);
+}
+
+.cui-chapter + .cui-chapter {
+  margin-top: calc(var(--space-chapter) * var(--space-scale));
+}
+
+.cui-section + .cui-section {
+  margin-top: calc(var(--space-section) * var(--space-scale));
+}
+
+.cui-block + .cui-block {
+  margin-top: calc(var(--space-block) * var(--space-scale));
+}
+
+/* —— Surface foundation —— Pack 02 — 06_ELEVATION_AND_SURFACE —— */
+
+.cui-surface-background {
+  background: var(--surface-background);
+  color: var(--text-primary);
+}
+
+.cui-surface-paper {
+  background: var(--surface-report-paper);
+  color: var(--text-primary);
+  border-radius: var(--radius-paper);
+  box-shadow: var(--elevation-none);
+}
+
+.cui-surface-section {
+  background: var(--surface-section);
+  color: var(--text-primary);
+  border-radius: var(--radius-surface);
+}
+
+.cui-surface-callout {
+  background: var(--surface-callout);
+  color: var(--text-primary);
+  border: 1px solid var(--border-callout);
+  border-radius: var(--radius-callout);
+  padding: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+.cui-surface-overlay {
+  background: var(--surface-overlay);
+  color: var(--text-primary);
+  border-radius: var(--radius-overlay);
+  box-shadow: var(--elevation-overlay);
+}
+
+.cui-divider {
+  border: 0;
+  border-top: 1px solid var(--border-divider);
+  margin-block: calc(var(--space-block) * var(--space-scale));
+}
+
+/* —— Responsive shell —— width adapts; reading order never changes —— */
+
+@media (max-width: 1279px) {
+  .cui-application-frame {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "top"
+      "sheet"
+      "footer";
+  }
+
+  .cui-reading-rail {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(280px, 86vw);
+    transform: translateX(-105%);
+    transition: transform var(--motion-normal) var(--motion-ease-out);
+    background: var(--surface-overlay);
+    box-shadow: var(--elevation-overlay);
+    border-right: 1px solid var(--border-divider);
+  }
+
+  .cui-reading-rail[data-open="true"] {
+    transform: none;
+  }
+
+  .cui-report-sheet {
+    box-shadow: var(--elevation-none);
+    border-radius: var(--radius-paper);
+  }
+}
+
+@media (max-width: 767px) {
+  .cui-report-sheet {
+    max-width: 100%;
+    padding-inline: var(--grid-margin);
+    padding-block: calc(var(--space-section) * var(--space-scale));
+  }
+
+  .cui-reading-column,
+  .cui-medium-column,
+  .cui-wide-column {
+    max-width: 100%;
+  }
+}
