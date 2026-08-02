@@ -401,7 +401,9 @@
       .map(function (r) {
         var parts = [r.name];
         if (r.category) parts.push(r.category);
-        if (r.priority != null) parts.push("priority " + r.priority);
+        if (r.priority != null) {
+          parts.push(t("report.kw_rule_priority") + ": " + r.priority);
+        }
         if (r.description) parts.push(r.description);
         return parts.filter(Boolean).join(" — ");
       })
