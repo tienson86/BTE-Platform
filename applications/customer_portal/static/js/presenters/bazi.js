@@ -351,9 +351,9 @@
 
   function resolveCanXuong(fullData) {
     var cx = null;
-    if (window.BteSummaryBuilder && typeof BteSummaryBuilder.build === "function") {
+    if (window.BteSummaryBuilder && typeof window.BteSummaryBuilder.build === "function") {
       try {
-        var model = BteSummaryBuilder.build(fullData || {}, {});
+        var model = window.BteSummaryBuilder.build(fullData || {}, {});
         cx = model && model.can_xuong;
       } catch (_) {
         cx = null;

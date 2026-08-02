@@ -141,8 +141,8 @@
       var full = (options && options.data) || {};
       var context = contextStrip(full);
       var body = "";
-      if (window.BtePresenters && typeof BtePresenters.narrative === "function") {
-        body = BtePresenters.narrative(narrative);
+      if (window.BtePresenters && typeof window.BtePresenters.narrative === "function") {
+        body = window.BtePresenters.narrative(narrative);
         // Retitle narrative shell for Discussion tab when possible.
         body = body
           .replace(

@@ -39,8 +39,8 @@
   function renderBasicInfo(data, options) {
     try {
       var info =
-        window.BtePresenters && BtePresenters.resolveChartInfo
-          ? BtePresenters.resolveChartInfo(data, (options && options.input) || {})
+        window.BtePresenters && window.BtePresenters.resolveChartInfo
+          ? window.BtePresenters.resolveChartInfo(data, (options && options.input) || {})
           : {
               full_name: MISSING,
               gender: MISSING,

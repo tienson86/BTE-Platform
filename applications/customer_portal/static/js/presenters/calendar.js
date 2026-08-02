@@ -162,8 +162,8 @@
 
   function resolveBatTrach(options, cal) {
     var bt =
-      window.BtePresenters && BtePresenters.resolveBatTrach
-        ? BtePresenters.resolveBatTrach((options && options.data) || {})
+      window.BtePresenters && window.BtePresenters.resolveBatTrach
+        ? window.BtePresenters.resolveBatTrach((options && options.data) || {})
         : null;
     if (bt && (bt.cung_phi !== MISSING || bt.menh_quai !== MISSING || bt.nhom_trach !== MISSING)) {
       return bt;
