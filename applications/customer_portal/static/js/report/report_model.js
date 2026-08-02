@@ -503,7 +503,16 @@
           ? null
           : typeof raw === "string" || typeof raw === "number"
             ? String(raw)
-            : JSON.stringify(raw);
+            : Array.isArray(raw)
+              ? raw
+                  .map(function (x) {
+                    if (x == null) return null;
+                    if (typeof x === "string" || typeof x === "number") return String(x);
+                    return x.label || x.name || x.title || null;
+                  })
+                  .filter(Boolean)
+                  .join(" · ") || null
+              : raw.label || raw.name || raw.title || raw.summary || null;
       blocks.push(
         makeBlock({
           id: rel.id,
