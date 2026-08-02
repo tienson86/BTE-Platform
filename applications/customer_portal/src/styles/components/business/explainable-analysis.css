@@ -27,6 +27,16 @@
   padding-block: calc(var(--space-paragraph) * var(--space-scale));
 }
 
+@media print {
+  .cui-biz-analysis-section,
+  .cui-biz-conclusion-panel,
+  .cui-biz-explanation-panel,
+  .cui-biz-evidence-panel {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cui-biz-explainable-analysis-screen {
     scroll-behavior: auto;

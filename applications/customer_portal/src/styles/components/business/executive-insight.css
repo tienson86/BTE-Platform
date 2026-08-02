@@ -36,6 +36,16 @@
   padding-block: calc(var(--space-paragraph) * var(--space-scale));
 }
 
+@media print {
+  .cui-biz-insight-section,
+  .cui-biz-opportunity-panel,
+  .cui-biz-risk-panel,
+  .cui-biz-executive-conclusion {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cui-biz-executive-insight {
     scroll-behavior: auto;

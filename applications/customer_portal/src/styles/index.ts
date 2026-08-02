@@ -15,3 +15,4 @@ export const SHARED_COMPONENTS_STYLES_ENTRY = "./components/shared/index.css" as
 export const BUSINESS_COMPONENTS_STYLES_ENTRY = "./components/business/index.css" as const;
 export const NAVIGATION_COMPONENTS_STYLES_ENTRY =
   "./components/navigation/index.css" as const;
+export const POLISH_STYLES_ENTRY = "./polish.css" as const;

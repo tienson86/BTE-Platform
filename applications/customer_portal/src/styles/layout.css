@@ -31,7 +31,7 @@
   padding-inline: var(--grid-margin);
   padding-block: var(--space-3);
   background: var(--surface-background);
-  border-bottom: 1px solid var(--border-divider);
+  border-bottom: var(--border-width) solid var(--border-divider);
 }
 
 .cui-reading-rail {
@@ -40,12 +40,12 @@
   top: 0;
   align-self: start;
   z-index: var(--z-rail);
-  width: 220px;
+  width: var(--rail-width);
   max-height: 100vh;
   overflow: auto;
   padding: calc(var(--space-block) * var(--space-scale)) var(--space-4);
   background: var(--surface-background);
-  border-right: 1px solid var(--border-divider);
+  border-right: var(--border-width) solid var(--border-divider);
 }
 
 .cui-report-sheet {
@@ -64,7 +64,7 @@
 .cui-page-footer {
   grid-area: footer;
   padding: var(--space-5) var(--grid-margin);
-  border-top: 1px solid var(--border-divider);
+  border-top: var(--border-width) solid var(--border-divider);
   color: var(--text-muted);
   font-size: var(--font-caption);
   background: var(--surface-background);
@@ -132,7 +132,7 @@
 .cui-surface-callout {
   background: var(--surface-callout);
   color: var(--text-primary);
-  border: 1px solid var(--border-callout);
+  border: var(--border-width) solid var(--border-callout);
   border-radius: var(--radius-callout);
   padding: calc(var(--space-paragraph) * var(--space-scale));
 }
@@ -146,7 +146,7 @@
 
 .cui-divider {
   border: 0;
-  border-top: 1px solid var(--border-divider);
+  border-top: var(--border-width) solid var(--border-divider);
   margin-block: calc(var(--space-block) * var(--space-scale));
 }
 
@@ -164,12 +164,12 @@
   .cui-reading-rail {
     position: fixed;
     inset: 0 auto 0 0;
-    width: min(280px, 86vw);
+    width: min(var(--rail-drawer-width), 86vw);
     transform: translateX(-105%);
     transition: transform var(--motion-normal) var(--motion-ease-out);
     background: var(--surface-overlay);
     box-shadow: var(--elevation-overlay);
-    border-right: 1px solid var(--border-divider);
+    border-right: var(--border-width) solid var(--border-divider);
   }
 
   .cui-reading-rail[data-open="true"] {
@@ -193,5 +193,16 @@
   .cui-medium-column,
   .cui-wide-column {
     max-width: 100%;
+  }
+
+  .cui-top-bar,
+  .cui-page-footer {
+    padding-block: calc(var(--space-inline) * var(--space-scale));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-reading-rail {
+    transition: none;
   }
 }

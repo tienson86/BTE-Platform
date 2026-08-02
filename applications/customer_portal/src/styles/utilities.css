@@ -116,3 +116,28 @@
     animation: none !important;
   }
 }
+
+/* —— WP-0012 polish utilities —— */
+
+.cui-print-only {
+  display: none;
+}
+
+@media print {
+  .cui-print-only {
+    display: block;
+  }
+
+  .cui-no-print {
+    display: none !important;
+  }
+}
+
+.cui-break-avoid {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.cui-contain-layout {
+  contain: layout style;
+}

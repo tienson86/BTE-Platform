@@ -44,6 +44,24 @@
   padding-block: calc(var(--space-paragraph) * var(--space-scale));
 }
 
+@media (max-width: 767px) {
+  .cui-biz-metrics-indicators,
+  .cui-biz-balance-panel__indicators,
+  .cui-biz-confidence-panel__items {
+    gap: calc(var(--space-list) * var(--space-scale));
+  }
+}
+
+@media print {
+  .cui-biz-metric-card,
+  .cui-biz-metric-indicator,
+  .cui-biz-balance-panel,
+  .cui-biz-confidence-panel {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cui-biz-metrics {
     scroll-behavior: auto;
