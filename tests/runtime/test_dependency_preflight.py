@@ -5,6 +5,7 @@ from __future__ import annotations
 from unittest.mock import patch
 
 import pytest
+from importlib.metadata import PackageNotFoundError
 
 from runtime.dependencies import (
     DISTRIBUTION_IMPORT_MAP,
@@ -93,33 +94,41 @@ class TestCheckPackage:
             raise ModuleNotFoundError("No module named 'dateutil'")
 
         with (
-            patch("runtime.dependencies.import_module", side_effect=_boom),
             patch(
-                "runtime.dependencies.is_distribution_installed",
-                return_value=False,
+                "runtime.dependency_resolver.import_module",
+                side_effect=_boom,
+            ),
+            patch(
+                "runtime.dependency_resolver.version",
+                side_effect=PackageNotFoundError("python-dateutil"),
             ),
         ):
             ok, message, results = check_required_packages(names=["python-dateutil"])
         assert ok is False
-        assert message.startswith("Missing packages: python-dateutil")
+        assert "python-dateutil" in message
+        assert "not_installed" in message
         assert results[0].spec.pip_name == "python-dateutil"
+        assert "pip install" in message
 
     def test_distribution_present_but_import_broken_message(self) -> None:
         def _boom(_name: str) -> None:
             raise ImportError("DLL load failed")
 
         with (
-            patch("runtime.dependencies.import_module", side_effect=_boom),
             patch(
-                "runtime.dependencies.is_distribution_installed",
-                return_value=True,
+                "runtime.dependency_resolver.import_module",
+                side_effect=_boom,
+            ),
+            patch(
+                "runtime.dependency_resolver.version",
+                return_value="2.5.0",
             ),
         ):
             ok, message, _ = check_required_packages(names=["pandas"])
         assert ok is False
         assert "pandas" in message
-        assert "distribution present" in message
-        assert "import 'pandas' failed" in message
+        assert "import_error" in message
+        assert "pip install" in message
 
 
 class TestCheckRequirementsIntegration:
@@ -144,18 +153,20 @@ class TestCheckRequirementsIntegration:
         result = check_requirements()
         if result.ok:
             return
-        assert "Missing packages:" in result.message
-        missing_segment = result.message.split("Missing packages:", 1)[1]
-        missing_segment = missing_segment.split(". Install", 1)[0]
-        tokens = []
-        for chunk in missing_segment.split(","):
-            chunk = chunk.strip()
-            if not chunk:
-                continue
-            tokens.append(chunk.split()[0])
-        assert "pandas" not in tokens
-        assert "python-dateutil" not in tokens
-        assert "dateutil" not in tokens
+        assert "Package" in result.message
+        assert "Installed" in result.message
+        assert "Required" in result.message
+        for line in result.message.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("pandas") or stripped.startswith("python-dateutil"):
+                assert "not_installed" not in stripped
+                assert "import_error" not in stripped
+                assert "version_conflict" not in stripped
+        assert "dateutil" not in {
+            chunk.split()[0]
+            for chunk in result.message.splitlines()
+            if chunk.strip().startswith("dateutil")
+        }
 
     def test_check_required_accepts_mixed_spec_styles(self) -> None:
         ok, message, results = check_required_packages(
