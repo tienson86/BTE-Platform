@@ -1,7 +1,6 @@
 /**
- * Discussion presentation layer (AI Discussion).
- * Wraps narrative/report content with analysis context references.
- * Display only — no LLM calls from the portal.
+ * Discussion + Knowledge Expert presentation.
+ * 3-pane UX consumes existing POST /api/v1/discussion; narrative is fallback only.
  */
 (function (global) {
   var MISSING = "--";
@@ -122,12 +121,87 @@
           return chip(p.label, p.value);
         })
         .join("") +
-      chip(t("discussion.ref_elements"), dayMaster + (element !== MISSING ? " · " + element : "")) +
+      chip(
+        t("discussion.ref_elements"),
+        dayMaster + (element !== MISSING ? " · " + element : "")
+      ) +
       chip(t("discussion.ref_ten_gods"), tenGods || MISSING) +
       chip(t("discussion.ref_shensha"), shensha || MISSING) +
       chip(t("discussion.ref_useful_god"), usefulGod) +
       "</div>" +
       "</section>"
+    );
+  }
+
+  function narrativeFallback(narrative) {
+    var body = "";
+    if (window.BtePresenters && typeof window.BtePresenters.narrative === "function") {
+      body = window.BtePresenters.narrative(narrative);
+      body = body
+        .replace(
+          /aria-label="[^"]*"/,
+          'aria-label="' + esc(t("discussion.narrative_fallback")) + '"'
+        )
+        .replace(
+          /<h2>[^<]*<\/h2>/,
+          "<h2>" + esc(t("discussion.narrative_fallback")) + "</h2>"
+        );
+    } else {
+      body =
+        '<p class="muted">' +
+        esc(t("discussion.empty")) +
+        "</p>";
+    }
+    return (
+      '<details class="bte-expert-fallback">' +
+      "<summary>" +
+      esc(t("discussion.narrative_fallback")) +
+      "</summary>" +
+      body +
+      "</details>"
+    );
+  }
+
+  function expertShell() {
+    return (
+      '<div class="bte-expert" data-expert-root>' +
+      '<aside class="bte-expert-pane" data-pane="conversation">' +
+      '<div class="bte-expert-pane-head">' +
+      esc(t("discussion.pane_conversation")) +
+      "</div>" +
+      '<div class="bte-expert-pane-body" data-expert-thread></div>' +
+      '<form class="bte-expert-composer" data-expert-form>' +
+      '<input type="text" data-expert-input autocomplete="off" placeholder="' +
+      esc(t("discussion.ask_placeholder")) +
+      '" aria-label="' +
+      esc(t("discussion.ask_placeholder")) +
+      '" />' +
+      '<button type="submit">' +
+      esc(t("discussion.ask_send")) +
+      "</button>" +
+      "</form>" +
+      "</aside>" +
+      '<section class="bte-expert-pane" data-pane="answer">' +
+      '<div class="bte-expert-pane-head">' +
+      esc(t("discussion.pane_answer")) +
+      "</div>" +
+      '<div class="bte-expert-pane-body" data-expert-answer>' +
+      '<p class="muted">' +
+      esc(t("discussion.ask_hint")) +
+      "</p>" +
+      "</div>" +
+      "</section>" +
+      '<aside class="bte-expert-pane" data-pane="sources">' +
+      '<div class="bte-expert-pane-head">' +
+      esc(t("discussion.pane_sources")) +
+      "</div>" +
+      '<div class="bte-expert-pane-body" data-expert-sources>' +
+      '<p class="muted">' +
+      esc(t("discussion.sources_empty")) +
+      "</p>" +
+      "</div>" +
+      "</aside>" +
+      "</div>"
     );
   }
 
@@ -139,35 +213,19 @@
   function renderDiscussion(narrative, options) {
     try {
       var full = (options && options.data) || {};
-      var context = contextStrip(full);
-      var body = "";
-      if (window.BtePresenters && typeof window.BtePresenters.narrative === "function") {
-        body = window.BtePresenters.narrative(narrative);
-        // Retitle narrative shell for Discussion tab when possible.
-        body = body
-          .replace(
-            /aria-label="[^"]*"/,
-            'aria-label="' + esc(t("discussion.title")) + '"'
-          )
-          .replace(
-            /<h2>[^<]*<\/h2>/,
-            "<h2>" + esc(t("discussion.title")) + "</h2>"
-          )
-          .replace(
-            /<p class="bte-calendar-sub">[^<]*<\/p>/,
-            '<p class="bte-calendar-sub">' + esc(t("discussion.subtitle")) + "</p>"
-          );
-      } else {
-        body =
-          '<section class="bte-narr"><p class="muted">' +
-          esc(t("discussion.empty")) +
-          "</p></section>";
-      }
-
       return (
         '<div class="bte-discussion">' +
-        context +
-        body +
+        '<header class="bte-calendar-head">' +
+        "<h2>" +
+        esc(t("discussion.expert_title")) +
+        "</h2>" +
+        '<p class="bte-calendar-sub">' +
+        esc(t("discussion.subtitle")) +
+        "</p>" +
+        "</header>" +
+        contextStrip(full) +
+        expertShell() +
+        narrativeFallback(narrative) +
         "</div>"
       );
     } catch (_) {
@@ -179,6 +237,225 @@
     }
   }
 
+  function formatAnswer(text) {
+    return esc(text || "").replace(/\n/g, "<br>");
+  }
+
+  function renderSources(payload) {
+    var discussion = payload && payload.discussion;
+    var summary = payload && payload.summary;
+    var validation = payload && payload.validation;
+    var parts = [];
+
+    if (discussion && discussion.confidence != null) {
+      var conf =
+        typeof discussion.confidence === "number"
+          ? discussion.confidence.toFixed(2)
+          : String(discussion.confidence);
+      parts.push(
+        "<div><strong>" +
+          esc(t("discussion.confidence")) +
+          ":</strong> " +
+          esc(conf) +
+          "</div>"
+      );
+      if (window.BteUI) {
+        var tone =
+          discussion.grounded === false
+            ? "warning"
+            : discussion.refused
+              ? "danger"
+              : "success";
+        parts.push(
+          BteUI.statusBadge(
+            discussion.refused
+              ? "Refused"
+              : discussion.grounded
+                ? "Grounded"
+                : "Ungrounded",
+            tone
+          )
+        );
+      }
+    }
+
+    if (summary && typeof summary === "object") {
+      parts.push(
+        '<ul class="bte-expert-meta">' +
+          "<li>Evidence: " +
+          esc(show(summary.evidence_count)) +
+          "</li>" +
+          "<li>Knowledge: " +
+          esc(show(summary.knowledge_count)) +
+          "</li>" +
+          "<li>Validation: " +
+          esc(
+            summary.validation_passed === true
+              ? "passed"
+              : summary.validation_passed === false
+                ? "failed"
+                : MISSING
+          ) +
+          "</li>" +
+          "</ul>"
+      );
+      if (Array.isArray(summary.reasoning_conclusions) && summary.reasoning_conclusions.length) {
+        parts.push(
+          "<div><strong>" +
+            esc(t("discussion.related")) +
+            "</strong><ul>" +
+            summary.reasoning_conclusions
+              .slice(0, 6)
+              .map(function (c) {
+                return "<li>" + esc(String(c)) + "</li>";
+              })
+              .join("") +
+            "</ul></div>"
+        );
+      }
+    }
+
+    if (validation && validation.issues && validation.issues.length) {
+      parts.push(
+        "<details><summary>Validation notes</summary><ul>" +
+          validation.issues
+            .slice(0, 8)
+            .map(function (issue) {
+              return (
+                "<li>" +
+                esc(
+                  typeof issue === "string"
+                    ? issue
+                    : issue.message || JSON.stringify(issue)
+                ) +
+                "</li>"
+              );
+            })
+            .join("") +
+          "</ul></details>"
+      );
+    }
+
+    if (!parts.length) {
+      return '<p class="muted">' + esc(t("discussion.sources_empty")) + "</p>";
+    }
+    return parts.join("");
+  }
+
+  function bindDiscussionExpert(root, options) {
+    if (!root) return;
+    var host = root.querySelector("[data-expert-root]");
+    if (!host) return;
+
+    var thread = host.querySelector("[data-expert-thread]");
+    var answerEl = host.querySelector("[data-expert-answer]");
+    var sourcesEl = host.querySelector("[data-expert-sources]");
+    var form = host.querySelector("[data-expert-form]");
+    var input = host.querySelector("[data-expert-input]");
+    var birth = (options && options.input) || {};
+    var busy = false;
+
+    function appendMsg(role, text) {
+      if (!thread) return;
+      var div = document.createElement("div");
+      div.className = "bte-expert-msg " + role;
+      div.innerHTML = formatAnswer(text);
+      thread.appendChild(div);
+      thread.scrollTop = thread.scrollHeight;
+    }
+
+    function showError(err) {
+      var message =
+        (err && err.message) || t("discussion.expert_unavailable");
+      var requestId =
+        (err && err.payload && err.payload.request_id) ||
+        (err && err.request_id) ||
+        "";
+      var details = "";
+      try {
+        if (err && err.payload) details = JSON.stringify(err.payload, null, 2);
+      } catch (_) {}
+      if (answerEl) {
+        answerEl.innerHTML = window.BteUI
+          ? BteUI.errorPanel(message, details, requestId) +
+            '<p class="muted" style="margin-top:0.75rem">' +
+            esc(t("discussion.expert_unavailable")) +
+            "</p>"
+          : '<p class="muted">' + esc(message) + "</p>";
+        var retry = document.createElement("button");
+        retry.type = "button";
+        retry.className = "secondary";
+        retry.textContent = "Retry";
+        retry.addEventListener("click", function () {
+          if (input && input.value) form.dispatchEvent(new Event("submit"));
+        });
+        answerEl.appendChild(retry);
+      }
+    }
+
+    async function ask(question) {
+      if (!window.BtePortal || typeof BtePortal.post !== "function") {
+        showError(new Error(t("common.api_client_failed")));
+        return;
+      }
+      busy = true;
+      if (answerEl) {
+        answerEl.innerHTML =
+          '<div class="skeleton-line"></div><div class="skeleton-line"></div>';
+      }
+      try {
+        var body = {
+          year: Number(birth.year),
+          month: Number(birth.month),
+          day: Number(birth.day),
+          hour: Number(birth.hour || 0),
+          minute: Number(birth.minute || 0),
+          gender: birth.gender || null,
+          timezone: birth.timezone || "Asia/Ho_Chi_Minh",
+          full_name: birth.full_name || null,
+          birth_place: birth.birth_place || null,
+          question: question,
+          show_citations: false,
+        };
+        var res = await BtePortal.post("/api/v1/discussion", body);
+        var data = res && res.data != null ? res.data : res;
+        var discussion = data && data.discussion;
+        var answerText =
+          (discussion && discussion.answer) ||
+          (data && data.message) ||
+          t("discussion.empty");
+        appendMsg("assistant", answerText);
+        if (answerEl) {
+          answerEl.innerHTML =
+            '<div class="bte-expert-answer-body">' +
+            formatAnswer(answerText) +
+            "</div>";
+        }
+        if (sourcesEl) sourcesEl.innerHTML = renderSources(data);
+        if (window.BteShell && typeof BteShell.toast === "function") {
+          BteShell.toast(t("discussion.expert_title"), "success");
+        }
+      } catch (err) {
+        showError(err);
+      } finally {
+        busy = false;
+      }
+    }
+
+    if (form) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (busy) return;
+        var q = input ? String(input.value || "").trim() : "";
+        if (!q) return;
+        appendMsg("user", q);
+        if (input) input.value = "";
+        ask(q);
+      });
+    }
+  }
+
   global.BtePresenters = global.BtePresenters || {};
   global.BtePresenters.discussion = renderDiscussion;
+  global.BtePresenters.bindDiscussionExpert = bindDiscussionExpert;
 })(window);
