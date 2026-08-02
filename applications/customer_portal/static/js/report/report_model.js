@@ -1035,8 +1035,6 @@
         : null;
     var pattern =
       payload.pattern && typeof payload.pattern === "object" ? payload.pattern : {};
-    var score =
-      payload.score && typeof payload.score === "object" ? payload.score : {};
     var knowledgeRoot =
       payload.knowledge && typeof payload.knowledge === "object"
         ? payload.knowledge
