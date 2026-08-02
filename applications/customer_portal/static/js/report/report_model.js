@@ -1147,10 +1147,17 @@
           payload: payload,
         }),
       },
-      interpretation: {
-        confidence: interpretation.confidence != null ? present(interpretation.confidence) : MISSING,
-        chapters: interpChapters(interpretation),
-      },
+      interpretation: (function () {
+        var doc = buildInterpretationDocument(interpretation);
+        return {
+          confidence:
+            interpretation.confidence != null
+              ? present(interpretation.confidence)
+              : MISSING,
+          document: doc,
+          chapters: doc.chapters,
+        };
+      })(),
       knowledge: {
         status: knowledge,
         narrative: payload.narrative || payload.report || null,
