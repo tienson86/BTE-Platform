@@ -196,7 +196,9 @@
       : '<p class="rpt-caption ax-miss">' + esc(unavailableText()) + "</p>";
 
     return (
-      '<article class="ax-block" data-component="AnalysisBlock" data-ax-id="' +
+      '<article class="ax-block" data-component="AnalysisBlock" id="analysis-' +
+      esc(block.id) +
+      '" data-ax-id="' +
       esc(block.id) +
       '" data-collapsed="' +
       (open === "true" ? "false" : "true") +
