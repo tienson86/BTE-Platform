@@ -145,15 +145,7 @@ if (!html.includes("RulePanel")) assert.push("rules");
 if (!html.includes("EvidencePanel")) assert.push("evidence");
 if (!html.includes("ConfidenceIndicator")) assert.push("confidence");
 if (!html.includes("KnowledgeReference")) assert.push("knowledge");
-const orderKeys = [
-  "an_conclusion",
-  "an_summary",
-  "an_factors",
-  "an_rules",
-  "an_evidence",
-  "an_confidence",
-];
-/* Structure order inside first block via Vietnamese labels */
+const firstBlock = html.split('data-component="AnalysisBlock"')[1] || "";
 const labels = [
   catalog.report.an_conclusion,
   catalog.report.an_summary,
@@ -164,7 +156,7 @@ const labels = [
 ];
 let prev = -1;
 labels.forEach((lab) => {
-  const idx = html.indexOf(lab);
+  const idx = firstBlock.indexOf(lab);
   if (idx < 0) assert.push("missing:" + lab);
   else if (idx < prev) assert.push("order:" + lab);
   if (idx >= 0) prev = idx;
