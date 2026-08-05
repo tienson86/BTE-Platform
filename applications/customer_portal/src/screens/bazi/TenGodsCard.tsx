@@ -1,9 +1,7 @@
 import { memo, type ReactNode } from "react";
-import { Badge } from "../../components/base/Badge";
 import { Card } from "../../components/base/Card";
 import { BaseText } from "../../components/base/BaseText";
 import { BaseTooltip } from "../../components/base/BaseTooltip";
-import { ScoreBar } from "../../components/display/ScoreBar";
 import { Stack } from "../../components/layout/Stack";
 import type {
   BaZiResultLabels,
@@ -19,15 +17,16 @@ export type TenGodsCardProps = {
   errorMessage?: string;
 };
 
-/** WP08 — Ten Gods Card (presentation only). */
+/**
+ * Canonical Level 4 — Ten Gods presence grid.
+ * Same god names/counts; check / × for progressive scan.
+ */
 export const TenGodsCard = memo(function TenGodsCard({
   status,
   labels,
   gods,
   errorMessage,
 }: TenGodsCardProps): ReactNode {
-  const totalCount = gods.reduce((sum, god) => sum + god.count, 0);
-
   return (
     <Card
       title={labels.tenGodsTitle}
@@ -43,30 +42,35 @@ export const TenGodsCard = memo(function TenGodsCard({
         errorDescription={errorMessage}
       >
         <Stack gap="paragraph">
-          <BaseText variant="caption" tone="secondary">
-            {labels.distributionSummary}: {totalCount} xuất hiện
+          <ul className="cui-bazi-presence-grid">
+            {gods.map((god) => {
+              const present = god.count > 0;
+              return (
+                <li key={god.id}>
+                  <BaseTooltip
+                    content={`${god.name}: ×${god.count} · ${god.descriptionPreview}`}
+                  >
+                    <span
+                      className="cui-bazi-presence"
+                      data-present={present ? "true" : "false"}
+                      aria-label={`${god.name}: ${present ? "có" : "không"}`}
+                    >
+                      <span
+                        className="cui-bazi-presence__mark"
+                        aria-hidden="true"
+                      >
+                        {present ? "✓" : "×"}
+                      </span>
+                      <BaseText variant="body">{god.name}</BaseText>
+                    </span>
+                  </BaseTooltip>
+                </li>
+              );
+            })}
+          </ul>
+          <BaseText variant="caption" tone="muted">
+            ✓ Có xuất hiện · × Không có
           </BaseText>
-          <div className="cui-bazi-gods__grid">
-            {gods.map((god) => (
-              <BaseTooltip
-                key={god.id}
-                content={`${god.name}: ${god.descriptionPreview}`}
-              >
-                <article className="cui-bazi-god" aria-label={god.name}>
-                  <div className="cui-bazi-god__head">
-                    <BaseText variant="subsection">{god.name}</BaseText>
-                    <Badge tone="info">×{god.count}</Badge>
-                    <Badge tone="neutral">{god.strength}</Badge>
-                  </div>
-                  <ScoreBar
-                    label={labels.score}
-                    value={god.score}
-                    max={100}
-                  />
-                </article>
-              </BaseTooltip>
-            ))}
-          </div>
         </Stack>
       </SectionGate>
     </Card>

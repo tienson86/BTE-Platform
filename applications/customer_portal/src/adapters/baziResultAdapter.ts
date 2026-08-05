@@ -6,7 +6,12 @@
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto, SeriesItemDto } from "../models";
 import {
   BAZI_MOCK_ACTIONS,
+  BAZI_MOCK_INTERPRETATION,
+  BAZI_MOCK_KNOWLEDGE,
+  BAZI_MOCK_SHEN_SHA,
+  BAZI_MOCK_SPIRIT_GODS,
   BAZI_RESULT_LABELS,
+  buildExecutiveFromResult,
   type BaZiFiveElement,
   type BaZiPillar,
   type BaZiProfile,
@@ -319,6 +324,10 @@ export function adaptAnalysisToBaZiResult(
     mapPillar(data.bazi?.[spec.key], spec.kind, spec.label),
   );
 
+  const fiveElements = mapFiveElements(data);
+  const tenGods = mapTenGods(data);
+  const strength = mapStrength(data);
+
   return {
     status: options.status ?? "ready",
     errorMessage: options.errorMessage,
@@ -327,9 +336,19 @@ export function adaptAnalysisToBaZiResult(
     metadata: mapMetadata(data, options.requestId),
     actions: BAZI_MOCK_ACTIONS,
     pillars,
-    fiveElements: mapFiveElements(data),
-    tenGods: mapTenGods(data),
-    strength: mapStrength(data),
+    fiveElements,
+    tenGods,
+    strength,
+    executive: buildExecutiveFromResult({
+      strength,
+      pillars,
+      fiveElements,
+      tenGods,
+    }),
+    spiritGods: BAZI_MOCK_SPIRIT_GODS,
+    shenSha: BAZI_MOCK_SHEN_SHA,
+    interpretation: BAZI_MOCK_INTERPRETATION,
+    knowledge: BAZI_MOCK_KNOWLEDGE,
   };
 }
 
@@ -338,6 +357,15 @@ export function createBaZiResultGateViewModel(
   status: PresentationStatus,
   errorMessage?: string,
 ): BaZiResultViewModel {
+  const strength = {
+    score: 0,
+    maxScore: 100,
+    label: "—",
+    level: "—",
+    confidence: 0,
+    summary: "",
+  };
+
   return {
     status,
     errorMessage,
@@ -362,13 +390,16 @@ export function createBaZiResultGateViewModel(
     pillars: [],
     fiveElements: [],
     tenGods: [],
-    strength: {
-      score: 0,
-      maxScore: 100,
-      label: "—",
-      level: "—",
-      confidence: 0,
-      summary: "",
-    },
+    strength,
+    executive: buildExecutiveFromResult({
+      strength,
+      pillars: [],
+      fiveElements: [],
+      tenGods: [],
+    }),
+    spiritGods: [],
+    shenSha: [],
+    interpretation: { title: BAZI_RESULT_LABELS.interpretationTitle, paragraphs: [] },
+    knowledge: [],
   };
 }

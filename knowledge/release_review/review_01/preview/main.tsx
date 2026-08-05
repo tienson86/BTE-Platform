@@ -2,9 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { DashboardScreen } from "@portal/screens/DashboardScreen";
 import { BaZiResultScreen } from "@portal/screens/bazi/BaZiResultScreen";
+import { ExecutiveSummaryCard } from "@portal/screens/bazi/ExecutiveSummaryCard";
 import { BAZI_RESULT_MOCK } from "@portal/screens/bazi/mockData";
 import { AuthLayout } from "@portal/layouts/AuthLayout";
 import { BlankLayout } from "@portal/layouts/BlankLayout";
+import { AppLayout } from "@portal/layouts/AppLayout";
 import { AppProviders } from "@portal/app/AppProviders";
 import { Dialog } from "@portal/components/feedback/Dialog";
 import { Drawer } from "@portal/components/feedback/Drawer";
@@ -20,6 +22,7 @@ import "@portal/styles/index.css";
 type ReviewPage =
   | "dashboard"
   | "bazi"
+  | "executive"
   | "bazi-loading"
   | "bazi-empty"
   | "bazi-error"
@@ -31,6 +34,7 @@ function readPage(): ReviewPage {
   const value = new URLSearchParams(window.location.search).get("page") ?? "dashboard";
   switch (value) {
     case "bazi":
+    case "executive":
     case "bazi-loading":
     case "bazi-empty":
     case "bazi-error":
@@ -100,6 +104,21 @@ function App() {
   if (page === "dashboard") {
     return <DashboardScreen userName="Nguyễn Văn Minh" />;
   }
+  if (page === "executive") {
+    return (
+      <AppProviders>
+        <AppLayout pathname="/result" userLabel="Nguyễn Văn Minh" tocActiveId="summary">
+          <div className="cui-review-executive-zoom">
+            <ExecutiveSummaryCard
+              status="ready"
+              labels={BAZI_RESULT_MOCK.labels}
+              executive={BAZI_RESULT_MOCK.executive}
+            />
+          </div>
+        </AppLayout>
+      </AppProviders>
+    );
+  }
   if (page === "bazi") {
     return <BaZiResultScreen userName="Nguyễn Văn Minh" />;
   }
@@ -142,6 +161,11 @@ style.textContent = `
     padding: calc(var(--space-block, 24px));
     max-width: 960px;
     margin: 0 auto;
+  }
+  .cui-review-executive-zoom {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: calc(var(--space-block, 24px));
   }
 `;
 document.head.appendChild(style);

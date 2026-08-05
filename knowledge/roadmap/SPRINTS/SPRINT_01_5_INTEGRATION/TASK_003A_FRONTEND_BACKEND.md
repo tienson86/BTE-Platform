@@ -2,6 +2,10 @@
 
 # TASK_003A — Frontend ↔ Backend Integration
 
+> **STATUS: CANCELLED (2026-08-05)**  
+> Product Owner yêu cầu hủy Integration cho đến khi Canonical Portal UI được phê duyệt / UI Freeze.  
+> Không kết nối API · Không Backend work trong task này · Mở lại sau Sprint 01 UI Freeze.
+
 ---
 
 # Document Information
@@ -13,7 +17,7 @@
 | Sprint | Sprint 01.5 |
 | Phase | Integration |
 | Version | 1.0 |
-| Status | READY |
+| Status | **CANCELLED** (2026-08-05) — chờ Product Owner phê duyệt Canonical Portal UI trước khi Integration |
 | Priority | P0 |
 | Estimated | 2–3 Days |
 

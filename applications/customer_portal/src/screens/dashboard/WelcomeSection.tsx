@@ -6,7 +6,7 @@ export type WelcomeSectionProps = {
   userName?: string;
 };
 
-/** Dashboard welcome block (WP04). */
+/** Dashboard welcome block — Canonical hero tier (same copy). */
 export function WelcomeSection({ userName }: WelcomeSectionProps): ReactNode {
   const greeting = userName ? `Xin chào, ${userName}` : "Xin chào";
   return (

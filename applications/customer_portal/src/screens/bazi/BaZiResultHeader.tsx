@@ -31,7 +31,10 @@ function initialsFromName(name: string): string {
   return (last.charAt(0) || "B").toUpperCase();
 }
 
-/** WP05 — BaZi Result Header (presentation only). */
+/**
+ * Canonical Result — BaZi Overview (tier 2).
+ * Same profile / metadata / actions data; reading-section presentation.
+ */
 export const BaZiResultHeader = memo(function BaZiResultHeader({
   status,
   labels,
@@ -41,25 +44,24 @@ export const BaZiResultHeader = memo(function BaZiResultHeader({
   errorMessage,
 }: BaZiResultHeaderProps): ReactNode {
   return (
-    <Card className="cui-bazi-header" aria-label={labels.pageTitle}>
+    <Card
+      className="cui-bazi-header cui-bazi-overview"
+      aria-label={labels.overviewTitle}
+      title={labels.overviewTitle}
+    >
       <SectionGate
         status={status}
-        loadingLabel="Đang tải header kết quả"
+        loadingLabel="Đang tải Tổng Quan Lá Số"
         emptyTitle="Chưa có thông tin lá số"
         emptyDescription="Lập lá số mới để xem kết quả."
-        errorTitle="Không tải được header kết quả"
+        errorTitle="Không tải được Tổng Quan Lá Số"
         errorDescription={errorMessage}
       >
         <Stack gap="paragraph">
           <div className="cui-bazi-header__title-row">
-            <div>
-              <BaseText variant="pageTitle" className="cui-bazi-header__title">
-                {labels.pageTitle}
-              </BaseText>
-              <Badge tone="info">
-                {labels.fieldChartId}: {metadata.chartId}
-              </Badge>
-            </div>
+            <Badge tone="info">
+              {labels.fieldChartId}: {metadata.chartId}
+            </Badge>
             <Badge tone="success">{metadata.analysisStatus}</Badge>
           </div>
 

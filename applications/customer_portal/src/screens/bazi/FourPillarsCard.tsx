@@ -19,7 +19,7 @@ export type FourPillarsCardProps = {
   errorMessage?: string;
 };
 
-/** WP06 — Four Pillars Card (presentation only). */
+/** Canonical Level 2 — Four Pillars grid. */
 export const FourPillarsCard = memo(function FourPillarsCard({
   status,
   labels,
@@ -27,26 +27,33 @@ export const FourPillarsCard = memo(function FourPillarsCard({
   errorMessage,
 }: FourPillarsCardProps): ReactNode {
   return (
-    <Card
-      title={labels.pillarsTitle}
-      className="cui-bazi-pillars"
-      aria-label={labels.pillarsTitle}
+    <section
+      id="tu-tru"
+      className="cui-bazi-level"
+      aria-labelledby="bazi-pillars-heading"
     >
-      <SectionGate
-        status={status}
-        loadingLabel="Đang tải Tứ Trụ"
-        emptyTitle="Chưa có dữ liệu Tứ Trụ"
-        emptyDescription="Dữ liệu trụ sẽ hiển thị sau khi phân tích."
-        errorTitle="Không tải được Tứ Trụ"
-        errorDescription={errorMessage}
-      >
-        <div className="cui-bazi-pillars__grid">
-          {pillars.map((pillar) => (
-            <PillarPanel key={pillar.kind} pillar={pillar} labels={labels} />
-          ))}
-        </div>
-      </SectionGate>
-    </Card>
+      <header className="cui-bazi-level__header">
+        <BaseText id="bazi-pillars-heading" variant="section">
+          {labels.pillarsTitle}
+        </BaseText>
+      </header>
+      <Card className="cui-bazi-pillars">
+        <SectionGate
+          status={status}
+          loadingLabel="Đang tải Tứ Trụ"
+          emptyTitle="Chưa có dữ liệu Tứ Trụ"
+          emptyDescription="Dữ liệu trụ sẽ hiển thị sau khi phân tích."
+          errorTitle="Không tải được Tứ Trụ"
+          errorDescription={errorMessage}
+        >
+          <div className="cui-bazi-pillars__grid">
+            {pillars.map((pillar) => (
+              <PillarPanel key={pillar.kind} pillar={pillar} labels={labels} />
+            ))}
+          </div>
+        </SectionGate>
+      </Card>
+    </section>
   );
 });
 
@@ -63,8 +70,11 @@ function PillarPanel({
       data-kind={pillar.kind}
       aria-label={`Trụ ${pillar.label}`}
     >
-      <BaseText variant="subsection" className="cui-bazi-pillar__label">
+      <BaseText variant="caption" tone="muted" className="cui-bazi-pillar__label">
         {pillar.label}
+      </BaseText>
+      <BaseText variant="subsection" className="cui-bazi-pillar__pair">
+        {pillar.heavenlyStem} · {pillar.earthlyBranch}
       </BaseText>
       <Divider />
       <Stack gap="list">
@@ -115,7 +125,7 @@ function PillarRow({
   tooltip: string;
 }): ReactNode {
   return (
-    <div className="cui-bazi-pillar__row">
+    <div className="cui-bazi-pillar__row cui-bazi-pillar__row--split">
       <BaseText variant="caption" tone="muted">
         {label}
       </BaseText>

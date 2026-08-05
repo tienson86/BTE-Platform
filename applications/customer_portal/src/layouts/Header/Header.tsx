@@ -1,22 +1,27 @@
 import type { ReactNode } from "react";
 import { IconButton } from "../../components/base/IconButton";
-import { SearchBox } from "../../components/forms/SearchBox";
 import { Topbar } from "../../components/navigation/Topbar";
 import { useTheme } from "../../theme";
 import { cx } from "../../utils";
+import { PrimaryNav } from "../Navigation/PrimaryNav";
 
 export type HeaderProps = {
   brand?: ReactNode;
   userLabel?: string;
+  activeNavId?: string;
   onMenuClick?: () => void;
   showMenuButton?: boolean;
   className?: string;
 };
 
-/** Application header — logo, search placeholder, theme, user (WP03). */
+/**
+ * Canonical application header — brand, primary nav, theme, user.
+ * Design System / Topbar API unchanged.
+ */
 export function Header({
-  brand = "BTE",
+  brand = "BTE Portal",
   userLabel = "Người dùng",
+  activeNavId,
   onMenuClick,
   showMenuButton = false,
   className,
@@ -35,7 +40,7 @@ export function Header({
       start={
         showMenuButton ? (
           <IconButton
-            label="Mở menu điều hướng"
+            label="Mở mục lục"
             icon={<span aria-hidden="true">☰</span>}
             onClick={onMenuClick}
           />
@@ -43,28 +48,31 @@ export function Header({
       }
       end={
         <div className="cui-app-header__actions">
-          <div className="cui-app-header__search">
-            <SearchBox
-              id="app-header-search"
-              placeholder="Tìm kiếm…"
-              submitLabel="Tìm"
-              aria-label="Tìm kiếm (placeholder)"
-            />
-          </div>
           <IconButton
-            label="Thông báo"
-            icon={<span aria-hidden="true">🔔</span>}
-          />
-          <IconButton
-            label={mode === "dark" ? "Chuyển sang giao diện sáng" : "Chuyển sang giao diện tối"}
+            label={
+              mode === "dark"
+                ? "Chuyển sang giao diện sáng"
+                : "Chuyển sang giao diện tối"
+            }
             icon={<span aria-hidden="true">{mode === "dark" ? "☀" : "☾"}</span>}
             onClick={toggleMode}
           />
-          <button type="button" className="cui-app-header__user" aria-haspopup="menu">
-            {userLabel}
+          <button
+            type="button"
+            className="cui-app-header__user"
+            aria-haspopup="menu"
+            aria-label={userLabel}
+            title={userLabel}
+          >
+            <span className="cui-app-header__avatar" aria-hidden="true">
+              {(userLabel.trim().split(/\s+/).pop() ?? "U").charAt(0).toUpperCase()}
+            </span>
+            <span className="cui-app-header__user-label">{userLabel}</span>
           </button>
         </div>
       }
-    />
+    >
+      <PrimaryNav activeId={activeNavId} />
+    </Topbar>
   );
 }

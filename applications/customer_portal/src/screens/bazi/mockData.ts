@@ -1,7 +1,6 @@
 /**
- * BaZi Result ViewModel types + mock fixture (Wave 3 / ADR-006).
- * Main flow uses AnalyzeService → Adapter (TASK_003A).
- * Mock remains for tests and `BTE_DATA_SOURCE=mock` only.
+ * BaZi Result ViewModel types + mock fixture (Canonical UI / ADR-006).
+ * Presentation only — no API / Engine coupling until Sprint 01.5 after UI Freeze.
  */
 
 export type PresentationStatus = "ready" | "loading" | "empty" | "error";
@@ -71,8 +70,72 @@ export type BaZiStrength = {
   readonly summary: string;
 };
 
+export type BaZiExecutiveMetric = {
+  readonly id: string;
+  readonly label: string;
+  readonly value: string;
+  readonly hint: string;
+};
+
+export type BaZiSpiritRole = "dung" | "hy" | "ky";
+
+export type BaZiSpiritGod = {
+  readonly id: string;
+  readonly role: BaZiSpiritRole;
+  readonly roleLabel: string;
+  readonly name: string;
+  readonly element: string;
+};
+
+export type BaZiExecutiveSummary = {
+  readonly title: string;
+  readonly verdict: string;
+  readonly level: string;
+  readonly confidence: number;
+  readonly summary: string;
+  readonly highlights: readonly string[];
+  readonly metrics: readonly BaZiExecutiveMetric[];
+  /** Hero — Nhật Chủ stem (largest signal). */
+  readonly dayMaster: string;
+  readonly dayMasterHint: string;
+  readonly element: string;
+  readonly elementHint: string;
+  readonly yinYang: string;
+  readonly yinYangHint: string;
+  /** Display value for Thân — avoid duplicating exact Strength badge text. */
+  readonly strengthGlance: string;
+  readonly strengthHint: string;
+  readonly dungThan: string;
+  readonly hyThan: string;
+  readonly kyThan: string;
+  readonly pattern: string;
+  readonly overallGrade: string;
+  readonly recommendation: string;
+};
+
+export type BaZiShenShaItem = {
+  readonly id: string;
+  readonly name: string;
+  readonly tone: string;
+  readonly note: string;
+  readonly present: boolean;
+};
+
+export type BaZiInterpretationBlock = {
+  readonly title: string;
+  readonly paragraphs: readonly string[];
+};
+
+export type BaZiKnowledgeItem = {
+  readonly id: string;
+  readonly title: string;
+  readonly reference: string;
+};
+
 export type BaZiResultLabels = {
   readonly pageTitle: string;
+  readonly executiveTitle: string;
+  readonly overviewTitle: string;
   readonly profileHeading: string;
   readonly metadataHeading: string;
   readonly actionsHeading: string;
@@ -80,6 +143,9 @@ export type BaZiResultLabels = {
   readonly fiveElementsTitle: string;
   readonly tenGodsTitle: string;
   readonly strengthTitle: string;
+  readonly shenShaTitle: string;
+  readonly interpretationTitle: string;
+  readonly knowledgeTitle: string;
   readonly fieldFullName: string;
   readonly fieldGender: string;
   readonly fieldSolar: string;
@@ -101,10 +167,13 @@ export type BaZiResultLabels = {
   readonly summary: string;
   readonly level: string;
   readonly distributionSummary: string;
+  readonly dayMaster: string;
 };
 
 export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   pageTitle: "Kết Quả Bát Tự",
+  executiveTitle: "Tóm Tắt Điều Hành",
+  overviewTitle: "Tổng Quan Lá Số",
   profileHeading: "Thông tin người xem",
   metadataHeading: "Thông tin lá số",
   actionsHeading: "Thao tác",
@@ -112,6 +181,9 @@ export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   fiveElementsTitle: "Ngũ Hành",
   tenGodsTitle: "Thập Thần",
   strengthTitle: "Thân Vượng Nhược",
+  shenShaTitle: "Thần Sát",
+  interpretationTitle: "Luận Giải",
+  knowledgeTitle: "Tri Thức",
   fieldFullName: "Họ tên",
   fieldGender: "Giới tính",
   fieldSolar: "Dương lịch",
@@ -133,6 +205,7 @@ export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   summary: "Mô tả ngắn",
   level: "Mức độ",
   distributionSummary: "Phân bố tổng quan",
+  dayMaster: "Nhật Chủ",
 };
 
 export const BAZI_MOCK_PROFILE: BaZiProfile = {
@@ -320,6 +393,152 @@ export const BAZI_MOCK_STRENGTH: BaZiStrength = {
     "Thân được mùa sinh, có nhiều trợ lực, khả năng tự lập cao. (mock — chưa tính từ Engine)",
 };
 
+/** Same displayed facts as Strength / Pillars — Canonical Executive Hero. */
+export const BAZI_MOCK_EXECUTIVE: BaZiExecutiveSummary = {
+  title: "Tóm Tắt Điều Hành",
+  verdict: BAZI_MOCK_STRENGTH.label,
+  level: BAZI_MOCK_STRENGTH.level,
+  confidence: BAZI_MOCK_STRENGTH.confidence,
+  summary: BAZI_MOCK_STRENGTH.summary,
+  highlights: [
+    `Nhật Chủ: ${BAZI_MOCK_PILLARS[2].heavenlyStem} ${BAZI_MOCK_PILLARS[2].earthlyBranch}`,
+    `Ngũ Hành nổi bật: Hỏa ${BAZI_MOCK_FIVE_ELEMENTS[3].percentage}%`,
+    `Thập Thần mạnh: Chính Ấn, Chính Quan, Chính Tài`,
+  ],
+  metrics: [
+    {
+      id: "day-master",
+      label: "Nhật Chủ",
+      value: BAZI_MOCK_PILLARS[2].heavenlyStem,
+      hint: "Hỏa · Dương",
+    },
+    {
+      id: "day-element",
+      label: "Ngũ Hành Nhật Chủ",
+      value: "Hỏa",
+      hint: "Dương Hỏa",
+    },
+    {
+      id: "yin-yang",
+      label: "Âm Dương",
+      value: "Dương",
+      hint: BAZI_MOCK_PROFILE.gender === "Nam" ? "Dương Nam" : "Dương",
+    },
+    {
+      id: "bone-weight",
+      label: "Cân Xương Đoán Mệnh",
+      value: "4 lượng 8 chỉ",
+      hint: "★★★★★ (mock)",
+    },
+  ],
+  dayMaster: BAZI_MOCK_PILLARS[2].heavenlyStem,
+  dayMasterHint: "Hỏa · Dương",
+  element: "Hỏa",
+  elementHint: "Dương Hỏa",
+  yinYang: "Dương",
+  yinYangHint: BAZI_MOCK_PROFILE.gender === "Nam" ? "Dương Nam" : "Dương",
+  strengthGlance: `${BAZI_MOCK_STRENGTH.level} · ${BAZI_MOCK_STRENGTH.score}/${BAZI_MOCK_STRENGTH.maxScore}`,
+  strengthHint: "Thân được mùa sinh (mock)",
+  dungThan: "Thủy",
+  hyThan: "Kim",
+  kyThan: "Hỏa",
+  pattern: "Chính Tài",
+  overallGrade: "B+",
+  recommendation: "Ưu tiên bổ Thủy, hạn chế Hỏa quá vượng. (mock — chờ Interpretation)",
+};
+
+/** Core analysis spirit gods — presentation mock (Canonical Level 3). */
+export const BAZI_MOCK_SPIRIT_GODS: readonly BaZiSpiritGod[] = [
+  {
+    id: "dung-thuy",
+    role: "dung",
+    roleLabel: "Dụng Thần",
+    name: "Thủy",
+    element: "thuy",
+  },
+  {
+    id: "ky-kim",
+    role: "ky",
+    roleLabel: "Kỵ Thần",
+    name: "Kim",
+    element: "kim",
+  },
+  {
+    id: "ky-hoa",
+    role: "ky",
+    roleLabel: "Kỵ Thần",
+    name: "Hỏa",
+    element: "hoa",
+  },
+] as const;
+
+export const BAZI_MOCK_SHEN_SHA: readonly BaZiShenShaItem[] = [
+  {
+    id: "ss-thien-at",
+    name: "Thiên Ất Quý Nhân",
+    tone: "Cát",
+    note: "Placeholder — chờ Rule Database.",
+    present: true,
+  },
+  {
+    id: "ss-hoa-cai",
+    name: "Hoa Cái",
+    tone: "Trung",
+    note: "Placeholder — chưa tính từ Engine.",
+    present: true,
+  },
+  {
+    id: "ss-van-xuong",
+    name: "Văn Xương",
+    tone: "Cát",
+    note: "Placeholder.",
+    present: false,
+  },
+  {
+    id: "ss-dao-hoa",
+    name: "Đào Hoa",
+    tone: "Trung",
+    note: "Placeholder.",
+    present: false,
+  },
+  {
+    id: "ss-dich-ma",
+    name: "Dịch Mã",
+    tone: "Trung",
+    note: "Placeholder.",
+    present: true,
+  },
+  {
+    id: "ss-hong-loan",
+    name: "Hồng Loan",
+    tone: "Cát",
+    note: "Placeholder.",
+    present: false,
+  },
+] as const;
+
+export const BAZI_MOCK_INTERPRETATION: BaZiInterpretationBlock = {
+  title: "Luận Giải",
+  paragraphs: [
+    BAZI_MOCK_STRENGTH.summary,
+    "Chính Ấn và Chính Quan xuất hiện rõ — thiên về học vấn, kỷ luật và trách nhiệm. (mock)",
+    "Nội dung luận giải đầy đủ sẽ được nối Interpretation Engine sau khi Portal UI được phê duyệt.",
+  ],
+};
+
+export const BAZI_MOCK_KNOWLEDGE: readonly BaZiKnowledgeItem[] = [
+  {
+    id: "kn-1",
+    title: "Cơ sở Nhật Chủ",
+    reference: "Knowledge Pack — Fundamental Theory (liên kết sau UI Freeze)",
+  },
+  {
+    id: "kn-2",
+    title: "Thân Vượng / Thân Nhược",
+    reference: "Knowledge Pack — Strength Theory (liên kết sau UI Freeze)",
+  },
+] as const;
+
 export type BaZiResultMockBundle = {
   readonly status: PresentationStatus;
   readonly errorMessage?: string;
@@ -331,6 +550,11 @@ export type BaZiResultMockBundle = {
   readonly fiveElements: readonly BaZiFiveElement[];
   readonly tenGods: readonly BaZiTenGod[];
   readonly strength: BaZiStrength;
+  readonly executive: BaZiExecutiveSummary;
+  readonly spiritGods: readonly BaZiSpiritGod[];
+  readonly shenSha: readonly BaZiShenShaItem[];
+  readonly interpretation: BaZiInterpretationBlock;
+  readonly knowledge: readonly BaZiKnowledgeItem[];
 };
 
 export const BAZI_RESULT_MOCK: BaZiResultMockBundle = {
@@ -343,4 +567,84 @@ export const BAZI_RESULT_MOCK: BaZiResultMockBundle = {
   fiveElements: BAZI_MOCK_FIVE_ELEMENTS,
   tenGods: BAZI_MOCK_TEN_GODS,
   strength: BAZI_MOCK_STRENGTH,
+  executive: BAZI_MOCK_EXECUTIVE,
+  spiritGods: BAZI_MOCK_SPIRIT_GODS,
+  shenSha: BAZI_MOCK_SHEN_SHA,
+  interpretation: BAZI_MOCK_INTERPRETATION,
+  knowledge: BAZI_MOCK_KNOWLEDGE,
 };
+
+/** Build executive tier from existing result facts (no new business data). */
+export function buildExecutiveFromResult(input: {
+  readonly strength: BaZiStrength;
+  readonly pillars: readonly BaZiPillar[];
+  readonly fiveElements: readonly BaZiFiveElement[];
+  readonly tenGods: readonly BaZiTenGod[];
+  readonly gender?: string;
+}): BaZiExecutiveSummary {
+  const day = input.pillars.find((p) => p.kind === "day");
+  const topElement = [...input.fiveElements].sort(
+    (a, b) => b.percentage - a.percentage,
+  )[0];
+  const topGods = [...input.tenGods]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((g) => g.name)
+    .join(", ");
+  const stem = day?.heavenlyStem ?? "—";
+
+  return {
+    title: BAZI_RESULT_LABELS.executiveTitle,
+    verdict: input.strength.label,
+    level: input.strength.level,
+    confidence: input.strength.confidence,
+    summary: input.strength.summary,
+    highlights: [
+      day ? `Nhật Chủ: ${day.heavenlyStem} ${day.earthlyBranch}` : "Nhật Chủ: —",
+      topElement
+        ? `Ngũ Hành nổi bật: ${topElement.name} ${topElement.percentage}%`
+        : "Ngũ Hành: —",
+      topGods ? `Thập Thần mạnh: ${topGods}` : "Thập Thần: —",
+    ],
+    metrics: [
+      {
+        id: "day-master",
+        label: "Nhật Chủ",
+        value: stem,
+        hint: topElement ? `${topElement.name}` : "—",
+      },
+      {
+        id: "day-element",
+        label: "Ngũ Hành Nhật Chủ",
+        value: topElement?.name ?? "—",
+        hint: topElement?.strength ?? "—",
+      },
+      {
+        id: "yin-yang",
+        label: "Âm Dương",
+        value: "—",
+        hint: input.gender ?? "—",
+      },
+      {
+        id: "bone-weight",
+        label: "Cân Xương Đoán Mệnh",
+        value: "—",
+        hint: "Chờ Engine",
+      },
+    ],
+    dayMaster: stem,
+    dayMasterHint: topElement ? `${topElement.name}` : "—",
+    element: topElement?.name ?? "—",
+    elementHint: topElement?.strength ?? "—",
+    yinYang: "—",
+    yinYangHint: input.gender ?? "—",
+    strengthGlance: `${input.strength.level} · ${input.strength.score}/${input.strength.maxScore}`,
+    strengthHint: input.strength.summary || "—",
+    dungThan: "—",
+    hyThan: "—",
+    kyThan: "—",
+    pattern: "—",
+    overallGrade: "—",
+    recommendation: "Đánh giá chi tiết sẽ có sau khi Interpretation Engine được nối.",
+  };
+}

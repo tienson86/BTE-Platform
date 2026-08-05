@@ -1,9 +1,16 @@
 import type { ReactNode } from "react";
+import { StickyReadingRail } from "../../components/shared";
+import { useTheme } from "../../theme";
 import { cx } from "../../utils";
-import { AppNavigation } from "../Navigation/AppNavigation";
+import type { TocNavItem } from "../Navigation/navItems";
+import { RESULT_TOC_ITEMS } from "../Navigation/navItems";
 
 export type SidebarProps = {
+  /** @deprecated App routes moved to Header PrimaryNav — kept for compat. */
   activeId?: string;
+  tocItems?: readonly TocNavItem[];
+  tocTitle?: string;
+  tocActiveId?: string;
   collapsed?: boolean;
   open?: boolean;
   onNavigate?: () => void;
@@ -11,41 +18,59 @@ export type SidebarProps = {
   className?: string;
 };
 
-/** Application sidebar / drawer navigation (WP03). */
+/**
+ * Canonical sidebar — page Table of Contents (MỤC LỤC).
+ * Primary app destinations live in Header.
+ */
 export function Sidebar({
-  activeId,
+  tocItems = RESULT_TOC_ITEMS,
+  tocTitle = "MỤC LỤC",
+  tocActiveId,
   collapsed = false,
   open = false,
-  onNavigate,
   onClose,
   className,
 }: SidebarProps): ReactNode {
+  const { mode, toggleMode } = useTheme();
+
   return (
     <>
       {open ? (
         <button
           type="button"
           className="cui-app-sidebar-backdrop"
-          aria-label="Đóng menu điều hướng"
+          aria-label="Đóng mục lục"
           onClick={onClose}
         />
       ) : null}
       <aside
         className={cx("cui-app-sidebar", className)}
-        aria-label="Thanh điều hướng"
+        aria-label={tocTitle}
         data-collapsed={collapsed || undefined}
         data-open={open || undefined}
       >
-        <div className="cui-app-sidebar__brand">
-          <span className="cui-app-sidebar__brand-text">
-            {collapsed ? "BTE" : "BTE Portal"}
-          </span>
-        </div>
-        <AppNavigation
-          activeId={activeId}
-          collapsed={collapsed}
-          onNavigate={onNavigate}
+        <StickyReadingRail
+          className="cui-app-toc"
+          title={collapsed ? "Mục" : tocTitle}
+          items={tocItems.map((item) => ({
+            id: item.id,
+            label: collapsed ? item.label.charAt(0) : item.label,
+            href: item.href,
+            active: tocActiveId === item.id,
+          }))}
         />
+        {!collapsed ? (
+          <div className="cui-app-sidebar__footer">
+            <button
+              type="button"
+              className="cui-app-sidebar__theme"
+              onClick={toggleMode}
+            >
+              Theme: {mode === "dark" ? "Dark" : "Light"}
+            </button>
+            <p className="cui-app-sidebar__version">BTE Platform v1.0.0</p>
+          </div>
+        ) : null}
       </aside>
     </>
   );

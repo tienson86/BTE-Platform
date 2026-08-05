@@ -2,7 +2,11 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { cx } from "../utils";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
-import { resolveActiveNavId } from "./Navigation/navItems";
+import {
+  RESULT_TOC_ITEMS,
+  resolveActiveNavId,
+  type TocNavItem,
+} from "./Navigation/navItems";
 import { Sidebar } from "./Sidebar";
 
 export type AppLayoutProps = {
@@ -11,6 +15,9 @@ export type AppLayoutProps = {
   activeNavId?: string;
   userLabel?: string;
   brand?: ReactNode;
+  tocItems?: readonly TocNavItem[];
+  tocTitle?: string;
+  tocActiveId?: string;
   className?: string;
 };
 
@@ -30,15 +37,18 @@ function readViewportMode(): ViewportMode {
 }
 
 /**
- * Portal application shell (WP03 / ADR-004).
- * Fixed header, responsive sidebar, content, footer, modal/notification roots.
+ * Canonical Portal shell (ADR-004).
+ * Header = primary nav · Sidebar = page TOC · Main = content.
  */
 export function AppLayout({
   children,
   pathname = "/",
   activeNavId,
   userLabel,
-  brand,
+  brand = "BTE Portal",
+  tocItems = RESULT_TOC_ITEMS,
+  tocTitle = "MỤC LỤC",
+  tocActiveId,
   className,
 }: AppLayoutProps): ReactNode {
   const [viewport, setViewport] = useState<ViewportMode>("desktop");
@@ -64,19 +74,22 @@ export function AppLayout({
 
   return (
     <div
-      className={cx("cui-app-shell", className)}
+      className={cx("cui-app-shell", "cui-app-shell--canonical", className)}
       data-viewport={viewport}
       data-sidebar-collapsed={collapsed || undefined}
     >
       <Header
         brand={brand}
         userLabel={userLabel}
+        activeNavId={resolvedActive}
         showMenuButton={isMobile}
         onMenuClick={toggleDrawer}
       />
       <div className="cui-app-shell__body">
         <Sidebar
-          activeId={resolvedActive}
+          tocItems={tocItems}
+          tocTitle={tocTitle}
+          tocActiveId={tocActiveId}
           collapsed={collapsed}
           open={isMobile ? drawerOpen : false}
           onClose={closeDrawer}

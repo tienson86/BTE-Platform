@@ -1,7 +1,6 @@
 /**
- * Dashboard ViewModel types + mock fixture (WP04 / ADR-006).
- * Main flow uses DashboardService → Adapter (TASK_003A).
- * Mock remains for tests and `BTE_DATA_SOURCE=mock` only.
+ * Dashboard ViewModel types + mock fixture (Canonical UI / ADR-006).
+ * Presentation mock only until Sprint 01.5 after UI Freeze.
  * Shortcuts / announcement stay static until CMS API exists.
  */
 
