@@ -1,6 +1,6 @@
 /**
- * Navigation Component Library — WP-0011.
- * Composes Shared Components only. Presentation ViewModels only.
+ * Navigation Component Library — WP-0011 + WP02.
+ * Composes Shared / Base Components. Presentation only.
  */
 
 export { ReadingNavigation } from "./ReadingNavigation";
@@ -35,3 +35,24 @@ export type { ReadingBreadcrumbProps } from "./ReadingBreadcrumb";
 
 export { PrintNavigator } from "./PrintNavigator";
 export type { PrintNavigatorProps } from "./PrintNavigator";
+
+export { Tabs } from "./Tabs";
+export type { TabsProps, TabsItem } from "./Tabs";
+
+export { Breadcrumb } from "./Breadcrumb";
+export type { BreadcrumbProps } from "./Breadcrumb";
+
+export { Pagination } from "./Pagination";
+export type { PaginationProps } from "./Pagination";
+
+export { SidebarItem } from "./SidebarItem";
+export type { SidebarItemProps } from "./SidebarItem";
+
+export { Topbar } from "./Topbar";
+export type { TopbarProps } from "./Topbar";
+
+export { Menu } from "./Menu";
+export type { MenuProps } from "./Menu";
+
+export { Dropdown } from "./Dropdown";
+export type { DropdownProps } from "./Dropdown";

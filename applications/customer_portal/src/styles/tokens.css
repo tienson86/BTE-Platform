@@ -148,30 +148,113 @@
 
   --border-divider: #e2e5eb;
   --border-callout: #c5d0de;
-  --border-focus: #2b4c7e;
+  --border-focus: #059669;
 
-  --feedback-success: #2f6f4e;
-  --feedback-success-soft: #eaf5ef;
-  --feedback-warning: #9a6700;
-  --feedback-warning-soft: #fff6e5;
-  --feedback-danger: #b42318;
-  --feedback-danger-soft: #fcebea;
-  --feedback-info: #2b4c7e;
-  --feedback-info-soft: #eaf0f7;
+  --feedback-success: #16a34a;
+  --feedback-success-soft: #f0fdf4;
+  --feedback-warning: #d97706;
+  --feedback-warning-soft: #fffbeb;
+  --feedback-danger: #dc2626;
+  --feedback-danger-soft: #fef2f2;
+  --feedback-info: #0284c7;
+  --feedback-info-soft: #f0f9ff;
 
-  --accent-primary: #2b4c7e;
-  --accent-primary-hover: #1f3a63;
-  --accent-primary-soft: #eaf0f7;
+  /* WP01 Primary = Emerald */
+  --accent-primary: #059669;
+  --accent-primary-hover: #047857;
+  --accent-primary-soft: #ecfdf5;
 
   --interaction-hover: rgba(26, 29, 35, 0.06);
-  --interaction-selected: rgba(43, 76, 126, 0.12);
+  --interaction-selected: rgba(5, 150, 105, 0.12);
   --interaction-disabled: rgba(26, 29, 35, 0.38);
 
-  --elevation-soft: 0 1px 2px rgba(26, 29, 35, 0.04), 0 4px 16px rgba(26, 29, 35, 0.05);
-  --elevation-overlay: 0 4px 8px rgba(26, 29, 35, 0.06), 0 12px 32px rgba(26, 29, 35, 0.1);
-  --elevation-modal: 0 8px 16px rgba(26, 29, 35, 0.08), 0 24px 48px rgba(26, 29, 35, 0.14);
+  --elevation-soft: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.05);
+  --elevation-overlay: 0 4px 8px rgba(15, 23, 42, 0.06), 0 12px 32px rgba(15, 23, 42, 0.1);
+  --elevation-modal: 0 8px 16px rgba(15, 23, 42, 0.08), 0 24px 48px rgba(15, 23, 42, 0.14);
 
-  --focus-ring: 0 0 0 3px rgba(43, 76, 126, 0.32);
+  --focus-ring: 0 0 0 3px rgba(5, 150, 105, 0.32);
+
+  /* —— WP01 Design Token scales (canonical) —— */
+  --bte-color-primary-50: #ecfdf5;
+  --bte-color-primary-100: #d1fae5;
+  --bte-color-primary-200: #a7f3d0;
+  --bte-color-primary-300: #6ee7b7;
+  --bte-color-primary-400: #34d399;
+  --bte-color-primary-500: #10b981;
+  --bte-color-primary-600: #059669;
+  --bte-color-primary-700: #047857;
+  --bte-color-primary-800: #065f46;
+  --bte-color-primary-900: #064e3b;
+  --bte-color-primary: var(--bte-color-primary-600);
+
+  --bte-color-secondary-50: #f8fafc;
+  --bte-color-secondary-100: #f1f5f9;
+  --bte-color-secondary-200: #e2e8f0;
+  --bte-color-secondary-300: #cbd5e1;
+  --bte-color-secondary-400: #94a3b8;
+  --bte-color-secondary-500: #64748b;
+  --bte-color-secondary-600: #475569;
+  --bte-color-secondary-700: #334155;
+  --bte-color-secondary-800: #1e293b;
+  --bte-color-secondary-900: #0f172a;
+  --bte-color-secondary: var(--bte-color-secondary-600);
+
+  --bte-space-0: 0px;
+  --bte-space-4: 4px;
+  --bte-space-8: 8px;
+  --bte-space-12: 12px;
+  --bte-space-16: 16px;
+  --bte-space-20: 20px;
+  --bte-space-24: 24px;
+  --bte-space-32: 32px;
+  --bte-space-40: 40px;
+  --bte-space-48: 48px;
+  --bte-space-64: 64px;
+  --bte-space-80: 80px;
+  --bte-space-96: 96px;
+
+  --bte-radius-0: 0px;
+  --bte-radius-4: 4px;
+  --bte-radius-8: 8px;
+  --bte-radius-12: 12px;
+  --bte-radius-16: 16px;
+  --bte-radius-20: 20px;
+  --bte-radius-24: 24px;
+  --bte-radius-9999: 9999px;
+  --bte-radius-md: var(--bte-radius-12);
+
+  --bte-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --bte-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.04);
+  --bte-shadow-md: 0 2px 4px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --bte-shadow-lg: 0 4px 8px rgba(15, 23, 42, 0.05), 0 16px 40px rgba(15, 23, 42, 0.08);
+  --bte-shadow-xl: 0 8px 16px rgba(15, 23, 42, 0.06), 0 24px 56px rgba(15, 23, 42, 0.12);
+
+  --bte-motion-fast: 120ms;
+  --bte-motion-normal: 200ms;
+  --bte-motion-slow: 320ms;
+  --bte-motion-easing: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --bte-z-base: 0;
+  --bte-z-dropdown: 100;
+  --bte-z-sticky: 200;
+  --bte-z-header: 300;
+  --bte-z-overlay: 400;
+  --bte-z-modal: 500;
+  --bte-z-toast: 600;
+  --bte-z-tooltip: 700;
+
+  --bte-icon-xs: 12px;
+  --bte-icon-sm: 16px;
+  --bte-icon-md: 20px;
+  --bte-icon-lg: 24px;
+  --bte-icon-xl: 32px;
+  --bte-icon-2xl: 40px;
+
+  --bte-breakpoint-mobile: 0px;
+  --bte-breakpoint-tablet: 768px;
+  --bte-breakpoint-laptop: 1024px;
+  --bte-breakpoint-desktop: 1440px;
+  --bte-breakpoint-wide: 1920px;
 }
 
 /* —— Responsive grid tokens —— Pack 02 Grid System —— */
