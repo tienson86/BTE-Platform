@@ -6,6 +6,7 @@ import { AppLayout } from "../../layouts/AppLayout";
 import { RESULT_TOC_ITEMS } from "../../layouts/Navigation/navItems";
 import { PageWrapper } from "../../layouts/PageWrapper";
 import { BaZiResultHeader } from "./BaZiResultHeader";
+import { ContextHeader } from "./ContextHeader";
 import { ExecutiveSummaryCard } from "./ExecutiveSummaryCard";
 import { FiveElementsCard } from "./FiveElementsCard";
 import { FourPillarsCard } from "./FourPillarsCard";
@@ -29,9 +30,8 @@ export type BaZiResultScreenProps = {
 };
 
 /**
- * Canonical BaZi Result — expected information flow (PO):
- * Executive Summary → BaZi Overview → Four Pillars → Five Elements →
- * Strength → Ten Gods → ShenSha → Interpretation → Knowledge
+ * Canonical BaZi Result — IA Freeze v1.1 reading order.
+ * S00 Context Header is implemented; S01+ remain until section-by-section PASS.
  */
 export function BaZiResultScreen({
   pathname = "/result",
@@ -51,7 +51,7 @@ export function BaZiResultScreen({
         userLabel={displayName}
         tocItems={RESULT_TOC_ITEMS}
         tocTitle="MỤC LỤC"
-        tocActiveId="summary"
+        tocActiveId="context"
       >
         <PageWrapper
           title={labels.pageTitle}
@@ -59,7 +59,16 @@ export function BaZiResultScreen({
           className="cui-bazi-page"
         >
           <Stack gap="section" className="cui-bazi-result cui-bazi-result--canonical">
-            {/* 1. Executive Summary */}
+            {/* S00 — Context Header */}
+            <ContextHeader
+              status={resolvedStatus}
+              labels={labels}
+              profile={bundle.profile}
+              metadata={bundle.metadata}
+              errorMessage={bundle.errorMessage}
+            />
+
+            {/* Legacy Executive (pending S01 redesign) */}
             <ExecutiveSummaryCard
               status={resolvedStatus}
               labels={labels}
@@ -67,7 +76,7 @@ export function BaZiResultScreen({
               errorMessage={bundle.errorMessage}
             />
 
-            {/* 2. BaZi Overview */}
+            {/* S02 candidate — BaZi Overview */}
             <section id="tong-quan" className="cui-bazi-level">
               <BaZiResultHeader
                 status={resolvedStatus}
@@ -79,7 +88,6 @@ export function BaZiResultScreen({
               />
             </section>
 
-            {/* 3. Four Pillars */}
             <FourPillarsCard
               status={resolvedStatus}
               labels={labels}
@@ -87,7 +95,6 @@ export function BaZiResultScreen({
               errorMessage={bundle.errorMessage}
             />
 
-            {/* 4. Five Elements */}
             <section id="ngu-hanh" className="cui-bazi-level">
               <FiveElementsCard
                 status={resolvedStatus}
@@ -97,7 +104,6 @@ export function BaZiResultScreen({
               />
             </section>
 
-            {/* 5. Strength (+ Dụng/Kỵ glance) */}
             <section id="than-vuong" className="cui-bazi-level">
               <div className="cui-bazi-strength-row">
                 <StrengthCard
@@ -110,7 +116,6 @@ export function BaZiResultScreen({
               </div>
             </section>
 
-            {/* 6. Ten Gods */}
             <section id="thap-than" className="cui-bazi-level">
               <TenGodsCard
                 status={resolvedStatus}
@@ -120,7 +125,6 @@ export function BaZiResultScreen({
               />
             </section>
 
-            {/* 7. ShenSha */}
             <section id="than-sat" className="cui-bazi-level">
               <ShenShaCard
                 status={resolvedStatus}
@@ -130,7 +134,6 @@ export function BaZiResultScreen({
               />
             </section>
 
-            {/* 8. Interpretation */}
             <section id="luan-giai" className="cui-bazi-level">
               <InterpretationCard
                 status={resolvedStatus}
@@ -140,7 +143,6 @@ export function BaZiResultScreen({
               />
             </section>
 
-            {/* 9. Knowledge */}
             <section id="tri-thuc" className="cui-bazi-level">
               <KnowledgeCard
                 status={resolvedStatus}

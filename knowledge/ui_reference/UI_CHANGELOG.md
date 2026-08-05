@@ -393,13 +393,64 @@ Applied:
 
 ---
 
+# UI-015
+
+## Date
+
+2026-08-05
+
+## Status
+
+**REJECT** — Product Owner Design Review
+
+## Type
+
+Section UI — S00 only
+
+## Title
+
+S00 Context Header (Context Strip)
+
+## Description
+
+Triển khai S00 Context Header theo Screen Specification.
+
+Strip ngữ cảnh ở đầu Result: hồ sơ, mã lá số, giới tính, ngày giờ sinh, phiên bản phân tích, thời điểm phân tích, trạng thái.
+
+## Review Result
+
+REJECT — không vì React/CSS/Component.
+
+Nguyên nhân: hiểu sai triết lý Canonical Portal — tối ưu Component/CRM metadata thay vì Reading Experience / Decision Support.
+
+## Why REJECT
+
+- First fold = admin/CRM record header, không phải decision brief
+- Metadata trước, kết luận sau
+- Shell Canonical-ish nhưng soul vẫn Dashboard
+
+## Follow-up
+
+- Phân tích: `CANONICAL_UI_COMPARISON_REVIEW.md`
+- **STOP implementation** toàn bộ section
+- Chỉ thiết kế lại S00 sau khi PO xác nhận Agent đã hiểu đúng Canonical
+
+## Related Documents
+
+- PORTAL_SCREEN_SPECIFICATIONS.md (S00)
+- CANONICAL_UI_COMPARISON_REVIEW.md
+- migration_report/S00_CONTEXT_HEADER_REVIEW.md
+- screenshots/s00_context/
+
+---
+
 # Next Milestone
 
-**PO Review — IA v1.1 Freeze Approval**
+**PO xác nhận Agent hiểu đúng Canonical Portal**
 
 ↓
 
-**Design S00 → S01 (only after APPROVED)**
+**Chỉ khi đó: thiết kế lại S00 (intent trước code)**
 
 ↓
 

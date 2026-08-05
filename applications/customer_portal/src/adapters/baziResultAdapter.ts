@@ -299,6 +299,7 @@ function mapMetadata(
   return {
     chartId: asString(requestId, `BZ-${now.getTime()}`),
     createdAt: stamp,
+    analyzedAt: stamp,
     engineVersion: asString(source?.engine, "1.0.0"),
     ruleDatabaseVersion: asString(source?.rules, "1.0.0"),
     interpretationVersion: asString(interp?.version, "1.0.0"),
@@ -381,6 +382,7 @@ export function createBaZiResultGateViewModel(
     metadata: {
       chartId: "—",
       createdAt: "—",
+      analyzedAt: "—",
       engineVersion: "—",
       ruleDatabaseVersion: "—",
       interpretationVersion: "—",

@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { DashboardScreen } from "@portal/screens/DashboardScreen";
 import { BaZiResultScreen } from "@portal/screens/bazi/BaZiResultScreen";
+import { ContextHeader } from "@portal/screens/bazi/ContextHeader";
 import { ExecutiveSummaryCard } from "@portal/screens/bazi/ExecutiveSummaryCard";
 import { BAZI_RESULT_MOCK } from "@portal/screens/bazi/mockData";
 import { AuthLayout } from "@portal/layouts/AuthLayout";
@@ -22,6 +23,7 @@ import "@portal/styles/index.css";
 type ReviewPage =
   | "dashboard"
   | "bazi"
+  | "s00"
   | "executive"
   | "bazi-loading"
   | "bazi-empty"
@@ -34,6 +36,7 @@ function readPage(): ReviewPage {
   const value = new URLSearchParams(window.location.search).get("page") ?? "dashboard";
   switch (value) {
     case "bazi":
+    case "s00":
     case "executive":
     case "bazi-loading":
     case "bazi-empty":
@@ -104,6 +107,23 @@ function App() {
   if (page === "dashboard") {
     return <DashboardScreen userName="Nguyễn Văn Minh" />;
   }
+  if (page === "s00") {
+    return (
+      <AppProviders>
+        <AppLayout pathname="/result" userLabel="Nguyễn Văn Minh" tocActiveId="context">
+          <div className="cui-review-s00-zoom">
+            <h1 className="cui-review-s00-zoom__title">S00 — Context Header (Zoom)</h1>
+            <ContextHeader
+              status="ready"
+              labels={BAZI_RESULT_MOCK.labels}
+              profile={BAZI_RESULT_MOCK.profile}
+              metadata={BAZI_RESULT_MOCK.metadata}
+            />
+          </div>
+        </AppLayout>
+      </AppProviders>
+    );
+  }
   if (page === "executive") {
     return (
       <AppProviders>
@@ -162,10 +182,17 @@ style.textContent = `
     max-width: 960px;
     margin: 0 auto;
   }
-  .cui-review-executive-zoom {
+  .cui-review-executive-zoom,
+  .cui-review-s00-zoom {
     max-width: 72rem;
     margin: 0 auto;
     padding: calc(var(--space-block, 24px));
+  }
+  .cui-review-s00-zoom__title {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary, #555);
   }
 `;
 document.head.appendChild(style);

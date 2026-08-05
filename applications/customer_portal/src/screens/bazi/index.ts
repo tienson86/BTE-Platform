@@ -5,6 +5,9 @@
 export { BaZiResultScreen } from "./BaZiResultScreen";
 export type { BaZiResultScreenProps } from "./BaZiResultScreen";
 
+export { ContextHeader } from "./ContextHeader";
+export type { ContextHeaderProps } from "./ContextHeader";
+
 export { ExecutiveSummaryCard } from "./ExecutiveSummaryCard";
 export type { ExecutiveSummaryCardProps } from "./ExecutiveSummaryCard";
 

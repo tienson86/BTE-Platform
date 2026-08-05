@@ -26,8 +26,9 @@ export type TocNavItem = {
   readonly href: string;
 };
 
-/** Default Result page TOC (MỤC LỤC) — mirrors expected information flow. */
+/** Default Result page TOC (MỤC LỤC) — IA Freeze v1.1 (S00 first). */
 export const RESULT_TOC_ITEMS: readonly TocNavItem[] = [
+  { id: "context", label: "Ngữ cảnh", href: "#ngu-canh" },
   { id: "summary", label: "Tóm tắt", href: "#tom-tat" },
   { id: "overview", label: "Tổng quan", href: "#tong-quan" },
   { id: "pillars", label: "BaZi", href: "#tu-tru" },

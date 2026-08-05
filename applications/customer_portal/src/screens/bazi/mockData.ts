@@ -17,6 +17,8 @@ export type BaZiProfile = {
 export type BaZiChartMetadata = {
   readonly chartId: string;
   readonly createdAt: string;
+  /** When analysis last completed (S00). */
+  readonly analyzedAt: string;
   readonly engineVersion: string;
   readonly ruleDatabaseVersion: string;
   readonly interpretationVersion: string;
@@ -134,6 +136,8 @@ export type BaZiKnowledgeItem = {
 
 export type BaZiResultLabels = {
   readonly pageTitle: string;
+  readonly contextTitle: string;
+  readonly contextDetailLink: string;
   readonly executiveTitle: string;
   readonly overviewTitle: string;
   readonly profileHeading: string;
@@ -152,7 +156,10 @@ export type BaZiResultLabels = {
   readonly fieldLunar: string;
   readonly fieldBirthTime: string;
   readonly fieldBirthPlace: string;
+  readonly fieldBirthSummary: string;
   readonly fieldCreatedAt: string;
+  readonly fieldAnalyzedAt: string;
+  readonly fieldAnalysisVersion: string;
   readonly fieldEngine: string;
   readonly fieldRules: string;
   readonly fieldInterpretation: string;
@@ -172,6 +179,8 @@ export type BaZiResultLabels = {
 
 export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   pageTitle: "Kết Quả Bát Tự",
+  contextTitle: "Ngữ cảnh lá số",
+  contextDetailLink: "Chi tiết hồ sơ",
   executiveTitle: "Tóm Tắt Điều Hành",
   overviewTitle: "Tổng Quan Lá Số",
   profileHeading: "Thông tin người xem",
@@ -190,7 +199,10 @@ export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   fieldLunar: "Âm lịch",
   fieldBirthTime: "Giờ sinh",
   fieldBirthPlace: "Nơi sinh",
+  fieldBirthSummary: "Ngày giờ sinh",
   fieldCreatedAt: "Ngày lập lá số",
+  fieldAnalyzedAt: "Thời điểm phân tích",
+  fieldAnalysisVersion: "Phiên bản phân tích",
   fieldEngine: "Engine Version",
   fieldRules: "Rule Database Version",
   fieldInterpretation: "Interpretation Version",
@@ -220,6 +232,7 @@ export const BAZI_MOCK_PROFILE: BaZiProfile = {
 export const BAZI_MOCK_METADATA: BaZiChartMetadata = {
   chartId: "BZ-2026-0805-001",
   createdAt: "05/08/2026 14:22",
+  analyzedAt: "05/08/2026 14:28",
   engineVersion: "1.0.0",
   ruleDatabaseVersion: "1.0.0",
   interpretationVersion: "1.0.0-ui",

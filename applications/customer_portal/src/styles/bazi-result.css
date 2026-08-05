@@ -1,12 +1,90 @@
 /**
  * BaZi Result — Canonical Portal UI layout.
- * Hierarchy: Executive → Pillars → Core → Secondary → Interpretation → Knowledge
+ * Hierarchy: S00 Context → (S01 pending) → Overview → Pillars → …
  */
 
 .cui-bazi-result--canonical {
   width: 100%;
   max-width: 72rem;
   margin-inline: auto;
+}
+
+/* —— S00: Context Header (strip, not Hero / Identity) —— */
+.cui-bazi-context {
+  scroll-margin-top: calc(var(--space-block) * var(--space-scale));
+}
+
+.cui-bazi-context__strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space-list) * var(--space-scale))
+    calc(var(--space-paragraph) * var(--space-scale));
+  padding: calc(var(--space-list) * var(--space-scale))
+    calc(var(--space-paragraph) * var(--space-scale));
+  border: var(--border-width) solid var(--border-divider);
+  border-radius: var(--bte-radius-md, var(--radius-surface));
+  background: var(--surface-section);
+}
+
+.cui-bazi-context__identity {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-list) * var(--space-scale));
+  min-width: min(100%, 12rem);
+  flex: 0 1 auto;
+}
+
+.cui-bazi-context__identity-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-inline) * var(--space-scale));
+  min-width: 0;
+}
+
+.cui-bazi-context__name {
+  margin: 0;
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.cui-bazi-context__fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: calc(var(--space-list) * var(--space-scale))
+    calc(var(--space-paragraph) * var(--space-scale));
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+.cui-bazi-context__field {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-inline) * var(--space-scale));
+  min-width: 0;
+}
+
+.cui-bazi-context__field--emphasize .cui-base-text[data-variant="body"] {
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.cui-bazi-context__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space-list) * var(--space-scale));
+  margin-inline-start: auto;
+}
+
+.cui-bazi-context__detail-link {
+  font-size: var(--font-size-caption, 0.8125rem);
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.cui-bazi-context__detail-link:hover,
+.cui-bazi-context__detail-link:focus-visible {
+  text-decoration: underline;
 }
 
 .cui-bazi-level {
@@ -381,6 +459,15 @@
 }
 
 @media (max-width: 1023px) {
+  .cui-bazi-context__strip {
+    align-items: flex-start;
+  }
+
+  .cui-bazi-context__status {
+    margin-inline-start: 0;
+    width: 100%;
+  }
+
   .cui-bazi-metrics,
   .cui-bazi-pillars__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -402,6 +489,17 @@
 }
 
 @media (max-width: 767px) {
+  .cui-bazi-context__strip {
+    flex-direction: column;
+    align-items: stretch;
+    gap: calc(var(--space-list) * var(--space-scale));
+  }
+
+  .cui-bazi-context__fields {
+    flex-direction: column;
+    gap: calc(var(--space-list) * var(--space-scale));
+  }
+
   .cui-bazi-metrics,
   .cui-bazi-pillars__grid,
   .cui-bazi-presence-grid,
