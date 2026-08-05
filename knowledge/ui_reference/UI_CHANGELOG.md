@@ -313,9 +313,9 @@ Mọi thay đổi lớn về:
 |------|--------|
 | Design System | ✅ Canonical |
 | Component Library | ✅ Canonical |
-| Information Architecture | ⏳ Awaiting PO (CANONICAL_PORTAL_INFORMATION_ARCHITECTURE.md) |
-| Dashboard | ⏸ Paused — pending IA approval |
-| BaZi Result | ⏸ Round 2 REJECT — rebuild after IA PASS |
+| Information Architecture | ⏳ v1.1 — Awaiting Freeze Approval |
+| Dashboard | ⏸ Paused — pending IA Freeze |
+| BaZi Result | ⏸ No section UI until IA v1.1 APPROVED |
 | Report | ⏳ Planned |
 | Interpretation | ⏳ Planned |
 | Settings | ⏳ Planned |
@@ -344,23 +344,66 @@ Round 2 REJECT — Architecture First Reset
 
 Round 2 (Executive Summary visual polish) bị Product Owner REJECT — sai bài toán (card design thay vì Information Architecture).
 
-## Decision
-
-Dừng code UI section. Duyệt IA trước. Chỉ sau IA PASS mới thiết kế lại từng Section.
-
 ## Related Documents
 
 - CANONICAL_PORTAL_INFORMATION_ARCHITECTURE.md
 
 ---
 
+# UI-014
+
+## Date
+
+2026-08-05
+
+## Status
+
+ACTIVE
+
+## Type
+
+Information Architecture
+
+## Title
+
+IA v1.1 — PASS WITH CHANGES applied
+
+## Description
+
+Product Owner review v1.0 = PASS WITH CHANGES.
+
+Applied:
+
+1. S01 rename → Identity & Decision Panel
+2. Zone A without Cân Xương
+3. Zone C → Decision Support (What / Why / Next)
+4. Five Elements → Element Balance
+5. Knowledge → Learning Panel (expandable, on demand)
+6. NEW S00 Context Header before S01
+
+## Impact
+
+- Architecture Freeze chờ APPROVED trên v1.1
+- Chưa được thiết kế S00/S01 UI
+- Không Integration
+
+## Related Documents
+
+- CANONICAL_PORTAL_INFORMATION_ARCHITECTURE.md (v1.1)
+
+---
+
 # Next Milestone
 
-**PO Review — Information Architecture**
+**PO Review — IA v1.1 Freeze Approval**
 
 ↓
 
-**Section-by-section design after IA PASS**
+**Design S00 → S01 (only after APPROVED)**
+
+↓
+
+**Section-by-section UI**
 
 ↓
 
