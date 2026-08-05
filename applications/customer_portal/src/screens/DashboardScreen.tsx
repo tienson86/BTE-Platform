@@ -1,15 +1,12 @@
 import type { ReactNode } from "react";
 import { AppProviders } from "../app/AppProviders";
 import { Stack } from "../components/layout/Stack";
+import { useDashboard } from "../hooks/useDashboard";
 import { AppLayout } from "../layouts/AppLayout";
 import { PageWrapper } from "../layouts/PageWrapper";
+import type { DashboardViewModel } from "../adapters";
 import {
   AnnouncementSection,
-  DASHBOARD_ANNOUNCEMENT,
-  DASHBOARD_QUICK_ACTIONS,
-  DASHBOARD_RECENT,
-  DASHBOARD_SHORTCUTS,
-  DASHBOARD_STATS,
   DashboardSkeleton,
   QuickActionsSection,
   RecentAnalysesSection,
@@ -24,18 +21,33 @@ export type DashboardScreenProps = {
   loading?: boolean;
   /** When true, recent list is forced empty to demonstrate Empty State. */
   emptyRecent?: boolean;
+  /**
+   * Injected ViewModel (tests / story).
+   * When omitted, loads via DashboardService → Adapter.
+   */
+  viewModel?: DashboardViewModel;
 };
 
 /**
- * Portal Dashboard home screen (WP04).
+ * Portal Dashboard home screen (WP04 + TASK_003A).
  * Uses AppLayout from WP03 only — no alternate layout.
+ * Data: Service → Adapter → ViewModel (no fetch in presentational children).
  */
 export function DashboardScreen({
   userName,
   pathname = "/dashboard",
-  loading = false,
+  loading,
   emptyRecent = false,
+  viewModel: viewModelProp,
 }: DashboardScreenProps): ReactNode {
+  const remote = useDashboard({
+    enabled: viewModelProp === undefined,
+    initialData: viewModelProp,
+  });
+  const viewModel = remote.viewModel;
+  const isLoading = loading ?? remote.loading;
+  const recentItems = emptyRecent ? [] : viewModel.recent;
+
   return (
     <AppProviders>
       <AppLayout pathname={pathname} userLabel={userName ?? "Người dùng"}>
@@ -47,18 +59,16 @@ export function DashboardScreen({
             { id: "dashboard", label: "Dashboard" },
           ]}
         >
-          {loading ? (
+          {isLoading ? (
             <DashboardSkeleton />
           ) : (
             <Stack gap="section" className="cui-dashboard">
               <WelcomeSection userName={userName} />
-              <QuickActionsSection actions={DASHBOARD_QUICK_ACTIONS} />
-              <StatisticsSection stats={DASHBOARD_STATS} />
-              <RecentAnalysesSection
-                items={emptyRecent ? [] : DASHBOARD_RECENT}
-              />
-              <ShortcutsSection shortcuts={DASHBOARD_SHORTCUTS} />
-              <AnnouncementSection announcement={DASHBOARD_ANNOUNCEMENT} />
+              <QuickActionsSection actions={viewModel.quickActions} />
+              <StatisticsSection stats={viewModel.stats} />
+              <RecentAnalysesSection items={recentItems} />
+              <ShortcutsSection shortcuts={viewModel.shortcuts} />
+              <AnnouncementSection announcement={viewModel.announcement} />
             </Stack>
           )}
         </PageWrapper>

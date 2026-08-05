@@ -1,6 +1,7 @@
 /**
- * BaZi Result mock data (Wave 3 / ADR-006).
- * Presentation-only. Replace with Analysis Engine bindings later.
+ * BaZi Result ViewModel types + mock fixture (Wave 3 / ADR-006).
+ * Main flow uses AnalyzeService → Adapter (TASK_003A).
+ * Mock remains for tests and `BTE_DATA_SOURCE=mock` only.
  */
 
 export type PresentationStatus = "ready" | "loading" | "empty" | "error";

@@ -1,5 +1,5 @@
 /**
- * Bindings barrel — populated by later Work Packages.
+ * Bindings barrel — API ↔ ViewModel adapters (TASK_003A).
  */
 
-export {};
+export * from "../adapters";

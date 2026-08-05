@@ -1,6 +1,8 @@
 /**
- * Dashboard mock data (WP04 / ADR-006).
- * Replace with API bindings when backend integration is ready.
+ * Dashboard ViewModel types + mock fixture (WP04 / ADR-006).
+ * Main flow uses DashboardService → Adapter (TASK_003A).
+ * Mock remains for tests and `BTE_DATA_SOURCE=mock` only.
+ * Shortcuts / announcement stay static until CMS API exists.
  */
 
 export type DashboardStat = {

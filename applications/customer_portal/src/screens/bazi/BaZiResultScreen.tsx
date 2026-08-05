@@ -1,8 +1,12 @@
 import type { ReactNode } from "react";
+import type { BaZiResultViewModel } from "../../adapters";
 import { AppProviders } from "../../app/AppProviders";
 import { Stack } from "../../components/layout/Stack";
+import { isMockDataSource } from "../../config/api";
+import { useBaZiResult } from "../../hooks/useBaZiResult";
 import { AppLayout } from "../../layouts/AppLayout";
 import { PageWrapper } from "../../layouts/PageWrapper";
+import type { AnalyzeChartRequest } from "../../models";
 import { BaZiResultHeader } from "./BaZiResultHeader";
 import { FiveElementsCard } from "./FiveElementsCard";
 import { FourPillarsCard } from "./FourPillarsCard";
@@ -17,32 +21,47 @@ import {
 export type BaZiResultScreenProps = {
   pathname?: string;
   userName?: string;
-  /** Override mock bundle (tests / future bindings). */
-  data?: BaZiResultMockBundle;
-  /** Force section status without replacing mock payload. */
+  /**
+   * Injected ViewModel (tests / story).
+   * When omitted, loads via AnalyzeService → Adapter.
+   */
+  data?: BaZiResultMockBundle | BaZiResultViewModel;
+  /** Force section status without replacing payload. */
   status?: PresentationStatus;
+  /** Birth payload for API analyze when `data` is not injected. */
+  analyzeRequest?: AnalyzeChartRequest;
 };
 
 /**
- * BaZi Result screen — Wave 3 (WP05–WP09).
- * Uses AppLayout only. Presentation + mock data. No Engine calls.
+ * BaZi Result screen — Wave 3 (WP05–WP09) + TASK_003A integration.
+ * Uses AppLayout only. Component section APIs unchanged.
  */
 export function BaZiResultScreen({
   pathname = "/result",
   userName,
-  data = BAZI_RESULT_MOCK,
+  data,
   status,
+  analyzeRequest,
 }: BaZiResultScreenProps): ReactNode {
-  const resolvedStatus = status ?? data.status;
-  const labels = data.labels;
-  const displayName = userName ?? data.profile.fullName;
+  const useMockDefault = isMockDataSource() && !analyzeRequest && data === undefined;
+
+  const remote = useBaZiResult({
+    request: analyzeRequest,
+    enabled: data === undefined,
+    initialData: data ?? (useMockDefault ? BAZI_RESULT_MOCK : undefined),
+  });
+
+  const bundle = data ?? remote.viewModel;
+  const resolvedStatus = status ?? bundle.status;
+  const labels = bundle.labels;
+  const displayName = userName ?? bundle.profile.fullName;
 
   return (
     <AppProviders>
       <AppLayout pathname={pathname} userLabel={displayName}>
         <PageWrapper
           title={labels.pageTitle}
-          description={data.metadata.chartId}
+          description={bundle.metadata.chartId}
           breadcrumb={[
             { id: "home", label: "Portal", href: "/dashboard" },
             { id: "result", label: labels.pageTitle },
@@ -52,36 +71,36 @@ export function BaZiResultScreen({
             <BaZiResultHeader
               status={resolvedStatus}
               labels={labels}
-              profile={data.profile}
-              metadata={data.metadata}
-              actions={data.actions}
-              errorMessage={data.errorMessage}
+              profile={bundle.profile}
+              metadata={bundle.metadata}
+              actions={bundle.actions}
+              errorMessage={bundle.errorMessage}
             />
             <FourPillarsCard
               status={resolvedStatus}
               labels={labels}
-              pillars={data.pillars}
-              errorMessage={data.errorMessage}
+              pillars={bundle.pillars}
+              errorMessage={bundle.errorMessage}
             />
             <div className="cui-bazi-result__split">
               <FiveElementsCard
                 status={resolvedStatus}
                 labels={labels}
-                elements={data.fiveElements}
-                errorMessage={data.errorMessage}
+                elements={bundle.fiveElements}
+                errorMessage={bundle.errorMessage}
               />
               <StrengthCard
                 status={resolvedStatus}
                 labels={labels}
-                strength={data.strength}
-                errorMessage={data.errorMessage}
+                strength={bundle.strength}
+                errorMessage={bundle.errorMessage}
               />
             </div>
             <TenGodsCard
               status={resolvedStatus}
               labels={labels}
-              gods={data.tenGods}
-              errorMessage={data.errorMessage}
+              gods={bundle.tenGods}
+              errorMessage={bundle.errorMessage}
             />
           </Stack>
         </PageWrapper>
