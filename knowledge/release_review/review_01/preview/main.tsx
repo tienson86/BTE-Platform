@@ -2,9 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { DashboardScreen } from "@portal/screens/DashboardScreen";
 import { BaZiResultScreen } from "@portal/screens/bazi/BaZiResultScreen";
-import { ContextHeader } from "@portal/screens/bazi/ContextHeader";
 import { ExecutiveSummaryCard } from "@portal/screens/bazi/ExecutiveSummaryCard";
 import { BAZI_RESULT_MOCK } from "@portal/screens/bazi/mockData";
+import { S00DesktopScreen } from "@portal/screens/s00/S00DesktopScreen";
 import { AuthLayout } from "@portal/layouts/AuthLayout";
 import { BlankLayout } from "@portal/layouts/BlankLayout";
 import { AppLayout } from "@portal/layouts/AppLayout";
@@ -108,21 +108,7 @@ function App() {
     return <DashboardScreen userName="Nguyễn Văn Minh" />;
   }
   if (page === "s00") {
-    return (
-      <AppProviders>
-        <AppLayout pathname="/result" userLabel="Nguyễn Văn Minh" tocActiveId="context">
-          <div className="cui-review-s00-zoom">
-            <h1 className="cui-review-s00-zoom__title">S00 — Context Header (Zoom)</h1>
-            <ContextHeader
-              status="ready"
-              labels={BAZI_RESULT_MOCK.labels}
-              profile={BAZI_RESULT_MOCK.profile}
-              metadata={BAZI_RESULT_MOCK.metadata}
-            />
-          </div>
-        </AppLayout>
-      </AppProviders>
-    );
+    return <S00DesktopScreen />;
   }
   if (page === "executive") {
     return (
@@ -187,6 +173,11 @@ style.textContent = `
     max-width: 72rem;
     margin: 0 auto;
     padding: calc(var(--space-block, 24px));
+  }
+  .cui-review-s00-layout {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: calc(var(--space-5, 24px));
   }
   .cui-review-s00-zoom__title {
     margin: 0 0 1rem;

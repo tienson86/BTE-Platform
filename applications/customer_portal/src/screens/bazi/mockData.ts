@@ -12,6 +12,8 @@ export type BaZiProfile = {
   readonly lunarBirthDate: string;
   readonly birthTime: string;
   readonly birthPlace: string;
+  /** Profile.Avatar — optional; initials used when absent. */
+  readonly avatarUrl?: string;
 };
 
 export type BaZiChartMetadata = {
@@ -137,7 +139,11 @@ export type BaZiKnowledgeItem = {
 export type BaZiResultLabels = {
   readonly pageTitle: string;
   readonly contextTitle: string;
+  readonly contextProfilePrefix: string;
+  readonly contextChartPrefix: string;
+  readonly contextAnalysisPrefix: string;
   readonly contextDetailLink: string;
+  readonly contextReanalyzeLink: string;
   readonly executiveTitle: string;
   readonly overviewTitle: string;
   readonly profileHeading: string;
@@ -180,7 +186,11 @@ export type BaZiResultLabels = {
 export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   pageTitle: "Kết Quả Bát Tự",
   contextTitle: "Ngữ cảnh lá số",
+  contextProfilePrefix: "Hồ sơ",
+  contextChartPrefix: "Mã",
+  contextAnalysisPrefix: "Phân tích",
   contextDetailLink: "Chi tiết hồ sơ",
+  contextReanalyzeLink: "Phân tích lại",
   executiveTitle: "Tóm Tắt Điều Hành",
   overviewTitle: "Tổng Quan Lá Số",
   profileHeading: "Thông tin người xem",
@@ -235,8 +245,8 @@ export const BAZI_MOCK_METADATA: BaZiChartMetadata = {
   analyzedAt: "05/08/2026 14:28",
   engineVersion: "1.0.0",
   ruleDatabaseVersion: "1.0.0",
-  interpretationVersion: "1.0.0-ui",
-  analysisStatus: "Hoàn tất (mock)",
+  interpretationVersion: "1.0.0",
+  analysisStatus: "Đã phân tích",
 };
 
 export const BAZI_MOCK_ACTIONS: readonly BaZiQuickAction[] = [

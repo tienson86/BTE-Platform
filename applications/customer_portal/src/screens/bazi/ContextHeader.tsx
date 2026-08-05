@@ -1,15 +1,10 @@
 import { memo, type ReactNode } from "react";
-import { Avatar } from "../../components/base/Avatar";
-import { Badge } from "../../components/base/Badge";
-import { BaseText } from "../../components/base/BaseText";
-import type { BaseTone } from "../../components/base/types";
 import type {
   BaZiChartMetadata,
   BaZiProfile,
   BaZiResultLabels,
   PresentationStatus,
 } from "./mockData";
-import { SectionGate } from "./SectionGate";
 
 export type ContextHeaderProps = {
   status: PresentationStatus;
@@ -19,136 +14,87 @@ export type ContextHeaderProps = {
   errorMessage?: string;
 };
 
-function initialsFromName(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  const last = parts[parts.length - 1] ?? "";
-  return (last.charAt(0) || "B").toUpperCase();
-}
-
-function buildBirthSummary(profile: BaZiProfile): string {
-  const date = profile.solarBirthDate.trim();
-  const time = profile.birthTime.trim();
-  if (date && time && date !== "—" && time !== "—") {
-    return `${date} · ${time}`;
-  }
-  return date || time || "—";
-}
-
-function statusTone(analysisStatus: string): BaseTone {
-  const normalized = analysisStatus.toLowerCase();
-  if (normalized.includes("lỗi") || normalized.includes("error")) {
-    return "danger";
-  }
-  if (
-    normalized.includes("đang") ||
-    normalized.includes("loading") ||
-    normalized.includes("xử lý")
-  ) {
-    return "warning";
-  }
-  if (normalized.includes("hoàn") || normalized.includes("xong") || normalized.includes("ready")) {
-    return "success";
-  }
-  return "info";
-}
-
 /**
- * S00 — Context Header (context strip).
- * Confirms which profile/chart/analysis the user is viewing.
- * Not Navigation, not Hero, not Identity / Decision Support.
+ * S00 — Context Header
+ * Step 1 (revised): Desktop Layout Skeleton = IA wireframe.
+ * Exposes Left / Center / Right regions and information zones.
+ * Not a loading skeleton. No product data. No responsive.
  */
 export const ContextHeader = memo(function ContextHeader({
-  status,
   labels,
-  profile,
-  metadata,
-  errorMessage,
 }: ContextHeaderProps): ReactNode {
-  const birthSummary = buildBirthSummary(profile);
-  const analysisVersion = metadata.interpretationVersion;
-
   return (
-    <section
+    <header
       id="ngu-canh"
       className="cui-bazi-context"
       aria-label={labels.contextTitle}
       data-section="s00-context"
+      data-layout-token="ContextRegion"
+      data-skeleton="desktop-wireframe"
     >
-      <SectionGate
-        status={status}
-        loadingLabel="Đang tải ngữ cảnh lá số"
-        emptyTitle="Chưa có ngữ cảnh lá số"
-        emptyDescription="Lập lá số mới để xác nhận hồ sơ đang xem."
-        errorTitle="Không tải được ngữ cảnh lá số"
-        errorDescription={errorMessage}
-      >
-        <div className="cui-bazi-context__strip">
-          <div className="cui-bazi-context__identity">
-            <Avatar
-              size="sm"
-              initials={initialsFromName(profile.fullName)}
-              alt={profile.fullName}
-              className="cui-bazi-context__avatar"
-            />
-            <div className="cui-bazi-context__identity-text">
-              <BaseText as="div" variant="body" className="cui-bazi-context__name">
-                {profile.fullName}
-              </BaseText>
-              <BaseText as="div" variant="caption" tone="muted">
-                {labels.fieldGender}: {profile.gender}
-              </BaseText>
+      {/* Top Container */}
+      <div className="cui-bazi-context__strip">
+        <div className="cui-bazi-context__strip-label">S00 · Context Header · Top Container</div>
+
+        <div className="cui-bazi-context__grid">
+          {/* LEFT REGION */}
+          <section
+            className="cui-bazi-context__region cui-bazi-context__region--left"
+            aria-label="Left Region"
+          >
+            <div className="cui-bazi-context__region-label">LEFT</div>
+            <div className="cui-bazi-context__zone" data-zone="avatar">
+              <div className="cui-bazi-context__zone-label">Avatar</div>
+              <div className="cui-bazi-context__slot cui-bazi-context__slot--avatar" />
             </div>
-          </div>
+          </section>
 
-          <div className="cui-bazi-context__fields" role="list">
-            <ContextField
-              label={labels.fieldChartId}
-              value={metadata.chartId}
-              emphasize
-            />
-            <ContextField label={labels.fieldBirthSummary} value={birthSummary} />
-            <ContextField label={labels.fieldAnalysisVersion} value={analysisVersion} />
-            <ContextField label={labels.fieldAnalyzedAt} value={metadata.analyzedAt} />
-          </div>
+          {/* CENTER REGION */}
+          <section
+            className="cui-bazi-context__region cui-bazi-context__region--center"
+            aria-label="Center Region"
+          >
+            <div className="cui-bazi-context__region-label">CENTER</div>
 
-          <div className="cui-bazi-context__status">
-            <Badge tone={statusTone(metadata.analysisStatus)}>
-              {metadata.analysisStatus}
-            </Badge>
-            <a className="cui-bazi-context__detail-link" href="#tong-quan">
-              {labels.contextDetailLink}
-            </a>
-          </div>
+            <div className="cui-bazi-context__zone" data-zone="primary">
+              <div className="cui-bazi-context__zone-label">Primary · Identity</div>
+              <div className="cui-bazi-context__slot">Tên hồ sơ</div>
+              <div className="cui-bazi-context__slot">Giới tính</div>
+              <div className="cui-bazi-context__slot cui-bazi-context__slot--wide">
+                Ngày giờ sinh · Địa điểm
+              </div>
+            </div>
+
+            <div className="cui-bazi-context__divider" role="separator" />
+
+            <div className="cui-bazi-context__zone" data-zone="metadata">
+              <div className="cui-bazi-context__zone-label">Secondary · Metadata</div>
+              <div className="cui-bazi-context__slot">Mã lá số</div>
+              <div className="cui-bazi-context__slot">Phiên bản</div>
+              <div className="cui-bazi-context__slot">Thời điểm phân tích</div>
+            </div>
+          </section>
+
+          {/* RIGHT REGION */}
+          <section
+            className="cui-bazi-context__region cui-bazi-context__region--right"
+            aria-label="Right Region"
+          >
+            <div className="cui-bazi-context__region-label">RIGHT</div>
+
+            <div className="cui-bazi-context__zone" data-zone="status">
+              <div className="cui-bazi-context__zone-label">Status</div>
+              <div className="cui-bazi-context__slot">Trạng thái</div>
+            </div>
+
+            <div className="cui-bazi-context__zone" data-zone="actions">
+              <div className="cui-bazi-context__zone-label">Supporting · Actions</div>
+              <div className="cui-bazi-context__slot">Chi tiết hồ sơ</div>
+              <div className="cui-bazi-context__slot">Phân tích lại</div>
+            </div>
+          </section>
         </div>
-      </SectionGate>
-    </section>
+      </div>
+    </header>
   );
 });
-
-function ContextField({
-  label,
-  value,
-  emphasize = false,
-}: {
-  label: string;
-  value: string;
-  emphasize?: boolean;
-}): ReactNode {
-  return (
-    <div
-      className={
-        emphasize
-          ? "cui-bazi-context__field cui-bazi-context__field--emphasize"
-          : "cui-bazi-context__field"
-      }
-      role="listitem"
-    >
-      <BaseText as="span" variant="caption" tone="muted">
-        {label}
-      </BaseText>
-      <BaseText as="span" variant="body">
-        {value}
-      </BaseText>
-    </div>
-  );
-}
