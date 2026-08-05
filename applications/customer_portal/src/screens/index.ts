@@ -31,3 +31,5 @@ export type { DashboardScreenProps } from "./DashboardScreen";
 
 export { BaZiResultScreen } from "./bazi";
 export type { BaZiResultScreenProps } from "./bazi";
+
+export { PortalPage, CANONICAL_DESKTOP_MOCK } from "./canonical_desktop";

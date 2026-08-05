@@ -5,6 +5,7 @@ import { BaZiResultScreen } from "@portal/screens/bazi/BaZiResultScreen";
 import { ExecutiveSummaryCard } from "@portal/screens/bazi/ExecutiveSummaryCard";
 import { BAZI_RESULT_MOCK } from "@portal/screens/bazi/mockData";
 import { S00DesktopScreen } from "@portal/screens/s00/S00DesktopScreen";
+import { PortalPage } from "@portal/screens/canonical_desktop";
 import { AuthLayout } from "@portal/layouts/AuthLayout";
 import { BlankLayout } from "@portal/layouts/BlankLayout";
 import { AppLayout } from "@portal/layouts/AppLayout";
@@ -24,6 +25,7 @@ type ReviewPage =
   | "dashboard"
   | "bazi"
   | "s00"
+  | "desktop"
   | "executive"
   | "bazi-loading"
   | "bazi-empty"
@@ -37,6 +39,7 @@ function readPage(): ReviewPage {
   switch (value) {
     case "bazi":
     case "s00":
+    case "desktop":
     case "executive":
     case "bazi-loading":
     case "bazi-empty":
@@ -109,6 +112,9 @@ function App() {
   }
   if (page === "s00") {
     return <S00DesktopScreen />;
+  }
+  if (page === "desktop") {
+    return <PortalPage />;
   }
   if (page === "executive") {
     return (
