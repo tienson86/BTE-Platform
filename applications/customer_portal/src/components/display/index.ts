@@ -1,5 +1,6 @@
 /**
  * WP02 Display Components.
+ * MetricCard and Timeline: import from `components/shared` (single public export).
  */
 
 export { StatCard } from "./StatCard";
@@ -7,12 +8,6 @@ export type { StatCardProps } from "./StatCard";
 
 export { InfoCard } from "./InfoCard";
 export type { InfoCardProps } from "./InfoCard";
-
-export { MetricCard } from "./MetricCard";
-export type { MetricCardProps } from "./MetricCard";
-
-export { Timeline } from "./Timeline";
-export type { TimelineProps } from "./Timeline";
 
 export { ScoreBar } from "./ScoreBar";
 export type { ScoreBarProps } from "./ScoreBar";

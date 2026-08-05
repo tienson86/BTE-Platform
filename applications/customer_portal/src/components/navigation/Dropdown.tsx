@@ -1,6 +1,5 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import { useState, type HTMLAttributes, type ReactNode } from "react";
 import { cx } from "../../utils";
-import { BaseButton } from "../base/BaseButton";
 
 export type DropdownProps = HTMLAttributes<HTMLDivElement> & {
   label: ReactNode;
@@ -9,7 +8,7 @@ export type DropdownProps = HTMLAttributes<HTMLDivElement> & {
   children?: ReactNode;
 };
 
-/** WP02 Dropdown — disclosure pattern (caller may control open). */
+/** WP02 Dropdown — disclosure pattern (no Base imports; WP-0011). */
 export function Dropdown({
   label,
   open,
@@ -18,19 +17,31 @@ export function Dropdown({
   className,
   ...rest
 }: DropdownProps) {
-  const uncontrolled = open === undefined;
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = open !== undefined;
+  const isOpen = isControlled ? open : internalOpen;
+
+  const setOpen = (next: boolean) => {
+    if (!isControlled) {
+      setInternalOpen(next);
+    }
+    onOpenChange?.(next);
+  };
+
   return (
-    <div className={cx("cui-dropdown", className)} data-open={open || undefined} {...rest}>
-      <BaseButton
-        variant="secondary"
-        size="sm"
-        aria-expanded={open ?? undefined}
+    <div className={cx("cui-dropdown", className)} data-open={isOpen || undefined} {...rest}>
+      <button
+        type="button"
+        className="cui-base-button"
+        data-variant="secondary"
+        data-size="sm"
+        aria-expanded={isOpen}
         aria-haspopup="menu"
-        onClick={() => onOpenChange?.(!(open ?? false))}
+        onClick={() => setOpen(!isOpen)}
       >
         {label}
-      </BaseButton>
-      {(uncontrolled || open) && children ? (
+      </button>
+      {isOpen && children ? (
         <div className="cui-dropdown__panel" role="menu">
           {children}
         </div>

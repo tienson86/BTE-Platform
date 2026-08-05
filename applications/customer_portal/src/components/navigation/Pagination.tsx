@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from "react";
 import { cx } from "../../utils";
-import { BaseButton } from "../base/BaseButton";
 
 export type PaginationProps = HTMLAttributes<HTMLElement> & {
   page: number;
@@ -10,7 +9,7 @@ export type PaginationProps = HTMLAttributes<HTMLElement> & {
   nextLabel?: string;
 };
 
-/** WP02 Pagination — presentational page controls. */
+/** WP02 Pagination — presentational page controls (no Base imports; WP-0011). */
 export function Pagination({
   page,
   pageCount,
@@ -28,25 +27,29 @@ export function Pagination({
       aria-label="Pagination"
       {...rest}
     >
-      <BaseButton
-        variant="secondary"
-        size="sm"
+      <button
+        type="button"
+        className="cui-base-button"
+        data-variant="secondary"
+        data-size="sm"
         disabled={safePage <= 1}
         onClick={() => onPageChange?.(safePage - 1)}
       >
         {previousLabel}
-      </BaseButton>
+      </button>
       <span className="cui-pagination__status" aria-live="polite">
         {safePage} / {safeCount}
       </span>
-      <BaseButton
-        variant="secondary"
-        size="sm"
+      <button
+        type="button"
+        className="cui-base-button"
+        data-variant="secondary"
+        data-size="sm"
         disabled={safePage >= safeCount}
         onClick={() => onPageChange?.(safePage + 1)}
       >
         {nextLabel}
-      </BaseButton>
+      </button>
     </nav>
   );
 }

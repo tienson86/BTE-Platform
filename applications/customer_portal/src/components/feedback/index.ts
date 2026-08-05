@@ -9,6 +9,7 @@ export { LoadingBoundary } from "./LoadingBoundary";
 export type { LoadingBoundaryProps } from "./LoadingBoundary";
 
 export { logFoundationError } from "./logFoundationError";
+export type { FoundationErrorLogPayload } from "./logFoundationError";
 
 export { Alert } from "./Alert";
 export type { AlertProps } from "./Alert";

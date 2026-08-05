@@ -105,3 +105,28 @@ export type { BaseStackProps } from "./BaseStack";
 
 export { BaseGrid } from "./BaseGrid";
 export type { BaseGridColumns, BaseGridProps } from "./BaseGrid";
+
+/* WP02 public aliases — prefer these names in new Portal UI. */
+export { Button } from "./Button";
+export type { ButtonProps } from "./Button";
+
+export { IconButton } from "./IconButton";
+export type { IconButtonProps } from "./IconButton";
+
+export { Card } from "./Card";
+export type { CardProps } from "./Card";
+
+export { Divider } from "./Divider";
+export type { DividerProps } from "./Divider";
+
+export { Badge } from "./Badge";
+export type { BadgeProps } from "./Badge";
+
+export { Tag } from "./Tag";
+export type { TagProps } from "./Tag";
+
+export { Avatar } from "./Avatar";
+export type { AvatarProps } from "./Avatar";
+
+export { Chip } from "./Chip";
+export type { ChipProps } from "./Chip";

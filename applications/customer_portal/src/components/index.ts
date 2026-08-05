@@ -1,9 +1,113 @@
 /**
- * Components public barrel — layer exports only.
+ * Components public barrel — ADR-003 Component Library.
+ * WP02 folders: base, layout, forms, feedback, navigation, display, charts.
+ * Legacy shared/business remain for compatibility (selective shared export avoids name clashes).
  */
 
-export * from "./feedback";
 export * from "./base";
-export * from "./shared";
-export * from "./business";
+export * from "./layout";
+export * from "./forms";
+export * from "./feedback";
 export * from "./navigation";
+export * from "./display";
+export * from "./charts";
+export * from "./business";
+
+export {
+  SectionHeader,
+  SectionDivider,
+  SectionContainer,
+  SectionSurface,
+  MetricRow,
+  MetricGroup,
+  MetricCard,
+  LabelValueRow,
+  StatusBadge,
+  ConfidenceBadge,
+  EvidenceRow,
+  EvidenceList,
+  PropertyGrid,
+  PropertyItem,
+  KeyValueGrid,
+  KeyValueRow,
+  HighlightBox,
+  InformationBox,
+  WarningBox,
+  SuccessBox,
+  InsightBox,
+  Callout,
+  ReadingProgress,
+  StickyReadingRail,
+  ScrollSpy,
+  CollapsePanel,
+  Accordion,
+  TabPanel,
+  Timeline,
+  TimelineItem,
+  UnavailableState,
+  LoadingState,
+  SearchBar,
+  FilterBar,
+  Toolbar,
+  FooterNote,
+  GlossaryEntry,
+  CitationRow,
+  ReferenceBlock,
+  TagGroup,
+  ChipGroup,
+  SkeletonSection,
+  SkeletonMetric,
+  SkeletonParagraph,
+} from "./shared";
+
+export type {
+  SectionHeaderProps,
+  SectionDividerProps,
+  SectionContainerProps,
+  SectionSurfaceProps,
+  MetricRowProps,
+  MetricGroupProps,
+  MetricCardProps,
+  LabelValueRowProps,
+  StatusBadgeProps,
+  ConfidenceBadgeProps,
+  ConfidenceLevel,
+  EvidenceRowProps,
+  EvidenceListProps,
+  PropertyGridProps,
+  PropertyItemProps,
+  KeyValueGridProps,
+  KeyValueRowProps,
+  HighlightBoxProps,
+  InformationBoxProps,
+  WarningBoxProps,
+  SuccessBoxProps,
+  InsightBoxProps,
+  CalloutProps,
+  ReadingProgressProps,
+  ReadingRailItem,
+  StickyReadingRailProps,
+  ScrollSpyItem,
+  ScrollSpyProps,
+  CollapsePanelProps,
+  AccordionItemData,
+  AccordionProps,
+  TabItem,
+  TabPanelProps,
+  TimelineProps,
+  TimelineItemProps,
+  UnavailableStateProps,
+  LoadingStateProps,
+  SearchBarProps,
+  FilterBarProps,
+  ToolbarProps,
+  FooterNoteProps,
+  GlossaryEntryProps,
+  CitationRowProps,
+  ReferenceBlockProps,
+  TagGroupProps,
+  ChipGroupProps,
+  SkeletonSectionProps,
+  SkeletonMetricProps,
+  SkeletonParagraphProps,
+} from "./shared";
