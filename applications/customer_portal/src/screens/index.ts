@@ -1,5 +1,5 @@
 /**
- * Screens barrel — WP-0004+.
+ * Screens barrel — WP-0004+ and Sprint 01 Portal screens.
  */
 
 export { ExecutiveSummaryScreen } from "./ExecutiveSummaryScreen";
@@ -25,3 +25,9 @@ export type { AppendixScreenProps } from "./AppendixScreen";
 
 export { NavigationScreen } from "./NavigationScreen";
 export type { NavigationScreenProps } from "./NavigationScreen";
+
+export { DashboardScreen } from "./DashboardScreen";
+export type { DashboardScreenProps } from "./DashboardScreen";
+
+export { BaZiResultScreen } from "./bazi";
+export type { BaZiResultScreenProps } from "./bazi";

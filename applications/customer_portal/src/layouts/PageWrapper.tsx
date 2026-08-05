@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Container } from "../../components/layout/Container";
-import { Stack } from "../../components/layout/Stack";
-import { cx } from "../../utils";
+import { Container } from "../components/layout/Container";
+import { Stack } from "../components/layout/Stack";
+import { cx } from "../utils";
 import { AppBreadcrumb, type AppBreadcrumbItem } from "./Breadcrumb";
 
 export type PageWrapperProps = {
