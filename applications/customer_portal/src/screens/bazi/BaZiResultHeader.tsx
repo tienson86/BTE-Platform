@@ -53,12 +53,7 @@ export const BaZiResultHeader = memo(function BaZiResultHeader({
         <Stack gap="paragraph">
           <div className="cui-bazi-header__title-row">
             <div>
-              <BaseText
-                variant="pageTitle"
-                className="cui-bazi-header__title"
-                role="heading"
-                aria-level={1}
-              >
+              <BaseText variant="pageTitle" className="cui-bazi-header__title">
                 {labels.pageTitle}
               </BaseText>
               <Badge tone="info">

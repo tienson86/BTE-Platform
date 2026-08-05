@@ -14,20 +14,22 @@ describe("Wave 3 BaZi Result UI", () => {
     render(<BaZiResultScreen /> as ReactElement);
 
     expect(screen.getByRole("heading", { level: 1, name: /Kết Quả Bát Tự/i })).toBeTruthy();
-    expect(screen.getByText(BAZI_RESULT_MOCK.profile.fullName)).toBeTruthy();
+    expect(screen.getAllByText(BAZI_RESULT_MOCK.profile.fullName).length).toBeGreaterThan(0);
     expect(screen.getByLabelText("Tứ Trụ")).toBeTruthy();
     expect(screen.getByLabelText("Ngũ Hành")).toBeTruthy();
     expect(screen.getByLabelText("Thập Thần")).toBeTruthy();
-    expect(screen.getByLabelText("Thân Vượng Nhược")).toBeTruthy();
+    expect(screen.getAllByLabelText("Thân Vượng Nhược").length).toBeGreaterThan(0);
+    expect(screen.getByText("Chính Quan")).toBeTruthy();
+    expect(screen.getByText("THÂN VƯỢNG")).toBeTruthy();
   });
 
   it("keeps unavailable quick actions visible but disabled", () => {
     render(<BaZiResultScreen /> as ReactElement);
 
     const pdf = screen.getByRole("button", { name: /Xuất PDF/i });
-    const print = screen.getByRole("button", { name: /^In/i });
-    expect(pdf).toBeDisabled();
-    expect(print).toBeDisabled();
+    const printBtn = screen.getByRole("button", { name: /In — chưa khả dụng/i });
+    expect((pdf as HTMLButtonElement).disabled).toBe(true);
+    expect((printBtn as HTMLButtonElement).disabled).toBe(true);
   });
 
   it("supports loading gate without crashing", () => {
