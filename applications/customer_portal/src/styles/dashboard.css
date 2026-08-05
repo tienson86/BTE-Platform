@@ -1,0 +1,73 @@
+/**
+ * Dashboard screen styles (WP04) — token-driven grid only.
+ */
+
+.cui-dashboard {
+  width: 100%;
+}
+
+.cui-dashboard__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--space-paragraph) * var(--space-scale));
+}
+
+.cui-dashboard__actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-dashboard__shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-dashboard-recent__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-dashboard-recent__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--space-list) * var(--space-scale));
+  padding: calc(var(--space-list) * var(--space-scale));
+  border: var(--border-width) solid var(--border-divider);
+  border-radius: var(--bte-radius-md, var(--radius-surface));
+  background: var(--surface-section);
+}
+
+.cui-dashboard-recent__meta {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-inline) * var(--space-scale));
+  min-width: 0;
+}
+
+.cui-dashboard-skeleton {
+  display: grid;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+@media (max-width: 1023px) {
+  .cui-dashboard__grid,
+  .cui-dashboard__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .cui-dashboard__grid,
+  .cui-dashboard__actions,
+  .cui-dashboard__shortcuts {
+    grid-template-columns: 1fr;
+  }
+}

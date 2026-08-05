@@ -1,0 +1,250 @@
+/**
+ * Portal App Shell (WP03) — token-driven only.
+ * Does not replace Commercial UI report-frame layout classes.
+ */
+
+.cui-app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-background);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+.cui-app-shell__body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+.cui-app-shell__main {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: calc(var(--space-paragraph) * var(--space-scale))
+    calc(var(--space-block) * var(--space-scale));
+  scroll-behavior: smooth;
+}
+
+.cui-app-shell__notifications,
+.cui-app-shell__modals {
+  position: relative;
+  z-index: var(--bte-z-toast, var(--z-toast));
+}
+
+.cui-app-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--bte-z-header, var(--z-sticky));
+  flex-shrink: 0;
+}
+
+.cui-app-header__brand {
+  font-weight: var(--font-weight-bold);
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-size: var(--font-section);
+}
+
+.cui-app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-app-header__search {
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.cui-app-header__user {
+  min-height: var(--touch-target-min);
+  padding-inline: calc(var(--space-list) * var(--space-scale));
+  border: var(--border-width) solid var(--border-divider);
+  border-radius: var(--radius-control);
+  background: var(--surface-section);
+  color: var(--text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.cui-app-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  z-index: var(--bte-z-sidebar, var(--z-rail));
+  width: var(--rail-width);
+  max-height: 100vh;
+  overflow: auto;
+  flex-shrink: 0;
+  padding: calc(var(--space-paragraph) * var(--space-scale))
+    calc(var(--space-list) * var(--space-scale));
+  background: var(--surface-report-paper);
+  border-right: var(--border-width) solid var(--border-divider);
+  transition: width var(--bte-motion-normal, var(--motion-normal))
+    var(--bte-motion-easing, var(--motion-ease-out));
+}
+
+.cui-app-sidebar[data-collapsed="true"] {
+  width: 72px;
+}
+
+.cui-app-sidebar__brand {
+  margin-bottom: calc(var(--space-paragraph) * var(--space-scale));
+  padding-inline: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-app-sidebar__brand-text {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.cui-app-sidebar-backdrop {
+  display: none;
+}
+
+.cui-app-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-inline) * var(--space-scale));
+}
+
+.cui-app-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--space-list) * var(--space-scale));
+  padding: calc(var(--space-list) * var(--space-scale))
+    calc(var(--space-block) * var(--space-scale));
+  border-top: var(--border-width) solid var(--border-divider);
+  background: var(--surface-background);
+  color: var(--text-muted);
+  font-size: var(--font-caption);
+}
+
+.cui-app-footer__support {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.cui-app-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-inline) * var(--space-scale));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-caption);
+}
+
+.cui-app-breadcrumb a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.cui-page-wrapper__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--space-list) * var(--space-scale));
+}
+
+.cui-page-wrapper__title {
+  margin: 0;
+  font-size: var(--font-page-title);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+}
+
+.cui-page-wrapper__description {
+  margin: calc(var(--space-inline) * var(--space-scale)) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--font-body);
+}
+
+.cui-auth-layout {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--space-block) * var(--space-scale));
+  background: var(--surface-background);
+}
+
+.cui-auth-layout__panel {
+  width: 100%;
+  padding: calc(var(--space-block) * var(--space-scale));
+  background: var(--surface-report-paper);
+  border: var(--border-width) solid var(--border-divider);
+  border-radius: var(--bte-radius-md, var(--radius-overlay));
+  box-shadow: var(--bte-shadow-sm, var(--elevation-soft));
+}
+
+.cui-auth-layout__title {
+  margin: 0 0 calc(var(--space-paragraph) * var(--space-scale));
+  font-size: var(--font-section);
+}
+
+.cui-blank-layout {
+  min-height: 100vh;
+  background: var(--surface-background);
+}
+
+/* Tablet: collapsed sidebar already via data-sidebar-collapsed */
+@media (max-width: 1023px) {
+  .cui-app-header__search {
+    display: none;
+  }
+}
+
+/* Mobile: sidebar as drawer */
+@media (max-width: 767px) {
+  .cui-app-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(var(--rail-drawer-width), 86vw);
+    max-height: none;
+    height: 100vh;
+    transform: translateX(-105%);
+    transition: transform var(--bte-motion-normal, var(--motion-normal))
+      var(--bte-motion-easing, var(--motion-ease-out));
+    box-shadow: var(--bte-shadow-lg, var(--elevation-overlay));
+    z-index: var(--bte-z-overlay, var(--z-overlay));
+  }
+
+  .cui-app-sidebar[data-open="true"] {
+    transform: none;
+  }
+
+  .cui-app-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--bte-z-overlay, var(--z-overlay)) - 1);
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: rgba(15, 23, 42, var(--opacity-overlay-scrim));
+    cursor: pointer;
+  }
+
+  .cui-app-shell__main {
+    padding-inline: calc(var(--space-paragraph) * var(--space-scale));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cui-app-sidebar,
+  .cui-app-shell__main {
+    transition: none;
+    scroll-behavior: auto;
+  }
+}
