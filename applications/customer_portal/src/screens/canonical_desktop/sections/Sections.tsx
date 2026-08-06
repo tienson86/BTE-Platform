@@ -12,7 +12,6 @@ import {
   IconGrid,
   IconHome,
   IconPalette,
-  IconPersonMark,
   IconTarget,
   IconUser,
 } from "../icons";
@@ -325,28 +324,7 @@ export { S06TenGods } from "./S06TenGods";
 
 export { S07ShenSha } from "./S07ShenSha";
 
-export function S08Interpretation(): ReactNode {
-  const s = d.s08;
-  return (
-    <section className="cd-card cd-card--fill cd-s08" aria-labelledby="cd-s08-title">
-      <h2 id="cd-s08-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s08__head">
-        <div className="cd-s08__icon">
-          <IconPersonMark size={18} />
-        </div>
-        <h3 className="cd-s08__heading">{s.heading}</h3>
-      </div>
-      <p className="cd-s08__body">{s.body}</p>
-      <div className="cd-s08__footer">
-        <button type="button" className="cd-btn-primary cd-s08__cta">
-          {s.cta}
-        </button>
-      </div>
-    </section>
-  );
-}
+export { S08Interpretation } from "./S08Interpretation";
 
 export function S11LearningPanel(): ReactNode {
   const s = d.s11;

@@ -273,10 +273,34 @@ export const CANONICAL_DESKTOP_MOCK = {
   },
   s08: {
     title: "S08 - LUẬN GIẢI TỔNG HỢP",
-    heading: "TỔNG LUẬN",
-    body:
-      "Bạn là người nhiệt huyết, có khả năng lãnh đạo và truyền cảm hứng. Lá số cho thấy bạn có tiềm năng lớn trong các lĩnh vực sáng tạo, giáo dục, truyền thông và quản trị. Giai đoạn trung vận là thời điểm bứt phá mạnh mẽ nếu biết tận dụng thế mạnh và kiểm soát cảm xúc.",
-    cta: "Đọc luận giải chi tiết →",
+    executive: {
+      title: "TỔNG QUAN LUẬN GIẢI",
+      body:
+        "Bạn là người có tố chất lãnh đạo, quyết đoán và khả năng truyền cảm hứng. Mệnh cục thiên về Hỏa nên hành động mạnh mẽ, nhưng cần cân bằng cảm xúc và sự kiên nhẫn để phát huy ổn định.",
+    },
+    strengths: {
+      title: "🟢 ĐIỂM MẠNH",
+      items: [
+        "Khả năng lãnh đạo",
+        "Quyết đoán",
+        "Ý chí mạnh",
+        "Có trách nhiệm",
+      ],
+    },
+    warnings: {
+      title: "🟠 CẦN LƯU Ý",
+      items: ["Hỏa quá vượng", "Thiếu Thủy", "Dễ nóng vội", "Thiếu kiên nhẫn"],
+    },
+    actions: {
+      title: "🔵 GỢI Ý HÀNH ĐỘNG",
+      items: [
+        "Phát triển vai trò quản lý",
+        "Bổ sung yếu tố Thủy",
+        "Làm việc theo nhóm",
+        "Kiểm soát cảm xúc",
+      ],
+    },
+    link: "Đọc luận giải đầy đủ →",
   },
   s11: {
     title: "S11 - PANEL HỌC TẬP",
