@@ -8,18 +8,13 @@ import {
   IconCompass,
   IconCopy,
   IconDoc,
-  IconDrop,
   IconFire,
   IconGrid,
   IconHome,
-  IconLeaf,
   IconPalette,
   IconPersonMark,
-  IconScale,
-  IconSpark,
   IconTarget,
   IconUser,
-  IconYinYang,
 } from "../icons";
 
 const d = CANONICAL_DESKTOP_MOCK;
@@ -295,37 +290,7 @@ export function S01IdentityDecision(): ReactNode {
   );
 }
 
-export function S02OverviewActions(): ReactNode {
-  const s = d.s02;
-  const iconMap = {
-    fire: <IconFire color="#b42318" />,
-    yinyang: <IconYinYang color="#5c6570" />,
-    scale: <IconScale color="#5c6570" />,
-    drop: <IconDrop color="#1d4f91" />,
-    spark: <IconSpark color="#6b7280" />,
-    leaf: <IconLeaf color="#2f6b3a" />,
-  } as const;
-
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s02-title">
-      <h2 id="cd-s02-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <h3 className="cd-s01__sub">{s.subtitle}</h3>
-      <div className="cd-s02__grid">
-        {s.items.map((item) => (
-          <div key={item.label} className="cd-s02__item">
-            <div className="cd-s02__item-icon">{iconMap[item.icon]}</div>
-            <div className="cd-s02__item-label">{item.label}</div>
-            <div className={`cd-s02__item-value cd-s02__item-value--${item.color}`}>
-              {item.value}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+export { S02OverviewActions } from "./S02OverviewActions";
 
 export function S09CungPhi(): ReactNode {
   const s = d.s09;

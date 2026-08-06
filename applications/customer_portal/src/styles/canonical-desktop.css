@@ -991,58 +991,97 @@ body:has(.cd-root) {
   flex-shrink: 0;
 }
 
-/* —— S02 —— */
+/* —— S02 — TỔNG QUAN & HÀNH ĐỘNG (Phase 2 polish) —— */
+.cd-s02 {
+  --s02-accent: #9a1b1b;
+  --s02-border: #eeebe8;
+  --s02-gap: 16px;
+  --s02-pad: 14px 16px;
+  --s02-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cd-s02__title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--s02-accent);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.cd-s02__card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--s02-border);
+  border-radius: var(--s02-radius);
+  box-shadow: 0 1px 4px rgba(28, 28, 28, 0.04);
+  padding: 14px;
+  min-height: 0;
+}
+
+.cd-s02__subtitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--s02-accent);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
 .cd-s02__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-rows: repeat(2, 1fr);
+  gap: var(--s02-gap);
+  flex: 1;
+  min-height: 0;
 }
 
-.cd-s02__item {
-  border: 1px solid var(--cd-border);
-  border-radius: 12px;
-  padding: 16px 10px;
-  text-align: center;
-  background: #faf9f8;
+.cd-s02__tile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  min-height: 100px;
+  justify-content: center;
+  text-align: center;
+  gap: 5px;
+  padding: var(--s02-pad);
+  background: #fff;
+  border: 1px solid var(--s02-border);
+  border-radius: var(--s02-radius);
+  box-shadow: 0 1px 2px rgba(28, 28, 28, 0.035);
+  min-height: 0;
+  min-width: 0;
 }
 
-.cd-s02__item-icon {
-  width: 28px;
-  height: 28px;
+.cd-s02__tile-icon {
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
 }
 
-.cd-s02__item-label {
-  font-size: 11px;
-  color: var(--cd-meta);
-  font-weight: 500;
+.cd-s02__tile-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8b929a;
+  line-height: 1.15;
 }
 
-.cd-s02__item-value {
-  font-size: 13px;
+.cd-s02__tile-value {
+  font-size: 18px;
   font-weight: 700;
-}
-
-.cd-s02__item-value--fire {
-  color: var(--cd-elem-fire);
-}
-.cd-s02__item-value--water {
-  color: var(--cd-elem-water);
-}
-.cd-s02__item-value--earth {
-  color: var(--cd-secondary);
-}
-.cd-s02__item-value--metal {
-  color: var(--cd-elem-metal);
-}
-.cd-s02__item-value--wood {
-  color: var(--cd-elem-wood);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
 }
 
 /* —— S09 —— */
