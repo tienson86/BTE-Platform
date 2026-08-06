@@ -330,34 +330,7 @@ export function S09CungPhi(): ReactNode {
   );
 }
 
-export function S03FourPillars(): ReactNode {
-  const s = d.s03;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s03-title">
-      <h2 id="cd-s03-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s03__pillars">
-        {s.pillars.map((p) => (
-          <article
-            key={p.title}
-            className={p.highlight ? "cd-s03__pillar cd-s03__pillar--hl" : "cd-s03__pillar"}
-          >
-            <div className="cd-s03__pillar-title">{p.title}</div>
-            <div className={`cd-s03__han cd-s03__han--${p.stem.tone}`}>{p.stem.han}</div>
-            <div className="cd-s03__viet">{p.stem.viet}</div>
-            <div className="cd-s03__el">{p.stem.element}</div>
-            <div className="cd-s03__divider" />
-            <div className={`cd-s03__han cd-s03__han--${p.branch.tone}`}>{p.branch.han}</div>
-            <div className="cd-s03__viet">{p.branch.viet}</div>
-            <div className="cd-s03__el">{p.branch.element}</div>
-            <div className="cd-s03__stamp">{p.stamp}</div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
+export { S03FourPillars } from "./S03FourPillars";
 
 export function S04ElementBalance(): ReactNode {
   const s = d.s04;

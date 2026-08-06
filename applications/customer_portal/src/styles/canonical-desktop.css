@@ -1162,98 +1162,150 @@ body:has(.cd-root) {
   font-weight: 500;
 }
 
-/* —— S03 —— */
-.cd-s03__pillars {
+/* —— S03 — TỨ TRỤ - BÁT TỰ (isolated rebuild) —— */
+.cd-s03 {
+  --s03-accent: #9a1b1b;
+  --s03-border: #eeebe8;
+  --s03-radius: 12px;
+  --s03-pad-y: 18px;
+  --s03-pad-x: 12px;
+  --s03-pad-bottom: 6px;
+  --s03-gap: 4px;
+  --s03-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: visible;
+}
+
+.cd-s03__title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--s03-accent);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.cd-s03__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: var(--s03-gap);
+  flex: 1;
+  align-items: stretch;
 }
 
 .cd-s03__pillar {
-  border: 1px solid var(--cd-border);
-  border-radius: 12px;
-  padding: 10px 6px 8px;
-  text-align: center;
-  background: #faf9f8;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-height: 220px;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 8px;
+  padding: var(--s03-pad-y) var(--s03-pad-x) var(--s03-pad-bottom);
+  background: #fff;
+  border: 1px solid var(--s03-border);
+  border-radius: var(--s03-radius);
+  box-shadow: var(--s03-shadow);
+  min-width: 0;
+  min-height: 296px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.cd-s03__pillar--hl {
-  border-color: var(--cd-primary);
-  border-width: 2px;
-  background: #fff8f7;
-  box-shadow: 0 0 0 1px rgba(154, 27, 27, 0.08), var(--cd-shadow);
+.cd-s03__pillar:hover,
+.cd-s03__pillar:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 28, 28, 0.08), 0 1px 3px rgba(28, 28, 28, 0.04);
+  outline: none;
 }
 
-.cd-s03__pillar-title {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: var(--cd-meta);
-  text-transform: uppercase;
+.cd-s03__pillar--master {
+  border-color: var(--s03-accent);
 }
 
-.cd-s03__pillar--hl .cd-s03__pillar-title {
-  color: var(--cd-primary);
+.cd-s03__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cd-s03__pillar-name {
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--cd-secondary);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.cd-s03__pillar--master .cd-s03__pillar-name {
+  color: var(--s03-accent);
+}
+
+.cd-s03__master-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: var(--s03-accent);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.cd-s03__glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
 }
 
 .cd-s03__han {
-  font-size: 28px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 1;
-  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
-}
-
-.cd-s03__pillar--hl .cd-s03__han {
-  font-size: 32px;
-}
-
-.cd-s03__han--fire {
-  color: var(--cd-elem-fire);
-}
-.cd-s03__han--wood {
-  color: var(--cd-elem-wood);
-}
-.cd-s03__han--metal {
-  color: var(--cd-elem-metal);
-}
-.cd-s03__han--earth {
-  color: var(--cd-elem-earth);
-}
-.cd-s03__han--water {
-  color: var(--cd-elem-water);
+  font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "SimSun", serif;
 }
 
 .cd-s03__viet {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
-.cd-s03__el {
+.cd-s03__glyph .cd-s03__el {
   font-size: 10px;
-  color: var(--cd-meta);
   font-weight: 400;
+  line-height: 1.2;
+  color: var(--cd-meta);
+  opacity: 0.8;
 }
 
-.cd-s03__divider {
-  height: 1px;
-  background: #ececec;
-  margin: 2px 4px;
+.cd-s03__tone--fire {
+  color: var(--cd-elem-fire);
+}
+.cd-s03__tone--wood {
+  color: var(--cd-elem-wood);
+}
+.cd-s03__tone--metal {
+  color: var(--cd-elem-metal);
+}
+.cd-s03__tone--earth {
+  color: var(--cd-elem-earth);
+}
+.cd-s03__tone--water {
+  color: var(--cd-elem-water);
 }
 
-.cd-s03__stamp {
+.cd-s03__footer {
   margin-top: auto;
-  border: 1px solid var(--cd-border);
-  border-radius: 999px;
-  padding: 4px 8px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--cd-secondary);
-  background: #fff;
+  padding-top: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cd-meta);
+  line-height: 1.2;
 }
 
 /* —— S04 —— */
