@@ -288,42 +288,7 @@ export { S03FourPillars } from "./S03FourPillars";
 
 export { S04ElementBalance } from "./S04ElementBalance";
 
-export function S05Strength(): ReactNode {
-  const s = d.s05;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s05-title">
-      <h2 id="cd-s05-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s05__body">
-        <div>
-          <div className="cd-label">{s.scoreLabel}</div>
-          <div className="cd-s05__score">
-            <span className="cd-s05__score-main">{s.score.split(" / ")[0]}</span>
-            <span className="cd-s05__score-max"> / {s.score.split(" / ")[1]}</span>
-          </div>
-          <div className="cd-s05__status">{s.status}</div>
-          <div className="cd-s05__bar" aria-hidden="true">
-            <span style={{ width: `${s.percent}%` }} />
-          </div>
-        </div>
-        <div>
-          <div className="cd-label">{s.evidenceTitle}</div>
-          <ul className="cd-s05__evidence">
-            {s.evidence.map((e) => (
-              <li key={e}>{e}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="cd-s05__footer">
-        <a className="cd-link" href="#s05-detail">
-          {s.link}
-        </a>
-      </div>
-    </section>
-  );
-}
+export { S05ChartStrength, S05Strength } from "./S05ChartStrength";
 
 export function S10CanXuong(): ReactNode {
   const s = d.s10;

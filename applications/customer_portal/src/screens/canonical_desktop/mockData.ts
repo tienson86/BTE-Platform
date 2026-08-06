@@ -203,18 +203,17 @@ export const CANONICAL_DESKTOP_MOCK = {
   },
   s05: {
     title: "S05 - SỨC MẠNH MỆNH CỤC",
-    scoreLabel: "ĐIỂM SỨC MẠNH",
-    score: "72 / 100",
-    status: "Mạnh",
-    percent: 72,
-    evidenceTitle: "BẢNG ĐỘNG CHÍNH",
-    evidence: [
-      "Nhật chủ Bính Hỏa vượng",
-      "Được Mộc sinh trợ",
-      "Ngọ Dần hợp Hỏa",
-      "Ấn tinh và Tỷ Kiên hỗ trợ",
+    level: "MẠNH",
+    score: "82 / 100",
+    percent: 82,
+    insight: "Mệnh cục cân bằng tốt.\nNhật chủ được sinh trợ.",
+    factors: [
+      { text: "Nhật chủ đắc lệnh", tone: "positive" as const },
+      { text: "Được Mộc sinh trợ", tone: "positive" as const },
+      { text: "Hỏa vượng", tone: "neutral" as const },
+      { text: "Kim suy", tone: "negative" as const },
     ],
-    link: "Xem chi tiết phân tích →",
+    cta: "Xem phân tích chi tiết →",
   },
   s10: {
     title: "S10 - CÂN XƯƠNG ĐOÁN MỆNH",
