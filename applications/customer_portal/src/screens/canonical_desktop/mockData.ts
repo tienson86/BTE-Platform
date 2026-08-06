@@ -311,14 +311,30 @@ export const CANONICAL_DESKTOP_MOCK = {
     link: "Đọc luận giải đầy đủ →",
   },
   s11: {
-    title: "S11 - PANEL HỌC TẬP",
-    items: [
-      { label: "Bài học phù hợp", value: "12 bài" },
-      { label: "Thuật ngữ liên quan", value: "25 mục" },
-      { label: "Hướng dẫn sử dụng", value: "Xem ngay" },
-      { label: "Tài liệu chuyên sâu", value: "8 tài liệu" },
-    ],
-    link: "Mở học tập →",
+    title: "S11 - BÁO CÁO TỔNG KẾT",
+    executive: {
+      title: "KẾT LUẬN TỔNG QUAN",
+      body:
+        "Bạn có nền tảng mệnh cục khá tốt. Khả năng phát triển ổn định nếu phát huy năng lực lãnh đạo và duy trì sự cân bằng cảm xúc.",
+    },
+    strengths: {
+      title: "✓ ĐIỂM MẠNH",
+      items: ["Lãnh đạo", "Quyết đoán", "Trách nhiệm", "Học hỏi nhanh"],
+    },
+    attention: {
+      title: "⚠ ĐIỂM CẦN LƯU Ý",
+      items: ["Dễ nóng vội", "Thiếu kiên nhẫn", "Cần cân bằng Ngũ hành"],
+    },
+    recommendations: {
+      title: "➜ KHUYẾN NGHỊ HÀNH ĐỘNG",
+      items: [
+        "Phát triển vai trò quản lý",
+        "Bổ sung yếu tố Thủy",
+        "Lựa chọn hướng làm việc phù hợp",
+        "Kiểm soát cảm xúc khi ra quyết định",
+      ],
+    },
+    link: "Xem báo cáo phân tích đầy đủ →",
   },
   footer:
     "Lưu ý: Thông tin chỉ mang tính tham khảo. Việc luận giải cần dựa trên nhiều yếu tố khác nhau.",

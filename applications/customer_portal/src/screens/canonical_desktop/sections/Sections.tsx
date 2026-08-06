@@ -6,7 +6,6 @@ import {
   IconClock,
   IconCompass,
   IconCopy,
-  IconDoc,
   IconFire,
   IconTarget,
   IconUser,
@@ -221,29 +220,4 @@ export { S07ShenSha } from "./S07ShenSha";
 
 export { S08Interpretation } from "./S08Interpretation";
 
-export function S11LearningPanel(): ReactNode {
-  const s = d.s11;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s11-title">
-      <h2 id="cd-s11-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <ul className="cd-s11__list">
-        {s.items.map((item) => (
-          <li key={item.label} className="cd-s11__item">
-            <span className="cd-s11__item-icon">
-              <IconDoc />
-            </span>
-            <span>{item.label}</span>
-            <span className="cd-s11__item-value">{item.value}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="cd-s11__footer">
-        <a className="cd-link" href="#s11-open">
-          {s.link}
-        </a>
-      </div>
-    </section>
-  );
-}
+export { S11ReportSummary, S11LearningPanel } from "./S11ReportSummary";
