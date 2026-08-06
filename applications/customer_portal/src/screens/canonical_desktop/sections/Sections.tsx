@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { CANONICAL_DESKTOP_MOCK } from "../mockData";
 import {
-  IconBriefcase,
   IconBulb,
   IconCalendar,
   IconClock,
@@ -9,50 +8,11 @@ import {
   IconCopy,
   IconDoc,
   IconFire,
-  IconGrid,
-  IconHome,
-  IconPalette,
   IconTarget,
   IconUser,
 } from "../icons";
 
 const d = CANONICAL_DESKTOP_MOCK;
-
-function BaguaDiagram({ center, number }: { center: string; number: string }): ReactNode {
-  return (
-    <svg className="cd-s09__bagua" viewBox="0 0 100 100" aria-hidden="true">
-      <polygon
-        points="50,4 88,22 96,62 70,94 30,94 4,62 12,22"
-        fill="#a60000"
-        stroke="#7a0000"
-        strokeWidth="2"
-      />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-        const rad = ((deg - 90) * Math.PI) / 180;
-        const x = 50 + Math.cos(rad) * 34;
-        const y = 50 + Math.sin(rad) * 34;
-        return (
-          <rect
-            key={deg}
-            x={x - 5}
-            y={y - 1.5}
-            width="10"
-            height="3"
-            fill="#f5dfa0"
-            transform={`rotate(${deg} ${x} ${y})`}
-          />
-        );
-      })}
-      <circle cx="50" cy="50" r="22" fill="#fff" />
-      <text x="50" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="#a60000">
-        {center}
-      </text>
-      <text x="50" y="62" textAnchor="middle" fontSize="14" fontWeight="700" fill="#a60000">
-        {number}
-      </text>
-    </svg>
-  );
-}
 
 export function S00ContextHeader(): ReactNode {
   const s = d.s00;
@@ -245,43 +205,7 @@ export function S01IdentityDecision(): ReactNode {
 
 export { S02OverviewActions } from "./S02OverviewActions";
 
-export function S09CungPhi(): ReactNode {
-  const s = d.s09;
-  const icons = {
-    home: <IconHome size={18} color="#fff" />,
-    briefcase: <IconBriefcase />,
-    compass: <IconCompass size={18} color="#fff" />,
-    palette: <IconPalette />,
-    grid: <IconGrid />,
-  } as const;
-
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s09-title">
-      <h2 id="cd-s09-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s09__quai">
-        <BaguaDiagram center={s.quai.center} number={s.quai.number} />
-        <ul className="cd-s09__bullets">
-          {s.quai.bullets.map((b) => (
-            <li key={b}>{b}</li>
-          ))}
-        </ul>
-      </div>
-      <h3 className="cd-s09__nhom-title">{s.nhomTrachTitle}</h3>
-      <div className="cd-s09__icons">
-        {s.nhomTrach.map((item) => (
-          <div key={item.label} className="cd-s09__icon-btn">
-            <div className={`cd-s09__icon-tile cd-s09__icon-tile--${item.color}`}>
-              {icons[item.icon]}
-            </div>
-            <span className="cd-s09__icon-label">{item.label}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+export { S09CungPhi, S09FengShuiGuidance } from "./S09FengShuiGuidance";
 
 export { S03FourPillars } from "./S03FourPillars";
 
