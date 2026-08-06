@@ -247,12 +247,28 @@ export const CANONICAL_DESKTOP_MOCK = {
   },
   s07: {
     title: "S07 - THẦN SÁT",
-    categories: [
-      { name: "Quý nhân", items: ["Thiên Ất", "Phúc Tinh"] },
-      { name: "Cát tinh", items: ["Tương Tinh", "Văn Xương"] },
-      { name: "Hung tinh", items: ["Không Vong", "Kiếp Sát"] },
-      { name: "Đặc biệt", items: ["Lộc Thần", "Thiên Đức"] },
-    ],
+    executive: {
+      line1: "Có 10 Thần Sát được kích hoạt",
+      line2: "5 Cát tinh • 5 Hung tinh",
+    },
+    good: {
+      title: "● CÁT TINH (5)",
+      items: [
+        "Thiên Ất Quý Nhân",
+        "Thiên Đức Quý Nhân",
+        "Nguyệt Đức Quý Nhân",
+        "Văn Xương",
+        "Hoa Cái",
+      ],
+    },
+    bad: {
+      title: "● HUNG TINH (5)",
+      items: ["Kiếp Sát", "Không Vong", "Cô Thần", "Quả Tú", "Đại Hao"],
+    },
+    footerSummary: {
+      line1: "Có 5 Cát tinh và 5 Hung tinh.",
+      line2: "Nên xem chi tiết để đánh giá mức độ ảnh hưởng.",
+    },
     link: "Xem toàn bộ →",
   },
   s08: {

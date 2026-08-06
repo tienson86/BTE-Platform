@@ -1775,61 +1775,161 @@ body:has(.cd-root) {
   outline: none;
 }
 
-/* —— S07 —— */
-.cd-s07__cats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* —— S07 — THẦN SÁT (isolated rebuild) —— */
+.cd-s07 {
+  --s07-accent: #9a1b1b;
+  --s07-border: #ece7e2;
+  --s07-divider: #e8e4df;
+  --s07-radius: 12px;
+  --s07-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
+  --s07-good: #1f7a4d;
+  --s07-bad: #b42318;
+  --s07-exec-bg: #fff8ef;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.cd-s07__card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--s07-border);
+  border-radius: var(--s07-radius);
+  box-shadow: var(--s07-shadow);
+  box-sizing: border-box;
+}
+
+.cd-s07__title {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--s07-accent);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.cd-s07__exec {
+  margin: 0 0 8px;
+  padding: 10px 12px;
+  background: var(--s07-exec-bg);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.cd-s07__exec-line {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--cd-secondary);
+  text-align: center;
+}
+
+.cd-s07__group {
+  margin: 0;
+}
+
+.cd-s07__group-title {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cd-s07__group-title--good {
+  color: var(--s07-good);
+}
+
+.cd-s07__group-title--bad {
+  color: var(--s07-bad);
+}
+
+.cd-s07__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
-.cd-s07__cat {
-  padding: 10px 10px;
-  min-width: 0;
-  border-radius: 10px;
-  background: #faf9f8;
-  border: 1px solid var(--cd-border);
+.cd-s07__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.cd-s07__cat--cat {
-  background: #f3f8f5;
-  border-color: #d7ebe0;
+.cd-s07__icon {
+  flex-shrink: 0;
+  width: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
 }
 
-.cd-s07__cat--hung {
-  background: #faf3f3;
-  border-color: #ecdada;
+.cd-s07__icon--good {
+  color: var(--s07-good);
 }
 
-.cd-s07__cat--dacbiet {
-  background: #f5f6f8;
-  border-color: #e0e3e8;
+.cd-s07__icon--bad {
+  color: var(--s07-bad);
 }
 
-.cd-s07__cat-name {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 8px;
+.cd-s07__text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
   color: var(--cd-text);
 }
 
-.cd-s07__cat-item {
-  font-size: 12px;
-  color: var(--cd-primary);
-  font-weight: 600;
-  margin-bottom: 4px;
+.cd-s07__divider {
+  width: auto;
+  height: 0;
+  margin: 6px 8px;
+  border: 0;
+  border-top: 1px solid var(--s07-divider);
+  align-self: stretch;
 }
 
-.cd-s07__cat--hung .cd-s07__cat-item {
-  color: var(--cd-danger);
+.cd-s07__footer-summary {
+  margin: 0 0 8px;
 }
 
-.cd-s07__cat--dacbiet .cd-s07__cat-item {
+.cd-s07__footer-line {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--cd-secondary);
 }
 
-.cd-s07__footer {
-  margin-top: 14px;
+.cd-s07__link {
+  display: block;
   text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--s07-accent);
+  text-decoration: none;
+  line-height: 1.2;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.cd-s07__link:hover,
+.cd-s07__link:focus-visible {
+  text-decoration: underline;
+  outline: none;
 }
 
 /* —— S08 —— */

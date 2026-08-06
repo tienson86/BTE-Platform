@@ -323,41 +323,7 @@ export function S10CanXuong(): ReactNode {
 
 export { S06TenGods } from "./S06TenGods";
 
-export function S07ShenSha(): ReactNode {
-  const s = d.s07;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s07-title">
-      <h2 id="cd-s07-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s07__cats">
-        {s.categories.map((cat) => {
-          const tone =
-            cat.name === "Hung tinh"
-              ? "cd-s07__cat cd-s07__cat--hung"
-              : cat.name === "Đặc biệt"
-                ? "cd-s07__cat cd-s07__cat--dacbiet"
-                : "cd-s07__cat cd-s07__cat--cat";
-          return (
-            <div key={cat.name} className={tone}>
-              <div className="cd-s07__cat-name">{cat.name}</div>
-              {cat.items.map((item) => (
-                <div key={item} className="cd-s07__cat-item">
-                  {item}
-                </div>
-              ))}
-            </div>
-          );
-        })}
-      </div>
-      <div className="cd-s07__footer">
-        <a className="cd-link" href="#s07-detail">
-          {s.link}
-        </a>
-      </div>
-    </section>
-  );
-}
+export { S07ShenSha } from "./S07ShenSha";
 
 export function S08Interpretation(): ReactNode {
   const s = d.s08;
