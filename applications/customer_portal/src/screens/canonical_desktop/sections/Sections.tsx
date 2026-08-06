@@ -55,52 +55,6 @@ function BaguaDiagram({ center, number }: { center: string; number: string }): R
   );
 }
 
-function ElementDonut(): ReactNode {
-  const legend = d.s04.legend;
-  const palette: Record<string, string> = {
-    Hỏa: "#b42318",
-    Mộc: "#2f6b3a",
-    Thổ: "#b8860b",
-    Kim: "#6b7280",
-    Thủy: "#1d4f91",
-  };
-  const r = 48;
-  const c = 2 * Math.PI * r;
-  let offset = 0;
-  const segments = legend.map((item) => {
-    const len = (item.pct / 100) * c;
-    const seg = { ...item, color: palette[item.name] ?? item.color, len, offset };
-    offset += len;
-    return seg;
-  });
-
-  return (
-    <div className="cd-s04__chart-wrap">
-      <svg width="140" height="140" viewBox="0 0 140 140" aria-hidden="true">
-        <g transform="translate(70,70) rotate(-90)">
-          {segments.map((seg) => (
-            <circle
-              key={seg.name}
-              r={r}
-              cx="0"
-              cy="0"
-              fill="transparent"
-              stroke={seg.color}
-              strokeWidth="18"
-              strokeDasharray={`${seg.len} ${c - seg.len}`}
-              strokeDashoffset={-seg.offset}
-            />
-          ))}
-        </g>
-      </svg>
-      <div className="cd-s04__chart-center">
-        <span>{d.s04.totalLabel}</span>
-        <strong>{d.s04.totalValue}</strong>
-      </div>
-    </div>
-  );
-}
-
 export function S00ContextHeader(): ReactNode {
   const s = d.s00;
   const timeMatch = /^(\d{1,2}:\d{2})\s*(.*)$/.exec(s.birth.time);
@@ -332,39 +286,7 @@ export function S09CungPhi(): ReactNode {
 
 export { S03FourPillars } from "./S03FourPillars";
 
-export function S04ElementBalance(): ReactNode {
-  const s = d.s04;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s04-title">
-      <h2 id="cd-s04-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s04__body">
-        <ElementDonut />
-        <ul className="cd-s04__legend">
-          {s.legend.map((item) => {
-            const palette: Record<string, string> = {
-              Hỏa: "#b42318",
-              Mộc: "#2f6b3a",
-              Thổ: "#b8860b",
-              Kim: "#6b7280",
-              Thủy: "#1d4f91",
-            };
-            const color = palette[item.name] ?? item.color;
-            return (
-              <li key={item.name}>
-                <span className="cd-s04__dot" style={{ background: color }} />
-                <span>{item.name}</span>
-                <span className="cd-s04__pct">{item.pct}%</span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <p className="cd-s04__summary">{s.summary}</p>
-    </section>
-  );
-}
+export { S04ElementBalance } from "./S04ElementBalance";
 
 export function S05Strength(): ReactNode {
   const s = d.s05;

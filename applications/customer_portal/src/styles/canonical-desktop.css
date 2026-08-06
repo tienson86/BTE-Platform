@@ -1308,78 +1308,134 @@ body:has(.cd-root) {
   line-height: 1.2;
 }
 
-/* —— S04 —— */
-.cd-s04__body {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 12px;
-  align-items: center;
-}
-
-.cd-s04__chart-wrap {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  margin: 0 auto;
-}
-
-.cd-s04__chart-center {
-  position: absolute;
-  inset: 0;
+/* —— S04 — CÂN BẰNG NGŨ HÀNH (isolated rebuild) —— */
+.cd-s04 {
+  --s04-accent: #9a1b1b;
+  --s04-border: #eeebe8;
+  --s04-radius: 12px;
+  --s04-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
+  --s04-status-strong: #1f7a4d;
+  --s04-status-medium: #b8860b;
+  --s04-status-weak: #c2410c;
+  --s04-status-very-weak: #b42318;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+  justify-content: flex-start;
+  min-width: 0;
 }
 
-.cd-s04__chart-center span {
-  font-size: 10px;
-  color: var(--cd-meta);
-  letter-spacing: 0.06em;
-  font-weight: 500;
+.cd-s04__card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--s04-border);
+  border-radius: var(--s04-radius);
+  box-shadow: var(--s04-shadow);
 }
 
-.cd-s04__chart-center strong {
-  font-size: 17px;
+.cd-s04__title {
+  margin: 0 0 10px;
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--s04-accent);
+  text-transform: uppercase;
+  line-height: 1.3;
 }
 
-.cd-s04__legend {
+.cd-s04__list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 12px;
 }
 
-.cd-s04__legend li {
-  display: flex;
+.cd-s04__row {
+  display: grid;
+  grid-template-columns: 36px 48% 40px minmax(0, 1fr);
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--cd-secondary);
+  gap: 10px;
 }
 
-.cd-s04__dot {
-  width: 7px;
-  height: 7px;
+.cd-s04__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cd-text);
+  line-height: 1.2;
+}
+
+.cd-s04__track {
+  height: 12px;
+  background: #f1efec;
   border-radius: 999px;
-  flex-shrink: 0;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.cd-s04__bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  min-width: 4px;
+}
+
+.cd-s04__bar-fill--wood {
+  background: var(--cd-elem-wood);
+}
+.cd-s04__bar-fill--fire {
+  background: var(--cd-elem-fire);
+}
+.cd-s04__bar-fill--earth {
+  background: var(--cd-elem-earth);
+}
+.cd-s04__bar-fill--metal {
+  background: var(--cd-elem-metal);
+}
+.cd-s04__bar-fill--water {
+  background: var(--cd-elem-water);
 }
 
 .cd-s04__pct {
-  margin-left: auto;
-  font-weight: 700;
-  color: var(--cd-text);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cd-meta);
+  text-align: right;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.cd-s04__status {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.cd-s04__status--strong {
+  color: var(--s04-status-strong);
+}
+.cd-s04__status--medium {
+  color: var(--s04-status-medium);
+}
+.cd-s04__status--weak {
+  color: var(--s04-status-weak);
+}
+.cd-s04__status--very-weak {
+  color: var(--s04-status-very-weak);
 }
 
 .cd-s04__summary {
-  margin: 12px 0 0;
-  font-size: 12px;
-  color: var(--cd-primary);
-  font-weight: 600;
+  margin: 20px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cd-secondary);
+  line-height: 1.4;
 }
 
 /* —— S05 —— */

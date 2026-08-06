@@ -192,16 +192,14 @@ export const CANONICAL_DESKTOP_MOCK = {
   },
   s04: {
     title: "S04 - CÂN BẰNG NGŨ HÀNH",
-    totalLabel: "TỔNG",
-    totalValue: "100%",
-    legend: [
-      { name: "Hỏa", pct: 42, color: "#c62828" },
-      { name: "Mộc", pct: 22, color: "#2e7d32" },
-      { name: "Thổ", pct: 15, color: "#f9a825" },
-      { name: "Kim", pct: 12, color: "#78909c" },
-      { name: "Thủy", pct: 9, color: "#1565c0" },
+    rows: [
+      { name: "Mộc", element: "wood" as const, pct: 22, status: "Trung bình" },
+      { name: "Hỏa", element: "fire" as const, pct: 42, status: "Rất mạnh" },
+      { name: "Thổ", element: "earth" as const, pct: 15, status: "Trung bình" },
+      { name: "Kim", element: "metal" as const, pct: 12, status: "Yếu" },
+      { name: "Thủy", element: "water" as const, pct: 9, status: "Rất yếu" },
     ],
-    summary: "Hỏa vượng • Thủy nhược",
+    summary: "Hỏa vượng • Thủy thiếu • Cân bằng trung bình",
   },
   s05: {
     title: "S05 - SỨC MẠNH MỆNH CỤC",
