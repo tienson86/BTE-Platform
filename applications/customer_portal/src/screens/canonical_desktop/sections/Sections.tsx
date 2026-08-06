@@ -321,38 +321,7 @@ export function S10CanXuong(): ReactNode {
   );
 }
 
-export function S06TenGods(): ReactNode {
-  const s = d.s06;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s06-title">
-      <h2 id="cd-s06-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s06__grid">
-        {s.gods.map((g) => (
-          <div key={g.name} className="cd-s06__god">
-            <div className="cd-s06__god-icon" style={{ background: g.color }}>
-              •
-            </div>
-            <div className="cd-s06__god-name">{g.name}</div>
-            <div
-              className={
-                g.highlight ? "cd-s06__god-value cd-s06__god-value--hl" : "cd-s06__god-value"
-              }
-            >
-              {g.value}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="cd-s06__footer">
-        <a className="cd-link" href="#s06-detail">
-          {s.link}
-        </a>
-      </div>
-    </section>
-  );
-}
+export { S06TenGods } from "./S06TenGods";
 
 export function S07ShenSha(): ReactNode {
   const s = d.s07;
