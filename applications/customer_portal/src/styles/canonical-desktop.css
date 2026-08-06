@@ -9,31 +9,52 @@ html:has(.cd-root),
 body:has(.cd-root) {
   margin: 0;
   padding: 0;
-  background: #f3f3f3;
+  background: #f2f1ef;
 }
 
 .cd-root {
-  --cd-sidebar: #560105;
-  --cd-sidebar-active: #840105;
-  --cd-sidebar-gold: #e8c56a;
-  --cd-sidebar-gold-muted: rgba(232, 197, 106, 0.72);
-  --cd-accent: #a60000;
-  --cd-accent-strong: #8b0000;
-  --cd-bg: #f3f3f3;
+  /* Color system — Primary / Secondary / Success / Warning / Danger */
+  --cd-primary: #9a1b1b;
+  --cd-secondary: #5c6570;
+  --cd-success: #1f7a4d;
+  --cd-success-bg: #eaf7f0;
+  --cd-warning: #a16207;
+  --cd-warning-bg: #fff7e8;
+  --cd-danger: #9a1b1b;
+  --cd-danger-bg: #f8eaea;
+
+  /* Compat aliases */
+  --cd-accent: var(--cd-primary);
+  --cd-accent-strong: #7a1212;
+
+  /* Sidebar — dark burgundy + gold active (SPRINT_UI_POLISH_01 §5) */
+  --cd-sidebar: #3f0a0c;
+  --cd-sidebar-active: #d4b56a;
+  --cd-sidebar-hover: #b8954a;
+  --cd-sidebar-gold: #e6d3a3;
+  --cd-sidebar-gold-muted: rgba(230, 211, 163, 0.7);
+  --cd-sidebar-text: #f7f1e6;
+
+  --cd-bg: #f2f1ef;
   --cd-card: #ffffff;
-  --cd-border: #e6e6e6;
-  --cd-text: #1f1f1f;
-  --cd-muted: #6b7280;
-  --cd-success: #059669;
-  --cd-success-bg: #ecfdf5;
-  --cd-warning: #b45309;
-  --cd-warning-bg: #fff4e5;
-  --cd-danger-bg: #fdecea;
+  --cd-border: #e8e6e3;
+  --cd-text: #1c1c1c;
+  --cd-muted: #7a828c;
+  --cd-meta: rgba(92, 101, 112, 0.72);
+
+  /* Ngũ Hành — only for element representation */
+  --cd-elem-fire: #b42318;
+  --cd-elem-wood: #2f6b3a;
+  --cd-elem-earth: #b8860b;
+  --cd-elem-metal: #6b7280;
+  --cd-elem-water: #1d4f91;
+
   --cd-header-h: 72px;
   --cd-sidebar-w: 280px;
   --cd-pad: 32px;
-  --cd-gap: 20px;
-  --cd-radius: 10px;
+  --cd-gap: 30px;
+  --cd-radius: 12px;
+  --cd-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
   --cd-font: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
 
   box-sizing: border-box;
@@ -45,7 +66,8 @@ body:has(.cd-root) {
   color: var(--cd-text);
   font-family: var(--cd-font);
   font-size: 14px;
-  line-height: 1.45;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .cd-root *,
@@ -63,7 +85,7 @@ body:has(.cd-root) {
 .cd-sidebar {
   grid-row: 1 / -1;
   background: var(--cd-sidebar);
-  color: var(--cd-sidebar-gold);
+  color: var(--cd-sidebar-text);
   display: flex;
   flex-direction: column;
   padding: 18px 14px 16px;
@@ -93,7 +115,7 @@ body:has(.cd-root) {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: #fff8e7;
+  color: var(--cd-sidebar-text);
 }
 
 .cd-sidebar__menu-btn {
@@ -134,22 +156,34 @@ body:has(.cd-root) {
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
-  border-radius: 8px;
-  color: var(--cd-sidebar-gold);
+  border-radius: 10px;
+  color: var(--cd-sidebar-text);
   font-size: 14px;
   font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.cd-sidebar__item--active {
-  background: var(--cd-sidebar-active);
+.cd-sidebar__item:hover {
+  background: rgba(184, 149, 74, 0.22);
   color: #fff;
+}
+
+.cd-sidebar__item--active,
+.cd-sidebar__item--active:hover {
+  background: var(--cd-sidebar-active);
+  color: #3f0a0c;
+  font-weight: 600;
 }
 
 .cd-sidebar__icon {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  opacity: 0.95;
+  opacity: 0.92;
+}
+
+.cd-sidebar__item--active .cd-sidebar__icon {
+  opacity: 1;
 }
 
 .cd-sidebar__footer {
@@ -158,8 +192,8 @@ body:has(.cd-root) {
 }
 
 .cd-sidebar__theme {
-  background: rgba(0, 0, 0, 0.22);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 10px;
   padding: 10px 12px;
   margin-bottom: 14px;
 }
@@ -178,7 +212,7 @@ body:has(.cd-root) {
   gap: 8px;
   font-size: 13px;
   font-weight: 600;
-  color: #fff8e7;
+  color: var(--cd-sidebar-text);
 }
 
 .cd-sidebar__version {
