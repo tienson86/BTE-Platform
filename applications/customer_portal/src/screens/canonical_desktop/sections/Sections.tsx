@@ -62,20 +62,27 @@ function BaguaDiagram({ center, number }: { center: string; number: string }): R
 
 function ElementDonut(): ReactNode {
   const legend = d.s04.legend;
-  const r = 42;
+  const palette: Record<string, string> = {
+    Hỏa: "#b42318",
+    Mộc: "#2f6b3a",
+    Thổ: "#b8860b",
+    Kim: "#6b7280",
+    Thủy: "#1d4f91",
+  };
+  const r = 48;
   const c = 2 * Math.PI * r;
   let offset = 0;
   const segments = legend.map((item) => {
     const len = (item.pct / 100) * c;
-    const seg = { ...item, len, offset };
+    const seg = { ...item, color: palette[item.name] ?? item.color, len, offset };
     offset += len;
     return seg;
   });
 
   return (
     <div className="cd-s04__chart-wrap">
-      <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
-        <g transform="translate(60,60) rotate(-90)">
+      <svg width="140" height="140" viewBox="0 0 140 140" aria-hidden="true">
+        <g transform="translate(70,70) rotate(-90)">
           {segments.map((seg) => (
             <circle
               key={seg.name}
@@ -84,7 +91,7 @@ function ElementDonut(): ReactNode {
               cy="0"
               fill="transparent"
               stroke={seg.color}
-              strokeWidth="16"
+              strokeWidth="18"
               strokeDasharray={`${seg.len} ${c - seg.len}`}
               strokeDashoffset={-seg.offset}
             />
@@ -101,26 +108,30 @@ function ElementDonut(): ReactNode {
 
 export function S00ContextHeader(): ReactNode {
   const s = d.s00;
+  const timeMatch = /^(\d{1,2}:\d{2})\s*(.*)$/.exec(s.birth.time);
+  const timePrimary = timeMatch?.[1] ?? s.birth.time;
+  const timeSecondary = timeMatch?.[2] ?? "";
+
   return (
     <section className="cd-s00" id="tom-tat" aria-labelledby="cd-s00-title">
-      <h2 id="cd-s00-title" className="cd-section-title">
+      <h2 id="cd-s00-title" className="cd-s00__title">
         {s.title}
       </h2>
-      <div className="cd-card">
+      <div className="cd-s00__card">
         <div className="cd-s00__body">
-          <div className="cd-s00__col">
-            <div className="cd-label">{s.profile.label}</div>
+          <div className="cd-s00__col cd-s00__col--profile">
+            <div className="cd-s00__label">{s.profile.label}</div>
             <div className="cd-s00__profile">
-              <div className="cd-s00__avatar">
-                <IconUser size={28} />
+              <div className="cd-s00__avatar" aria-hidden="true">
+                <IconUser size={26} />
               </div>
-              <div>
+              <div className="cd-s00__profile-text">
                 <p className="cd-s00__name">
                   {s.profile.name}
                   <span className="cd-s00__gender">{s.profile.genderSymbol}</span>
                 </p>
                 <p className="cd-s00__meta">{s.profile.meta}</p>
-                <a className="cd-link" href="#ho-so">
+                <a className="cd-s00__link" href="#ho-so">
                   {s.profile.profileLink}
                 </a>
               </div>
@@ -128,47 +139,48 @@ export function S00ContextHeader(): ReactNode {
           </div>
 
           <div className="cd-s00__col">
-            <div className="cd-label">{s.birth.label}</div>
+            <div className="cd-s00__label">{s.birth.label}</div>
             <div className="cd-s00__birth-row">
-              <IconCalendar />
-              <strong>{s.birth.date}</strong>
-              <span className="cd-s00__lunar">{s.birth.lunar}</span>
+              <IconCalendar size={14} color="#8b929a" />
+              <strong className="cd-s00__primary">{s.birth.date}</strong>
+              <span className="cd-s00__secondary">{s.birth.lunar}</span>
             </div>
             <div className="cd-s00__birth-row">
-              <IconClock />
-              <strong>{s.birth.time}</strong>
+              <IconClock size={14} color="#8b929a" />
+              <strong className="cd-s00__primary">{timePrimary}</strong>
+              {timeSecondary ? (
+                <span className="cd-s00__secondary">{timeSecondary}</span>
+              ) : null}
             </div>
           </div>
 
           <div className="cd-s00__col">
-            <div className="cd-label">{s.chartId.label}</div>
+            <div className="cd-s00__label">{s.chartId.label}</div>
             <div className="cd-s00__chart-id">
               <span>{s.chartId.value}</span>
-              <IconCopy />
+              <IconCopy size={13} />
             </div>
           </div>
 
           <div className="cd-s00__col">
-            <div className="cd-label">{s.version.label}</div>
-            <div className="cd-s00__version-value">{s.version.value}</div>
-            <div className="cd-s00__version-sys">{s.version.system}</div>
+            <div className="cd-s00__label">{s.version.label}</div>
+            <div className="cd-s00__primary cd-s00__primary--lg">{s.version.value}</div>
+            <div className="cd-s00__secondary">{s.version.system}</div>
           </div>
 
           <div className="cd-s00__col">
-            <div className="cd-label">{s.analyzedAt.label}</div>
-            <div className="cd-s00__version-value" style={{ fontSize: 13 }}>
-              {s.analyzedAt.value}
-            </div>
-            <div className="cd-s00__relative">{s.analyzedAt.relative}</div>
+            <div className="cd-s00__label">{s.analyzedAt.label}</div>
+            <div className="cd-s00__primary">{s.analyzedAt.value}</div>
+            <div className="cd-s00__secondary">{s.analyzedAt.relative}</div>
           </div>
 
-          <div className="cd-s00__col">
-            <div className="cd-label">{s.status.label}</div>
+          <div className="cd-s00__col cd-s00__col--status">
+            <div className="cd-s00__label">{s.status.label}</div>
             <div className="cd-s00__status">
               <span>{s.status.value}</span>
-              <span className="cd-s00__dot" />
+              <span className="cd-s00__dot" aria-hidden="true" />
             </div>
-            <a className="cd-link" href="#chia-se" style={{ marginTop: 8 }}>
+            <a className="cd-s00__link" href="#chia-se">
               {s.status.shareLink}
             </a>
           </div>
@@ -253,12 +265,12 @@ export function S01IdentityDecision(): ReactNode {
 export function S02OverviewActions(): ReactNode {
   const s = d.s02;
   const iconMap = {
-    fire: <IconFire color="#c62828" />,
-    yinyang: <IconYinYang color="#1565c0" />,
-    scale: <IconScale color="#6a1b9a" />,
-    drop: <IconDrop color="#1565c0" />,
-    spark: <IconSpark color="#f9a825" />,
-    leaf: <IconLeaf color="#2e7d32" />,
+    fire: <IconFire color="#b42318" />,
+    yinyang: <IconYinYang color="#5c6570" />,
+    scale: <IconScale color="#5c6570" />,
+    drop: <IconDrop color="#1d4f91" />,
+    spark: <IconSpark color="#6b7280" />,
+    leaf: <IconLeaf color="#2f6b3a" />,
   } as const;
 
   return (
@@ -359,13 +371,23 @@ export function S04ElementBalance(): ReactNode {
       <div className="cd-s04__body">
         <ElementDonut />
         <ul className="cd-s04__legend">
-          {s.legend.map((item) => (
-            <li key={item.name}>
-              <span className="cd-s04__dot" style={{ background: item.color }} />
-              <span>{item.name}</span>
-              <span className="cd-s04__pct">{item.pct}%</span>
-            </li>
-          ))}
+          {s.legend.map((item) => {
+            const palette: Record<string, string> = {
+              Hỏa: "#b42318",
+              Mộc: "#2f6b3a",
+              Thổ: "#b8860b",
+              Kim: "#6b7280",
+              Thủy: "#1d4f91",
+            };
+            const color = palette[item.name] ?? item.color;
+            return (
+              <li key={item.name}>
+                <span className="cd-s04__dot" style={{ background: color }} />
+                <span>{item.name}</span>
+                <span className="cd-s04__pct">{item.pct}%</span>
+              </li>
+            );
+          })}
         </ul>
       </div>
       <p className="cd-s04__summary">{s.summary}</p>
@@ -383,7 +405,10 @@ export function S05Strength(): ReactNode {
       <div className="cd-s05__body">
         <div>
           <div className="cd-label">{s.scoreLabel}</div>
-          <div className="cd-s05__score">{s.score}</div>
+          <div className="cd-s05__score">
+            <span className="cd-s05__score-main">{s.score.split(" / ")[0]}</span>
+            <span className="cd-s05__score-max"> / {s.score.split(" / ")[1]}</span>
+          </div>
           <div className="cd-s05__status">{s.status}</div>
           <div className="cd-s05__bar" aria-hidden="true">
             <span style={{ width: `${s.percent}%` }} />
@@ -479,16 +504,24 @@ export function S07ShenSha(): ReactNode {
         {s.title}
       </h2>
       <div className="cd-s07__cats">
-        {s.categories.map((cat) => (
-          <div key={cat.name} className="cd-s07__cat">
-            <div className="cd-s07__cat-name">{cat.name}</div>
-            {cat.items.map((item) => (
-              <div key={item} className="cd-s07__cat-item">
-                {item}
-              </div>
-            ))}
-          </div>
-        ))}
+        {s.categories.map((cat) => {
+          const tone =
+            cat.name === "Hung tinh"
+              ? "cd-s07__cat cd-s07__cat--hung"
+              : cat.name === "Đặc biệt"
+                ? "cd-s07__cat cd-s07__cat--dacbiet"
+                : "cd-s07__cat cd-s07__cat--cat";
+          return (
+            <div key={cat.name} className={tone}>
+              <div className="cd-s07__cat-name">{cat.name}</div>
+              {cat.items.map((item) => (
+                <div key={item} className="cd-s07__cat-item">
+                  {item}
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
       <div className="cd-s07__footer">
         <a className="cd-link" href="#s07-detail">
@@ -502,7 +535,7 @@ export function S07ShenSha(): ReactNode {
 export function S08Interpretation(): ReactNode {
   const s = d.s08;
   return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s08-title">
+    <section className="cd-card cd-card--fill cd-s08" aria-labelledby="cd-s08-title">
       <h2 id="cd-s08-title" className="cd-section-title">
         {s.title}
       </h2>
