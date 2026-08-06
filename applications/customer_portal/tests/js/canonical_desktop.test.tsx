@@ -6,11 +6,11 @@ import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { PortalPage, CANONICAL_DESKTOP_MOCK } from "../../src/screens/canonical_desktop";
 
-describe("PortalPage — Desktop Canonical V1", () => {
+describe("PortalPage — Desktop Canonical V2", () => {
   it("renders shell and all sections S00–S11 in Vietnamese", () => {
     const { container } = render(<PortalPage />);
 
-    expect(container.querySelector('[data-canonical="desktop-v1"]')).toBeTruthy();
+    expect(container.querySelector('[data-canonical="desktop-v2"]')).toBeTruthy();
     expect(screen.getByText("BTE Portal")).toBeTruthy();
     expect(screen.getByText("Kết quả")).toBeTruthy();
     expect(screen.getByText("PHÂN TÍCH LÁ SỐ")).toBeTruthy();

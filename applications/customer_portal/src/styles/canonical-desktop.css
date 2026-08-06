@@ -1,5 +1,5 @@
 /**
- * Desktop Canonical UI — styles for CANONICAL_PORTAL_UI_DESKTOP_V1.png
+ * Desktop Canonical UI — styles for CANONICAL_PORTAL_UI_DESKTOP_V2
  * Isolated from legacy Portal CSS. Desktop only.
  */
 
@@ -52,8 +52,9 @@ body:has(.cd-root) {
   --cd-header-h: 72px;
   --cd-sidebar-w: 280px;
   --cd-pad: 32px;
-  --cd-gap: 30px;
-  --cd-radius: 12px;
+  --cd-gap: 24px;
+  --cd-content-w: 1600px;
+  --cd-radius: 16px;
   --cd-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
   --cd-font: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
 
@@ -347,7 +348,15 @@ body:has(.cd-root) {
 /* —— Content —— */
 .cd-content {
   grid-column: 2;
-  padding: 24px var(--cd-pad) 32px;
+  padding: var(--cd-pad);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.cd-content__inner {
+  width: 100%;
+  max-width: var(--cd-content-w);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--cd-gap);
@@ -434,23 +443,31 @@ body:has(.cd-root) {
   color: var(--cd-secondary);
 }
 
-/* —— Grid rows —— */
+/* —— Grid rows (12-column ratios — CANONICAL_PORTAL_UI_DESKTOP_V2) —— */
 .cd-row {
   display: grid;
   gap: var(--cd-gap);
   align-items: stretch;
+  min-width: 0;
+}
+
+.cd-row--1 {
+  grid-template-columns: 1fr;
 }
 
 .cd-row--3 {
-  grid-template-columns: 1.15fr 0.95fr 1.15fr;
+  /* S01 | S02 | S09 — equal thirds */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .cd-row--4 {
-  grid-template-columns: 1.05fr 0.85fr 1fr 1.05fr;
+  /* S03(4) | S04(4) | S05(2) | S10(2) */
+  grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr);
 }
 
 .cd-row--bottom {
-  grid-template-columns: 1.2fr 0.85fr 1.15fr 0.85fr;
+  /* S06(4) | S07(2) | S08(3) | S11(3) */
+  grid-template-columns: minmax(0, 4fr) minmax(0, 2fr) minmax(0, 3fr) minmax(0, 3fr);
 }
 
 /* —— S00 — rebuilt to match CANONICAL_PORTAL_UI_DESKTOP_V1.png —— */
@@ -479,7 +496,7 @@ body:has(.cd-root) {
 .cd-s00__card {
   background: #fff;
   border: 1px solid #e8e6e3;
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
   padding: var(--s00-pad-y) var(--s00-pad-x);
 }
@@ -698,7 +715,7 @@ body:has(.cd-root) {
   flex-direction: column;
   background: #fff;
   border: 1px solid var(--s01-border);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
   padding: 14px;
   min-height: 0;
@@ -997,7 +1014,7 @@ body:has(.cd-root) {
   --s02-border: #eeebe8;
   --s02-gap: 16px;
   --s02-pad: 14px 16px;
-  --s02-radius: 12px;
+  --s02-radius: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1212,7 +1229,7 @@ body:has(.cd-root) {
 .cd-s03 {
   --s03-accent: #9a1b1b;
   --s03-border: #eeebe8;
-  --s03-radius: 12px;
+  --s03-radius: 16px;
   --s03-pad-y: 18px;
   --s03-pad-x: 12px;
   --s03-pad-bottom: 6px;
@@ -1358,7 +1375,7 @@ body:has(.cd-root) {
 .cd-s04 {
   --s04-accent: #9a1b1b;
   --s04-border: #eeebe8;
-  --s04-radius: 12px;
+  --s04-radius: 16px;
   --s04-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   --s04-status-strong: #1f7a4d;
   --s04-status-medium: #b8860b;
@@ -1488,7 +1505,7 @@ body:has(.cd-root) {
 .cd-s05 {
   --s05-accent: #9a1b1b;
   --s05-border: #eeebe8;
-  --s05-radius: 12px;
+  --s05-radius: 16px;
   --s05-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   --s05-level-very-strong: #14532d;
   --s05-level-strong: #1f7a4d;
@@ -1664,7 +1681,7 @@ body:has(.cd-root) {
   --s10-accent: #9a1b1b;
   --s10-border: #ece7e2;
   --s10-divider: #e5e7eb;
-  --s10-radius: 12px;
+  --s10-radius: 16px;
   --s10-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   --s10-decision-bg: #fff8ef;
   --s10-neutral-900: #111827;
@@ -1804,7 +1821,7 @@ body:has(.cd-root) {
 .cd-s06 {
   --s06-accent: #9a1b1b;
   --s06-border: #ece7e2;
-  --s06-radius: 12px;
+  --s06-radius: 16px;
   --s06-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   height: 100%;
   display: flex;
@@ -1924,7 +1941,7 @@ body:has(.cd-root) {
   --s07-accent: #9a1b1b;
   --s07-border: #ece7e2;
   --s07-divider: #e8e4df;
-  --s07-radius: 12px;
+  --s07-radius: 16px;
   --s07-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   --s07-good: #1f7a4d;
   --s07-bad: #b42318;
@@ -2081,7 +2098,7 @@ body:has(.cd-root) {
   --s08-accent: #9a1b1b;
   --s08-border: #ece7e2;
   --s08-divider: #e8e4df;
-  --s08-radius: 12px;
+  --s08-radius: 16px;
   --s08-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   --s08-exec-bg: #fff8ef;
   --s08-strength: #1f7a4d;
@@ -2263,7 +2280,7 @@ body:has(.cd-root) {
   --s11-accent: #9a1b1b;
   --s11-border: #ece7e2;
   --s11-divider: #e5e7eb;
-  --s11-radius: 12px;
+  --s11-radius: 16px;
   --s11-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
   --s11-exec-bg: #fff8ef;
   --s11-neutral-700: #374151;
