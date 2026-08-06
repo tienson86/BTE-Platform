@@ -192,71 +192,97 @@ export function S00ContextHeader(): ReactNode {
 
 export function S01IdentityDecision(): ReactNode {
   const s = d.s01;
+  const element = s.dayMaster.value.includes(" ")
+    ? s.dayMaster.value.split(" ").slice(1).join(" ")
+    : s.dayMaster.value;
+  const yinYang = s.dayMaster.subtype.replace(element, "").trim() || s.dayMaster.subtype;
+  const strengthBadge = s.dayMaster.tags[0];
+  const personalityBadge = s.dayMaster.tags[1];
+
   return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s01-title">
-      <h2 id="cd-s01-title" className="cd-section-title">
+    <section className="cd-s01" aria-labelledby="cd-s01-title">
+      <h2 id="cd-s01-title" className="cd-s01__title">
         {s.title}
       </h2>
-      <div className="cd-s01">
-        <div>
-          <h3 className="cd-s01__sub">{s.identityTitle}</h3>
-          <div className="cd-s01__day">
-            <div className="cd-s01__fire">
+      <div className="cd-s01__card">
+        {/* 1. THÔNG TIN BẢN MỆNH */}
+        <div className="cd-s01__block">
+          <h3 className="cd-s01__block-title">{s.identityTitle}</h3>
+          <div className="cd-s01__identity">
+            <div className="cd-s01__identity-icon" aria-hidden="true">
               <IconFire size={22} />
             </div>
-            <div>
-              <div className="cd-s01__day-label">{s.dayMaster.label}</div>
-              <div className="cd-s01__day-value">{s.dayMaster.value}</div>
-              <div className="cd-s01__day-sub">{s.dayMaster.subtype}</div>
-              <div className="cd-s01__tags">
-                {s.dayMaster.tags.map((tag) => (
-                  <span key={tag.text} className={`cd-tag cd-tag--${tag.tone}`}>
-                    {tag.text}
+            <div className="cd-s01__identity-body">
+              <div className="cd-s01__identity-label">{s.dayMaster.label}</div>
+              <div className="cd-s01__identity-name">{s.dayMaster.value}</div>
+              <div className="cd-s01__identity-meta">
+                <span>
+                  <em>Ngũ hành</em> {element}
+                </span>
+                <span className="cd-s01__identity-dot" aria-hidden="true">
+                  ·
+                </span>
+                <span>
+                  <em>Âm dương</em> {yinYang}
+                </span>
+              </div>
+              <div className="cd-s01__badges">
+                {strengthBadge ? (
+                  <span className={`cd-s01__badge cd-s01__badge--${strengthBadge.tone}`}>
+                    {strengthBadge.text}
                   </span>
-                ))}
+                ) : null}
+                {personalityBadge ? (
+                  <span className={`cd-s01__badge cd-s01__badge--${personalityBadge.tone}`}>
+                    {personalityBadge.text.replace(/^Tính cách:\s*/i, "Tính cách: ")}
+                  </span>
+                ) : null}
               </div>
             </div>
           </div>
-          <div style={{ marginTop: 10 }}>
-            <div className="cd-label" style={{ marginBottom: 4 }}>
-              {s.conditions.title}
-            </div>
+        </div>
+
+        {/* 2. ĐIỀU KIỆN MỆNH CỤC */}
+        <div className="cd-s01__block">
+          <h3 className="cd-s01__block-title">{s.conditions.title}</h3>
+          <div className="cd-s01__conditions">
             {s.conditions.rows.map((row) => (
               <div key={row.label} className="cd-s01__cond-row">
-                <div className="cd-s01__cond-left">
-                  <strong>{row.label}:</strong>
-                  {row.value}
+                <div className="cd-s01__cond-text">
+                  <span className="cd-s01__cond-label">{row.label}</span>
+                  <span className="cd-s01__cond-value">{row.value}</span>
                 </div>
-                <span className={`cd-tag cd-tag--${row.tone}`}>{row.tag}</span>
+                <span className={`cd-s01__badge cd-s01__badge--fixed cd-s01__badge--${row.tone}`}>
+                  {row.tag}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
-        <div>
-          <h3 className="cd-s01__sub">{s.decisionTitle}</h3>
-          <div className="cd-s01__decisions">
+        {/* 3. ĐỊNH HƯỚNG CUỘC ĐỜI */}
+        <div className="cd-s01__block cd-s01__block--guidance">
+          <h3 className="cd-s01__block-title">{s.decisionTitle}</h3>
+          <div className="cd-s01__guidance">
             {s.decisions.map((item) => (
-              <div key={item.question} className="cd-s01__decision">
-                <div className={`cd-s01__decision-icon cd-s01__decision-icon--${item.icon}`}>
-                  {item.icon === "target" && <IconTarget />}
-                  {item.icon === "bulb" && <IconBulb />}
-                  {item.icon === "compass" && <IconCompass />}
+              <div key={item.question} className="cd-s01__guide">
+                <div className={`cd-s01__guide-icon cd-s01__guide-icon--${item.icon}`}>
+                  {item.icon === "target" && <IconTarget size={15} />}
+                  {item.icon === "bulb" && <IconBulb size={15} />}
+                  {item.icon === "compass" && <IconCompass size={15} />}
                 </div>
-                <div>
-                  <p className="cd-s01__q">{item.question}</p>
-                  <p className="cd-s01__a">{item.answer}</p>
+                <div className="cd-s01__guide-body">
+                  <div className="cd-s01__guide-q">{item.question}</div>
+                  <p className="cd-s01__guide-a">{item.answer}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="cd-s01__cta">
-          <button type="button" className="cd-btn-primary">
-            {s.cta}
-          </button>
-        </div>
+        <button type="button" className="cd-s01__cta">
+          {s.cta}
+        </button>
       </div>
     </section>
   );
