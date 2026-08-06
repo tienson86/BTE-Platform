@@ -1,7 +1,7 @@
 /**
  * S09 — CUNG PHÍ / QUÁI MỆNH & NHÓM TRẠCH
- * Uses approved canonical Later Heaven Bagua SVG.
- * knowledge/ui_master/sections/S09_FENG_SHUI_GUIDANCE/assets/bagua/Bagua_HauThien.svg
+ * Canonical Final layout (SSOT: S09_CANONICAL_FINAL*.png).
+ * Bagua asset: Bagua_HauThien.svg (unchanged).
  */
 
 import type { ReactNode } from "react";
@@ -18,75 +18,68 @@ import baguaHauThienUrl from "../assets/Bagua_HauThien.svg";
 const data = CANONICAL_DESKTOP_MOCK.s09;
 
 /**
- * Approved Bagua asset with dynamic center overlay (SVG unchanged).
+ * Approved Bagua asset with dynamic center as SVG <text> (asset file unchanged).
+ * Center circle in Bagua_HauThien.svg: r≈157 @ 1024 → optically centered overlay.
  */
 function BaguaDiagram({ center, number }: { center: string; number: string }): ReactNode {
   return (
-    <div
+    <svg
       className="cd-s09__bagua"
+      viewBox="0 0 168 168"
+      width={168}
+      height={168}
       aria-hidden="true"
-      style={{ position: "relative" }}
     >
-      <img
-        className="cd-s09__bagua-img"
-        src={baguaHauThienUrl}
-        alt=""
-        width={88}
-        height={88}
-        draggable={false}
-        style={{ display: "block", width: "100%", height: "100%" }}
+      <image
+        href={baguaHauThienUrl}
+        width={168}
+        height={168}
+        preserveAspectRatio="xMidYMid meet"
       />
-      <div
-        className="cd-s09__bagua-center"
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          pointerEvents: "none",
-          lineHeight: 1.15,
-        }}
+      {/* Title ~−25% vs prior 16px; SemiBold; sits above optical center */}
+      <text
+        x={84}
+        y={72}
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="#a60000"
+        fontFamily="Inter, Arial, Helvetica, sans-serif"
+        fontSize={12}
+        fontWeight={600}
       >
-        <span
-          style={{
-            color: "#a60000",
-            fontSize: 11,
-            fontWeight: 700,
-          }}
-        >
-          {center}
-        </span>
-        <span
-          style={{
-            color: "#a60000",
-            fontSize: 14,
-            fontWeight: 700,
-          }}
-        >
-          {number}
-        </span>
-      </div>
-    </div>
+        {center}
+      </text>
+      {/* Number ~+25% vs prior 24px; Bold; primary focal point */}
+      <text
+        x={84}
+        y={96}
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="#a60000"
+        fontFamily="Inter, Arial, Helvetica, sans-serif"
+        fontSize={30}
+        fontWeight={700}
+      >
+        {number}
+      </text>
+    </svg>
   );
 }
 
 /**
- * S09 Feng Shui / Cung Phí section — Desktop Canonical V1.
+ * S09 Feng Shui / Cung Phí — Desktop Canonical Final.
  */
 export function S09FengShuiGuidance(): ReactNode {
   const icons = {
-    home: <IconHome size={18} color="#fff" />,
-    briefcase: <IconBriefcase />,
-    compass: <IconCompass size={18} color="#fff" />,
-    palette: <IconPalette />,
-    grid: <IconGrid />,
+    home: <IconHome size={28} color="#fff" />,
+    briefcase: <IconBriefcase size={28} color="#fff" />,
+    compass: <IconCompass size={28} color="#fff" />,
+    palette: <IconPalette size={28} color="#fff" />,
+    grid: <IconGrid size={28} color="#fff" />,
   } as const;
 
   return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s09-title">
+    <section className="cd-s09 cd-card cd-card--fill" aria-labelledby="cd-s09-title">
       <h2 id="cd-s09-title" className="cd-section-title">
         {data.title}
       </h2>

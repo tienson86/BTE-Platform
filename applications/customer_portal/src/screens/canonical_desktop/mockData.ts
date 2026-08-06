@@ -217,17 +217,25 @@ export const CANONICAL_DESKTOP_MOCK = {
   },
   s10: {
     title: "S10 - CÂN XƯƠNG ĐOÁN MỆNH",
-    resultLabel: "KẾT QUẢ CÂN XƯƠNG",
-    result: "4 lượng 8 chỉ",
-    grade: "Thượng cách",
     stars: 5,
-    bullets: [
-      "Cân nặng: 4 lượng 8 chỉ",
-      "Chủ về: Phú quý, thành đạt",
-      "Tính cách: Thông minh, quyết đoán, có chí tiến thủ",
-      "Xu hướng: Tự lập, có danh vị và tài lộc",
-    ],
-    link: "Xem luận giải chi tiết →",
+    weight: "4 LƯỢNG 3 CHỈ",
+    grade: "MỆNH TỐT",
+    insight: "Thuộc nhóm có hậu vận ổn định.",
+    verse: {
+      title: "📜 BÀI CA CÂN XƯƠNG",
+      lines: [
+        "Thân mang phúc khí trời ban,",
+        "Công danh thuận lợi, gia an cửa nhà.",
+        "Trung vận vững vàng tích lũy,",
+        "Hậu vận an hòa, phúc lộc thêm hoa.",
+      ],
+    },
+    interpretation: {
+      title: "📖 LUẬN GIẢI",
+      body:
+        "Bạn là người có số mệnh khá tốt. Tiền vận có thể gặp thử thách, nhưng trung vận và hậu vận ổn định, dễ tích lũy thành quả nếu kiên trì.",
+    },
+    link: "Đọc luận giải đầy đủ →",
   },
   s06: {
     title: "S06 - THẬP THẦN",

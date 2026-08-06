@@ -31,7 +31,7 @@ describe("PortalPage — Desktop Canonical V1", () => {
 
     expect(screen.getAllByText("Nguyễn Văn A").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Bính Hỏa")).toBeTruthy();
-    expect(screen.getByText("4 lượng 8 chỉ")).toBeTruthy();
+    expect(screen.getByText("4 LƯỢNG 3 CHỈ")).toBeTruthy();
     expect(screen.getByText(CANONICAL_DESKTOP_MOCK.footer)).toBeTruthy();
   });
 });

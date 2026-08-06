@@ -213,36 +213,7 @@ export { S04ElementBalance } from "./S04ElementBalance";
 
 export { S05ChartStrength, S05Strength } from "./S05ChartStrength";
 
-export function S10CanXuong(): ReactNode {
-  const s = d.s10;
-  return (
-    <section className="cd-card cd-card--fill" aria-labelledby="cd-s10-title">
-      <h2 id="cd-s10-title" className="cd-section-title">
-        {s.title}
-      </h2>
-      <div className="cd-s10__body">
-        <div>
-          <div className="cd-label">{s.resultLabel}</div>
-          <div className="cd-s10__result">{s.result}</div>
-          <div className="cd-s10__grade">{s.grade}</div>
-          <div className="cd-s10__stars" aria-label={`${s.stars} sao`}>
-            {"★".repeat(s.stars)}
-          </div>
-        </div>
-        <ul className="cd-s10__bullets">
-          {s.bullets.map((b) => (
-            <li key={b}>{b}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="cd-s10__footer">
-        <a className="cd-link" href="#s10-detail">
-          {s.link}
-        </a>
-      </div>
-    </section>
-  );
-}
+export { S10BoneWeightFortune, S10CanXuong } from "./S10BoneWeightFortune";
 
 export { S06TenGods } from "./S06TenGods";
 
