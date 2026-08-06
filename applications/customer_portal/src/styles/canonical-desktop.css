@@ -696,13 +696,34 @@ body:has(.cd-root) {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
   background: #fff;
   border: 1px solid var(--s01-border);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
-  padding: 16px 16px 14px;
+  padding: 14px;
   min-height: 0;
+}
+
+/* Exactly TWO columns: 60% left / 40% right */
+.cd-s01__cols {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 14px;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+
+.cd-s01__col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.cd-s01__col--right {
+  padding-left: 2px;
 }
 
 .cd-s01__block {
@@ -712,7 +733,11 @@ body:has(.cd-root) {
 }
 
 .cd-s01__block--guidance {
+  flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .cd-s01__block-title {
@@ -771,7 +796,7 @@ body:has(.cd-root) {
 
 .cd-s01__identity-name {
   margin-top: 2px;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--s01-accent);
   line-height: 1.1;
@@ -890,14 +915,19 @@ body:has(.cd-root) {
 .cd-s01__guidance {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  flex: 1;
 }
 
 .cd-s01__guide {
   display: grid;
   grid-template-columns: 28px 1fr;
-  gap: 10px;
+  gap: 8px;
   align-items: start;
+  background: var(--s01-soft);
+  border: 1px solid var(--s01-border);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .cd-s01__guide-icon {
@@ -925,7 +955,7 @@ body:has(.cd-root) {
 }
 
 .cd-s01__guide-q {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--s01-text);
@@ -933,14 +963,14 @@ body:has(.cd-root) {
 }
 
 .cd-s01__guide-a {
-  margin: 3px 0 0;
-  font-size: 12px;
+  margin: 2px 0 0;
+  font-size: 11px;
   font-weight: 400;
   color: var(--s01-secondary);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
-/* —— CTA —— */
+/* —— CTA (right column only) —— */
 .cd-s01__cta {
   margin-top: auto;
   display: inline-flex;
@@ -955,9 +985,10 @@ body:has(.cd-root) {
   font-size: 13px;
   font-weight: 600;
   line-height: 1.2;
-  padding: 12px 16px;
+  padding: 11px 14px;
   cursor: default;
   box-shadow: 0 2px 6px rgba(154, 27, 27, 0.22);
+  flex-shrink: 0;
 }
 
 /* —— S02 —— */

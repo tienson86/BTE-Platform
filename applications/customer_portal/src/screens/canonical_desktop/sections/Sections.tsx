@@ -205,84 +205,91 @@ export function S01IdentityDecision(): ReactNode {
         {s.title}
       </h2>
       <div className="cd-s01__card">
-        {/* 1. THÔNG TIN BẢN MỆNH */}
-        <div className="cd-s01__block">
-          <h3 className="cd-s01__block-title">{s.identityTitle}</h3>
-          <div className="cd-s01__identity">
-            <div className="cd-s01__identity-icon" aria-hidden="true">
-              <IconFire size={22} />
+        <div className="cd-s01__cols">
+          {/* LEFT 60% — Identity + Conditions */}
+          <div className="cd-s01__col cd-s01__col--left">
+            <div className="cd-s01__block">
+              <h3 className="cd-s01__block-title">{s.identityTitle}</h3>
+              <div className="cd-s01__identity">
+                <div className="cd-s01__identity-icon" aria-hidden="true">
+                  <IconFire size={22} />
+                </div>
+                <div className="cd-s01__identity-body">
+                  <div className="cd-s01__identity-label">{s.dayMaster.label}</div>
+                  <div className="cd-s01__identity-name">{s.dayMaster.value}</div>
+                  <div className="cd-s01__identity-meta">
+                    <span>
+                      <em>Ngũ hành</em> {element}
+                    </span>
+                    <span className="cd-s01__identity-dot" aria-hidden="true">
+                      ·
+                    </span>
+                    <span>
+                      <em>Âm dương</em> {yinYang}
+                    </span>
+                  </div>
+                  <div className="cd-s01__badges">
+                    {strengthBadge ? (
+                      <span className={`cd-s01__badge cd-s01__badge--${strengthBadge.tone}`}>
+                        {strengthBadge.text}
+                      </span>
+                    ) : null}
+                    {personalityBadge ? (
+                      <span className={`cd-s01__badge cd-s01__badge--${personalityBadge.tone}`}>
+                        {personalityBadge.text.replace(/^Tính cách:\s*/i, "Tính cách: ")}
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="cd-s01__identity-body">
-              <div className="cd-s01__identity-label">{s.dayMaster.label}</div>
-              <div className="cd-s01__identity-name">{s.dayMaster.value}</div>
-              <div className="cd-s01__identity-meta">
-                <span>
-                  <em>Ngũ hành</em> {element}
-                </span>
-                <span className="cd-s01__identity-dot" aria-hidden="true">
-                  ·
-                </span>
-                <span>
-                  <em>Âm dương</em> {yinYang}
-                </span>
-              </div>
-              <div className="cd-s01__badges">
-                {strengthBadge ? (
-                  <span className={`cd-s01__badge cd-s01__badge--${strengthBadge.tone}`}>
-                    {strengthBadge.text}
-                  </span>
-                ) : null}
-                {personalityBadge ? (
-                  <span className={`cd-s01__badge cd-s01__badge--${personalityBadge.tone}`}>
-                    {personalityBadge.text.replace(/^Tính cách:\s*/i, "Tính cách: ")}
-                  </span>
-                ) : null}
+
+            <div className="cd-s01__block">
+              <h3 className="cd-s01__block-title">{s.conditions.title}</h3>
+              <div className="cd-s01__conditions">
+                {s.conditions.rows.map((row) => (
+                  <div key={row.label} className="cd-s01__cond-row">
+                    <div className="cd-s01__cond-text">
+                      <span className="cd-s01__cond-label">{row.label}</span>
+                      <span className="cd-s01__cond-value">{row.value}</span>
+                    </div>
+                    <span
+                      className={`cd-s01__badge cd-s01__badge--fixed cd-s01__badge--${row.tone}`}
+                    >
+                      {row.tag}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* 2. ĐIỀU KIỆN MỆNH CỤC */}
-        <div className="cd-s01__block">
-          <h3 className="cd-s01__block-title">{s.conditions.title}</h3>
-          <div className="cd-s01__conditions">
-            {s.conditions.rows.map((row) => (
-              <div key={row.label} className="cd-s01__cond-row">
-                <div className="cd-s01__cond-text">
-                  <span className="cd-s01__cond-label">{row.label}</span>
-                  <span className="cd-s01__cond-value">{row.value}</span>
-                </div>
-                <span className={`cd-s01__badge cd-s01__badge--fixed cd-s01__badge--${row.tone}`}>
-                  {row.tag}
-                </span>
+          {/* RIGHT 40% — Guidance + CTA */}
+          <div className="cd-s01__col cd-s01__col--right">
+            <div className="cd-s01__block cd-s01__block--guidance">
+              <h3 className="cd-s01__block-title">{s.decisionTitle}</h3>
+              <div className="cd-s01__guidance">
+                {s.decisions.map((item) => (
+                  <div key={item.question} className="cd-s01__guide">
+                    <div className={`cd-s01__guide-icon cd-s01__guide-icon--${item.icon}`}>
+                      {item.icon === "target" && <IconTarget size={15} />}
+                      {item.icon === "bulb" && <IconBulb size={15} />}
+                      {item.icon === "compass" && <IconCompass size={15} />}
+                    </div>
+                    <div className="cd-s01__guide-body">
+                      <div className="cd-s01__guide-q">{item.question}</div>
+                      <p className="cd-s01__guide-a">{item.answer}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <button type="button" className="cd-s01__cta">
+              {s.cta}
+            </button>
           </div>
         </div>
-
-        {/* 3. ĐỊNH HƯỚNG CUỘC ĐỜI */}
-        <div className="cd-s01__block cd-s01__block--guidance">
-          <h3 className="cd-s01__block-title">{s.decisionTitle}</h3>
-          <div className="cd-s01__guidance">
-            {s.decisions.map((item) => (
-              <div key={item.question} className="cd-s01__guide">
-                <div className={`cd-s01__guide-icon cd-s01__guide-icon--${item.icon}`}>
-                  {item.icon === "target" && <IconTarget size={15} />}
-                  {item.icon === "bulb" && <IconBulb size={15} />}
-                  {item.icon === "compass" && <IconCompass size={15} />}
-                </div>
-                <div className="cd-s01__guide-body">
-                  <div className="cd-s01__guide-q">{item.question}</div>
-                  <p className="cd-s01__guide-a">{item.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <button type="button" className="cd-s01__cta">
-          {s.cta}
-        </button>
       </div>
     </section>
   );
