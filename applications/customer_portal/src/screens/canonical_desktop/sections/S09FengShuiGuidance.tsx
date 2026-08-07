@@ -5,7 +5,7 @@
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 import {
   IconBriefcase,
   IconCompass,
@@ -15,7 +15,6 @@ import {
 } from "../icons";
 import baguaHauThienUrl from "../assets/Bagua_HauThien.svg";
 
-const data = CANONICAL_DESKTOP_MOCK.s09;
 
 /**
  * Approved Bagua asset with dynamic center as SVG <text> (asset file unchanged).
@@ -70,6 +69,7 @@ function BaguaDiagram({ center, number }: { center: string; number: string }): R
  * S09 Feng Shui / Cung Phí — Desktop Canonical Final.
  */
 export function S09FengShuiGuidance(): ReactNode {
+  const data = useCanonicalDesktop().s09;
   const icons = {
     home: <IconHome size={28} color="#fff" />,
     briefcase: <IconBriefcase size={28} color="#fff" />,

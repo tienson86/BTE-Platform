@@ -1,15 +1,9 @@
 /**
- * S05 — SỨC MẠNH MỆNH CỤC
- * Isolated rebuild from CANONICAL_PORTAL_UI_DESKTOP_V1.png
- * + knowledge/ui_master/master_sections/S05_CHART_STRENGTH/
- *
- * Executive Decision Card — conclusion first, score secondary.
+ * S05 — Dashboard Preview Card: SỨC MẠNH MỆNH CỤC
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
-
-const data = CANONICAL_DESKTOP_MOCK.s05;
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 const CHECK_TONE: Record<string, string> = {
   positive: "cd-s05__check--positive",
@@ -18,9 +12,6 @@ const CHECK_TONE: Record<string, string> = {
   negative: "cd-s05__check--negative",
 };
 
-/**
- * Semantic color modifier for strength level.
- */
 function levelModifier(level: string): string {
   const key = level.trim().toLowerCase();
   if (key === "rất mạnh") return "cd-s05__level--very-strong";
@@ -32,13 +23,15 @@ function levelModifier(level: string): string {
 }
 
 /**
- * S05 Chart Strength — decision card: level → insight → bar → factors → CTA.
+ * S05 Chart Strength — Dashboard preview card.
  */
 export function S05ChartStrength(): ReactNode {
+  const data = useCanonicalDesktop().s05;
+  const previewFactors = data.factors.slice(0, 4);
   const [scoreMain, scoreMax = "100"] = data.score.split(/\s*\/\s*/);
 
   return (
-    <section className="cd-s05" aria-labelledby="cd-s05-title">
+    <section className="cd-s05 cd-preview-card" aria-labelledby="cd-s05-title">
       <div className="cd-s05__card">
         <h2 id="cd-s05-title" className="cd-s05__title">
           {data.title}
@@ -71,7 +64,7 @@ export function S05ChartStrength(): ReactNode {
         </div>
 
         <ul className="cd-s05__factors">
-          {data.factors.map((factor) => (
+          {previewFactors.map((factor) => (
             <li key={factor.text} className="cd-s05__factor">
               <span
                 className={`cd-s05__check ${CHECK_TONE[factor.tone] ?? ""}`}
@@ -84,7 +77,7 @@ export function S05ChartStrength(): ReactNode {
           ))}
         </ul>
 
-        <button type="button" className="cd-s05__cta">
+        <button type="button" className="cd-s05__cta cd-preview-cta">
           {data.cta}
         </button>
       </div>

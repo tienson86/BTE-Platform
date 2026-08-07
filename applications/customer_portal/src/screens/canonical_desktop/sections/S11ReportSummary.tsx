@@ -1,43 +1,37 @@
 /**
- * S11 — BÁO CÁO TỔNG KẾT
- * Isolated rebuild: Executive Closing Report.
- * knowledge/ui_master/sections/S11_REPORT_SUMMARY/
- *
- * Reading flow:
- * Header → Executive Summary → Strength → Attention → Recommendation → Link
- *
- * NOT a dashboard / KPI / chart / learning panel.
+ * S11 — Dashboard Preview Card: BÁO CÁO TỔNG KẾT
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
-
-const data = CANONICAL_DESKTOP_MOCK.s11;
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 /**
- * S11 Report Summary — executive closing card for Desktop Canonical V1.
+ * S11 Report Summary — Dashboard preview card.
  */
 export function S11ReportSummary(): ReactNode {
+  const data = useCanonicalDesktop().s11;
+  const previewStrengths = data.strengths.items.slice(0, 2);
+  const previewAttention = data.attention.items.slice(0, 2);
+  const previewRecs = data.recommendations.items.slice(0, 2);
+
   return (
-    <section className="cd-s11" aria-labelledby="cd-s11-title">
+    <section className="cd-s11 cd-preview-card" aria-labelledby="cd-s11-title">
       <div className="cd-s11__card">
         <h2 id="cd-s11-title" className="cd-s11__title">
           {data.title}
         </h2>
 
-        <div className="cd-s11__exec">
+        <div className="cd-s11__exec cd-s11__exec--preview">
           <h3 className="cd-s11__exec-title">{data.executive.title}</h3>
           <p className="cd-s11__exec-body">{data.executive.body}</p>
         </div>
-
-        <hr className="cd-s11__divider" />
 
         <div className="cd-s11__block">
           <h3 className="cd-s11__block-title cd-s11__block-title--strength">
             {data.strengths.title}
           </h3>
           <ul className="cd-s11__list">
-            {data.strengths.items.map((item) => (
+            {previewStrengths.map((item) => (
               <li key={item} className="cd-s11__row">
                 <span className="cd-s11__icon cd-s11__icon--strength" aria-hidden="true">
                   ✓
@@ -48,14 +42,12 @@ export function S11ReportSummary(): ReactNode {
           </ul>
         </div>
 
-        <hr className="cd-s11__divider" />
-
         <div className="cd-s11__block">
           <h3 className="cd-s11__block-title cd-s11__block-title--attention">
             {data.attention.title}
           </h3>
           <ul className="cd-s11__list">
-            {data.attention.items.map((item) => (
+            {previewAttention.map((item) => (
               <li key={item} className="cd-s11__row">
                 <span className="cd-s11__icon cd-s11__icon--attention" aria-hidden="true">
                   •
@@ -66,14 +58,12 @@ export function S11ReportSummary(): ReactNode {
           </ul>
         </div>
 
-        <hr className="cd-s11__divider" />
-
         <div className="cd-s11__block">
           <h3 className="cd-s11__block-title cd-s11__block-title--recommend">
             {data.recommendations.title}
           </h3>
           <ul className="cd-s11__list">
-            {data.recommendations.items.map((item) => (
+            {previewRecs.map((item) => (
               <li key={item} className="cd-s11__row">
                 <span className="cd-s11__icon cd-s11__icon--recommend" aria-hidden="true">
                   →
@@ -84,11 +74,9 @@ export function S11ReportSummary(): ReactNode {
           </ul>
         </div>
 
-        <hr className="cd-s11__divider cd-s11__divider--footer" />
-
-        <a className="cd-s11__link" href="#s11-report">
+        <button type="button" className="cd-preview-cta">
           {data.link}
-        </a>
+        </button>
       </div>
     </section>
   );

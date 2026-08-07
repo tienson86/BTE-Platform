@@ -348,11 +348,18 @@ body:has(.cd-root) {
 /* —— Content —— */
 .cd-content {
   grid-column: 2;
-  padding: var(--cd-pad);
+  /* DESKTOP_GRID_SPEC: top/bottom margin 24, outer padding L/R 32 */
+  padding: 24px var(--cd-pad);
   min-width: 0;
   box-sizing: border-box;
 }
 
+/*
+ * Result page stack — DESKTOP_ROW_SPEC.md
+ * NOT a CSS Grid. Vertical stack of independent Row containers only.
+ * Row 4 always begins after Row 3 finishes (normal document flow).
+ */
+.cd-result-page,
 .cd-content__inner {
   width: 100%;
   max-width: var(--cd-content-w);
@@ -373,12 +380,27 @@ body:has(.cd-root) {
   line-height: 1.3;
 }
 
+/* Shared module header — inside white card, identical across S01–S11 */
+.cd-module-header {
+  margin: 0 0 16px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #b91c1c;
+  text-transform: uppercase;
+  line-height: 1.3;
+  flex: 0 0 auto;
+}
+
 .cd-card {
   background: var(--cd-card);
   border: 1px solid var(--cd-border);
   border-radius: var(--cd-radius);
   box-shadow: var(--cd-shadow);
-  padding: 22px 24px;
+  /* DESKTOP_GRID_SPEC §8 — Card Padding 24px */
+  padding: 24px;
+  overflow: hidden;
 }
 
 .cd-link {
@@ -443,31 +465,72 @@ body:has(.cd-root) {
   color: var(--cd-secondary);
 }
 
-/* —— Grid rows (12-column ratios — CANONICAL_PORTAL_UI_DESKTOP_V2) —— */
+/*
+ * Independent Row containers — DESKTOP_ROW_SPEC.md V2.0 + DESKTOP_GRID_SPEC.md
+ *
+ * Visual rhythm over equal height (canonical image is highest priority).
+ * Each Row owns its own 12-column grid.
+ * Cards: top-aligned, natural (content-driven) height — no artificial stretch.
+ * Forbidden: equal-height by default, masonry, dense packing, page-wide grid.
+ */
+.cd-row-container {
+  min-width: 0;
+  width: 100%;
+}
+
+.cd-row-grid,
 .cd-row {
   display: grid;
-  gap: var(--cd-gap);
-  align-items: stretch;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--cd-gap);
+  row-gap: var(--cd-gap);
+  grid-auto-flow: row;
+  grid-auto-rows: auto;
+  /* Top alignment — bottoms may differ (ROW_SPEC §8) */
+  align-items: start;
   min-width: 0;
+  width: 100%;
 }
 
-.cd-row--1 {
-  grid-template-columns: 1fr;
+.cd-row-cell,
+.cd-grid-cell {
+  min-width: 0;
+  width: 100%;
+  height: auto;
+  align-self: start;
 }
 
-.cd-row--3 {
-  /* S01 | S02 | S09 — equal thirds */
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+/*
+ * Natural height — cancel artificial fill from prior equal-height architecture.
+ * Do not override section display (sections keep their own flex/grid internals).
+ */
+.cd-row-cell > *,
+.cd-grid-cell > * {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  min-width: 0;
+  flex: none;
 }
 
-.cd-row--4 {
-  /* S03(4) | S04(4) | S05(2) | S10(2) */
-  grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr);
+.cd-row-cell--12,
+.cd-grid-cell--12 {
+  grid-column: span 12;
 }
 
-.cd-row--bottom {
-  /* S06(4) | S07(2) | S08(3) | S11(3) */
-  grid-template-columns: minmax(0, 4fr) minmax(0, 2fr) minmax(0, 3fr) minmax(0, 3fr);
+.cd-row-cell--4,
+.cd-grid-cell--4 {
+  grid-column: span 4;
+}
+
+.cd-row-cell--3,
+.cd-grid-cell--3 {
+  grid-column: span 3;
+}
+
+.cd-row-cell--2,
+.cd-grid-cell--2 {
+  grid-column: span 2;
 }
 
 /* —— S00 — rebuilt to match CANONICAL_PORTAL_UI_DESKTOP_V1.png —— */
@@ -699,16 +762,6 @@ body:has(.cd-root) {
   min-width: 0;
 }
 
-.cd-s01__title {
-  margin: 0 0 10px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--s01-accent);
-  text-transform: uppercase;
-  line-height: 1.3;
-}
-
 .cd-s01__card {
   flex: 1;
   display: flex;
@@ -717,8 +770,9 @@ body:has(.cd-root) {
   border: 1px solid var(--s01-border);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
-  padding: 14px;
+  padding: 24px;
   min-height: 0;
+  box-sizing: border-box;
 }
 
 /* Exactly TWO columns: 60% left / 40% right */
@@ -1008,7 +1062,7 @@ body:has(.cd-root) {
   flex-shrink: 0;
 }
 
-/* —— S02 — TỔNG QUAN & HÀNH ĐỘNG (Phase 2 polish) —— */
+/* —— S02 — TỔNG QUAN LÁ SỐ —— */
 .cd-s02 {
   --s02-accent: #9a1b1b;
   --s02-border: #eeebe8;
@@ -1021,46 +1075,28 @@ body:has(.cd-root) {
   min-width: 0;
 }
 
-.cd-s02__title {
-  margin: 0 0 10px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--s02-accent);
-  text-transform: uppercase;
-  line-height: 1.3;
-}
-
 .cd-s02__card {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   background: #fff;
   border: 1px solid var(--s02-border);
   border-radius: var(--s02-radius);
   box-shadow: 0 1px 4px rgba(28, 28, 28, 0.04);
-  padding: 14px;
+  padding: 24px;
   min-height: 0;
-}
-
-.cd-s02__subtitle {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--s02-accent);
-  text-transform: uppercase;
-  line-height: 1.3;
+  box-sizing: border-box;
 }
 
 .cd-s02__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: auto auto;
   gap: var(--s02-gap);
-  flex: 1;
+  flex: 0 0 auto;
   min-height: 0;
+  /* Optical center of the six tiles within remaining card space */
+  margin-block: auto;
 }
 
 .cd-s02__tile {
@@ -1225,16 +1261,14 @@ body:has(.cd-root) {
   white-space: nowrap;
 }
 
-/* —— S03 — TỨ TRỤ - BÁT TỰ (isolated rebuild) —— */
+/* —— S03 — TỨ TRỤ - BÁT TỰ (density redesign) —— */
 .cd-s03 {
   --s03-accent: #9a1b1b;
   --s03-border: #eeebe8;
-  --s03-radius: 16px;
-  --s03-pad-y: 18px;
-  --s03-pad-x: 12px;
-  --s03-pad-bottom: 6px;
-  --s03-gap: 4px;
-  --s03-shadow: 0 1px 4px rgba(28, 28, 28, 0.045), 0 1px 2px rgba(28, 28, 28, 0.03);
+  --s03-radius: 12px;
+  --s03-pad-y: 16px;
+  --s03-pad-x: 10px;
+  --s03-gap: 8px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1242,22 +1276,28 @@ body:has(.cd-root) {
   overflow: visible;
 }
 
-.cd-s03__title {
-  margin: 0 0 10px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--s03-accent);
-  text-transform: uppercase;
-  line-height: 1.3;
+.cd-s03__card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--s03-border);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
+  padding: 24px;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
 }
 
 .cd-s03__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--s03-gap);
-  flex: 1;
+  flex: 1 1 auto;
   align-items: stretch;
+  align-content: center;
+  min-height: 0;
 }
 
 .cd-s03__pillar {
@@ -1266,22 +1306,21 @@ body:has(.cd-root) {
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  gap: 8px;
-  padding: var(--s03-pad-y) var(--s03-pad-x) var(--s03-pad-bottom);
-  background: #fff;
+  gap: 12px;
+  padding: var(--s03-pad-y) var(--s03-pad-x);
+  background: #faf9f8;
   border: 1px solid var(--s03-border);
   border-radius: var(--s03-radius);
-  box-shadow: var(--s03-shadow);
   min-width: 0;
-  min-height: 296px;
   transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .cd-s03__pillar:hover,
 .cd-s03__pillar:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(28, 28, 28, 0.08), 0 1px 3px rgba(28, 28, 28, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(28, 28, 28, 0.07);
   outline: none;
+  background: #fff;
 }
 
 .cd-s03__pillar--master {
@@ -1325,14 +1364,14 @@ body:has(.cd-root) {
 }
 
 .cd-s03__han {
-  font-size: 33px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 1;
   font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "SimSun", serif;
 }
 
 .cd-s03__viet {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
@@ -1363,7 +1402,6 @@ body:has(.cd-root) {
 }
 
 .cd-s03__footer {
-  margin-top: auto;
   padding-top: 2px;
   font-size: 12px;
   font-weight: 500;
@@ -2450,6 +2488,227 @@ body:has(.cd-root) {
   outline: none;
 }
 
+/*
+ * Dashboard Preview Cards — compact summary + CTA.
+ * Natural height only. No equal-height stretch. No blank fill.
+ */
+.cd-preview-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  margin-top: 12px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 10px;
+  background: #9a1b1b;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 0 12px;
+  cursor: default;
+  box-shadow: 0 2px 6px rgba(154, 27, 27, 0.22);
+  flex-shrink: 0;
+}
+
+.cd-s05.cd-preview-card .cd-s05__summary {
+  margin: 0 0 8px;
+}
+
+.cd-s05.cd-preview-card .cd-s05__level {
+  font-size: 24px;
+}
+
+.cd-s05.cd-preview-card .cd-s05__insight {
+  margin: 0 0 8px;
+  -webkit-line-clamp: 2;
+}
+
+.cd-s05.cd-preview-card .cd-s05__track {
+  margin: 0 0 10px;
+  height: 10px;
+}
+
+.cd-s05.cd-preview-card .cd-s05__factors {
+  margin: 0 0 10px;
+}
+
+.cd-s05.cd-preview-card .cd-s05__cta {
+  height: 40px;
+  margin-top: 0;
+  font-size: 13px;
+}
+
+.cd-s06.cd-preview-card .cd-s06__card {
+  padding: 14px 16px;
+}
+
+.cd-s06__preview-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cd-meta);
+}
+
+.cd-s06__preview-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cd-s06__preview-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  padding: 6px 8px;
+  border: 1px solid var(--s06-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.cd-s06__preview-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cd-text);
+}
+
+.cd-s06__preview-score {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--cd-text);
+}
+
+.cd-s07.cd-preview-card .cd-s07__card {
+  padding: 12px 14px 14px;
+}
+
+.cd-s07.cd-preview-card .cd-s07__list {
+  gap: 6px;
+}
+
+.cd-s07.cd-preview-card .cd-preview-cta {
+  margin-top: 10px;
+}
+
+.cd-s08.cd-preview-card .cd-s08__card {
+  padding: 14px 16px;
+}
+
+.cd-s08.cd-preview-card .cd-s08__title {
+  margin: 0 0 10px;
+}
+
+.cd-s08__exec--preview {
+  padding: 10px 12px;
+  margin: 0 0 10px;
+}
+
+.cd-s08__exec--preview .cd-s08__exec-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cd-s08.cd-preview-card .cd-s08__block {
+  margin-top: 8px;
+}
+
+.cd-s08.cd-preview-card .cd-s08__block-title {
+  margin: 0 0 6px;
+}
+
+.cd-s08.cd-preview-card .cd-s08__list {
+  gap: 4px;
+}
+
+.cd-s08.cd-preview-card .cd-preview-cta {
+  margin-top: 12px;
+}
+
+.cd-s10.cd-preview-card .cd-s10__card {
+  height: auto;
+  padding: 14px 16px;
+}
+
+.cd-s10.cd-preview-card .cd-s10__title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cd-s10.cd-preview-card .cd-s10__decision {
+  padding: 14px 12px;
+}
+
+.cd-s10.cd-preview-card .cd-preview-cta {
+  margin-top: 12px;
+}
+
+.cd-s11.cd-preview-card .cd-s11__card {
+  height: auto;
+  padding: 14px 16px;
+}
+
+.cd-s11.cd-preview-card .cd-s11__title {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.cd-s11__exec--preview {
+  padding: 10px 12px;
+  max-height: none;
+}
+
+.cd-s11__exec--preview .cd-s11__exec-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+}
+
+.cd-s11__exec--preview .cd-s11__exec-body {
+  -webkit-line-clamp: 2;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cd-s11.cd-preview-card .cd-s11__block {
+  margin: 8px 0 0;
+}
+
+.cd-s11.cd-preview-card .cd-s11__block-title {
+  margin: 0 0 4px;
+  font-size: 12px;
+}
+
+.cd-s11.cd-preview-card .cd-s11__list {
+  gap: 4px;
+}
+
+.cd-s11.cd-preview-card .cd-s11__text {
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.cd-s11.cd-preview-card .cd-preview-cta {
+  margin-top: 12px;
+  height: 40px;
+}
+
 /* —— Footer —— */
 .cd-footer {
   grid-column: 2;
@@ -2475,4 +2734,173 @@ body:has(.cd-root) {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/*
+ * FINAL VISUAL RHYTHM — Desktop V2
+ * Equal OUTER heights within Group A / B / C only.
+ * No cross-group equalization. No masonry. Internals stay natural size.
+ */
+.cd-row-container--02 .cd-row-grid,
+.cd-row-container--03 .cd-row-grid,
+.cd-row-container--04 .cd-row-grid {
+  align-items: stretch;
+}
+
+.cd-row-container--02 .cd-row-cell,
+.cd-row-container--03 .cd-row-cell,
+.cd-row-container--04 .cd-row-cell {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: auto;
+}
+
+.cd-row-container--02 .cd-row-cell > *,
+.cd-row-container--03 .cd-row-cell > *,
+.cd-row-container--04 .cd-row-cell > * {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* —— Group A: S01 | S03 | S09 —— */
+.cd-row-container--02 .cd-s01__card,
+.cd-row-container--02 .cd-s03__card,
+.cd-row-container--02 .cd-s09.cd-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: auto;
+}
+
+.cd-row-container--02 .cd-s01__cols {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.cd-row-container--02 .cd-s01__col--right {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.cd-row-container--02 .cd-s01__cta {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* S03 — pillars sized by content; grid balances residual card space */
+.cd-row-container--02 .cd-s03__grid {
+  flex: 1 1 auto;
+  align-items: stretch;
+  align-content: center;
+}
+
+.cd-row-container--02 .cd-s03__pillar {
+  height: auto;
+}
+
+/* S09 — do not stretch Bagua / icon tiles */
+.cd-row-container--02 .cd-s09__quai,
+.cd-row-container--02 .cd-s09__nhom-title,
+.cd-row-container--02 .cd-s09__icons {
+  flex: 0 0 auto;
+}
+
+.cd-row-container--02 .cd-s09__bagua {
+  width: 168px;
+  height: 168px;
+  flex: none;
+}
+
+/* —— Group B: S02 | S04 | S06 —— */
+.cd-row-container--03 .cd-s02__card,
+.cd-row-container--03 .cd-s04__card,
+.cd-row-container--03 .cd-s06__card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+/* S02 — tiles natural; optically centered in card */
+.cd-row-container--03 .cd-s02__grid {
+  flex: 0 0 auto;
+  grid-template-rows: auto auto;
+  margin-block: auto;
+}
+
+.cd-row-container--03 .cd-s02__tile {
+  flex: none;
+  justify-content: center;
+}
+
+/* S04 — do not stretch progress bars */
+.cd-row-container--03 .cd-s04__list,
+.cd-row-container--03 .cd-s04__summary {
+  flex: 0 0 auto;
+}
+
+.cd-row-container--03 .cd-s04__track,
+.cd-row-container--03 .cd-s04__bar-fill {
+  flex: none;
+}
+
+/* S06 — content top; CTA bottom */
+.cd-row-container--03 .cd-s06__preview-label,
+.cd-row-container--03 .cd-s06__preview-list {
+  flex: 0 0 auto;
+}
+
+.cd-row-container--03 .cd-s06 .cd-preview-cta {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* —— Row 4: S05 | S07 | S08 | S10 | S11 —— */
+.cd-row-container--04 .cd-s05__card,
+.cd-row-container--04 .cd-s07__card,
+.cd-row-container--04 .cd-s08__card,
+.cd-row-container--04 .cd-s10__card,
+.cd-row-container--04 .cd-s11__card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: auto !important;
+  /* Shared outer bottom pad so CTA baselines align */
+  padding-bottom: 14px;
+}
+
+.cd-row-container--04 .cd-preview-card .cd-preview-cta,
+.cd-row-container--04 .cd-s05__cta.cd-preview-cta {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Keep preview body blocks natural; spacer lives above CTA */
+.cd-row-container--04 .cd-s05__summary,
+.cd-row-container--04 .cd-s05__track,
+.cd-row-container--04 .cd-s05__factors,
+.cd-row-container--04 .cd-s07__exec,
+.cd-row-container--04 .cd-s07__group,
+.cd-row-container--04 .cd-s07__divider,
+.cd-row-container--04 .cd-s08__exec,
+.cd-row-container--04 .cd-s08__block,
+.cd-row-container--04 .cd-s10__decision,
+.cd-row-container--04 .cd-s11__exec,
+.cd-row-container--04 .cd-s11__block {
+  flex: 0 0 auto;
+}
+
+.cd-row-container--04 .cd-s05__track {
+  height: 10px;
 }

@@ -5,9 +5,8 @@
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
-
-const data = CANONICAL_DESKTOP_MOCK.s03;
+import { ModuleHeader } from "../ModuleHeader";
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 type Tone = "fire" | "water" | "wood" | "metal" | "earth";
 
@@ -49,47 +48,48 @@ function GlyphBlock({ glyph }: { glyph: Glyph }): ReactNode {
 }
 
 /**
- * S03 Four Pillars — 4 equal pillar cards; Day pillar highlighted only by border + label.
+ * S03 Four Pillars — outer card + denser pillar columns; Day pillar highlighted.
  */
 export function S03FourPillars(): ReactNode {
+  const data = useCanonicalDesktop().s03;
   return (
     <section className="cd-s03" aria-labelledby="cd-s03-title">
-      <h2 id="cd-s03-title" className="cd-s03__title">
-        {data.title}
-      </h2>
-      <div className="cd-s03__grid">
-        {data.pillars.map((pillar) => {
-          const isMaster = pillar.highlight;
-          const headerLabel = isMaster
-            ? pillar.title.replace(/\s*\(.*\)\s*$/, "").trim()
-            : pillar.title;
-          const aria = isMaster
-            ? `${headerLabel}, Nhật Chủ, ${pillar.stem.viet} ${pillar.branch.viet}`
-            : `${headerLabel}, ${pillar.stem.viet} ${pillar.branch.viet}`;
+      <div className="cd-s03__card">
+        <ModuleHeader id="cd-s03-title">{data.title}</ModuleHeader>
+        <div className="cd-s03__grid">
+          {data.pillars.map((pillar) => {
+            const isMaster = pillar.highlight;
+            const headerLabel = isMaster
+              ? pillar.title.replace(/\s*\(.*\)\s*$/, "").trim()
+              : pillar.title;
+            const aria = isMaster
+              ? `${headerLabel}, Nhật Chủ, ${pillar.stem.viet} ${pillar.branch.viet}`
+              : `${headerLabel}, ${pillar.stem.viet} ${pillar.branch.viet}`;
 
-          return (
-            <article
-              key={pillar.title}
-              className={
-                isMaster ? "cd-s03__pillar cd-s03__pillar--master" : "cd-s03__pillar"
-              }
-              aria-label={aria}
-              tabIndex={0}
-            >
-              <header className="cd-s03__header">
-                <div className="cd-s03__pillar-name">{headerLabel}</div>
-                {isMaster ? (
-                  <div className="cd-s03__master-tag">NHẬT CHỦ</div>
-                ) : null}
-              </header>
+            return (
+              <article
+                key={pillar.title}
+                className={
+                  isMaster ? "cd-s03__pillar cd-s03__pillar--master" : "cd-s03__pillar"
+                }
+                aria-label={aria}
+                tabIndex={0}
+              >
+                <header className="cd-s03__header">
+                  <div className="cd-s03__pillar-name">{headerLabel}</div>
+                  {isMaster ? (
+                    <div className="cd-s03__master-tag">NHẬT CHỦ</div>
+                  ) : null}
+                </header>
 
-              <GlyphBlock glyph={pillar.stem} />
-              <GlyphBlock glyph={pillar.branch} />
+                <GlyphBlock glyph={pillar.stem} />
+                <GlyphBlock glyph={pillar.branch} />
 
-              <footer className="cd-s03__footer">{pillar.stamp}</footer>
-            </article>
-          );
-        })}
+                <footer className="cd-s03__footer">{pillar.stamp}</footer>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

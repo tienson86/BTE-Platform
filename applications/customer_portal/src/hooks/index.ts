@@ -7,5 +7,10 @@ export { useAsyncResource } from "./useAsyncResource";
 export type { AsyncResourceState, AsyncStatus } from "./useAsyncResource";
 export { useBaZiResult } from "./useBaZiResult";
 export type { UseBaZiResultOptions, UseBaZiResultResult } from "./useBaZiResult";
+export { useCanonicalDesktopResult } from "./useCanonicalDesktopResult";
+export type {
+  UseCanonicalDesktopResultOptions,
+  UseCanonicalDesktopResultResult,
+} from "./useCanonicalDesktopResult";
 export { useDashboard } from "./useDashboard";
 export type { UseDashboardOptions, UseDashboardResult } from "./useDashboard";

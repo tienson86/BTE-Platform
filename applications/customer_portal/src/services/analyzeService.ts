@@ -5,8 +5,11 @@
 import { ApiClient, API_ENDPOINTS, getApiClient } from "../api";
 import {
   adaptAnalysisToBaZiResult,
+  adaptAnalysisToCanonicalDesktop,
   createBaZiResultGateViewModel,
+  createCanonicalDesktopMockViewModel,
   type BaZiResultViewModel,
+  type CanonicalDesktopViewModel,
 } from "../adapters";
 import { isMockDataSource } from "../config/api";
 import type { AnalysisResponse, AnalyzeChartRequest, ChartResponse } from "../models";
@@ -55,6 +58,45 @@ export class AnalyzeService {
       request,
       requestId: response.request_id,
       status: "ready",
+    });
+  }
+
+  /**
+   * Analyze and adapt to Canonical Desktop ViewModel (S00–S11).
+   * Calendar → BaZi → Pattern/Score/Strength → Interpretation → Report via orchestrator.
+   */
+  async getCanonicalDesktopViewModel(
+    request: AnalyzeChartRequest,
+  ): Promise<CanonicalDesktopViewModel> {
+    if (isMockDataSource()) {
+      const fixture = createCanonicalDesktopMockViewModel();
+      return {
+        ...fixture,
+        header: {
+          ...fixture.header,
+          user: {
+            ...fixture.header.user,
+            name: request.full_name ?? fixture.header.user.name,
+          },
+        },
+        s00: {
+          ...fixture.s00,
+          profile: {
+            ...fixture.s00.profile,
+            name: request.full_name ?? fixture.s00.profile.name,
+          },
+        },
+        source: "mock",
+        status: "ready",
+      };
+    }
+
+    const response = await this.analyze(request);
+    return adaptAnalysisToCanonicalDesktop(response.data, {
+      request,
+      requestId: response.request_id,
+      status: "ready",
+      source: "api",
     });
   }
 

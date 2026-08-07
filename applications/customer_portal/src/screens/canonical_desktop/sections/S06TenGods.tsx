@@ -1,45 +1,45 @@
 /**
- * S06 — THẬP THẦN
- * Isolated rebuild: Quick Recognition Panel (2×5 grid).
- * PATTERN_03_DATA_COLUMNS + PATTERN_06_INFORMATION_LIST
- * + CANONICAL_PORTAL_UI_DESKTOP_V1.png
+ * S06 — Dashboard Preview Card: THẬP THẦN
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
-
-const data = CANONICAL_DESKTOP_MOCK.s06;
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 /**
- * S06 Ten Gods — 10 equal cells, fixed order, scan in under 5 seconds.
+ * S06 Ten Gods — Dashboard preview card.
  */
 export function S06TenGods(): ReactNode {
+  const data = useCanonicalDesktop().s06;
+  const previewGods = [...data.gods]
+    .sort((a, b) => Number.parseFloat(b.score) - Number.parseFloat(a.score))
+    .slice(0, 4);
+
   return (
-    <section className="cd-s06" aria-labelledby="cd-s06-title">
+    <section className="cd-s06 cd-preview-card" aria-labelledby="cd-s06-title">
       <div className="cd-s06__card">
         <h2 id="cd-s06-title" className="cd-s06__title">
           {data.title}
         </h2>
 
-        <div className="cd-s06__scroll">
-          <ul className="cd-s06__grid">
-            {data.gods.map((god) => (
-              <li key={god.name} className="cd-s06__cell" aria-label={`${god.name} ${god.score}`}>
-                <span
-                  className="cd-s06__dot"
-                  style={{ background: god.color }}
-                  aria-hidden="true"
-                />
-                <span className="cd-s06__short">{god.name}</span>
-                <span className="cd-s06__score">{god.score}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <p className="cd-s06__preview-label">Tóm tắt Thập thần nổi bật</p>
 
-        <a className="cd-s06__link" href="#s06-detail">
+        <ul className="cd-s06__preview-list">
+          {previewGods.map((god) => (
+            <li key={god.name} className="cd-s06__preview-row">
+              <span
+                className="cd-s06__dot"
+                style={{ background: god.color }}
+                aria-hidden="true"
+              />
+              <span className="cd-s06__preview-name">{god.name}</span>
+              <span className="cd-s06__preview-score">{god.score}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button type="button" className="cd-preview-cta">
           {data.link}
-        </a>
+        </button>
       </div>
     </section>
   );

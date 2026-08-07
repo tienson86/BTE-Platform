@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
+import { ModuleHeader } from "../ModuleHeader";
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 import {
   IconBulb,
   IconCalendar,
@@ -11,10 +12,8 @@ import {
   IconUser,
 } from "../icons";
 
-const d = CANONICAL_DESKTOP_MOCK;
-
 export function S00ContextHeader(): ReactNode {
-  const s = d.s00;
+  const s = useCanonicalDesktop().s00;
   const timeMatch = /^(\d{1,2}:\d{2})\s*(.*)$/.exec(s.birth.time);
   const timePrimary = timeMatch?.[1] ?? s.birth.time;
   const timeSecondary = timeMatch?.[2] ?? "";
@@ -98,7 +97,7 @@ export function S00ContextHeader(): ReactNode {
 }
 
 export function S01IdentityDecision(): ReactNode {
-  const s = d.s01;
+  const s = useCanonicalDesktop().s01;
   const element = s.dayMaster.value.includes(" ")
     ? s.dayMaster.value.split(" ").slice(1).join(" ")
     : s.dayMaster.value;
@@ -108,10 +107,8 @@ export function S01IdentityDecision(): ReactNode {
 
   return (
     <section className="cd-s01" aria-labelledby="cd-s01-title">
-      <h2 id="cd-s01-title" className="cd-s01__title">
-        {s.title}
-      </h2>
       <div className="cd-s01__card">
+        <ModuleHeader id="cd-s01-title">{s.title}</ModuleHeader>
         <div className="cd-s01__cols">
           {/* LEFT 60% — Identity + Conditions */}
           <div className="cd-s01__col cd-s01__col--left">

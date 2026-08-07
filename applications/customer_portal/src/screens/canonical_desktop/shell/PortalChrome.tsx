@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 import {
   IconBell,
   IconMenu,
@@ -8,9 +8,8 @@ import {
   IconStarLogo,
 } from "../icons";
 
-const data = CANONICAL_DESKTOP_MOCK;
-
 export function PortalHeader(): ReactNode {
+  const data = useCanonicalDesktop();
   return (
     <header className="cd-header" role="banner">
       <button type="button" className="cd-header__toggle" aria-label="Menu">
@@ -52,6 +51,7 @@ export function PortalHeader(): ReactNode {
 }
 
 export function PortalSidebar(): ReactNode {
+  const data = useCanonicalDesktop();
   return (
     <aside className="cd-sidebar" aria-label="Thanh bên">
       <div className="cd-sidebar__brand">
@@ -103,6 +103,7 @@ export function PortalSidebar(): ReactNode {
 }
 
 export function PortalFooter(): ReactNode {
+  const data = useCanonicalDesktop();
   return (
     <footer className="cd-footer">
       <div className="cd-footer__inner">

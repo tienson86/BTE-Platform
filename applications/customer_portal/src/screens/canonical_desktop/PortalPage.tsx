@@ -1,67 +1,70 @@
 /**
- * PortalPage — Desktop Canonical UI root.
- * Assembled against CANONICAL_PORTAL_UI_DESKTOP_V2.
- * Reuses approved S00–S11 modules. Does not redesign section internals.
+ * PortalPage / ResultPage — Desktop Dashboard (CANONICAL_PORTAL_UI_DESKTOP_V2).
+ *
+ * Data: AnalyzeService → canonicalDesktopAdapter → CanonicalDesktopProvider.
+ * Layout frozen — see DESKTOP_V2_FREEZE.md.
  */
 
 import type { ReactNode } from "react";
+import type { CanonicalDesktopViewModel } from "../../adapters";
+import { useCanonicalDesktopResult } from "../../hooks";
+import type { AnalyzeChartRequest } from "../../models";
+import { CanonicalDesktopProvider } from "./CanonicalDesktopContext";
 import { PortalFooter, PortalHeader, PortalSidebar } from "./shell/PortalChrome";
-import {
-  S00ContextHeader,
-  S01IdentityDecision,
-  S02OverviewActions,
-  S03FourPillars,
-  S04ElementBalance,
-  S05Strength,
-  S06TenGods,
-  S07ShenSha,
-  S08Interpretation,
-  S09CungPhi,
-  S10CanXuong,
-  S11LearningPanel,
-} from "./sections/Sections";
+import { Row01, Row02, Row03, Row04 } from "./rows";
 import "../../styles/canonical-desktop.css";
 
+export type PortalPageProps = {
+  /** Birth request for POST /analyze. Omit to keep fixture preview. */
+  readonly request?: AnalyzeChartRequest | null;
+  /** Injected ViewModel (tests / story). */
+  readonly initialData?: CanonicalDesktopViewModel;
+  readonly enabled?: boolean;
+};
+
 /**
- * Canonical Desktop Portal page (V2 layout shell).
+ * Canonical Desktop Dashboard — engine-backed when `request` is provided.
  */
-export function PortalPage(): ReactNode {
+export function PortalPage({
+  request = null,
+  initialData,
+  enabled = true,
+}: PortalPageProps = {}): ReactNode {
+  const { viewModel } = useCanonicalDesktopResult({
+    request,
+    initialData,
+    enabled,
+    previewFallback: true,
+  });
+
+  const mode = viewModel.source === "api" ? "engine-live" : "dashboard-preview";
+
   return (
-    <div className="cd-root" data-canonical="desktop-v2">
-      <PortalSidebar />
-      <PortalHeader />
-      <main className="cd-content">
-        <div className="cd-content__inner">
-          {/* Row 1 — S00 full width */}
-          <div className="cd-row cd-row--1">
-            <S00ContextHeader />
+    <CanonicalDesktopProvider value={viewModel}>
+      <div
+        className="cd-root"
+        data-canonical="desktop-v2"
+        data-mode={mode}
+        data-status={viewModel.status}
+      >
+        <PortalSidebar />
+        <PortalHeader />
+        <main className="cd-content" data-page="result">
+          <div
+            className="cd-result-page"
+            data-architecture="independent-row-containers"
+          >
+            <Row01 />
+            <Row02 />
+            <Row03 />
+            <Row04 />
           </div>
-
-          {/* Row 2 — S01 | S02 | S09 — equal */}
-          <div className="cd-row cd-row--3">
-            <S01IdentityDecision />
-            <S02OverviewActions />
-            <S09CungPhi />
-          </div>
-
-          {/* Row 3 — S03(4) | S04(4) | S05(2) | S10(2) */}
-          <div className="cd-row cd-row--4">
-            <S03FourPillars />
-            <S04ElementBalance />
-            <S05Strength />
-            <S10CanXuong />
-          </div>
-
-          {/* Row 4 — S06(4) | S07(2) | S08(3) | S11(3) */}
-          <div className="cd-row cd-row--bottom">
-            <S06TenGods />
-            <S07ShenSha />
-            <S08Interpretation />
-            <S11LearningPanel />
-          </div>
-        </div>
-      </main>
-      <PortalFooter />
-    </div>
+        </main>
+        <PortalFooter />
+      </div>
+    </CanonicalDesktopProvider>
   );
 }
+
+/** Alias matching DESKTOP_COMPONENT_MAPPING naming. */
+export const ResultPage = PortalPage;

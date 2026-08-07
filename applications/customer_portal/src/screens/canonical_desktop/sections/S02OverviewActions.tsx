@@ -1,11 +1,12 @@
 /**
- * S02 — TỔNG QUAN & HÀNH ĐỘNG
+ * S02 — TỔNG QUAN LÁ SỐ
  * Isolated rebuild from CANONICAL_PORTAL_UI_DESKTOP_V1.png
  * + knowledge/ui_master/master_sections/S02_OVERVIEW_ACTIONS/
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
+import { ModuleHeader } from "../ModuleHeader";
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 import {
   IconDrop,
   IconFire,
@@ -14,8 +15,6 @@ import {
   IconSpark,
   IconYinYang,
 } from "../icons";
-
-const data = CANONICAL_DESKTOP_MOCK.s02;
 
 const ICON_COLOR: Record<string, string> = {
   fire: "#b42318",
@@ -26,16 +25,14 @@ const ICON_COLOR: Record<string, string> = {
 };
 
 /**
- * S02 Overview Actions — 3×2 equal summary cards.
+ * S02 Overview — title inside card; 3×2 tiles as primary content.
  */
 export function S02OverviewActions(): ReactNode {
+  const data = useCanonicalDesktop().s02;
   return (
     <section className="cd-s02" aria-labelledby="cd-s02-title">
-      <h2 id="cd-s02-title" className="cd-s02__title">
-        {data.title}
-      </h2>
       <div className="cd-s02__card">
-        <h3 className="cd-s02__subtitle">{data.subtitle}</h3>
+        <ModuleHeader id="cd-s02-title">{data.title}</ModuleHeader>
         <div className="cd-s02__grid">
           {data.items.map((item) => {
             const color = ICON_COLOR[item.color] ?? ICON_COLOR.metal;
@@ -50,10 +47,7 @@ export function S02OverviewActions(): ReactNode {
                   {item.icon === "leaf" && <IconLeaf size={32} color={color} />}
                 </div>
                 <div className="cd-s02__tile-title">{item.label}</div>
-                <div
-                  className="cd-s02__tile-value"
-                  style={{ color }}
-                >
+                <div className="cd-s02__tile-value" style={{ color }}>
                   {item.value}
                 </div>
               </article>

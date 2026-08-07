@@ -1,23 +1,18 @@
 /**
- * S10 — CÂN XƯƠNG ĐOÁN MỆNH
- * Isolated rebuild: Executive Bone Weight Fortune Card.
- * knowledge/ui_master/sections/S10_BONE_WEIGHT_FORTUNE/
- *
- * Reading flow: Header → Decision → Verse → Interpretation → Link
- * NOT a dashboard / KPI / calculator / rule viewer.
+ * S10 — Dashboard Preview Card: CÂN XƯƠNG ĐOÁN MỆNH
+ * No bone-weight engine yet — ViewModel may still carry fixture until engine lands.
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
-
-const data = CANONICAL_DESKTOP_MOCK.s10;
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 /**
- * S10 Bone Weight Fortune — decision card + verse + interpretation + link.
+ * S10 Bone Weight Fortune — Dashboard preview card.
  */
 export function S10BoneWeightFortune(): ReactNode {
+  const data = useCanonicalDesktop().s10;
   return (
-    <section className="cd-s10" aria-labelledby="cd-s10-title">
+    <section className="cd-s10 cd-preview-card" aria-labelledby="cd-s10-title">
       <div className="cd-s10__card">
         <h2 id="cd-s10-title" className="cd-s10__title">
           {data.title}
@@ -32,31 +27,9 @@ export function S10BoneWeightFortune(): ReactNode {
           <p className="cd-s10__insight">{data.insight}</p>
         </div>
 
-        <hr className="cd-s10__divider" />
-
-        <div className="cd-s10__block">
-          <h3 className="cd-s10__block-title">{data.verse.title}</h3>
-          <div className="cd-s10__verse">
-            {data.verse.lines.map((line) => (
-              <p key={line} className="cd-s10__verse-line">
-                {line}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <hr className="cd-s10__divider" />
-
-        <div className="cd-s10__block">
-          <h3 className="cd-s10__block-title">{data.interpretation.title}</h3>
-          <p className="cd-s10__interp-body">{data.interpretation.body}</p>
-        </div>
-
-        <hr className="cd-s10__divider" />
-
-        <a className="cd-s10__link" href="#s10-detail">
+        <button type="button" className="cd-preview-cta">
           {data.link}
-        </a>
+        </button>
       </div>
     </section>
   );

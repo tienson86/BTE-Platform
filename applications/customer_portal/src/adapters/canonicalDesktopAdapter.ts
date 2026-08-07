@@ -1,0 +1,807 @@
+/**
+ * Analysis API → Canonical Desktop ViewModel.
+ * Calendar / BaZi / Pattern / Score / Strength / Interpretation / Report / Feng Shui.
+ */
+
+import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../models";
+import {
+  CANONICAL_DESKTOP_MOCK,
+  type CanonicalDesktopMock,
+} from "../screens/canonical_desktop/mockData";
+
+export type CanonicalDesktopStatus = "ready" | "loading" | "error" | "empty";
+
+export type CanonicalDesktopViewModel = {
+  readonly header: CanonicalDesktopMock["header"];
+  readonly sidebar: CanonicalDesktopMock["sidebar"];
+  readonly s00: CanonicalDesktopMock["s00"];
+  readonly s01: CanonicalDesktopMock["s01"];
+  readonly s02: CanonicalDesktopMock["s02"];
+  readonly s03: CanonicalDesktopMock["s03"];
+  readonly s04: CanonicalDesktopMock["s04"];
+  readonly s05: CanonicalDesktopMock["s05"];
+  readonly s06: CanonicalDesktopMock["s06"];
+  readonly s07: CanonicalDesktopMock["s07"];
+  readonly s08: CanonicalDesktopMock["s08"];
+  readonly s09: CanonicalDesktopMock["s09"];
+  readonly s10: CanonicalDesktopMock["s10"];
+  readonly s11: CanonicalDesktopMock["s11"];
+  readonly footer: CanonicalDesktopMock["footer"];
+  readonly source: "api" | "mock";
+  readonly status: CanonicalDesktopStatus;
+  readonly statusMessage?: string;
+};
+
+export type AdaptCanonicalDesktopOptions = {
+  readonly request?: AnalyzeChartRequest;
+  readonly requestId?: string | null;
+  readonly status?: CanonicalDesktopStatus;
+  readonly source?: "api" | "mock";
+};
+
+type GlyphMeta = { han: string; element: string; tone: string };
+
+const STEM_ENTRIES: { keys: string[]; meta: GlyphMeta }[] = [
+  { keys: ["giáp", "giap"], meta: { han: "甲", element: "Mộc Dương", tone: "wood" } },
+  { keys: ["ất", "at"], meta: { han: "乙", element: "Mộc Âm", tone: "wood" } },
+  { keys: ["bính", "binh"], meta: { han: "丙", element: "Hỏa Dương", tone: "fire" } },
+  { keys: ["đinh", "dinh"], meta: { han: "丁", element: "Hỏa Âm", tone: "fire" } },
+  { keys: ["mậu", "mau"], meta: { han: "戊", element: "Thổ Dương", tone: "earth" } },
+  { keys: ["kỷ", "ky"], meta: { han: "己", element: "Thổ Âm", tone: "earth" } },
+  { keys: ["canh"], meta: { han: "庚", element: "Kim Dương", tone: "metal" } },
+  { keys: ["tân", "tan"], meta: { han: "辛", element: "Kim Âm", tone: "metal" } },
+  { keys: ["nhâm", "nham"], meta: { han: "壬", element: "Thủy Dương", tone: "water" } },
+  { keys: ["quý", "quy"], meta: { han: "癸", element: "Thủy Âm", tone: "water" } },
+];
+
+const BRANCH_ENTRIES: { keys: string[]; meta: GlyphMeta }[] = [
+  { keys: ["tý"], meta: { han: "子", element: "Thủy Dương", tone: "water" } },
+  { keys: ["sửu", "suu"], meta: { han: "丑", element: "Thổ Âm", tone: "earth" } },
+  { keys: ["dần", "dan"], meta: { han: "寅", element: "Mộc Dương", tone: "wood" } },
+  { keys: ["mão", "mao"], meta: { han: "卯", element: "Mộc Âm", tone: "wood" } },
+  { keys: ["thìn", "thin"], meta: { han: "辰", element: "Thổ Dương", tone: "earth" } },
+  { keys: ["tỵ"], meta: { han: "巳", element: "Hỏa Âm", tone: "fire" } },
+  { keys: ["ngọ", "ngo"], meta: { han: "午", element: "Hỏa Dương", tone: "fire" } },
+  { keys: ["mùi", "mui"], meta: { han: "未", element: "Thổ Âm", tone: "earth" } },
+  { keys: ["thân", "than"], meta: { han: "申", element: "Kim Dương", tone: "metal" } },
+  { keys: ["dậu", "dau"], meta: { han: "酉", element: "Kim Âm", tone: "metal" } },
+  { keys: ["tuất", "tuat"], meta: { han: "戌", element: "Thổ Dương", tone: "earth" } },
+  { keys: ["hợi", "hoi"], meta: { han: "亥", element: "Thủy Âm", tone: "water" } },
+];
+
+const HUNG_SHENSHA = new Set(
+  [
+    "kiếp sát",
+    "kiep sat",
+    "không vong",
+    "khong vong",
+    "cô thần",
+    "co than",
+    "quả tú",
+    "qua tu",
+    "đại hao",
+    "dai hao",
+    "tang môn",
+    "tang mon",
+    "bạch hổ",
+    "bach ho",
+    "câu trận",
+    "cau tran",
+  ].map((s) => s.toLowerCase()),
+);
+
+const TEN_GOD_COLORS: Record<string, string> = {
+  "chính quan": "#1565c0",
+  "thất sát": "#6a1b9a",
+  "chính ấn": "#ef6c00",
+  "thiên ấn": "#f9a825",
+  "chính tài": "#2e7d32",
+  "thiên tài": "#c62828",
+  "thực thần": "#5d4037",
+  "thương quan": "#455a64",
+  "tỷ kiên": "#7b1fa2",
+  "kiếp tài": "#00838f",
+};
+
+const ELEMENT_STATUS = (pct: number): string => {
+  if (pct >= 35) return "Rất mạnh";
+  if (pct >= 25) return "Mạnh";
+  if (pct >= 15) return "Trung bình";
+  if (pct >= 8) return "Yếu";
+  return "Rất yếu";
+};
+
+const ELEMENT_ROW: { name: string; element: "wood" | "fire" | "earth" | "metal" | "water" }[] = [
+  { name: "Mộc", element: "wood" },
+  { name: "Hỏa", element: "fire" },
+  { name: "Thổ", element: "earth" },
+  { name: "Kim", element: "metal" },
+  { name: "Thủy", element: "water" },
+];
+
+/**
+ * Deep-clone fixture for mutation-safe ViewModel bases.
+ */
+function cloneFixture(): CanonicalDesktopViewModel {
+  return {
+    ...(JSON.parse(JSON.stringify(CANONICAL_DESKTOP_MOCK)) as CanonicalDesktopMock),
+    source: "mock",
+    status: "ready",
+  };
+}
+
+function asString(value: unknown, fallback = ""): string {
+  if (value === null || value === undefined) return fallback;
+  return String(value);
+}
+
+function pad2(n: number): string {
+  return String(n).padStart(2, "0");
+}
+
+function normKey(raw: string): string {
+  return raw
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function genderMeta(raw: string | null | undefined): { symbol: string; label: string } {
+  const v = (raw ?? "").toLowerCase();
+  if (v === "male" || v === "nam" || v === "m") {
+    return { symbol: "♂", label: "Nam" };
+  }
+  if (v === "female" || v === "nu" || v === "nữ" || v === "f") {
+    return { symbol: "♀", label: "Nữ" };
+  }
+  return { symbol: "•", label: raw ? String(raw) : "—" };
+}
+
+function matchGlyph(
+  viet: string,
+  entries: { keys: string[]; meta: GlyphMeta }[],
+): GlyphMeta | null {
+  const raw = viet.trim().toLowerCase();
+  for (const entry of entries) {
+    if (entry.keys.some((candidate) => candidate.toLowerCase() === raw)) {
+      return entry.meta;
+    }
+  }
+  const key = normKey(viet);
+  for (const entry of entries) {
+    if (entry.keys.some((candidate) => normKey(candidate) === key)) {
+      return entry.meta;
+    }
+  }
+  return null;
+}
+
+function lookupStem(viet: string): { han: string; viet: string; element: string; tone: string } {
+  const hit = matchGlyph(viet, STEM_ENTRIES);
+  const label = viet.trim() || "—";
+  if (hit) {
+    return { han: hit.han, viet: label, element: hit.element, tone: hit.tone };
+  }
+  return { han: label, viet: label, element: "—", tone: "metal" };
+}
+
+function lookupBranch(viet: string): { han: string; viet: string; element: string; tone: string } {
+  const hit = matchGlyph(viet, BRANCH_ENTRIES);
+  const label = viet.trim() || "—";
+  if (hit) {
+    return { han: hit.han, viet: label, element: hit.element, tone: hit.tone };
+  }
+  return { han: label, viet: label, element: "—", tone: "metal" };
+}
+
+function normalizeElement(label: string): string {
+  const map: Record<string, string> = {
+    kim: "Kim",
+    metal: "Kim",
+    moc: "Mộc",
+    wood: "Mộc",
+    thuy: "Thủy",
+    water: "Thủy",
+    hoa: "Hỏa",
+    fire: "Hỏa",
+    tho: "Thổ",
+    earth: "Thổ",
+  };
+  return map[normKey(label)] ?? label.trim();
+}
+
+function seriesValue(item: { value?: number; count?: number; score?: number }): number {
+  if (typeof item.value === "number") return item.value;
+  if (typeof item.count === "number") return item.count;
+  if (typeof item.score === "number") return item.score;
+  return 0;
+}
+
+function pickStr(obj: Record<string, unknown> | undefined, keys: string[]): string {
+  if (!obj) return "";
+  for (const key of keys) {
+    const v = obj[key];
+    if (typeof v === "string" && v.trim()) return v.trim();
+  }
+  return "";
+}
+
+function pickList(obj: Record<string, unknown> | undefined, keys: string[]): string[] {
+  if (!obj) return [];
+  for (const key of keys) {
+    const v = obj[key];
+    if (Array.isArray(v)) {
+      return v.map((x) => asString(x).trim()).filter(Boolean);
+    }
+    if (typeof v === "string" && v.trim()) {
+      return v.split(/[,;/|]+/).map((s) => s.trim()).filter(Boolean);
+    }
+  }
+  return [];
+}
+
+function mapPillarGlyph(
+  dto: PillarDto | undefined,
+  title: string,
+  stamp: string,
+  highlight: boolean,
+): CanonicalDesktopMock["s03"]["pillars"][number] {
+  const stem = lookupStem(asString(dto?.stem, "—"));
+  const branch = lookupBranch(asString(dto?.branch, "—"));
+  return {
+    title,
+    stem,
+    branch,
+    stamp,
+    highlight,
+  };
+}
+
+function mapS00(
+  data: AnalysisDataDto,
+  request: AnalyzeChartRequest | undefined,
+  requestId: string | null | undefined,
+): CanonicalDesktopMock["s00"] {
+  const base = cloneFixture().s00;
+  const gender = genderMeta(data.customer?.gender ?? request?.gender);
+  const year = request?.year;
+  const month = request?.month;
+  const day = request?.day;
+  const hour = request?.hour ?? 0;
+  const minute = request?.minute ?? 0;
+  const lunarDay = asString(data.calendar?.day_can_chi);
+  const lunarMonth = asString(data.calendar?.month_can_chi);
+  const lunarYear = asString(data.calendar?.year_can_chi);
+  const lunarBits = [lunarDay, lunarMonth, lunarYear].filter(Boolean).join(" · ");
+  const now = new Date();
+
+  return {
+    ...base,
+    profile: {
+      ...base.profile,
+      name: asString(data.customer?.full_name ?? request?.full_name, base.profile.name),
+      genderSymbol: gender.symbol,
+      meta: `${gender.label} • ${asString(data.bazi?.day_master_yin_yang, gender.label)}`,
+    },
+    birth: {
+      ...base.birth,
+      date:
+        year && month && day
+          ? `${pad2(day)}/${pad2(month)}/${year}`
+          : base.birth.date,
+      lunar: lunarBits ? `(${lunarBits})` : base.birth.lunar,
+      time:
+        year !== undefined
+          ? `${pad2(hour)}:${pad2(minute)} (${asString(data.customer?.timezone ?? request?.timezone, "GMT+7")})`
+          : base.birth.time,
+    },
+    chartId: {
+      ...base.chartId,
+      value: asString(requestId ?? data.customer?.customer_id, base.chartId.value),
+    },
+    analyzedAt: {
+      ...base.analyzedAt,
+      value: `${pad2(now.getDate())}/${pad2(now.getMonth() + 1)}/${now.getFullYear()} ${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`,
+      relative: "Vừa xong",
+    },
+    status: {
+      ...base.status,
+      value: "Hoàn tất",
+    },
+  };
+}
+
+function mapS01(data: AnalysisDataDto): CanonicalDesktopMock["s01"] {
+  const base = cloneFixture().s01;
+  const dm = asString(data.bazi?.day_master, base.dayMaster.value);
+  const element = normalizeElement(asString(data.bazi?.day_master_element));
+  const yy = asString(data.bazi?.day_master_yin_yang);
+  const pattern = data.pattern as Record<string, unknown> | undefined;
+  const strength = data.strength;
+  const score = Math.round(Number(strength?.strength_score ?? data.score?.strength_score ?? 0));
+  const level = asString(strength?.strength_level);
+  const cachCuc = pickStr(pattern, ["cach_cuc", "pattern"]);
+  const than = pickStr(pattern, ["than_vuong_nhuoc", "than"]);
+  const season = asString(
+    (data.calendar?.solar_term as { name?: string } | null | undefined)?.name,
+  );
+  const interp = data.interpretation as Record<string, unknown> | undefined;
+  const sections = Array.isArray(interp?.sections) ? (interp.sections as Record<string, unknown>[]) : [];
+  const bodies = sections
+    .map((s) => asString(s.body ?? s.content ?? s.text).trim())
+    .filter(Boolean);
+
+  const strengthTone =
+    score >= 60 ? ("danger" as const) : score >= 40 ? ("warning" as const) : ("success" as const);
+
+  return {
+    ...base,
+    dayMaster: {
+      ...base.dayMaster,
+      value: element ? `${dm}`.replace(/\s+/g, " ").trim() || `${dm}` : dm,
+      subtype: yy && element ? `${yy} ${element}`.trim() : yy || element || base.dayMaster.subtype,
+      tags: [
+        {
+          text: than || (element ? `${element} ${score >= 55 ? "vượng" : "cân"}` : base.dayMaster.tags[0].text),
+          tone: strengthTone,
+        },
+        {
+          text: `Mệnh cục: ${cachCuc || level || "—"}`,
+          tone: "neutral" as const,
+        },
+      ],
+    },
+    conditions: {
+      ...base.conditions,
+      rows: [
+        {
+          label: "Mùa sinh",
+          value: season || base.conditions.rows[0].value,
+          tag: season ? "Tiết khí" : base.conditions.rows[0].tag,
+          tone: "neutral" as const,
+        },
+        {
+          label: "Cục mệnh",
+          value: cachCuc || base.conditions.rows[1].value,
+          tag: than || base.conditions.rows[1].tag,
+          tone: strengthTone === "danger" ? ("warning" as const) : strengthTone,
+        },
+        {
+          label: "Thân cư",
+          value: pickStr(pattern, ["tong_cach", "than"]) || base.conditions.rows[2].value,
+          tag: score >= 55 ? "Tốt" : "Theo dõi",
+          tone: score >= 55 ? ("success" as const) : ("warning" as const),
+        },
+      ],
+    },
+    decisions: [
+      {
+        icon: "target" as const,
+        question: "BẠN LÀ AI?",
+        answer: bodies[0] || asString(strength?.reasoning, base.decisions[0].answer),
+      },
+      {
+        icon: "bulb" as const,
+        question: "THẾ MẠNH CỦA BẠN?",
+        answer: bodies[1] || (cachCuc ? `Cách cục ${cachCuc}. ${than}` : base.decisions[1].answer),
+      },
+      {
+        icon: "compass" as const,
+        question: "BẠN NÊN LÀM GÌ?",
+        answer:
+          bodies[2] ||
+          asString(
+            (data.useful_god as Record<string, unknown> | undefined)?.reasoning,
+            base.decisions[2].answer,
+          ),
+      },
+    ],
+  };
+}
+
+function mapS02(data: AnalysisDataDto): CanonicalDesktopMock["s02"] {
+  const base = cloneFixture().s02;
+  const pattern = data.pattern as Record<string, unknown> | undefined;
+  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const series = data.score?.wuxing_series ?? [];
+  let topElement = "—";
+  let topPct = -1;
+  for (const item of series) {
+    const name = normalizeElement(asString(item.label ?? item.element ?? item.name));
+    const v = seriesValue(item);
+    if (v > topPct) {
+      topPct = v;
+      topElement = name;
+    }
+  }
+  const yy = asString(data.bazi?.day_master_yin_yang, "—");
+  const than = pickStr(pattern, ["than_vuong_nhuoc", "than"]) || "—";
+  const dung = pickStr(useful, ["useful_god"]) || pickStr(pattern, ["dung_than"]) || "—";
+  const hy =
+    pickList(useful, ["favorable_gods"]).join(", ") ||
+    pickStr(pattern, ["hy_than"]) ||
+    "—";
+  const ky =
+    pickList(useful, ["unfavorable_gods"]).join(", ") ||
+    pickStr(pattern, ["ky_than"]) ||
+    "—";
+
+  const elementColor =
+    topElement === "Hỏa"
+      ? "fire"
+      : topElement === "Thủy"
+        ? "water"
+        : topElement === "Mộc"
+          ? "wood"
+          : topElement === "Kim"
+            ? "metal"
+            : "earth";
+
+  return {
+    ...base,
+    items: [
+      {
+        icon: "fire" as const,
+        label: "Ngũ hành",
+        value: topElement !== "—" ? `${topElement} nổi` : base.items[0].value,
+        color: elementColor,
+      },
+      {
+        icon: "yinyang" as const,
+        label: "Âm dương",
+        value: yy,
+        color: "water",
+      },
+      {
+        icon: "scale" as const,
+        label: "Thế cục",
+        value: than,
+        color: "earth",
+      },
+      {
+        icon: "drop" as const,
+        label: "Dụng thần",
+        value: dung,
+        color: "water",
+      },
+      {
+        icon: "spark" as const,
+        label: "Hỷ thần",
+        value: hy,
+        color: "metal",
+      },
+      {
+        icon: "leaf" as const,
+        label: "Kỵ thần",
+        value: ky,
+        color: "wood",
+      },
+    ],
+  };
+}
+
+function mapS03(
+  data: AnalysisDataDto,
+  request: AnalyzeChartRequest | undefined,
+): CanonicalDesktopMock["s03"] {
+  const base = cloneFixture().s03;
+  const hour = request?.hour ?? 0;
+  const minute = request?.minute ?? 0;
+  return {
+    ...base,
+    pillars: [
+      mapPillarGlyph(data.bazi?.year_pillar, "NĂM TRỤ", asString(request?.year, base.pillars[0].stamp), false),
+      mapPillarGlyph(
+        data.bazi?.month_pillar,
+        "THÁNG TRỤ",
+        request?.month ? pad2(request.month) : base.pillars[1].stamp,
+        false,
+      ),
+      mapPillarGlyph(data.bazi?.day_pillar, "NGÀY TRỤ (NHẬT CHỦ)", asString(request?.day, base.pillars[2].stamp), true),
+      mapPillarGlyph(
+        data.bazi?.hour_pillar,
+        "GIỜ TRỤ",
+        request ? `${pad2(hour)}:${pad2(minute)}` : base.pillars[3].stamp,
+        false,
+      ),
+    ],
+  };
+}
+
+function mapS04(data: AnalysisDataDto): CanonicalDesktopMock["s04"] {
+  const base = cloneFixture().s04;
+  const scores: Record<string, number> = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
+  for (const item of data.score?.wuxing_series ?? []) {
+    const name = normalizeElement(asString(item.label ?? item.element ?? item.name));
+    if (name in scores) scores[name] = seriesValue(item);
+  }
+  const total = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
+  const rows = ELEMENT_ROW.map((row) => {
+    const pct = Math.round((scores[row.name] / total) * 100);
+    return { name: row.name, element: row.element, pct, status: ELEMENT_STATUS(pct) };
+  });
+  const strongest = [...rows].sort((a, b) => b.pct - a.pct)[0];
+  const weakest = [...rows].sort((a, b) => a.pct - b.pct)[0];
+  return {
+    ...base,
+    rows,
+    summary: `${strongest.name} vượng • ${weakest.name} thiếu • Điểm ${asString(data.score?.grade, "—")}`,
+  };
+}
+
+function mapS05(data: AnalysisDataDto): CanonicalDesktopMock["s05"] {
+  const base = cloneFixture().s05;
+  const score = Math.round(Number(data.strength?.strength_score ?? data.score?.strength_score ?? 0));
+  const levelRaw = asString(data.strength?.strength_level, base.level);
+  const level = score >= 70 ? "MẠNH" : score >= 45 ? "TRUNG BÌNH" : "YẾU";
+  const reasoning = asString(data.strength?.reasoning, base.insight);
+  const factors = asString(data.strength?.reasoning)
+    .split(/[.;\n]+/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 4)
+    .map((text, i) => ({
+      text,
+      tone: (i < 2 ? "positive" : i === 2 ? "neutral" : "negative") as "positive" | "neutral" | "negative",
+    }));
+
+  return {
+    ...base,
+    level: level || levelRaw.toUpperCase(),
+    score: `${score} / 100`,
+    percent: Math.min(100, Math.max(0, score)),
+    insight: reasoning || base.insight,
+    factors: factors.length > 0 ? factors : base.factors,
+  };
+}
+
+function mapS06(data: AnalysisDataDto): CanonicalDesktopMock["s06"] {
+  const base = cloneFixture().s06;
+  const series = data.score?.ten_god_series;
+  if (Array.isArray(series) && series.length > 0) {
+    return {
+      ...base,
+      gods: series.map((item, index) => {
+        const name = asString(item.label ?? item.name, `Thần ${index + 1}`);
+        const score = seriesValue(item);
+        const key = name.toLowerCase();
+        const color =
+          Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
+        const short = name.length > 8 ? `${name.slice(0, 6)}.` : name;
+        return { name, short, score: score.toFixed(1), color };
+      }),
+    };
+  }
+
+  const counts = new Map<string, number>();
+  for (const god of data.bazi?.ten_gods ?? []) {
+    const name = asString(god).trim();
+    if (!name || name === "Nhật Chủ") continue;
+    counts.set(name, (counts.get(name) ?? 0) + 1);
+  }
+  if (counts.size === 0) return base;
+
+  return {
+    ...base,
+    gods: Array.from(counts.entries()).map(([name, count]) => {
+      const key = name.toLowerCase();
+      const color =
+        Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
+      return {
+        name,
+        short: name.length > 8 ? `${name.slice(0, 6)}.` : name,
+        score: (count * 0.5).toFixed(1),
+        color,
+      };
+    }),
+  };
+}
+
+function mapS07(data: AnalysisDataDto): CanonicalDesktopMock["s07"] {
+  const base = cloneFixture().s07;
+  const list = (data.bazi?.shensha ?? []).map((s) => asString(s).trim()).filter(Boolean);
+  if (list.length === 0) return base;
+
+  const good: string[] = [];
+  const bad: string[] = [];
+  for (const name of list) {
+    const key = normKey(name);
+    if (HUNG_SHENSHA.has(key) || [...HUNG_SHENSHA].some((h) => key.includes(h))) {
+      bad.push(name);
+    } else {
+      good.push(name);
+    }
+  }
+
+  return {
+    ...base,
+    executive: {
+      line1: `Có ${list.length} Thần Sát được kích hoạt`,
+      line2: `${good.length} Cát tinh • ${bad.length} Hung tinh`,
+    },
+    good: {
+      title: `● CÁT TINH (${good.length})`,
+      items: good.length > 0 ? good : ["—"],
+    },
+    bad: {
+      title: `● HUNG TINH (${bad.length})`,
+      items: bad.length > 0 ? bad : ["—"],
+    },
+    footerSummary: {
+      line1: `Có ${good.length} Cát tinh và ${bad.length} Hung tinh.`,
+      line2: "Nên xem chi tiết để đánh giá mức độ ảnh hưởng.",
+    },
+  };
+}
+
+function mapS08(data: AnalysisDataDto): CanonicalDesktopMock["s08"] {
+  const base = cloneFixture().s08;
+  const interp = data.interpretation as Record<string, unknown> | undefined;
+  const sections = Array.isArray(interp?.sections) ? (interp.sections as Record<string, unknown>[]) : [];
+  const bodies = sections
+    .map((s) => asString(s.body ?? s.content ?? s.text).trim())
+    .filter(Boolean);
+  const titles = sections.map((s) => asString(s.title).toLowerCase());
+
+  const strengths: string[] = [];
+  const warnings: string[] = [];
+  const actions: string[] = [];
+  sections.forEach((s, i) => {
+    const title = titles[i] ?? "";
+    const body = bodies[i] ?? "";
+    const snippet = body.split(/[.\n]/)[0]?.trim();
+    if (!snippet) return;
+    if (/mạnh|ưu|strength|tốt/.test(title)) strengths.push(snippet);
+    else if (/yếu|lưu ý|risk|warning|nhược/.test(title)) warnings.push(snippet);
+    else if (/hành động|khuyến|recommend|gợi ý/.test(title)) actions.push(snippet);
+  });
+
+  return {
+    ...base,
+    executive: {
+      ...base.executive,
+      body: bodies[0] || asString(data.score?.recommendation, base.executive.body),
+    },
+    strengths: {
+      ...base.strengths,
+      items: strengths.length > 0 ? strengths.slice(0, 4) : base.strengths.items,
+    },
+    warnings: {
+      ...base.warnings,
+      items: warnings.length > 0 ? warnings.slice(0, 4) : base.warnings.items,
+    },
+    actions: {
+      ...base.actions,
+      items: actions.length > 0 ? actions.slice(0, 4) : base.actions.items,
+    },
+  };
+}
+
+function mapS09(data: AnalysisDataDto): CanonicalDesktopMock["s09"] {
+  const base = cloneFixture().s09;
+  const cal = data.calendar ?? {};
+  const cung = asString(cal.cung_phi ?? cal.menh_quai, base.quai.center);
+  const menh = asString(cal.menh_quai ?? cal.cung_phi, cung);
+  const nhom = asString(cal.nhom_trach, "");
+  const guaName = asString(cal.gua_name, menh);
+  const numberMatch = guaName.match(/\d+/) ?? menh.match(/\d+/);
+  const bullets = [
+    `Cung mệnh: ${cung || menh}`,
+    nhom ? `Nhóm trạch: ${nhom}` : base.quai.bullets[1],
+    asString(cal.group_label, base.quai.bullets[2]),
+    asString(cal.avoid_label, base.quai.bullets[3]),
+  ].filter(Boolean);
+
+  return {
+    ...base,
+    quai: {
+      center: guaName || menh || base.quai.center,
+      number: numberMatch?.[0] ?? base.quai.number,
+      bullets: bullets.length >= 2 ? bullets : base.quai.bullets,
+    },
+  };
+}
+
+function mapS11(data: AnalysisDataDto): CanonicalDesktopMock["s11"] {
+  const base = cloneFixture().s11;
+  const report = data.report as Record<string, unknown> | undefined;
+  const narrative = data.narrative as Record<string, unknown> | undefined;
+  const markdown = asString(report?.markdown ?? narrative?.markdown ?? report?.html);
+  const firstPara =
+    markdown
+      .replace(/<[^>]+>/g, " ")
+      .split(/\n+/)
+      .map((l) => l.replace(/^#+\s*/, "").trim())
+      .find((l) => l.length > 40) ?? "";
+
+  const s08 = mapS08(data);
+  return {
+    ...base,
+    executive: {
+      ...base.executive,
+      body: firstPara || s08.executive.body || base.executive.body,
+    },
+    strengths: {
+      ...base.strengths,
+      items: s08.strengths.items.slice(0, 4),
+    },
+    attention: {
+      ...base.attention,
+      items: s08.warnings.items.slice(0, 3),
+    },
+    recommendations: {
+      ...base.recommendations,
+      items: s08.actions.items.slice(0, 4),
+    },
+  };
+}
+
+/**
+ * Map full orchestrator analysis payload → Canonical Desktop ViewModel.
+ */
+export function adaptAnalysisToCanonicalDesktop(
+  data: AnalysisDataDto,
+  options: AdaptCanonicalDesktopOptions = {},
+): CanonicalDesktopViewModel {
+  const fixture = cloneFixture();
+  const request = options.request;
+
+  return {
+    ...fixture,
+    header: {
+      ...fixture.header,
+      user: {
+        ...fixture.header.user,
+        name: asString(data.customer?.full_name ?? request?.full_name, fixture.header.user.name),
+        initials: asString(data.customer?.full_name ?? request?.full_name, "NV")
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(-2)
+          .map((p) => p[0]?.toUpperCase() ?? "")
+          .join("")
+          .slice(0, 2) || fixture.header.user.initials,
+      },
+    },
+    s00: mapS00(data, request, options.requestId),
+    s01: mapS01(data),
+    s02: mapS02(data),
+    s03: mapS03(data, request),
+    s04: mapS04(data),
+    s05: mapS05(data),
+    s06: mapS06(data),
+    s07: mapS07(data),
+    s08: mapS08(data),
+    s09: mapS09(data),
+    // S10 — no bone-weight engine yet; keep fixture until engine exists.
+    s10: fixture.s10,
+    s11: mapS11(data),
+    footer: fixture.footer,
+    source: options.source ?? "api",
+    status: options.status ?? "ready",
+  };
+}
+
+/**
+ * Gate / preview ViewModels.
+ */
+export function createCanonicalDesktopGateViewModel(
+  status: CanonicalDesktopStatus,
+  message?: string,
+): CanonicalDesktopViewModel {
+  return {
+    ...cloneFixture(),
+    status,
+    statusMessage: message,
+    source: "mock",
+  };
+}
+
+/** Fixture ViewModel for tests / dashboard-preview without network. */
+export function createCanonicalDesktopMockViewModel(): CanonicalDesktopViewModel {
+  return {
+    ...cloneFixture(),
+    status: "ready",
+    source: "mock",
+  };
+}

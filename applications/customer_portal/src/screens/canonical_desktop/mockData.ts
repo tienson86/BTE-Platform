@@ -1,6 +1,6 @@
 /**
- * Static mock data for Desktop Canonical UI (TASK_UI_IMPLEMENTATION_001).
- * Matches CANONICAL_PORTAL_UI_DESKTOP_V1.png — Vietnamese labels only.
+ * Static fixture for Desktop Canonical UI (preview / tests / S10 fallback).
+ * Runtime SSOT is AnalyzeService → canonicalDesktopAdapter (POST /analyze).
  */
 
 export const CANONICAL_DESKTOP_MOCK = {
@@ -47,7 +47,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     copyright: "© 2024 BTE Platform",
   },
   s00: {
-    title: "S00 - THÔNG TIN BỐI CẢNH",
+    title: "THÔNG TIN BỐI CẢNH",
     profile: {
       label: "HỒ SƠ",
       name: "Nguyễn Văn A",
@@ -82,7 +82,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     },
   },
   s01: {
-    title: "S01 - THÔNG TIN & ĐỊNH HƯỚNG",
+    title: "THÔNG TIN ĐỊNH HƯỚNG",
     identityTitle: "THÔNG TIN BẢN MỆNH",
     dayMaster: {
       label: "Nhật chủ",
@@ -125,8 +125,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     cta: "Xem luận giải chi tiết →",
   },
   s02: {
-    title: "S02 - TỔNG QUAN & HÀNH ĐỘNG",
-    subtitle: "TỔNG QUAN LÁ SỐ",
+    title: "TỔNG QUAN LÁ SỐ",
     items: [
       { icon: "fire" as const, label: "Ngũ hành", value: "Hỏa vượng", color: "fire" },
       { icon: "yinyang" as const, label: "Âm dương", value: "Cân bằng", color: "water" },
@@ -137,7 +136,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     ],
   },
   s09: {
-    title: "S09 - CUNG PHÍ / QUÁI MỆNH & NHÓM TRẠCH",
+    title: "CUNG PHI - MỆNH QUÁI - NHÓM TRẠCH",
     quai: {
       center: "Ly Hỏa",
       number: "9",
@@ -158,7 +157,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     ],
   },
   s03: {
-    title: "S03 - TỨ TRỤ - BÁT TỰ",
+    title: "TỨ TRỤ - BÁT TỰ",
     pillars: [
       {
         title: "NĂM TRỤ",
@@ -191,7 +190,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     ],
   },
   s04: {
-    title: "S04 - CÂN BẰNG NGŨ HÀNH",
+    title: "CÂN BẰNG NGŨ HÀNH",
     rows: [
       { name: "Mộc", element: "wood" as const, pct: 22, status: "Trung bình" },
       { name: "Hỏa", element: "fire" as const, pct: 42, status: "Rất mạnh" },
@@ -202,7 +201,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     summary: "Hỏa vượng • Thủy thiếu • Cân bằng trung bình",
   },
   s05: {
-    title: "S05 - SỨC MẠNH MỆNH CỤC",
+    title: "MỆNH CỤC",
     level: "MẠNH",
     score: "82 / 100",
     percent: 82,
@@ -216,7 +215,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     cta: "Xem phân tích chi tiết →",
   },
   s10: {
-    title: "S10 - CÂN XƯƠNG ĐOÁN MỆNH",
+    title: "CÂN XƯƠNG ĐOÁN MỆNH",
     stars: 5,
     weight: "4 LƯỢNG 3 CHỈ",
     grade: "MỆNH TỐT",
@@ -238,7 +237,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     link: "Đọc luận giải đầy đủ →",
   },
   s06: {
-    title: "S06 - THẬP THẦN",
+    title: "CÁC THẬP THẦN",
     gods: [
       { name: "Chính Quan", short: "Ch.Quan", score: "0.8", color: "#1565c0" },
       { name: "Thất Sát", short: "Th.Sát", score: "0.6", color: "#6a1b9a" },
@@ -254,7 +253,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     link: "Xem chi tiết →",
   },
   s07: {
-    title: "S07 - THẦN SÁT",
+    title: "THẦN SÁT",
     executive: {
       line1: "Có 10 Thần Sát được kích hoạt",
       line2: "5 Cát tinh • 5 Hung tinh",
@@ -280,7 +279,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     link: "Xem toàn bộ →",
   },
   s08: {
-    title: "S08 - LUẬN GIẢI TỔNG HỢP",
+    title: "LUẬN GIẢI TỔNG THỂ",
     executive: {
       title: "TỔNG QUAN LUẬN GIẢI",
       body:
@@ -311,7 +310,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     link: "Đọc luận giải đầy đủ →",
   },
   s11: {
-    title: "S11 - BÁO CÁO TỔNG KẾT",
+    title: "BÁO CÁO TỔNG KẾT",
     executive: {
       title: "KẾT LUẬN TỔNG QUAN",
       body:

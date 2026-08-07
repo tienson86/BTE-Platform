@@ -1,15 +1,10 @@
 /**
  * S04 — CÂN BẰNG NGŨ HÀNH
- * Isolated rebuild from CANONICAL_PORTAL_UI_DESKTOP_V1.png
- * + knowledge/ui_master/master_sections/S04_ELEMENT_BALANCE/
- *
  * Horizontal bars only. No pie / donut / gauge.
  */
 
 import type { ReactNode } from "react";
-import { CANONICAL_DESKTOP_MOCK } from "../mockData";
-
-const data = CANONICAL_DESKTOP_MOCK.s04;
+import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 const ELEMENT_CLASS: Record<string, string> = {
   wood: "cd-s04__bar-fill--wood",
@@ -34,6 +29,7 @@ function statusModifier(status: string): string {
  * S04 Element Balance — five proportional rows + one summary line.
  */
 export function S04ElementBalance(): ReactNode {
+  const data = useCanonicalDesktop().s04;
   return (
     <section className="cd-s04" aria-labelledby="cd-s04-title">
       <div className="cd-s04__card">
