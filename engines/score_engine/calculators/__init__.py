@@ -3,6 +3,8 @@ Các Calculator của Score Engine.
 """
 
 from .wuxing_score import WuxingScoreCalculator
+from .season_score import SeasonScoreCalculator
+from .temperature_score import TemperatureScoreCalculator
 from .strength_score import StrengthScoreCalculator
 from .ten_god_score import TenGodScoreCalculator
 from .pattern_score import PatternScoreCalculator
@@ -13,6 +15,8 @@ from .final_score import FinalScoreCalculator
 
 __all__ = [
     "WuxingScoreCalculator",
+    "SeasonScoreCalculator",
+    "TemperatureScoreCalculator",
     "StrengthScoreCalculator",
     "TenGodScoreCalculator",
     "PatternScoreCalculator",

@@ -15,6 +15,8 @@ class ScoreResult:
     """
 
     wuxing_score: float = 0.0
+    season_score: float = 0.0
+    temperature_score: float = 0.0
     strength_score: float = 0.0
     ten_god_score: float = 0.0
     pattern_score: float = 0.0
@@ -38,6 +40,16 @@ class ScoreResult:
     interpretation_score: float | None = None
 
     @property
+    def five_elements_score(self) -> float:
+        """Pack 03 alias for Ngũ hành (wuxing) score."""
+        return float(self.wuxing_score or 0.0)
+
+    @property
+    def overall_score(self) -> float:
+        """Pack 03 alias for total / overall score."""
+        return float(self.total_score or 0.0)
+
+    @property
     def modules(self) -> list[str]:
         """Module names from calculator details (internal)."""
         return list(self.details.keys())
@@ -47,6 +59,9 @@ class ScoreResult:
         return {
             "success": self.success,
             "wuxing_score": self.wuxing_score,
+            "five_elements_score": self.five_elements_score,
+            "season_score": self.season_score,
+            "temperature_score": self.temperature_score,
             "strength_score": self.strength_score,
             "ten_god_score": self.ten_god_score,
             "pattern_score": self.pattern_score,
@@ -54,6 +69,7 @@ class ScoreResult:
             "shensha_score": self.shensha_score,
             "luck_score": self.luck_score,
             "total_score": self.total_score,
+            "overall_score": self.overall_score,
             "grade": self.grade,
             "confidence": self.confidence,
             "recommendation": self.recommendation,

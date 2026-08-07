@@ -14,9 +14,12 @@ from typing import Any
 
 from .result import ScoreResult
 from .loader import ScoreLoader
+from .analysis import AnalysisResult, AnalysisResultBuilder
 
 from .calculators import (
     WuxingScoreCalculator,
+    SeasonScoreCalculator,
+    TemperatureScoreCalculator,
     StrengthScoreCalculator,
     TenGodScoreCalculator,
     PatternScoreCalculator,
@@ -56,6 +59,8 @@ class ScoreEngine:
         """
         return [
             WuxingScoreCalculator(self.loader),
+            SeasonScoreCalculator(self.loader),
+            TemperatureScoreCalculator(self.loader),
             StrengthScoreCalculator(self.loader),
             TenGodScoreCalculator(self.loader),
             PatternScoreCalculator(self.loader),
@@ -103,6 +108,8 @@ class ScoreEngine:
 
         # Publish module scores into ScoreResult fields
         result.wuxing_score = module_scores.get("wuxing", 0.0)
+        result.season_score = module_scores.get("season", 0.0)
+        result.temperature_score = module_scores.get("temperature", 0.0)
         result.strength_score = module_scores.get("strength", 0.0)
         result.ten_god_score = module_scores.get("ten_gods", 0.0)
         result.pattern_score = module_scores.get("pattern", 0.0)
@@ -111,11 +118,15 @@ class ScoreEngine:
         result.luck_score = module_scores.get("luck", 0.0)
 
         # Working copy for FinalScoreCalculator only — never mutates caller RuleContext.
+        # Season / Temperature are first-class Pack 03 dimensions but are omitted from
+        # dimension_weight.csv so overall total stays backward compatible.
         enriched = dict(rule_context)
         score_section = dict(enriched.get("score") or {})
         score_section.update(
             {
                 "wuxing_score": result.wuxing_score,
+                "season_score": result.season_score,
+                "temperature_score": result.temperature_score,
                 "strength_score": result.strength_score,
                 "ten_god_score": result.ten_god_score,
                 "pattern_score": result.pattern_score,
@@ -143,9 +154,19 @@ class ScoreEngine:
         result.success = True
         return result
 
+    def analyze(self, context) -> AnalysisResult:
+        """
+        Pack 03 entry: run scoring then build AnalysisResult aggregate.
+
+        Production orchestrator continues to use ``calculate`` → ScoreResult.
+        """
+        rule_context = self._resolve_rule_context(context)
+        score_result = self.calculate(rule_context)
+        return AnalysisResultBuilder().build(score_result, rule_context)
+
     # Compatibility alias requested by platform docs
     def run(self, context):
-        """Alias of ``calculate`` for callers expecting ``run()``."""
+        """Alias of ``calculate`` for callers expecting ``run()`` → ScoreResult."""
         return self.calculate(context)
 
     def append_score_to_rule_context(
@@ -164,6 +185,7 @@ class ScoreEngine:
         section.update(
             {
                 "total_score": float(result.total_score or 0.0),
+                "overall_score": float(result.overall_score or 0.0),
                 "strength_score": float(result.strength_score or 0.0),
                 "ten_god_score": float(result.ten_god_score or 0.0),
                 "pattern_score": float(result.pattern_score or 0.0),
@@ -171,6 +193,9 @@ class ScoreEngine:
                 "shensha_score": float(result.shensha_score or 0.0),
                 "luck_score": float(result.luck_score or 0.0),
                 "wuxing_score": float(result.wuxing_score or 0.0),
+                "five_elements_score": float(result.five_elements_score or 0.0),
+                "season_score": float(result.season_score or 0.0),
+                "temperature_score": float(result.temperature_score or 0.0),
                 "grade": result.grade or "",
                 "confidence": result.confidence or "",
                 "recommendation": result.recommendation or "",
