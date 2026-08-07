@@ -1,6 +1,6 @@
 /**
  * ResultPage body — Zone architecture only (PACK_06 / PACK_07).
- * No direct card rendering. Sprint A: Phases 01–04.
+ * No direct card rendering. Architecture frozen (Sprint A).
  */
 
 import type { ReactNode } from "react";
@@ -16,7 +16,7 @@ import {
 
 /**
  * Official Result Page composition — Zones → Rows → Grid → Cards.
- * Sprint A architecture frozen; Sprint B fills LP-005/006/007 content.
+ * Sprint A architecture frozen; Sprint B content; Sprint C quality.
  */
 export function ResultPageBody(): ReactNode {
   return (
@@ -25,7 +25,7 @@ export function ResultPageBody(): ReactNode {
       data-architecture="zone-row-grid-card"
       data-blueprint="pack07"
       data-presentation="pack04"
-      data-sprint="B"
+      data-sprint="D"
     >
       <ContextZone />
       <SummaryZone />

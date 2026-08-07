@@ -1,9 +1,11 @@
 /**
- * Result screen barrel — Sprint A architecture.
+ * Result screen barrel — Sprint A architecture (frozen) + Sprint C quality.
  */
 
 export { ResultPageBody } from "./ResultPageBody";
 export { ResultPageProvider, useResultPageViewModel } from "./ResultPageContext";
+export { ResultPageStatusGate } from "./ResultPageStatusGate";
+export type { ResultPageStatusGateProps } from "./ResultPageStatusGate";
 export { adaptResultPageViewModel } from "./adapters/resultPresentationAdapter";
 export type { ResultPageViewModel } from "./viewModels";
 export * from "./zones";
@@ -15,7 +17,6 @@ export {
   RECOMMENDATION_PRIORITY_ORDER,
   bindPlaceholder,
   formatPreviewField,
-  groupItems,
   priorityFromIndex,
   sortByRecommendationPriority,
   truncatePrimaryList,

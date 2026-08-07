@@ -1,5 +1,5 @@
 /**
- * Sprint A screenshot harness — mounts PortalPage with mock preview.
+ * Result Page screenshot harness — mounts PortalPage with mock preview.
  */
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

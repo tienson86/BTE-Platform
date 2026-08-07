@@ -1,5 +1,5 @@
 /**
- * Vite config for Sprint A screenshot harness only.
+ * Vite config for Result Page screenshot harness only.
  */
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";

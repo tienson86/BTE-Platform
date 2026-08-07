@@ -25,7 +25,7 @@ export function RecommendationZone(): ReactNode {
       heightClass="L"
       pattern="LP-005"
       aria-label="Recommendation Zone"
-      data-sprint="B"
+      data-sprint="D"
     >
       <ResultGrid>
         <ResultGridCell span={12}>
@@ -49,7 +49,7 @@ export function InterpretationZone(): ReactNode {
       heightClass="AUTO"
       pattern="LP-006"
       aria-label="Interpretation Zone"
-      data-sprint="B"
+      data-sprint="D"
     >
       <ResultGrid>
         <ResultGridCell span={12}>
@@ -73,7 +73,7 @@ export function KnowledgeZone(): ReactNode {
       heightClass="AUTO"
       pattern="LP-007"
       aria-label="Knowledge Zone"
-      data-sprint="B"
+      data-sprint="D"
     >
       <ResultGrid>
         <ResultGridCell span={12}>

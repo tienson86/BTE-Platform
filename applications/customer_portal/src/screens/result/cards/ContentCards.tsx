@@ -1,8 +1,8 @@
 /**
- * LP-005 / LP-006 / LP-007 content cards — Sprint B.
+ * LP-005 / LP-006 / LP-007 content cards — Sprint B content, Sprint C a11y/perf.
  */
 
-import { useState, type ReactNode } from "react";
+import { memo, useId, useState, type ReactNode } from "react";
 import { PresentationText } from "../../../components/shared/PresentationText";
 import type {
   InterpretationBlockViewModel,
@@ -33,6 +33,7 @@ function RecommendationItem({
   item: RecommendationItemViewModel;
 }): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const detailId = useId();
 
   return (
     <article
@@ -62,18 +63,22 @@ function RecommendationItem({
         as="p"
       />
       {expanded ? (
-        <PresentationText
-          typeRole="body"
-          preview={item.detail}
-          className="rp-rec-item__detail"
-          as="p"
-        />
+        <div id={detailId}>
+          <PresentationText
+            typeRole="body"
+            preview={item.detail}
+            className="rp-rec-item__detail"
+            as="p"
+          />
+        </div>
       ) : null}
       {item.hasMore ? (
         <button
           type="button"
           className="rp-expand-btn"
           aria-expanded={expanded}
+          aria-controls={detailId}
+          aria-label={`${expanded ? "Thu gọn" : "Xem thêm"}: ${item.action.text}`}
           onClick={() => setExpanded((value) => !value)}
         >
           {expanded ? "Thu gọn" : "Xem thêm"}
@@ -86,7 +91,7 @@ function RecommendationItem({
 /**
  * LP-005 Recommendation card — priority list, max 5 primary.
  */
-export function RecommendationCard({
+export const RecommendationCard = memo(function RecommendationCard({
   model,
 }: {
   model: RecommendationZoneViewModel;
@@ -107,21 +112,27 @@ export function RecommendationCard({
       >
         {model.title}
       </PresentationText>
-      <div className="rp-card__body rp-rec-list">
+      <div className="rp-card__body rp-rec-list" role="list">
         {model.items.map((item) => (
-          <RecommendationItem key={item.id} item={item} />
+          <div key={item.id} role="listitem">
+            <RecommendationItem item={item} />
+          </div>
         ))}
       </div>
       {model.hasMore ? (
         <div className="rp-card__footer">
-          <button type="button" className="rp-card__cta">
+          <button
+            type="button"
+            className="rp-card__cta"
+            aria-label={model.viewAllLabel}
+          >
             {model.viewAllLabel}
           </button>
         </div>
       ) : null}
     </article>
   );
-}
+});
 
 function InterpretationBlock({
   block,
@@ -133,6 +144,7 @@ function InterpretationBlock({
   collapseLabel: string;
 }): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const detailId = useId();
 
   return (
     <article
@@ -151,12 +163,19 @@ function InterpretationBlock({
       </PresentationText>
 
       <div className="rp-interp-step" data-step="observation">
-        <span className="rp-interp-step__label">Observation</span>
-        <PresentationText typeRole="summary" preview={block.observation} as="p" />
+        <span className="rp-interp-step__label" id={`${detailId}-obs`}>
+          Observation
+        </span>
+        <PresentationText
+          typeRole="summary"
+          preview={block.observation}
+          as="p"
+          aria-labelledby={`${detailId}-obs`}
+        />
       </div>
 
       {expanded ? (
-        <>
+        <div id={detailId}>
           <div className="rp-interp-step" data-step="explanation">
             <span className="rp-interp-step__label">Explanation</span>
             <PresentationText typeRole="body" preview={block.explanation} as="p" />
@@ -169,7 +188,7 @@ function InterpretationBlock({
             <span className="rp-interp-step__label">Suggestion</span>
             <PresentationText typeRole="body" preview={block.suggestion} as="p" />
           </div>
-        </>
+        </div>
       ) : (
         <div className="rp-interp-step rp-interp-step--preview" data-step="explanation-preview">
           <span className="rp-interp-step__label">Explanation</span>
@@ -181,6 +200,8 @@ function InterpretationBlock({
         type="button"
         className="rp-expand-btn"
         aria-expanded={expanded}
+        aria-controls={detailId}
+        aria-label={`${expanded ? collapseLabel : expandLabel}: ${block.title}`}
         onClick={() => setExpanded((value) => !value)}
       >
         {expanded ? collapseLabel : expandLabel}
@@ -192,7 +213,7 @@ function InterpretationBlock({
 /**
  * LP-006 Interpretation card — preview / expand / collapse reading layout.
  */
-export function InterpretationCard({
+export const InterpretationCard = memo(function InterpretationCard({
   model,
 }: {
   model: InterpretationZoneViewModel;
@@ -225,7 +246,7 @@ export function InterpretationCard({
       </div>
     </article>
   );
-}
+});
 
 function KnowledgeSection({
   section,
@@ -233,6 +254,7 @@ function KnowledgeSection({
   section: KnowledgeSectionViewModel;
 }): ReactNode {
   const [open, setOpen] = useState(section.defaultOpen);
+  const panelId = useId();
 
   return (
     <div
@@ -244,6 +266,7 @@ function KnowledgeSection({
         type="button"
         className="rp-know-section__trigger"
         aria-expanded={open}
+        aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
       >
         <PresentationText typeRole="subtitle" clamp="title" as="span">
@@ -254,7 +277,12 @@ function KnowledgeSection({
         </span>
       </button>
       {open ? (
-        <div className="rp-know-section__panel">
+        <div
+          id={panelId}
+          className="rp-know-section__panel"
+          role="region"
+          aria-label={section.title}
+        >
           <PresentationText typeRole="summary" preview={section.definition} as="p" />
           <PresentationText
             typeRole="caption"
@@ -272,6 +300,7 @@ function KnowledgeSection({
           preview={section.definition}
           className="rp-know-section__teaser"
           as="p"
+          id={panelId}
         />
       )}
     </div>
@@ -281,7 +310,7 @@ function KnowledgeSection({
 /**
  * LP-007 Knowledge card — terminology / references / theory / appendix accordion.
  */
-export function KnowledgeCard({
+export const KnowledgeCard = memo(function KnowledgeCard({
   model,
 }: {
   model: KnowledgeZoneViewModel;
@@ -309,4 +338,4 @@ export function KnowledgeCard({
       </div>
     </article>
   );
-}
+});

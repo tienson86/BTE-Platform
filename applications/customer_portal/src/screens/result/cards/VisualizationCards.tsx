@@ -7,14 +7,6 @@ import { PresentationText } from "../../../components/shared/PresentationText";
 import type { LuckTimelineViewModel, RadarChartViewModel } from "../viewModels";
 import { ResultCardShell } from "./ResultCardShell";
 
-const ELEMENT_COLOR: Record<string, string> = {
-  wood: "#2f6b3a",
-  fire: "#b42318",
-  earth: "#b8860b",
-  metal: "#6b7280",
-  water: "#1d4f91",
-};
-
 function polarPoint(cx: number, cy: number, radius: number, angleDeg: number): string {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
   return `${cx + radius * Math.cos(rad)},${cy + radius * Math.sin(rad)}`;
@@ -22,6 +14,7 @@ function polarPoint(cx: number, cy: number, radius: number, angleDeg: number): s
 
 /**
  * Fixed-size radar from five-element percentages (presentation only).
+ * Element colors come from CSS design tokens via data-element.
  */
 function FiveElementRadar({
   axes,
@@ -44,6 +37,10 @@ function FiveElementRadar({
     .map((axis, i) => polarPoint(cx, cy, maxR * (axis.pct / 100), i * step))
     .join(" ");
 
+  const axisSummary = axes
+    .map((axis) => `${axis.name} ${axis.pct}%`)
+    .join(", ");
+
   return (
     <svg
       className="rp-radar__svg"
@@ -51,7 +48,7 @@ function FiveElementRadar({
       width={size}
       height={size}
       role="img"
-      aria-label="Radar ngũ hành"
+      aria-label={`Radar ngũ hành: ${axisSummary}`}
     >
       {rings.map((points) => (
         <polygon
@@ -80,7 +77,7 @@ function FiveElementRadar({
             x={x}
             y={y}
             className="rp-radar__label"
-            fill={ELEMENT_COLOR[axis.element] ?? "#1c1c1c"}
+            data-element={axis.element}
             textAnchor="middle"
             dominantBaseline="middle"
           >

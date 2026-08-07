@@ -1,5 +1,6 @@
 /**
- * Capture Sprint A LP screenshots (expects vite on :5179).
+ * Capture Result Page LP screenshots (expects vite on :5179).
+ * Viewports: Desktop 1440 · Laptop 1280 · Tablet 1024 · Tablet Portrait 768 · Mobile 390.
  */
 
 import { chromium } from "playwright";
@@ -10,13 +11,15 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(
   __dirname,
-  "../../../knowledge/ui_reference/refactor/sprint_b_screenshots",
+  "../../../knowledge/ui_reference/refactor/sprint_c_screenshots",
 );
-const url = "http://127.0.0.1:5179/sprint-a-screenshots.html";
+const url = "http://127.0.0.1:5179/result-page-screenshots.html";
 
 const VIEWPORTS = [
   { name: "desktop", width: 1440, height: 900 },
+  { name: "laptop", width: 1280, height: 800 },
   { name: "tablet", width: 1024, height: 768 },
+  { name: "tablet_portrait", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
 ];
 
@@ -43,6 +46,17 @@ try {
     await page.goto(url, { waitUntil: "networkidle", timeout: 90000 });
     await page.waitForSelector('[data-pattern="LP-001"]', { timeout: 60000 });
     await page.waitForTimeout(400);
+
+    const overflowX = await page.evaluate(() => {
+      const el = document.documentElement;
+      return el.scrollWidth > el.clientWidth;
+    });
+    manifest.push({
+      viewport: vp.name,
+      pattern: "OVERFLOW_X",
+      horizontalScroll: overflowX,
+      size: `${vp.width}x${vp.height}`,
+    });
 
     const fullPath = path.join(outDir, `full_${vp.name}.png`);
     await page.screenshot({ path: fullPath, fullPage: true });

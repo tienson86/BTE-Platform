@@ -1,10 +1,10 @@
 /**
  * PortalPage / ResultPage — BTE Result Page (Design System V1.0).
  *
- * Architecture (PACK_06 / PACK_07):
+ * Architecture (PACK_06 / PACK_07) — FROZEN:
  *   ResultPage → Zones → Rows → Grid → Cards → ViewModels → Presentation Adapter
  *
- * Sprint A: Phases 01–04 (Context, Summary LP-001, Analysis LP-003, Visualization LP-004).
+ * Sprint C: quality, responsive, accessibility, performance (Phases 09–13).
  * Data: AnalyzeService → canonicalDesktopAdapter → resultPresentationAdapter.
  */
 
@@ -17,6 +17,7 @@ import { PortalFooter, PortalHeader, PortalSidebar } from "./shell/PortalChrome"
 import {
   ResultPageBody,
   ResultPageProvider,
+  ResultPageStatusGate,
   adaptResultPageViewModel,
 } from "../result";
 import "../../styles/canonical-desktop.css";
@@ -69,12 +70,19 @@ export function PortalPage({
           data-presentation="pack04"
           data-mode={mode}
           data-status={viewModel.status}
-          data-sprint="B"
+          data-sprint="D"
         >
           <PortalSidebar />
           <PortalHeader />
-          <main className="cd-content" data-page="result">
-            <ResultPageBody />
+          <main className="cd-content" data-page="result" id="rp-main">
+            {viewModel.status !== "ready" ? (
+              <ResultPageStatusGate
+                status={viewModel.status}
+                message={viewModel.statusMessage}
+              />
+            ) : (
+              <ResultPageBody />
+            )}
           </main>
           <PortalFooter />
         </div>
