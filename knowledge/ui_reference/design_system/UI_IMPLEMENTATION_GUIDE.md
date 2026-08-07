@@ -588,7 +588,58 @@ Only compliant implementations may be merged.
 
 ---
 
-# 28. Future Evolution
+# 28. Result Page UI V1.0 (Frozen)
+
+Official Result Page implementation:
+
+```
+applications/customer_portal/src/screens/result/
+```
+
+Architecture (FROZEN)
+
+```
+ResultPage → Zones → Rows → Grid → Cards → ViewModels → Presentation Adapter
+```
+
+Zone reading order (FROZEN)
+
+```
+Context → Summary → Analysis → Visualization → Recommendation → Interpretation → Knowledge
+```
+
+Layout Patterns
+
+| Pattern | Zone |
+|---------|------|
+| LP-001 | Summary |
+| LP-003 | Analysis |
+| LP-004 | Visualization |
+| LP-005 | Recommendation |
+| LP-006 | Interpretation |
+| LP-007 | Knowledge |
+
+Baselines
+
+| Layer | Sprint |
+|-------|--------|
+| Architecture | A |
+| Presentation | B |
+| Quality | C |
+| Release / Freeze | D |
+
+Mandatory references
+
+- PACK_01 … PACK_07
+- RESULT_PAGE_LAYOUT_GALLERY.md
+- UI_V1_FREEZE_CHECKLIST.md
+- FINAL_UI_V1_RELEASE_REPORT.md
+
+After UI V1.0 freeze, do not change zone order, row heights, grid contracts, or layout patterns without a new major Design System version.
+
+---
+
+# 29. Future Evolution
 
 The implementation guide evolves together with the Design System.
 

@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(
   __dirname,
-  "../../../knowledge/ui_reference/refactor/sprint_c_screenshots",
+  "../../../knowledge/ui_reference/refactor/ui_v1_release_screenshots",
 );
 const url = "http://127.0.0.1:5179/result-page-screenshots.html";
 
