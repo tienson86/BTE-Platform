@@ -1,0 +1,83 @@
+---
+description: BTE Foundation V1.0 — mandatory reading order for all UI work
+alwaysApply: true
+---
+
+# BTE Foundation V1.0 Rules
+
+Foundation V1.0 is frozen.
+
+Do not edit Foundation documents to make implementation easier.
+
+---
+
+## 1. Read Before Coding (mandatory order)
+
+Before any UI or presentation change, read and comply with:
+
+1. `knowledge/product/BTE_PRODUCT_MANIFESTO.md`
+2. `knowledge/ui_reference/brand/BTE_EXPERIENCE_PRINCIPLES.md`
+3. `knowledge/ui_reference/brand/BTE_BRAND_LANGUAGE.md`
+4. `knowledge/ui_reference/visual/00_VISUAL_LANGUAGE_INDEX.md` (+ System, Gallery, Transform Guide)
+5. `knowledge/ui_reference/design_system/00_DESIGN_SYSTEM_INDEX.md` + relevant PACK_01–07
+6. `knowledge/ui_reference/design_system/UI_IMPLEMENTATION_GUIDE.md`
+7. `knowledge/ui_reference/foundation/FOUNDATION_DEVELOPER_GUIDE.md`
+
+For Result / analysis UI also read PACK_06, PACK_07, Layout Gallery.
+
+---
+
+## 2. Dependency Chain
+
+```
+Product Manifesto
+↓
+Experience Principles
+↓
+Brand Language
+↓
+Visual Language
+↓
+Design System
+↓
+Code
+```
+
+Higher layers win conflicts.
+
+---
+
+## 3. Must Follow
+
+- Design System structure (Zones → Rows → Grid → Cards for analysis)
+- Visual Language hierarchy and transform rules
+- Brand Language (consultant, not calculator)
+- Experience Principles (trust → understanding → action)
+- Accessibility (PACK_05)
+- Existing Cursor architecture / testing / engine / database rules
+
+---
+
+## 4. Must Not
+
+- Redesign Result Page architecture or Layout Patterns
+- Invent spacing, typography scales, colors, shadows, or button systems
+- Modify frozen Foundation or Design System pack content
+- Mix Engine models / business rules into UI
+- Create marketing or consumer-widget UIs for analytical content
+
+---
+
+## 5. Compliance Gate
+
+Before finishing UI work, apply:
+
+`knowledge/ui_reference/foundation/FOUNDATION_COMPLIANCE_CHECKLIST.md`
+
+Adoption status and migration order:
+
+`knowledge/ui_reference/foundation/FOUNDATION_ADOPTION_PLAN.md`
+
+---
+
+END

@@ -4,6 +4,31 @@ Version: 3.0.0
 Work Package: WP-0001 (+ WP-0001A Hardening)  
 Status: Architecture Stabilization
 
+This document describes the **code** presentation foundation for Commercial UI V3
+(tokens, folders, providers).
+
+It does **not** replace platform Foundation V1.0.
+
+## Platform Foundation V1.0 (read first)
+
+```
+Product Manifesto
+↓
+Experience Principles
+↓
+Brand Language
+↓
+Visual Language
+↓
+Design System (PACK_01–07)
+↓
+UI Implementation Guide
+```
+
+Entry: `knowledge/ui_reference/foundation/FOUNDATION_INDEX.md`  
+Developer guide: `knowledge/ui_reference/foundation/FOUNDATION_DEVELOPER_GUIDE.md`  
+Compliance: `knowledge/ui_reference/foundation/FOUNDATION_COMPLIANCE_CHECKLIST.md`
+
 This document describes the presentation foundation for Commercial UI V3.
 It defines folder ownership only. It does not define business screens,
 business components, or analysis behaviour.

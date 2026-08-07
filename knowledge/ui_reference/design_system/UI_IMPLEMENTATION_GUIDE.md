@@ -1,17 +1,51 @@
 # UI_IMPLEMENTATION_GUIDE.md
 
-Version: 1.0
+Version: 1.1
 Status: OFFICIAL
 Owner: BTE UI Architecture
 
-Depends on
+Depends on (Foundation V1.0 chain — read in order)
 
+- knowledge/product/BTE_PRODUCT_MANIFESTO.md
+- knowledge/ui_reference/brand/BTE_EXPERIENCE_PRINCIPLES.md
+- knowledge/ui_reference/brand/BTE_BRAND_LANGUAGE.md
+- knowledge/ui_reference/visual/00_VISUAL_LANGUAGE_INDEX.md
+- knowledge/ui_reference/visual/VISUAL_LANGUAGE_SYSTEM.md
 - 00_DESIGN_SYSTEM_INDEX.md
 - PACK_01_DESIGN_PRINCIPLES.md
 - PACK_02_LAYOUT_SYSTEM.md
 - PACK_03_COMPONENT_STANDARD.md
 - PACK_04_UI_PRESENTATION_STANDARD.md
 - PACK_05_ACCESSIBILITY.md
+- knowledge/ui_reference/foundation/FOUNDATION_DEVELOPER_GUIDE.md
+
+---
+
+# 0. Foundation Dependency Chain
+
+Every implementation must respect Foundation V1.0:
+
+```
+Product Manifesto
+↓
+Experience Principles
+↓
+Brand Language
+↓
+Visual Language
+↓
+Design System (PACK_01 → PACK_07)
+↓
+This Implementation Guide
+↓
+Code
+```
+
+Foundation documents are frozen. Do not edit them to unblock coding.
+
+Adoption entry: `knowledge/ui_reference/foundation/FOUNDATION_INDEX.md`
+
+Compliance gate: `knowledge/ui_reference/foundation/FOUNDATION_COMPLIANCE_CHECKLIST.md`
 
 ---
 

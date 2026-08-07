@@ -10,6 +10,22 @@ Owner: BTE UI Architecture
 
 The BTE UI Design System is the official design specification for the entire BTE Platform.
 
+The Design System sits **below** Foundation V1.0 Product, Experience, Brand, and Visual Language layers.
+
+```
+Product Manifesto
+↓
+Experience Principles
+↓
+Brand Language
+↓
+Visual Language
+↓
+Design System  ← this index
+```
+
+Foundation entry: `knowledge/ui_reference/foundation/FOUNDATION_INDEX.md`
+
 It defines the principles, architecture, components, presentation rules, and implementation standards that every application within the platform must follow.
 
 This Design System serves as the Single Source of Truth (SSOT) for all user interface development.
