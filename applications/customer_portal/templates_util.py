@@ -9,6 +9,15 @@ from applications.customer_portal.pages import LOGIN_ITEM, NAV_ITEMS
 TEMPLATES_DIR = PORTAL_ROOT / "templates"
 
 
+def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, str]) -> str:
+    """Replace shared template tokens."""
+    html = html.replace("{{LANG}}", locale)
+    html = html.replace("{{I18N_JSON}}", dump_catalog_json(locale))
+    html = html.replace("{{I18N_LOCALE}}", locale)
+    html = html.replace("{{DOC_TITLE}}", t(catalog, "brand.title") or settings.title)
+    return html
+
+
 def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE) -> str:
     """Compose layout + page body with navigation (labels from i18n catalog)."""
     catalog = load_catalog(locale)
@@ -32,8 +41,15 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
     html = base.replace("{{NAV}}", "\n".join(nav_html))
     html = html.replace("{{CONTENT}}", body)
     html = html.replace("{{ACTIVE}}", active)
-    html = html.replace("{{LANG}}", locale)
-    html = html.replace("{{I18N_JSON}}", dump_catalog_json(locale))
-    html = html.replace("{{I18N_LOCALE}}", locale)
-    html = html.replace("{{DOC_TITLE}}", t(catalog, "brand.title") or settings.title)
-    return html
+    return _apply_common_tokens(html, locale=locale, catalog=catalog)
+
+
+def render_desktop_page(
+    template_name: str = "result_desktop.html",
+    *,
+    locale: str = DEFAULT_LOCALE,
+) -> str:
+    """Render full-bleed Canonical Desktop V2 host (no legacy app-shell)."""
+    catalog = load_catalog(locale)
+    html = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    return _apply_common_tokens(html, locale=locale, catalog=catalog)

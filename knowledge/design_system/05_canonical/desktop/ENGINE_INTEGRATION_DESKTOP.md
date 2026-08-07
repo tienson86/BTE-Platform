@@ -10,6 +10,9 @@
 
 Portal Canonical Desktop consumes real Orchestrator output (`POST /analyze`) instead of static mock for S00–S11.
 
+**Go-live:** Desktop V2 is the default `/result` UI.
+See `DESKTOP_V2_GO_LIVE_REPORT.md`.
+
 ---
 
 ## Architecture
@@ -76,11 +79,11 @@ With live API (`VITE_DATA_SOURCE=api`) → `data-mode="engine-live"`.
 
 ## Remaining integration work
 
-1. Route host: pass birth `request` from case/URL into `PortalPage`.
+1. ~~Route host: pass birth `request` from case/URL into `PortalPage`.~~ **Done** — ResultStore → `resultApp` → PortalPage.
 2. Improve Interpretation → S08/S11 structured lists (section taxonomy).
 3. Bone-weight engine for S10.
 4. Richer Feng Shui bullets from full `GuaResult` when exposed on calendar payload.
-5. Remove fixture fallback from production route once live path is mandatory.
+5. Remove fixture fallback from production route once live path is mandatory (optional; `?preview=1` remains for demos).
 
 ---
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{DOC_TITLE}} — Kết quả</title>
+  <link rel="stylesheet" href="/static/dist/result.css" />
+  <script>
+    window.__BTE_I18N__ = {{I18N_JSON}};
+    window.__BTE_I18N_LOCALE__ = "{{I18N_LOCALE}}";
+  </script>
+  <script src="/static/js/i18n.js"></script>
+  <script src="/static/js/result_store.js"></script>
+  <script src="/static/js/api.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: #f2f1ef;
+    }
+    #canonical-desktop-root {
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body data-result-ui="canonical-desktop-v2">
+  <div id="canonical-desktop-root" data-mount="PortalPage"></div>
+  <script type="module" src="/static/dist/result.js"></script>
+</body>
+</html>

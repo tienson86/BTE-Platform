@@ -20,7 +20,7 @@ from fastapi.staticfiles import StaticFiles
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.pages import LOGIN_ITEM, NAV_ITEMS
-from applications.customer_portal.templates_util import render_page
+from applications.customer_portal.templates_util import render_desktop_page, render_page
 
 HOP_BY_HOP = {
     "connection",
@@ -73,9 +73,11 @@ def create_app() -> FastAPI:
         return page("analyze", "analyze.html")
 
     @app.get("/result", response_class=HTMLResponse)
-    def result_page() -> HTMLResponse:
-        """Result page."""
-        return page("result", "result.html")
+    def result_page(request: Request) -> HTMLResponse:
+        """Result page — Canonical Desktop V2 (production). Legacy via ?legacy=1."""
+        if request.query_params.get("legacy") == "1":
+            return page("result", "result_legacy.html")
+        return HTMLResponse(render_desktop_page("result_desktop.html"))
 
     @app.get("/reports", response_class=HTMLResponse)
     def reports_page() -> HTMLResponse:

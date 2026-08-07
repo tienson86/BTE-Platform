@@ -2,4 +2,4 @@
 
 PAGE_KEY = "result"
 ROUTE = "/result"
-TEMPLATE = "result.html"
+TEMPLATE = "result_desktop.html"
