@@ -15,6 +15,14 @@ Pack 03 architecture skeleton lives in sibling packages
 (``api/``, ``pipeline/``, ``contracts/``, ``interpreters/``, …).
 See ``ARCHITECTURE_README.md``. Legacy public exports below are unchanged.
 
+Pack 04 narrative path (AnalysisResult → NarrativeInterpretationResult):
+
+from engines.interpretation_engine import InterpretationEngine
+from engines.interpretation_engine.pack04 import NarrativeInterpretationResult
+
+engine = InterpretationEngine()
+result = engine.interpret_from_analysis(analysis_result)
+
 Sử dụng (legacy):
 
 from engines.interpretation_engine import InterpretationEngine
@@ -79,6 +87,29 @@ from .formatter import (
 
 
 # =====================================================
+# PACK 04 (narrative) — lazy exports
+# =====================================================
+
+
+def __getattr__(name: str):
+    """Lazy Pack 04 exports (avoid Score Engine import at package init)."""
+    if name == "EngineResult":
+        from .pack04 import EngineResult
+
+        return EngineResult
+    if name == "NarrativeInterpretationResult":
+        from .pack04 import NarrativeInterpretationResult
+
+        return NarrativeInterpretationResult
+    if name == "Pack04Pipeline":
+        from .pack04 import Pack04Pipeline
+
+        return Pack04Pipeline
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+
+# =====================================================
 # PACKAGE VERSION
 # =====================================================
 
@@ -125,6 +156,16 @@ __all__ = [
 
     "Formatter",
 
-    "format_result"
+    "format_result",
+
+
+
+    # Pack 04
+
+    "EngineResult",
+
+    "NarrativeInterpretationResult",
+
+    "Pack04Pipeline",
 
 ]

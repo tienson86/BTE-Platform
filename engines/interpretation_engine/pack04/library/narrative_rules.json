@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "rules": [
+    {
+      "rule_id": "NR_OV_ALWAYS",
+      "section": "overview",
+      "sentence_id": "SEN_OV_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_STR_STRONG",
+      "section": "strength",
+      "sentence_id": "SEN_STR_STRONG",
+      "priority": 100,
+      "when": {
+        "op": "in",
+        "field": "strength.value",
+        "values": ["Strong", "Follow Strong"]
+      }
+    },
+    {
+      "rule_id": "NR_STR_BALANCED",
+      "section": "strength",
+      "sentence_id": "SEN_STR_BALANCED",
+      "priority": 90,
+      "when": {
+        "op": "eq",
+        "field": "strength.value",
+        "value": "Balanced"
+      }
+    },
+    {
+      "rule_id": "NR_STR_WEAK",
+      "section": "strength",
+      "sentence_id": "SEN_STR_WEAK",
+      "priority": 90,
+      "when": {
+        "op": "in",
+        "field": "strength.value",
+        "values": ["Weak", "Follow Weak"]
+      }
+    },
+    {
+      "rule_id": "NR_STR_FALLBACK",
+      "section": "strength",
+      "sentence_id": "SEN_STR_BALANCED",
+      "priority": 10,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_PAT_ALWAYS",
+      "section": "pattern",
+      "sentence_id": "SEN_PAT_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_UG_ALWAYS",
+      "section": "useful_god",
+      "sentence_id": "SEN_UG_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_TG_ALWAYS",
+      "section": "ten_gods",
+      "sentence_id": "SEN_TG_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_FE_ALWAYS",
+      "section": "five_elements",
+      "sentence_id": "SEN_FE_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_SEASON_ALWAYS",
+      "section": "season",
+      "sentence_id": "SEN_SEASON_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_TEMP_ALWAYS",
+      "section": "temperature",
+      "sentence_id": "SEN_TEMP_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    },
+    {
+      "rule_id": "NR_SUM_ALWAYS",
+      "section": "summary",
+      "sentence_id": "SEN_SUM_01",
+      "priority": 100,
+      "when": { "op": "always" }
+    }
+  ]
+}

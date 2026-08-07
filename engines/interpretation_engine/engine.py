@@ -65,8 +65,8 @@ class InterpretationEngine:
     """
     Active WP5 pipeline entry point.
 
-    Sole producer of InterpretationResult for the production pipeline.
-    Consumes shared RuleContext (read-only).
+    Production: ``run(RuleContext)`` → legacy ``InterpretationResult``.
+    Pack 04: ``interpret_from_analysis(AnalysisResult)`` → narrative aggregate.
     """
 
     def __init__(self, rule_path: Optional[str] = None) -> None:
@@ -87,11 +87,21 @@ class InterpretationEngine:
         self.generator = SentenceGenerator()
         self.formatter = Formatter()
         self._last_priority_resolution: Dict[str, Any] = {}
+        self._pack04_pipeline = None
 
     @staticmethod
     def is_rule_context(context: Any) -> bool:
         """Return True when input is a production RuleContext dict."""
         return isinstance(context, dict) and "bazi" in context and "wuxing" in context
+
+    @staticmethod
+    def is_analysis_result(value: Any) -> bool:
+        """Return True when input is Score Engine Pack 03 AnalysisResult."""
+        try:
+            from engines.score_engine.analysis import AnalysisResult
+        except Exception:
+            return False
+        return isinstance(value, AnalysisResult)
 
     def calculate(self, *args: Any, **kwargs: Any):
         """Compatibility entry point for the platform pipeline (stub report)."""
@@ -101,9 +111,28 @@ class InterpretationEngine:
 
     def interpret(self, context: Any, rules: Any = None):
         """Compatibility wrapper — prefers run(RuleContext) when dict-like."""
+        if self.is_analysis_result(context):
+            return self.interpret_from_analysis(context)
         if isinstance(context, dict) and ("bazi" in context or "wuxing" in context):
             return self.run(context)
         return self.calculate(context, rules)
+
+    def interpret_from_analysis(self, analysis_result: Any):
+        """
+        Pack 04 public entry: AnalysisResult → Result<NarrativeInterpretationResult>.
+
+        Does not mutate AnalysisResult. Does not alter production RuleContext path.
+        """
+        pipeline = self._get_pack04_pipeline()
+        return pipeline.run(analysis_result)
+
+    def _get_pack04_pipeline(self):
+        """Lazy-load Pack 04 pipeline (keeps WP5 init light)."""
+        if self._pack04_pipeline is None:
+            from .pack04 import Pack04Pipeline
+
+            self._pack04_pipeline = Pack04Pipeline()
+        return self._pack04_pipeline
 
     def to_markdown(self, report: Any) -> str:
         """Compatibility markdown export."""
