@@ -37,6 +37,51 @@ Mục tiêu:
 | 0.2 | Sprint 01 | Archived | Dashboard + BaZi Result |
 | 0.3 | UI Review 01 | Archived | Sau Wave 3 |
 | 1.0 | Canonical UI | Active | Giao diện chính thức của BTE V1 |
+| 1.1 | 2026-08-07 | Active | PACK_04 UI Presentation Standard |
+
+---
+
+# UI-PACK04
+
+## Date
+
+2026-08-07
+
+## Status
+
+IMPLEMENTED
+
+## Type
+
+Presentation Standard
+
+## Title
+
+PACK_04 UI Presentation Standard
+
+## Description
+
+Áp dụng chuẩn presentation cho Result page:
+
+- Fixed card height theo card type
+- Line-clamp cho title / summary / description
+- Presentation Adapter + `hasMore`
+- Equal-height independent card grids
+- Overflow: hidden | line-clamp | internal-scroll
+- Spacing 8pt + typography scale chuẩn hóa
+
+## Spec
+
+`knowledge/ui_reference/design_system/PACK_04_UI_PRESENTATION_STANDARD.md`
+
+## Code
+
+- `src/presentation/*`
+- `src/components/shared/PresentationCard.tsx`
+- `src/components/shared/PresentationText.tsx`
+- `src/components/shared/PresentationGrid.tsx`
+- `src/styles/presentation.css`
+- `src/screens/canonical_desktop/PortalPage.tsx`
 
 ---
 

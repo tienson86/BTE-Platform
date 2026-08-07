@@ -1,0 +1,363 @@
+/**
+ * PACK_04 — UI Presentation Standard styles.
+ * Fixed card heights, line-clamp, overflow strategies, 8pt spacing, typography.
+ */
+
+:root {
+  /* Card height matrix */
+  --ui-card-h-context: 128px;
+  --ui-card-h-module: 448px;
+  --ui-card-h-guidance: 448px;
+  --ui-card-h-chart: 400px;
+  --ui-card-h-metric: 400px;
+  --ui-card-h-summary: 400px;
+  --ui-card-h-list: 420px;
+  --ui-card-h-preview: 420px;
+
+  /* 8pt spacing */
+  --ui-space-0: 0;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 24px;
+  --ui-space-6: 32px;
+  --ui-space-7: 48px;
+  --ui-space-8: 64px;
+
+  /* Typography */
+  --ui-type-title-size: 16px;
+  --ui-type-subtitle-size: 14px;
+  --ui-type-body-size: 14px;
+  --ui-type-summary-size: 13px;
+  --ui-type-caption-size: 12px;
+  --ui-type-metric-size: 24px;
+}
+
+/* —— Equal-height independent grid —— */
+.ui-presentation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  column-gap: var(--ui-space-5);
+  row-gap: var(--ui-space-5);
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+}
+
+.ui-presentation-grid__cell {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-presentation-grid__cell > * {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.ui-presentation-grid__cell--12 {
+  grid-column: span 12;
+}
+
+.ui-presentation-grid__cell--4 {
+  grid-column: span 4;
+}
+
+.ui-presentation-grid__cell--3 {
+  grid-column: span 3;
+}
+
+.ui-presentation-grid__cell--2 {
+  grid-column: span 2;
+}
+
+/* —— Fixed-height card shell —— */
+.ui-presentation-card {
+  --ui-card-height: var(--ui-card-h-preview);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: var(--ui-card-height);
+  max-height: var(--ui-card-height);
+  min-height: var(--ui-card-height);
+  overflow: hidden;
+  padding: var(--ui-space-4);
+  gap: var(--ui-space-3);
+  min-width: 0;
+}
+
+.ui-presentation-card[data-card-type="context"] {
+  --ui-card-height: var(--ui-card-h-context);
+}
+
+.ui-presentation-card[data-card-type="module"] {
+  --ui-card-height: var(--ui-card-h-module);
+}
+
+.ui-presentation-card[data-card-type="guidance"] {
+  --ui-card-height: var(--ui-card-h-guidance);
+}
+
+.ui-presentation-card[data-card-type="chart"] {
+  --ui-card-height: var(--ui-card-h-chart);
+}
+
+.ui-presentation-card[data-card-type="metric"] {
+  --ui-card-height: var(--ui-card-h-metric);
+}
+
+.ui-presentation-card[data-card-type="summary"] {
+  --ui-card-height: var(--ui-card-h-summary);
+}
+
+.ui-presentation-card[data-card-type="list"] {
+  --ui-card-height: var(--ui-card-h-list);
+}
+
+.ui-presentation-card[data-card-type="preview"] {
+  --ui-card-height: var(--ui-card-h-preview);
+}
+
+.ui-presentation-card__header {
+  flex: 0 0 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ui-presentation-card__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ui-presentation-card__body[data-overflow="internal-scroll"] {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.ui-presentation-card__body[data-overflow="line-clamp"],
+.ui-presentation-card__body[data-overflow="hidden"] {
+  overflow: hidden;
+}
+
+.ui-presentation-card__footer {
+  flex: 0 0 auto;
+  margin-top: auto;
+}
+
+/* —— Typography + line-clamp —— */
+.ui-presentation-text {
+  margin: 0;
+  min-width: 0;
+  color: inherit;
+}
+
+.ui-presentation-text[data-type-role="title"] {
+  font-size: var(--ui-type-title-size);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ui-presentation-text[data-type-role="subtitle"] {
+  font-size: var(--ui-type-subtitle-size);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.ui-presentation-text[data-type-role="body"] {
+  font-size: var(--ui-type-body-size);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ui-presentation-text[data-type-role="summary"] {
+  font-size: var(--ui-type-summary-size);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.ui-presentation-text[data-type-role="caption"] {
+  font-size: var(--ui-type-caption-size);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.ui-presentation-text[data-type-role="metric"] {
+  font-size: var(--ui-type-metric-size);
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-presentation-text[data-line-clamp]:not([data-line-clamp="none"]) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--ui-line-clamp, 2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Utility clamps for existing Result markup */
+.ui-line-clamp-1,
+.ui-line-clamp-2,
+.ui-line-clamp-3,
+.ui-line-clamp-4,
+.ui-line-clamp-5 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-line-clamp-1 {
+  -webkit-line-clamp: 1;
+}
+
+.ui-line-clamp-2 {
+  -webkit-line-clamp: 2;
+}
+
+.ui-line-clamp-3 {
+  -webkit-line-clamp: 3;
+}
+
+.ui-line-clamp-4 {
+  -webkit-line-clamp: 4;
+}
+
+.ui-line-clamp-5 {
+  -webkit-line-clamp: 5;
+}
+
+/* —— Canonical Result page compliance layer —— */
+.cd-result-page[data-presentation="pack04"] {
+  gap: var(--ui-space-5);
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-grid,
+.cd-result-page[data-presentation="pack04"] .cd-row {
+  align-items: stretch;
+  column-gap: var(--ui-space-5);
+  row-gap: var(--ui-space-5);
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-cell,
+.cd-result-page[data-presentation="pack04"] .cd-grid-cell {
+  height: 100%;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-cell > *,
+.cd-result-page[data-presentation="pack04"] .cd-grid-cell > * {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  max-height: none;
+}
+
+/* Inner card surfaces — fixed height; row grids share equal height */
+.cd-result-page[data-presentation="pack04"] .cd-row-container--02 {
+  --ui-row-card-height: var(--ui-card-h-module);
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-container--03 {
+  --ui-row-card-height: var(--ui-card-h-chart);
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-container--04 {
+  --ui-row-card-height: var(--ui-card-h-preview);
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-s00__card {
+  height: var(--ui-card-h-context);
+  max-height: var(--ui-card-h-context);
+  overflow: hidden;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-container--02 .cd-s01__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--02 .cd-s02__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--02 .cd-s09.cd-card {
+  height: var(--ui-row-card-height);
+  max-height: var(--ui-row-card-height);
+  overflow: hidden;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-container--03 .cd-s03__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--03 .cd-s04__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--03 .cd-s05__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--03 .cd-s10__card {
+  height: var(--ui-row-card-height);
+  max-height: var(--ui-row-card-height);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-row-container--04 .cd-s06__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--04 .cd-s07__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--04 .cd-s08__card,
+.cd-result-page[data-presentation="pack04"] .cd-row-container--04 .cd-s11__card {
+  height: var(--ui-row-card-height);
+  max-height: var(--ui-row-card-height);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* List cards: internal scroll body */
+.cd-result-page[data-presentation="pack04"] .cd-s06 .cd-s06__preview-list,
+.cd-result-page[data-presentation="pack04"] .cd-s07 .cd-s07__list {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+/* Title / summary / description clamps on Result cards */
+.cd-result-page[data-presentation="pack04"] .cd-module-header,
+.cd-result-page[data-presentation="pack04"] .cd-section-title,
+.cd-result-page[data-presentation="pack04"] .cd-s05__title,
+.cd-result-page[data-presentation="pack04"] .cd-s06__title,
+.cd-result-page[data-presentation="pack04"] .cd-s07__title,
+.cd-result-page[data-presentation="pack04"] .cd-s08__title,
+.cd-result-page[data-presentation="pack04"] .cd-s10__title,
+.cd-result-page[data-presentation="pack04"] .cd-s11__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-s05__insight,
+.cd-result-page[data-presentation="pack04"] .cd-s08__exec-body,
+.cd-result-page[data-presentation="pack04"] .cd-s11__exec-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-s01__guide-a,
+.cd-result-page[data-presentation="pack04"] .cd-s01__guide-q,
+.cd-result-page[data-presentation="pack04"] .cd-s10__insight {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.cd-result-page[data-presentation="pack04"] .cd-s08__text,
+.cd-result-page[data-presentation="pack04"] .cd-s11__text,
+.cd-result-page[data-presentation="pack04"] .cd-s05__factor span:last-child {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

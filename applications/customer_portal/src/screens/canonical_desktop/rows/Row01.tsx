@@ -1,5 +1,6 @@
 /**
- * Row01 — Context (S00). Natural height.
+ * Row01 — Context (S00).
+ * PACK_04: fixed context card height; content cannot expand shell.
  */
 
 import type { ReactNode } from "react";
@@ -12,9 +13,10 @@ import { RowGridCell } from "./RowGridCell";
 export function Row01(): ReactNode {
   return (
     <section
-      className="cd-row-container cd-row-container--01 cd-row-container--natural-height"
+      className="cd-row-container cd-row-container--01"
       data-row="1"
       data-row-container="Row01"
+      data-presentation="pack04"
       aria-label="Row 1 — Thông tin bối cảnh"
     >
       <div className="cd-row-grid">

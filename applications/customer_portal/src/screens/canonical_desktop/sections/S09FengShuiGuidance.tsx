@@ -93,14 +93,17 @@ export function S09FengShuiGuidance(): ReactNode {
       </div>
       <h3 className="cd-s09__nhom-title">{data.nhomTrachTitle}</h3>
       <div className="cd-s09__icons">
-        {data.nhomTrach.map((item) => (
+        {data.nhomTrach.map((item) => {
+          const iconKey = item.icon as keyof typeof icons;
+          return (
           <div key={item.label} className="cd-s09__icon-btn">
             <div className={`cd-s09__icon-tile cd-s09__icon-tile--${item.color}`}>
-              {icons[item.icon]}
+              {icons[iconKey]}
             </div>
             <span className="cd-s09__icon-label">{item.label}</span>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

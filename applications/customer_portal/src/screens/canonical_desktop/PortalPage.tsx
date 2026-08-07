@@ -1,24 +1,27 @@
 /**
- * PortalPage / ResultPage — Desktop Dashboard (CANONICAL_PORTAL_UI_DESKTOP_V2).
+ * PortalPage / ResultPage — BTE Result Page (Design System V1.0).
  *
- * Data: AnalyzeService → canonicalDesktopAdapter → CanonicalDesktopProvider.
- * Layout frozen — see DESKTOP_V2_FREEZE.md.
+ * Architecture (PACK_06 / PACK_07):
+ *   ResultPage → Zones → Rows → Grid → Cards → ViewModels → Presentation Adapter
  *
- * Canonical rows:
- *   Row1 S00
- *   Row2 S01 | S02 | S09
- *   Row3 S03 | S04 | S05 | S10
- *   Row4 S06 | S07 | S08 | S11
+ * Sprint A: Phases 01–04 (Context, Summary LP-001, Analysis LP-003, Visualization LP-004).
+ * Data: AnalyzeService → canonicalDesktopAdapter → resultPresentationAdapter.
  */
 
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import type { CanonicalDesktopViewModel } from "../../adapters";
 import { useCanonicalDesktopResult } from "../../hooks";
 import type { AnalyzeChartRequest } from "../../models";
 import { CanonicalDesktopProvider } from "./CanonicalDesktopContext";
 import { PortalFooter, PortalHeader, PortalSidebar } from "./shell/PortalChrome";
-import { Row01, Row02, Row03, Row04 } from "./rows";
+import {
+  ResultPageBody,
+  ResultPageProvider,
+  adaptResultPageViewModel,
+} from "../result";
 import "../../styles/canonical-desktop.css";
+import "../../styles/presentation.css";
+import "../../styles/result-page.css";
 
 export type PortalPageProps = {
   /** Birth request for POST /analyze. Omit to keep fixture preview. */
@@ -34,7 +37,7 @@ export type PortalPageProps = {
 };
 
 /**
- * Canonical Desktop Dashboard — engine-backed when `request` / `initialData` is provided.
+ * Result Page host — shell + zone architecture (no direct cards).
  */
 export function PortalPage({
   request = null,
@@ -49,34 +52,36 @@ export function PortalPage({
     previewFallback,
   });
 
+  const resultModel = useMemo(
+    () => adaptResultPageViewModel(viewModel),
+    [viewModel],
+  );
+
   const mode = viewModel.source === "api" ? "engine-live" : "dashboard-preview";
 
   return (
     <CanonicalDesktopProvider value={viewModel}>
-      <div
-        className="cd-root"
-        data-canonical="desktop-v2"
-        data-mode={mode}
-        data-status={viewModel.status}
-      >
-        <PortalSidebar />
-        <PortalHeader />
-        <main className="cd-content" data-page="result">
-          <div
-            className="cd-result-page"
-            data-architecture="independent-row-containers"
-          >
-            <Row01 />
-            <Row02 />
-            <Row03 />
-            <Row04 />
-          </div>
-        </main>
-        <PortalFooter />
-      </div>
+      <ResultPageProvider value={resultModel}>
+        <div
+          className="cd-root"
+          data-canonical="desktop-v2"
+          data-result-architecture="pack07"
+          data-presentation="pack04"
+          data-mode={mode}
+          data-status={viewModel.status}
+          data-sprint="A"
+        >
+          <PortalSidebar />
+          <PortalHeader />
+          <main className="cd-content" data-page="result">
+            <ResultPageBody />
+          </main>
+          <PortalFooter />
+        </div>
+      </ResultPageProvider>
     </CanonicalDesktopProvider>
   );
 }
 
-/** Alias matching DESKTOP_COMPONENT_MAPPING naming. */
+/** Official Result Page alias (PACK_07). */
 export const ResultPage = PortalPage;

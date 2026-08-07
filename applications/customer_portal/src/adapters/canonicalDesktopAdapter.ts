@@ -11,22 +11,38 @@ import {
 
 export type CanonicalDesktopStatus = "ready" | "loading" | "error" | "empty";
 
+/**
+ * Widen deep fixture literals to runtime-safe primitives.
+ * Mock uses `as const`; ViewModels must accept API-derived strings/numbers.
+ */
+type WidenLiterals<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends boolean
+      ? boolean
+      : T extends readonly (infer U)[]
+        ? ReadonlyArray<WidenLiterals<U>>
+        : T extends object
+          ? { readonly [K in keyof T]: WidenLiterals<T[K]> }
+          : T;
+
 export type CanonicalDesktopViewModel = {
-  readonly header: CanonicalDesktopMock["header"];
-  readonly sidebar: CanonicalDesktopMock["sidebar"];
-  readonly s00: CanonicalDesktopMock["s00"];
-  readonly s01: CanonicalDesktopMock["s01"];
-  readonly s02: CanonicalDesktopMock["s02"];
-  readonly s03: CanonicalDesktopMock["s03"];
-  readonly s04: CanonicalDesktopMock["s04"];
-  readonly s05: CanonicalDesktopMock["s05"];
-  readonly s06: CanonicalDesktopMock["s06"];
-  readonly s07: CanonicalDesktopMock["s07"];
-  readonly s08: CanonicalDesktopMock["s08"];
-  readonly s09: CanonicalDesktopMock["s09"];
-  readonly s10: CanonicalDesktopMock["s10"];
-  readonly s11: CanonicalDesktopMock["s11"];
-  readonly footer: CanonicalDesktopMock["footer"];
+  readonly header: WidenLiterals<CanonicalDesktopMock["header"]>;
+  readonly sidebar: WidenLiterals<CanonicalDesktopMock["sidebar"]>;
+  readonly s00: WidenLiterals<CanonicalDesktopMock["s00"]>;
+  readonly s01: WidenLiterals<CanonicalDesktopMock["s01"]>;
+  readonly s02: WidenLiterals<CanonicalDesktopMock["s02"]>;
+  readonly s03: WidenLiterals<CanonicalDesktopMock["s03"]>;
+  readonly s04: WidenLiterals<CanonicalDesktopMock["s04"]>;
+  readonly s05: WidenLiterals<CanonicalDesktopMock["s05"]>;
+  readonly s06: WidenLiterals<CanonicalDesktopMock["s06"]>;
+  readonly s07: WidenLiterals<CanonicalDesktopMock["s07"]>;
+  readonly s08: WidenLiterals<CanonicalDesktopMock["s08"]>;
+  readonly s09: WidenLiterals<CanonicalDesktopMock["s09"]>;
+  readonly s10: WidenLiterals<CanonicalDesktopMock["s10"]>;
+  readonly s11: WidenLiterals<CanonicalDesktopMock["s11"]>;
+  readonly footer: WidenLiterals<CanonicalDesktopMock["footer"]>;
   readonly source: "api" | "mock";
   readonly status: CanonicalDesktopStatus;
   readonly statusMessage?: string;
@@ -246,7 +262,7 @@ function mapPillarGlyph(
   title: string,
   stamp: string,
   highlight: boolean,
-): CanonicalDesktopMock["s03"]["pillars"][number] {
+): CanonicalDesktopViewModel["s03"]["pillars"][number] {
   const stem = lookupStem(asString(dto?.stem, "—"));
   const branch = lookupBranch(asString(dto?.branch, "—"));
   return {
@@ -262,7 +278,7 @@ function mapS00(
   data: AnalysisDataDto,
   request: AnalyzeChartRequest | undefined,
   requestId: string | null | undefined,
-): CanonicalDesktopMock["s00"] {
+): CanonicalDesktopViewModel["s00"] {
   const base = cloneFixture().s00;
   const gender = genderMeta(data.customer?.gender ?? request?.gender);
   const year = request?.year;
@@ -312,7 +328,7 @@ function mapS00(
   };
 }
 
-function mapS01(data: AnalysisDataDto): CanonicalDesktopMock["s01"] {
+function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const base = cloneFixture().s01;
   const dm = asString(data.bazi?.day_master, base.dayMaster.value);
   const element = normalizeElement(asString(data.bazi?.day_master_element));
@@ -400,7 +416,7 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopMock["s01"] {
   };
 }
 
-function mapS02(data: AnalysisDataDto): CanonicalDesktopMock["s02"] {
+function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
   const base = cloneFixture().s02;
   const pattern = data.pattern as Record<string, unknown> | undefined;
   const useful = data.useful_god as Record<string, unknown> | undefined;
@@ -484,7 +500,7 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopMock["s02"] {
 function mapS03(
   data: AnalysisDataDto,
   request: AnalyzeChartRequest | undefined,
-): CanonicalDesktopMock["s03"] {
+): CanonicalDesktopViewModel["s03"] {
   const base = cloneFixture().s03;
   const hour = request?.hour ?? 0;
   const minute = request?.minute ?? 0;
@@ -509,7 +525,7 @@ function mapS03(
   };
 }
 
-function mapS04(data: AnalysisDataDto): CanonicalDesktopMock["s04"] {
+function mapS04(data: AnalysisDataDto): CanonicalDesktopViewModel["s04"] {
   const base = cloneFixture().s04;
   const scores: Record<string, number> = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
   for (const item of data.score?.wuxing_series ?? []) {
@@ -530,7 +546,7 @@ function mapS04(data: AnalysisDataDto): CanonicalDesktopMock["s04"] {
   };
 }
 
-function mapS05(data: AnalysisDataDto): CanonicalDesktopMock["s05"] {
+function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
   const base = cloneFixture().s05;
   const score = Math.round(Number(data.strength?.strength_score ?? data.score?.strength_score ?? 0));
   const levelRaw = asString(data.strength?.strength_level, base.level);
@@ -556,7 +572,7 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopMock["s05"] {
   };
 }
 
-function mapS06(data: AnalysisDataDto): CanonicalDesktopMock["s06"] {
+function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
   const base = cloneFixture().s06;
   const series = data.score?.ten_god_series;
   if (Array.isArray(series) && series.length > 0) {
@@ -598,7 +614,7 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopMock["s06"] {
   };
 }
 
-function mapS07(data: AnalysisDataDto): CanonicalDesktopMock["s07"] {
+function mapS07(data: AnalysisDataDto): CanonicalDesktopViewModel["s07"] {
   const base = cloneFixture().s07;
   const list = (data.bazi?.shensha ?? []).map((s) => asString(s).trim()).filter(Boolean);
   if (list.length === 0) return base;
@@ -635,7 +651,7 @@ function mapS07(data: AnalysisDataDto): CanonicalDesktopMock["s07"] {
   };
 }
 
-function mapS08(data: AnalysisDataDto): CanonicalDesktopMock["s08"] {
+function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const base = cloneFixture().s08;
   const interp = data.interpretation as Record<string, unknown> | undefined;
   const sections = Array.isArray(interp?.sections) ? (interp.sections as Record<string, unknown>[]) : [];
@@ -647,7 +663,7 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopMock["s08"] {
   const strengths: string[] = [];
   const warnings: string[] = [];
   const actions: string[] = [];
-  sections.forEach((s, i) => {
+  sections.forEach((_section, i) => {
     const title = titles[i] ?? "";
     const body = bodies[i] ?? "";
     const snippet = body.split(/[.\n]/)[0]?.trim();
@@ -678,7 +694,7 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopMock["s08"] {
   };
 }
 
-function mapS09(data: AnalysisDataDto): CanonicalDesktopMock["s09"] {
+function mapS09(data: AnalysisDataDto): CanonicalDesktopViewModel["s09"] {
   const base = cloneFixture().s09;
   const cal = data.calendar ?? {};
   const cung = asString(cal.cung_phi ?? cal.menh_quai, base.quai.center);
@@ -703,7 +719,7 @@ function mapS09(data: AnalysisDataDto): CanonicalDesktopMock["s09"] {
   };
 }
 
-function mapS11(data: AnalysisDataDto): CanonicalDesktopMock["s11"] {
+function mapS11(data: AnalysisDataDto): CanonicalDesktopViewModel["s11"] {
   const base = cloneFixture().s11;
   const report = data.report as Record<string, unknown> | undefined;
   const narrative = data.narrative as Record<string, unknown> | undefined;

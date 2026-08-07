@@ -1,8 +1,11 @@
 /**
  * S05 — Dashboard Preview Card: SỨC MẠNH MỆNH CỤC
+ * PACK_04: Presentation Adapter preview + hasMore (fixed height).
  */
 
 import type { ReactNode } from "react";
+import { adaptStrengthPreview } from "../../../presentation";
+import { PresentationText } from "../../../components/shared/PresentationText";
 import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 const CHECK_TONE: Record<string, string> = {
@@ -27,13 +30,22 @@ function levelModifier(level: string): string {
  */
 export function S05ChartStrength(): ReactNode {
   const data = useCanonicalDesktop().s05;
-  const previewFactors = data.factors.slice(0, 4);
+  const preview = adaptStrengthPreview({
+    insight: data.insight,
+    factors: data.factors,
+    cardType: "preview",
+  });
   const [scoreMain, scoreMax = "100"] = data.score.split(/\s*\/\s*/);
 
   return (
-    <section className="cd-s05 cd-preview-card" aria-labelledby="cd-s05-title">
+    <section
+      className="cd-s05 cd-preview-card"
+      data-card-type="preview"
+      data-has-more={preview.hasMore ? "true" : "false"}
+      aria-labelledby="cd-s05-title"
+    >
       <div className="cd-s05__card">
-        <h2 id="cd-s05-title" className="cd-s05__title">
+        <h2 id="cd-s05-title" className="cd-s05__title ui-line-clamp-2">
           {data.title}
         </h2>
 
@@ -47,7 +59,12 @@ export function S05ChartStrength(): ReactNode {
           </div>
         </div>
 
-        <p className="cd-s05__insight">{data.insight}</p>
+        <PresentationText
+          className="cd-s05__insight"
+          typeRole="summary"
+          preview={preview.insight}
+          as="p"
+        />
 
         <div
           className="cd-s05__track"
@@ -64,7 +81,7 @@ export function S05ChartStrength(): ReactNode {
         </div>
 
         <ul className="cd-s05__factors">
-          {previewFactors.map((factor) => (
+          {preview.factors.items.map((factor) => (
             <li key={factor.text} className="cd-s05__factor">
               <span
                 className={`cd-s05__check ${CHECK_TONE[factor.tone] ?? ""}`}
@@ -72,12 +89,19 @@ export function S05ChartStrength(): ReactNode {
               >
                 ✓
               </span>
-              <span>{factor.text}</span>
+              <span className="ui-line-clamp-2">{factor.text}</span>
             </li>
           ))}
         </ul>
 
-        <button type="button" className="cd-s05__cta cd-preview-cta">
+        <button
+          type="button"
+          className="cd-s05__cta cd-preview-cta"
+          data-has-more={preview.hasMore ? "true" : "false"}
+          aria-label={
+            preview.hasMore ? `${data.cta} — còn nội dung đầy đủ` : data.cta
+          }
+        >
           {data.cta}
         </button>
       </div>

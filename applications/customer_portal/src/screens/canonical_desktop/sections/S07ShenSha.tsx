@@ -1,8 +1,11 @@
 /**
  * S07 — Dashboard Preview Card: THẦN SÁT
+ * PACK_04: Presentation Adapter list preview + hasMore (fixed height / internal scroll).
  */
 
 import type { ReactNode } from "react";
+import { adaptPreviewList, adaptPreviewText } from "../../../presentation";
+import { PresentationText } from "../../../components/shared/PresentationText";
 import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 /**
@@ -10,18 +13,30 @@ import { useCanonicalDesktop } from "../CanonicalDesktopContext";
  */
 export function S07ShenSha(): ReactNode {
   const data = useCanonicalDesktop().s07;
-  const previewGood = data.good.items.slice(0, 3);
-  const previewBad = data.bad.items.slice(0, 2);
+  const good = adaptPreviewList(data.good.items, 3);
+  const bad = adaptPreviewList(data.bad.items, 2);
+  const execLine = adaptPreviewText(data.executive.line2, "summary");
+  const hasMore = good.hasMore || bad.hasMore || execLine.hasMore;
 
   return (
-    <section className="cd-s07 cd-preview-card" aria-labelledby="cd-s07-title">
+    <section
+      className="cd-s07 cd-preview-card"
+      data-card-type="list"
+      data-has-more={hasMore ? "true" : "false"}
+      aria-labelledby="cd-s07-title"
+    >
       <div className="cd-s07__card">
-        <h2 id="cd-s07-title" className="cd-s07__title">
+        <h2 id="cd-s07-title" className="cd-s07__title ui-line-clamp-2">
           {data.title}
         </h2>
 
         <div className="cd-s07__exec">
-          <p className="cd-s07__exec-line">{data.executive.line2}</p>
+          <PresentationText
+            className="cd-s07__exec-line"
+            typeRole="summary"
+            preview={execLine}
+            as="p"
+          />
         </div>
 
         <div className="cd-s07__group">
@@ -29,12 +44,12 @@ export function S07ShenSha(): ReactNode {
             ● CÁT TINH
           </h3>
           <ul className="cd-s07__list">
-            {previewGood.map((item) => (
+            {good.items.map((item) => (
               <li key={item} className="cd-s07__row">
                 <span className="cd-s07__icon cd-s07__icon--good" aria-hidden="true">
                   ✓
                 </span>
-                <span className="cd-s07__text">{item}</span>
+                <span className="cd-s07__text ui-line-clamp-2">{item}</span>
               </li>
             ))}
           </ul>
@@ -47,18 +62,23 @@ export function S07ShenSha(): ReactNode {
             ● HUNG TINH
           </h3>
           <ul className="cd-s07__list">
-            {previewBad.map((item) => (
+            {bad.items.map((item) => (
               <li key={item} className="cd-s07__row">
                 <span className="cd-s07__icon cd-s07__icon--bad" aria-hidden="true">
                   ✕
                 </span>
-                <span className="cd-s07__text">{item}</span>
+                <span className="cd-s07__text ui-line-clamp-2">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <button type="button" className="cd-preview-cta">
+        <button
+          type="button"
+          className="cd-preview-cta"
+          data-has-more={hasMore ? "true" : "false"}
+          aria-label={hasMore ? `${data.link} — còn nội dung đầy đủ` : data.link}
+        >
           {data.link}
         </button>
       </div>

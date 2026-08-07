@@ -1,8 +1,11 @@
 /**
  * S11 — Dashboard Preview Card: BÁO CÁO TỔNG KẾT
+ * PACK_04: Presentation Adapter preview + hasMore (fixed height).
  */
 
 import type { ReactNode } from "react";
+import { adaptReportSummaryPreview } from "../../../presentation";
+import { PresentationText } from "../../../components/shared/PresentationText";
 import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 
 /**
@@ -10,20 +13,40 @@ import { useCanonicalDesktop } from "../CanonicalDesktopContext";
  */
 export function S11ReportSummary(): ReactNode {
   const data = useCanonicalDesktop().s11;
-  const previewStrengths = data.strengths.items.slice(0, 2);
-  const previewAttention = data.attention.items.slice(0, 2);
-  const previewRecs = data.recommendations.items.slice(0, 2);
+  const preview = adaptReportSummaryPreview({
+    executiveTitle: data.executive.title,
+    executiveBody: data.executive.body,
+    strengths: data.strengths.items,
+    attention: data.attention.items,
+    recommendations: data.recommendations.items,
+    cardType: "preview",
+  });
 
   return (
-    <section className="cd-s11 cd-preview-card" aria-labelledby="cd-s11-title">
+    <section
+      className="cd-s11 cd-preview-card"
+      data-card-type="preview"
+      data-has-more={preview.hasMore ? "true" : "false"}
+      aria-labelledby="cd-s11-title"
+    >
       <div className="cd-s11__card">
-        <h2 id="cd-s11-title" className="cd-s11__title">
+        <h2 id="cd-s11-title" className="cd-s11__title ui-line-clamp-2">
           {data.title}
         </h2>
 
         <div className="cd-s11__exec cd-s11__exec--preview">
-          <h3 className="cd-s11__exec-title">{data.executive.title}</h3>
-          <p className="cd-s11__exec-body">{data.executive.body}</p>
+          <PresentationText
+            className="cd-s11__exec-title"
+            typeRole="subtitle"
+            preview={preview.executive.title}
+            as="h3"
+          />
+          <PresentationText
+            className="cd-s11__exec-body"
+            typeRole="summary"
+            preview={preview.executive.body}
+            as="p"
+          />
         </div>
 
         <div className="cd-s11__block">
@@ -31,12 +54,12 @@ export function S11ReportSummary(): ReactNode {
             {data.strengths.title}
           </h3>
           <ul className="cd-s11__list">
-            {previewStrengths.map((item) => (
+            {preview.strengths.items.map((item) => (
               <li key={item} className="cd-s11__row">
                 <span className="cd-s11__icon cd-s11__icon--strength" aria-hidden="true">
                   ✓
                 </span>
-                <span className="cd-s11__text">{item}</span>
+                <span className="cd-s11__text ui-line-clamp-2">{item}</span>
               </li>
             ))}
           </ul>
@@ -47,12 +70,12 @@ export function S11ReportSummary(): ReactNode {
             {data.attention.title}
           </h3>
           <ul className="cd-s11__list">
-            {previewAttention.map((item) => (
+            {preview.attention.items.map((item) => (
               <li key={item} className="cd-s11__row">
                 <span className="cd-s11__icon cd-s11__icon--attention" aria-hidden="true">
                   •
                 </span>
-                <span className="cd-s11__text">{item}</span>
+                <span className="cd-s11__text ui-line-clamp-2">{item}</span>
               </li>
             ))}
           </ul>
@@ -63,18 +86,25 @@ export function S11ReportSummary(): ReactNode {
             {data.recommendations.title}
           </h3>
           <ul className="cd-s11__list">
-            {previewRecs.map((item) => (
+            {preview.recommendations.items.map((item) => (
               <li key={item} className="cd-s11__row">
                 <span className="cd-s11__icon cd-s11__icon--recommend" aria-hidden="true">
                   →
                 </span>
-                <span className="cd-s11__text">{item}</span>
+                <span className="cd-s11__text ui-line-clamp-2">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <button type="button" className="cd-preview-cta">
+        <button
+          type="button"
+          className="cd-preview-cta"
+          data-has-more={preview.hasMore ? "true" : "false"}
+          aria-label={
+            preview.hasMore ? `${data.link} — còn nội dung đầy đủ` : data.link
+          }
+        >
           {data.link}
         </button>
       </div>

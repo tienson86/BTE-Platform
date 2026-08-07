@@ -140,3 +140,15 @@ export type { SkeletonMetricProps } from "./SkeletonMetric";
 
 export { SkeletonParagraph } from "./SkeletonParagraph";
 export type { SkeletonParagraphProps } from "./SkeletonParagraph";
+
+export { PresentationCard } from "./PresentationCard";
+export type { PresentationCardProps } from "./PresentationCard";
+
+export { PresentationText } from "./PresentationText";
+export type { PresentationTextProps } from "./PresentationText";
+
+export { PresentationGrid, PresentationGridCell } from "./PresentationGrid";
+export type {
+  PresentationGridCellProps,
+  PresentationGridProps,
+} from "./PresentationGrid";

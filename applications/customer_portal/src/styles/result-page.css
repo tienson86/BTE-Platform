@@ -1,0 +1,360 @@
+/**
+ * Result Page styles — Sprint A (PACK_02 / PACK_04 / PACK_06 / PACK_07).
+ * Official height classes, equal-height rows, 8pt spacing.
+ */
+
+:root {
+  --rp-height-xs: 160px;
+  --rp-height-s: 220px;
+  --rp-height-m: 320px;
+  --rp-height-l: 420px;
+  --rp-height-xl: 560px;
+
+  --rp-space-1: 4px;
+  --rp-space-2: 8px;
+  --rp-space-3: 12px;
+  --rp-space-4: 16px;
+  --rp-space-5: 24px;
+  --rp-space-6: 32px;
+
+  --rp-card-bg: #ffffff;
+  --rp-card-border: #e8e6e3;
+  --rp-card-radius: 16px;
+  --rp-card-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
+  --rp-accent: #9a1b1b;
+  --rp-text: #1c1c1c;
+  --rp-muted: #5c6570;
+  --rp-track: #f0eeeb;
+}
+
+.rp-result-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-5);
+  width: 100%;
+  min-width: 0;
+}
+
+.rp-row {
+  width: 100%;
+  min-width: 0;
+}
+
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--rp-space-5);
+  row-gap: var(--rp-space-5);
+  align-items: stretch;
+  width: 100%;
+}
+
+.rp-grid__cell {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rp-grid__cell > * {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+.rp-grid__cell--12 { grid-column: span 12; }
+.rp-grid__cell--6 { grid-column: span 6; }
+.rp-grid__cell--4 { grid-column: span 4; }
+.rp-grid__cell--3 { grid-column: span 3; }
+.rp-grid__cell--2 { grid-column: span 2; }
+
+.rp-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: var(--rp-row-card-height, var(--rp-height-m));
+  max-height: var(--rp-row-card-height, var(--rp-height-m));
+  min-height: var(--rp-row-card-height, var(--rp-height-m));
+  overflow: hidden;
+  padding: var(--rp-space-4);
+  gap: var(--rp-space-3);
+  background: var(--rp-card-bg);
+  border: 1px solid var(--rp-card-border);
+  border-radius: var(--rp-card-radius);
+  box-shadow: var(--rp-card-shadow);
+  color: var(--rp-text);
+}
+
+.rp-card--auto {
+  height: auto;
+  max-height: none;
+  min-height: 0;
+}
+
+.rp-card--stub {
+  justify-content: center;
+}
+
+.rp-card--context {
+  /* Context uses row height S */
+}
+
+.rp-card__title {
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--rp-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rp-card__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-3);
+}
+
+.rp-card__footer {
+  flex: 0 0 auto;
+  margin-top: auto;
+}
+
+.rp-card__headline,
+.rp-card__summary {
+  margin: 0;
+  color: var(--rp-muted);
+}
+
+.rp-card__bullets,
+.rp-indicators,
+.rp-destiny,
+.rp-elements,
+.rp-strength__factors,
+.rp-ten-gods,
+.rp-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-2);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.rp-card__bullet,
+.rp-indicators__row,
+.rp-destiny__item,
+.rp-elements__row,
+.rp-strength__factor,
+.rp-ten-gods__row,
+.rp-timeline__item {
+  min-width: 0;
+}
+
+.rp-indicators__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--rp-space-2);
+  align-items: baseline;
+  padding: var(--rp-space-2) 0;
+  border-bottom: 1px solid var(--rp-card-border);
+}
+
+.rp-destiny__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-1);
+}
+
+.rp-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--rp-accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--rp-accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rp-card__cta:hover,
+.rp-card__cta:focus-visible {
+  background: rgba(154, 27, 27, 0.06);
+  outline: none;
+}
+
+.rp-context {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--rp-space-4);
+  min-height: 0;
+}
+
+.rp-context__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-1);
+  min-width: 0;
+  padding-right: var(--rp-space-3);
+  border-right: 1px solid var(--rp-card-border);
+}
+
+.rp-context__col:last-child {
+  border-right: 0;
+}
+
+.rp-elements__row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr auto;
+  gap: var(--rp-space-2);
+  align-items: center;
+}
+
+.rp-elements__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rp-elements__name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rp-elements__status {
+  font-size: 12px;
+  color: var(--rp-muted);
+}
+
+.rp-elements__track,
+.rp-strength__track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--rp-track);
+  overflow: hidden;
+}
+
+.rp-elements__fill,
+.rp-strength__fill {
+  display: block;
+  height: 100%;
+  background: var(--rp-accent);
+}
+
+.rp-elements__pct {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--rp-muted);
+}
+
+.rp-strength__hero {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--rp-space-3);
+}
+
+.rp-ten-gods__row {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  gap: var(--rp-space-2);
+  align-items: center;
+}
+
+.rp-ten-gods__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.rp-radar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--rp-space-3);
+  min-height: 0;
+}
+
+.rp-radar__svg {
+  flex: 0 0 auto;
+}
+
+.rp-radar__ring,
+.rp-radar__axis {
+  stroke: #d9d4ce;
+  stroke-width: 1;
+}
+
+.rp-radar__area {
+  fill: rgba(154, 27, 27, 0.18);
+  stroke: var(--rp-accent);
+  stroke-width: 2;
+}
+
+.rp-radar__label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rp-timeline__item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--rp-space-3);
+  align-items: start;
+}
+
+.rp-timeline__marker {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(154, 27, 27, 0.08);
+  color: var(--rp-accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Responsive — reading order preserved */
+@media (max-width: 1199px) {
+  .rp-grid__cell--4,
+  .rp-grid__cell--6 {
+    grid-column: span 6;
+  }
+
+  .rp-context {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .rp-grid__cell--2,
+  .rp-grid__cell--3,
+  .rp-grid__cell--4,
+  .rp-grid__cell--6,
+  .rp-grid__cell--12 {
+    grid-column: span 12;
+  }
+
+  .rp-context {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-context__col {
+    border-right: 0;
+    border-bottom: 1px solid var(--rp-card-border);
+    padding-bottom: var(--rp-space-3);
+  }
+
+  .rp-context__col:last-child {
+    border-bottom: 0;
+  }
+}

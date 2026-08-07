@@ -1,6 +1,6 @@
 /**
  * Row03 — S03 | S04 | S05 | S10 (4 | 4 | 2 | 2).
- * S05/S10 are Dashboard Preview Cards. Natural height, top-aligned.
+ * PACK_04: equal-height independent cards (chart / metric / preview / summary).
  */
 
 import type { ReactNode } from "react";
@@ -18,10 +18,12 @@ import { RowGridCell } from "./RowGridCell";
 export function Row03(): ReactNode {
   return (
     <section
-      className="cd-row-container cd-row-container--03 cd-row-container--natural-height"
+      className="cd-row-container cd-row-container--03"
       data-row="3"
       data-row-container="Row03"
       data-section-group="AnalysisSection"
+      data-presentation="pack04"
+      data-equal-height="true"
       aria-label="Row 3 — Phân tích cốt lõi"
     >
       <div className="cd-row-grid">
