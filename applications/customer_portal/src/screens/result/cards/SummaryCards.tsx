@@ -82,7 +82,7 @@ export function DestinyDirectionCard({
       hasMore={model.hasMore}
       data-card="destiny-direction"
       footer={
-        <button type="button" className="rp-card__cta" data-has-more={model.hasMore ? "true" : "false"}>
+        <button type="button" className="rp-card__cta rp-card__cta--primary" data-has-more={model.hasMore ? "true" : "false"}>
           {model.cta}
         </button>
       }

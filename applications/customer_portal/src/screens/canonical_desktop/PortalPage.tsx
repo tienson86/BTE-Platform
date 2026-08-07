@@ -23,6 +23,7 @@ import {
 import "../../styles/canonical-desktop.css";
 import "../../styles/presentation.css";
 import "../../styles/result-page.css";
+import "../../styles/result-page-visual-v2.css";
 
 export type PortalPageProps = {
   /** Birth request for POST /analyze. Omit to keep fixture preview. */

@@ -26,6 +26,7 @@ export function ResultPageBody(): ReactNode {
       data-blueprint="pack07"
       data-presentation="pack04"
       data-sprint="D"
+      data-visual="v2"
     >
       <ContextZone />
       <SummaryZone />

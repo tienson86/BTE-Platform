@@ -123,7 +123,7 @@ export const RecommendationCard = memo(function RecommendationCard({
         <div className="rp-card__footer">
           <button
             type="button"
-            className="rp-card__cta"
+            className="rp-card__cta rp-card__cta--text"
             aria-label={model.viewAllLabel}
           >
             {model.viewAllLabel}

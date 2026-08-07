@@ -1,0 +1,380 @@
+/**
+ * Result Page Visual Language V2 — appearance only.
+ * Architecture / layout / presentation / a11y / responsive remain frozen (UI V1.0).
+ *
+ * Source of truth:
+ * - knowledge/ui_reference/visual/VISUAL_LANGUAGE_SYSTEM.md
+ * - knowledge/ui_reference/visual/VISUAL_TRANSFORMATION_GUIDE.md
+ */
+
+/* —— Task 01–06: Official Visual Language tokens (not invented) —— */
+.rp-result-page[data-visual="v2"] {
+  /* Typography scale — VISUAL_LANGUAGE_SYSTEM §9.1 */
+  --rp-v2-display: 40px;
+  --rp-v2-h3: 20px;
+  --rp-v2-h4: 18px;
+  --rp-v2-body: 16px;
+  --rp-v2-caption: 14px;
+  --rp-v2-meta: 12px;
+
+  /* Map PACK_04 presentation roles inside Result Page only */
+  --ui-type-title-size: var(--rp-v2-h3);
+  --ui-type-subtitle-size: var(--rp-v2-body);
+  --ui-type-body-size: var(--rp-v2-body);
+  --ui-type-summary-size: var(--rp-v2-caption);
+  --ui-type-caption-size: var(--rp-v2-meta);
+  --ui-type-metric-size: var(--rp-v2-display);
+
+  /* Rhythm — VISUAL_LANGUAGE_SYSTEM §14.1 */
+  --rp-space-7: 48px; /* XL — major zone gap */
+  --rp-space-8: 64px; /* XXL */
+
+  /* Surfaces — §8 / §10.5 */
+  --rp-page-bg: #f5f4f2;
+  --rp-card-bg: #ffffff;
+  --rp-surface-subtle: #f7f6f4;
+  --rp-card-border: #ebe8e4;
+  --rp-divider: #eceae7;
+
+  /* Elevation — §11 (subtle only) */
+  --rp-elev-0: none;
+  --rp-elev-1: 0 1px 2px rgba(28, 28, 28, 0.04);
+  --rp-elev-2: 0 4px 16px rgba(28, 28, 28, 0.06), 0 1px 3px rgba(28, 28, 28, 0.04);
+
+  /* Card padding M = 24px — §14.2 */
+  --rp-card-pad: var(--rp-space-5);
+
+  gap: var(--rp-space-7);
+  background: transparent;
+}
+
+/* —— Task 03–05: Border / Surface / Elevation —— */
+.rp-result-page[data-visual="v2"] .rp-card {
+  padding: var(--rp-card-pad);
+  gap: var(--rp-space-4);
+  border: 1px solid var(--rp-card-border);
+  border-radius: var(--rp-card-radius);
+  box-shadow: var(--rp-elev-1);
+  background: var(--rp-card-bg);
+}
+
+.rp-result-page[data-visual="v2"] .rp-grid {
+  column-gap: var(--rp-space-5);
+  row-gap: var(--rp-space-5);
+}
+
+/* —— Task 01 / 10: Typography + Executive visual weight —— */
+.rp-result-page[data-visual="v2"] .rp-card__title {
+  color: var(--rp-text);
+  font-size: var(--rp-v2-h3);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__headline {
+  color: var(--rp-text);
+  font-size: var(--rp-v2-body);
+  line-height: 1.5;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__summary {
+  color: var(--rp-muted);
+  font-size: var(--rp-v2-caption);
+  line-height: 1.4;
+}
+
+.rp-result-page[data-visual="v2"] .ui-presentation-text[data-type-role="title"] {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.rp-result-page[data-visual="v2"] .ui-presentation-text[data-type-role="body"],
+.rp-result-page[data-visual="v2"] .ui-presentation-text[data-type-role="summary"] {
+  line-height: 1.5;
+}
+
+.rp-result-page[data-visual="v2"] .ui-presentation-text[data-type-role="metric"] {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Primary focus: Executive Summary (Rule 04 / 10) */
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] {
+  box-shadow: var(--rp-elev-2);
+  border-color: transparent;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] .rp-card__title {
+  color: var(--rp-accent);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] .rp-card__bullets {
+  gap: var(--rp-space-3);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] .rp-card__bullet {
+  padding-left: var(--rp-space-3);
+  border-left: 2px solid var(--rp-accent-soft-strong);
+}
+
+/* Secondary analysis / visualization — calmer */
+.rp-result-page[data-visual="v2"] .rp-row[data-zone="analysis"] .rp-card,
+.rp-result-page[data-visual="v2"] .rp-row[data-zone="visualization"] .rp-card {
+  box-shadow: var(--rp-elev-1);
+}
+
+/* Tertiary knowledge — minimal chrome (Rule 15) */
+.rp-result-page[data-visual="v2"] .rp-card--knowledge {
+  border-style: solid;
+  border-color: var(--rp-divider);
+  box-shadow: var(--rp-elev-0);
+  background: var(--rp-surface-subtle);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card--knowledge .rp-card__title {
+  color: var(--rp-muted);
+  font-size: var(--rp-v2-h4);
+  font-weight: 500;
+}
+
+/* —— Task 07: Density — softer list separators —— */
+.rp-result-page[data-visual="v2"] .rp-indicators__row {
+  border-bottom-color: var(--rp-divider);
+  padding: var(--rp-space-3) 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__body {
+  gap: var(--rp-space-4);
+}
+
+.rp-result-page[data-visual="v2"] .rp-context {
+  gap: var(--rp-space-5);
+}
+
+.rp-result-page[data-visual="v2"] .rp-context__col {
+  border-right-color: var(--rp-divider);
+  padding-right: var(--rp-space-4);
+}
+
+/* —— Task 08: Button hierarchy (Primary / Secondary / Text) —— */
+.rp-result-page[data-visual="v2"] .rp-card__cta {
+  height: 44px;
+  border-radius: 8px;
+  font-size: var(--rp-v2-caption);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__cta--primary {
+  background: var(--rp-accent);
+  border-color: var(--rp-accent);
+  color: var(--rp-card-bg);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__cta--primary:hover,
+.rp-result-page[data-visual="v2"] .rp-card__cta--primary:focus-visible {
+  background: var(--rp-accent);
+  border-color: var(--rp-accent);
+  color: var(--rp-card-bg);
+  filter: brightness(0.92);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__cta--secondary {
+  background: transparent;
+  border-color: var(--rp-card-border);
+  color: var(--rp-text);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__cta--secondary:hover,
+.rp-result-page[data-visual="v2"] .rp-card__cta--secondary:focus-visible {
+  background: var(--rp-surface-subtle);
+  border-color: var(--rp-muted);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__cta--text {
+  height: auto;
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--rp-accent);
+  justify-content: flex-start;
+  padding: 0;
+  box-shadow: none;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card__cta--text:hover,
+.rp-result-page[data-visual="v2"] .rp-card__cta--text:focus-visible {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.rp-result-page[data-visual="v2"] .rp-expand-btn {
+  font-size: var(--rp-v2-caption);
+  font-weight: 500;
+  color: var(--rp-muted);
+}
+
+.rp-result-page[data-visual="v2"] .rp-expand-btn:hover,
+.rp-result-page[data-visual="v2"] .rp-expand-btn:focus-visible {
+  color: var(--rp-accent);
+}
+
+/* —— Task 09: Iconography — quieter chrome —— */
+.rp-result-page[data-visual="v2"] .rp-timeline__marker {
+  background: var(--rp-surface-subtle);
+  color: var(--rp-muted);
+  font-weight: 600;
+  border: 1px solid var(--rp-divider);
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section__chevron {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* —— Task 11–12: Recommendation — flat composition (Rule 02 / 13) —— */
+.rp-result-page[data-visual="v2"] .rp-rec-list {
+  gap: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item {
+  padding: var(--rp-space-4) 0;
+  border: 0;
+  border-bottom: 1px solid var(--rp-divider);
+  border-radius: 0;
+  background: transparent;
+  gap: var(--rp-space-2);
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item:last-child {
+  border-bottom: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__head {
+  gap: var(--rp-space-3);
+}
+
+.rp-result-page[data-visual="v2"] .rp-priority {
+  height: 22px;
+  border-radius: 4px;
+  font-size: var(--rp-v2-meta);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.rp-result-page[data-visual="v2"] .rp-priority[data-priority="medium"],
+.rp-result-page[data-visual="v2"] .rp-priority[data-priority="low"] {
+  background: transparent;
+  color: var(--rp-muted);
+  border: 1px solid var(--rp-divider);
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__benefit::before {
+  font-weight: 500;
+  color: var(--rp-muted);
+  content: "Benefit · ";
+}
+
+/* —— Task 13: Interpretation readability (Rule 14) —— */
+.rp-result-page[data-visual="v2"] .rp-interp-list {
+  gap: var(--rp-space-5);
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-block {
+  padding: var(--rp-space-5) 0;
+  border: 0;
+  border-top: 1px solid var(--rp-divider);
+  border-radius: 0;
+  background: transparent;
+  gap: var(--rp-space-4);
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-block:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-block__title {
+  font-size: var(--rp-v2-h4);
+  font-weight: 600;
+  color: var(--rp-text);
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-step {
+  gap: var(--rp-space-2);
+  max-width: 68ch;
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-step__label {
+  font-size: var(--rp-v2-meta);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--rp-muted);
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-step[data-step="observation"] .rp-interp-step__label {
+  color: var(--rp-accent);
+}
+
+/* —— Task 14: Knowledge readability (Rule 15) —— */
+.rp-result-page[data-visual="v2"] .rp-know-list {
+  gap: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section {
+  border: 0;
+  border-bottom: 1px solid var(--rp-divider);
+  border-radius: 0;
+  background: transparent;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section:last-child {
+  border-bottom: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section__trigger {
+  padding: var(--rp-space-4) 0;
+  border-radius: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section__panel,
+.rp-result-page[data-visual="v2"] .rp-know-section__teaser {
+  padding: 0 0 var(--rp-space-4);
+  max-width: 68ch;
+  color: var(--rp-muted);
+}
+
+/* —— Task 15: Executive report polish —— */
+.rp-result-page[data-visual="v2"] .rp-card--recommendation {
+  box-shadow: var(--rp-elev-1);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card--interpretation {
+  box-shadow: var(--rp-elev-0);
+  border-color: var(--rp-divider);
+}
+
+.rp-result-page[data-visual="v2"] .rp-row[data-zone="summary"] {
+  position: relative;
+}
+
+.rp-result-page[data-visual="v2"] .rp-strength__hero {
+  margin-bottom: var(--rp-space-2);
+}
+
+.rp-result-page[data-visual="v2"] .rp-elements__track,
+.rp-result-page[data-visual="v2"] .rp-strength__track {
+  height: 6px;
+  background: var(--rp-track);
+}
+
+/* Keep focus visible (a11y frozen) */
+.rp-result-page[data-visual="v2"] .rp-card__cta:focus-visible,
+.rp-result-page[data-visual="v2"] .rp-expand-btn:focus-visible,
+.rp-result-page[data-visual="v2"] .rp-know-section__trigger:focus-visible {
+  outline: var(--rp-focus-ring);
+  outline-offset: var(--rp-focus-offset);
+}

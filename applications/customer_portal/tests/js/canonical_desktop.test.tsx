@@ -13,6 +13,7 @@ describe("PortalPage — Result architecture Sprint D / UI V1", () => {
 
     expect(container.querySelector('[data-result-architecture="pack07"]')).toBeTruthy();
     expect(container.querySelector('[data-sprint="D"]')).toBeTruthy();
+    expect(container.querySelector('[data-visual="v2"]')).toBeTruthy();
     expect(container.querySelector(".rp-result-page")).toBeTruthy();
     expect(container.querySelector("#rp-main")).toBeTruthy();
 

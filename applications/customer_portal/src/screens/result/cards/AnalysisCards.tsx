@@ -66,7 +66,7 @@ export function StrengthAnalysisCard({
       hasMore={model.hasMore}
       data-card="strength"
       footer={
-        <button type="button" className="rp-card__cta" data-has-more={model.hasMore ? "true" : "false"}>
+        <button type="button" className="rp-card__cta rp-card__cta--secondary" data-has-more={model.hasMore ? "true" : "false"}>
           {model.cta}
         </button>
       }
@@ -115,7 +115,7 @@ export function TenGodsAnalysisCard({
       hasMore={model.hasMore}
       data-card="ten-gods"
       footer={
-        <button type="button" className="rp-card__cta" data-has-more={model.hasMore ? "true" : "false"}>
+        <button type="button" className="rp-card__cta rp-card__cta--secondary" data-has-more={model.hasMore ? "true" : "false"}>
           {model.cta}
         </button>
       }
