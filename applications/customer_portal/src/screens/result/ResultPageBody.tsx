@@ -16,6 +16,7 @@ import {
 
 /**
  * Official Result Page composition — Zones → Rows → Grid → Cards.
+ * Sprint A architecture frozen; Sprint B fills LP-005/006/007 content.
  */
 export function ResultPageBody(): ReactNode {
   return (
@@ -24,7 +25,7 @@ export function ResultPageBody(): ReactNode {
       data-architecture="zone-row-grid-card"
       data-blueprint="pack07"
       data-presentation="pack04"
-      data-sprint="A"
+      data-sprint="B"
     >
       <ContextZone />
       <SummaryZone />

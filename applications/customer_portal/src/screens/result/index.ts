@@ -9,3 +9,14 @@ export type { ResultPageViewModel } from "./viewModels";
 export * from "./zones";
 export * from "./layout";
 export * from "./cards";
+export {
+  MAX_PRIMARY_RECOMMENDATIONS,
+  RECOMMENDATION_PRIORITY_LABEL,
+  RECOMMENDATION_PRIORITY_ORDER,
+  bindPlaceholder,
+  formatPreviewField,
+  groupItems,
+  priorityFromIndex,
+  sortByRecommendationPriority,
+  truncatePrimaryList,
+} from "./presentation/previewBuilder";

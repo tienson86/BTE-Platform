@@ -3,7 +3,7 @@
  * Presentation-only. No BaZi business logic.
  */
 
-import { adaptPreviewText, type PreviewText } from "../../presentation";
+import { adaptPreviewText, type PreviewText } from "../../../presentation";
 import type { RecommendationPriority } from "../viewModels";
 
 export const RECOMMENDATION_PRIORITY_ORDER: readonly RecommendationPriority[] = [

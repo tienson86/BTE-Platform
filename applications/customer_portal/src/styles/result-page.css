@@ -323,6 +323,196 @@
   font-weight: 700;
 }
 
+/* —— Sprint B: LP-005 Recommendation —— */
+.rp-card--recommendation {
+  overflow: hidden;
+}
+
+.rp-rec-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-3);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.rp-rec-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-2);
+  padding: var(--rp-space-3);
+  border: 1px solid var(--rp-card-border);
+  border-radius: 12px;
+  background: #faf9f8;
+  min-width: 0;
+}
+
+.rp-rec-item__head {
+  display: flex;
+  align-items: center;
+  gap: var(--rp-space-2);
+  min-width: 0;
+}
+
+.rp-rec-item__action {
+  margin: 0;
+  min-width: 0;
+}
+
+.rp-rec-item__reason,
+.rp-rec-item__benefit,
+.rp-rec-item__detail {
+  margin: 0;
+  color: var(--rp-muted);
+}
+
+.rp-rec-item__benefit::before {
+  content: "Benefit · ";
+  font-weight: 600;
+  color: var(--rp-text);
+}
+
+.rp-priority {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 var(--rp-space-2);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rp-priority[data-priority="critical"] {
+  background: #f8eaea;
+  color: #9a1b1b;
+}
+
+.rp-priority[data-priority="high"] {
+  background: #fff7e8;
+  color: #a16207;
+}
+
+.rp-priority[data-priority="medium"] {
+  background: #eef2f6;
+  color: #455a64;
+}
+
+.rp-priority[data-priority="low"] {
+  background: #eaf7f0;
+  color: #1f7a4d;
+}
+
+.rp-expand-btn {
+  align-self: flex-start;
+  margin-top: var(--rp-space-1);
+  border: 0;
+  background: transparent;
+  color: var(--rp-accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.rp-expand-btn:hover,
+.rp-expand-btn:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+/* —— Sprint B: LP-006 Interpretation —— */
+.rp-card--interpretation,
+.rp-card--knowledge {
+  height: auto;
+  max-height: none;
+  min-height: 0;
+}
+
+.rp-interp-list,
+.rp-know-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-4);
+}
+
+.rp-interp-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-3);
+  padding: var(--rp-space-4);
+  border: 1px solid var(--rp-card-border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.rp-interp-block__title {
+  margin: 0;
+  color: var(--rp-text);
+}
+
+.rp-interp-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-1);
+  min-width: 0;
+}
+
+.rp-interp-step__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rp-accent);
+}
+
+.rp-interp-step p {
+  margin: 0;
+}
+
+/* —— Sprint B: LP-007 Knowledge —— */
+.rp-card--knowledge {
+  border-style: dashed;
+}
+
+.rp-know-section {
+  border: 1px solid var(--rp-card-border);
+  border-radius: 12px;
+  background: #faf9f8;
+  overflow: hidden;
+}
+
+.rp-know-section__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rp-space-3);
+  padding: var(--rp-space-3) var(--rp-space-4);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.rp-know-section__chevron {
+  color: var(--rp-accent);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.rp-know-section__panel,
+.rp-know-section__teaser {
+  padding: 0 var(--rp-space-4) var(--rp-space-4);
+  margin: 0;
+}
+
+.rp-know-section__ref {
+  margin: var(--rp-space-2) 0 0;
+}
+
 /* Responsive — reading order preserved */
 @media (max-width: 1199px) {
   .rp-grid__cell--4,

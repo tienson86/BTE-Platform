@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(
   __dirname,
-  "../../../knowledge/ui_reference/refactor/sprint_a_screenshots",
+  "../../../knowledge/ui_reference/refactor/sprint_b_screenshots",
 );
 const url = "http://127.0.0.1:5179/sprint-a-screenshots.html";
 
@@ -24,6 +24,9 @@ const ZONES = [
   { id: "LP-001", selector: '[data-pattern="LP-001"]', file: "lp001_summary" },
   { id: "LP-003", selector: '[data-pattern="LP-003"]', file: "lp003_analysis" },
   { id: "LP-004", selector: '[data-pattern="LP-004"]', file: "lp004_visualization" },
+  { id: "LP-005", selector: '[data-pattern="LP-005"]', file: "lp005_recommendation" },
+  { id: "LP-006", selector: '[data-pattern="LP-006"]', file: "lp006_interpretation" },
+  { id: "LP-007", selector: '[data-pattern="LP-007"]', file: "lp007_knowledge" },
 ];
 
 fs.mkdirSync(outDir, { recursive: true });

@@ -69,7 +69,7 @@ export function PortalPage({
           data-presentation="pack04"
           data-mode={mode}
           data-status={viewModel.status}
-          data-sprint="A"
+          data-sprint="B"
         >
           <PortalSidebar />
           <PortalHeader />

@@ -15,3 +15,8 @@ export {
   TenGodsAnalysisCard,
 } from "./AnalysisCards";
 export { RadarChartCard, LuckTimelineCard } from "./VisualizationCards";
+export {
+  RecommendationCard,
+  InterpretationCard,
+  KnowledgeCard,
+} from "./ContentCards";

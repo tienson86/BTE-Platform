@@ -67,15 +67,15 @@ S00
 
 ↓
 
-S01 → S02 → S09
+S01 → S03 → S09
 
 ↓
 
-S03 → S04 → S05 → S10
+S02 → S04 → S06 
 
 ↓
 
-S06 → S07 → S08 → S11
+S05 → S07 → S08 → S10 → S11
 
 This order MUST NOT change.
 

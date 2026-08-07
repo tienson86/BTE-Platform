@@ -1,47 +1,60 @@
 /**
- * Result Page Sprint A — zone architecture smoke test (PACK_06 / PACK_07).
+ * Result Page Sprint A+B — zone architecture + content zones smoke test.
  */
 
 import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { PortalPage, CANONICAL_DESKTOP_MOCK } from "../../src/screens/canonical_desktop";
 
-describe("PortalPage — Result architecture Sprint A", () => {
-  it("renders shell and official zones without direct card composition on page root", () => {
+describe("PortalPage — Result architecture Sprint B", () => {
+  it("preserves Sprint A zones and renders LP-005/006/007 content zones", () => {
     const { container } = render(<PortalPage />);
 
     expect(container.querySelector('[data-result-architecture="pack07"]')).toBeTruthy();
-    expect(container.querySelector('[data-sprint="A"]')).toBeTruthy();
+    expect(container.querySelector('[data-sprint="B"]')).toBeTruthy();
     expect(container.querySelector(".rp-result-page")).toBeTruthy();
 
     expect(screen.getByText("BTE Portal")).toBeTruthy();
     expect(screen.getByText("Kết quả")).toBeTruthy();
 
-    // Zone / row markers
-    expect(container.querySelector('[data-zone="context"]')).toBeTruthy();
+    // Frozen Sprint A patterns
     expect(container.querySelector('[data-zone="summary"][data-pattern="LP-001"]')).toBeTruthy();
     expect(container.querySelector('[data-zone="analysis"][data-pattern="LP-003"]')).toBeTruthy();
     expect(container.querySelector('[data-zone="visualization"][data-pattern="LP-004"]')).toBeTruthy();
-    expect(container.querySelector('[data-zone="recommendation"]')).toBeTruthy();
-    expect(container.querySelector('[data-zone="interpretation"]')).toBeTruthy();
-    expect(container.querySelector('[data-zone="knowledge"]')).toBeTruthy();
 
-    // LP-001 cards
-    expect(screen.getByText("TÓM TẮT ĐIỀU HÀNH")).toBeTruthy();
-    expect(screen.getByText("CHỈ SỐ CỐT LÕI")).toBeTruthy();
-    expect(screen.getByText("ĐỊNH HƯỚNG MỆNH VẬN")).toBeTruthy();
+    // Sprint B patterns
+    expect(container.querySelector('[data-zone="recommendation"][data-pattern="LP-005"]')).toBeTruthy();
+    expect(container.querySelector('[data-zone="interpretation"][data-pattern="LP-006"]')).toBeTruthy();
+    expect(container.querySelector('[data-zone="knowledge"][data-pattern="LP-007"]')).toBeTruthy();
 
-    // LP-003 cards
-    expect(screen.getByText("NGŨ HÀNH")).toBeTruthy();
-    expect(screen.getByText(CANONICAL_DESKTOP_MOCK.s05.title)).toBeTruthy();
-    expect(screen.getByText("THẬP THẦN")).toBeTruthy();
+    // Reading order: recommendation before interpretation before knowledge
+    const zones = [...container.querySelectorAll("[data-zone]")].map(
+      (node) => node.getAttribute("data-zone"),
+    );
+    expect(zones.indexOf("recommendation")).toBeLessThan(zones.indexOf("interpretation"));
+    expect(zones.indexOf("interpretation")).toBeLessThan(zones.indexOf("knowledge"));
 
-    // LP-004 cards
-    expect(screen.getByText("BIỂU ĐỒ RADAR NGŨ HÀNH")).toBeTruthy();
-    expect(screen.getByText("DÒNG THỜI GIAN VẬN")).toBeTruthy();
+    // LP-005
+    expect(screen.getByText("KHUYẾN NGHỊ")).toBeTruthy();
+    expect(screen.getByText("Critical")).toBeTruthy();
+    expect(container.querySelectorAll(".rp-rec-item").length).toBeGreaterThan(0);
+    expect(container.querySelectorAll(".rp-rec-item").length).toBeLessThanOrEqual(5);
 
-    // Equal-height rows for Sprint A implemented zones
-    expect(container.querySelectorAll('[data-equal-height="true"]').length).toBeGreaterThanOrEqual(4);
+    // LP-006 preview default + expand
+    expect(screen.getByText("LUẬN GIẢI")).toBeTruthy();
+    expect(screen.getAllByText("Observation").length).toBeGreaterThan(0);
+    const expandButtons = screen.getAllByRole("button", { name: "Mở rộng luận giải" });
+    expect(expandButtons.length).toBeGreaterThan(0);
+    fireEvent.click(expandButtons[0]!);
+    expect(screen.getAllByText("Impact").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Suggestion").length).toBeGreaterThan(0);
+
+    // LP-007
+    expect(screen.getByText("KIẾN THỨC")).toBeTruthy();
+    expect(screen.getByText("Thuật ngữ")).toBeTruthy();
+    expect(screen.getByText("Tài liệu tham chiếu")).toBeTruthy();
+    expect(screen.getByText("Lý thuyết truyền thống")).toBeTruthy();
+    expect(screen.getByText("Phụ lục")).toBeTruthy();
 
     expect(screen.getAllByText("Nguyễn Văn A").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(CANONICAL_DESKTOP_MOCK.footer)).toBeTruthy();
