@@ -1,10 +1,11 @@
 # 01 — Capability Registry
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: **OFFICIAL — Single Source of Truth**  
 Date: 2026-08-08  
 Owner: BTE Product  
 Scope: Customer-facing commercial capabilities only  
+**Commercial version:** **RC1** (NOT Released)  
 
 ---
 
@@ -13,6 +14,26 @@ Scope: Customer-facing commercial capabilities only
 The Capability Registry is the **single source of truth** for every commercial capability in BTE.
 
 If a capability is not listed here, it is **not** an official product capability — regardless of Domain docs, Knowledge Units, or engineering work-in-progress.
+
+---
+
+## 1b. Commercial version status
+
+| Field | Value |
+|-------|-------|
+| **Status** | **Release Candidate 1** |
+| **Engineering** | **PASS** |
+| **Golden Cases** | **PASS** |
+| **Commercial QA** | **PASS** |
+| **Human Consulting Review** | **PENDING** |
+| **Product Decision** | **PENDING** |
+| **Commercial Version** | **RC1** |
+| **Release package** | `knowledge/releases/v1/09`–`13` |
+| **RC1 forms** | `knowledge/product/release_candidate/` |
+| **Included Capabilities** | CAP-CAREER-SEL-001 · CAP-CAREER-PRO-001 |
+
+**Commercial V1 is NOT Released.**  
+**Do not declare Released until Product GO.**
 
 ---
 
@@ -89,13 +110,13 @@ Every capability entry must include:
 | **Owner** | BTE Product |
 | **Priority** | P1 → shipped as Production V1 |
 | **Commercial Value** | High — upsell after career selection |
-| **Future Release** | Released in Release 2 — maintenance until revision |
+| **Future Release** | Included in Commercial V1 **RC1** scope — Capability Released ≠ Commercial version Released |
 
-**Customer outcome:** Ready / prepare / defer posture; management-role acceptance; competency gaps; risks + mitigation; timing + advancement window; 90-day promotion plan — on the existing Result Page.
+**Customer outcome:** Ready / prepare / defer posture; management-role acceptance; competency gaps; risks + mitigation; timing + advancement window; 90-day promotion plan — on the existing Result Page (secondary milestone under Career Strategy).
 
 **Out of scope:** Guaranteed titles/salary; full Leadership Assessment; Partnership packs.
 
-**Gate:** Product Review before Leadership Assessment (Release 3).
+**Next Capability train:** Leadership Assessment — do not start without Product approval.
 
 ---
 
@@ -241,8 +262,8 @@ Every capability entry must include:
 
 | Capability ID | Name | Domain | Version | Status | Stage | Production | Priority | Release |
 |---------------|------|--------|---------|--------|-------|------------|----------|---------|
-| CAP-CAREER-SEL-001 | Career Selection Assessment | Domain 01 | 1.0.0 | Released | Frozen | Yes | P0 | R1 |
-| CAP-CAREER-PRO-001 | Promotion Readiness Assessment | Domain 01 | 1.0.0 | Released | Production | Yes | P1 | R2 |
+| CAP-CAREER-SEL-001 | Career Selection Assessment | Domain 01 | 1.0.0 | Released | Frozen | Yes | P0 | R1 · Commercial V1 RC1 |
+| CAP-CAREER-PRO-001 | Promotion Readiness Assessment | Domain 01 | 1.0.0 | Released | Production | Yes | P1 | R2 · Commercial V1 RC1 |
 | CAP-CAREER-LED-001 | Leadership Assessment | Domain 01 | — | Proposed | Proposed | No | P1 | R3 |
 | CAP-BUSINESS-SUIT-001 | Business Suitability Assessment | Domain 01 | — | Proposed | Proposed | No | P1 | R4 |
 | CAP-FINANCE-PLAN-001 | Finance Planning Assessment | Finance (TBD) | — | Proposed | Proposed | No | P2 | R5 |
@@ -274,8 +295,17 @@ Those are implementation details supporting capabilities.
 
 ## 7. Stop line
 
-Registry updated: **two** production capabilities (SEL Frozen · PRO Production V1).  
+Registry SoT: SEL Frozen · PRO Production V1.
 
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Commercial Version | RC1 |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
+| Commercial V1 Released? | No |
+
+**Commercial V1 is NOT Released.**  
 **Do not start Leadership Assessment without Product approval.**
 
 ---

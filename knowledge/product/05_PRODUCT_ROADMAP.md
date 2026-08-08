@@ -1,10 +1,10 @@
 # 05 — Product Roadmap
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: **OFFICIAL — Capability Roadmap**  
 Date: 2026-08-08  
 Owner: BTE Product  
-Depends on: `01_CAPABILITY_REGISTRY.md`  
+Depends on: `01_CAPABILITY_REGISTRY.md` · Commercial V1 RC1  
 Scope: Roadmap by **capability** (not by Engine)  
 
 ---
@@ -22,7 +22,7 @@ Architecture remains frozen; product grows by shipping capabilities that pass th
 | Release | Capability ID | Capability Name | Status |
 |--------:|---------------|-----------------|--------|
 | **1** | CAP-CAREER-SEL-001 | Career Selection Assessment | **Released · Frozen** |
-| **2** | CAP-CAREER-PRO-001 | Promotion Readiness Assessment | **Released (Production V1)** |
+| **2** | CAP-CAREER-PRO-001 | Promotion Readiness Assessment | **Released · Production** · Commercial V1 RC1 |
 | **3** | CAP-CAREER-LED-001 | Leadership Assessment | Proposed — awaiting Product approval |
 | **4** | CAP-BUSINESS-SUIT-001 | Business Suitability Assessment | Proposed |
 | **5** | CAP-FINANCE-PLAN-001 | Finance Planning Assessment | Proposed |
@@ -52,7 +52,7 @@ Architecture remains frozen; product grows by shipping capabilities that pass th
 | Dependencies | Wave 1.1 · CAP-CAREER-SEL-001 |
 | Commercial value | **High** — upsell / timing-sensitive career |
 | Estimated maturity | **Production V1** (complete) |
-| Notes | Sprint E · Domain reports `24`–`30` |
+| Notes | Sprint E · Domain reports `24`–`30` · included in Commercial V1 RC1 scope |
 
 ### Release 3 — Leadership Assessment
 
@@ -157,9 +157,18 @@ R1 Career Selection ────────────────────
 
 ## 7. Stop line
 
-Release 1 Frozen · Release 2 Production V1.  
+Release 1 Frozen · Release 2 Production V1.
 
-**Stop. Do not start Release 3 (Leadership Assessment) without Product approval.**
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Commercial Version | RC1 |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
+| Commercial V1 Released? | No |
+
+**Commercial V1 is NOT Released.**  
+**Do not start Release 3 (Leadership Assessment) without Product approval.**
 
 ---
 

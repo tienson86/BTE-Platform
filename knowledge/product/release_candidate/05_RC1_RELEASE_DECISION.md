@@ -1,9 +1,21 @@
 # 05 — RC1 Release Decision · Commercial V1
 
 Version: 1.0.0  
-Status: **AWAITING PRODUCT OWNER** — do not pre-fill GO  
 Date: 2026-08-08  
 Release candidate: **Commercial V1 · RC1**  
+
+| Field | Value |
+|-------|-------|
+| **Status** | **Release Candidate 1** |
+| **Engineering** | **PASS** |
+| **Golden Cases** | **PASS** |
+| **Commercial QA** | **PASS** |
+| **Human Consulting Review** | **PENDING** |
+| **Product Decision** | **PENDING** |
+| **Commercial Version** | **RC1** |
+
+**UNSIGNED.** Decision checkboxes below must remain blank until Product Owner signs.  
+**Commercial V1 is NOT Released.**
 
 ---
 
@@ -11,87 +23,35 @@ Release candidate: **Commercial V1 · RC1**
 
 Record the **official Product release decision** for Commercial V1 after Human Consulting Validation.
 
-This decision is **independent** of:
-
-- Capability Registry rows already marked Released for SEL / PRO (production path wiring)  
-- Engineering Golden Cases / module tests PASS  
-
-Commercial V1 **product** release requires this form signed.
-
-**Do not declare Commercial V1 Released until a GO or GO WITH MINOR FIXES is recorded here.**
+**Do not pre-fill GO.** Leave decision blank until Product Owner signs.
 
 ---
 
-## 2. Official release outcomes
+## 2. Prerequisites (engineering / docs — claimed complete at RC1 cut)
 
-### GO
-
-Commercial V1 may be announced as Released for Beta / commercial offering.
-
-Conditions:
-
-- Human consulting acceptance is **PASS** (aggregate)  
-- Zero open Blockers  
-- Prerequisites verified (below)
-
-### GO WITH MINOR FIXES
-
-Commercial V1 may proceed with an explicit minor-fix list.
-
-Conditions:
-
-- Acceptance is **PASS WITH MINOR FIXES**  
-- Zero Blockers  
-- Fixes owned, dated, and P1-or-lower  
-- Product accepts residual risk in writing
-
-### NO GO
-
-Commercial V1 must **not** be announced as Released.
-
-Conditions:
-
-- Any **REJECT** acceptance, or open Blocker, or failed prerequisites  
-- Return to polish / consulting repair — **no new Capability** as a shortcut
+| Prerequisite | Status |
+|--------------|--------|
+| Engineering | PASS |
+| Golden Cases | PASS |
+| Commercial QA | PASS |
+| Release package `09`–`13` | Complete |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
 
 ---
 
-## 3. Prerequisite verification (engineering package)
+## 3. Consulting acceptance
 
-Verify before signing. Mark each:
+Attach or reference completed:
 
-| Check | Status | Evidence |
-|-------|:------:|----------|
-| RC1 review package files exist (`01`–`05`) | ☐ | `knowledge/product/release_candidate/` |
-| Capability Registry lists Career Selection Released | ☐ | `knowledge/product/01_CAPABILITY_REGISTRY.md` |
-| Capability Registry lists Promotion Readiness Released | ☐ | same |
-| Product Changelog records capability releases | ☐ | `knowledge/product/06_PRODUCT_CHANGELOG.md` |
-| Career Selection release notes complete | ☐ | Domain `23_RELEASE_NOTES.md` |
-| Promotion release notes complete | ☐ | Domain `30_PROMOTION_RELEASE_NOTES.md` |
-| Golden Cases complete (SEL) | ☐ | Domain `22` / `tests/domain01` |
-| Golden Cases complete (PRO) | ☐ | Domain `25` / `29` / `tests/domain01` |
-| Regression complete (commercial + domain01) | ☐ | `09_COMMERCIAL_QA.md` · validation reports |
-| P0 engineering polish complete | ☐ | `commercial_v1/07`–`09` |
-| Human consulting forms completed | ☐ | Completed `02`–`04` |
+- `04_CONSULTING_ACCEPTANCE_FORM.md`  
+- Scoring sheets as required by `01_RC1_REVIEW_GUIDE.md`  
+
+Consulting gate closed? ☐ Yes · ☐ No  
 
 ---
 
-## 4. Human consulting roll-up
-
-| Metric | Value |
-|--------|-------|
-| Reviewers count | |
-| Cases PASS | |
-| Cases PASS WITH MINOR FIXES | |
-| Cases REJECT | |
-| Open Blockers | |
-| Open Majors | |
-
----
-
-## 5. Decision record (Product Owner only)
-
-Select **one**:
+## 4. Decision record (Product Owner)
 
 - [ ] **GO**  
 - [ ] **GO WITH MINOR FIXES**  
@@ -99,31 +59,34 @@ Select **one**:
 
 | Field | Value |
 |-------|-------|
-| Decision date | _pending_ |
-| Product Owner | |
-| Rationale | |
-| Minor fix list (if any) | |
-| Next review date (if NO GO / minors) | |
+| Decision date | ________________ |
+| Product Owner | ________________ |
+| Rationale | ________________ |
+| Minor fix list (if any) | ________________ |
+| Next review date | ________________ |
 
-**Commercial V1 Released?** ☐ Yes · ☐ **No (default until signed GO / GO WITH MINOR FIXES)**
+**Commercial V1 Released?** ☐ Yes · ☐ No  
 
----
-
-## 6. Post-decision actions
-
-| If | Then |
-|----|------|
-| GO | Update Product Changelog with Commercial V1 Released; announce Beta; freeze RC1 scope |
-| GO WITH MINOR FIXES | Track minors; Changelog notes conditional release; no new Capability |
-| NO GO | Keep RC1; open polish sprint from acceptance comments only |
+*(Mark Yes only after GO / GO WITH MINOR FIXES and a separate Released announcement — not before.)*
 
 ---
 
-## 7. Stop line
+## 5. Post-decision actions (after GO only)
 
-Decision form ready.  
+| Action | Status |
+|--------|--------|
+| Update Product Changelog — Commercial V1 Released | ☐ |
+| Publish Released announcement | ☐ |
+| Freeze & archive RC1 | ☐ |
+| Confirm baseline `12` as Released train | ☐ |
 
-**Wait for Product review. Do not declare Commercial V1 Released in this package.**
+---
+
+## 6. Stop line
+
+Decision form **open**.  
+
+**Do not declare Commercial V1 Released until this form is signed.**
 
 ---
 

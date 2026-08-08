@@ -80,12 +80,19 @@ Exact scope of V1.1 / V2 is set by Product Roadmap + Capability Registry — thi
 
 ## 6. Commercial V1 current planning stance
 
-| Item | Stance |
-|------|--------|
-| Commercial V1 | **RC1** — finish Human Consulting + Product Approval |
-| Commercial V1.1 | **Do not start** as escape hatch from RC1 |
-| Commercial V2 | **Not opened** |
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Engineering | PASS |
+| Golden Cases | PASS |
+| Commercial QA | PASS |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
+| Commercial Version | RC1 |
+| Commercial V1.1 | Do not start as escape hatch from RC1 |
+| Commercial V2 | Not opened |
 
+**Commercial V1 is NOT Released.**  
 **Do not declare Commercial V1 Released in this document.**
 
 ---

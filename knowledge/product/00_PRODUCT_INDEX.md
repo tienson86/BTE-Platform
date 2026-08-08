@@ -1,10 +1,10 @@
 # 00 — Product Index · Capability Registry V1
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: **OFFICIAL — Capability Registry V1**  
 Date: 2026-08-08  
 Owner: BTE Product  
-Depends on: Product Manifesto · V1 Architecture Freeze · Domain 01 CAP-D1-CA-SEL Production V1  
+Depends on: Product Manifesto · V1 Architecture Freeze · Domain 01 production capabilities  
 Scope: **Documentation only** — no runtime, no Knowledge Units, no implementation  
 
 ---
@@ -38,8 +38,9 @@ Domain packs / Knowledge / Narrative / Portal (implementation & delivery)
 | 6 | `06_PRODUCT_CHANGELOG.md` | Official capability release log |
 | — | `BTE_PRODUCT_MANIFESTO.md` | Product constitution (pre-existing) |
 | — | `commercial_v1/` | Experience audit + P0 polish docs |
-| — | `release_candidate/` | **Commercial V1 RC1 human consulting validation** |
-| — | `../releases/process/` | **Permanent BTE Release Management process** |
+| — | `release_candidate/` | **Commercial V1 RC1** human consulting validation |
+| — | `../releases/v1/09`–`13` | **Commercial V1 RC1 release package** (awaiting Product sign-off) |
+| — | `../releases/process/` | Permanent BTE Release Management process |
 
 ---
 
@@ -59,18 +60,26 @@ Domain packs / Knowledge / Narrative / Portal (implementation & delivery)
 
 | Registry ID | Name | Status | Production |
 |-------------|------|--------|------------|
-## 4. Current production snapshot
-
-| Registry ID | Name | Status | Production |
-|-------------|------|--------|------------|
 | **CAP-CAREER-SEL-001** | Career Selection Assessment | Released / Frozen | **Yes (V1)** |
-| **CAP-CAREER-PRO-001** | Promotion Readiness Assessment | Released | **Yes (V1)** |
+| **CAP-CAREER-PRO-001** | Promotion Readiness Assessment | Released / Production | **Yes (V1)** |
 
 Domain aliases: `CAP-D1-CA-SEL`, `CAP-D1-CA-PRO`  
 
-**Commercial V1 product status:** Release Candidate **RC1** — human consulting validation in progress (`release_candidate/`).  
+| Field | Value |
+|-------|-------|
+| **Status** | **Release Candidate 1** |
+| **Engineering** | **PASS** |
+| **Golden Cases** | **PASS** |
+| **Commercial QA** | **PASS** |
+| **Human Consulting Review** | **PENDING** |
+| **Product Decision** | **PENDING** |
+| **Commercial Version** | **RC1** |
+| **Released?** | **No** |
+| **Release package** | `knowledge/releases/v1/09`–`13` |
+| **RC1 forms** | `knowledge/product/release_candidate/` |
 
-**Do not declare Commercial V1 Released until `05_RC1_RELEASE_DECISION.md` is signed GO / GO WITH MINOR FIXES.**  
+**Commercial V1 is NOT Released.**  
+**Do not declare Released until `05_RC1_RELEASE_DECISION.md` is signed GO.**  
 **Do not start Leadership Assessment until Product approval.**
 
 ---
@@ -79,15 +88,22 @@ Domain aliases: `CAP-D1-CA-SEL`, `CAP-D1-CA-PRO`
 
 - Authoring Knowledge Units  
 - Modifying Wave 1.1, Foundation, Narrative, Portal, APIs, or runtime  
-- Starting Release 2 (Promotion Readiness)  
+- Starting Leadership Assessment without Product approval  
 
 ---
 
 ## 6. Stop line
 
-Capability Registry V1 is established.  
+Capability Registry SoT established.  
 
-**Wait for Product approval before the next capability.**
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Commercial Version | RC1 |
+| Commercial V1 Released? | No |
+
+**Commercial V1 is NOT Released.**  
+**Wait for Human Consulting Review (PENDING) and Product Decision (PENDING).**
 
 ---
 

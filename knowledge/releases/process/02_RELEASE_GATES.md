@@ -118,13 +118,16 @@ Commercial version gates **aggregate** capability readiness + experience + human
 
 ## 6. Commercial V1 RC1
 
-| Gate | Status (as of pack publish) |
-|------|-----------------------------|
-| Engineering | Complete (per Product declaration) |
-| Golden Case | Complete for SEL + PRO (engineering evidence) |
-| Commercial Quality | P0 engineering polish done; residual human confirmation via consulting |
-| Human Consulting | **Open** (RC1 package) |
-| Product Approval | **Open** — Commercial V1 not Released |
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Engineering | PASS |
+| Golden Cases | PASS |
+| Commercial QA | PASS |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
+| Commercial Version | RC1 |
+| Declared Released? | No |
 
 ---
 

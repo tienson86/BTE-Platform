@@ -1,6 +1,6 @@
 # 00 — Release Process Index · BTE Release Management
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: **OFFICIAL — Permanent Release Process**  
 Date: 2026-08-08  
 Owner: BTE Product  
@@ -14,7 +14,7 @@ This pack is the **permanent BTE Release Management** process.
 
 It applies to:
 
-- Commercial V1 (currently **RC1** — human consulting gate open)  
+- Commercial V1 (currently **RC1** — Human Consulting + Product sign-off open)  
 - Commercial V1.1 / V2 / later  
 - Hotfixes and post-release maintenance  
 
@@ -24,7 +24,7 @@ It complements (does not replace):
 |------|------|
 | `knowledge/product/` Capability Registry & policies | Capability as release unit |
 | `knowledge/product/release_candidate/` | Human consulting validation for a given RC |
-| `knowledge/releases/v1/` | V1 Architecture Freeze & technical release notes |
+| `knowledge/releases/v1/` | V1 Architecture Freeze & Commercial V1 RC1 package (`09`–`13`) |
 | `knowledge/consulting_quality/` | Consulting scorecard & acceptance minima |
 
 ---
@@ -47,14 +47,22 @@ It complements (does not replace):
 
 ## 3. Current Commercial V1 status (do not invent)
 
-| Item | Status |
-|------|--------|
-| Architecture | Frozen |
-| Engineering (Commercial V1 scope) | Complete |
-| Career Selection Assessment | Capability Released (production path) |
-| Promotion Readiness Assessment | Capability Released (production path) |
-| Commercial V1 **product** release | **RC1** — awaiting Human Consulting + Product sign-off |
-| Declared Commercial V1 Released? | **No** — wait for Product Review |
+| Field | Value |
+|-------|-------|
+| **Status** | **Release Candidate 1** |
+| **Engineering** | **PASS** |
+| **Golden Cases** | **PASS** |
+| **Commercial QA** | **PASS** |
+| **Human Consulting Review** | **PENDING** |
+| **Product Decision** | **PENDING** |
+| **Commercial Version** | **RC1** |
+| Career Selection Assessment | Capability Released · Frozen |
+| Promotion Readiness Assessment | Capability Released · Production |
+| Declared Commercial V1 Released? | **No** |
+| Release package | `knowledge/releases/v1/09`–`13` |
+| Archive folder | **INACTIVE** (`release_candidate/archive/`) |
+
+**Commercial V1 is NOT Released.**
 
 ---
 
@@ -72,7 +80,16 @@ A Capability may be Released on the production path while the **Commercial versi
 
 Release Management V1 published.  
 
-**Wait for Product Review. Do not declare Commercial V1 Released.**
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Commercial Version | RC1 |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
+| Commercial V1 Released? | No |
+
+**Commercial V1 is NOT Released.**  
+**Wait for Product Review.**
 
 ---
 

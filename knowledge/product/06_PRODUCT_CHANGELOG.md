@@ -1,6 +1,6 @@
 # 06 — Product Changelog
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: **OFFICIAL**  
 Date: 2026-08-08  
 Owner: BTE Product  
@@ -10,7 +10,7 @@ Depends on: `01_CAPABILITY_REGISTRY.md`
 
 ## 1. Purpose
 
-Official changelog for **capability releases**.
+Official changelog for **capability releases** and **Commercial version** announcements.
 
 Every production capability release records:
 
@@ -27,16 +27,21 @@ Every production capability release records:
 
 ## 2. Entries
 
-### 2026-08-08 — Commercial V1 · RC1 human consulting package
+### 2026-08-08 — Commercial V1 · RC1 release package
 
 | Field | Value |
 |-------|-------|
 | **Version** | RC1 (product gate — not a capability semver) |
 | **Capability** | — (Commercial V1 product validation) |
-| **Changes** | Published Release Candidate human consulting validation package under `knowledge/product/release_candidate/` (`01`–`05`). Engineering complete; Commercial V1 **not** declared Released pending Product Owner decision on `05_RC1_RELEASE_DECISION.md`. |
-| **Golden Cases** | Prerequisites verified in Domain / `tests/domain01` (not re-run here) |
-| **Regression** | Prerequisites documented in `commercial_v1/09` |
-| **Production date** | N/A — awaiting human GO |
+| **Status** | Release Candidate 1 |
+| **Engineering** | PASS |
+| **Golden Cases** | PASS |
+| **Commercial QA** | PASS |
+| **Human Consulting Review** | PENDING |
+| **Product Decision** | PENDING |
+| **Commercial Version** | RC1 |
+| **Changes** | Published Commercial V1 RC1 release package (`knowledge/releases/v1/09`–`13`) and human consulting forms under `release_candidate/`. **Commercial V1 is NOT Released.** |
+| **Production date** | N/A — Product Decision PENDING |
 
 ### 2026-08-08 — CAP-CAREER-PRO-001 · v1.0.0
 
@@ -116,9 +121,18 @@ Every production capability release records:
 
 ## 4. Stop line
 
-Changelog: Career Selection **Frozen** · Promotion Readiness **v1.0.0** released.  
+Capability log: Career Selection **Frozen** · Promotion Readiness **v1.0.0**.  
 
-Next entry only after Product-approved Leadership Assessment work.
+| Field | Value |
+|-------|-------|
+| Status | Release Candidate 1 |
+| Commercial Version | RC1 |
+| Human Consulting Review | PENDING |
+| Product Decision | PENDING |
+| Commercial V1 Released? | No |
+
+**Commercial V1 is NOT Released.**  
+**Do not log Commercial V1 Released until Product GO.**
 
 ---
 
