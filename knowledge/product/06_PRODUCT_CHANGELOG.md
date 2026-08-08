@@ -27,6 +27,17 @@ Every production capability release records:
 
 ## 2. Entries
 
+### 2026-08-08 — Commercial V1 · RC1 human consulting package
+
+| Field | Value |
+|-------|-------|
+| **Version** | RC1 (product gate — not a capability semver) |
+| **Capability** | — (Commercial V1 product validation) |
+| **Changes** | Published Release Candidate human consulting validation package under `knowledge/product/release_candidate/` (`01`–`05`). Engineering complete; Commercial V1 **not** declared Released pending Product Owner decision on `05_RC1_RELEASE_DECISION.md`. |
+| **Golden Cases** | Prerequisites verified in Domain / `tests/domain01` (not re-run here) |
+| **Regression** | Prerequisites documented in `commercial_v1/09` |
+| **Production date** | N/A — awaiting human GO |
+
 ### 2026-08-08 — CAP-CAREER-PRO-001 · v1.0.0
 
 | Field | Value |

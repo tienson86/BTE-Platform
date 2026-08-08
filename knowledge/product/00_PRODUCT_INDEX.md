@@ -37,6 +37,9 @@ Domain packs / Knowledge / Narrative / Portal (implementation & delivery)
 | 5 | `05_PRODUCT_ROADMAP.md` | Capability-ordered roadmap |
 | 6 | `06_PRODUCT_CHANGELOG.md` | Official capability release log |
 | — | `BTE_PRODUCT_MANIFESTO.md` | Product constitution (pre-existing) |
+| — | `commercial_v1/` | Experience audit + P0 polish docs |
+| — | `release_candidate/` | **Commercial V1 RC1 human consulting validation** |
+| — | `../releases/process/` | **Permanent BTE Release Management process** |
 
 ---
 
@@ -56,11 +59,18 @@ Domain packs / Knowledge / Narrative / Portal (implementation & delivery)
 
 | Registry ID | Name | Status | Production |
 |-------------|------|--------|------------|
-| **CAP-CAREER-SEL-001** | Career Selection Assessment | Released / **Frozen** | **Yes (V1)** |
-| **CAP-CAREER-PRO-001** | Promotion Readiness Assessment | **Released** | **Yes (V1)** |
+## 4. Current production snapshot
+
+| Registry ID | Name | Status | Production |
+|-------------|------|--------|------------|
+| **CAP-CAREER-SEL-001** | Career Selection Assessment | Released / Frozen | **Yes (V1)** |
+| **CAP-CAREER-PRO-001** | Promotion Readiness Assessment | Released | **Yes (V1)** |
 
 Domain aliases: `CAP-D1-CA-SEL`, `CAP-D1-CA-PRO`  
 
+**Commercial V1 product status:** Release Candidate **RC1** — human consulting validation in progress (`release_candidate/`).  
+
+**Do not declare Commercial V1 Released until `05_RC1_RELEASE_DECISION.md` is signed GO / GO WITH MINOR FIXES.**  
 **Do not start Leadership Assessment until Product approval.**
 
 ---

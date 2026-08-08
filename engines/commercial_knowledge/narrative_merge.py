@@ -201,7 +201,10 @@ def _enrich_analysis_from_bundle(
 
     if bundle.strengths and not (career and career.career_direction):
         commercial = commercialize_customer_text(bundle.strengths[0].text)
-        if not str(strength.get("reasoning") or "").strip():
+        existing = str(strength.get("reasoning") or "").strip()
+        if existing and not _is_commercial_marker(existing):
+            strength["reasoning"] = f"{commercial} {existing}".strip()
+        else:
             strength["reasoning"] = commercial
         strength["commercial_knowledge_unit_id"] = bundle.strengths[0].knowledge_unit_id
 
@@ -234,12 +237,40 @@ def _enrich_analysis_from_bundle(
             else score.get("commercial_knowledge_unit_id")
         )
         useful["commercial_recommendation"] = primary["composed_text"]
+    elif bundle.recommendations:
+        # Wave 1.1-only recommendation path.
+        rec_item = bundle.recommendations[0]
+        rec = commercialize_customer_text(rec_item.text)
+        existing_rec = str(score.get("recommendation") or "").strip()
+        if existing_rec and _looks_like_code(existing_rec):
+            score["recommendation"] = rec
+            score["analytical_recommendation"] = existing_rec
+        elif not existing_rec:
+            score["recommendation"] = rec
+        else:
+            score["analytical_recommendation"] = existing_rec
+            score["recommendation"] = rec
+        score["commercial_knowledge_unit_id"] = rec_item.knowledge_unit_id
+        useful["commercial_recommendation"] = rec
 
     # P0-01: Promotion is secondary milestone only.
     if secondary:
         score["secondary_recommendation"] = secondary["composed_text"]
         score["secondary_career_milestone"] = secondary
         useful["commercial_secondary_milestone"] = secondary["composed_text"]
+
+
+def _is_commercial_marker(text: str) -> bool:
+    return (
+        "trục hỗ trợ" in text
+        or "Dụng thần" in text
+        or "nền tảng ngày" in text
+        or "Nhật chủ" in text
+        or "Điểm tựa" in text
+        or "Họ nghề" in text
+        or "What:" in text
+        or "Kế hoạch 90 ngày" in text
+    )
 
 
 def _looks_like_code(text: str) -> bool:

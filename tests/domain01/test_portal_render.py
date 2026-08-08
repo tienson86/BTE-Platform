@@ -55,6 +55,18 @@ def test_portal_receives_career_selection_on_narrative_result() -> None:
     assert projected["warnings"]
     assert projected["role"]
     assert projected["environment"]
+    assert result["career_selection_label"] == "Career Selection Assessment"
+    assert result["promotion_readiness_label"] == "Promotion Readiness Assessment"
+    assert result["primary_recommendation"]["what"]
+    assert "What:" in result["primary_recommendation"]["composed_text"]
+    assert "Promotion Readiness Assessment" in result["secondary_career_milestone"][
+        "composed_text"
+    ]
+    executive = result["commercial_executive_summary"]
+    assert executive["central_message"]
+    assert len(executive["supporting_points"]) <= 3
+    assert executive["conclusion"]
+    assert "Dụng thần" not in executive["composed_text"]
 
 
 def test_portal_projection_does_not_require_new_route() -> None:

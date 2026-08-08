@@ -377,24 +377,35 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const useNarrative = hasUsableNarrativeResult(narrative);
   const career = careerSelectionFromNarrative(narrative);
   const promotion = promotionReadinessFromNarrative(narrative);
+  const executive = executiveFromNarrative(narrative);
+  const primaryRec = primaryRecommendationFromNarrative(narrative);
+  const secondary = secondaryMilestoneFromNarrative(narrative);
   const careerDirection = careerFieldText(career, "career_direction");
   const careerStrengths = careerFieldText(career, "career_strengths");
-  const careerPlan = careerFieldText(career, "action_plan_90d");
-  const promotionReadiness = promotionFieldText(promotion, "promotion_readiness");
-  const promotionPlan = promotionFieldText(promotion, "action_plan_90d");
   const whoBody = useNarrative
-    ? careerDirection || promotionReadiness || summaryText(narrative?.summary, "identity")
+    ? (executive?.central_message
+        ? `Career Selection Assessment — ${executive.central_message}`
+        : careerDirection
+          ? `Career Selection Assessment — ${careerDirection}`
+          : summaryText(narrative?.summary, "identity"))
     : findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
   const strengthBody = useNarrative
-    ? careerStrengths ||
-      promotionFieldText(promotion, "promotion_strengths") ||
-      summaryText(narrative?.summary, "strengths")
+    ? (executive?.supporting_points?.length
+        ? executive.supporting_points.join(" ")
+        : careerStrengths || summaryText(narrative?.summary, "strengths"))
     : findSectionBody(sections, [/điểm mạnh/i, /thế mạnh/i]);
+  const primaryAction =
+    primaryRec?.composed_text ||
+    careerFieldText(career, "action_plan_90d") ||
+    summaryText(narrative?.summary, "priority_recommendation") ||
+    summaryText(narrative?.summary, "next_action");
+  const secondaryAction =
+    secondary?.composed_text ||
+    (promotion
+      ? `Promotion Readiness Assessment (mốc nghề phụ): ${promotionFieldText(promotion, "promotion_readiness")}`
+      : "");
   const actionBody = useNarrative
-    ? promotionPlan ||
-      careerPlan ||
-      summaryText(narrative?.summary, "priority_recommendation") ||
-      summaryText(narrative?.summary, "next_action")
+    ? [primaryAction, secondaryAction].filter(Boolean).join(" ")
     : findSectionBody(sections, [
         /dụng thần/i,
         /kết luận/i,
@@ -402,15 +413,15 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
         /khuyến/i,
       ]);
   const useful = data.useful_god as Record<string, unknown> | undefined;
-  const whoFallback = [dm && `Nhật chủ ${dm}`, cachCuc && `Cách cục ${cachCuc}`, than]
+  const whoFallback = [dm && `Nền tảng ngày ${dm}`, cachCuc && `Cấu trúc nghề ${cachCuc}`, than]
     .filter(Boolean)
     .join(" · ");
-  const strengthFallback = [cachCuc && `Cách cục ${cachCuc}`, than]
+  const strengthFallback = [cachCuc && `Cấu trúc nghề ${cachCuc}`, than]
     .filter(Boolean)
     .join(". ");
   const dung = pickStr(useful, ["useful_god"]);
   const actionFallback = dung
-    ? `Ưu tiên phát huy Dụng thần: ${dung}. ${asString(data.score?.recommendation)}`.trim()
+    ? `Ưu tiên phát huy trục hỗ trợ: ${dung}. ${asString(data.score?.recommendation)}`.trim()
     : asString(data.score?.recommendation);
 
   const strengthTone =
@@ -754,48 +765,52 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   if (hasUsableNarrativeResult(narrative) && narrative) {
     const career = careerSelectionFromNarrative(narrative);
     const promotion = promotionReadinessFromNarrative(narrative);
-    const careerDirection = careerFieldText(career, "career_direction");
+    const executive = executiveFromNarrative(narrative);
+    const primaryRec = primaryRecommendationFromNarrative(narrative);
+    const secondary = secondaryMilestoneFromNarrative(narrative);
     const careerStrengths = careerFieldText(career, "career_strengths");
     const careerRisks = careerFieldText(career, "career_risks");
     const careerMitigation = careerFieldText(career, "career_mitigation");
-    const careerPlan = careerFieldText(career, "action_plan_90d");
-    const promotionReadiness = promotionFieldText(promotion, "promotion_readiness");
-    const promotionPlan = promotionFieldText(promotion, "action_plan_90d");
-    const promotionRisks = promotionFieldText(promotion, "promotion_risks");
-    const promotionMitigation = promotionFieldText(
-      promotion,
-      "promotion_mitigation",
-    );
     const strengths = (
-      careerStrengths
-        ? [careerStrengths]
-        : promotionFieldText(promotion, "promotion_strengths")
-          ? [promotionFieldText(promotion, "promotion_strengths")]
-          : (narrative.summary?.strengths ?? []).map((item) => firstCommercialSnippet(item))
-    )
-      .filter((item) => item !== UNAVAILABLE_CONCLUSION)
-      .slice(0, 4);
-    const warnings = (
-      careerRisks || careerMitigation
-        ? [careerRisks, careerMitigation].filter(Boolean)
-        : promotionRisks || promotionMitigation
-          ? [promotionRisks, promotionMitigation].filter(Boolean)
-          : (narrative.summary?.weaknesses ?? []).map((item) =>
+      executive?.supporting_points?.length
+        ? [...executive.supporting_points]
+        : careerStrengths
+          ? [careerStrengths]
+          : (narrative.summary?.strengths ?? []).map((item) =>
               firstCommercialSnippet(item),
             )
     )
       .filter((item) => item !== UNAVAILABLE_CONCLUSION)
+      .slice(0, 3);
+    const warnings = (
+      careerRisks || careerMitigation
+        ? [careerRisks, careerMitigation].filter(Boolean)
+        : (narrative.summary?.weaknesses ?? []).map((item) =>
+            firstCommercialSnippet(item),
+          )
+    )
+      .filter((item) => item !== UNAVAILABLE_CONCLUSION)
       .slice(0, 4);
-    const actions = (
-      promotionPlan
-        ? [promotionPlan]
-        : careerPlan
-          ? [careerPlan]
-          : recommendationActions(narrative)
-    ).slice(0, 4);
+    const primaryAction =
+      primaryRec?.composed_text ||
+      careerFieldText(career, "action_plan_90d") ||
+      recommendationActions(narrative)[0] ||
+      "";
+    const secondaryAction =
+      secondary?.composed_text ||
+      (promotion
+        ? `Promotion Readiness Assessment (mốc nghề phụ): ${promotionFieldText(promotion, "promotion_readiness")}`
+        : "");
+    const actions = [primaryAction, secondaryAction]
+      .filter((item) => item && item !== UNAVAILABLE_CONCLUSION)
+      .slice(0, 4);
     const overview =
-      careerDirection ||
-      promotionReadiness ||
+      (executive?.composed_text
+        ? `Career Selection Assessment — ${executive.central_message || executive.composed_text}`
+        : "") ||
+      (careerFieldText(career, "career_direction")
+        ? `Career Selection Assessment — ${careerFieldText(career, "career_direction")}`
+        : "") ||
       summaryText(narrative.summary, "identity") ||
       paragraphByRole(narrative, "observation") ||
       sectionParagraphTexts(narrative, /observation|overview|executive/i)[0] ||

@@ -91,11 +91,13 @@ Fixes are **out of scope for Sprint A** — Product Review decides priority and 
 
 ---
 
-## 8. Stop line
+## 7. Stop line
 
 **Official blocker list published.**  
 
-**Wait for Product Review. Do not fix anything yet. Do not start a new Capability.**
+Sprint B engineering resolved P0-01…P0-05; P0-06 human package ready (`10`).  
+
+**Wait for Product Review / human consulting sign-off. Do not start a new Capability.**
 
 ---
 

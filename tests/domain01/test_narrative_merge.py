@@ -1,4 +1,4 @@
-"""Narrative merge enrichment for Career Selection Assessment."""
+"""Narrative merge enrichment — Commercial V1 P0 polish."""
 
 from __future__ import annotations
 
@@ -41,9 +41,10 @@ def test_narrative_merge_enriches_without_replacing_interpretation() -> None:
     assert enriched_interp["summary"] == before_summary
     assert enriched_interp.get("career_selection_capability_id") == "CAP-D1-CA-SEL"
     assert enriched_interp["career_selection_assessment"]["career_direction"]["text"]
-    assert "Họ nghề hợp bạn" in enriched_analysis["strength"]["reasoning"]
-    assert "Kế hoạch 90 ngày" in enriched_analysis["score"]["recommendation"]
+    assert enriched_interp["commercial_executive_summary"]["central_message"]
+    assert "What:" in enriched_analysis["score"]["recommendation"]
     assert enriched_analysis["score"].get("analytical_recommendation") == "Thủy"
+    assert "Dụng thần" not in enriched_analysis["strength"]["reasoning"]
 
 
 def test_narrative_prefers_career_action_over_generic_rec() -> None:
@@ -64,11 +65,15 @@ def test_narrative_prefers_career_action_over_generic_rec() -> None:
         enriched_analysis["score"]["commercial_knowledge_unit_id"]
         == "KU-AC-CA-000001"
     )
-    assert "Tháng 1" in enriched_analysis["score"]["recommendation"]
+    assert "What:" in enriched_analysis["score"]["recommendation"]
+    assert "Why:" in enriched_analysis["score"]["recommendation"]
+    assert "How:" in enriched_analysis["score"]["recommendation"]
+    assert "When:" in enriched_analysis["score"]["recommendation"]
+    assert "Expected outcome:" in enriched_analysis["score"]["recommendation"]
 
 
-def test_production_narrative_prefers_promotion_action_when_both_present() -> None:
-    """Full production allow-list prefers Promotion 90-day plan for Rec."""
+def test_production_keeps_career_primary_and_promotion_secondary() -> None:
+    """Full production path: Career primary Rec; Promotion secondary milestone."""
     adapter = CommercialKnowledgeAdapter()
     bundle, payload = adapter.adapt(
         analysis=strong_employee_chart(),
@@ -80,9 +85,22 @@ def test_production_narrative_prefers_promotion_action_when_both_present() -> No
         bundle=bundle,
         payload=payload,
     )
-    assert enriched_interp.get("promotion_readiness_capability_id") == "CAP-D1-CA-PRO"
+    assert enriched_interp.get("career_selection_label") == "Career Selection Assessment"
+    assert (
+        enriched_interp.get("promotion_readiness_label")
+        == "Promotion Readiness Assessment"
+    )
     assert (
         enriched_analysis["score"]["commercial_knowledge_unit_id"]
-        == "KU-AC-CA-000020"
+        == "KU-AC-CA-000001"
     )
-    assert "thăng tiến" in enriched_analysis["score"]["recommendation"]
+    assert "What:" in enriched_analysis["score"]["recommendation"]
+    secondary = enriched_analysis["score"]["secondary_recommendation"]
+    assert "Promotion Readiness Assessment" in secondary
+    assert "mốc nghề phụ" in secondary
+    executive = enriched_interp["commercial_executive_summary"]
+    assert executive["central_message"]
+    assert len(executive["supporting_points"]) <= 3
+    assert executive["conclusion"]
+    # Promotion must not densify Exec central message.
+    assert "Sẵn sàng thăng tiến" not in executive["central_message"]

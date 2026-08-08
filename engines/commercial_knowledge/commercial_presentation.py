@@ -17,13 +17,14 @@ _TECHNICAL_REPLACEMENTS: tuple[tuple[str, str], ...] = (
     (r"\bnhật chủ\b", "nền tảng ngày"),
     (r"\bCách cục\b", "cấu trúc nghề"),
     (r"\bcách cục\b", "cấu trúc nghề"),
-    (r"\bkhung\b", "khung nghề"),
+    (r"\bmức thân\b", "mức lực"),
     (r"\bphần kỵ\b", "phần lệch hướng"),
     (r"\bnuôi phần kỵ\b", "nuôi phần lệch hướng"),
     (r"\bthân được nâng đỡ\b", "đang có nền lực"),
     (r"\bthân đang mỏng lực\b", "đang cần giữ mực"),
-    (r"\bmức thân\b", "mức lực"),
-    (r"\bthân\b", "mức lực"),
+    (r"\bNếu thân\b", "Nếu mức lực"),
+    (r"\bnếu thân\b", "nếu mức lực"),
+    (r"\bkhi thân\b", "khi mức lực"),
 )
 
 
@@ -119,17 +120,22 @@ def format_primary_recommendation(
 ) -> dict[str, str]:
     """
     Format primary Career Strategy recommendation as What/Why/How/When/Outcome.
+
+    Returns an empty dict when Career Selection is absent (Wave 1.1-only path).
     """
+    if not career or not career.knowledge_unit_ids:
+        return {}
+
     plan = ""
     direction = ""
     why_extra = ""
-    if career and career.action_plan_90d:
+    if career.action_plan_90d:
         plan = commercialize_customer_text(career.action_plan_90d.text)
     elif wave_recommendation:
         plan = commercialize_customer_text(wave_recommendation)
-    if career and career.career_direction:
+    if career.career_direction:
         direction = commercialize_customer_text(career.career_direction.text)
-    if career and career.career_mitigation:
+    if career.career_mitigation:
         why_extra = commercialize_customer_text(career.career_mitigation.text)
 
     what = _short(direction or "Chọn và giữ một hướng nghề phù hợp cấu trúc của bạn.", 160)
