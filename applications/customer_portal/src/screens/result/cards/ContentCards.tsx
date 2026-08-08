@@ -41,29 +41,37 @@ function RecommendationItem({
       data-priority={item.priority}
       data-expanded={expanded ? "true" : "false"}
     >
-      <div className="rp-rec-item__head">
-        <PriorityBadge priority={item.priority} label={item.priorityLabel} />
+      <div className="rp-rec-item__group" data-group="action">
+        <div className="rp-rec-item__head">
+          <PriorityBadge priority={item.priority} label={item.priorityLabel} />
+          <PresentationText
+            typeRole="subtitle"
+            preview={item.action}
+            className="rp-rec-item__action"
+            as="h3"
+          />
+        </div>
+      </div>
+      <div className="rp-rec-item__group" data-group="reason">
+        <span className="rp-rec-item__label">Lý do</span>
         <PresentationText
-          typeRole="subtitle"
-          preview={item.action}
-          className="rp-rec-item__action"
-          as="h3"
+          typeRole="summary"
+          preview={item.reason}
+          className="rp-rec-item__reason"
+          as="p"
         />
       </div>
-      <PresentationText
-        typeRole="summary"
-        preview={item.reason}
-        className="rp-rec-item__reason"
-        as="p"
-      />
-      <PresentationText
-        typeRole="summary"
-        preview={item.benefit}
-        className="rp-rec-item__benefit"
-        as="p"
-      />
+      <div className="rp-rec-item__group" data-group="benefit">
+        <span className="rp-rec-item__label">Lợi ích</span>
+        <PresentationText
+          typeRole="summary"
+          preview={item.benefit}
+          className="rp-rec-item__benefit"
+          as="p"
+        />
+      </div>
       {expanded ? (
-        <div id={detailId}>
+        <div id={detailId} className="rp-rec-item__group" data-group="detail">
           <PresentationText
             typeRole="body"
             preview={item.detail}
@@ -196,16 +204,18 @@ function InterpretationBlock({
         </div>
       )}
 
-      <button
-        type="button"
-        className="rp-expand-btn"
-        aria-expanded={expanded}
-        aria-controls={detailId}
-        aria-label={`${expanded ? collapseLabel : expandLabel}: ${block.title}`}
-        onClick={() => setExpanded((value) => !value)}
-      >
-        {expanded ? collapseLabel : expandLabel}
-      </button>
+      {block.hasMore ? (
+        <button
+          type="button"
+          className="rp-expand-btn"
+          aria-expanded={expanded}
+          aria-controls={detailId}
+          aria-label={`${expanded ? collapseLabel : expandLabel}: ${block.title}`}
+          onClick={() => setExpanded((value) => !value)}
+        >
+          {expanded ? collapseLabel : expandLabel}
+        </button>
+      ) : null}
     </article>
   );
 }

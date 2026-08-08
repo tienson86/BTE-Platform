@@ -378,3 +378,171 @@
   outline: var(--rp-focus-ring);
   outline-offset: var(--rp-focus-offset);
 }
+
+/* ==========================================================================
+ * Release C — Visual Polish (appearance only)
+ * No new layouts / components / Design System tokens.
+ * ========================================================================== */
+
+/* —— Executive Summary: stronger visual anchor —— */
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] {
+  gap: var(--rp-space-5);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] .rp-card__headline {
+  font-size: var(--rp-v2-h4);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] .rp-card__bullets {
+  margin-top: var(--rp-space-1);
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="executive-summary"] .rp-card__bullet {
+  padding-top: var(--rp-space-1);
+  padding-bottom: var(--rp-space-1);
+}
+
+/* Soften peer CTAs that compete with Executive in the first viewport */
+.rp-result-page[data-visual="v2"] .rp-card[data-card="destiny-direction"] .rp-card__cta--primary[data-has-more="false"] {
+  background: transparent;
+  border: 1px solid var(--rp-card-border);
+  color: var(--rp-text);
+  font-weight: 500;
+}
+
+/* —— Card balance / denser reading inside fixed heights —— */
+.rp-result-page[data-visual="v2"] .rp-card[data-card="strength"] .rp-strength__level,
+.rp-result-page[data-visual="v2"] .rp-card[data-card="strength"] .ui-presentation-text[data-type-role="metric"] {
+  font-size: var(--rp-v2-h3);
+  line-height: 1.2;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="ten-gods"] .rp-ten-gods__row {
+  gap: var(--rp-space-3);
+  padding: var(--rp-space-1) 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-radar {
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: var(--rp-space-4);
+}
+
+.rp-result-page[data-visual="v2"] .rp-radar__label {
+  font-size: var(--rp-v2-meta);
+}
+
+.rp-result-page[data-visual="v2"] .rp-elements__name {
+  font-size: var(--rp-v2-caption);
+}
+
+.rp-result-page[data-visual="v2"] .rp-elements__status,
+.rp-result-page[data-visual="v2"] .rp-elements__pct {
+  font-size: var(--rp-v2-meta);
+}
+
+.rp-result-page[data-visual="v2"] .rp-indicators__row:last-child {
+  border-bottom: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-card[data-card="context"] .rp-card__title {
+  color: var(--rp-muted);
+  font-size: var(--rp-v2-caption);
+  font-weight: 500;
+}
+
+/* —— Recommendation: scannable visual groups —— */
+.rp-result-page[data-visual="v2"] .rp-card--recommendation .rp-rec-item {
+  padding: var(--rp-space-3) 0;
+  gap: var(--rp-space-3);
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-space-1);
+  min-width: 0;
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__group[data-group="action"] {
+  gap: var(--rp-space-2);
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__label {
+  font-size: var(--rp-v2-meta);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rp-muted);
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__reason,
+.rp-result-page[data-visual="v2"] .rp-rec-item__benefit {
+  line-height: 1.5;
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__benefit::before {
+  content: none;
+}
+
+.rp-result-page[data-visual="v2"] .rp-rec-item__detail {
+  margin-top: var(--rp-space-1);
+  padding-top: var(--rp-space-3);
+  border-top: 1px solid var(--rp-divider);
+  line-height: 1.5;
+}
+
+/* —— Interpretation: consulting report rhythm —— */
+.rp-result-page[data-visual="v2"] .rp-interp-list {
+  gap: var(--rp-space-6, var(--rp-space-5));
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-block {
+  padding: var(--rp-space-5) 0 var(--rp-space-4);
+  gap: var(--rp-space-4);
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-step--preview {
+  opacity: 0.88;
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-step--preview .rp-interp-step__label {
+  color: var(--rp-muted);
+}
+
+.rp-result-page[data-visual="v2"] .rp-interp-block .rp-expand-btn {
+  margin-top: var(--rp-space-1);
+  align-self: flex-start;
+}
+
+/* —— Knowledge: quieter educational support —— */
+.rp-result-page[data-visual="v2"] .rp-know-section__teaser {
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section__panel {
+  line-height: 1.55;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section__chevron {
+  font-size: var(--rp-v2-h4);
+  opacity: 0.55;
+}
+
+.rp-result-page[data-visual="v2"] .rp-know-section__ref {
+  margin-top: var(--rp-space-2);
+}
+
+/* —— Status / consistency —— */
+.rp-result-page[data-visual="v2"] .rp-status-gate {
+  padding: var(--rp-space-7) var(--rp-space-5);
+}
+
+.rp-result-page[data-visual="v2"] .rp-status-gate .ui-skeleton,
+.rp-result-page[data-visual="v2"] .rp-status-gate [class*="skeleton"] {
+  border-radius: var(--rp-card-radius);
+}
