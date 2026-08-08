@@ -30,15 +30,17 @@ def build_narrative_result_dict(
     """
     Compose Pack 05 NarrativeResult and return portal JSON.
 
-    When commercial knowledge is enabled, production allow-listed units enrich
-    Executive Summary / Recommendation / Career Selection / Promotion Readiness
-    without replacing Interpretation analytical meaning.
+    Commercial V1 polish attaches structured Exec / primary Career Rec /
+    secondary Promotion milestone without new routes or layout.
     """
     analysis_in = analysis or {}
     interpretation_in = interpretation or {}
     commercial_bundle_payload: dict[str, Any] | None = None
     career_selection_payload: dict[str, Any] | None = None
     promotion_readiness_payload: dict[str, Any] | None = None
+    executive_payload: dict[str, Any] | None = None
+    primary_rec_payload: dict[str, Any] | None = None
+    secondary_milestone_payload: dict[str, Any] | None = None
 
     if include_commercial_knowledge:
         adapter = CommercialKnowledgeAdapter(
@@ -64,6 +66,11 @@ def build_narrative_result_dict(
         promotion_readiness_payload = commercial_bundle_payload.get(
             "promotion_readiness_assessment"
         )
+        executive_payload = interpretation_in.get("commercial_executive_summary")
+        primary_rec_payload = interpretation_in.get("primary_recommendation")
+        secondary_milestone_payload = interpretation_in.get(
+            "secondary_career_milestone"
+        )
 
     engine = NarrativeEngine()
     result = engine.compose_narrative_result(
@@ -77,8 +84,30 @@ def build_narrative_result_dict(
         payload["commercial_knowledge_bundle"] = commercial_bundle_payload
     if career_selection_payload is not None:
         payload["career_selection_assessment"] = career_selection_payload
+        payload["career_selection_label"] = "Career Selection Assessment"
     if promotion_readiness_payload is not None:
         payload["promotion_readiness_assessment"] = promotion_readiness_payload
+        payload["promotion_readiness_label"] = "Promotion Readiness Assessment"
+    if isinstance(executive_payload, dict):
+        payload["commercial_executive_summary"] = executive_payload
+        # Prefer structured Exec identity for Portal without Engine redesign.
+        summary = payload.get("summary")
+        if isinstance(summary, dict) and executive_payload.get("composed_text"):
+            summary = dict(summary)
+            summary["identity"] = executive_payload["composed_text"]
+            if executive_payload.get("supporting_points"):
+                summary["strengths"] = list(executive_payload["supporting_points"])
+            payload["summary"] = summary
+    if isinstance(primary_rec_payload, dict):
+        payload["primary_recommendation"] = primary_rec_payload
+        summary = payload.get("summary")
+        if isinstance(summary, dict) and primary_rec_payload.get("composed_text"):
+            summary = dict(summary)
+            summary["priority_recommendation"] = primary_rec_payload["composed_text"]
+            summary["next_action"] = primary_rec_payload["composed_text"]
+            payload["summary"] = summary
+    if isinstance(secondary_milestone_payload, dict):
+        payload["secondary_career_milestone"] = secondary_milestone_payload
     return payload
 
 
@@ -90,6 +119,7 @@ def narrative_result_source_fingerprint() -> dict[str, str]:
         "contract": "pack05_narrative_result_v1",
         "commercial_knowledge": "engines.commercial_knowledge.CommercialKnowledgeAdapter",
         "capabilities": "CAP-D1-CA-SEL;CAP-D1-CA-PRO",
+        "polish": "commercial_v1_p0",
         "view": (
             "applications.api.services.narrative_result_truth.build_narrative_result_dict"
         ),
