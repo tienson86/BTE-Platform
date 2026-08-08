@@ -4,9 +4,13 @@
 
 export {
   asNarrativeResult,
+  careerFieldText,
+  careerSelectionFromNarrative,
   hasUsableNarrativeResult,
 } from "./narrativeResultAdapter";
 export type {
+  CareerSelectionAssessmentDto,
+  CareerSelectionFieldDto,
   NarrativeResultDto,
   NarrativeResultSummaryDto,
   NarrativeSectionDto,

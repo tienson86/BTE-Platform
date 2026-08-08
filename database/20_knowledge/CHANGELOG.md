@@ -1,5 +1,55 @@
 # Changelog — Classical Knowledge Base
 
+## 0.3.1 (2026-08-08)
+
+### Changed / Added
+
+- Sprint C: **Career Selection Assessment** completion in `22_domain01_career_business.csv`.
+- SEL pack: 11 units under `CAP-D1-CA-SEL` / wave `W-D01-C-SEL` (direction → 90-day plan).
+- KU-CN-LE-000001 and KU-AC-BU-000001 retained unchanged (other capabilities).
+
+### SEL units
+
+| Id | Title |
+|----|-------|
+| KU-CN-CA-000001 | Career Work Direction |
+| KU-CN-CA-000010 | Career Environment Fit |
+| KU-CN-CA-000011 | Career Organizational Role |
+| KU-CN-CA-000012 | Leadership vs Specialist Posture |
+| KU-CN-CA-000013 | Employment vs Entrepreneurship Posture |
+| KU-CN-CA-000014 | Career Competitive Advantages |
+| KU-RK-CA-000010 | Career Selection Primary Risks |
+| KU-MT-CA-000010 | Career Selection Mitigation |
+| KU-CN-CA-000015 | Career Development Priorities |
+| KU-CN-CA-000016 | Career Decision Timing Light |
+| KU-AC-CA-000001 | Career 90-Day Action Plan |
+
+### Notes
+
+- Wave 1.1 unchanged. No runtime. No Promotion/Leadership/Partnership/Management packs.
+
+## 0.3.0 (2026-08-08)
+
+### Added
+
+- Domain 01 Career & Business **P0** Knowledge Units in `22_domain01_career_business.csv` (exactly **4** units).
+- Additive Domain columns: `capability_id`, `decision_ids`, `executive_summary_support`, `recommendation_support`, `decision_support`, `traceability`.
+
+### Units (Domain 01 P0)
+
+| Id | Title | Capability |
+|----|-------|------------|
+| KU-CN-CA-000001 | Career Work Direction | CAP-D1-CA-SEL |
+| KU-AC-CA-000001 | Career Role-Fit Next Step | CAP-D1-CA-SEL / CAP-D1-CA-DEV |
+| KU-CN-LE-000001 | Leadership Style Light | CAP-D1-CA-LED |
+| KU-AC-BU-000001 | Employment vs Independent Posture | CAP-D1-BU-ENP |
+
+### Notes
+
+- Wave 1.1 (`21_knowledge_units.csv`) **unchanged**.
+- No P1/P2 Domain units in this release.
+- Production Adapter wiring of `22_*.csv` is a follow-up (content authored only).
+
 ## 0.2.1 (2026-08-08)
 
 ### Changed

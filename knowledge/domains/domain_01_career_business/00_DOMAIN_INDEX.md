@@ -1,10 +1,10 @@
 # 00 — Domain 01 Index · Career & Business
 
-Version: 1.1  
-Status: **DOMAIN 01 · SPRINT A FROZEN · SPRINT A.5 CAPABILITY MODEL**  
+Version: 1.4  
+Status: **DOMAIN 01 · PRODUCTION WIRING — Career Selection Assessment = Production Capability V1**  
 Date: 2026-08-08  
-Depends on: Wave 1.1 Golden Baseline (frozen) · Commercial Knowledge Model · EPIC 4–7 · Sprint A (`01`–`08`)  
-Scope: Sprint A = domain architecture; Sprint A.5 = capability / service model — **no Knowledge Units, no runtime**  
+Depends on: Wave 1.1 frozen · Capability Model · Sprint C SEL complete  
+Scope: Production wiring only (no new KUs; no Promotion)  
 
 ---
 
@@ -13,7 +13,9 @@ Scope: Sprint A = domain architecture; Sprint A.5 = capability / service model �
 Establish **Domain 01 — Career & Business** as a complete commercial consultation **domain + capability** model for BTE.
 
 - Sprint A: how the domain is structured (subdomains, decisions, KU slots, cases).  
-- Sprint A.5: how the domain is sold/consumed as **capabilities** (services).
+- Sprint A.5: how the domain is sold/consumed as **capabilities** (services).  
+- Sprint B–C: Career Selection Assessment content complete.  
+- **This release:** wire CAP-D1-CA-SEL into the production Result pipeline.
 
 ---
 
@@ -35,9 +37,22 @@ Establish **Domain 01 — Career & Business** as a complete commercial consultat
 | 11 | `11_CAPABILITY_MATURITY_MODEL.md` | Levels 1–5 + current/target |
 | 12 | `12_CAPABILITY_API_CONTRACT.md` | Future public capability contract (design) |
 | 13 | `13_CAPABILITY_ROADMAP.md` | Phase 1–3 implementation plan |
+| 14 | `14_IMPLEMENTATION_REPORT.md` | Sprint B P0 authoring report |
+| 15 | `15_GOLDEN_CASE_RESULTS.md` | Offline Golden Case results |
+| 16 | `16_REMAINING_GAPS.md` | Wiring + P1/P2 gaps |
+| 17 | `17_CAPABILITY_COMPLETION_REPORT.md` | Career Selection completion |
+| 18 | `18_ACCEPTANCE_TEST_RESULTS.md` | SEL acceptance tests |
+| 19 | `19_REMAINING_GAPS.md` | Post-SEL gaps |
+| 20 | `20_PRODUCTION_WIRING_REPORT.md` | Production wiring |
+| 21 | `21_PRODUCT_DEMO_REPORT.md` | Before → After demo |
+| 22 | `22_PRODUCTION_VALIDATION.md` | Golden Cases + tests |
+| 23 | `23_RELEASE_NOTES.md` | Production Capability V1 notes |
 
 **Reviewers (Sprint A):** 00 → 01 → … → 08.  
-**Reviewers (Sprint A.5):** 09 → 10 → 11 → 12 → 13.
+**Reviewers (Sprint A.5):** 09 → 10 → 11 → 12 → 13.  
+**Reviewers (Sprint B):** 14 → 15 → 16.  
+**Reviewers (Sprint C):** 17 → 18 → 19.  
+**Reviewers (Production wiring):** 20 → 21 → 22 → 23.
 
 ---
 
@@ -51,6 +66,7 @@ Establish **Domain 01 — Career & Business** as a complete commercial consultat
 | Primary scenarios | CS-CA, CS-CC, CS-PR, CS-BU, CS-ST, CS-ENP, CS-LE |
 | Primary decisions | DS-CC, DS-PR, DS-BP (+ career-select / founder postures) |
 | Capabilities | CAP-D1-* (see `09`) |
+| Production live | **CAP-D1-CA-SEL** only |
 | Depends on | Wave 1.1 core (Identity / Strength / Weakness / Useful God / Core Rec) |
 
 ---
@@ -60,13 +76,13 @@ Establish **Domain 01 — Career & Business** as a complete commercial consultat
 ```
 Wave 1.1 Core (frozen)
         ↓
-Domain 01 architecture (Sprint A · frozen)
+Domain 01 architecture + capabilities (frozen)
         ↓
-Domain 01 capabilities (Sprint A.5 · this sprint)
+Career Selection Assessment content (Sprint C · frozen)
         ↓
-Future: Knowledge population → Narrative enrichment → Capability API
+Production wiring (this release) → Result Page
         ↓
-Portal / Report / Future APIs
+Product Review gate → (later) Promotion Readiness
 ```
 
 Capability = business service orchestrating Knowledge + Decisions + Narrative + Golden Cases.  
@@ -74,11 +90,13 @@ Not a new Engine. Not a Knowledge Unit. Not Narrative itself.
 
 ---
 
-## 5. Non-goals (Sprint A.5)
+## 5. Non-goals (this release)
 
-- Creating or editing Knowledge Units  
-- Modifying Wave 1.1  
-- Runtime / API / Narrative / Portal / Foundation / Design System changes  
+- Authoring new Knowledge Units  
+- Modifying Wave 1.1 content  
+- Foundation / Design System / Visual Language / Result layout  
+- Interpretation Engine / Score Engine changes  
+- Promotion Readiness or other Domain 01 capabilities  
 
 ---
 
@@ -88,17 +106,19 @@ Not a new Engine. Not a Knowledge Unit. Not Narrative itself.
 |-----------|--------|
 | Domain capabilities defined | `09` |
 | Capability mapping completed | `10` |
-| Capability maturity documented | `11` |
-| Future API contract documented | `12` |
-| Capability roadmap completed | `13` |
-| Domain 01 complete consulting service model | `01`–`13` together |
+| Career Selection content complete | `17`–`19` |
+| Production wiring | `20` |
+| Product demo | `21` |
+| Production validation | `22` |
+| Release notes | `23` |
 
 ---
 
 ## 7. Stop line
 
-Sprint A.5 complete.  
-**Do not author Career/Business Knowledge Units. Wait for Product review.**
+**Career Selection Assessment = Production Capability V1.**  
+
+**Do not start Promotion Readiness. Wait for Product Review.**
 
 ---
 

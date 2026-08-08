@@ -1,4 +1,4 @@
-"""Load and filter Wave 1.1 Knowledge Units from CSV corpus."""
+"""Load and filter allow-listed Knowledge Units from CSV corpora."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import csv
 import logging
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
 from .models import WAVE_1_1_ALLOW_LIST
 from .signal_projection import bind_placeholders, evaluate_condition, project_analysis_signals
@@ -14,19 +14,32 @@ from .signal_projection import bind_placeholders, evaluate_condition, project_an
 logger = logging.getLogger(__name__)
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
-_DEFAULT_CSV = _REPO_ROOT / "database" / "20_knowledge" / "21_knowledge_units.csv"
+_DEFAULT_CSV_21 = _REPO_ROOT / "database" / "20_knowledge" / "21_knowledge_units.csv"
+_DEFAULT_CSV_22 = _REPO_ROOT / "database" / "20_knowledge" / "22_domain01_career_business.csv"
+_DEFAULT_CORPORA: tuple[Path, ...] = (_DEFAULT_CSV_21, _DEFAULT_CSV_22)
 
 
 class RetrievalService:
     """
     Retrieve allow-listed Knowledge Units and bind commercial text.
 
-    Wave 1.1: only KU-ID-001 … KU-RC-001 are eligible.
+    Production loads Wave 1.1 + Domain 01 CSV files; eligibility is allow-list gated
+    (Career Selection Assessment units only from Domain 01).
     """
 
-    def __init__(self, csv_path: Path | None = None) -> None:
+    def __init__(
+        self,
+        csv_path: Path | None = None,
+        *,
+        csv_paths: Sequence[Path] | None = None,
+    ) -> None:
         """Create retrieval service with optional CSV override (tests)."""
-        self._csv_path = csv_path or _DEFAULT_CSV
+        if csv_paths is not None:
+            self._csv_paths = tuple(Path(path) for path in csv_paths)
+        elif csv_path is not None:
+            self._csv_paths = (Path(csv_path),)
+        else:
+            self._csv_paths = _DEFAULT_CORPORA
 
     def retrieve(
         self,
@@ -40,16 +53,22 @@ class RetrievalService:
         Return (selected_bound_rows, dropped, signals).
 
         Selected rows include bound `commercial_text` and never leave the allow-list.
+        Production callers pass ``PRODUCTION_ALLOW_LIST`` for Career Selection V1.
         """
         signals = project_analysis_signals(analysis)
-        rows = _load_units(str(self._csv_path))
+        rows = _load_units_many(tuple(str(path) for path in self._csv_paths))
         selected: list[dict[str, Any]] = []
         dropped: list[tuple[str, str]] = []
+        deny_reason = (
+            "not_in_wave_1_1_allow_list"
+            if allow_list_ids == WAVE_1_1_ALLOW_LIST
+            else "not_in_production_allow_list"
+        )
 
         for row in rows:
             unit_id = (row.get("knowledge_unit_id") or "").strip()
             if unit_id not in allow_list_ids:
-                dropped.append((unit_id or "unknown", "not_in_wave_1_1_allow_list"))
+                dropped.append((unit_id or "unknown", deny_reason))
                 continue
             if not _scenario_match(row.get("scenarios") or "", scenario_id):
                 dropped.append((unit_id, "scenario_mismatch"))
@@ -91,7 +110,7 @@ class RetrievalService:
                 item.get("knowledge_unit_id") or "",
             )
         )
-        # One unit per evidence_kind (Wave 1.1).
+        # One unit per evidence_kind.
         deduped: list[dict[str, Any]] = []
         seen_kinds: set[str] = set()
         for item in selected:
@@ -103,15 +122,30 @@ class RetrievalService:
             deduped.append(item)
 
         logger.info(
-            "commercial_retrieval.selected=%s dropped=%s scenario=%s",
+            "commercial_retrieval.selected=%s dropped=%s scenario=%s corpora=%s",
             len(deduped),
             len(dropped),
             scenario_id,
+            len(self._csv_paths),
         )
         return deduped, dropped, signals
 
 
-@lru_cache(maxsize=4)
+@lru_cache(maxsize=8)
+def _load_units_many(csv_paths: tuple[str, ...]) -> tuple[dict[str, str], ...]:
+    rows: list[dict[str, str]] = []
+    seen_ids: set[str] = set()
+    for csv_path in csv_paths:
+        for row in _load_units(csv_path):
+            unit_id = (row.get("knowledge_unit_id") or "").strip()
+            if not unit_id or unit_id in seen_ids:
+                continue
+            seen_ids.add(unit_id)
+            rows.append(row)
+    return tuple(rows)
+
+
+@lru_cache(maxsize=8)
 def _load_units(csv_path: str) -> tuple[dict[str, str], ...]:
     path = Path(csv_path)
     if not path.is_file():
@@ -155,3 +189,10 @@ def _safe_int(value: Any, default: int) -> int:
         return int(value)
     except (TypeError, ValueError):
         return default
+
+
+# Backward-compatible alias used by older call sites / tests.
+def clear_unit_caches() -> None:
+    """Clear CSV load caches (tests)."""
+    _load_units.cache_clear()
+    _load_units_many.cache_clear()

@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 from typing import Any
 
+from .bundle_builder import career_selection_to_dict
 from .models import CommercialKnowledgeBundle, NarrativeKnowledgePayload
 
 
@@ -21,6 +22,7 @@ def enrich_narrative_inputs(
     - Does not overwrite Interpretation conclusion fields with empty values.
     - Adds commercial sections and soft-enriches analysis prose fields.
     - Preserves original interpretation sections (append-only).
+    - Attaches Career Selection Assessment projection for Portal (no raw KUs).
     """
     analysis_out = copy.deepcopy(analysis) if isinstance(analysis, dict) else {}
     interpretation_out = (
@@ -51,21 +53,37 @@ def enrich_narrative_inputs(
     _enrich_analysis_from_bundle(analysis_out, bundle)
     interpretation_out["commercial_knowledge_bundle_id"] = bundle.bundle_id
     interpretation_out["commercial_enrichment"] = True
+    if bundle.career_selection and bundle.career_selection.knowledge_unit_ids:
+        interpretation_out["career_selection_assessment"] = career_selection_to_dict(
+            bundle.career_selection
+        )
+        interpretation_out["career_selection_capability_id"] = (
+            bundle.career_selection.capability_id
+        )
     return analysis_out, interpretation_out
 
 
 def _section_title(evidence_kind: str, targets: tuple[str, ...]) -> str:
     """Title heuristics so Narrative component_selector can bind refs."""
-    if evidence_kind == "identity":
-        return "Tổng quan danh tính thương mại"
-    if evidence_kind == "strength":
-        return "Tổng quan điểm mạnh"
-    if evidence_kind == "weakness":
-        return "Lưu ý điểm hạn chế"
-    if evidence_kind == "explanation":
-        return "Lý giải dụng thần"
-    if evidence_kind == "action":
-        return "Khuyến nghị hành động"
+    titles = {
+        "identity": "Tổng quan danh tính thương mại",
+        "strength": "Tổng quan điểm mạnh",
+        "weakness": "Lưu ý điểm hạn chế",
+        "explanation": "Lý giải dụng thần",
+        "action": "Kế hoạch nghề 90 ngày",
+        "career_direction": "Hướng nghề nghiệp",
+        "career_environment": "Môi trường làm việc",
+        "career_org_role": "Vai trò tổ chức",
+        "career_lead_vs_spec": "Lãnh đạo hay chuyên gia",
+        "career_path_mode": "Làm thuê hay độc lập",
+        "career_advantage": "Lợi thế nghề",
+        "career_risk": "Rủi ro nghề",
+        "career_mitigation": "Giảm rủi ro nghề",
+        "career_development": "Ưu tiên phát triển nghề",
+        "career_timing": "Nhịp quyết định nghề",
+    }
+    if evidence_kind in titles:
+        return titles[evidence_kind]
     if "warning" in targets:
         return "Lưu ý thương mại"
     return "Tri thức thương mại"
@@ -94,11 +112,37 @@ def _enrich_analysis_from_bundle(
         bazi = analysis["bazi"]
 
     if bundle.identity and not bazi.get("day_master"):
-        # Structural identity still required; do not invent day master labels.
         pass
 
-    if bundle.strengths:
-        # Enrich reasoning with commercial strength text (do not clear existing).
+    career = bundle.career_selection
+    if career and career.career_direction:
+        # Soft-enrich identity-facing reasoning without wiping Analysis.
+        direction = career.career_direction.text
+        existing = str(strength.get("reasoning") or "").strip()
+        if existing and direction not in existing:
+            strength["reasoning"] = f"{direction} {existing}".strip()
+        elif not existing:
+            strength["reasoning"] = direction
+        strength["commercial_career_direction"] = direction
+        strength["commercial_knowledge_unit_id"] = career.career_direction.knowledge_unit_id
+
+    if career and career.career_strengths:
+        advantage = career.career_strengths.text
+        existing = str(strength.get("reasoning") or "").strip()
+        if existing and advantage not in existing:
+            strength["reasoning"] = f"{existing} {advantage}".strip()
+        elif not existing:
+            strength["reasoning"] = advantage
+        strength["commercial_career_strengths"] = advantage
+
+    if career and career.career_risks:
+        useful["commercial_weakness_text"] = career.career_risks.text
+        strength["commercial_weakness_text"] = career.career_risks.text
+        score["commercial_weakness"] = career.career_risks.text
+        if career.career_mitigation:
+            score["commercial_mitigation"] = career.career_mitigation.text
+
+    if bundle.strengths and not (career and career.career_direction):
         commercial = bundle.strengths[0].text
         existing = str(strength.get("reasoning") or "").strip()
         if existing and not _is_commercial_marker(existing):
@@ -107,27 +151,28 @@ def _enrich_analysis_from_bundle(
             strength["reasoning"] = commercial
         strength["commercial_knowledge_unit_id"] = bundle.strengths[0].knowledge_unit_id
 
-    if bundle.weaknesses:
+    if bundle.weaknesses and not (career and career.career_risks):
         commercial = bundle.weaknesses[0].text
-        # Provide commercial weakness as structured list text Narrative can surface.
         useful["unfavorable_gods"] = useful.get("unfavorable_gods") or []
         if isinstance(useful["unfavorable_gods"], list):
-            # Keep analytical gods; attach commercial note separately.
             useful["commercial_weakness_text"] = commercial
         strength.setdefault("commercial_weakness_text", commercial)
-        # Also seed explanation-style weakness via score side-channel for composers.
         score["commercial_weakness"] = commercial
 
     if bundle.useful_god:
         useful["commercial_explanation"] = bundle.useful_god[0].text
         useful["commercial_knowledge_unit_id"] = bundle.useful_god[0].knowledge_unit_id
-        # Prefer commercial explanation as reasoning enrichment when empty.
         if not str(strength.get("reasoning") or "").strip():
             strength["reasoning"] = bundle.useful_god[0].text
 
-    if bundle.recommendations:
-        rec = bundle.recommendations[0].text
-        # Enrich recommendation — do not wipe analytical useful_god code.
+    # Prefer Career 90-day action when present; else Wave 1.1 recommendations.
+    rec_item = None
+    if career and career.action_plan_90d:
+        rec_item = career.action_plan_90d
+    elif bundle.recommendations:
+        rec_item = bundle.recommendations[0]
+    if rec_item is not None:
+        rec = rec_item.text
         existing_rec = str(score.get("recommendation") or "").strip()
         if existing_rec and _looks_like_code(existing_rec):
             score["recommendation"] = rec
@@ -135,15 +180,20 @@ def _enrich_analysis_from_bundle(
         elif not existing_rec:
             score["recommendation"] = rec
         else:
-            # Keep analytical sentence; commercial takes precedence for Narrative value.
             score["analytical_recommendation"] = existing_rec
             score["recommendation"] = rec
-        score["commercial_knowledge_unit_id"] = bundle.recommendations[0].knowledge_unit_id
+        score["commercial_knowledge_unit_id"] = rec_item.knowledge_unit_id
         useful["commercial_recommendation"] = rec
 
 
 def _is_commercial_marker(text: str) -> bool:
-    return "Dụng thần" in text or "Nhật chủ" in text or "Điểm tựa" in text
+    return (
+        "Dụng thần" in text
+        or "Nhật chủ" in text
+        or "Điểm tựa" in text
+        or "Họ nghề" in text
+        or "Kế hoạch 90 ngày" in text
+    )
 
 
 def _looks_like_code(text: str) -> bool:

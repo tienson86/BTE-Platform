@@ -18,6 +18,8 @@ import {
 } from "./contentGuards";
 import {
   asNarrativeResult,
+  careerFieldText,
+  careerSelectionFromNarrative,
   hasUsableNarrativeResult,
   paragraphByRole,
   recommendationActions,
@@ -368,14 +370,19 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   );
   const narrative = asNarrativeResult(data.narrative_result);
   const useNarrative = hasUsableNarrativeResult(narrative);
+  const career = careerSelectionFromNarrative(narrative);
+  const careerDirection = careerFieldText(career, "career_direction");
+  const careerStrengths = careerFieldText(career, "career_strengths");
+  const careerPlan = careerFieldText(career, "action_plan_90d");
   const whoBody = useNarrative
-    ? summaryText(narrative?.summary, "identity")
+    ? careerDirection || summaryText(narrative?.summary, "identity")
     : findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
   const strengthBody = useNarrative
-    ? summaryText(narrative?.summary, "strengths")
+    ? careerStrengths || summaryText(narrative?.summary, "strengths")
     : findSectionBody(sections, [/điểm mạnh/i, /thế mạnh/i]);
   const actionBody = useNarrative
-    ? summaryText(narrative?.summary, "priority_recommendation") ||
+    ? careerPlan ||
+      summaryText(narrative?.summary, "priority_recommendation") ||
       summaryText(narrative?.summary, "next_action")
     : findSectionBody(sections, [
         /dụng thần/i,
@@ -734,16 +741,31 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const base = cloneFixture().s08;
   const narrative = asNarrativeResult(data.narrative_result);
   if (hasUsableNarrativeResult(narrative) && narrative) {
-    const strengths = (narrative.summary?.strengths ?? [])
-      .map((item) => firstCommercialSnippet(item))
+    const career = careerSelectionFromNarrative(narrative);
+    const careerDirection = careerFieldText(career, "career_direction");
+    const careerStrengths = careerFieldText(career, "career_strengths");
+    const careerRisks = careerFieldText(career, "career_risks");
+    const careerMitigation = careerFieldText(career, "career_mitigation");
+    const careerPlan = careerFieldText(career, "action_plan_90d");
+    const strengths = (
+      careerStrengths
+        ? [careerStrengths]
+        : (narrative.summary?.strengths ?? []).map((item) => firstCommercialSnippet(item))
+    )
       .filter((item) => item !== UNAVAILABLE_CONCLUSION)
       .slice(0, 4);
-    const warnings = (narrative.summary?.weaknesses ?? [])
-      .map((item) => firstCommercialSnippet(item))
+    const warnings = (
+      careerRisks || careerMitigation
+        ? [careerRisks, careerMitigation].filter(Boolean)
+        : (narrative.summary?.weaknesses ?? []).map((item) => firstCommercialSnippet(item))
+    )
       .filter((item) => item !== UNAVAILABLE_CONCLUSION)
       .slice(0, 4);
-    const actions = recommendationActions(narrative).slice(0, 4);
+    const actions = (
+      careerPlan ? [careerPlan] : recommendationActions(narrative)
+    ).slice(0, 4);
     const overview =
+      careerDirection ||
       summaryText(narrative.summary, "identity") ||
       paragraphByRole(narrative, "observation") ||
       sectionParagraphTexts(narrative, /observation|overview|executive/i)[0] ||

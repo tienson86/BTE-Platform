@@ -18,6 +18,27 @@ WAVE_1_1_ALLOW_LIST: frozenset[str] = frozenset(
     }
 )
 
+# Domain 01 — Career Selection Assessment only (Production Capability V1).
+CAREER_SELECTION_ALLOW_LIST: frozenset[str] = frozenset(
+    {
+        "KU-CN-CA-000001",
+        "KU-CN-CA-000010",
+        "KU-CN-CA-000011",
+        "KU-CN-CA-000012",
+        "KU-CN-CA-000013",
+        "KU-CN-CA-000014",
+        "KU-RK-CA-000010",
+        "KU-MT-CA-000010",
+        "KU-CN-CA-000015",
+        "KU-CN-CA-000016",
+        "KU-AC-CA-000001",
+    }
+)
+
+PRODUCTION_ALLOW_LIST: frozenset[str] = WAVE_1_1_ALLOW_LIST | CAREER_SELECTION_ALLOW_LIST
+
+CAPABILITY_CAREER_SELECTION = "CAP-D1-CA-SEL"
+
 DEFAULT_TARGET_COMPONENTS: tuple[str, ...] = (
     "executive_summary",
     "recommendation",
@@ -25,7 +46,22 @@ DEFAULT_TARGET_COMPONENTS: tuple[str, ...] = (
     "reasoning",
     "warning",
     "conclusion",
+    "impact",
 )
+
+# evidence_kind → Career Selection Assessment field
+CAREER_SELECTION_FIELD_BY_KIND: dict[str, str] = {
+    "career_direction": "career_direction",
+    "career_environment": "working_environment",
+    "career_org_role": "preferred_role",
+    "career_lead_vs_spec": "leadership_posture",
+    "career_path_mode": "employment_posture",
+    "career_advantage": "career_strengths",
+    "career_risk": "career_risks",
+    "career_mitigation": "career_mitigation",
+    "career_development": "development_focus",
+    "career_timing": "timing_guidance",
+}
 
 
 @dataclass(slots=True)
@@ -75,6 +111,30 @@ class BundleItem:
 
 
 @dataclass(slots=True)
+class CareerSelectionAssessment:
+    """
+    Career Selection Assessment capability projection.
+
+    Narrative / Portal consume this object — never raw Knowledge Units.
+    """
+
+    capability_id: str = CAPABILITY_CAREER_SELECTION
+    status: str = "empty"
+    career_direction: BundleItem | None = None
+    working_environment: BundleItem | None = None
+    preferred_role: BundleItem | None = None
+    leadership_posture: BundleItem | None = None
+    employment_posture: BundleItem | None = None
+    career_strengths: BundleItem | None = None
+    career_risks: BundleItem | None = None
+    career_mitigation: BundleItem | None = None
+    development_focus: BundleItem | None = None
+    timing_guidance: BundleItem | None = None
+    action_plan_90d: BundleItem | None = None
+    knowledge_unit_ids: tuple[str, ...] = ()
+
+
+@dataclass(slots=True)
 class CommercialKnowledgeBundle:
     """
     Narrative-facing commercial bundle.
@@ -94,6 +154,7 @@ class CommercialKnowledgeBundle:
     recommendations: tuple[BundleItem, ...] = ()
     warnings: tuple[BundleItem, ...] = ()
     opportunities: tuple[BundleItem, ...] = ()
+    career_selection: CareerSelectionAssessment | None = None
     confidence: float = 0.0
     selected_units: tuple[SelectedUnitSummary, ...] = ()
     dropped_units: tuple[DroppedUnit, ...] = ()

@@ -56,7 +56,72 @@ export type NarrativeResultDto = {
   readonly status?: string;
   readonly run_id?: string;
   readonly contract?: string;
+  /** Career Selection Assessment projection (no raw Knowledge Units). */
+  readonly career_selection_assessment?: CareerSelectionAssessmentDto | null;
+  readonly commercial_knowledge_bundle?: {
+    readonly career_selection_assessment?: CareerSelectionAssessmentDto | null;
+    readonly [key: string]: unknown;
+  } | null;
 };
+
+export type CareerSelectionFieldDto = {
+  readonly text?: string;
+  readonly knowledge_unit_id?: string;
+  readonly evidence_kind?: string;
+  readonly version?: string;
+  readonly confidence?: number;
+};
+
+export type CareerSelectionAssessmentDto = {
+  readonly capability_id?: string;
+  readonly status?: string;
+  readonly career_direction?: CareerSelectionFieldDto | null;
+  readonly working_environment?: CareerSelectionFieldDto | null;
+  readonly preferred_role?: CareerSelectionFieldDto | null;
+  readonly leadership_posture?: CareerSelectionFieldDto | null;
+  readonly employment_posture?: CareerSelectionFieldDto | null;
+  readonly career_strengths?: CareerSelectionFieldDto | null;
+  readonly career_risks?: CareerSelectionFieldDto | null;
+  readonly career_mitigation?: CareerSelectionFieldDto | null;
+  readonly development_focus?: CareerSelectionFieldDto | null;
+  readonly timing_guidance?: CareerSelectionFieldDto | null;
+  readonly action_plan_90d?: CareerSelectionFieldDto | null;
+  readonly knowledge_unit_ids?: readonly string[];
+};
+
+export function asCareerSelectionAssessment(
+  value: unknown,
+): CareerSelectionAssessmentDto | null {
+  if (!value || typeof value !== "object") return null;
+  const record = value as Record<string, unknown>;
+  if (record.capability_id !== "CAP-D1-CA-SEL" && !record.career_direction) {
+    return null;
+  }
+  return value as CareerSelectionAssessmentDto;
+}
+
+export function careerSelectionFromNarrative(
+  narrative: NarrativeResultDto | null | undefined,
+): CareerSelectionAssessmentDto | null {
+  if (!narrative) return null;
+  return (
+    asCareerSelectionAssessment(narrative.career_selection_assessment) ||
+    asCareerSelectionAssessment(
+      narrative.commercial_knowledge_bundle?.career_selection_assessment,
+    )
+  );
+}
+
+export function careerFieldText(
+  assessment: CareerSelectionAssessmentDto | null | undefined,
+  key: keyof CareerSelectionAssessmentDto,
+): string {
+  if (!assessment) return "";
+  const value = assessment[key];
+  if (!value || typeof value !== "object") return "";
+  const text = (value as CareerSelectionFieldDto).text;
+  return text == null ? "" : String(text).trim();
+}
 
 export function asNarrativeResult(
   value: unknown,
