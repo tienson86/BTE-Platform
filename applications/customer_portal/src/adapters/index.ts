@@ -3,6 +3,16 @@
  */
 
 export {
+  asNarrativeResult,
+  hasUsableNarrativeResult,
+} from "./narrativeResultAdapter";
+export type {
+  NarrativeResultDto,
+  NarrativeResultSummaryDto,
+  NarrativeSectionDto,
+} from "./narrativeResultAdapter";
+
+export {
   adaptAnalysisToBaZiResult,
   createBaZiResultGateViewModel,
 } from "./baziResultAdapter";

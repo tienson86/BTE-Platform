@@ -115,6 +115,60 @@ describe("adaptAnalysisToCanonicalDesktop", () => {
     expect(vm.s11.executive.body.length).toBeGreaterThan(10);
   });
 
+  it("prefers Pack 05 narrative_result over legacy interpretation text", () => {
+    const withNarrative = {
+      ...SAMPLE,
+      interpretation: {
+        sections: [
+          { title: "Tổng quan", body: "Kích hoạt khi xác định Chính Cách." },
+        ],
+      },
+      narrative_result: {
+        contract: "pack05_narrative_result_v1",
+        status: "partial_insufficient",
+        summary: {
+          identity: "Nhật chủ Bính · Cách cục Thực Thương",
+          strengths: ["Quyết đoán có nguồn chứng"],
+          weaknesses: ["Cần cân bằng cảm xúc"],
+          priority_recommendation: "Ưu tiên phát huy Thủy",
+          next_action: "Ưu tiên phát huy Thủy",
+          insufficient_flags: [],
+        },
+        sections: [
+          {
+            id: "sec-observation",
+            intent: "observation",
+            title: "Quan sát",
+            paragraphs: [
+              {
+                id: "p1",
+                role: "observation",
+                text: "Quan sát từ dữ liệu phân tích: Nhật chủ Bính.",
+                insufficient_data: false,
+              },
+            ],
+          },
+        ],
+        recommendations: [
+          {
+            id: "rec-1",
+            priority: "high",
+            action: "Ưu tiên phát huy Thủy",
+            reason: "Dụng thần Thủy",
+            benefit: "",
+            insufficient_data: false,
+          },
+        ],
+      },
+    };
+    const vm = adaptAnalysisToCanonicalDesktop(withNarrative, { source: "api" });
+    expect(vm.narrativeResult?.contract).toBe("pack05_narrative_result_v1");
+    expect(vm.s08.executive.body).toContain("Nhật chủ Bính");
+    expect(vm.s08.executive.body).not.toContain("Kích hoạt khi");
+    expect(vm.s08.strengths.items[0]).toContain("Quyết đoán");
+    expect(vm.s11.recommendations.items[0]).toContain("Thủy");
+  });
+
   it("keeps fixture ViewModel for preview/tests", () => {
     const vm = createCanonicalDesktopMockViewModel();
     expect(vm.source).toBe("mock");

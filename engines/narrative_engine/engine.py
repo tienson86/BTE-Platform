@@ -24,16 +24,18 @@ from engines.base.context import EngineContext
 from engines.base.result import EngineResult
 
 from .models import NarrativeReport
+from .runtime import NarrativeRuntime, NarrativeTree, RuntimeInput
+from .composer import NarrativeResult, NarrativeResultComposer
 from .service import NarrativeService
 
 
 class NarrativeEngine(BaseEngine):
-    """Narrative Engine — polish Interpretation + Report into cohesive prose."""
+    """Narrative Engine — WP7 prose path + Pack 05 D1 tree + D2 result composer."""
 
     name = "NarrativeEngine"
-    version = "1.0.0"
+    version = "1.2.0"
     stage = "narrative"
-    description = "Compose narrative from InterpretationResult and ReportModel."
+    description = "Compose NarrativeTree (D1) and NarrativeResult (D2)."
 
     def __init__(
         self,
@@ -41,6 +43,53 @@ class NarrativeEngine(BaseEngine):
     ) -> None:
         super().__init__()
         self.service = NarrativeService(sentence_library_root)
+        self.runtime = NarrativeRuntime()
+        self.result_composer = NarrativeResultComposer()
+
+    def compose_tree(
+        self,
+        runtime_input: RuntimeInput | None = None,
+        *,
+        analysis: Any = None,
+        interpretation: Any = None,
+        run_id: str = "",
+    ) -> NarrativeTree:
+        """
+        Sprint D1 public API: compose NarrativeTree only.
+
+        Does not generate paragraphs or prose.
+        """
+        if runtime_input is not None:
+            return self.runtime.compose_tree(runtime_input)
+        return self.runtime.compose_tree_from_sources(
+            analysis=analysis,
+            interpretation=interpretation,
+            run_id=run_id,
+        )
+
+    def compose_narrative_result(
+        self,
+        *,
+        analysis: Any = None,
+        interpretation: Any = None,
+        run_id: str = "",
+        tree: NarrativeTree | None = None,
+    ) -> NarrativeResult:
+        """
+        Sprint D2 public API: NarrativeTree → NarrativeResult.
+
+        Sentences are sourced from Interpretation/Evidence only.
+        """
+        narrative_tree = tree or self.compose_tree(
+            analysis=analysis,
+            interpretation=interpretation,
+            run_id=run_id,
+        )
+        return self.result_composer.compose(
+            narrative_tree,
+            analysis=analysis,
+            interpretation=interpretation,
+        )
 
     def compose(
         self,

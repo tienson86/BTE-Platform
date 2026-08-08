@@ -28,6 +28,10 @@ import {
   extractInterpretationSections,
   normalizeScore100,
 } from "./contentGuards";
+import {
+  asNarrativeResult,
+  hasUsableNarrativeResult,
+} from "./narrativeResultAdapter";
 
 /** Presentation ViewModel — same shape as former mock bundle. */
 export type BaZiResultViewModel = BaZiResultMockBundle;
@@ -268,6 +272,32 @@ function mapStrength(data: AnalysisDataDto): BaZiStrength {
 }
 
 function mapInterpretation(data: AnalysisDataDto): BaZiInterpretationBlock {
+  const narrative = asNarrativeResult(data.narrative_result);
+  if (hasUsableNarrativeResult(narrative) && narrative) {
+    const paragraphs = (narrative.sections ?? [])
+      .flatMap((section) => section.paragraphs ?? [])
+      .filter((paragraph) => !paragraph.insufficient_data)
+      .map((paragraph) => commercialOrUnavailable(paragraph.text))
+      .filter((body) => body !== UNAVAILABLE_CONCLUSION)
+      .slice(0, 6);
+    if (paragraphs.length === 0) {
+      const summaryBits = [
+        narrative.summary?.identity,
+        ...(narrative.summary?.strengths ?? []),
+        narrative.summary?.priority_recommendation,
+      ]
+        .map((item) => commercialOrUnavailable(item))
+        .filter((body) => body !== UNAVAILABLE_CONCLUSION);
+      return {
+        title: "Luận Giải",
+        paragraphs:
+          summaryBits.length > 0 ? summaryBits.slice(0, 6) : [UNAVAILABLE_CONCLUSION],
+      };
+    }
+    return { title: "Luận Giải", paragraphs };
+  }
+
+  // Legacy fallback when Pack 05 NarrativeResult is absent.
   const sections = extractInterpretationSections(
     data.interpretation as Record<string, unknown> | undefined,
   );

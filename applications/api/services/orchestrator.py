@@ -69,6 +69,10 @@ from applications.api.services.report_truth import (
     build_report_view,
     report_source_fingerprint,
 )
+from applications.api.services.narrative_result_truth import (
+    build_narrative_result_dict,
+    narrative_result_source_fingerprint,
+)
 from applications.api.services.score_truth import (
     build_score_view,
     score_source_fingerprint,
@@ -548,10 +552,25 @@ class OrchestratorService:
         completed.append("interpretation")
         payload["interpretation"] = analysis.interpretation_dict()
         payload["interpretation_source"] = analysis.meta.interpretation_source
+        # Pack 05 NarrativeResult — official commercial narrative for Portal.
+        analysis_bag = {
+            "bazi": payload.get("bazi") or {},
+            "pattern": payload.get("pattern") or {},
+            "strength": payload.get("strength") or {},
+            "useful_god": payload.get("useful_god") or {},
+            "score": payload.get("score") or {},
+        }
+        narrative_result_payload = build_narrative_result_dict(
+            analysis=analysis_bag,
+            interpretation=payload.get("interpretation") or {},
+            run_id=str(payload.get("request_id") or ""),
+        )
+        payload["narrative_result"] = narrative_result_payload
+        payload["narrative_result_source"] = narrative_result_source_fingerprint()
         logger.info(
-            "pipeline.interpretation sections=%s summary_len=%s",
+            "pipeline.interpretation sections=%s narrative_result_status=%s",
             payload["interpretation"].get("section_count", 0),
-            len(str(payload["interpretation"].get("summary") or "")),
+            narrative_result_payload.get("status"),
         )
         if stop_index == 11:
             return self._finalize_public_payload(payload, completed)

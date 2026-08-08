@@ -119,7 +119,10 @@ export type AnalysisDataDto = {
   readonly score?: ScoreDto;
   readonly interpretation?: Record<string, unknown>;
   readonly report?: Record<string, unknown>;
+  /** ReportEngine delivery markdown/html (legacy delivery alias). */
   readonly narrative?: Record<string, unknown>;
+  /** Pack 05 official commercial NarrativeResult. */
+  readonly narrative_result?: Record<string, unknown>;
   readonly customer?: CustomerEchoDto;
   readonly [key: string]: unknown;
 };

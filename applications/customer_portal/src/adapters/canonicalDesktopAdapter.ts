@@ -16,6 +16,15 @@ import {
   firstCommercialSnippet,
   normalizeScore100,
 } from "./contentGuards";
+import {
+  asNarrativeResult,
+  hasUsableNarrativeResult,
+  paragraphByRole,
+  recommendationActions,
+  sectionParagraphTexts,
+  summaryText,
+  type NarrativeResultDto,
+} from "./narrativeResultAdapter";
 
 export type CanonicalDesktopStatus = "ready" | "loading" | "error" | "empty";
 
@@ -54,6 +63,8 @@ export type CanonicalDesktopViewModel = {
   readonly source: "api" | "mock";
   readonly status: CanonicalDesktopStatus;
   readonly statusMessage?: string;
+  /** Pack 05 official commercial narrative (preferred over legacy interpretation). */
+  readonly narrativeResult?: NarrativeResultDto | null;
 };
 
 export type AdaptCanonicalDesktopOptions = {
@@ -355,14 +366,23 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const sections = extractInterpretationSections(
     data.interpretation as Record<string, unknown> | undefined,
   );
-  const whoBody = findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
-  const strengthBody = findSectionBody(sections, [/điểm mạnh/i, /thế mạnh/i]);
-  const actionBody = findSectionBody(sections, [
-    /dụng thần/i,
-    /kết luận/i,
-    /hành động/i,
-    /khuyến/i,
-  ]);
+  const narrative = asNarrativeResult(data.narrative_result);
+  const useNarrative = hasUsableNarrativeResult(narrative);
+  const whoBody = useNarrative
+    ? summaryText(narrative?.summary, "identity")
+    : findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
+  const strengthBody = useNarrative
+    ? summaryText(narrative?.summary, "strengths")
+    : findSectionBody(sections, [/điểm mạnh/i, /thế mạnh/i]);
+  const actionBody = useNarrative
+    ? summaryText(narrative?.summary, "priority_recommendation") ||
+      summaryText(narrative?.summary, "next_action")
+    : findSectionBody(sections, [
+        /dụng thần/i,
+        /kết luận/i,
+        /hành động/i,
+        /khuyến/i,
+      ]);
   const useful = data.useful_god as Record<string, unknown> | undefined;
   const whoFallback = [dm && `Nhật chủ ${dm}`, cachCuc && `Cách cục ${cachCuc}`, than]
     .filter(Boolean)
@@ -712,6 +732,44 @@ function mapS07(data: AnalysisDataDto): CanonicalDesktopViewModel["s07"] {
 
 function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const base = cloneFixture().s08;
+  const narrative = asNarrativeResult(data.narrative_result);
+  if (hasUsableNarrativeResult(narrative) && narrative) {
+    const strengths = (narrative.summary?.strengths ?? [])
+      .map((item) => firstCommercialSnippet(item))
+      .filter((item) => item !== UNAVAILABLE_CONCLUSION)
+      .slice(0, 4);
+    const warnings = (narrative.summary?.weaknesses ?? [])
+      .map((item) => firstCommercialSnippet(item))
+      .filter((item) => item !== UNAVAILABLE_CONCLUSION)
+      .slice(0, 4);
+    const actions = recommendationActions(narrative).slice(0, 4);
+    const overview =
+      summaryText(narrative.summary, "identity") ||
+      paragraphByRole(narrative, "observation") ||
+      sectionParagraphTexts(narrative, /observation|overview|executive/i)[0] ||
+      "";
+    return {
+      ...base,
+      executive: {
+        ...base.executive,
+        body: commercialOrUnavailable(overview),
+      },
+      strengths: {
+        ...base.strengths,
+        items: strengths.length > 0 ? strengths : [UNAVAILABLE_CONCLUSION],
+      },
+      warnings: {
+        ...base.warnings,
+        items: warnings.length > 0 ? warnings : [UNAVAILABLE_CONCLUSION],
+      },
+      actions: {
+        ...base.actions,
+        items: actions.length > 0 ? actions : [UNAVAILABLE_CONCLUSION],
+      },
+    };
+  }
+
+  // Legacy fallback — only when Pack 05 NarrativeResult is absent.
   const sections = extractInterpretationSections(
     data.interpretation as Record<string, unknown> | undefined,
   );
@@ -819,9 +877,41 @@ function mapS09(data: AnalysisDataDto): CanonicalDesktopViewModel["s09"] {
 
 function mapS11(data: AnalysisDataDto): CanonicalDesktopViewModel["s11"] {
   const base = cloneFixture().s11;
+  const narrative = asNarrativeResult(data.narrative_result);
+  const s08 = mapS08(data);
+
+  if (hasUsableNarrativeResult(narrative) && narrative) {
+    const closing =
+      sectionParagraphTexts(narrative, /conclusion|closing|kết luận/i)[0] ||
+      summaryText(narrative.summary, "identity");
+    const actions = recommendationActions(narrative);
+    return {
+      ...base,
+      executive: {
+        ...base.executive,
+        body: commercialOrUnavailable(closing),
+      },
+      strengths: {
+        ...base.strengths,
+        items: s08.strengths.items.slice(0, 4),
+      },
+      attention: {
+        ...base.attention,
+        items: s08.warnings.items.slice(0, 3),
+      },
+      recommendations: {
+        ...base.recommendations,
+        items:
+          actions.length > 0
+            ? actions.slice(0, 4)
+            : s08.actions.items.slice(0, 4),
+      },
+    };
+  }
+
   const report = data.report as Record<string, unknown> | undefined;
-  const narrative = data.narrative as Record<string, unknown> | undefined;
-  const markdown = asString(report?.markdown ?? narrative?.markdown ?? report?.html);
+  const deliveryNarrative = data.narrative as Record<string, unknown> | undefined;
+  const markdown = asString(report?.markdown ?? deliveryNarrative?.markdown ?? report?.html);
   const firstPara =
     markdown
       .replace(/<[^>]+>/g, " ")
@@ -829,7 +919,6 @@ function mapS11(data: AnalysisDataDto): CanonicalDesktopViewModel["s11"] {
       .map((l) => l.replace(/^#+\s*/, "").trim())
       .find((l) => l.length > 40) ?? "";
 
-  const s08 = mapS08(data);
   return {
     ...base,
     executive: {
@@ -891,6 +980,7 @@ export function adaptAnalysisToCanonicalDesktop(
     s10: mapS10(),
     s11: mapS11(data),
     footer: fixture.footer,
+    narrativeResult: asNarrativeResult(data.narrative_result),
     source: options.source ?? "api",
     status: options.status ?? "ready",
   };
@@ -908,6 +998,7 @@ export function createCanonicalDesktopGateViewModel(
     status,
     statusMessage: message,
     source: "mock",
+    narrativeResult: null,
   };
 }
 
@@ -917,5 +1008,6 @@ export function createCanonicalDesktopMockViewModel(): CanonicalDesktopViewModel
     ...cloneFixture(),
     status: "ready",
     source: "mock",
+    narrativeResult: null,
   };
 }

@@ -14,6 +14,11 @@ import {
   commercialOrUnavailable,
 } from "../../../adapters/contentGuards";
 import {
+  hasUsableNarrativeResult,
+  paragraphByRole,
+  type NarrativeRecommendationDto,
+} from "../../../adapters/narrativeResultAdapter";
+import {
   MAX_PRIMARY_RECOMMENDATIONS,
   RECOMMENDATION_PRIORITY_LABEL,
   bindPlaceholder,
@@ -26,6 +31,7 @@ import type {
   InterpretationBlockViewModel,
   KnowledgeSectionViewModel,
   RecommendationItemViewModel,
+  RecommendationPriority,
   ResultPageViewModel,
 } from "../viewModels";
 
@@ -34,6 +40,54 @@ const TIMELINE_LABELS = ["Tiền vận", "Trung vận", "Hậu vận", "Định 
 function buildRecommendations(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel["recommendations"] {
+  const narrative = source.narrativeResult;
+  if (hasUsableNarrativeResult(narrative) && narrative) {
+    const fromRoot = narrative.recommendations ?? [];
+    const fromSections = (narrative.sections ?? []).flatMap(
+      (section) => section.recommendations ?? [],
+    );
+    const rawItems: NarrativeRecommendationDto[] = [...fromRoot, ...fromSections];
+    const draft: RecommendationItemViewModel[] = rawItems.map((item, index) => {
+      const priority = _mapPriority(item.priority, index);
+      const actionPreview = formatPreviewField(item.action, "title");
+      const reasonPreview = formatPreviewField(item.reason, "summary");
+      const benefitPreview = formatPreviewField(item.benefit, "summary");
+      const detailPreview = adaptPreviewText(
+        [
+          `Hành động: ${bindPlaceholder(item.action)}`,
+          `Lý do: ${bindPlaceholder(item.reason)}`,
+          `Lợi ích kỳ vọng: ${bindPlaceholder(item.benefit)}`,
+        ]
+          .filter((part) => !part.endsWith(UNAVAILABLE_CONCLUSION))
+          .join(" "),
+        "narrative",
+      );
+      return {
+        id: item.id ?? `rec-${index + 1}`,
+        priority,
+        priorityLabel: RECOMMENDATION_PRIORITY_LABEL[priority],
+        action: actionPreview,
+        reason: reasonPreview,
+        benefit: benefitPreview,
+        detail: detailPreview,
+        hasMore:
+          actionPreview.hasMore ||
+          reasonPreview.hasMore ||
+          benefitPreview.hasMore ||
+          detailPreview.hasMore,
+      };
+    });
+    const sorted = sortByRecommendationPriority(draft);
+    const primary = truncatePrimaryList(sorted, MAX_PRIMARY_RECOMMENDATIONS);
+    return {
+      title: "KHUYẾN NGHỊ",
+      items: primary.items,
+      totalCount: primary.totalCount,
+      hasMore: primary.hasMore || primary.items.some((item) => item.hasMore),
+      viewAllLabel: "Xem tất cả khuyến nghị →",
+    };
+  }
+
   const rawActions = source.s11.recommendations.items;
   const rawWarnings = source.s08.warnings.items;
   const rawBenefits = source.s08.strengths.items;
@@ -87,9 +141,82 @@ function buildRecommendations(
   };
 }
 
+function _mapPriority(
+  value: string | undefined,
+  index: number,
+): RecommendationPriority {
+  const key = (value ?? "").toLowerCase();
+  if (key === "critical" || key === "high" || key === "medium" || key === "low") {
+    return key;
+  }
+  return priorityFromIndex(index);
+}
+
 function buildInterpretation(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel["interpretation"] {
+  const narrative = source.narrativeResult;
+  if (hasUsableNarrativeResult(narrative) && narrative) {
+    const overviewObs = paragraphByRole(narrative, "observation");
+    const overviewExplanation = paragraphByRole(narrative, "explanation");
+    const overviewImpact = paragraphByRole(narrative, "impact");
+    const overviewSuggestion = paragraphByRole(narrative, "suggestion");
+    const cautionObs = commercialOrUnavailable(
+      (narrative.summary?.weaknesses ?? []).join("; "),
+    );
+    const directionObs = commercialOrUnavailable(narrative.summary?.identity);
+    const directionSuggestion = commercialOrUnavailable(
+      narrative.summary?.next_action || narrative.summary?.priority_recommendation,
+    );
+
+    const blocks: InterpretationBlockViewModel[] = [
+      {
+        id: "interp-overview",
+        title: "Tổng quan mệnh cục",
+        observation: formatPreviewField(overviewObs, "summary"),
+        explanation: formatPreviewField(overviewExplanation, "description"),
+        impact: formatPreviewField(overviewImpact, "summary"),
+        suggestion: formatPreviewField(overviewSuggestion, "summary"),
+        hasMore: true,
+      },
+      {
+        id: "interp-caution",
+        title: "Điểm cần lưu ý",
+        observation: formatPreviewField(cautionObs, "summary"),
+        explanation: formatPreviewField(overviewExplanation, "description"),
+        impact: formatPreviewField(cautionObs, "summary"),
+        suggestion: formatPreviewField(directionSuggestion, "summary"),
+        hasMore: true,
+      },
+      {
+        id: "interp-direction",
+        title: "Định hướng hành động",
+        observation: formatPreviewField(directionObs, "summary"),
+        explanation: formatPreviewField(
+          commercialOrUnavailable(narrative.summary?.priority_recommendation),
+          "description",
+        ),
+        impact: formatPreviewField(overviewImpact, "summary"),
+        suggestion: formatPreviewField(directionSuggestion, "summary"),
+        hasMore: true,
+      },
+    ].map((block) => ({
+      ...block,
+      hasMore:
+        block.observation.hasMore ||
+        block.explanation.hasMore ||
+        block.impact.hasMore ||
+        block.suggestion.hasMore,
+    }));
+
+    return {
+      title: "LUẬN GIẢI",
+      blocks,
+      expandLabel: "Mở rộng luận giải",
+      collapseLabel: "Thu gọn",
+    };
+  }
+
   const overviewObs = commercialOrUnavailable(source.s08.executive.body);
   const overviewImpact = commercialOrUnavailable(
     source.s08.strengths.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
