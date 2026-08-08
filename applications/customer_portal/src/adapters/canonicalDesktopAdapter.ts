@@ -8,6 +8,14 @@ import {
   CANONICAL_DESKTOP_MOCK,
   type CanonicalDesktopMock,
 } from "../screens/canonical_desktop/mockData";
+import {
+  UNAVAILABLE_CONCLUSION,
+  commercialOrUnavailable,
+  extractInterpretationSections,
+  findSectionBody,
+  firstCommercialSnippet,
+  normalizeScore100,
+} from "./contentGuards";
 
 export type CanonicalDesktopStatus = "ready" | "loading" | "error" | "empty";
 
@@ -335,18 +343,37 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const yy = asString(data.bazi?.day_master_yin_yang);
   const pattern = data.pattern as Record<string, unknown> | undefined;
   const strength = data.strength;
-  const score = Math.round(Number(strength?.strength_score ?? data.score?.strength_score ?? 0));
+  const score = normalizeScore100(
+    data.score?.strength_score ?? strength?.strength_score ?? 0,
+  );
   const level = asString(strength?.strength_level);
   const cachCuc = pickStr(pattern, ["cach_cuc", "pattern"]);
   const than = pickStr(pattern, ["than_vuong_nhuoc", "than"]);
   const season = asString(
     (data.calendar?.solar_term as { name?: string } | null | undefined)?.name,
   );
-  const interp = data.interpretation as Record<string, unknown> | undefined;
-  const sections = Array.isArray(interp?.sections) ? (interp.sections as Record<string, unknown>[]) : [];
-  const bodies = sections
-    .map((s) => asString(s.body ?? s.content ?? s.text).trim())
-    .filter(Boolean);
+  const sections = extractInterpretationSections(
+    data.interpretation as Record<string, unknown> | undefined,
+  );
+  const whoBody = findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
+  const strengthBody = findSectionBody(sections, [/điểm mạnh/i, /thế mạnh/i]);
+  const actionBody = findSectionBody(sections, [
+    /dụng thần/i,
+    /kết luận/i,
+    /hành động/i,
+    /khuyến/i,
+  ]);
+  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const whoFallback = [dm && `Nhật chủ ${dm}`, cachCuc && `Cách cục ${cachCuc}`, than]
+    .filter(Boolean)
+    .join(" · ");
+  const strengthFallback = [cachCuc && `Cách cục ${cachCuc}`, than]
+    .filter(Boolean)
+    .join(". ");
+  const dung = pickStr(useful, ["useful_god"]);
+  const actionFallback = dung
+    ? `Ưu tiên phát huy Dụng thần: ${dung}. ${asString(data.score?.recommendation)}`.trim()
+    : asString(data.score?.recommendation);
 
   const strengthTone =
     score >= 60 ? ("danger" as const) : score >= 40 ? ("warning" as const) : ("success" as const);
@@ -359,7 +386,7 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
       subtype: yy && element ? `${yy} ${element}`.trim() : yy || element || base.dayMaster.subtype,
       tags: [
         {
-          text: than || (element ? `${element} ${score >= 55 ? "vượng" : "cân"}` : base.dayMaster.tags[0].text),
+          text: than || (element ? `${element} ${score >= 55 ? "vượng" : "cân"}` : "—"),
           tone: strengthTone,
         },
         {
@@ -373,19 +400,19 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
       rows: [
         {
           label: "Mùa sinh",
-          value: season || base.conditions.rows[0].value,
-          tag: season ? "Tiết khí" : base.conditions.rows[0].tag,
+          value: season || UNAVAILABLE_CONCLUSION,
+          tag: season ? "Tiết khí" : "—",
           tone: "neutral" as const,
         },
         {
           label: "Cục mệnh",
-          value: cachCuc || base.conditions.rows[1].value,
-          tag: than || base.conditions.rows[1].tag,
+          value: cachCuc || UNAVAILABLE_CONCLUSION,
+          tag: than || "—",
           tone: strengthTone === "danger" ? ("warning" as const) : strengthTone,
         },
         {
           label: "Thân cư",
-          value: pickStr(pattern, ["tong_cach", "than"]) || base.conditions.rows[2].value,
+          value: pickStr(pattern, ["tong_cach", "than"]) || than || UNAVAILABLE_CONCLUSION,
           tag: score >= 55 ? "Tốt" : "Theo dõi",
           tone: score >= 55 ? ("success" as const) : ("warning" as const),
         },
@@ -395,22 +422,19 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
       {
         icon: "target" as const,
         question: "BẠN LÀ AI?",
-        answer: bodies[0] || asString(strength?.reasoning, base.decisions[0].answer),
+        answer: commercialOrUnavailable(whoBody || whoFallback),
       },
       {
         icon: "bulb" as const,
         question: "THẾ MẠNH CỦA BẠN?",
-        answer: bodies[1] || (cachCuc ? `Cách cục ${cachCuc}. ${than}` : base.decisions[1].answer),
+        answer: commercialOrUnavailable(strengthBody || strengthFallback),
       },
       {
         icon: "compass" as const,
         question: "BẠN NÊN LÀM GÌ?",
-        answer:
-          bodies[2] ||
-          asString(
-            (data.useful_god as Record<string, unknown> | undefined)?.reasoning,
-            base.decisions[2].answer,
-          ),
+        answer: commercialOrUnavailable(
+          actionBody || actionFallback || asString(data.score?.recommendation),
+        ),
       },
     ],
   };
@@ -548,27 +572,36 @@ function mapS04(data: AnalysisDataDto): CanonicalDesktopViewModel["s04"] {
 
 function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
   const base = cloneFixture().s05;
-  const score = Math.round(Number(data.strength?.strength_score ?? data.score?.strength_score ?? 0));
-  const levelRaw = asString(data.strength?.strength_level, base.level);
+  const score = normalizeScore100(
+    data.score?.strength_score ?? data.strength?.strength_score ?? 0,
+  );
+  const levelRaw = asString(data.strength?.strength_level, "");
   const level = score >= 70 ? "MẠNH" : score >= 45 ? "TRUNG BÌNH" : "YẾU";
-  const reasoning = asString(data.strength?.reasoning, base.insight);
+  const reasoning = commercialOrUnavailable(asString(data.strength?.reasoning));
   const factors = asString(data.strength?.reasoning)
     .split(/[.;\n]+/)
     .map((s) => s.trim())
     .filter(Boolean)
+    .filter((text) => commercialOrUnavailable(text) !== UNAVAILABLE_CONCLUSION)
     .slice(0, 4)
     .map((text, i) => ({
       text,
-      tone: (i < 2 ? "positive" : i === 2 ? "neutral" : "negative") as "positive" | "neutral" | "negative",
+      tone: (i < 2 ? "positive" : i === 2 ? "neutral" : "negative") as
+        | "positive"
+        | "neutral"
+        | "negative",
     }));
 
   return {
     ...base,
-    level: level || levelRaw.toUpperCase(),
+    level: level || levelRaw.toUpperCase() || "—",
     score: `${score} / 100`,
     percent: Math.min(100, Math.max(0, score)),
-    insight: reasoning || base.insight,
-    factors: factors.length > 0 ? factors : base.factors,
+    insight: reasoning,
+    factors:
+      factors.length > 0
+        ? factors
+        : [{ text: UNAVAILABLE_CONCLUSION, tone: "neutral" as const }],
   };
 }
 
@@ -596,7 +629,19 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
     if (!name || name === "Nhật Chủ") continue;
     counts.set(name, (counts.get(name) ?? 0) + 1);
   }
-  if (counts.size === 0) return base;
+  if (counts.size === 0) {
+    return {
+      ...base,
+      gods: [
+        {
+          name: UNAVAILABLE_CONCLUSION,
+          short: "—",
+          score: "0.0",
+          color: "#5c6570",
+        },
+      ],
+    };
+  }
 
   return {
     ...base,
@@ -617,7 +662,21 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
 function mapS07(data: AnalysisDataDto): CanonicalDesktopViewModel["s07"] {
   const base = cloneFixture().s07;
   const list = (data.bazi?.shensha ?? []).map((s) => asString(s).trim()).filter(Boolean);
-  if (list.length === 0) return base;
+  if (list.length === 0) {
+    return {
+      ...base,
+      executive: {
+        line1: UNAVAILABLE_CONCLUSION,
+        line2: "",
+      },
+      good: { title: "● CÁT TINH (0)", items: [UNAVAILABLE_CONCLUSION] },
+      bad: { title: "● HUNG TINH (0)", items: [UNAVAILABLE_CONCLUSION] },
+      footerSummary: {
+        line1: UNAVAILABLE_CONCLUSION,
+        line2: "",
+      },
+    };
+  }
 
   const good: string[] = [];
   const bad: string[] = [];
@@ -638,11 +697,11 @@ function mapS07(data: AnalysisDataDto): CanonicalDesktopViewModel["s07"] {
     },
     good: {
       title: `● CÁT TINH (${good.length})`,
-      items: good.length > 0 ? good : ["—"],
+      items: good.length > 0 ? good : [UNAVAILABLE_CONCLUSION],
     },
     bad: {
       title: `● HUNG TINH (${bad.length})`,
-      items: bad.length > 0 ? bad : ["—"],
+      items: bad.length > 0 ? bad : [UNAVAILABLE_CONCLUSION],
     },
     footerSummary: {
       line1: `Có ${good.length} Cát tinh và ${bad.length} Hung tinh.`,
@@ -653,43 +712,82 @@ function mapS07(data: AnalysisDataDto): CanonicalDesktopViewModel["s07"] {
 
 function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const base = cloneFixture().s08;
-  const interp = data.interpretation as Record<string, unknown> | undefined;
-  const sections = Array.isArray(interp?.sections) ? (interp.sections as Record<string, unknown>[]) : [];
-  const bodies = sections
-    .map((s) => asString(s.body ?? s.content ?? s.text).trim())
-    .filter(Boolean);
-  const titles = sections.map((s) => asString(s.title).toLowerCase());
+  const sections = extractInterpretationSections(
+    data.interpretation as Record<string, unknown> | undefined,
+  );
 
   const strengths: string[] = [];
   const warnings: string[] = [];
   const actions: string[] = [];
-  sections.forEach((_section, i) => {
-    const title = titles[i] ?? "";
-    const body = bodies[i] ?? "";
-    const snippet = body.split(/[.\n]/)[0]?.trim();
-    if (!snippet) return;
-    if (/mạnh|ưu|strength|tốt/.test(title)) strengths.push(snippet);
-    else if (/yếu|lưu ý|risk|warning|nhược/.test(title)) warnings.push(snippet);
-    else if (/hành động|khuyến|recommend|gợi ý/.test(title)) actions.push(snippet);
-  });
+  for (const section of sections) {
+    const title = section.title.toLowerCase();
+    const snippet = firstCommercialSnippet(section.body);
+    if (snippet === UNAVAILABLE_CONCLUSION) continue;
+    if (/điểm mạnh|thế mạnh|ưu điểm|strength/.test(title)) {
+      strengths.push(snippet);
+    } else if (/điểm cần lưu ý|lưu ý|nhược|warning|risk|yếu tố/.test(title)) {
+      warnings.push(snippet);
+    } else if (/hành động|khuyến|recommend|gợi ý|dụng thần|kết luận/.test(title)) {
+      actions.push(snippet);
+    }
+  }
+
+  const overviewBody =
+    findSectionBody(sections, [/^tính cách$/i, /^kết luận$/i, /tổng quan/i]) ||
+    asString(data.score?.recommendation);
+  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const dung = pickStr(useful, ["useful_god"]) || pickStr(data.pattern as Record<string, unknown> | undefined, ["dung_than"]);
+  if (actions.length === 0 && dung) {
+    actions.push(`Ưu tiên phát huy Dụng thần: ${dung}`);
+  }
+  if (actions.length === 0) {
+    const rec = asString(data.score?.recommendation).trim();
+    if (rec) actions.push(rec);
+  }
+
+  const strengthItems =
+    strengths.length > 0 ? strengths.slice(0, 4) : [UNAVAILABLE_CONCLUSION];
+  const warningItems =
+    warnings.length > 0 ? warnings.slice(0, 4) : [UNAVAILABLE_CONCLUSION];
+  const actionItems =
+    actions.length > 0 ? actions.slice(0, 4) : [UNAVAILABLE_CONCLUSION];
 
   return {
     ...base,
     executive: {
       ...base.executive,
-      body: bodies[0] || asString(data.score?.recommendation, base.executive.body),
+      body: commercialOrUnavailable(overviewBody),
     },
     strengths: {
       ...base.strengths,
-      items: strengths.length > 0 ? strengths.slice(0, 4) : base.strengths.items,
+      items: strengthItems,
     },
     warnings: {
       ...base.warnings,
-      items: warnings.length > 0 ? warnings.slice(0, 4) : base.warnings.items,
+      items: warningItems,
     },
     actions: {
       ...base.actions,
-      items: actions.length > 0 ? actions.slice(0, 4) : base.actions.items,
+      items: actionItems,
+    },
+  };
+}
+
+function mapS10(): CanonicalDesktopViewModel["s10"] {
+  const base = cloneFixture().s10;
+  return {
+    ...base,
+    stars: 0,
+    weight: "—",
+    grade: UNAVAILABLE_CONCLUSION,
+    insight: UNAVAILABLE_CONCLUSION,
+    verse: {
+      ...base.verse,
+      lines: [UNAVAILABLE_CONCLUSION],
+    },
+    interpretation: {
+      ...base.interpretation,
+      body: UNAVAILABLE_CONCLUSION,
     },
   };
 }
@@ -736,7 +834,7 @@ function mapS11(data: AnalysisDataDto): CanonicalDesktopViewModel["s11"] {
     ...base,
     executive: {
       ...base.executive,
-      body: firstPara || s08.executive.body || base.executive.body,
+      body: commercialOrUnavailable(firstPara || s08.executive.body),
     },
     strengths: {
       ...base.strengths,
@@ -789,8 +887,8 @@ export function adaptAnalysisToCanonicalDesktop(
     s07: mapS07(data),
     s08: mapS08(data),
     s09: mapS09(data),
-    // S10 — no bone-weight engine yet; keep fixture until engine exists.
-    s10: fixture.s10,
+    // S10 — bone-weight engine not in production pipeline; no fixture leakage.
+    s10: mapS10(),
     s11: mapS11(data),
     footer: fixture.footer,
     source: options.source ?? "api",

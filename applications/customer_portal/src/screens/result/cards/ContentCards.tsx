@@ -164,7 +164,7 @@ function InterpretationBlock({
 
       <div className="rp-interp-step" data-step="observation">
         <span className="rp-interp-step__label" id={`${detailId}-obs`}>
-          Observation
+          Quan sát
         </span>
         <PresentationText
           typeRole="summary"
@@ -177,21 +177,21 @@ function InterpretationBlock({
       {expanded ? (
         <div id={detailId}>
           <div className="rp-interp-step" data-step="explanation">
-            <span className="rp-interp-step__label">Explanation</span>
+            <span className="rp-interp-step__label">Giải thích</span>
             <PresentationText typeRole="body" preview={block.explanation} as="p" />
           </div>
           <div className="rp-interp-step" data-step="impact">
-            <span className="rp-interp-step__label">Impact</span>
+            <span className="rp-interp-step__label">Tác động</span>
             <PresentationText typeRole="body" preview={block.impact} as="p" />
           </div>
           <div className="rp-interp-step" data-step="suggestion">
-            <span className="rp-interp-step__label">Suggestion</span>
+            <span className="rp-interp-step__label">Gợi ý</span>
             <PresentationText typeRole="body" preview={block.suggestion} as="p" />
           </div>
         </div>
       ) : (
         <div className="rp-interp-step rp-interp-step--preview" data-step="explanation-preview">
-          <span className="rp-interp-step__label">Explanation</span>
+          <span className="rp-interp-step__label">Giải thích</span>
           <PresentationText typeRole="summary" preview={block.explanation} as="p" />
         </div>
       )}

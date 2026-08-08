@@ -14,10 +14,10 @@ export const RECOMMENDATION_PRIORITY_ORDER: readonly RecommendationPriority[] = 
 ] as const;
 
 export const RECOMMENDATION_PRIORITY_LABEL: Record<RecommendationPriority, string> = {
-  critical: "Critical",
-  high: "High",
-  medium: "Medium",
-  low: "Low",
+  critical: "Ưu tiên cao",
+  high: "Cao",
+  medium: "Trung bình",
+  low: "Thấp",
 };
 
 export const MAX_PRIMARY_RECOMMENDATIONS = 5;
@@ -40,10 +40,11 @@ export function sortByRecommendationPriority<T extends { readonly priority: Reco
 
 /**
  * Bind placeholder when source text is empty.
+ * Prefer commercial unavailable copy for missing narrative fields.
  */
 export function bindPlaceholder(
   value: string | null | undefined,
-  placeholder = "—",
+  placeholder = "Chưa đủ dữ liệu để đưa ra kết luận.",
 ): string {
   const trimmed = (value ?? "").trim();
   return trimmed.length > 0 ? trimmed : placeholder;

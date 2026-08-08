@@ -1,6 +1,6 @@
 /**
  * S10 — Dashboard Preview Card: CÂN XƯƠNG ĐOÁN MỆNH
- * No bone-weight engine yet — ViewModel may still carry fixture until engine lands.
+ * Bone-weight engine is not in the production pipeline; ViewModel shows unavailable copy.
  */
 
 import type { ReactNode } from "react";

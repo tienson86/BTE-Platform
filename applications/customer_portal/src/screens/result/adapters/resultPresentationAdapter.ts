@@ -10,6 +10,10 @@ import {
   adaptPreviewText,
 } from "../../../presentation";
 import {
+  UNAVAILABLE_CONCLUSION,
+  commercialOrUnavailable,
+} from "../../../adapters/contentGuards";
+import {
   MAX_PRIMARY_RECOMMENDATIONS,
   RECOMMENDATION_PRIORITY_LABEL,
   bindPlaceholder,
@@ -86,56 +90,61 @@ function buildRecommendations(
 function buildInterpretation(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel["interpretation"] {
+  const overviewObs = commercialOrUnavailable(source.s08.executive.body);
+  const overviewImpact = commercialOrUnavailable(
+    source.s08.strengths.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
+  );
+  const overviewSuggestion = commercialOrUnavailable(
+    source.s08.actions.items[0] ?? source.s01.cta,
+  );
+  const cautionObs = commercialOrUnavailable(
+    source.s08.warnings.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
+  );
+  const cautionExplanation = commercialOrUnavailable(
+    source.s05.insight.replace(/\n/g, " "),
+  );
+  const cautionImpact = commercialOrUnavailable(
+    source.s11.attention.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
+  );
+  const cautionSuggestion = commercialOrUnavailable(
+    source.s08.actions.items[1] ?? source.s11.recommendations.items[1],
+  );
+  const directionObs = commercialOrUnavailable(source.s01.decisions[0]?.answer);
+  const directionExplanation = commercialOrUnavailable(source.s01.decisions[1]?.answer);
+  const directionImpact = commercialOrUnavailable(source.s01.decisions[2]?.answer);
+  const directionSuggestion = commercialOrUnavailable(
+    source.s08.actions.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 3).join("; "),
+  );
+
   const blocks: InterpretationBlockViewModel[] = [
     {
       id: "interp-overview",
       title: "Tổng quan mệnh cục",
-      observation: formatPreviewField(source.s08.executive.body, "summary"),
+      observation: formatPreviewField(overviewObs, "summary"),
       explanation: formatPreviewField(
-        `Nhật chủ ${source.s01.dayMaster.value} · ${source.s04.summary}`,
+        `Nhật chủ ${bindPlaceholder(source.s01.dayMaster.value, "—")} · ${commercialOrUnavailable(source.s04.summary)}`,
         "description",
       ),
-      impact: formatPreviewField(
-        source.s08.strengths.items.slice(0, 2).join("; "),
-        "summary",
-      ),
-      suggestion: formatPreviewField(
-        source.s08.actions.items[0] ?? source.s01.cta,
-        "summary",
-      ),
+      impact: formatPreviewField(overviewImpact, "summary"),
+      suggestion: formatPreviewField(overviewSuggestion, "summary"),
       hasMore: true,
     },
     {
       id: "interp-caution",
       title: "Điểm cần lưu ý",
-      observation: formatPreviewField(
-        source.s08.warnings.items.slice(0, 2).join("; "),
-        "summary",
-      ),
-      explanation: formatPreviewField(
-        source.s05.insight.replace(/\n/g, " "),
-        "description",
-      ),
-      impact: formatPreviewField(
-        source.s11.attention.items.slice(0, 2).join("; "),
-        "summary",
-      ),
-      suggestion: formatPreviewField(
-        source.s08.actions.items[1] ?? source.s11.recommendations.items[1],
-        "summary",
-      ),
+      observation: formatPreviewField(cautionObs, "summary"),
+      explanation: formatPreviewField(cautionExplanation, "description"),
+      impact: formatPreviewField(cautionImpact, "summary"),
+      suggestion: formatPreviewField(cautionSuggestion, "summary"),
       hasMore: true,
     },
     {
       id: "interp-direction",
       title: "Định hướng hành động",
-      observation: formatPreviewField(source.s01.decisions[0]?.answer, "summary"),
-      explanation: formatPreviewField(source.s01.decisions[1]?.answer, "description"),
-      impact: formatPreviewField(source.s10.insight, "summary"),
-      suggestion: formatPreviewField(
-        source.s08.actions.items.slice(0, 3).join("; "),
-        "summary",
-      ),
+      observation: formatPreviewField(directionObs, "summary"),
+      explanation: formatPreviewField(directionExplanation, "description"),
+      impact: formatPreviewField(directionImpact, "summary"),
+      suggestion: formatPreviewField(directionSuggestion, "summary"),
       hasMore: true,
     },
   ].map((block) => ({
@@ -144,8 +153,7 @@ function buildInterpretation(
       block.observation.hasMore ||
       block.explanation.hasMore ||
       block.impact.hasMore ||
-      block.suggestion.hasMore ||
-      true,
+      block.suggestion.hasMore,
   }));
 
   return {
@@ -159,12 +167,14 @@ function buildInterpretation(
 function buildKnowledge(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel["knowledge"] {
-  const dayMaster = bindPlaceholder(source.s01.dayMaster.value);
+  const dayMaster = bindPlaceholder(source.s01.dayMaster.value, "—");
   const usefulGod = bindPlaceholder(
     source.s02.items.find((i) => i.label === "Dụng thần")?.value,
+    "—",
   );
   const pattern = bindPlaceholder(
     source.s02.items.find((i) => i.label === "Thế cục")?.value,
+    "—",
   );
 
   const sections: KnowledgeSectionViewModel[] = [
@@ -176,9 +186,11 @@ function buildKnowledge(
         `Nhật chủ: ${dayMaster}. Dụng thần: ${usefulGod}. Thế cục: ${pattern}.`,
         "summary",
       ),
-      reference: formatPreviewField("BTE Knowledge Base · Thuật ngữ Bát Tự", "summary"),
+      reference: formatPreviewField("Thuật ngữ Bát Tự trong lá số hiện tại", "summary"),
       detail: adaptPreviewText(
-        "Thuật ngữ được trình bày để hỗ trợ đọc luận giải. Định nghĩa mang tính giáo dục và không thay thế kết luận phân tích.",
+        commercialOrUnavailable(
+          `Nhật chủ ${dayMaster}; Dụng thần ${usefulGod}; Thế cục ${pattern}.`,
+        ),
         "narrative",
       ),
       hasMore: true,
@@ -189,12 +201,19 @@ function buildKnowledge(
       kind: "references",
       title: "Tài liệu tham chiếu",
       definition: formatPreviewField(
-        "Tham chiếu cấu trúc Ngũ hành, Thập thần và khuyến nghị hành động trong báo cáo.",
+        commercialOrUnavailable(source.s04.summary),
         "summary",
       ),
-      reference: formatPreviewField("PACK_06 Knowledge Zone · Classical References", "summary"),
+      reference: formatPreviewField("Ngũ hành · Thập thần · Khuyến nghị", "summary"),
       detail: adaptPreviewText(
-        "Phần tham chiếu liệt kê nguồn trình bày. Không thực hiện suy luận nghiệp vụ trong Presentation Layer.",
+        commercialOrUnavailable(
+          [
+            ...source.s08.strengths.items.slice(0, 2),
+            ...source.s08.warnings.items.slice(0, 2),
+          ]
+            .filter((item) => item !== UNAVAILABLE_CONCLUSION)
+            .join("; "),
+        ),
         "narrative",
       ),
       hasMore: true,
@@ -205,12 +224,12 @@ function buildKnowledge(
       kind: "theory",
       title: "Lý thuyết truyền thống",
       definition: formatPreviewField(
-        `Cân bằng Ngũ hành hiện tại: ${bindPlaceholder(source.s04.summary)}.`,
+        commercialOrUnavailable(source.s04.summary),
         "summary",
       ),
-      reference: formatPreviewField("Traditional Theory · Five Elements Balance", "summary"),
+      reference: formatPreviewField("Cân bằng Ngũ hành", "summary"),
       detail: adaptPreviewText(
-        "Lý thuyết truyền thống được rút gọn để hỗ trợ hiểu kết quả. Nội dung đầy đủ nằm ở chế độ mở rộng.",
+        commercialOrUnavailable(source.s05.insight),
         "narrative",
       ),
       hasMore: true,
@@ -221,12 +240,12 @@ function buildKnowledge(
       kind: "appendix",
       title: "Phụ lục",
       definition: formatPreviewField(
-        `Mã lá số ${bindPlaceholder(source.s00.chartId.value)} · ${bindPlaceholder(source.s00.version.value)}.`,
+        `Mã lá số ${bindPlaceholder(source.s00.chartId.value, "—")} · ${bindPlaceholder(source.s00.version.value, "—")}.`,
         "summary",
       ),
-      reference: formatPreviewField("Appendix · Report Metadata", "summary"),
+      reference: formatPreviewField("Metadata báo cáo", "summary"),
       detail: adaptPreviewText(
-        bindPlaceholder(source.footer),
+        commercialOrUnavailable(source.footer),
         "narrative",
       ),
       hasMore: true,
@@ -246,9 +265,15 @@ function buildKnowledge(
 export function adaptResultPageViewModel(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel {
-  const executiveBody = adaptPreviewText(source.s08.executive.body, "narrative");
+  const executiveBody = adaptPreviewText(
+    commercialOrUnavailable(source.s08.executive.body),
+    "narrative",
+  );
   const executivePoints = adaptPreviewList(
-    [...source.s08.strengths.items.slice(0, 2), ...source.s08.warnings.items.slice(0, 2)],
+    [
+      ...source.s08.strengths.items.slice(0, 2),
+      ...source.s08.warnings.items.slice(0, 2),
+    ].map((item) => commercialOrUnavailable(item)),
     4,
   );
 
@@ -264,7 +289,7 @@ export function adaptResultPageViewModel(
   const destinyItems = adaptPreviewList(
     source.s01.decisions.map((d) => ({
       question: d.question,
-      answer: adaptPreviewText(d.answer, "summary"),
+      answer: adaptPreviewText(commercialOrUnavailable(d.answer), "summary"),
     })),
     3,
   );
@@ -280,10 +305,16 @@ export function adaptResultPageViewModel(
   );
 
   const strengthInsight = adaptPreviewText(
-    source.s05.insight.replace(/\n/g, " "),
+    commercialOrUnavailable(source.s05.insight.replace(/\n/g, " ")),
     "summary",
   );
-  const strengthFactors = adaptPreviewList(source.s05.factors, 4);
+  const strengthFactors = adaptPreviewList(
+    source.s05.factors.map((f) => ({
+      ...f,
+      text: commercialOrUnavailable(f.text),
+    })),
+    4,
+  );
 
   const rankedGods = [...source.s06.gods].sort(
     (a, b) => Number.parseFloat(b.score) - Number.parseFloat(a.score),
@@ -298,31 +329,40 @@ export function adaptResultPageViewModel(
     pct: row.pct,
     element: row.element,
   }));
-  const radarSummary = adaptPreviewText(source.s04.summary, "summary");
+  const radarSummary = adaptPreviewText(
+    commercialOrUnavailable(source.s04.summary),
+    "summary",
+  );
 
   const timelineSource = [
     {
       label: TIMELINE_LABELS[0],
-      detail: adaptPreviewText(source.s10.insight, "summary"),
+      detail: adaptPreviewText(UNAVAILABLE_CONCLUSION, "summary"),
     },
     {
       label: TIMELINE_LABELS[1],
-      detail: adaptPreviewText(source.s08.strengths.items[0] ?? "", "summary"),
+      detail: adaptPreviewText(
+        commercialOrUnavailable(source.s08.strengths.items[0] ?? ""),
+        "summary",
+      ),
     },
     {
       label: TIMELINE_LABELS[2],
-      detail: adaptPreviewText(source.s08.warnings.items[0] ?? "", "summary"),
+      detail: adaptPreviewText(
+        commercialOrUnavailable(source.s08.warnings.items[0] ?? ""),
+        "summary",
+      ),
     },
     {
       label: TIMELINE_LABELS[3],
-      detail: adaptPreviewText(source.s08.actions.items[0] ?? source.s01.cta, "summary"),
+      detail: adaptPreviewText(
+        commercialOrUnavailable(source.s08.actions.items[0] ?? source.s01.cta),
+        "summary",
+      ),
     },
   ];
   const stages = adaptPreviewList(timelineSource, 4);
-  const timelineSummary = adaptPreviewText(
-    `${source.s10.grade} · ${source.s10.weight}`,
-    "summary",
-  );
+  const timelineSummary = adaptPreviewText(UNAVAILABLE_CONCLUSION, "summary");
 
   return {
     context: {

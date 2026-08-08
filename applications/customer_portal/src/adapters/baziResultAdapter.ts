@@ -6,22 +6,28 @@
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto, SeriesItemDto } from "../models";
 import {
   BAZI_MOCK_ACTIONS,
-  BAZI_MOCK_INTERPRETATION,
-  BAZI_MOCK_KNOWLEDGE,
-  BAZI_MOCK_SHEN_SHA,
-  BAZI_MOCK_SPIRIT_GODS,
   BAZI_RESULT_LABELS,
   buildExecutiveFromResult,
   type BaZiFiveElement,
+  type BaZiInterpretationBlock,
+  type BaZiKnowledgeItem,
   type BaZiPillar,
   type BaZiProfile,
   type BaZiChartMetadata,
   type BaZiResultMockBundle,
+  type BaZiShenShaItem,
+  type BaZiSpiritGod,
   type BaZiStrength,
   type BaZiTenGod,
   type PillarKind,
   type PresentationStatus,
 } from "../screens/bazi/mockData";
+import {
+  UNAVAILABLE_CONCLUSION,
+  commercialOrUnavailable,
+  extractInterpretationSections,
+  normalizeScore100,
+} from "./contentGuards";
 
 /** Presentation ViewModel — same shape as former mock bundle. */
 export type BaZiResultViewModel = BaZiResultMockBundle;
@@ -240,14 +246,16 @@ function mapTenGods(data: AnalysisDataDto): readonly BaZiTenGod[] {
 
 function mapStrength(data: AnalysisDataDto): BaZiStrength {
   const strength = data.strength;
-  const scoreRaw = strength?.strength_score ?? data.score?.strength_score ?? 0;
-  const score = Math.round(Number(scoreRaw) || 0);
+  const score = normalizeScore100(
+    data.score?.strength_score ?? strength?.strength_score ?? 0,
+  );
   const mapped = mapStrengthLevel(asString(strength?.strength_level), score);
   const confidenceRaw = strength?.confidence;
   const confidence =
     typeof confidenceRaw === "number"
       ? Math.round(confidenceRaw <= 1 ? confidenceRaw * 100 : confidenceRaw)
-      : 0;
+      : Math.min(95, Math.max(40, score));
+  const summary = commercialOrUnavailable(asString(strength?.reasoning));
 
   return {
     score,
@@ -255,8 +263,141 @@ function mapStrength(data: AnalysisDataDto): BaZiStrength {
     label: mapped.label,
     level: mapped.level,
     confidence,
-    summary: asString(strength?.reasoning, data.score?.recommendation ?? ""),
+    summary,
   };
+}
+
+function mapInterpretation(data: AnalysisDataDto): BaZiInterpretationBlock {
+  const sections = extractInterpretationSections(
+    data.interpretation as Record<string, unknown> | undefined,
+  );
+  const paragraphs = sections
+    .map((section) => commercialOrUnavailable(section.body))
+    .filter((body) => body !== UNAVAILABLE_CONCLUSION)
+    .slice(0, 6);
+
+  return {
+    title: "Luận Giải",
+    paragraphs:
+      paragraphs.length > 0 ? paragraphs : [UNAVAILABLE_CONCLUSION],
+  };
+}
+
+function mapKnowledge(data: AnalysisDataDto): readonly BaZiKnowledgeItem[] {
+  const pattern = data.pattern as Record<string, unknown> | undefined;
+  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const items: BaZiKnowledgeItem[] = [];
+  const dm = asString(data.bazi?.day_master);
+  if (dm) {
+    items.push({
+      id: "kn-day-master",
+      title: "Nhật Chủ",
+      reference: dm,
+    });
+  }
+  const cach = asString(pattern?.cach_cuc);
+  if (cach) {
+    items.push({
+      id: "kn-pattern",
+      title: "Cách Cục",
+      reference: cach,
+    });
+  }
+  const dung = asString(useful?.useful_god ?? pattern?.dung_than);
+  if (dung) {
+    items.push({
+      id: "kn-useful-god",
+      title: "Dụng Thần",
+      reference: dung,
+    });
+  }
+  if (items.length === 0) {
+    return [
+      {
+        id: "kn-unavailable",
+        title: "Kiến thức",
+        reference: UNAVAILABLE_CONCLUSION,
+      },
+    ];
+  }
+  return items;
+}
+
+function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
+  const list = (data.bazi?.shensha ?? []).map((s) => asString(s).trim()).filter(Boolean);
+  if (list.length === 0) {
+    return [
+      {
+        id: "ss-unavailable",
+        name: "Thần Sát",
+        tone: "Trung",
+        note: UNAVAILABLE_CONCLUSION,
+        present: false,
+      },
+    ];
+  }
+  return list.map((name, index) => ({
+    id: `ss-${index + 1}`,
+    name,
+    tone: "Trung" as const,
+    note: name,
+    present: true,
+  }));
+}
+
+function mapSpiritGods(data: AnalysisDataDto): readonly BaZiSpiritGod[] {
+  const pattern = data.pattern as Record<string, unknown> | undefined;
+  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const dung = asString(useful?.useful_god ?? pattern?.dung_than);
+  const hy =
+    Array.isArray(useful?.favorable_gods)
+      ? asString(useful?.favorable_gods?.[0])
+      : asString(pattern?.hy_than);
+  const ky =
+    Array.isArray(useful?.unfavorable_gods)
+      ? asString(useful?.unfavorable_gods?.[0])
+      : asString(pattern?.ky_than);
+
+  const rows: BaZiSpiritGod[] = [];
+  if (dung) {
+    rows.push({
+      id: "dung",
+      role: "dung",
+      roleLabel: "Dụng Thần",
+      name: dung,
+      element: dung.toLowerCase(),
+    });
+  }
+  if (hy) {
+    rows.push({
+      id: "hy",
+      role: "hy",
+      roleLabel: "Hỷ Thần",
+      name: hy,
+      element: hy.toLowerCase(),
+    });
+  }
+  if (ky) {
+    rows.push({
+      id: "ky",
+      role: "ky",
+      roleLabel: "Kỵ Thần",
+      name: ky,
+      element: ky.toLowerCase(),
+    });
+  }
+  if (rows.length === 0) {
+    return [
+      {
+        id: "sg-unavailable",
+        role: "dung",
+        roleLabel: "Dụng Thần",
+        name: UNAVAILABLE_CONCLUSION,
+        element: "—",
+      },
+    ];
+  }
+  return rows;
 }
 
 function mapProfile(data: AnalysisDataDto, request?: AnalyzeChartRequest): BaZiProfile {
@@ -328,6 +469,8 @@ export function adaptAnalysisToBaZiResult(
   const fiveElements = mapFiveElements(data);
   const tenGods = mapTenGods(data);
   const strength = mapStrength(data);
+  const pattern = data.pattern as Record<string, unknown> | undefined;
+  const useful = data.useful_god as Record<string, unknown> | undefined;
 
   return {
     status: options.status ?? "ready",
@@ -345,11 +488,31 @@ export function adaptAnalysisToBaZiResult(
       pillars,
       fiveElements,
       tenGods,
+      gender: options.request?.gender ?? data.customer?.gender ?? undefined,
+      yinYang: asString(data.bazi?.day_master_yin_yang) || undefined,
+      dungThan: asString(useful?.useful_god ?? pattern?.dung_than) || undefined,
+      hyThan:
+        (Array.isArray(useful?.favorable_gods)
+          ? useful?.favorable_gods.map(String).join(", ")
+          : asString(pattern?.hy_than)) || undefined,
+      kyThan:
+        (Array.isArray(useful?.unfavorable_gods)
+          ? useful?.unfavorable_gods.map(String).join(", ")
+          : asString(pattern?.ky_than)) || undefined,
+      pattern: asString(pattern?.cach_cuc ?? pattern?.pattern) || undefined,
+      overallGrade: asString(data.score?.grade) || undefined,
+      recommendation:
+        asString(data.score?.recommendation) ||
+        commercialOrUnavailable(
+          extractInterpretationSections(
+            data.interpretation as Record<string, unknown> | undefined,
+          ).find((s) => /kết luận|dụng thần/i.test(s.title))?.body,
+        ),
     }),
-    spiritGods: BAZI_MOCK_SPIRIT_GODS,
-    shenSha: BAZI_MOCK_SHEN_SHA,
-    interpretation: BAZI_MOCK_INTERPRETATION,
-    knowledge: BAZI_MOCK_KNOWLEDGE,
+    spiritGods: mapSpiritGods(data),
+    shenSha: mapShenSha(data),
+    interpretation: mapInterpretation(data),
+    knowledge: mapKnowledge(data),
   };
 }
 

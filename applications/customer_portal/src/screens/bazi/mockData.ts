@@ -604,6 +604,13 @@ export function buildExecutiveFromResult(input: {
   readonly fiveElements: readonly BaZiFiveElement[];
   readonly tenGods: readonly BaZiTenGod[];
   readonly gender?: string;
+  readonly yinYang?: string;
+  readonly dungThan?: string;
+  readonly hyThan?: string;
+  readonly kyThan?: string;
+  readonly pattern?: string;
+  readonly overallGrade?: string;
+  readonly recommendation?: string;
 }): BaZiExecutiveSummary {
   const day = input.pillars.find((p) => p.kind === "day");
   const topElement = [...input.fiveElements].sort(
@@ -615,13 +622,21 @@ export function buildExecutiveFromResult(input: {
     .map((g) => g.name)
     .join(", ");
   const stem = day?.heavenlyStem ?? "—";
+  const unavailable = "Chưa đủ dữ liệu để đưa ra kết luận.";
+  const dungThan = input.dungThan?.trim() || unavailable;
+  const hyThan = input.hyThan?.trim() || unavailable;
+  const kyThan = input.kyThan?.trim() || unavailable;
+  const pattern = input.pattern?.trim() || unavailable;
+  const overallGrade = input.overallGrade?.trim() || unavailable;
+  const recommendation = input.recommendation?.trim() || unavailable;
+  const yinYang = input.yinYang?.trim() || "—";
 
   return {
     title: BAZI_RESULT_LABELS.executiveTitle,
     verdict: input.strength.label,
     level: input.strength.level,
     confidence: input.strength.confidence,
-    summary: input.strength.summary,
+    summary: input.strength.summary || unavailable,
     highlights: [
       day ? `Nhật Chủ: ${day.heavenlyStem} ${day.earthlyBranch}` : "Nhật Chủ: —",
       topElement
@@ -645,29 +660,29 @@ export function buildExecutiveFromResult(input: {
       {
         id: "yin-yang",
         label: "Âm Dương",
-        value: "—",
+        value: yinYang,
         hint: input.gender ?? "—",
       },
       {
         id: "bone-weight",
         label: "Cân Xương Đoán Mệnh",
         value: "—",
-        hint: "Chờ Engine",
+        hint: unavailable,
       },
     ],
     dayMaster: stem,
     dayMasterHint: topElement ? `${topElement.name}` : "—",
     element: topElement?.name ?? "—",
     elementHint: topElement?.strength ?? "—",
-    yinYang: "—",
+    yinYang,
     yinYangHint: input.gender ?? "—",
     strengthGlance: `${input.strength.level} · ${input.strength.score}/${input.strength.maxScore}`,
-    strengthHint: input.strength.summary || "—",
-    dungThan: "—",
-    hyThan: "—",
-    kyThan: "—",
-    pattern: "—",
-    overallGrade: "—",
-    recommendation: "Đánh giá chi tiết sẽ có sau khi Interpretation Engine được nối.",
+    strengthHint: input.strength.summary || unavailable,
+    dungThan,
+    hyThan,
+    kyThan,
+    pattern,
+    overallGrade,
+    recommendation,
   };
 }
