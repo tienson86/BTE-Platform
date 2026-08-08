@@ -54,8 +54,8 @@ def project_analysis_signals(analysis: dict[str, Any] | None) -> dict[str, Any]:
 
     return {
         "day_master": day_master,
-        "day_master_label": day_master or "Nhật chủ",
-        "pattern_label": pattern_label or "cấu trúc chính",
+        "day_master_label": day_master or "nền tảng ngày",
+        "pattern_label": pattern_label or "cấu trúc nghề chính",
         "strength_band": strength_band,
         "strength_band_label": strength_band_label,
         "strength_score": strength_score,
@@ -66,7 +66,7 @@ def project_analysis_signals(analysis: dict[str, Any] | None) -> dict[str, Any]:
         ),
         "has_useful_god": bool(useful_god),
         "useful_god": useful_god,
-        "useful_god_label": useful_god or "Dụng thần",
+        "useful_god_label": useful_god or "trục hỗ trợ",
         "has_enemy_or_clash_caution": has_enemy or weak_strength,
         "weakness_frame": weakness_frame,
         "weakness_signal_label": weakness_signal_label,

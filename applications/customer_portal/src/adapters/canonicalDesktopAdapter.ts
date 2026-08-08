@@ -22,6 +22,8 @@ import {
   careerSelectionFromNarrative,
   hasUsableNarrativeResult,
   paragraphByRole,
+  promotionFieldText,
+  promotionReadinessFromNarrative,
   recommendationActions,
   sectionParagraphTexts,
   summaryText,
@@ -371,17 +373,23 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const narrative = asNarrativeResult(data.narrative_result);
   const useNarrative = hasUsableNarrativeResult(narrative);
   const career = careerSelectionFromNarrative(narrative);
+  const promotion = promotionReadinessFromNarrative(narrative);
   const careerDirection = careerFieldText(career, "career_direction");
   const careerStrengths = careerFieldText(career, "career_strengths");
   const careerPlan = careerFieldText(career, "action_plan_90d");
+  const promotionReadiness = promotionFieldText(promotion, "promotion_readiness");
+  const promotionPlan = promotionFieldText(promotion, "action_plan_90d");
   const whoBody = useNarrative
-    ? careerDirection || summaryText(narrative?.summary, "identity")
+    ? careerDirection || promotionReadiness || summaryText(narrative?.summary, "identity")
     : findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
   const strengthBody = useNarrative
-    ? careerStrengths || summaryText(narrative?.summary, "strengths")
+    ? careerStrengths ||
+      promotionFieldText(promotion, "promotion_strengths") ||
+      summaryText(narrative?.summary, "strengths")
     : findSectionBody(sections, [/điểm mạnh/i, /thế mạnh/i]);
   const actionBody = useNarrative
-    ? careerPlan ||
+    ? promotionPlan ||
+      careerPlan ||
       summaryText(narrative?.summary, "priority_recommendation") ||
       summaryText(narrative?.summary, "next_action")
     : findSectionBody(sections, [
@@ -742,30 +750,49 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const narrative = asNarrativeResult(data.narrative_result);
   if (hasUsableNarrativeResult(narrative) && narrative) {
     const career = careerSelectionFromNarrative(narrative);
+    const promotion = promotionReadinessFromNarrative(narrative);
     const careerDirection = careerFieldText(career, "career_direction");
     const careerStrengths = careerFieldText(career, "career_strengths");
     const careerRisks = careerFieldText(career, "career_risks");
     const careerMitigation = careerFieldText(career, "career_mitigation");
     const careerPlan = careerFieldText(career, "action_plan_90d");
+    const promotionReadiness = promotionFieldText(promotion, "promotion_readiness");
+    const promotionPlan = promotionFieldText(promotion, "action_plan_90d");
+    const promotionRisks = promotionFieldText(promotion, "promotion_risks");
+    const promotionMitigation = promotionFieldText(
+      promotion,
+      "promotion_mitigation",
+    );
     const strengths = (
       careerStrengths
         ? [careerStrengths]
-        : (narrative.summary?.strengths ?? []).map((item) => firstCommercialSnippet(item))
+        : promotionFieldText(promotion, "promotion_strengths")
+          ? [promotionFieldText(promotion, "promotion_strengths")]
+          : (narrative.summary?.strengths ?? []).map((item) => firstCommercialSnippet(item))
     )
       .filter((item) => item !== UNAVAILABLE_CONCLUSION)
       .slice(0, 4);
     const warnings = (
       careerRisks || careerMitigation
         ? [careerRisks, careerMitigation].filter(Boolean)
-        : (narrative.summary?.weaknesses ?? []).map((item) => firstCommercialSnippet(item))
+        : promotionRisks || promotionMitigation
+          ? [promotionRisks, promotionMitigation].filter(Boolean)
+          : (narrative.summary?.weaknesses ?? []).map((item) =>
+              firstCommercialSnippet(item),
+            )
     )
       .filter((item) => item !== UNAVAILABLE_CONCLUSION)
       .slice(0, 4);
     const actions = (
-      careerPlan ? [careerPlan] : recommendationActions(narrative)
+      promotionPlan
+        ? [promotionPlan]
+        : careerPlan
+          ? [careerPlan]
+          : recommendationActions(narrative)
     ).slice(0, 4);
     const overview =
       careerDirection ||
+      promotionReadiness ||
       summaryText(narrative.summary, "identity") ||
       paragraphByRole(narrative, "observation") ||
       sectionParagraphTexts(narrative, /observation|overview|executive/i)[0] ||

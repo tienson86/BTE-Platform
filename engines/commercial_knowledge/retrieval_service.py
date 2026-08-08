@@ -10,6 +10,7 @@ from typing import Any, Sequence
 
 from .models import WAVE_1_1_ALLOW_LIST
 from .signal_projection import bind_placeholders, evaluate_condition, project_analysis_signals
+from .commercial_presentation import commercialize_customer_text
 
 logger = logging.getLogger(__name__)
 
@@ -98,6 +99,7 @@ class RetrievalService:
             if _looks_technical(bound):
                 dropped.append((unit_id, "technical_wording"))
                 continue
+            bound = commercialize_customer_text(bound)
             enriched = dict(row)
             enriched["commercial_text"] = bound
             enriched["bind_signals"] = signals

@@ -7,6 +7,8 @@ export {
   careerFieldText,
   careerSelectionFromNarrative,
   hasUsableNarrativeResult,
+  promotionFieldText,
+  promotionReadinessFromNarrative,
 } from "./narrativeResultAdapter";
 export type {
   CareerSelectionAssessmentDto,
@@ -14,6 +16,7 @@ export type {
   NarrativeResultDto,
   NarrativeResultSummaryDto,
   NarrativeSectionDto,
+  PromotionReadinessAssessmentDto,
 } from "./narrativeResultAdapter";
 
 export {

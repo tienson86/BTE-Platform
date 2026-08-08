@@ -1,5 +1,33 @@
 # Changelog — Classical Knowledge Base
 
+## 0.3.2 (2026-08-08)
+
+### Added
+
+- Sprint E: **Promotion Readiness Assessment** in `22_domain01_career_business.csv`.
+- PRO pack: 10 units under `CAP-D1-CA-PRO` / wave `W-D01-E-PRO`.
+
+### PRO units
+
+| Id | Title |
+|----|-------|
+| KU-CN-CA-000020 | Promotion Readiness Posture |
+| KU-CN-CA-000021 | Management Role Acceptance |
+| KU-CN-CA-000022 | Promotion Competency Gaps |
+| KU-CN-CA-000023 | Promotion Supporting Strengths |
+| KU-CN-CA-000024 | Advance Prepare Defer Posture |
+| KU-CN-CA-000025 | Promotion Timing Light |
+| KU-OP-CA-000001 | Promotion Advancement Window |
+| KU-RK-CA-000020 | Promotion Overreach Risks |
+| KU-MT-CA-000020 | Promotion Risk Mitigation |
+| KU-AC-CA-000020 | Promotion 90-Day Action Plan |
+
+### Notes
+
+- Wave 1.1 unchanged. Career Selection units unchanged (Frozen).
+- LED/BU rows unchanged and not production-allow-listed.
+- Runtime wiring: `PRODUCTION_ALLOW_LIST` includes PRO units.
+
 ## 0.3.1 (2026-08-08)
 
 ### Changed / Added

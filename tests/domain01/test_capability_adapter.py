@@ -5,6 +5,7 @@ from __future__ import annotations
 from engines.commercial_knowledge import (
     CAREER_SELECTION_ALLOW_LIST,
     PRODUCTION_ALLOW_LIST,
+    PROMOTION_READINESS_ALLOW_LIST,
     WAVE_1_1_ALLOW_LIST,
     CommercialKnowledgeAdapter,
 )
@@ -12,16 +13,21 @@ from engines.commercial_knowledge import (
 from .conftest import strong_employee_chart
 
 
-def test_production_allow_list_is_wave_plus_career_selection_only() -> None:
-    """Production allow-list = Wave 1.1 ∪ SEL — no LED/BU Domain 01 units."""
-    assert PRODUCTION_ALLOW_LIST == WAVE_1_1_ALLOW_LIST | CAREER_SELECTION_ALLOW_LIST
+def test_production_allow_list_is_wave_plus_career_and_promotion() -> None:
+    """Production allow-list = Wave 1.1 ∪ SEL ∪ PRO — no LED/BU Domain 01 units."""
+    assert PRODUCTION_ALLOW_LIST == (
+        WAVE_1_1_ALLOW_LIST
+        | CAREER_SELECTION_ALLOW_LIST
+        | PROMOTION_READINESS_ALLOW_LIST
+    )
     assert "KU-CN-LE-000001" not in PRODUCTION_ALLOW_LIST
     assert "KU-AC-BU-000001" not in PRODUCTION_ALLOW_LIST
     assert len(CAREER_SELECTION_ALLOW_LIST) == 11
+    assert len(PROMOTION_READINESS_ALLOW_LIST) == 10
 
 
-def test_adapter_with_production_allow_list_selects_career_units() -> None:
-    """Production allow-list selects Career Selection Assessment units."""
+def test_adapter_with_production_allow_list_selects_career_and_promotion_units() -> None:
+    """Production allow-list selects SEL + PRO units; excludes LED/BU."""
     adapter = CommercialKnowledgeAdapter()
     bundle, _payload = adapter.adapt(
         analysis=strong_employee_chart(),
@@ -31,9 +37,13 @@ def test_adapter_with_production_allow_list_selects_career_units() -> None:
     selected = {item.knowledge_unit_id for item in bundle.selected_units}
     assert selected.issubset(PRODUCTION_ALLOW_LIST)
     career_selected = selected & CAREER_SELECTION_ALLOW_LIST
+    promo_selected = selected & PROMOTION_READINESS_ALLOW_LIST
     assert career_selected
+    assert promo_selected
     assert "KU-CN-CA-000001" in career_selected
     assert "KU-AC-CA-000001" in career_selected
+    assert "KU-CN-CA-000020" in promo_selected
+    assert "KU-AC-CA-000020" in promo_selected
     assert "KU-CN-LE-000001" not in selected
     assert "KU-AC-BU-000001" not in selected
 

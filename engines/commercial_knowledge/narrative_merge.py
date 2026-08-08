@@ -5,7 +5,13 @@ from __future__ import annotations
 import copy
 from typing import Any
 
-from .bundle_builder import career_selection_to_dict
+from .bundle_builder import career_selection_to_dict, promotion_readiness_to_dict
+from .commercial_presentation import (
+    build_executive_composition,
+    commercialize_customer_text,
+    format_primary_recommendation,
+    format_secondary_promotion_milestone,
+)
 from .models import CommercialKnowledgeBundle, NarrativeKnowledgePayload
 
 
@@ -19,10 +25,11 @@ def enrich_narrative_inputs(
     """
     Enrich analysis/interpretation copies for Narrative compose.
 
-    - Does not overwrite Interpretation conclusion fields with empty values.
-    - Adds commercial sections and soft-enriches analysis prose fields.
-    - Preserves original interpretation sections (append-only).
-    - Attaches Career Selection Assessment projection for Portal (no raw KUs).
+    Commercial V1 polish:
+    - Career Strategy is primary Recommendation.
+    - Promotion is secondary milestone only.
+    - Executive Summary is 1 central + ≤3 supporting + 1 conclusion.
+    - Customer-facing wording is commercialized (no technical BaZi dump).
     """
     analysis_out = copy.deepcopy(analysis) if isinstance(analysis, dict) else {}
     interpretation_out = (
@@ -41,7 +48,7 @@ def enrich_narrative_inputs(
             {
                 "id": section_id,
                 "title": title,
-                "body": unit.text,
+                "body": commercialize_customer_text(unit.text),
                 "knowledge_unit_id": unit.knowledge_unit_id,
                 "version": unit.version,
                 "evidence_kind": unit.evidence_kind,
@@ -53,12 +60,33 @@ def enrich_narrative_inputs(
     _enrich_analysis_from_bundle(analysis_out, bundle)
     interpretation_out["commercial_knowledge_bundle_id"] = bundle.bundle_id
     interpretation_out["commercial_enrichment"] = True
-    if bundle.career_selection and bundle.career_selection.knowledge_unit_ids:
+
+    career = bundle.career_selection
+    promotion = bundle.promotion_readiness
+    executive = build_executive_composition(career, promotion)
+    primary = format_primary_recommendation(career=career)
+    secondary = format_secondary_promotion_milestone(promotion)
+
+    interpretation_out["commercial_executive_summary"] = executive
+    interpretation_out["primary_recommendation"] = primary
+    if secondary:
+        interpretation_out["secondary_career_milestone"] = secondary
+
+    if career and career.knowledge_unit_ids:
         interpretation_out["career_selection_assessment"] = career_selection_to_dict(
-            bundle.career_selection
+            career
         )
-        interpretation_out["career_selection_capability_id"] = (
-            bundle.career_selection.capability_id
+        interpretation_out["career_selection_capability_id"] = career.capability_id
+        interpretation_out["career_selection_label"] = "Career Selection Assessment"
+    if promotion and promotion.knowledge_unit_ids:
+        interpretation_out["promotion_readiness_assessment"] = (
+            promotion_readiness_to_dict(promotion)
+        )
+        interpretation_out["promotion_readiness_capability_id"] = (
+            promotion.capability_id
+        )
+        interpretation_out["promotion_readiness_label"] = (
+            "Promotion Readiness Assessment"
         )
     return analysis_out, interpretation_out
 
@@ -69,18 +97,28 @@ def _section_title(evidence_kind: str, targets: tuple[str, ...]) -> str:
         "identity": "Tổng quan danh tính thương mại",
         "strength": "Tổng quan điểm mạnh",
         "weakness": "Lưu ý điểm hạn chế",
-        "explanation": "Lý giải dụng thần",
+        "explanation": "Lý giải trục hỗ trợ",
         "action": "Kế hoạch nghề 90 ngày",
-        "career_direction": "Hướng nghề nghiệp",
-        "career_environment": "Môi trường làm việc",
-        "career_org_role": "Vai trò tổ chức",
-        "career_lead_vs_spec": "Lãnh đạo hay chuyên gia",
-        "career_path_mode": "Làm thuê hay độc lập",
-        "career_advantage": "Lợi thế nghề",
-        "career_risk": "Rủi ro nghề",
-        "career_mitigation": "Giảm rủi ro nghề",
-        "career_development": "Ưu tiên phát triển nghề",
-        "career_timing": "Nhịp quyết định nghề",
+        "career_direction": "Career Selection — hướng nghề",
+        "career_environment": "Career Selection — môi trường",
+        "career_org_role": "Career Selection — vai trò",
+        "career_lead_vs_spec": "Career Selection — tư thế chuyên môn",
+        "career_path_mode": "Career Selection — làm thuê hay độc lập",
+        "career_advantage": "Career Selection — lợi thế",
+        "career_risk": "Career Selection — rủi ro",
+        "career_mitigation": "Career Selection — giảm rủi ro",
+        "career_development": "Career Selection — phát triển",
+        "career_timing": "Career Selection — nhịp quyết định",
+        "promotion_readiness": "Promotion Readiness — sẵn sàng",
+        "promotion_mgmt_role": "Promotion Readiness — vai trò quản lý",
+        "promotion_competency_gaps": "Promotion Readiness — khoảng trống năng lực",
+        "promotion_strengths": "Promotion Readiness — lợi thế",
+        "promotion_posture": "Promotion Readiness — tư thế",
+        "promotion_timing": "Promotion Readiness — nhịp",
+        "promotion_window": "Promotion Readiness — cửa sổ",
+        "promotion_risk": "Promotion Readiness — rủi ro",
+        "promotion_mitigation": "Promotion Readiness — giảm rủi ro",
+        "promotion_action_90d": "Promotion Readiness — mốc 90 ngày",
     }
     if evidence_kind in titles:
         return titles[evidence_kind]
@@ -106,53 +144,69 @@ def _enrich_analysis_from_bundle(
     if not isinstance(score, dict):
         analysis["score"] = {}
         score = analysis["score"]
-    bazi = analysis.setdefault("bazi", {})
-    if not isinstance(bazi, dict):
-        analysis["bazi"] = {}
-        bazi = analysis["bazi"]
-
-    if bundle.identity and not bazi.get("day_master"):
-        pass
 
     career = bundle.career_selection
-    if career and career.career_direction:
-        # Soft-enrich identity-facing reasoning without wiping Analysis.
-        direction = career.career_direction.text
-        existing = str(strength.get("reasoning") or "").strip()
-        if existing and direction not in existing:
-            strength["reasoning"] = f"{direction} {existing}".strip()
-        elif not existing:
-            strength["reasoning"] = direction
-        strength["commercial_career_direction"] = direction
-        strength["commercial_knowledge_unit_id"] = career.career_direction.knowledge_unit_id
+    promotion = bundle.promotion_readiness
+    executive = build_executive_composition(career, promotion)
+    primary = format_primary_recommendation(
+        career=career,
+        wave_recommendation=(
+            bundle.recommendations[0].text if bundle.recommendations else ""
+        ),
+    )
+    secondary = format_secondary_promotion_milestone(promotion)
+
+    # P0-03: replace dense concatenation with structured Exec composition.
+    if executive.get("composed_text"):
+        strength["reasoning"] = executive["composed_text"]
+        strength["commercial_executive_summary"] = executive
+        if career and career.career_direction:
+            strength["commercial_knowledge_unit_id"] = (
+                career.career_direction.knowledge_unit_id
+            )
 
     if career and career.career_strengths:
-        advantage = career.career_strengths.text
-        existing = str(strength.get("reasoning") or "").strip()
-        if existing and advantage not in existing:
-            strength["reasoning"] = f"{existing} {advantage}".strip()
-        elif not existing:
-            strength["reasoning"] = advantage
-        strength["commercial_career_strengths"] = advantage
+        strength["commercial_career_strengths"] = commercialize_customer_text(
+            career.career_strengths.text
+        )
+    if career and career.career_direction:
+        strength["commercial_career_direction"] = commercialize_customer_text(
+            career.career_direction.text
+        )
 
     if career and career.career_risks:
-        useful["commercial_weakness_text"] = career.career_risks.text
-        strength["commercial_weakness_text"] = career.career_risks.text
-        score["commercial_weakness"] = career.career_risks.text
+        risk_text = commercialize_customer_text(career.career_risks.text)
+        useful["commercial_weakness_text"] = risk_text
+        strength["commercial_weakness_text"] = risk_text
+        score["commercial_weakness"] = risk_text
         if career.career_mitigation:
-            score["commercial_mitigation"] = career.career_mitigation.text
+            score["commercial_mitigation"] = commercialize_customer_text(
+                career.career_mitigation.text
+            )
+
+    # Promotion metadata only — must not overwrite Exec reasoning.
+    if promotion and promotion.promotion_readiness:
+        strength["commercial_promotion_readiness"] = commercialize_customer_text(
+            promotion.promotion_readiness.text
+        )
+    if promotion and promotion.promotion_risks:
+        useful["commercial_promotion_risk"] = commercialize_customer_text(
+            promotion.promotion_risks.text
+        )
+        score["commercial_promotion_risk"] = useful["commercial_promotion_risk"]
+        if promotion.promotion_mitigation:
+            score["commercial_promotion_mitigation"] = commercialize_customer_text(
+                promotion.promotion_mitigation.text
+            )
 
     if bundle.strengths and not (career and career.career_direction):
-        commercial = bundle.strengths[0].text
-        existing = str(strength.get("reasoning") or "").strip()
-        if existing and not _is_commercial_marker(existing):
-            strength["reasoning"] = f"{commercial} {existing}".strip()
-        else:
+        commercial = commercialize_customer_text(bundle.strengths[0].text)
+        if not str(strength.get("reasoning") or "").strip():
             strength["reasoning"] = commercial
         strength["commercial_knowledge_unit_id"] = bundle.strengths[0].knowledge_unit_id
 
     if bundle.weaknesses and not (career and career.career_risks):
-        commercial = bundle.weaknesses[0].text
+        commercial = commercialize_customer_text(bundle.weaknesses[0].text)
         useful["unfavorable_gods"] = useful.get("unfavorable_gods") or []
         if isinstance(useful["unfavorable_gods"], list):
             useful["commercial_weakness_text"] = commercial
@@ -160,40 +214,32 @@ def _enrich_analysis_from_bundle(
         score["commercial_weakness"] = commercial
 
     if bundle.useful_god:
-        useful["commercial_explanation"] = bundle.useful_god[0].text
+        useful["commercial_explanation"] = commercialize_customer_text(
+            bundle.useful_god[0].text
+        )
         useful["commercial_knowledge_unit_id"] = bundle.useful_god[0].knowledge_unit_id
-        if not str(strength.get("reasoning") or "").strip():
-            strength["reasoning"] = bundle.useful_god[0].text
 
-    # Prefer Career 90-day action when present; else Wave 1.1 recommendations.
-    rec_item = None
-    if career and career.action_plan_90d:
-        rec_item = career.action_plan_90d
-    elif bundle.recommendations:
-        rec_item = bundle.recommendations[0]
-    if rec_item is not None:
-        rec = rec_item.text
+    # P0-01 / P0-05: Career Strategy is primary Rec (structured).
+    if primary.get("composed_text"):
         existing_rec = str(score.get("recommendation") or "").strip()
         if existing_rec and _looks_like_code(existing_rec):
-            score["recommendation"] = rec
             score["analytical_recommendation"] = existing_rec
-        elif not existing_rec:
-            score["recommendation"] = rec
-        else:
+        elif existing_rec and not score.get("analytical_recommendation"):
             score["analytical_recommendation"] = existing_rec
-            score["recommendation"] = rec
-        score["commercial_knowledge_unit_id"] = rec_item.knowledge_unit_id
-        useful["commercial_recommendation"] = rec
+        score["recommendation"] = primary["composed_text"]
+        score["primary_recommendation"] = primary
+        score["commercial_knowledge_unit_id"] = (
+            career.action_plan_90d.knowledge_unit_id
+            if career and career.action_plan_90d
+            else score.get("commercial_knowledge_unit_id")
+        )
+        useful["commercial_recommendation"] = primary["composed_text"]
 
-
-def _is_commercial_marker(text: str) -> bool:
-    return (
-        "Dụng thần" in text
-        or "Nhật chủ" in text
-        or "Điểm tựa" in text
-        or "Họ nghề" in text
-        or "Kế hoạch 90 ngày" in text
-    )
+    # P0-01: Promotion is secondary milestone only.
+    if secondary:
+        score["secondary_recommendation"] = secondary["composed_text"]
+        score["secondary_career_milestone"] = secondary
+        useful["commercial_secondary_milestone"] = secondary["composed_text"]
 
 
 def _looks_like_code(text: str) -> bool:

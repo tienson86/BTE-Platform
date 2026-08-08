@@ -27,6 +27,33 @@ Every production capability release records:
 
 ## 2. Entries
 
+### 2026-08-08 — CAP-CAREER-PRO-001 · v1.0.0
+
+| Field | Value |
+|-------|-------|
+| **Version** | `1.0.0` |
+| **Capability** | `CAP-CAREER-PRO-001` — Promotion Readiness Assessment |
+| **Domain alias** | `CAP-D1-CA-PRO` |
+| **Status** | Released · Production |
+| **Changes** | Second Commercial Capability on production Result path. Customers receive readiness posture, management-role acceptance, competency gaps, advancement posture/window, timing, risks + mitigation, and 90-day promotion plan via existing Result slots. Career Selection remains Frozen companion. |
+| **Golden Cases** | D1-GC-PROMOTE-READY, PREPARE, MIXED — **3/3 PASS** |
+| **Regression** | `tests/domain01` + `tests/commercial_knowledge` PASS (41) |
+| **Production date** | **2026-08-08** |
+| **Evidence** | Domain `24`–`30`; Acceptance Standard Pass |
+
+**Non-goals this release:** Leadership Assessment (full); Partnership; Wave 1.1 edits; SEL content edits; new Result screens.
+
+### 2026-08-08 — CAP-CAREER-SEL-001 · Freeze notice
+
+| Field | Value |
+|-------|-------|
+| **Version** | `1.0.0` (unchanged) |
+| **Capability** | `CAP-CAREER-SEL-001` — Career Selection Assessment |
+| **Changes** | Stage moved to **Frozen** as Promotion Readiness ships. No content change. |
+| **Golden Cases** | Prior 3/3 retained |
+| **Regression** | PASS |
+| **Production date** | 2026-08-08 (freeze notice) |
+
 ### 2026-08-08 — CAP-CAREER-SEL-001 · v1.0.0
 
 | Field | Value |
@@ -78,9 +105,9 @@ Every production capability release records:
 
 ## 4. Stop line
 
-Changelog opened with Career Selection Assessment **v1.0.0**.  
+Changelog: Career Selection **Frozen** · Promotion Readiness **v1.0.0** released.  
 
-Next entry expected only after Product-approved capability work (not before Promotion Readiness approval).
+Next entry only after Product-approved Leadership Assessment work.
 
 ---
 

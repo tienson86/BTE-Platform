@@ -53,16 +53,16 @@ Every capability entry must include:
 | **Domain Alias** | `CAP-D1-CA-SEL` |
 | **Version** | `1.0.0` |
 | **Status** | **Released** |
-| **Current Stage** | **Production** |
+| **Current Stage** | **Frozen** |
 | **Production** | **Yes** |
 | **Golden Cases** | **3/3** (P0: STRONG-EMP, WEAK-EMP, MIXED-EMP) |
 | **Knowledge Coverage** | **100%** of SEL required slots (11/11 units) |
-| **Acceptance Status** | **Pass** (offline + production wiring validation) |
-| **Dependencies** | Wave 1.1 Core (Identity, Strength, Weakness, Useful God, Core Rec) |
+| **Acceptance Status** | **Pass** |
+| **Dependencies** | Wave 1.1 Core |
 | **Owner** | BTE Product |
 | **Priority** | P0 |
 | **Commercial Value** | High — primary career entry / conversion capability |
-| **Future Release** | Released in Release 1 — maintenance only until revision |
+| **Future Release** | Released in Release 1 — **Frozen**; maintenance/revision only |
 
 **Customer outcome:** Work-direction families, environment, role, leadership/employment posture, strengths, risks, mitigation, development, timing, 90-day plan — on the existing Result Page.
 
@@ -78,20 +78,24 @@ Every capability entry must include:
 | **Capability Name** | Promotion Readiness Assessment |
 | **Domain** | Domain 01 — Career & Business |
 | **Domain Alias** | `CAP-D1-CA-PRO` |
-| **Version** | — (not released) |
-| **Status** | **Proposed** |
-| **Current Stage** | Proposed |
-| **Production** | No |
-| **Golden Cases** | 0 / planned |
-| **Knowledge Coverage** | Not started |
-| **Acceptance Status** | Pending |
-| **Dependencies** | Wave 1.1 · CAP-CAREER-SEL-001 (recommended prior) |
+| **Version** | `1.0.0` |
+| **Status** | **Released** |
+| **Current Stage** | **Production** |
+| **Production** | **Yes** |
+| **Golden Cases** | **3/3** (PROMOTE-READY, PROMOTE-PREPARE, PROMOTE-MIXED) |
+| **Knowledge Coverage** | **100%** (10/10 PRO units) |
+| **Acceptance Status** | **Pass** |
+| **Dependencies** | Wave 1.1 · CAP-CAREER-SEL-001 (Frozen companion on Result path) |
 | **Owner** | BTE Product |
-| **Priority** | P1 |
+| **Priority** | P1 → shipped as Production V1 |
 | **Commercial Value** | High — upsell after career selection |
-| **Future Release** | **Release 2** |
+| **Future Release** | Released in Release 2 — maintenance until revision |
 
-**Gate:** Do **not** start until Product approval after Registry V1 review.
+**Customer outcome:** Ready / prepare / defer posture; management-role acceptance; competency gaps; risks + mitigation; timing + advancement window; 90-day promotion plan — on the existing Result Page.
+
+**Out of scope:** Guaranteed titles/salary; full Leadership Assessment; Partnership packs.
+
+**Gate:** Product Review before Leadership Assessment (Release 3).
 
 ---
 
@@ -237,8 +241,8 @@ Every capability entry must include:
 
 | Capability ID | Name | Domain | Version | Status | Stage | Production | Priority | Release |
 |---------------|------|--------|---------|--------|-------|------------|----------|---------|
-| CAP-CAREER-SEL-001 | Career Selection Assessment | Domain 01 | 1.0.0 | Released | Production | Yes | P0 | R1 |
-| CAP-CAREER-PRO-001 | Promotion Readiness Assessment | Domain 01 | — | Proposed | Proposed | No | P1 | R2 |
+| CAP-CAREER-SEL-001 | Career Selection Assessment | Domain 01 | 1.0.0 | Released | Frozen | Yes | P0 | R1 |
+| CAP-CAREER-PRO-001 | Promotion Readiness Assessment | Domain 01 | 1.0.0 | Released | Production | Yes | P1 | R2 |
 | CAP-CAREER-LED-001 | Leadership Assessment | Domain 01 | — | Proposed | Proposed | No | P1 | R3 |
 | CAP-BUSINESS-SUIT-001 | Business Suitability Assessment | Domain 01 | — | Proposed | Proposed | No | P1 | R4 |
 | CAP-FINANCE-PLAN-001 | Finance Planning Assessment | Finance (TBD) | — | Proposed | Proposed | No | P2 | R5 |
@@ -270,9 +274,9 @@ Those are implementation details supporting capabilities.
 
 ## 7. Stop line
 
-Registry V1 published with **one** production capability: Career Selection Assessment.  
+Registry updated: **two** production capabilities (SEL Frozen · PRO Production V1).  
 
-**Do not start Promotion Readiness without Product approval.**
+**Do not start Leadership Assessment without Product approval.**
 
 ---
 

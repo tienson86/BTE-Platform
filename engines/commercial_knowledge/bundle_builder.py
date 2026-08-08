@@ -8,11 +8,14 @@ from uuid import uuid4
 
 from .models import (
     CAPABILITY_CAREER_SELECTION,
+    CAPABILITY_PROMOTION_READINESS,
     CAREER_SELECTION_ALLOW_LIST,
     CAREER_SELECTION_FIELD_BY_KIND,
     CONTRACT_ID,
     CONTRACT_VERSION,
     PRODUCTION_ALLOW_LIST,
+    PROMOTION_READINESS_ALLOW_LIST,
+    PROMOTION_READINESS_FIELD_BY_KIND,
     WAVE_1_1_ALLOW_LIST,
     BundleItem,
     CareerSelectionAssessment,
@@ -20,6 +23,7 @@ from .models import (
     DroppedUnit,
     NarrativeEvidenceUnit,
     NarrativeKnowledgePayload,
+    PromotionReadinessAssessment,
     SelectedUnitSummary,
 )
 
@@ -47,6 +51,7 @@ class BundleBuilder:
         summaries: list[SelectedUnitSummary] = []
         evidence_units: list[NarrativeEvidenceUnit] = []
         career_fields: dict[str, BundleItem] = {}
+        promotion_fields: dict[str, BundleItem] = {}
 
         for row in selected_rows:
             item = _to_bundle_item(row)
@@ -64,15 +69,26 @@ class BundleBuilder:
                 recommendations.append(item)
                 if item.knowledge_unit_id in CAREER_SELECTION_ALLOW_LIST:
                     career_fields.setdefault("action_plan_90d", item)
+            elif kind == "promotion_action_90d":
+                recommendations.append(item)
+                promotion_fields.setdefault("action_plan_90d", item)
             elif kind == "risk":
                 warnings.append(item)
-            elif kind in {"opportunity"} or "opportunity" in (row.get("opportunity_category") or ""):
+            elif kind in {"opportunity"} or "opportunity" in (
+                row.get("opportunity_category") or ""
+            ):
                 opportunities.append(item)
 
             field_name = CAREER_SELECTION_FIELD_BY_KIND.get(kind)
             if field_name and field_name not in career_fields:
                 career_fields[field_name] = item
             if kind == "career_risk":
+                warnings.append(item)
+
+            promo_field = PROMOTION_READINESS_FIELD_BY_KIND.get(kind)
+            if promo_field and promo_field not in promotion_fields:
+                promotion_fields[promo_field] = item
+            if kind == "promotion_risk":
                 warnings.append(item)
 
             summaries.append(
@@ -98,14 +114,25 @@ class BundleBuilder:
             )
 
         career_selection = _build_career_selection(career_fields)
+        promotion_readiness = _build_promotion_readiness(promotion_fields)
         confidences = [item.confidence for item in summaries]
         overall = round(fmean(confidences), 4) if confidences else 0.0
-        if career_selection.status == "complete" or (identity and recommendations):
+        if (
+            career_selection.status == "complete"
+            or promotion_readiness.status == "complete"
+            or (identity and recommendations)
+        ):
             status = "complete"
         elif summaries:
             status = "partial"
         else:
             status = "empty"
+
+        capabilities: list[str] = []
+        if career_selection.knowledge_unit_ids:
+            capabilities.append(CAPABILITY_CAREER_SELECTION)
+        if promotion_readiness.knowledge_unit_ids:
+            capabilities.append(CAPABILITY_PROMOTION_READINESS)
 
         bundle_id = f"ckb-{run_id}" if run_id else f"ckb-{uuid4().hex[:12]}"
         signal_keys = tuple(sorted((signals or {}).keys()))
@@ -124,6 +151,7 @@ class BundleBuilder:
             warnings=tuple(warnings),
             opportunities=tuple(opportunities),
             career_selection=career_selection,
+            promotion_readiness=promotion_readiness,
             confidence=overall,
             selected_units=tuple(summaries),
             dropped_units=tuple(
@@ -135,6 +163,9 @@ class BundleBuilder:
             traceability={
                 "selected_knowledge_unit_ids": selected_ids,
                 "career_selection_unit_ids": list(career_selection.knowledge_unit_ids),
+                "promotion_readiness_unit_ids": list(
+                    promotion_readiness.knowledge_unit_ids
+                ),
                 "signal_keys": list(signal_keys),
                 "chain": [
                     "knowledge_unit",
@@ -149,21 +180,19 @@ class BundleBuilder:
                     "narrative",
                     "portal",
                 ],
-                "capability_id": CAPABILITY_CAREER_SELECTION
-                if career_selection.knowledge_unit_ids
-                else "",
+                "capability_ids": capabilities,
+                "capability_id": capabilities[0] if capabilities else "",
             },
             metadata={
-                "wave": "W-P0-1.1-CORE+W-D01-C-SEL",
+                "wave": "W-P0-1.1-CORE+W-D01-C-SEL+W-D01-E-PRO",
                 "allow_list": sorted(PRODUCTION_ALLOW_LIST),
                 "career_selection_allow_list": sorted(CAREER_SELECTION_ALLOW_LIST),
+                "promotion_readiness_allow_list": sorted(
+                    PROMOTION_READINESS_ALLOW_LIST
+                ),
                 "wave_1_1_allow_list": sorted(WAVE_1_1_ALLOW_LIST),
                 "run_id": run_id,
-                "capabilities": (
-                    [CAPABILITY_CAREER_SELECTION]
-                    if career_selection.knowledge_unit_ids
-                    else []
-                ),
+                "capabilities": capabilities,
             },
         )
         payload = NarrativeKnowledgePayload(
@@ -216,6 +245,10 @@ def bundle_to_dict(bundle: CommercialKnowledgeBundle) -> dict[str, Any]:
         payload["career_selection_assessment"] = career_selection_to_dict(
             bundle.career_selection
         )
+    if bundle.promotion_readiness is not None:
+        payload["promotion_readiness_assessment"] = promotion_readiness_to_dict(
+            bundle.promotion_readiness
+        )
     return payload
 
 
@@ -238,6 +271,31 @@ def career_selection_to_dict(assessment: CareerSelectionAssessment) -> dict[str,
         "career_mitigation": _optional(assessment.career_mitigation),
         "development_focus": _optional(assessment.development_focus),
         "timing_guidance": _optional(assessment.timing_guidance),
+        "action_plan_90d": _optional(assessment.action_plan_90d),
+        "knowledge_unit_ids": list(assessment.knowledge_unit_ids),
+    }
+
+
+def promotion_readiness_to_dict(
+    assessment: PromotionReadinessAssessment,
+) -> dict[str, Any]:
+    """Serialize Promotion Readiness Assessment for Portal / API."""
+
+    def _optional(item: BundleItem | None) -> dict[str, Any] | None:
+        return None if item is None else _item_dict(item)
+
+    return {
+        "capability_id": assessment.capability_id,
+        "status": assessment.status,
+        "promotion_readiness": _optional(assessment.promotion_readiness),
+        "management_role_posture": _optional(assessment.management_role_posture),
+        "competency_gaps": _optional(assessment.competency_gaps),
+        "promotion_strengths": _optional(assessment.promotion_strengths),
+        "advancement_posture": _optional(assessment.advancement_posture),
+        "timing_guidance": _optional(assessment.timing_guidance),
+        "advancement_window": _optional(assessment.advancement_window),
+        "promotion_risks": _optional(assessment.promotion_risks),
+        "promotion_mitigation": _optional(assessment.promotion_mitigation),
         "action_plan_90d": _optional(assessment.action_plan_90d),
         "knowledge_unit_ids": list(assessment.knowledge_unit_ids),
     }
@@ -280,6 +338,52 @@ def _build_career_selection(fields: dict[str, BundleItem]) -> CareerSelectionAss
         and assessment.action_plan_90d
         and assessment.career_risks
         and assessment.career_mitigation
+    ):
+        assessment.status = "complete"
+    elif ids:
+        assessment.status = "partial"
+    else:
+        assessment.status = "empty"
+    return assessment
+
+
+def _build_promotion_readiness(
+    fields: dict[str, BundleItem],
+) -> PromotionReadinessAssessment:
+    assessment = PromotionReadinessAssessment(
+        promotion_readiness=fields.get("promotion_readiness"),
+        management_role_posture=fields.get("management_role_posture"),
+        competency_gaps=fields.get("competency_gaps"),
+        promotion_strengths=fields.get("promotion_strengths"),
+        advancement_posture=fields.get("advancement_posture"),
+        timing_guidance=fields.get("timing_guidance"),
+        advancement_window=fields.get("advancement_window"),
+        promotion_risks=fields.get("promotion_risks"),
+        promotion_mitigation=fields.get("promotion_mitigation"),
+        action_plan_90d=fields.get("action_plan_90d"),
+    )
+    ids = tuple(
+        item.knowledge_unit_id
+        for item in (
+            assessment.promotion_readiness,
+            assessment.management_role_posture,
+            assessment.competency_gaps,
+            assessment.promotion_strengths,
+            assessment.advancement_posture,
+            assessment.timing_guidance,
+            assessment.advancement_window,
+            assessment.promotion_risks,
+            assessment.promotion_mitigation,
+            assessment.action_plan_90d,
+        )
+        if item is not None
+    )
+    assessment.knowledge_unit_ids = ids
+    if (
+        assessment.promotion_readiness
+        and assessment.action_plan_90d
+        and assessment.promotion_risks
+        and assessment.promotion_mitigation
     ):
         assessment.status = "complete"
     elif ids:

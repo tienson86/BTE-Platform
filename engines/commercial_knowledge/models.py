@@ -18,7 +18,7 @@ WAVE_1_1_ALLOW_LIST: frozenset[str] = frozenset(
     }
 )
 
-# Domain 01 — Career Selection Assessment only (Production Capability V1).
+# Domain 01 — Career Selection Assessment (Production Capability V1 · Frozen).
 CAREER_SELECTION_ALLOW_LIST: frozenset[str] = frozenset(
     {
         "KU-CN-CA-000001",
@@ -35,9 +35,30 @@ CAREER_SELECTION_ALLOW_LIST: frozenset[str] = frozenset(
     }
 )
 
-PRODUCTION_ALLOW_LIST: frozenset[str] = WAVE_1_1_ALLOW_LIST | CAREER_SELECTION_ALLOW_LIST
+# Domain 01 — Promotion Readiness Assessment (Production Capability V1).
+PROMOTION_READINESS_ALLOW_LIST: frozenset[str] = frozenset(
+    {
+        "KU-CN-CA-000020",
+        "KU-CN-CA-000021",
+        "KU-CN-CA-000022",
+        "KU-CN-CA-000023",
+        "KU-CN-CA-000024",
+        "KU-CN-CA-000025",
+        "KU-OP-CA-000001",
+        "KU-RK-CA-000020",
+        "KU-MT-CA-000020",
+        "KU-AC-CA-000020",
+    }
+)
+
+PRODUCTION_ALLOW_LIST: frozenset[str] = (
+    WAVE_1_1_ALLOW_LIST
+    | CAREER_SELECTION_ALLOW_LIST
+    | PROMOTION_READINESS_ALLOW_LIST
+)
 
 CAPABILITY_CAREER_SELECTION = "CAP-D1-CA-SEL"
+CAPABILITY_PROMOTION_READINESS = "CAP-D1-CA-PRO"
 
 DEFAULT_TARGET_COMPONENTS: tuple[str, ...] = (
     "executive_summary",
@@ -61,6 +82,20 @@ CAREER_SELECTION_FIELD_BY_KIND: dict[str, str] = {
     "career_mitigation": "career_mitigation",
     "career_development": "development_focus",
     "career_timing": "timing_guidance",
+}
+
+# evidence_kind → Promotion Readiness Assessment field
+PROMOTION_READINESS_FIELD_BY_KIND: dict[str, str] = {
+    "promotion_readiness": "promotion_readiness",
+    "promotion_mgmt_role": "management_role_posture",
+    "promotion_competency_gaps": "competency_gaps",
+    "promotion_strengths": "promotion_strengths",
+    "promotion_posture": "advancement_posture",
+    "promotion_timing": "timing_guidance",
+    "promotion_window": "advancement_window",
+    "promotion_risk": "promotion_risks",
+    "promotion_mitigation": "promotion_mitigation",
+    "promotion_action_90d": "action_plan_90d",
 }
 
 
@@ -135,6 +170,29 @@ class CareerSelectionAssessment:
 
 
 @dataclass(slots=True)
+class PromotionReadinessAssessment:
+    """
+    Promotion Readiness Assessment capability projection.
+
+    Narrative / Portal consume this object — never raw Knowledge Units.
+    """
+
+    capability_id: str = CAPABILITY_PROMOTION_READINESS
+    status: str = "empty"
+    promotion_readiness: BundleItem | None = None
+    management_role_posture: BundleItem | None = None
+    competency_gaps: BundleItem | None = None
+    promotion_strengths: BundleItem | None = None
+    advancement_posture: BundleItem | None = None
+    timing_guidance: BundleItem | None = None
+    advancement_window: BundleItem | None = None
+    promotion_risks: BundleItem | None = None
+    promotion_mitigation: BundleItem | None = None
+    action_plan_90d: BundleItem | None = None
+    knowledge_unit_ids: tuple[str, ...] = ()
+
+
+@dataclass(slots=True)
 class CommercialKnowledgeBundle:
     """
     Narrative-facing commercial bundle.
@@ -155,6 +213,7 @@ class CommercialKnowledgeBundle:
     warnings: tuple[BundleItem, ...] = ()
     opportunities: tuple[BundleItem, ...] = ()
     career_selection: CareerSelectionAssessment | None = None
+    promotion_readiness: PromotionReadinessAssessment | None = None
     confidence: float = 0.0
     selected_units: tuple[SelectedUnitSummary, ...] = ()
     dropped_units: tuple[DroppedUnit, ...] = ()

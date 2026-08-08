@@ -37,7 +37,8 @@ def test_golden_case_career_selection_complete(case_id: str, factory) -> None:
         scenario_id="default",
     )
     assert_career_selection_complete(bundle.career_selection)
-    assert bundle.metadata["capabilities"] == ["CAP-D1-CA-SEL"]
+    assert "CAP-D1-CA-SEL" in bundle.metadata["capabilities"]
+    assert "CAP-D1-CA-PRO" in bundle.metadata["capabilities"]
 
 
 @pytest.mark.parametrize("case_id,factory", GOLDEN_CASES)

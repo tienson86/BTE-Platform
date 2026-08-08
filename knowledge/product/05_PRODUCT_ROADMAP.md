@@ -21,9 +21,9 @@ Architecture remains frozen; product grows by shipping capabilities that pass th
 
 | Release | Capability ID | Capability Name | Status |
 |--------:|---------------|-----------------|--------|
-| **1** | CAP-CAREER-SEL-001 | Career Selection Assessment | **Released (Production V1)** |
-| **2** | CAP-CAREER-PRO-001 | Promotion Readiness Assessment | Proposed — awaiting Product approval |
-| **3** | CAP-CAREER-LED-001 | Leadership Assessment | Proposed |
+| **1** | CAP-CAREER-SEL-001 | Career Selection Assessment | **Released · Frozen** |
+| **2** | CAP-CAREER-PRO-001 | Promotion Readiness Assessment | **Released (Production V1)** |
+| **3** | CAP-CAREER-LED-001 | Leadership Assessment | Proposed — awaiting Product approval |
 | **4** | CAP-BUSINESS-SUIT-001 | Business Suitability Assessment | Proposed |
 | **5** | CAP-FINANCE-PLAN-001 | Finance Planning Assessment | Proposed |
 | **6** | CAP-MARRIAGE-COMPAT-001 | Marriage Compatibility Assessment | Proposed |
@@ -49,10 +49,10 @@ Architecture remains frozen; product grows by shipping capabilities that pass th
 | Field | Value |
 |-------|-------|
 | Capability | CAP-CAREER-PRO-001 |
-| Dependencies | Wave 1.1 · **recommended:** CAP-CAREER-SEL-001 live |
+| Dependencies | Wave 1.1 · CAP-CAREER-SEL-001 |
 | Commercial value | **High** — upsell / timing-sensitive career |
-| Estimated maturity | Content not started → target Production after full Acceptance |
-| Notes | **Do not start** until Product approval |
+| Estimated maturity | **Production V1** (complete) |
+| Notes | Sprint E · Domain reports `24`–`30` |
 
 ### Release 3 — Leadership Assessment
 
@@ -62,7 +62,7 @@ Architecture remains frozen; product grows by shipping capabilities that pass th
 | Dependencies | Wave 1.1 · CAP-CAREER-SEL-001 · Domain leadership decision model |
 | Commercial value | **High** |
 | Estimated maturity | Domain P0 light seed only — deep assessment TBD |
-| Notes | Distinct from SEL leadership *posture* field |
+| Notes | **Do not start** until Product approval |
 
 ### Release 4 — Business Suitability Assessment
 
@@ -157,9 +157,9 @@ R1 Career Selection ────────────────────
 
 ## 7. Stop line
 
-Release 1 complete.  
+Release 1 Frozen · Release 2 Production V1.  
 
-**Stop. Do not start Release 2 (Promotion Readiness) without Product approval.**
+**Stop. Do not start Release 3 (Leadership Assessment) without Product approval.**
 
 ---
 

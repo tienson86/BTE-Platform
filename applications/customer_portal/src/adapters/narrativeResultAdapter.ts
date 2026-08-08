@@ -58,8 +58,11 @@ export type NarrativeResultDto = {
   readonly contract?: string;
   /** Career Selection Assessment projection (no raw Knowledge Units). */
   readonly career_selection_assessment?: CareerSelectionAssessmentDto | null;
+  /** Promotion Readiness Assessment projection (no raw Knowledge Units). */
+  readonly promotion_readiness_assessment?: PromotionReadinessAssessmentDto | null;
   readonly commercial_knowledge_bundle?: {
     readonly career_selection_assessment?: CareerSelectionAssessmentDto | null;
+    readonly promotion_readiness_assessment?: PromotionReadinessAssessmentDto | null;
     readonly [key: string]: unknown;
   } | null;
 };
@@ -115,6 +118,59 @@ export function careerSelectionFromNarrative(
 export function careerFieldText(
   assessment: CareerSelectionAssessmentDto | null | undefined,
   key: keyof CareerSelectionAssessmentDto,
+): string {
+  if (!assessment) return "";
+  const value = assessment[key];
+  if (!value || typeof value !== "object") return "";
+  const text = (value as CareerSelectionFieldDto).text;
+  return text == null ? "" : String(text).trim();
+}
+
+export type PromotionReadinessAssessmentDto = {
+  readonly capability_id?: string;
+  readonly status?: string;
+  readonly promotion_readiness?: CareerSelectionFieldDto | null;
+  readonly management_role_posture?: CareerSelectionFieldDto | null;
+  readonly competency_gaps?: CareerSelectionFieldDto | null;
+  readonly promotion_strengths?: CareerSelectionFieldDto | null;
+  readonly advancement_posture?: CareerSelectionFieldDto | null;
+  readonly timing_guidance?: CareerSelectionFieldDto | null;
+  readonly advancement_window?: CareerSelectionFieldDto | null;
+  readonly promotion_risks?: CareerSelectionFieldDto | null;
+  readonly promotion_mitigation?: CareerSelectionFieldDto | null;
+  readonly action_plan_90d?: CareerSelectionFieldDto | null;
+  readonly knowledge_unit_ids?: readonly string[];
+};
+
+export function asPromotionReadinessAssessment(
+  value: unknown,
+): PromotionReadinessAssessmentDto | null {
+  if (!value || typeof value !== "object") return null;
+  const record = value as Record<string, unknown>;
+  if (
+    record.capability_id !== "CAP-D1-CA-PRO" &&
+    !record.promotion_readiness
+  ) {
+    return null;
+  }
+  return value as PromotionReadinessAssessmentDto;
+}
+
+export function promotionReadinessFromNarrative(
+  narrative: NarrativeResultDto | null | undefined,
+): PromotionReadinessAssessmentDto | null {
+  if (!narrative) return null;
+  return (
+    asPromotionReadinessAssessment(narrative.promotion_readiness_assessment) ||
+    asPromotionReadinessAssessment(
+      narrative.commercial_knowledge_bundle?.promotion_readiness_assessment,
+    )
+  );
+}
+
+export function promotionFieldText(
+  assessment: PromotionReadinessAssessmentDto | null | undefined,
+  key: keyof PromotionReadinessAssessmentDto,
 ): string {
   if (!assessment) return "";
   const value = assessment[key];

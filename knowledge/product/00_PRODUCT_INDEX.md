@@ -56,11 +56,12 @@ Domain packs / Knowledge / Narrative / Portal (implementation & delivery)
 
 | Registry ID | Name | Status | Production |
 |-------------|------|--------|------------|
-| **CAP-CAREER-SEL-001** | Career Selection Assessment | Released | **Yes (V1)** |
+| **CAP-CAREER-SEL-001** | Career Selection Assessment | Released / **Frozen** | **Yes (V1)** |
+| **CAP-CAREER-PRO-001** | Promotion Readiness Assessment | **Released** | **Yes (V1)** |
 
-Domain alias: `CAP-D1-CA-SEL` · Domain 01 · Version 1.0.0  
+Domain aliases: `CAP-D1-CA-SEL`, `CAP-D1-CA-PRO`  
 
-**Do not start Promotion Readiness until Product approval.**
+**Do not start Leadership Assessment until Product approval.**
 
 ---
 

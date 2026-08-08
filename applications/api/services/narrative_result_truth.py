@@ -3,7 +3,7 @@ Pack 05 NarrativeResult truth — API serialization + commercial enrichment.
 
 Does not modify Interpretation Engine logic or Narrative architecture.
 Commercial Knowledge Adapter enriches inputs before compose
-(Wave 1.1 + Career Selection Assessment).
+(Wave 1.1 + Career Selection + Promotion Readiness).
 """
 
 from __future__ import annotations
@@ -31,13 +31,14 @@ def build_narrative_result_dict(
     Compose Pack 05 NarrativeResult and return portal JSON.
 
     When commercial knowledge is enabled, production allow-listed units enrich
-    Executive Summary / Recommendation / Career Selection without replacing
-    Interpretation analytical meaning.
+    Executive Summary / Recommendation / Career Selection / Promotion Readiness
+    without replacing Interpretation analytical meaning.
     """
     analysis_in = analysis or {}
     interpretation_in = interpretation or {}
     commercial_bundle_payload: dict[str, Any] | None = None
     career_selection_payload: dict[str, Any] | None = None
+    promotion_readiness_payload: dict[str, Any] | None = None
 
     if include_commercial_knowledge:
         adapter = CommercialKnowledgeAdapter(
@@ -60,6 +61,9 @@ def build_narrative_result_dict(
         career_selection_payload = commercial_bundle_payload.get(
             "career_selection_assessment"
         )
+        promotion_readiness_payload = commercial_bundle_payload.get(
+            "promotion_readiness_assessment"
+        )
 
     engine = NarrativeEngine()
     result = engine.compose_narrative_result(
@@ -73,6 +77,8 @@ def build_narrative_result_dict(
         payload["commercial_knowledge_bundle"] = commercial_bundle_payload
     if career_selection_payload is not None:
         payload["career_selection_assessment"] = career_selection_payload
+    if promotion_readiness_payload is not None:
+        payload["promotion_readiness_assessment"] = promotion_readiness_payload
     return payload
 
 
@@ -83,7 +89,7 @@ def narrative_result_source_fingerprint() -> dict[str, str]:
         "method": "compose_narrative_result",
         "contract": "pack05_narrative_result_v1",
         "commercial_knowledge": "engines.commercial_knowledge.CommercialKnowledgeAdapter",
-        "capability": "CAP-D1-CA-SEL",
+        "capabilities": "CAP-D1-CA-SEL;CAP-D1-CA-PRO",
         "view": (
             "applications.api.services.narrative_result_truth.build_narrative_result_dict"
         ),
