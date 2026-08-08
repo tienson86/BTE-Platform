@@ -58,13 +58,44 @@ export type NarrativeResultDto = {
   readonly contract?: string;
   /** Career Selection Assessment projection (no raw Knowledge Units). */
   readonly career_selection_assessment?: CareerSelectionAssessmentDto | null;
+  readonly career_selection_label?: string;
   /** Promotion Readiness Assessment projection (no raw Knowledge Units). */
   readonly promotion_readiness_assessment?: PromotionReadinessAssessmentDto | null;
+  readonly promotion_readiness_label?: string;
+  readonly commercial_executive_summary?: CommercialExecutiveSummaryDto | null;
+  readonly primary_recommendation?: StructuredRecommendationDto | null;
+  readonly secondary_career_milestone?: SecondaryMilestoneDto | null;
   readonly commercial_knowledge_bundle?: {
     readonly career_selection_assessment?: CareerSelectionAssessmentDto | null;
     readonly promotion_readiness_assessment?: PromotionReadinessAssessmentDto | null;
     readonly [key: string]: unknown;
   } | null;
+};
+
+export type CommercialExecutiveSummaryDto = {
+  readonly central_message?: string;
+  readonly supporting_points?: readonly string[];
+  readonly conclusion?: string;
+  readonly composed_text?: string;
+  readonly capability_labels?: readonly string[];
+};
+
+export type StructuredRecommendationDto = {
+  readonly what?: string;
+  readonly why?: string;
+  readonly how?: string;
+  readonly when?: string;
+  readonly expected_outcome?: string;
+  readonly composed_text?: string;
+  readonly capability_label?: string;
+  readonly role?: string;
+};
+
+export type SecondaryMilestoneDto = {
+  readonly capability_label?: string;
+  readonly role?: string;
+  readonly summary?: string;
+  readonly composed_text?: string;
 };
 
 export type CareerSelectionFieldDto = {
@@ -177,6 +208,27 @@ export function promotionFieldText(
   if (!value || typeof value !== "object") return "";
   const text = (value as CareerSelectionFieldDto).text;
   return text == null ? "" : String(text).trim();
+}
+
+export function executiveFromNarrative(
+  narrative: NarrativeResultDto | null | undefined,
+): CommercialExecutiveSummaryDto | null {
+  if (!narrative?.commercial_executive_summary) return null;
+  return narrative.commercial_executive_summary;
+}
+
+export function primaryRecommendationFromNarrative(
+  narrative: NarrativeResultDto | null | undefined,
+): StructuredRecommendationDto | null {
+  if (!narrative?.primary_recommendation) return null;
+  return narrative.primary_recommendation;
+}
+
+export function secondaryMilestoneFromNarrative(
+  narrative: NarrativeResultDto | null | undefined,
+): SecondaryMilestoneDto | null {
+  if (!narrative?.secondary_career_milestone) return null;
+  return narrative.secondary_career_milestone;
 }
 
 export function asNarrativeResult(
