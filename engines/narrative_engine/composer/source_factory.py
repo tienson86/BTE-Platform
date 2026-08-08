@@ -157,36 +157,51 @@ def _enrich_from_analysis_dict(facts: dict[str, SourceFact], data: dict[str, Any
                 confidence=0.5,
                 knowledge_refs=("knowledge:strength.reasoning",),
             )
+    commercial_action = str(useful.get("commercial_recommendation") or "").strip()
     action_value = str(
         useful.get("useful_god")
         or pattern.get("dung_than")
-        or score.get("recommendation")
+        or score.get("analytical_recommendation")
+        or ("" if commercial_action else score.get("recommendation"))
         or ""
     )
-    if action_value:
+    if action_value or commercial_action:
         matched = useful.get("matched_rules") if isinstance(useful.get("matched_rules"), list) else []
+        knowledge_unit = str(score.get("commercial_knowledge_unit_id") or "")
         upsert(
             "ev-action",
             kind=EvidenceKind.ACTION.value,
             label="Dụng thần / khuyến nghị",
-            value=action_value,
-            source_path="useful_god|score.recommendation",
+            value=action_value or commercial_action,
+            raw_text=commercial_action,
+            source_path="useful_god|score.recommendation|commercial",
             confidence=0.77,
             rule_refs=tuple(str(item) for item in matched),
-            knowledge_refs=("knowledge:useful_god",),
+            knowledge_refs=(
+                (f"knowledge:{knowledge_unit}",)
+                if knowledge_unit
+                else ("knowledge:useful_god",)
+            ),
         )
     risk_value = ""
     if isinstance(useful.get("unfavorable_gods"), list) and useful.get("unfavorable_gods"):
         risk_value = ", ".join(str(item) for item in useful["unfavorable_gods"])
     elif pattern.get("ky_than"):
         risk_value = str(pattern.get("ky_than"))
-    if risk_value:
+    commercial_weakness = str(
+        useful.get("commercial_weakness_text")
+        or score.get("commercial_weakness")
+        or strength.get("commercial_weakness_text")
+        or ""
+    ).strip()
+    if risk_value or commercial_weakness:
         upsert(
             "ev-risk",
             kind=EvidenceKind.RISK.value,
             label="Kỵ / bất lợi",
-            value=risk_value,
-            source_path="useful_god.unfavorable|pattern.ky_than",
+            value=risk_value or commercial_weakness,
+            raw_text=commercial_weakness,
+            source_path="useful_god.unfavorable|pattern.ky_than|commercial",
             confidence=0.65,
             knowledge_refs=("knowledge:risk",),
         )
@@ -194,8 +209,9 @@ def _enrich_from_analysis_dict(facts: dict[str, SourceFact], data: dict[str, Any
             "ev-weakness",
             kind=EvidenceKind.WEAKNESS.value,
             label="Điểm hạn chế",
-            value=risk_value,
-            source_path="useful_god.unfavorable|pattern.ky_than",
+            value=risk_value or commercial_weakness,
+            raw_text=commercial_weakness,
+            source_path="useful_god.unfavorable|pattern.ky_than|commercial",
             confidence=0.65,
             knowledge_refs=("knowledge:weakness",),
         )

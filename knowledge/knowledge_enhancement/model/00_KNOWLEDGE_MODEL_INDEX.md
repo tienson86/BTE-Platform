@@ -1,10 +1,10 @@
 # 00 — Knowledge Model Index
 
-Version: 1.2  
-Status: **SPRINT A–B FROZEN · SPRINT C — Knowledge Unit Model**  
+Version: 1.3  
+Status: **SPRINT A–C FROZEN · SPRINT D — Knowledge Catalog Blueprint**  
 Date: 2026-08-08  
 Epic: Knowledge Model (EPIC 2)  
-Sprint: A–B (frozen) + C (atomic unit architecture)  
+Sprint: A–C (frozen) + D (catalog blueprint)  
 Scope: Documentation only — no records, no CSV/JSON population, no runtime  
 
 ---
@@ -39,11 +39,17 @@ Sprint A defines that model. It does **not** author knowledge records.
 | 13 | `13_KNOWLEDGE_COMPOSITION_MODEL.md` | How units compose into consultation |
 | 14 | `14_KNOWLEDGE_LIFECYCLE.md` | Draft → Published → Deprecated |
 | 15 | `15_KNOWLEDGE_AUTHORING_STANDARD.md` | Authoring / naming / maintenance |
+| 16 | `16_KNOWLEDGE_CATALOG.md` | Planned KU inventory (Sprint D) |
+| 17 | `17_DOMAIN_KNOWLEDGE_MAP.md` | Required / optional / future per domain |
+| 18 | `18_SCENARIO_KNOWLEDGE_MATRIX.md` | Scenario → KU → Narrative |
+| 19 | `19_NARRATIVE_SUPPORT_MATRIX.md` | KU → Narrative / Portal / Report gaps |
+| 20 | `20_KNOWLEDGE_IMPLEMENTATION_PLAN.md` | Phased population plan |
 
 **Suggested path for reviewers (Sprint A):** 00 → 01 → 02 → 03 → 04 → 05.  
-**Suggested path for reviewers (Sprint B):** 00 → 06 → 07 → 08 → 09 → 10 (with A as prerequisite).  
-**Suggested path for reviewers (Sprint C):** 00 → 11 → 12 → 13 → 14 → 15 (with A–B as prerequisite).  
-**Suggested path for content authors (after approval):** 00 → 15 → 14 → 12 → 11 → 05 → 10 → 06.
+**Suggested path for reviewers (Sprint B):** 00 → 06 → 07 → 08 → 09 → 10.  
+**Suggested path for reviewers (Sprint C):** 00 → 11 → 12 → 13 → 14 → 15.  
+**Suggested path for reviewers (Sprint D):** 00 → 16 → 17 → 18 → 19 → 20 (with A–C as prerequisite).  
+**Suggested path for content authors (after approval):** 00 → 20 → 16 → 15 → 14 → 12 → 18.
 
 ---
 
@@ -94,6 +100,16 @@ Internal document dependencies:
         ↓ draft → published → deprecated
 15 Knowledge Authoring Standard
         ↓ how authors write units
+16 Knowledge Catalog               (Sprint D)
+        ↓ planned unit inventory
+17 Domain Knowledge Map
+        ↓ required/optional/future per domain
+18 Scenario Knowledge Matrix
+        ↓ scenario coverage
+19 Narrative Support Matrix
+        ↓ delivery coverage gaps
+20 Knowledge Implementation Plan
+        ↓ phased population order
 ```
 
 ---
@@ -174,20 +190,21 @@ Future packs must declare which **Commercial Knowledge Kind** and **Consultation
 
 | Criterion | Met when |
 |-----------|----------|
-| Model fully defined | Files 01–05 approved (Sprint A — done) |
-| Scenario taxonomy defined | Files 06–10 approved (Sprint B — done) |
-| Knowledge Unit defined | Files 11–15 complete (Sprint C) |
+| Model fully defined | Files 01–05 (Sprint A — frozen) |
+| Scenario taxonomy defined | Files 06–10 (Sprint B — frozen) |
+| Knowledge Unit defined | Files 11–15 (Sprint C — frozen) |
+| Catalog blueprint defined | Files 16–20 (Sprint D) |
 | Layer responsibilities clear | Rule ≠ Unit ≠ Evidence ≠ Narrative ≠ Scenario |
-| Expansion blueprint ready | Files 05 + 10 + 15 |
-| Traceability defined | Files 03 + 07 + 09 + 11–13 |
-| Advisory SSOT declared | Commercial Knowledge = composed Knowledge Units; Scenario is entry point only |
+| Expansion blueprint ready | Files 05 + 10 + 15 + 20 |
+| Traceability defined | Files 03 + 07 + 09 + 11–13 + 18–19 |
+| Advisory SSOT declared | Commercial Knowledge = composed Published KUs |
 
 ---
 
 ## 8. Stop line
 
-Sprint A–B are **frozen**.  
-Sprint C ends at architecture review.  
+Sprint A–C are **frozen**.  
+Sprint D ends at architecture review.  
 **Do not create Knowledge Units / records. Do not populate database/20_knowledge. Do not implement runtime.**
 
 ---

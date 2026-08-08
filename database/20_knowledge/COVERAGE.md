@@ -1,10 +1,9 @@
 # Coverage Report — Classical Knowledge Base
 
-**Epic:** 03 — Knowledge & AI Expert System  
-**Milestone:** 01 — Classical Knowledge Base Foundation  
-**Date:** 2026-08-02  
-**Database version:** 0.1.0  
-**Status:** Schema only (not content-ready)
+**Epic:** 03 — Knowledge Population Wave 1.1  
+**Date:** 2026-08-08  
+**Database version:** 0.2.0  
+**Status:** Wave 1.1 core units authored — **awaiting review** (not Published)
 
 ---
 
@@ -12,84 +11,38 @@
 
 | Metric | Value |
 |--------|------:|
-| Topic files expected | 20 |
-| Topic files present | 20 |
-| Schema columns per file | 9 |
-| Content rows (all files) | 0 |
-| Files with matching schema | 20 / 20 |
-| Content coverage | 0% |
-| Schema readiness | 100% |
+| Topic files `01`–`20` (legacy schema) | 20 |
+| Content rows in `01`–`20` | 0 |
+| Knowledge Unit file `21_knowledge_units.csv` | 1 |
+| Knowledge Unit rows (Wave 1.1) | **5** |
+| Units Published | 0 |
+| Units awaiting review | 5 |
 
 ---
 
-## Schema checklist
+## Wave 1.1 unit coverage
 
-Required columns (stable order):
-
-1. `id`
-2. `topic`
-3. `keyword`
-4. `condition`
-5. `classical_text`
-6. `modern_interpretation`
-7. `priority`
-8. `confidence`
-9. `reference`
-
-All 20 files use this exact header and contain **no data rows**.
+| Id | Title | Kind | Evidence | Narrative targets | Status |
+|----|-------|------|----------|-------------------|--------|
+| KU-ID-001 | Identity Core | Analytical | identity | Exec / Observation / Conclusion | awaiting_review |
+| KU-ST-001 | Strength Core | Analytical | strength | Exec / Observation / Reasoning / Conclusion | awaiting_review |
+| KU-WK-001 | Weakness Core | Analytical | weakness | Exec / Warning / Conclusion | awaiting_review |
+| KU-UG-001 | Useful God Core | Analytical | explanation | Exec / Reasoning / Impact / Recommendation | awaiting_review |
+| KU-RC-001 | Core Recommendation | Action | action | Recommendation / Exec / Conclusion | awaiting_review |
 
 ---
 
-## Per-file coverage
+## Commercial pipeline intent
 
-| File | Header OK | Data rows | Content status |
-|------|-----------|----------:|----------------|
-| `01_five_elements.csv` | yes | 0 | empty — schema only |
-| `02_yin_yang.csv` | yes | 0 | empty — schema only |
-| `03_ten_gods.csv` | yes | 0 | empty — schema only |
-| `04_hidden_stems.csv` | yes | 0 | empty — schema only |
-| `05_growth_stage.csv` | yes | 0 | empty — schema only |
-| `06_nayin.csv` | yes | 0 | empty — schema only |
-| `07_patterns.csv` | yes | 0 | empty — schema only |
-| `08_useful_god.csv` | yes | 0 | empty — schema only |
-| `09_strength.csv` | yes | 0 | empty — schema only |
-| `10_temperature.csv` | yes | 0 | empty — schema only |
-| `11_shensha.csv` | yes | 0 | empty — schema only |
-| `12_career.csv` | yes | 0 | empty — schema only |
-| `13_wealth.csv` | yes | 0 | empty — schema only |
-| `14_marriage.csv` | yes | 0 | empty — schema only |
-| `15_children.csv` | yes | 0 | empty — schema only |
-| `16_health.csv` | yes | 0 | empty — schema only |
-| `17_parents.csv` | yes | 0 | empty — schema only |
-| `18_luck_cycles.csv` | yes | 0 | empty — schema only |
-| `19_feng_shui.csv` | yes | 0 | empty — schema only |
-| `20_glossary.csv` | yes | 0 | empty — schema only |
+These five units are designed to improve:
+
+1. **Executive Summary** — identity + strengths + weaknesses framing  
+2. **Recommendation** — useful-god-bound priority + next action  
+
+Runtime wiring is **out of scope** for Wave 1.1.
 
 ---
 
-## Domain coverage (planned)
+## Legacy topic files (`01`–`20`)
 
-| Domain group | Files | Seeded | Notes |
-|--------------|------:|-------:|-------|
-| Fundamentals | 01–06 | 0 | Five elements, yin-yang, ten gods, hidden stems, growth, nayin |
-| Analytical | 07–11 | 0 | Patterns, useful god, strength, temperature, shensha |
-| Life domains | 12–17 | 0 | Career, wealth, marriage, children, health, parents |
-| Cycles / space | 18–19 | 0 | Luck cycles, feng shui |
-| Glossary | 20 | 0 | Terminology |
-
----
-
-## Gaps / next milestones
-
-1. Curate initial seed rows for high-priority topics (ten gods, shensha, useful god, five elements).
-2. Bind `reference` values to `SRC-*` / `REF-*` bibliography ids.
-3. Add Knowledge Expert loader + validation (duplicate `id`, missing required fields).
-4. Do **not** treat 0% content coverage as a failure of Milestone 01 — schema foundation is the goal.
-
----
-
-## Compatibility
-
-- No engines read or write this folder in Milestone 01.
-- Existing calculation / interpretation databases unchanged.
-- Safe to add rows in later milestones without renaming columns.
+Unchanged: schema-only headers; 0 content rows. Stable columns preserved.
