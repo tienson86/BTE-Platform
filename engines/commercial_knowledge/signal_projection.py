@@ -37,22 +37,42 @@ def project_analysis_signals(analysis: dict[str, Any] | None) -> dict[str, Any]:
 
     favorable_strength = _is_favorable_strength(strength_band, strength_score)
     weak_strength = _is_weak_strength(strength_band, strength_score)
+    strength_band_label = _commercial_strength_band_label(
+        strength_band,
+        strength_score,
+        favorable=favorable_strength,
+        weak=weak_strength,
+    )
+    weakness_frame = "thin" if weak_strength else ("opposed" if has_enemy else "none")
+    weakness_signal_label = _weakness_label(
+        unfavorable,
+        ky_than,
+        weak_strength=weak_strength,
+        favorable_strength=favorable_strength,
+        strength_band_label=strength_band_label,
+    )
 
     return {
         "day_master": day_master,
         "day_master_label": day_master or "Nhật chủ",
         "pattern_label": pattern_label or "cấu trúc chính",
         "strength_band": strength_band,
-        "strength_band_label": strength_band or "chưa xác định",
+        "strength_band_label": strength_band_label,
         "strength_score": strength_score,
         "strength_score_favorable": favorable_strength,
         "has_day_master": bool(day_master),
-        "has_pattern_or_strength_band": bool(pattern_label or strength_band or strength_score is not None),
+        "has_pattern_or_strength_band": bool(
+            pattern_label or strength_band or strength_score is not None
+        ),
         "has_useful_god": bool(useful_god),
         "useful_god": useful_god,
         "useful_god_label": useful_god or "Dụng thần",
         "has_enemy_or_clash_caution": has_enemy or weak_strength,
-        "weakness_signal_label": _weakness_label(unfavorable, ky_than, strength_band),
+        "weakness_frame": weakness_frame,
+        "weakness_signal_label": weakness_signal_label,
+        "weakness_statement": _weakness_statement(weakness_frame, weakness_signal_label),
+        "weakness_risk": _weakness_risk(weakness_frame),
+        "weakness_mitigation": _weakness_mitigation(weakness_frame),
         "grade": _text(score.get("grade")),
         "raw_strength_band": strength_band,
     }
@@ -157,15 +177,94 @@ def _is_weak_strength(band: str, score: Any) -> bool:
         return False
 
 
-def _weakness_label(unfavorable: list[Any], ky_than: str, band: str) -> str:
-    parts: list[str] = []
-    if unfavorable:
-        parts.append(", ".join(str(item) for item in unfavorable[:3]))
-    if ky_than:
-        parts.append(ky_than)
+def _commercial_strength_band_label(
+    band: str,
+    score: Any,
+    *,
+    favorable: bool,
+    weak: bool,
+) -> str:
+    """Map Analysis band tokens to customer-facing commercial labels."""
+    if weak:
+        return "đang mỏng lực"
+    lowered = (band or "").lower()
+    if any(token in lowered for token in ("can", "cân", "balance")):
+        return "đang cân bằng"
+    if favorable or any(token in lowered for token in ("vuong", "vượng", "strong")):
+        return "được nâng đỡ"
     if band:
-        parts.append(f"mức thân {band}")
+        # Unknown band — never echo raw engine tokens to customers.
+        return "chưa xác định rõ"
+    try:
+        numeric = float(score)
+    except (TypeError, ValueError):
+        return "chưa xác định rõ"
+    if numeric < 45.0:
+        return "đang mỏng lực"
+    if numeric < 55.0:
+        return "đang cân bằng"
+    return "được nâng đỡ"
+
+
+def _weakness_label(
+    unfavorable: list[Any],
+    ky_than: str,
+    *,
+    weak_strength: bool,
+    favorable_strength: bool,
+    strength_band_label: str,
+) -> str:
+    """Build a unique, commercial caution phrase (no duplicated enemies/bands)."""
+    seen: set[str] = set()
+    parts: list[str] = []
+
+    def _add(raw: str) -> None:
+        label = raw.strip()
+        if not label:
+            return
+        key = label.casefold()
+        if key in seen:
+            return
+        seen.add(key)
+        parts.append(label)
+
+    for item in unfavorable[:3]:
+        _add(str(item))
+    _add(ky_than)
+
+    if weak_strength:
+        _add("thân đang mỏng lực")
+    elif favorable_strength and parts:
+        # Frame B: unique opposition labels only — do not claim thin structure.
+        return "; ".join(parts)
+    elif not parts and strength_band_label:
+        _add(f"thân {strength_band_label}")
+
     return "; ".join(parts) if parts else "điểm hạn chế cấu trúc"
+
+
+def _weakness_statement(frame: str, signal_label: str) -> str:
+    """Opening Weakness sentence for Frame A (thin) or Frame B (opposed)."""
+    label = signal_label.strip() or "điểm hạn chế cấu trúc"
+    if frame == "opposed":
+        return (
+            f"Điểm cần giữ không phải vì bạn thiếu nền, mà vì có phần dễ kéo lệch: {label}."
+        )
+    return (
+        f"Điểm cần giữ của bạn là chỗ lực cấu trúc đang mỏng hoặc dễ bị kéo quá mức: {label}."
+    )
+
+
+def _weakness_risk(frame: str) -> str:
+    if frame == "opposed":
+        return "Nếu chạy theo phần kỵ, dễ mất lợi thế đang có."
+    return "Nếu mở rộng khi chưa giữ mực, dễ lệch nhịp và hao lực."
+
+
+def _weakness_mitigation(frame: str) -> str:
+    if frame == "opposed":
+        return "Giữ biên và giảm những việc nuôi phần kỵ trước."
+    return "Giảm tải và giữ nhịp trước khi mở rộng."
 
 
 def _as_dict(value: Any) -> dict[str, Any]:
