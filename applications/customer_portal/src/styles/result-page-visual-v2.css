@@ -546,3 +546,129 @@
 .rp-result-page[data-visual="v2"] .rp-status-gate [class*="skeleton"] {
   border-radius: var(--rp-card-radius);
 }
+
+/* —— Product Polish V1 · Consulting experience (presentation only) —— */
+.rp-result-page[data-experience="consulting"] .rp-card--identity-hero {
+  min-height: 0;
+  height: auto;
+  gap: var(--rp-space-3);
+  box-shadow: var(--rp-elev-1);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__eyebrow {
+  color: var(--rp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--rp-v2-meta);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__title {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--rp-v2-h3);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__name {
+  font-size: var(--rp-v2-display);
+  line-height: 1.1;
+  margin: 0;
+  color: var(--rp-text);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__meta,
+.rp-result-page[data-experience="consulting"] .rp-identity__birth {
+  color: var(--rp-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rp-space-2) var(--rp-space-4);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__tech {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rp-space-3);
+  margin: var(--rp-space-3) 0 0;
+  padding: var(--rp-space-3);
+  background: var(--rp-surface-subtle);
+  border-radius: var(--rp-card-radius-inner);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__tech dt {
+  color: var(--rp-muted);
+  font-size: var(--rp-v2-meta);
+  margin: 0;
+}
+
+.rp-result-page[data-experience="consulting"] .rp-identity__tech dd {
+  margin: var(--rp-space-1) 0 0;
+  color: var(--rp-text);
+  font-size: var(--rp-v2-caption);
+  word-break: break-word;
+}
+
+.rp-result-page[data-experience="consulting"] .rp-card--hero-exec {
+  height: auto;
+  min-height: var(--rp-height-m);
+  box-shadow: var(--rp-elev-2);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-card__conclusion {
+  margin: var(--rp-space-3) 0 0;
+  padding-top: var(--rp-space-3);
+  border-top: 1px solid var(--rp-divider);
+  color: var(--rp-text);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rp-space-3);
+  align-items: center;
+}
+
+.rp-result-page[data-experience="consulting"] .rp-row[data-priority="3"] .rp-card {
+  box-shadow: var(--rp-elev-0);
+  border-color: var(--rp-card-border);
+  opacity: 0.98;
+}
+
+.rp-result-page[data-experience="consulting"] .rp-row[data-zone="recommendation"] {
+  scroll-margin-top: var(--rp-space-5);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-row[data-zone="analysis"],
+.rp-result-page[data-experience="consulting"] .rp-row[data-zone="interpretation"] {
+  scroll-margin-top: var(--rp-space-5);
+}
+
+.rp-result-page[data-experience="consulting"] .rp-card--auto {
+  height: auto;
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+}
+
+.rp-result-page[data-experience="consulting"] .rp-card--auto .rp-card__body {
+  overflow: visible;
+}
+
+@media (max-width: 1023px) {
+  .rp-result-page[data-experience="consulting"] .rp-identity__tech {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-result-page[data-experience="consulting"] .rp-grid__cell--8 {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 639px) {
+  .rp-result-page[data-experience="consulting"] .rp-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .rp-result-page[data-experience="consulting"] .rp-identity__name {
+    font-size: 32px;
+  }
+}

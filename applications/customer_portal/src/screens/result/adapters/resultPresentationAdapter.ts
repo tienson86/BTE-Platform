@@ -14,8 +14,11 @@ import {
   commercialOrUnavailable,
 } from "../../../adapters/contentGuards";
 import {
+  executiveFromNarrative,
   hasUsableNarrativeResult,
   paragraphByRole,
+  primaryRecommendationFromNarrative,
+  secondaryMilestoneFromNarrative,
   type NarrativeRecommendationDto,
 } from "../../../adapters/narrativeResultAdapter";
 import {
@@ -37,10 +40,91 @@ import type {
 
 const TIMELINE_LABELS = ["Tiền vận", "Trung vận", "Hậu vận", "Định hướng"] as const;
 
+function isUsablePreviewText(text: string): boolean {
+  const trimmed = text.trim();
+  return Boolean(trimmed) && trimmed !== UNAVAILABLE_CONCLUSION;
+}
+
 function buildRecommendations(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel["recommendations"] {
   const narrative = source.narrativeResult;
+  const structuredPrimary = primaryRecommendationFromNarrative(narrative);
+  const secondaryMilestone = secondaryMilestoneFromNarrative(narrative);
+
+  if (structuredPrimary) {
+    const what = formatPreviewField(structuredPrimary.what, "title");
+    const why = formatPreviewField(structuredPrimary.why, "summary");
+    const outcome = formatPreviewField(
+      structuredPrimary.expected_outcome,
+      "summary",
+    );
+    const howWhenDetail = adaptPreviewText(
+      [
+        structuredPrimary.how
+          ? `Cách làm: ${commercialOrUnavailable(structuredPrimary.how)}`
+          : "",
+        structuredPrimary.when
+          ? `Thời điểm: ${commercialOrUnavailable(structuredPrimary.when)}`
+          : "",
+      ]
+        .filter(Boolean)
+        .join(" "),
+      "narrative",
+    );
+    const primaryItem: RecommendationItemViewModel = {
+      id: "rec-primary-career",
+      priority: "critical",
+      priorityLabel:
+        structuredPrimary.capability_label?.trim() || "Chiến lược nghề nghiệp",
+      action: what,
+      reason: why,
+      benefit: outcome,
+      detail: howWhenDetail,
+      hasMore:
+        what.hasMore ||
+        why.hasMore ||
+        outcome.hasMore ||
+        howWhenDetail.hasMore ||
+        Boolean(structuredPrimary.how || structuredPrimary.when),
+    };
+    const items: RecommendationItemViewModel[] = [primaryItem];
+    if (secondaryMilestone?.summary || secondaryMilestone?.composed_text) {
+      const summaryText = commercialOrUnavailable(
+        secondaryMilestone.summary || secondaryMilestone.composed_text,
+      );
+      const summaryPreview = formatPreviewField(summaryText, "summary");
+      items.push({
+        id: "rec-secondary-promotion",
+        priority: "medium",
+        priorityLabel:
+          secondaryMilestone.capability_label?.trim() ||
+          "Cột mốc thăng tiến",
+        action: formatPreviewField(
+          secondaryMilestone.capability_label || "Sẵn sàng thăng tiến",
+          "title",
+        ),
+        reason: summaryPreview,
+        benefit: formatPreviewField(
+          "Xem chi tiết trong phần mở rộng khi cần.",
+          "summary",
+        ),
+        detail: summaryPreview,
+        hasMore: summaryPreview.hasMore,
+      });
+    }
+    return {
+      title: "KHUYẾN NGHỊ",
+      items,
+      totalCount: items.length,
+      hasMore: items.some((item) => item.hasMore),
+      viewAllLabel: "Đọc toàn bộ tư vấn",
+      visible: true,
+      primaryCtaLabel: "Đọc toàn bộ tư vấn",
+      secondaryCtaLabel: "Xem phân tích chi tiết",
+    };
+  }
+
   if (hasUsableNarrativeResult(narrative) && narrative) {
     const fromRoot = narrative.recommendations ?? [];
     const fromSections = (narrative.sections ?? []).flatMap(
@@ -84,7 +168,10 @@ function buildRecommendations(
       items: primary.items,
       totalCount: primary.totalCount,
       hasMore: primary.hasMore || primary.items.some((item) => item.hasMore),
-      viewAllLabel: "Xem tất cả khuyến nghị →",
+      viewAllLabel: "Đọc toàn bộ tư vấn",
+      visible: primary.items.length > 0,
+      primaryCtaLabel: "Đọc toàn bộ tư vấn",
+      secondaryCtaLabel: "Xem phân tích chi tiết",
     };
   }
 
@@ -137,7 +224,10 @@ function buildRecommendations(
     items: primary.items,
     totalCount: primary.totalCount,
     hasMore: primary.hasMore || primary.items.some((item) => item.hasMore),
-    viewAllLabel: "Xem tất cả khuyến nghị →",
+    viewAllLabel: "Đọc toàn bộ tư vấn",
+    visible: primary.items.length > 0,
+    primaryCtaLabel: "Đọc toàn bộ tư vấn",
+    secondaryCtaLabel: "Xem phân tích chi tiết",
   };
 }
 
@@ -214,6 +304,7 @@ function buildInterpretation(
       blocks,
       expandLabel: "Mở rộng luận giải",
       collapseLabel: "Thu gọn",
+      visible: blocks.length > 0,
     };
   }
 
@@ -288,6 +379,7 @@ function buildInterpretation(
     blocks,
     expandLabel: "Mở rộng luận giải",
     collapseLabel: "Thu gọn",
+    visible: blocks.length > 0,
   };
 }
 
@@ -383,26 +475,45 @@ function buildKnowledge(
   return {
     title: "KIẾN THỨC",
     sections,
+    visible: sections.length > 0,
   };
 }
 
 /**
  * Build full Result Page ViewModel (Sprint A zones + Sprint B content zones).
+ * Product Polish V1 — consulting presentation mapping (existing data only).
  */
 export function adaptResultPageViewModel(
   source: CanonicalDesktopViewModel,
 ): ResultPageViewModel {
+  const narrative = source.narrativeResult;
+  const commercialExec = executiveFromNarrative(narrative);
+
   const executiveBody = adaptPreviewText(
-    commercialOrUnavailable(source.s08.executive.body),
+    commercialOrUnavailable(
+      commercialExec?.central_message || source.s08.executive.body,
+    ),
     "narrative",
   );
+  const pointSources = commercialExec?.supporting_points?.length
+    ? [...commercialExec.supporting_points]
+    : [
+        ...source.s08.strengths.items.slice(0, 2),
+        ...source.s08.warnings.items.slice(0, 2),
+      ];
   const executivePoints = adaptPreviewList(
-    [
-      ...source.s08.strengths.items.slice(0, 2),
-      ...source.s08.warnings.items.slice(0, 2),
-    ].map((item) => commercialOrUnavailable(item)),
+    pointSources
+      .map((item) => commercialOrUnavailable(item))
+      .filter(isUsablePreviewText)
+      .slice(0, 4),
     4,
   );
+  const conclusionText = commercialExec?.conclusion
+    ? commercialOrUnavailable(commercialExec.conclusion)
+    : "";
+  const conclusion = isUsablePreviewText(conclusionText)
+    ? adaptPreviewText(conclusionText, "summary")
+    : null;
 
   const indicators = adaptPreviewList(
     source.s02.items.map((item) => ({
@@ -413,12 +524,18 @@ export function adaptResultPageViewModel(
     6,
   );
 
+  const careerLabel =
+    narrative?.career_selection_label?.trim() ||
+    "ĐỊNH HƯỚNG NGHỀ NGHIỆP";
   const destinyItems = adaptPreviewList(
     source.s01.decisions.map((d) => ({
       question: d.question,
       answer: adaptPreviewText(commercialOrUnavailable(d.answer), "summary"),
     })),
     3,
+  );
+  const destinyVisible = destinyItems.items.some((item) =>
+    isUsablePreviewText(item.answer.text),
   );
 
   const elementRows = adaptPreviewList(
@@ -442,6 +559,9 @@ export function adaptResultPageViewModel(
     })),
     4,
   );
+  const strengthVisible =
+    Boolean(source.s05.level?.trim()) ||
+    isUsablePreviewText(strengthInsight.text);
 
   const rankedGods = [...source.s06.gods].sort(
     (a, b) => Number.parseFloat(b.score) - Number.parseFloat(a.score),
@@ -490,10 +610,18 @@ export function adaptResultPageViewModel(
   ];
   const stages = adaptPreviewList(timelineSource, 4);
   const timelineSummary = adaptPreviewText(UNAVAILABLE_CONCLUSION, "summary");
+  const timelineVisible = stages.items.some((stage) =>
+    isUsablePreviewText(stage.detail.text),
+  );
+
+  const recommendations = buildRecommendations(source);
+  const interpretation = buildInterpretation(source);
+  const knowledge = buildKnowledge(source);
 
   return {
     context: {
-      title: source.s00.title,
+      title: "BẠN LÀ AI",
+      identityLabel: "Hồ sơ tư vấn",
       profileName: source.s00.profile.name,
       profileMeta: source.s00.profile.meta,
       birthDate: source.s00.birth.date,
@@ -504,27 +632,37 @@ export function adaptResultPageViewModel(
       analyzedAt: source.s00.analyzedAt.value,
     },
     executive: {
-      title: "TÓM TẮT ĐIỀU HÀNH",
+      title: "TÓM TẮT TƯ VẤN",
       headline: executiveBody,
       points: executivePoints,
-      hasMore: executiveBody.hasMore || executivePoints.hasMore,
+      conclusion,
+      hasMore:
+        executiveBody.hasMore ||
+        executivePoints.hasMore ||
+        Boolean(conclusion?.hasMore),
+      primaryCtaLabel: "Đọc toàn bộ tư vấn",
+      secondaryCtaLabel: "Xem phân tích chi tiết",
     },
     indicators: {
       title: "CHỈ SỐ CỐT LÕI",
       items: indicators,
       hasMore: indicators.hasMore,
+      visible: false,
     },
     destiny: {
-      title: "ĐỊNH HƯỚNG MỆNH VẬN",
+      title: careerLabel,
+      questionLabel: "Hướng nghề phù hợp?",
       items: destinyItems,
       cta: source.s01.cta,
       hasMore: destinyItems.hasMore || destinyItems.items.some((i) => i.answer.hasMore),
+      visible: destinyVisible,
     },
     fiveElements: {
       title: "NGŨ HÀNH",
       rows: elementRows,
       summary: adaptPreviewText(source.s04.summary, "summary"),
       hasMore: elementRows.hasMore,
+      visible: elementRows.items.length > 0,
     },
     strength: {
       title: source.s05.title,
@@ -535,27 +673,31 @@ export function adaptResultPageViewModel(
       factors: strengthFactors,
       cta: source.s05.cta,
       hasMore: strengthInsight.hasMore || strengthFactors.hasMore,
+      visible: strengthVisible,
     },
     tenGods: {
       title: "THẬP THẦN",
       gods,
       cta: source.s06.link,
       hasMore: gods.hasMore,
+      visible: gods.items.length > 0,
     },
     radar: {
       title: "BIỂU ĐỒ RADAR NGŨ HÀNH",
       axes: radarAxes,
       summary: radarSummary,
       hasMore: radarSummary.hasMore,
+      visible: radarAxes.length > 0,
     },
     timeline: {
       title: "DÒNG THỜI GIAN VẬN",
       stages,
       summary: timelineSummary,
       hasMore: stages.hasMore || timelineSummary.hasMore,
+      visible: timelineVisible,
     },
-    recommendations: buildRecommendations(source),
-    interpretation: buildInterpretation(source),
-    knowledge: buildKnowledge(source),
+    recommendations,
+    interpretation,
+    knowledge,
   };
 }

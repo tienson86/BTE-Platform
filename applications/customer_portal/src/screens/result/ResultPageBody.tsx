@@ -1,6 +1,6 @@
 /**
- * ResultPage body — Zone architecture only (PACK_06 / PACK_07).
- * No direct card rendering. Architecture frozen (Sprint A).
+ * ResultPage body — Product Polish V1 consulting reading order.
+ * Zones retained (PACK_06 contracts); composition order prioritizes advice.
  */
 
 import type { ReactNode } from "react";
@@ -15,8 +15,7 @@ import {
 } from "./zones";
 
 /**
- * Official Result Page composition — Zones → Rows → Grid → Cards.
- * Sprint A architecture frozen; Sprint B content; Sprint C quality.
+ * Reading flow: Identity → Summary → Recommendation → Strength/Evidence → Details.
  */
 export function ResultPageBody(): ReactNode {
   return (
@@ -25,15 +24,16 @@ export function ResultPageBody(): ReactNode {
       data-architecture="zone-row-grid-card"
       data-blueprint="pack07"
       data-presentation="pack04"
-      data-sprint="D"
+      data-sprint="product-polish-v1"
       data-visual="v2"
+      data-experience="consulting"
     >
       <ContextZone />
       <SummaryZone />
-      <AnalysisZone />
-      <VisualizationZone />
       <RecommendationZone />
+      <AnalysisZone />
       <InterpretationZone />
+      <VisualizationZone />
       <KnowledgeZone />
     </div>
   );

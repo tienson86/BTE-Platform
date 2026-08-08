@@ -1,6 +1,5 @@
 /**
- * VisualizationZone — Row 04 / LP-004 (Gallery Pattern 04).
- * Radar + Timeline · 50/50 · Height XL · Fixed · Text summary required.
+ * VisualizationZone — Priority 3 reference charts (after advice + evidence).
  */
 
 import type { ReactNode } from "react";
@@ -9,26 +8,35 @@ import { ResultGrid, ResultGridCell, ResultRow } from "../layout";
 import { useResultPageViewModel } from "../ResultPageContext";
 
 /**
- * Visualization support — 6+6 equal height, no resize.
+ * Details beat — charts/tables as reference, not hero.
  */
 export function VisualizationZone(): ReactNode {
   const model = useResultPageViewModel();
+  const showRadar = model.radar.visible;
+  const showTimeline = model.timeline.visible;
+
+  if (!showRadar && !showTimeline) return null;
 
   return (
     <ResultRow
-      rowId="04"
+      rowId="06"
       zone="visualization"
-      heightClass="XL"
+      heightClass="AUTO"
       pattern="LP-004"
       aria-label="Visualization Zone"
+      data-priority="3"
     >
       <ResultGrid>
-        <ResultGridCell span={6}>
-          <RadarChartCard model={model.radar} />
-        </ResultGridCell>
-        <ResultGridCell span={6}>
-          <LuckTimelineCard model={model.timeline} />
-        </ResultGridCell>
+        {showRadar ? (
+          <ResultGridCell span={showTimeline ? 6 : 12}>
+            <RadarChartCard model={model.radar} />
+          </ResultGridCell>
+        ) : null}
+        {showTimeline ? (
+          <ResultGridCell span={showRadar ? 6 : 12}>
+            <LuckTimelineCard model={model.timeline} />
+          </ResultGridCell>
+        ) : null}
       </ResultGrid>
     </ResultRow>
   );

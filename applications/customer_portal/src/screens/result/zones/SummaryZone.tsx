@@ -1,41 +1,38 @@
 /**
- * SummaryZone — Row 02 / LP-001 (PACK_07 + Gallery Pattern 01).
- * Three equal cards · Height M · Preview only.
+ * SummaryZone — Row 02 consulting hero (Product Polish V1).
+ * Executive Summary dominant · Career secondary · Indicators demoted (P3).
  */
 
 import type { ReactNode } from "react";
-import {
-  CoreIndicatorsCard,
-  DestinyDirectionCard,
-  ExecutiveSummaryCard,
-} from "../cards";
+import { DestinyDirectionCard, ExecutiveSummaryCard } from "../cards";
 import { ResultGrid, ResultGridCell, ResultRow } from "../layout";
 import { useResultPageViewModel } from "../ResultPageContext";
 
 /**
- * Executive analytical summary — 4+4+4 equal height.
+ * First-read consulting summary — Identity already shown; Exec + Career.
  */
 export function SummaryZone(): ReactNode {
   const model = useResultPageViewModel();
+  const showCareer = model.destiny.visible;
 
   return (
     <ResultRow
       rowId="02"
       zone="summary"
-      heightClass="M"
+      heightClass="AUTO"
       pattern="LP-001"
       aria-label="Summary Zone"
+      data-priority="1"
     >
       <ResultGrid>
-        <ResultGridCell span={4}>
+        <ResultGridCell span={showCareer ? 8 : 12}>
           <ExecutiveSummaryCard model={model.executive} />
         </ResultGridCell>
-        <ResultGridCell span={4}>
-          <CoreIndicatorsCard model={model.indicators} />
-        </ResultGridCell>
-        <ResultGridCell span={4}>
-          <DestinyDirectionCard model={model.destiny} />
-        </ResultGridCell>
+        {showCareer ? (
+          <ResultGridCell span={4}>
+            <DestinyDirectionCard model={model.destiny} />
+          </ResultGridCell>
+        ) : null}
       </ResultGrid>
     </ResultRow>
   );

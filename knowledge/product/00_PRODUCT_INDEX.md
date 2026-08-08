@@ -38,6 +38,7 @@ Domain packs / Knowledge / Narrative / Portal (implementation & delivery)
 | 6 | `06_PRODUCT_CHANGELOG.md` | Official capability release log |
 | — | `BTE_PRODUCT_MANIFESTO.md` | Product constitution (pre-existing) |
 | — | `commercial_v1/` | Experience audit + P0 polish docs |
+| — | `product_polish/` | **Product Polish V1 · Experience Architecture (Sprint A)** |
 | — | `release_candidate/` | **Commercial V1 RC1** human consulting validation |
 | — | `../releases/v1/09`–`13` | **Commercial V1 RC1 release package** (awaiting Product sign-off) |
 | — | `../releases/process/` | Permanent BTE Release Management process |

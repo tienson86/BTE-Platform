@@ -1,6 +1,5 @@
 /**
- * Sprint B zones — LP-005 / LP-006 / LP-007.
- * Architecture frozen: same ResultRow / Grid / Cell contracts as Sprint A.
+ * Recommendation / Interpretation / Knowledge zones — Product Polish V1.
  */
 
 import type { ReactNode } from "react";
@@ -13,19 +12,23 @@ import { ResultGrid, ResultGridCell, ResultRow } from "../layout";
 import { useResultPageViewModel } from "../ResultPageContext";
 
 /**
- * RecommendationZone — Row 05 / LP-005 · Height L.
+ * RecommendationZone — Primary actions (after Exec / Career).
  */
 export function RecommendationZone(): ReactNode {
   const { recommendations } = useResultPageViewModel();
+  if (!recommendations.visible || recommendations.items.length === 0) {
+    return null;
+  }
 
   return (
     <ResultRow
-      rowId="05"
+      rowId="04"
       zone="recommendation"
-      heightClass="L"
+      heightClass="AUTO"
       pattern="LP-005"
       aria-label="Recommendation Zone"
-      data-sprint="D"
+      data-priority="1"
+      data-sprint="product-polish-v1"
     >
       <ResultGrid>
         <ResultGridCell span={12}>
@@ -37,19 +40,23 @@ export function RecommendationZone(): ReactNode {
 }
 
 /**
- * InterpretationZone — Row 06 / LP-006 · AUTO height · Preview/Expand/Collapse.
+ * InterpretationZone — Evidence (Priority 2).
  */
 export function InterpretationZone(): ReactNode {
   const { interpretation } = useResultPageViewModel();
+  if (!interpretation.visible || interpretation.blocks.length === 0) {
+    return null;
+  }
 
   return (
     <ResultRow
-      rowId="06"
+      rowId="05"
       zone="interpretation"
       heightClass="AUTO"
       pattern="LP-006"
       aria-label="Interpretation Zone"
-      data-sprint="D"
+      data-priority="2"
+      data-sprint="product-polish-v1"
     >
       <ResultGrid>
         <ResultGridCell span={12}>
@@ -61,10 +68,13 @@ export function InterpretationZone(): ReactNode {
 }
 
 /**
- * KnowledgeZone — Row 07 / LP-007 · AUTO height · Accordion · after Interpretation.
+ * KnowledgeZone — Reference (Priority 3).
  */
 export function KnowledgeZone(): ReactNode {
   const { knowledge } = useResultPageViewModel();
+  if (!knowledge.visible || knowledge.sections.length === 0) {
+    return null;
+  }
 
   return (
     <ResultRow
@@ -73,7 +83,8 @@ export function KnowledgeZone(): ReactNode {
       heightClass="AUTO"
       pattern="LP-007"
       aria-label="Knowledge Zone"
-      data-sprint="D"
+      data-priority="3"
+      data-sprint="product-polish-v1"
     >
       <ResultGrid>
         <ResultGridCell span={12}>

@@ -7,6 +7,8 @@ import type { PreviewList, PreviewText } from "../../presentation";
 
 export type ContextZoneViewModel = {
   readonly title: string;
+  /** Customer-facing identity question label. */
+  readonly identityLabel: string;
   readonly profileName: string;
   readonly profileMeta: string;
   readonly birthDate: string;
@@ -20,8 +22,13 @@ export type ContextZoneViewModel = {
 export type ExecutiveSummaryViewModel = {
   readonly title: string;
   readonly headline: PreviewText;
+  /** Supporting bullets (≤4). */
   readonly points: PreviewList<string>;
+  /** Closing consulting line when available. */
+  readonly conclusion: PreviewText | null;
   readonly hasMore: boolean;
+  readonly primaryCtaLabel: string;
+  readonly secondaryCtaLabel: string;
 };
 
 export type CoreIndicatorsViewModel = {
@@ -32,16 +39,21 @@ export type CoreIndicatorsViewModel = {
     readonly color: string;
   }>;
   readonly hasMore: boolean;
+  /** Priority 3 — omit from hero when false. */
+  readonly visible: boolean;
 };
 
 export type DestinyDirectionViewModel = {
   readonly title: string;
+  /** Single-question responsibility: career direction. */
+  readonly questionLabel: string;
   readonly items: PreviewList<{
     readonly question: string;
     readonly answer: PreviewText;
   }>;
   readonly cta: string;
   readonly hasMore: boolean;
+  readonly visible: boolean;
 };
 
 export type FiveElementsViewModel = {
@@ -54,6 +66,7 @@ export type FiveElementsViewModel = {
   }>;
   readonly summary: PreviewText;
   readonly hasMore: boolean;
+  readonly visible: boolean;
 };
 
 export type StrengthAnalysisViewModel = {
@@ -65,6 +78,7 @@ export type StrengthAnalysisViewModel = {
   readonly factors: PreviewList<{ readonly text: string; readonly tone: string }>;
   readonly cta: string;
   readonly hasMore: boolean;
+  readonly visible: boolean;
 };
 
 export type TenGodsAnalysisViewModel = {
@@ -76,6 +90,7 @@ export type TenGodsAnalysisViewModel = {
   }>;
   readonly cta: string;
   readonly hasMore: boolean;
+  readonly visible: boolean;
 };
 
 export type RadarChartViewModel = {
@@ -87,6 +102,7 @@ export type RadarChartViewModel = {
   }[];
   readonly summary: PreviewText;
   readonly hasMore: boolean;
+  readonly visible: boolean;
 };
 
 export type LuckTimelineViewModel = {
@@ -97,6 +113,7 @@ export type LuckTimelineViewModel = {
   }>;
   readonly summary: PreviewText;
   readonly hasMore: boolean;
+  readonly visible: boolean;
 };
 
 /** LP-005 priority levels — Critical → Low. */
@@ -119,6 +136,9 @@ export type RecommendationZoneViewModel = {
   readonly totalCount: number;
   readonly hasMore: boolean;
   readonly viewAllLabel: string;
+  readonly visible: boolean;
+  readonly primaryCtaLabel: string;
+  readonly secondaryCtaLabel: string;
 };
 
 /** LP-006 interpretation block — Observation → Explanation → Impact → Suggestion. */
@@ -137,6 +157,7 @@ export type InterpretationZoneViewModel = {
   readonly blocks: readonly InterpretationBlockViewModel[];
   readonly expandLabel: string;
   readonly collapseLabel: string;
+  readonly visible: boolean;
 };
 
 /** LP-007 knowledge sections. */
@@ -160,6 +181,7 @@ export type KnowledgeSectionViewModel = {
 export type KnowledgeZoneViewModel = {
   readonly title: string;
   readonly sections: readonly KnowledgeSectionViewModel[];
+  readonly visible: boolean;
 };
 
 export type ResultPageViewModel = {

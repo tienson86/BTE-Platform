@@ -63,10 +63,10 @@
   min-width: 0;
 }
 
-/* Below-fold rows: reduce paint work without changing layout (Sprint C). */
-.rp-row[data-result-row="05"],
-.rp-row[data-result-row="06"],
-.rp-row[data-result-row="07"] {
+/* Below-fold rows: reduce paint work (Product Polish consulting order). */
+.rp-row[data-zone="interpretation"],
+.rp-row[data-zone="visualization"],
+.rp-row[data-zone="knowledge"] {
   content-visibility: auto;
   contain-intrinsic-size: auto 420px;
 }
@@ -93,6 +93,7 @@
 }
 
 .rp-grid__cell--12 { grid-column: span 12; }
+.rp-grid__cell--8 { grid-column: span 8; }
 .rp-grid__cell--6 { grid-column: span 6; }
 .rp-grid__cell--4 { grid-column: span 4; }
 .rp-grid__cell--3 { grid-column: span 3; }
@@ -632,6 +633,10 @@
     grid-column: span 6;
   }
 
+  .rp-grid__cell--8 {
+    grid-column: span 12;
+  }
+
   .rp-context {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -640,7 +645,8 @@
 /* Tablet / Tablet portrait (<1024): stack within rows */
 @media (max-width: 1023px) {
   .rp-grid__cell--4,
-  .rp-grid__cell--6 {
+  .rp-grid__cell--6,
+  .rp-grid__cell--8 {
     grid-column: span 12;
   }
 
@@ -667,6 +673,7 @@
   .rp-grid__cell--3,
   .rp-grid__cell--4,
   .rp-grid__cell--6,
+  .rp-grid__cell--8,
   .rp-grid__cell--12 {
     grid-column: span 12;
   }

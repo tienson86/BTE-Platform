@@ -90,12 +90,16 @@ function FiveElementRadar({
 }
 
 export function RadarChartCard({ model }: { model: RadarChartViewModel }): ReactNode {
+  if (!model.visible || model.axes.length === 0) return null;
+
   return (
     <ResultCardShell
       title={model.title}
       titleId="rp-radar-title"
       hasMore={model.hasMore}
       data-card="radar-chart"
+      data-priority="3"
+      className="rp-card--auto"
     >
       <div className="rp-radar">
         <FiveElementRadar axes={model.axes} />
@@ -115,12 +119,16 @@ export function LuckTimelineCard({
 }: {
   model: LuckTimelineViewModel;
 }): ReactNode {
+  if (!model.visible || model.stages.items.length === 0) return null;
+
   return (
     <ResultCardShell
       title={model.title}
       titleId="rp-timeline-title"
       hasMore={model.hasMore}
       data-card="luck-timeline"
+      data-priority="3"
+      className="rp-card--auto"
     >
       <ol className="rp-timeline">
         {model.stages.items.map((stage, index) => (

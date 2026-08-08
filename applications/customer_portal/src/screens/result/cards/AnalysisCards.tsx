@@ -16,12 +16,16 @@ export function FiveElementsCard({
 }: {
   model: FiveElementsViewModel;
 }): ReactNode {
+  if (!model.visible || model.rows.items.length === 0) return null;
+
   return (
     <ResultCardShell
       title={model.title}
       titleId="rp-five-elements-title"
       hasMore={model.hasMore}
       data-card="five-elements"
+      data-priority="3"
+      className="rp-card--auto"
     >
       <ul className="rp-elements">
         {model.rows.items.map((row) => (
@@ -59,17 +63,17 @@ export function StrengthAnalysisCard({
 }: {
   model: StrengthAnalysisViewModel;
 }): ReactNode {
+  if (!model.visible) return null;
+
   return (
     <ResultCardShell
       title={model.title}
       titleId="rp-strength-title"
       hasMore={model.hasMore}
       data-card="strength"
-      footer={
-        <button type="button" className="rp-card__cta rp-card__cta--secondary" data-has-more={model.hasMore ? "true" : "false"}>
-          {model.cta}
-        </button>
-      }
+      data-question="main-strength"
+      data-priority="2"
+      className="rp-card--auto"
     >
       <div className="rp-strength__hero">
         <PresentationText typeRole="metric" as="div" className="rp-strength__level">
@@ -108,17 +112,17 @@ export function TenGodsAnalysisCard({
 }: {
   model: TenGodsAnalysisViewModel;
 }): ReactNode {
+  if (!model.visible || model.gods.items.length === 0) return null;
+
   return (
     <ResultCardShell
       title={model.title}
       titleId="rp-ten-gods-title"
       hasMore={model.hasMore}
       data-card="ten-gods"
-      footer={
-        <button type="button" className="rp-card__cta rp-card__cta--secondary" data-has-more={model.hasMore ? "true" : "false"}>
-          {model.cta}
-        </button>
-      }
+      data-priority="3"
+      className="rp-card--auto"
+      footer={null}
     >
       <ul className="rp-ten-gods">
         {model.gods.items.map((god) => (

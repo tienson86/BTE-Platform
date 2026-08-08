@@ -4,6 +4,8 @@
 
 import { memo, useId, useState, type ReactNode } from "react";
 import { PresentationText } from "../../../components/shared/PresentationText";
+import { UNAVAILABLE_CONCLUSION } from "../../../adapters/contentGuards";
+import { scrollToResultZone } from "../presentation/scrollToZone";
 import type {
   InterpretationBlockViewModel,
   InterpretationZoneViewModel,
@@ -34,6 +36,12 @@ function RecommendationItem({
 }): ReactNode {
   const [expanded, setExpanded] = useState(false);
   const detailId = useId();
+  const showBenefit =
+    Boolean(item.benefit.text.trim()) &&
+    item.benefit.text !== UNAVAILABLE_CONCLUSION;
+  const showReason =
+    Boolean(item.reason.text.trim()) &&
+    item.reason.text !== UNAVAILABLE_CONCLUSION;
 
   return (
     <article
@@ -52,24 +60,28 @@ function RecommendationItem({
           />
         </div>
       </div>
-      <div className="rp-rec-item__group" data-group="reason">
-        <span className="rp-rec-item__label">Lý do</span>
-        <PresentationText
-          typeRole="summary"
-          preview={item.reason}
-          className="rp-rec-item__reason"
-          as="p"
-        />
-      </div>
-      <div className="rp-rec-item__group" data-group="benefit">
-        <span className="rp-rec-item__label">Lợi ích</span>
-        <PresentationText
-          typeRole="summary"
-          preview={item.benefit}
-          className="rp-rec-item__benefit"
-          as="p"
-        />
-      </div>
+      {showReason ? (
+        <div className="rp-rec-item__group" data-group="reason">
+          <span className="rp-rec-item__label">Vì sao</span>
+          <PresentationText
+            typeRole="summary"
+            preview={item.reason}
+            className="rp-rec-item__reason"
+            as="p"
+          />
+        </div>
+      ) : null}
+      {showBenefit ? (
+        <div className="rp-rec-item__group" data-group="benefit">
+          <span className="rp-rec-item__label">Kết quả kỳ vọng</span>
+          <PresentationText
+            typeRole="summary"
+            preview={item.benefit}
+            className="rp-rec-item__benefit"
+            as="p"
+          />
+        </div>
+      ) : null}
       {expanded ? (
         <div id={detailId} className="rp-rec-item__group" data-group="detail">
           <PresentationText
@@ -97,18 +109,22 @@ function RecommendationItem({
 }
 
 /**
- * LP-005 Recommendation card — priority list, max 5 primary.
+ * LP-005 Recommendation card — primary consulting actions.
  */
 export const RecommendationCard = memo(function RecommendationCard({
   model,
 }: {
   model: RecommendationZoneViewModel;
 }): ReactNode {
+  if (!model.visible || model.items.length === 0) return null;
+
   return (
     <article
-      className="rp-card rp-card--recommendation"
+      className="rp-card rp-card--recommendation rp-card--auto"
       data-card="recommendation"
       data-pattern="LP-005"
+      data-question="what-should-i-do"
+      data-priority="1"
       aria-labelledby="rp-recommendation-title"
     >
       <PresentationText
@@ -127,17 +143,22 @@ export const RecommendationCard = memo(function RecommendationCard({
           </div>
         ))}
       </div>
-      {model.hasMore ? (
-        <div className="rp-card__footer">
-          <button
-            type="button"
-            className="rp-card__cta rp-card__cta--text"
-            aria-label={model.viewAllLabel}
-          >
-            {model.viewAllLabel}
-          </button>
-        </div>
-      ) : null}
+      <div className="rp-card__footer rp-cta-row">
+        <button
+          type="button"
+          className="rp-card__cta rp-card__cta--primary"
+          onClick={() => scrollToResultZone("interpretation")}
+        >
+          {model.primaryCtaLabel}
+        </button>
+        <button
+          type="button"
+          className="rp-card__cta rp-card__cta--secondary"
+          onClick={() => scrollToResultZone("analysis")}
+        >
+          {model.secondaryCtaLabel}
+        </button>
+      </div>
     </article>
   );
 });
@@ -228,11 +249,15 @@ export const InterpretationCard = memo(function InterpretationCard({
 }: {
   model: InterpretationZoneViewModel;
 }): ReactNode {
+  if (!model.visible || model.blocks.length === 0) return null;
+
   return (
     <article
       className="rp-card rp-card--auto rp-card--interpretation"
       data-card="interpretation"
       data-pattern="LP-006"
+      data-question="why-evidence"
+      data-priority="2"
       aria-labelledby="rp-interpretation-title"
     >
       <PresentationText
@@ -325,11 +350,14 @@ export const KnowledgeCard = memo(function KnowledgeCard({
 }: {
   model: KnowledgeZoneViewModel;
 }): ReactNode {
+  if (!model.visible || model.sections.length === 0) return null;
+
   return (
     <article
       className="rp-card rp-card--auto rp-card--knowledge"
       data-card="knowledge"
       data-pattern="LP-007"
+      data-priority="3"
       aria-labelledby="rp-knowledge-title"
     >
       <PresentationText

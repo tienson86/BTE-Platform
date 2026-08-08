@@ -68,7 +68,7 @@ export function ResultGrid({ className, children, ...rest }: ResultGridProps): R
 }
 
 export type ResultGridCellProps = HTMLAttributes<HTMLDivElement> & {
-  span: 2 | 3 | 4 | 6 | 12;
+  span: 2 | 3 | 4 | 6 | 8 | 12;
   children?: ReactNode;
 };
 

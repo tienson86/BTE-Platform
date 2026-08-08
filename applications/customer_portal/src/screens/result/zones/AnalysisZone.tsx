@@ -1,6 +1,5 @@
 /**
- * AnalysisZone — Row 03 / LP-003 (Gallery Pattern 03 Triple Analysis).
- * Three equal cards · Height XL · Equal width · No dynamic height.
+ * AnalysisZone — Strength first (P2), then supporting technical cards (P3).
  */
 
 import type { ReactNode } from "react";
@@ -13,30 +12,46 @@ import { ResultGrid, ResultGridCell, ResultRow } from "../layout";
 import { useResultPageViewModel } from "../ResultPageContext";
 
 /**
- * Core analysis evidence — 4+4+4 equal height.
+ * Understanding beat — strength before technical apparatus.
  */
 export function AnalysisZone(): ReactNode {
   const model = useResultPageViewModel();
+  const cards: ReactNode[] = [];
+
+  if (model.strength.visible) {
+    cards.push(
+      <ResultGridCell key="strength" span={4}>
+        <StrengthAnalysisCard model={model.strength} />
+      </ResultGridCell>,
+    );
+  }
+  if (model.fiveElements.visible) {
+    cards.push(
+      <ResultGridCell key="five-elements" span={4}>
+        <FiveElementsCard model={model.fiveElements} />
+      </ResultGridCell>,
+    );
+  }
+  if (model.tenGods.visible) {
+    cards.push(
+      <ResultGridCell key="ten-gods" span={4}>
+        <TenGodsAnalysisCard model={model.tenGods} />
+      </ResultGridCell>,
+    );
+  }
+
+  if (cards.length === 0) return null;
 
   return (
     <ResultRow
       rowId="03"
       zone="analysis"
-      heightClass="XL"
+      heightClass="AUTO"
       pattern="LP-003"
       aria-label="Analysis Zone"
+      data-priority="2"
     >
-      <ResultGrid>
-        <ResultGridCell span={4}>
-          <FiveElementsCard model={model.fiveElements} />
-        </ResultGridCell>
-        <ResultGridCell span={4}>
-          <StrengthAnalysisCard model={model.strength} />
-        </ResultGridCell>
-        <ResultGridCell span={4}>
-          <TenGodsAnalysisCard model={model.tenGods} />
-        </ResultGridCell>
-      </ResultGrid>
+      <ResultGrid>{cards}</ResultGrid>
     </ResultRow>
   );
 }
