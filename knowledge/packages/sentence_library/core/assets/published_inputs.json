@@ -1,0 +1,148 @@
+{
+  "package_id": "bz_16_sentence_library_core",
+  "package_version": "1.0.0",
+  "inputs": [
+    {
+      "name": "analysis.strength_score",
+      "source": "bz_01_strength_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.season_score",
+      "source": "bz_02_seasonal_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.temperature_score",
+      "source": "bz_03_temperature_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.pattern_score",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "analysis.pattern_quality",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.pattern_confidence",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.pattern_stability",
+      "source": "bz_04_pattern_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.follow_pattern",
+      "source": "bz_10_follow_pattern_core",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.follow_pattern_score",
+      "source": "bz_10_follow_pattern_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.transformation_score",
+      "source": "bz_11_transformation_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.interaction_score",
+      "source": "bz_12_combination_clash_core",
+      "type": "number"
+    },
+    {
+      "name": "analysis.interaction_confidence",
+      "source": "bz_12_combination_clash_core",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.ten_gods_profile",
+      "source": "bz_13_ten_gods_advanced",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.ten_gods_balance",
+      "source": "bz_13_ten_gods_advanced",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.growth_profile",
+      "source": "bz_14_twelve_growth_advanced",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.growth_score",
+      "source": "bz_14_twelve_growth_advanced",
+      "type": "number"
+    },
+    {
+      "name": "analysis.hidden_stems_profile",
+      "source": "bz_15_hidden_stems_advanced",
+      "type": "enum"
+    },
+    {
+      "name": "analysis.hidden_stems_score",
+      "source": "bz_15_hidden_stems_advanced",
+      "type": "number"
+    },
+    {
+      "name": "decision.resolved_useful_god",
+      "source": "bz_07_useful_god_priority",
+      "type": "string"
+    },
+    {
+      "name": "decision.decision_priority",
+      "source": "bz_07_useful_god_priority",
+      "type": "enum"
+    },
+    {
+      "name": "decision.resolution_confidence",
+      "source": "bz_07_useful_god_priority",
+      "type": "enum"
+    },
+    {
+      "name": "luck.major_cycles",
+      "source": "bz_09_luck_foundation",
+      "type": "list"
+    },
+    {
+      "name": "luck.annual_cycles",
+      "source": "bz_09_luck_foundation",
+      "type": "list"
+    },
+    {
+      "name": "luck.timeline_metadata",
+      "source": "bz_09_luck_foundation",
+      "type": "object"
+    },
+    {
+      "name": "interpretation.section",
+      "source": "interpretation_context",
+      "type": "string"
+    },
+    {
+      "name": "interpretation.confidence",
+      "source": "interpretation_context",
+      "type": "enum"
+    },
+    {
+      "name": "interpretation.audience",
+      "source": "interpretation_context",
+      "type": "enum"
+    }
+  ],
+  "forbidden": [
+    "raw chart fields",
+    "arbitrary placeholders",
+    "html",
+    "markdown",
+    "interpretation generation"
+  ]
+}
