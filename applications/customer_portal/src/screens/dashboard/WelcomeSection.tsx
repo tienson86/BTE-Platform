@@ -13,8 +13,8 @@ export function WelcomeSection({ userName }: WelcomeSectionProps): ReactNode {
     <Card className="cui-dashboard-welcome">
       <BaseText variant="section">{greeting}</BaseText>
       <BaseText variant="body" tone="secondary">
-        BTE Portal giúp bạn lập lá số, xem kết quả Bát Tự và theo dõi báo cáo —
-        tất cả trong một không gian làm việc thống nhất.
+        Không gian tư vấn giúp bạn lập lá số, đọc định hướng và theo dõi hồ sơ —
+        bình tĩnh, rõ ràng, không phải bảng điều khiển.
       </BaseText>
     </Card>
   );

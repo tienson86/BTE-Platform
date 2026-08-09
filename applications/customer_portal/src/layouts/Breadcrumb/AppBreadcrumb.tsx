@@ -18,7 +18,7 @@ export function AppBreadcrumb({ items, className }: AppBreadcrumbProps): ReactNo
     return null;
   }
   return (
-    <nav className={cx("cui-app-breadcrumb", className)} aria-label="Breadcrumb">
+    <nav className={cx("cui-app-breadcrumb", className)} aria-label="Đường dẫn">
       <ol className="cui-app-breadcrumb__list">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;

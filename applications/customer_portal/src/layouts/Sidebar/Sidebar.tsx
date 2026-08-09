@@ -66,7 +66,7 @@ export function Sidebar({
               className="cui-app-sidebar__theme"
               onClick={toggleMode}
             >
-              Theme: {mode === "dark" ? "Dark" : "Light"}
+              {mode === "dark" ? "Giao diện tối" : "Giao diện sáng"}
             </button>
             <p className="cui-app-sidebar__version">BTE Platform v1.0.0</p>
           </div>

@@ -11,7 +11,6 @@ import {
   QuickActionsSection,
   RecentAnalysesSection,
   ShortcutsSection,
-  StatisticsSection,
   WelcomeSection,
 } from "./dashboard";
 import {
@@ -61,8 +60,8 @@ export function DashboardScreen({
         tocActiveId="welcome"
       >
         <PageWrapper
-          title="Dashboard"
-          description="Tổng quan hoạt động và lối vào chức năng chính."
+          title="Hôm nay bạn nên làm gì?"
+          description="Tiếp tục tư vấn đang dở hoặc bắt đầu một phân tích mới."
           className="cui-dashboard-page"
         >
           {loading ? (
@@ -83,14 +82,6 @@ export function DashboardScreen({
                 aria-label="Thao tác nhanh"
               >
                 <QuickActionsSection actions={viewModel.quickActions} />
-              </section>
-
-              <section
-                id="chi-so"
-                className="cui-dashboard__tier cui-dashboard__tier--metrics"
-                aria-label="Chỉ số"
-              >
-                <StatisticsSection stats={viewModel.stats} />
               </section>
 
               <section
