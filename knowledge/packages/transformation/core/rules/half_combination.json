@@ -1,0 +1,2928 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "half_combination",
+  "count": 20,
+  "objects": [
+    {
+      "id": "TRC-000116",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "shen_zi",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_shen_zi",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_shen_zi",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_shen_zi_00",
+      "name": "Bán hợp: shen_zi",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_shen_zi",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_shen_zi",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000117",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "hai_mao",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_hai_mao",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_hai_mao",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_hai_mao_01",
+      "name": "Bán hợp: hai_mao",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_hai_mao",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_hai_mao",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000118",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "yin_wu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_yin_wu",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_yin_wu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_yin_wu_02",
+      "name": "Bán hợp: yin_wu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_yin_wu",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_yin_wu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000119",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "si_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_si_you",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_si_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_si_you_03",
+      "name": "Bán hợp: si_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_si_you",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_si_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000120",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "shen_zi",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_shen_zi",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_shen_zi",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_shen_zi_04",
+      "name": "Bán hợp: shen_zi",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_shen_zi",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_shen_zi",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000121",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "hai_mao",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_hai_mao",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_hai_mao",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_hai_mao_05",
+      "name": "Bán hợp: hai_mao",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_hai_mao",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_hai_mao",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000122",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "yin_wu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_yin_wu",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_yin_wu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_yin_wu_06",
+      "name": "Bán hợp: yin_wu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_yin_wu",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_yin_wu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000123",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "si_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_si_you",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_si_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_si_you_07",
+      "name": "Bán hợp: si_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_si_you",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_si_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000124",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "shen_zi",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_shen_zi",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_shen_zi",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_shen_zi_08",
+      "name": "Bán hợp: shen_zi",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_shen_zi",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_shen_zi",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000125",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "hai_mao",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_hai_mao",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_hai_mao",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_hai_mao_09",
+      "name": "Bán hợp: hai_mao",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_hai_mao",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_hai_mao",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000126",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "yin_wu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_yin_wu",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_yin_wu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_yin_wu_10",
+      "name": "Bán hợp: yin_wu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_yin_wu",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_yin_wu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000127",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "si_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_si_you",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_si_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_si_you_11",
+      "name": "Bán hợp: si_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_si_you",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_si_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000128",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "shen_zi",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_shen_zi",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_shen_zi",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_shen_zi_12",
+      "name": "Bán hợp: shen_zi",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_shen_zi",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_shen_zi",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000129",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "hai_mao",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_hai_mao",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_hai_mao",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_hai_mao_13",
+      "name": "Bán hợp: hai_mao",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_hai_mao",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_hai_mao",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000130",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "yin_wu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_yin_wu",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_yin_wu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_yin_wu_14",
+      "name": "Bán hợp: yin_wu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_yin_wu",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_yin_wu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000131",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "si_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_si_you",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_si_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_si_you_15",
+      "name": "Bán hợp: si_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_si_you",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_si_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000132",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "shen_zi",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_shen_zi",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_shen_zi",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_shen_zi_16",
+      "name": "Bán hợp: shen_zi",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_shen_zi",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_shen_zi",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000133",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "hai_mao",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_hai_mao",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_hai_mao",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_hai_mao_17",
+      "name": "Bán hợp: hai_mao",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_hai_mao",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_hai_mao",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000134",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "yin_wu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_yin_wu",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_yin_wu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_yin_wu_18",
+      "name": "Bán hợp: yin_wu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_yin_wu",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_yin_wu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000135",
+      "version": "1.0.0",
+      "category": "half_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "half_combination",
+        "si_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_si_you",
+        "weight": 6,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_si_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+      "references": [
+        {
+          "target": "REF-TRC-half_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "half_si_you_19",
+      "name": "Bán hợp: si_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_si_you",
+          "weight": 6,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_si_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Bán hợp: tín hiệu mùa trung bình. Không hoàn tất hóa. Không sửa PAT/FPC.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "half_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

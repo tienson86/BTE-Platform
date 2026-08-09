@@ -1,0 +1,2468 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "temperature_exceptions",
+  "count": 20,
+  "objects": [
+    {
+      "id": "FPC-000116",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_00",
+      "name": "Ngoại lệ điều hậu #1",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000117",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 76
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_01",
+      "name": "Ngoại lệ điều hậu #2",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 76
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000118",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 77
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_02",
+      "name": "Ngoại lệ điều hậu #3",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 77
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000119",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 78
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_03",
+      "name": "Ngoại lệ điều hậu #4",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 78
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000120",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 79
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_04",
+      "name": "Ngoại lệ điều hậu #5",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 79
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000121",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 80
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_05",
+      "name": "Ngoại lệ điều hậu #6",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 80
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000122",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 81
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_06",
+      "name": "Ngoại lệ điều hậu #7",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 81
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000123",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 82
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_07",
+      "name": "Ngoại lệ điều hậu #8",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 82
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000124",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 83
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_08",
+      "name": "Ngoại lệ điều hậu #9",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 83
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000125",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 84
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_extreme_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_09",
+      "name": "Ngoại lệ điều hậu #10",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 84
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_extreme_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000126",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 20
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_10",
+      "name": "Ngoại lệ điều hậu #11",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 20
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000127",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 19
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_11",
+      "name": "Ngoại lệ điều hậu #12",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 19
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000128",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 18
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_12",
+      "name": "Ngoại lệ điều hậu #13",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 18
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000129",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 17
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_13",
+      "name": "Ngoại lệ điều hậu #14",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 17
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000130",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 16
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_14",
+      "name": "Ngoại lệ điều hậu #15",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 16
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000131",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 15
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_15",
+      "name": "Ngoại lệ điều hậu #16",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 15
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000132",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 14
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_16",
+      "name": "Ngoại lệ điều hậu #17",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 14
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000133",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 13
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_17",
+      "name": "Ngoại lệ điều hậu #18",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 13
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000134",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 12
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_18",
+      "name": "Ngoại lệ điều hậu #19",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 12
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000135",
+      "version": "1.0.0",
+      "category": "temperature_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "temperature_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 11
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=temperature",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "climate_cold_follow_risk",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+      "references": [
+        {
+          "target": "REF-FPC-temperature_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "temp_exception_19",
+      "name": "Ngoại lệ điều hậu #20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 11
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=temperature",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "climate_cold_follow_risk",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ điều hậu chỉ đọc temperature_score. Không tính lại TEC. Không đọc khí hậu thô.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

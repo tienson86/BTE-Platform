@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-FPC-CONTRA-001",
+      "source": "RN-FPC-CONTRA-OBS-001",
+      "target": "RN-FPC-CONTRA-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-CONTRA-002",
+      "source": "RN-FPC-CONTRA-EVD-001",
+      "target": "RN-FPC-CONTRA-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-CONTRA-003",
+      "source": "RN-FPC-CONTRA-INF-001",
+      "target": "RN-FPC-CONTRA-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-CONTRA-004",
+      "source": "RN-FPC-CONTRA-MID-001",
+      "target": "RN-FPC-CONTRA-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-CONTRA-005",
+      "source": "RN-FPC-CONTRA-OBS-001",
+      "target": "RN-FPC-CONTRA-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-FPC-CONTRA-006",
+      "source": "RN-FPC-CONTRA-CON-001",
+      "target": "RN-FPC-CONTRA-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

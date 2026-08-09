@@ -1,0 +1,94 @@
+{
+  "chain_id": "RC-TRC-MIXED-001",
+  "title": "Hợp lẫn",
+  "package_id": "bz_11_transformation_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-TRC-MIXED-001",
+  "transformation_theme": "mixed",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-TRC-MIXED-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-TRC-MIXED-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-TRC-MIXED-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-TRC-MIXED-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-TRC-MIXED-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "TRC-000031",
+    "TRC-000032",
+    "TRC-000086",
+    "TRC-000087",
+    "TRC-000001",
+    "TRC-000002"
+  ],
+  "upstream_follow_pattern_rules": [
+    "FPC-000001",
+    "FPC-000156",
+    "FPC-000181"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "upstream_pattern_evaluation_rules": [
+    "PEV-000001",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation",
+    "follow_pattern",
+    "useful_god_priority",
+    "transformation"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/TRC-000031.json",
+    "evidence/bundles/TRC-000032.json",
+    "evidence/bundles/TRC-000086.json",
+    "evidence/bundles/TRC-000087.json",
+    "evidence/bundles/TRC-000001.json",
+    "evidence/bundles/TRC-000002.json"
+  ],
+  "node_ids": [
+    "RN-TRC-MIXED-OBS-001",
+    "RN-TRC-MIXED-EVD-001",
+    "RN-TRC-MIXED-INF-001",
+    "RN-TRC-MIXED-MID-001",
+    "RN-TRC-MIXED-FIN-001",
+    "RN-TRC-MIXED-ALT-001",
+    "RN-TRC-MIXED-CON-001"
+  ]
+}

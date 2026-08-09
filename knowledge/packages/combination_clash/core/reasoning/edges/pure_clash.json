@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-CBC-PURE-CLASH-001",
+      "source": "RN-CBC-PURE-CLASH-OBS-001",
+      "target": "RN-CBC-PURE-CLASH-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-CLASH-002",
+      "source": "RN-CBC-PURE-CLASH-EVD-001",
+      "target": "RN-CBC-PURE-CLASH-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-CLASH-003",
+      "source": "RN-CBC-PURE-CLASH-INF-001",
+      "target": "RN-CBC-PURE-CLASH-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-CLASH-004",
+      "source": "RN-CBC-PURE-CLASH-MID-001",
+      "target": "RN-CBC-PURE-CLASH-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-CLASH-005",
+      "source": "RN-CBC-PURE-CLASH-OBS-001",
+      "target": "RN-CBC-PURE-CLASH-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-CBC-PURE-CLASH-006",
+      "source": "RN-CBC-PURE-CLASH-CON-001",
+      "target": "RN-CBC-PURE-CLASH-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

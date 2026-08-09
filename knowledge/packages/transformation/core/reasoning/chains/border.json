@@ -1,0 +1,94 @@
+{
+  "chain_id": "RC-TRC-BORDER-001",
+  "title": "Biên hóa",
+  "package_id": "bz_11_transformation_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-TRC-BORDER-001",
+  "transformation_theme": "borderline",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-TRC-BORDER-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-TRC-BORDER-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-TRC-BORDER-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-TRC-BORDER-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-TRC-BORDER-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "TRC-000136",
+    "TRC-000137",
+    "TRC-000138",
+    "TRC-000116",
+    "TRC-000117",
+    "TRC-000118"
+  ],
+  "upstream_follow_pattern_rules": [
+    "FPC-000001",
+    "FPC-000156",
+    "FPC-000181"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "upstream_pattern_evaluation_rules": [
+    "PEV-000001",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation",
+    "follow_pattern",
+    "useful_god_priority",
+    "transformation"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/TRC-000136.json",
+    "evidence/bundles/TRC-000137.json",
+    "evidence/bundles/TRC-000138.json",
+    "evidence/bundles/TRC-000116.json",
+    "evidence/bundles/TRC-000117.json",
+    "evidence/bundles/TRC-000118.json"
+  ],
+  "node_ids": [
+    "RN-TRC-BORDER-OBS-001",
+    "RN-TRC-BORDER-EVD-001",
+    "RN-TRC-BORDER-INF-001",
+    "RN-TRC-BORDER-MID-001",
+    "RN-TRC-BORDER-FIN-001",
+    "RN-TRC-BORDER-ALT-001",
+    "RN-TRC-BORDER-CON-001"
+  ]
+}

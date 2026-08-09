@@ -1,0 +1,3218 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_12_combination_clash_core",
+  "category": "punishment",
+  "count": 30,
+  "objects": [
+    {
+      "id": "CBC-000171",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "ungrateful",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_ungrateful_00",
+      "name": "Hình: ungrateful",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000172",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "bullying",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_bullying_01",
+      "name": "Hình: bullying",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000173",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "unpunished",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_unpunished_02",
+      "name": "Hình: unpunished",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000174",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "self_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_self_punishment_03",
+      "name": "Hình: self_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000175",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "mixed_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_mixed_punishment_04",
+      "name": "Hình: mixed_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000176",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "ungrateful",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_ungrateful_05",
+      "name": "Hình: ungrateful",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000177",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "bullying",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_bullying_06",
+      "name": "Hình: bullying",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000178",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "unpunished",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_unpunished_07",
+      "name": "Hình: unpunished",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000179",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "self_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_self_punishment_08",
+      "name": "Hình: self_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000180",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "mixed_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_mixed_punishment_09",
+      "name": "Hình: mixed_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000181",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "ungrateful",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_ungrateful_10",
+      "name": "Hình: ungrateful",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000182",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "bullying",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_bullying_11",
+      "name": "Hình: bullying",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000183",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "unpunished",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_unpunished_12",
+      "name": "Hình: unpunished",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000184",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "self_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_self_punishment_13",
+      "name": "Hình: self_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000185",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "mixed_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_mixed_punishment_14",
+      "name": "Hình: mixed_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000186",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "ungrateful",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_ungrateful_15",
+      "name": "Hình: ungrateful",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000187",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "bullying",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_bullying_16",
+      "name": "Hình: bullying",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000188",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "unpunished",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_unpunished_17",
+      "name": "Hình: unpunished",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000189",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "self_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_self_punishment_18",
+      "name": "Hình: self_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000190",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "mixed_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_mixed_punishment_19",
+      "name": "Hình: mixed_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000191",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "ungrateful",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_ungrateful_20",
+      "name": "Hình: ungrateful",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000192",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "bullying",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_bullying_21",
+      "name": "Hình: bullying",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000193",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "unpunished",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_unpunished_22",
+      "name": "Hình: unpunished",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000194",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "self_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_self_punishment_23",
+      "name": "Hình: self_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000195",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "mixed_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_mixed_punishment_24",
+      "name": "Hình: mixed_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000196",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "ungrateful",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_ungrateful_25",
+      "name": "Hình: ungrateful",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000197",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "bullying",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_bullying_26",
+      "name": "Hình: bullying",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000198",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "unpunished",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=partial",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "partial",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_unpunished_27",
+      "name": "Hình: unpunished",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=partial",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "partial",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000199",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "self_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_self_punishment_28",
+      "name": "Hình: self_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    },
+    {
+      "id": "CBC-000200",
+      "version": "1.0.0",
+      "category": "punishment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "punishment",
+        "mixed_punishment",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "clash_detected=true",
+        "weight": 8,
+        "signal": "clash_detected",
+        "score_target": "day_master.interaction_score",
+        "outcome": "true",
+        "publishes": "clash_detected"
+      },
+      "explanation": "Hình là quan hệ. Không suy kết quả hóa từ hình.",
+      "references": [
+        {
+          "target": "REF-CBC-punishment",
+          "relation": "references"
+        }
+      ],
+      "code": "punish_mixed_punishment_29",
+      "name": "Hình: mixed_punishment",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "clash_detected=true",
+          "weight": 8,
+          "signal": "clash_detected",
+          "score_target": "day_master.interaction_score",
+          "outcome": "true",
+          "publishes": "clash_detected"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,3708 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "true_follow",
+  "count": 25,
+  "objects": [
+    {
+      "id": "FPC-000156",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "wealth_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 8
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_wealth_follow_00",
+      "name": "Tòng chân: wealth_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 8
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000157",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "officer_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 9
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_officer_follow_01",
+      "name": "Tòng chân: officer_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 9
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000158",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "output_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 10
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_output_follow_02",
+      "name": "Tòng chân: output_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 10
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000159",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "mixed_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 11
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_mixed_follow_03",
+      "name": "Tòng chân: mixed_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 11
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000160",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "true_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 12
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_true_follow_04",
+      "name": "Tòng chân: true_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 12
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000161",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "wealth_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 13
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_wealth_follow_05",
+      "name": "Tòng chân: wealth_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 13
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000162",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "officer_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 14
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_officer_follow_06",
+      "name": "Tòng chân: officer_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 14
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000163",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "output_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 15
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_output_follow_07",
+      "name": "Tòng chân: output_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 15
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000164",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "mixed_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 8
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 68
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_mixed_follow_08",
+      "name": "Tòng chân: mixed_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 8
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 68
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000165",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "true_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 9
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 69
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_true_follow_09",
+      "name": "Tòng chân: true_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 9
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 69
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000166",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "wealth_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 10
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_wealth_follow_10",
+      "name": "Tòng chân: wealth_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 10
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000167",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "officer_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 11
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_officer_follow_11",
+      "name": "Tòng chân: officer_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 11
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000168",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "output_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 12
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_output_follow_12",
+      "name": "Tòng chân: output_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 12
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000169",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "mixed_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 13
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_mixed_follow_13",
+      "name": "Tòng chân: mixed_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 13
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000170",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "true_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 14
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_true_follow_14",
+      "name": "Tòng chân: true_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 14
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000171",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "wealth_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 15
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_wealth_follow_15",
+      "name": "Tòng chân: wealth_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 15
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000172",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "officer_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 8
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_officer_follow_16",
+      "name": "Tòng chân: officer_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 8
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000173",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "output_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 9
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_output_follow_17",
+      "name": "Tòng chân: output_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 9
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000174",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "mixed_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 10
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 68
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_mixed_follow_18",
+      "name": "Tòng chân: mixed_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 10
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 68
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000175",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "true_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 11
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 69
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_true_follow_19",
+      "name": "Tòng chân: true_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 11
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 69
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000176",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "wealth_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 12
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_wealth_follow_20",
+      "name": "Tòng chân: wealth_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 12
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (wealth_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000177",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "officer_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 13
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_officer_follow_21",
+      "name": "Tòng chân: officer_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 13
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (officer_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000178",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "output_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 14
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_output_follow_22",
+      "name": "Tòng chân: output_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 14
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (output_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000179",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "mixed_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 15
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_mixed_follow_23",
+      "name": "Tòng chân: mixed_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 15
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (mixed_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000180",
+      "version": "1.0.0",
+      "category": "true_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "true_follow",
+        "true_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 8
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 12,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+      "references": [
+        {
+          "target": "REF-FPC-true_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "true_true_follow_24",
+      "name": "Tòng chân: true_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 8
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 12,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng chân (true_follow) khi sức thân cực nhược và cách đã vỡ trên output công bố. Kiểu Tòng suy từ dải điểm đã công bố, không từ thiên can thô.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "true_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

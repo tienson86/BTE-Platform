@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TRC-BORDER-001",
+      "source": "RN-TRC-BORDER-OBS-001",
+      "target": "RN-TRC-BORDER-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-BORDER-002",
+      "source": "RN-TRC-BORDER-EVD-001",
+      "target": "RN-TRC-BORDER-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-BORDER-003",
+      "source": "RN-TRC-BORDER-INF-001",
+      "target": "RN-TRC-BORDER-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-BORDER-004",
+      "source": "RN-TRC-BORDER-MID-001",
+      "target": "RN-TRC-BORDER-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-BORDER-005",
+      "source": "RN-TRC-BORDER-OBS-001",
+      "target": "RN-TRC-BORDER-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TRC-BORDER-006",
+      "source": "RN-TRC-BORDER-CON-001",
+      "target": "RN-TRC-BORDER-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

@@ -1,0 +1,3083 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "scoring",
+  "count": 25,
+  "objects": [
+    {
+      "id": "FPC-000201",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=20",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "20",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_20",
+      "name": "Điểm Tòng 20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=20",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "20",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000202",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 49
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=23",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "23",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_23",
+      "name": "Điểm Tòng 23",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 49
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=23",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "23",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000203",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 38
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 48
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=26",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "26",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_26",
+      "name": "Điểm Tòng 26",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 38
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 48
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=26",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "26",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000204",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 37
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 47
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=29",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "29",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_29",
+      "name": "Điểm Tòng 29",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 37
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 47
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=29",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "29",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000205",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 46
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=32",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "32",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_32",
+      "name": "Điểm Tòng 32",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 46
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=32",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "32",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000206",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=35",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "35",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_35",
+      "name": "Điểm Tòng 35",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=35",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "35",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000207",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 34
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=38",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "38",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_38",
+      "name": "Điểm Tòng 38",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 34
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=38",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "38",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000208",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 43
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=41",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "41",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_41",
+      "name": "Điểm Tòng 41",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 43
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=41",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "41",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000209",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 32
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 42
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=44",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "44",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_44",
+      "name": "Điểm Tòng 44",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 32
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 42
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=44",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "44",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000210",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 31
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 41
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=47",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "47",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_47",
+      "name": "Điểm Tòng 47",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 31
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 41
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=47",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "47",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000211",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=50",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "50",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_50",
+      "name": "Điểm Tòng 50",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=50",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "50",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000212",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 29
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 39
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=53",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "53",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_53",
+      "name": "Điểm Tòng 53",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 29
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 39
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=53",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "53",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000213",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 38
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=56",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "56",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_56",
+      "name": "Điểm Tòng 56",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 38
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=56",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "56",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000214",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 27
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 37
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=59",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "59",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_59",
+      "name": "Điểm Tòng 59",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 27
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 37
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=59",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "59",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000215",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 26
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=62",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "62",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_62",
+      "name": "Điểm Tòng 62",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 26
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=62",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "62",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000216",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=65",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "65",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_65",
+      "name": "Điểm Tòng 65",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=65",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "65",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000217",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 24
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 34
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=68",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "68",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_68",
+      "name": "Điểm Tòng 68",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 24
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 34
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=68",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "68",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000218",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 23
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 33
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=71",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "71",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_71",
+      "name": "Điểm Tòng 71",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 23
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 33
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=71",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "71",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000219",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 22
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=74",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "74",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_74",
+      "name": "Điểm Tòng 74",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 22
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=74",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "74",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000220",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 21
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 31
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=77",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "77",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_77",
+      "name": "Điểm Tòng 77",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 21
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 31
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=77",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "77",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000221",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=80",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "80",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_80",
+      "name": "Điểm Tòng 80",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=80",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "80",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000222",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 19
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 29
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=83",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "83",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_83",
+      "name": "Điểm Tòng 83",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 19
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 29
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=83",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "83",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000223",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 18
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=86",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "86",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_86",
+      "name": "Điểm Tòng 86",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 18
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=86",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "86",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000224",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 17
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 27
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=89",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "89",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_89",
+      "name": "Điểm Tòng 89",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 17
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 27
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=89",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "89",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000225",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "scoring",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 16
+        },
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 26
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_score=92",
+        "weight": 9,
+        "signal": "follow_pattern_score",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "92",
+        "publishes": "follow_pattern_score"
+      },
+      "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+      "references": [
+        {
+          "target": "REF-FPC-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_band_92",
+      "name": "Điểm Tòng 92",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 16
+          },
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 26
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_score=92",
+          "weight": 9,
+          "signal": "follow_pattern_score",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "92",
+          "publishes": "follow_pattern_score"
+        },
+        "explanation": "Composite follow_pattern_score từ điểm đã công bố. Không ghi đè pattern_score hay strength_score.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "scoring"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

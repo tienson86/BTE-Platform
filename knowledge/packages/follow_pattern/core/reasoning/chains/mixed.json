@@ -1,0 +1,88 @@
+{
+  "chain_id": "RC-FPC-MIXED-001",
+  "title": "Tín hiệu lẫn",
+  "package_id": "bz_10_follow_pattern_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-FPC-MIXED-001",
+  "follow_theme": "pattern_compatibility",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-FPC-MIXED-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-FPC-MIXED-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-FPC-MIXED-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-FPC-MIXED-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-FPC-MIXED-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "FPC-000136",
+    "FPC-000137",
+    "FPC-000138",
+    "FPC-000096",
+    "FPC-000097",
+    "FPC-000116"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "upstream_pattern_evaluation_rules": [
+    "PEV-000001",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation",
+    "useful_god_priority",
+    "follow_pattern"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/FPC-000136.json",
+    "evidence/bundles/FPC-000137.json",
+    "evidence/bundles/FPC-000138.json",
+    "evidence/bundles/FPC-000096.json",
+    "evidence/bundles/FPC-000097.json",
+    "evidence/bundles/FPC-000116.json"
+  ],
+  "node_ids": [
+    "RN-FPC-MIXED-OBS-001",
+    "RN-FPC-MIXED-EVD-001",
+    "RN-FPC-MIXED-INF-001",
+    "RN-FPC-MIXED-MID-001",
+    "RN-FPC-MIXED-FIN-001",
+    "RN-FPC-MIXED-ALT-001",
+    "RN-FPC-MIXED-CON-001"
+  ]
+}

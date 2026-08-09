@@ -1,0 +1,559 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "examples": [
+    {
+      "example_id": "EX-TRC-SUCCESS-001",
+      "title": "Hóa thành",
+      "transformation_detected": "true",
+      "published_outputs": {
+        "season_score": 80,
+        "strength_score": 40,
+        "temperature_score": 70,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-SUCCESS-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-TRC-FAILED-001",
+      "title": "Hóa thất bại",
+      "transformation_detected": "false",
+      "published_outputs": {
+        "season_score": 20,
+        "strength_score": 30,
+        "temperature_score": 15,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "true",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-FAILED-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-TRC-PARTIAL-001",
+      "title": "Hóa một phần",
+      "transformation_detected": "partial",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 45,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-PARTIAL-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-TRC-CONFLICT-001",
+      "title": "Xung đột",
+      "transformation_detected": "withheld",
+      "published_outputs": {
+        "season_score": 75,
+        "strength_score": 20,
+        "temperature_score": 25,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "true",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-CONFLICT-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-TRC-BORDER-001",
+      "title": "Biên",
+      "transformation_detected": "partial",
+      "published_outputs": {
+        "season_score": 50,
+        "strength_score": 48,
+        "temperature_score": 48,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "withheld",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-BORDER-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-TRC-LOWCONF-001",
+      "title": "Tin thấp",
+      "transformation_detected": "withheld",
+      "published_outputs": {
+        "season_score": 40,
+        "strength_score": 40,
+        "temperature_score": 40,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "withheld",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-LOWCONF-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-TRC-MIXED-001",
+      "title": "Hợp lẫn",
+      "transformation_detected": "partial",
+      "published_outputs": {
+        "season_score": 68,
+        "strength_score": 42,
+        "temperature_score": 55,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_type": "none",
+        "follow_pattern_confidence": "low",
+        "follow_pattern_score": 10,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "low"
+      },
+      "consumed_package_outputs": {
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "reasoning_path": "RC-TRC-MIXED-001",
+      "upstream_follow_pattern_rules": [
+        "FPC-000001",
+        "FPC-000156",
+        "FPC-000181"
+      ],
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000089"
+      ],
+      "upstream_pattern_evaluation_rules": [
+        "PEV-000001",
+        "PEV-000089",
+        "PEV-000101"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001",
+        "TEC-000057"
+      ]
+    }
+  ]
+}

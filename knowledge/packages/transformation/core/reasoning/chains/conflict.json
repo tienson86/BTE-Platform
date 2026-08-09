@@ -1,0 +1,94 @@
+{
+  "chain_id": "RC-TRC-CONFLICT-001",
+  "title": "Tín hiệu xung đột",
+  "package_id": "bz_11_transformation_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-TRC-CONFLICT-001",
+  "transformation_theme": "conflict",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-TRC-CONFLICT-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-TRC-CONFLICT-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-TRC-CONFLICT-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-TRC-CONFLICT-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-TRC-CONFLICT-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "TRC-000166",
+    "TRC-000167",
+    "TRC-000168",
+    "TRC-000056",
+    "TRC-000057",
+    "TRC-000058"
+  ],
+  "upstream_follow_pattern_rules": [
+    "FPC-000001",
+    "FPC-000156",
+    "FPC-000181"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "upstream_pattern_evaluation_rules": [
+    "PEV-000001",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation",
+    "follow_pattern",
+    "useful_god_priority",
+    "transformation"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/TRC-000166.json",
+    "evidence/bundles/TRC-000167.json",
+    "evidence/bundles/TRC-000168.json",
+    "evidence/bundles/TRC-000056.json",
+    "evidence/bundles/TRC-000057.json",
+    "evidence/bundles/TRC-000058.json"
+  ],
+  "node_ids": [
+    "RN-TRC-CONFLICT-OBS-001",
+    "RN-TRC-CONFLICT-EVD-001",
+    "RN-TRC-CONFLICT-INF-001",
+    "RN-TRC-CONFLICT-MID-001",
+    "RN-TRC-CONFLICT-FIN-001",
+    "RN-TRC-CONFLICT-ALT-001",
+    "RN-TRC-CONFLICT-CON-001"
+  ]
+}

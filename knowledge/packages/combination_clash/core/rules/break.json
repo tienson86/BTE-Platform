@@ -1,0 +1,2148 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_12_combination_clash_core",
+  "category": "break",
+  "count": 20,
+  "objects": [
+    {
+      "id": "CBC-000226",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "zi_you",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=weak",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "weak",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_zi_you_00",
+      "name": "Phá: zi_you",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=weak",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "weak",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000227",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "wu_mao",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=medium",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "medium",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_wu_mao_01",
+      "name": "Phá: wu_mao",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=medium",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "medium",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000228",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "shen_si",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=strong",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "strong",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_shen_si_02",
+      "name": "Phá: shen_si",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=strong",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "strong",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000229",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "xu_wei",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=none",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "none",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_xu_wei_03",
+      "name": "Phá: xu_wei",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=none",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "none",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000230",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "zi_you",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=weak",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "weak",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_zi_you_04",
+      "name": "Phá: zi_you",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=weak",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "weak",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000231",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "wu_mao",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=medium",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "medium",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_wu_mao_05",
+      "name": "Phá: wu_mao",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=medium",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "medium",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000232",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "shen_si",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=strong",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "strong",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_shen_si_06",
+      "name": "Phá: shen_si",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=strong",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "strong",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000233",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "xu_wei",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=none",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "none",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_xu_wei_07",
+      "name": "Phá: xu_wei",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=none",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "none",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000234",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "zi_you",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=weak",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "weak",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_zi_you_08",
+      "name": "Phá: zi_you",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=weak",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "weak",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000235",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "wu_mao",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=medium",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "medium",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_wu_mao_09",
+      "name": "Phá: wu_mao",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=medium",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "medium",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000236",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "shen_si",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=strong",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "strong",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_shen_si_10",
+      "name": "Phá: shen_si",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=strong",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "strong",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000237",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "xu_wei",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=none",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "none",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_xu_wei_11",
+      "name": "Phá: xu_wei",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=none",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "none",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000238",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "zi_you",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=weak",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "weak",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_zi_you_12",
+      "name": "Phá: zi_you",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=weak",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "weak",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000239",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "wu_mao",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=medium",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "medium",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_wu_mao_13",
+      "name": "Phá: wu_mao",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=medium",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "medium",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000240",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "shen_si",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=strong",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "strong",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_shen_si_14",
+      "name": "Phá: shen_si",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=strong",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "strong",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000241",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "xu_wei",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=none",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "none",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_xu_wei_15",
+      "name": "Phá: xu_wei",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=none",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "none",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000242",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "zi_you",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=weak",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "weak",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_zi_you_16",
+      "name": "Phá: zi_you",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=weak",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "weak",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000243",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "wu_mao",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 51
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=medium",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "medium",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_wu_mao_17",
+      "name": "Phá: wu_mao",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 51
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=medium",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "medium",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000244",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "shen_si",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=strong",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "strong",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_shen_si_18",
+      "name": "Phá: shen_si",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=strong",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "strong",
+          "publishes": "interaction_strength"
+        }
+      }
+    },
+    {
+      "id": "CBC-000245",
+      "version": "1.0.0",
+      "category": "break",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "clash",
+        "break",
+        "xu_wei",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "transformation_strength",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "interaction_strength=none",
+        "weight": 7,
+        "signal": "interaction_strength",
+        "score_target": "day_master.interaction_score",
+        "outcome": "none",
+        "publishes": "interaction_strength"
+      },
+      "explanation": "Phá là quan hệ. Không xác định hóa. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-CBC-break",
+          "relation": "references"
+        }
+      ],
+      "code": "break_xu_wei_19",
+      "name": "Phá: xu_wei",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "transformation_strength",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "interaction_strength=none",
+          "weight": 7,
+          "signal": "interaction_strength",
+          "score_target": "day_master.interaction_score",
+          "outcome": "none",
+          "publishes": "interaction_strength"
+        }
+      }
+    }
+  ]
+}

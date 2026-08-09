@@ -1,0 +1,2468 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "strength_exceptions",
+  "count": 20,
+  "objects": [
+    {
+      "id": "FPC-000076",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 16
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 18
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_16_18",
+      "name": "Ngoại lệ sức thân biên 16-18",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 16
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 18
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000077",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 17
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_17_20",
+      "name": "Ngoại lệ sức thân biên 17-20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 17
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000078",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 22
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_18_22",
+      "name": "Ngoại lệ sức thân biên 18-22",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 22
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000079",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 19
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_19_24",
+      "name": "Ngoại lệ sức thân biên 19-24",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 19
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000080",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 26
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_20_26",
+      "name": "Ngoại lệ sức thân biên 20-26",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 26
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000081",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 21
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_21_28",
+      "name": "Ngoại lệ sức thân biên 21-28",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 21
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000082",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_22_30",
+      "name": "Ngoại lệ sức thân biên 22-30",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000083",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 23
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_23_32",
+      "name": "Ngoại lệ sức thân biên 23-32",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 23
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000084",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 34
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_24_34",
+      "name": "Ngoại lệ sức thân biên 24-34",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 34
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000085",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_25_36",
+      "name": "Ngoại lệ sức thân biên 25-36",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000086",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 38
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_26_38",
+      "name": "Ngoại lệ sức thân biên 26-38",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 38
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000087",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_27_40",
+      "name": "Ngoại lệ sức thân biên 27-40",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000088",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 42
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_28_42",
+      "name": "Ngoại lệ sức thân biên 28-42",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 42
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000089",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_29_44",
+      "name": "Ngoại lệ sức thân biên 29-44",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000090",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_30_45",
+      "name": "Ngoại lệ sức thân biên 30-45",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000091",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_31_45",
+      "name": "Ngoại lệ sức thân biên 31-45",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000092",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_32_45",
+      "name": "Ngoại lệ sức thân biên 32-45",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000093",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_33_45",
+      "name": "Ngoại lệ sức thân biên 33-45",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000094",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_34_45",
+      "name": "Ngoại lệ sức thân biên 34-45",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000095",
+      "version": "1.0.0",
+      "category": "strength_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "strength_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=strength_border",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline_strength",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+      "references": [
+        {
+          "target": "REF-FPC-strength_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "str_exception_band_35_45",
+      "name": "Ngoại lệ sức thân biên 35-45",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=strength_border",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline_strength",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Biên sức thân trên strength_score đã công bố. Không tính lại SKC. Không đọc thiên can/địa chi.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

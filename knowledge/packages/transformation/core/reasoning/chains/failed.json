@@ -1,0 +1,94 @@
+{
+  "chain_id": "RC-TRC-FAILED-001",
+  "title": "Hóa thất bại",
+  "package_id": "bz_11_transformation_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-TRC-FAILED-001",
+  "transformation_theme": "failed",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-TRC-FAILED-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-TRC-FAILED-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-TRC-FAILED-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-TRC-FAILED-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-TRC-FAILED-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "TRC-000166",
+    "TRC-000167",
+    "TRC-000168",
+    "TRC-000169",
+    "TRC-000170",
+    "TRC-000171"
+  ],
+  "upstream_follow_pattern_rules": [
+    "FPC-000001",
+    "FPC-000156",
+    "FPC-000181"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "upstream_pattern_evaluation_rules": [
+    "PEV-000001",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation",
+    "follow_pattern",
+    "useful_god_priority",
+    "transformation"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/TRC-000166.json",
+    "evidence/bundles/TRC-000167.json",
+    "evidence/bundles/TRC-000168.json",
+    "evidence/bundles/TRC-000169.json",
+    "evidence/bundles/TRC-000170.json",
+    "evidence/bundles/TRC-000171.json"
+  ],
+  "node_ids": [
+    "RN-TRC-FAILED-OBS-001",
+    "RN-TRC-FAILED-EVD-001",
+    "RN-TRC-FAILED-INF-001",
+    "RN-TRC-FAILED-MID-001",
+    "RN-TRC-FAILED-FIN-001",
+    "RN-TRC-FAILED-ALT-001",
+    "RN-TRC-FAILED-CON-001"
+  ]
+}

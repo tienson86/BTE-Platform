@@ -1,0 +1,68 @@
+{
+  "rule_id": "FPC-000113",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Ngoại lệ mùa lệnh: season_weak_18",
+    "why": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+    "when": "Khi 11 output đã công bố khớp điều kiện.",
+    "when_not": "Khi thiếu input hợp đồng hoặc điều kiện không khớp.",
+    "summary": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02."
+  },
+  "rationale": "Luật `season_weak_18` xác định Tòng Cách từ output đã công bố. Không viết lại PAT/PEV/SKC/SEC/TEC/UG.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-5A: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-FPC-season_exceptions",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-FPC-000113-01",
+      "rule_id": "FPC-000113",
+      "polarity": "positive",
+      "published_outputs": {
+        "season_score": 18,
+        "strength_score": 20
+      },
+      "note": "Thỏa điều kiện Tòng trên output đã công bố."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-FPC-000113-01",
+      "rule_id": "FPC-000113",
+      "polarity": "negative",
+      "published_outputs": {
+        "season_score": 58,
+        "strength_score": 20
+      },
+      "note": "Không thỏa hoặc bị loại Tòng."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-FPC-000113-01",
+      "rule_id": "FPC-000113",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "season_score": 18,
+        "strength_score": 20
+      },
+      "note": "Biên: đủ FPC nhưng thiếu một input hợp đồng thì không công bố Tòng."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_10_follow_pattern_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-5A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

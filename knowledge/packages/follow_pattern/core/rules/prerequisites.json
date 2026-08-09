@@ -1,0 +1,3253 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "prerequisites",
+  "count": 25,
+  "objects": [
+    {
+      "id": "FPC-000026",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_season_score",
+      "name": "Tiên quyết input đã công bố: prereq_published_season_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000027",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_strength_score",
+      "name": "Tiên quyết input đã công bố: prereq_published_strength_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000028",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_temperature_score",
+      "name": "Tiên quyết input đã công bố: prereq_published_temperature_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000029",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_pattern_score",
+      "name": "Tiên quyết input đã công bố: prereq_published_pattern_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000030",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_pattern_quality",
+      "name": "Tiên quyết input đã công bố: prereq_published_pattern_quality",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000031",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_pattern_confidence",
+      "name": "Tiên quyết input đã công bố: prereq_published_pattern_confidence",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000032",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_pattern_integrity",
+      "name": "Tiên quyết input đã công bố: prereq_published_pattern_integrity",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000033",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_pattern_stability",
+      "name": "Tiên quyết input đã công bố: prereq_published_pattern_stability",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000034",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_resolved_useful_god",
+      "name": "Tiên quyết input đã công bố: prereq_published_resolved_useful_god",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000035",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "tertiary"
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_decision_priority",
+      "name": "Tiên quyết input đã công bố: prereq_published_decision_priority",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "tertiary"
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000036",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_published_resolution_confidence",
+      "name": "Tiên quyết input đã công bố: prereq_published_resolution_confidence",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000037",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_11",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_11",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000038",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_12",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_12",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000039",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_13",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_13",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000040",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_14",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_14",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000041",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_15",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_15",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000042",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_16",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_16",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000043",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_17",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_17",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000044",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_18",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_18",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000045",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_19",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_19",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000046",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_20",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000047",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_21",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_21",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000048",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_22",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_22",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000049",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_23",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_23",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000050",
+      "version": "1.0.0",
+      "category": "prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "prerequisites",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "follow_prereq=pass",
+        "weight": 5,
+        "signal": "follow_prerequisites",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "ready",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+      "references": [
+        {
+          "target": "REF-FPC-prerequisites",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_scores_published_24",
+      "name": "Tiên quyết input đã công bố: prereq_scores_published_24",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "follow_prereq=pass",
+          "weight": 5,
+          "signal": "follow_prerequisites",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "ready",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Tòng Cách chỉ chạy khi đủ 11 output đã công bố. Không nội suy chart. Không đọc internals SKC/SEC/TEC/PAT/PEV/UGD/UGP.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "prerequisites"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

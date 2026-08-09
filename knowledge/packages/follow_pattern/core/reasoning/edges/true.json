@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-FPC-TRUE-001",
+      "source": "RN-FPC-TRUE-OBS-001",
+      "target": "RN-FPC-TRUE-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-TRUE-002",
+      "source": "RN-FPC-TRUE-EVD-001",
+      "target": "RN-FPC-TRUE-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-TRUE-003",
+      "source": "RN-FPC-TRUE-INF-001",
+      "target": "RN-FPC-TRUE-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-TRUE-004",
+      "source": "RN-FPC-TRUE-MID-001",
+      "target": "RN-FPC-TRUE-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-TRUE-005",
+      "source": "RN-FPC-TRUE-OBS-001",
+      "target": "RN-FPC-TRUE-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-FPC-TRUE-006",
+      "source": "RN-FPC-TRUE-CON-001",
+      "target": "RN-FPC-TRUE-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

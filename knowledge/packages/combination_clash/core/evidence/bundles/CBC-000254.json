@@ -1,0 +1,116 @@
+{
+  "rule_id": "CBC-000254",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Công bố clash_detected=true",
+    "why": "Công bố hợp đồng clash_detected. Chỉ tám output chính thức. Không công bố transformation_*.",
+    "when": "Khi 18 output đã công bố khớp điều kiện quan hệ.",
+    "when_not": "Khi thiếu input hợp đồng hoặc quan hệ bị withhold.",
+    "summary": "Công bố hợp đồng clash_detected. Chỉ tám output chính thức. Không công bố transformation_*."
+  },
+  "rationale": "Luật `pub_clash_detected_true_08` mô hình quan hệ can/chi từ output đã công bố. Không xác định kết quả hóa. Không viết lại TRC/FPC/PAT/PEV/SKC/SEC/TEC/UG.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-5C: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-CBC-priority_publication",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-CBC-000254-01",
+      "rule_id": "CBC-000254",
+      "polarity": "positive",
+      "published_outputs": {
+        "season_score": 32,
+        "temperature_score": 50,
+        "strength_score": 50,
+        "pattern_score": 46,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_type": "none",
+        "follow_pattern_score": 15,
+        "transformation_detected": "false",
+        "transformation_type": "none",
+        "transformation_strength": "none",
+        "transformation_score": 88,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "high"
+      },
+      "note": "Thỏa điều kiện quan hệ."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-CBC-000254-01",
+      "rule_id": "CBC-000254",
+      "polarity": "negative",
+      "published_outputs": {
+        "season_score": 10,
+        "temperature_score": 50,
+        "strength_score": 50,
+        "pattern_score": 46,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_type": "none",
+        "follow_pattern_score": 15,
+        "transformation_detected": "false",
+        "transformation_type": "none",
+        "transformation_strength": "none",
+        "transformation_score": 88,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "high"
+      },
+      "note": "Không kích hoạt quan hệ / ưu tiên khác."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-CBC-000254-01",
+      "rule_id": "CBC-000254",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "season_score": 32,
+        "temperature_score": 50,
+        "strength_score": 50,
+        "pattern_score": 46,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_type": "none",
+        "follow_pattern_score": 15,
+        "transformation_detected": "false",
+        "transformation_type": "none",
+        "transformation_strength": "none",
+        "transformation_score": 88,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "high"
+      },
+      "note": "Biên: đủ CBC nhưng thiếu một input hợp đồng thì không công bố quan hệ."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_12_combination_clash_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-5C",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

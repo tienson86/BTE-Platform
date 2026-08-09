@@ -1,0 +1,4388 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "three_meeting_combination",
+  "count": 30,
+  "objects": [
+    {
+      "id": "TRC-000086",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_00",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000087",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 71
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_01",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 71
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000088",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 72
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_02",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 72
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000089",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 73
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_03",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 73
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000090",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 74
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_04",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 74
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000091",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_05",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000092",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_06",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000093",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 71
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_07",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 71
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000094",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 72
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_08",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 72
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000095",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 73
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_09",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 73
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000096",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 74
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_10",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 74
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000097",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_11",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000098",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_12",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000099",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 71
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_13",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 71
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000100",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 72
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_14",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 72
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000101",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 73
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_15",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 73
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000102",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 74
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_16",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 74
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000103",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_17",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000104",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_18",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000105",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 71
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_19",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 71
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000106",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 72
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_20",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 72
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000107",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 73
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_21",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 73
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000108",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 74
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_22",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 74
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000109",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_23",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000110",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_24",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000111",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 71
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_25",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 71
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000112",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 72
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_shen_you_xu_west",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_shen_you_xu_west",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_26",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 72
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_shen_you_xu_west",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_shen_you_xu_west",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000113",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 73
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_hai_zi_chou_north",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_hai_zi_chou_north",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_27",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 73
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_hai_zi_chou_north",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_hai_zi_chou_north",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000114",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 74
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_yin_mao_chen_east",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_yin_mao_chen_east",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_28",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 74
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_yin_mao_chen_east",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_yin_mao_chen_east",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000115",
+      "version": "1.0.0",
+      "category": "three_meeting_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=meeting_si_wu_wei_south",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "meeting_si_wu_wei_south",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-three_meeting_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_29",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=meeting_si_wu_wei_south",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "meeting_si_wu_wei_south",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hội từ season_score/pattern_score đã công bố. Không đọc cụm chi thô.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_meeting_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

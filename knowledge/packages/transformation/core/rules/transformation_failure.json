@@ -1,0 +1,3383 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "transformation_failure",
+  "count": 25,
+  "objects": [
+    {
+      "id": "TRC-000166",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 25
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_00",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 25
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000167",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 26
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_01",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 26
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000168",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 27
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_02",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 27
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000169",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_03",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000170",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 29
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_04",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 29
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000171",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 30
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_05",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 30
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000172",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 31
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_06",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 31
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000173",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_climate_07",
+      "name": "Hóa thất bại: failed_climate",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000174",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 58
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_08",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 58
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000175",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 59
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_09",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 59
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000176",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_10",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000177",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 61
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_11",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 61
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000178",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 62
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_12",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 62
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000179",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 63
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_13",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 63
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000180",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 64
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_14",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 64
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000181",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 65
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_follow_blocks_transform_15",
+      "name": "Hóa thất bại: failed_follow_blocks_transform",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 65
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000182",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_16",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000183",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 21
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_17",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 21
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000184",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 22
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_18",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 22
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000185",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 23
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_19",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 23
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000186",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_20",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000187",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_21",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000188",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 26
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_22",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 26
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000189",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 27
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_23",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 27
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000190",
+      "version": "1.0.0",
+      "category": "transformation_failure",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "failure",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 9,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_failure",
+          "relation": "references"
+        }
+      ],
+      "code": "fail_failed_pattern_broken_24",
+      "name": "Hóa thất bại: failed_pattern_broken",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 9,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Hóa thất bại khi khí hậu lệch, Tòng chân chặn, hoặc cách vỡ. Không ghi đè follow_pattern.",
+        "evaluation": {
+          "weight": 9,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_failure"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "rule_id": "FPC-000238",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Công bố follow_pattern_confidence=medium",
+    "why": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+    "when": "Khi 11 output đã công bố khớp điều kiện.",
+    "when_not": "Khi thiếu input hợp đồng hoặc điều kiện không khớp.",
+    "summary": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô."
+  },
+  "rationale": "Luật `publish_follow_pattern_confidence_medium` xác định Tòng Cách từ output đã công bố. Không viết lại PAT/PEV/SKC/SEC/TEC/UG.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-5A: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-FPC-publication",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-FPC-000238-01",
+      "rule_id": "FPC-000238",
+      "polarity": "positive",
+      "published_outputs": {
+        "pattern_integrity": 40,
+        "strength_score": 25
+      },
+      "note": "Thỏa điều kiện Tòng trên output đã công bố."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-FPC-000238-01",
+      "rule_id": "FPC-000238",
+      "polarity": "negative",
+      "published_outputs": {
+        "pattern_integrity": 80,
+        "strength_score": 25
+      },
+      "note": "Không thỏa hoặc bị loại Tòng."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-FPC-000238-01",
+      "rule_id": "FPC-000238",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "pattern_integrity": 40,
+        "strength_score": 25
+      },
+      "note": "Biên: đủ FPC nhưng thiếu một input hợp đồng thì không công bố Tòng."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_10_follow_pattern_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-5A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

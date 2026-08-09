@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TRC-LOWCONF-001",
+      "source": "RN-TRC-LOWCONF-OBS-001",
+      "target": "RN-TRC-LOWCONF-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-LOWCONF-002",
+      "source": "RN-TRC-LOWCONF-EVD-001",
+      "target": "RN-TRC-LOWCONF-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-LOWCONF-003",
+      "source": "RN-TRC-LOWCONF-INF-001",
+      "target": "RN-TRC-LOWCONF-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-LOWCONF-004",
+      "source": "RN-TRC-LOWCONF-MID-001",
+      "target": "RN-TRC-LOWCONF-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-LOWCONF-005",
+      "source": "RN-TRC-LOWCONF-OBS-001",
+      "target": "RN-TRC-LOWCONF-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TRC-LOWCONF-006",
+      "source": "RN-TRC-LOWCONF-CON-001",
+      "target": "RN-TRC-LOWCONF-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

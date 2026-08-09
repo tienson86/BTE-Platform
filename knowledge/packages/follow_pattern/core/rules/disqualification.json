@@ -1,0 +1,3093 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "disqualification",
+  "count": 25,
+  "objects": [
+    {
+      "id": "FPC-000051",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_55",
+      "name": "Loại Tòng: dq_strength_gte_55",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000052",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_58",
+      "name": "Loại Tòng: dq_strength_gte_58",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000053",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_61",
+      "name": "Loại Tòng: dq_strength_gte_61",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000054",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_64",
+      "name": "Loại Tòng: dq_strength_gte_64",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000055",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_67",
+      "name": "Loại Tòng: dq_strength_gte_67",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000056",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 70
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_70",
+      "name": "Loại Tòng: dq_strength_gte_70",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 70
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000057",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 73
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_73",
+      "name": "Loại Tòng: dq_strength_gte_73",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 73
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000058",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 76
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_strength_gte_76",
+      "name": "Loại Tòng: dq_strength_gte_76",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 76
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000059",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_good",
+      "name": "Loại Tòng: dq_intact_pattern_good",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000060",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_excellent",
+      "name": "Loại Tòng: dq_intact_pattern_excellent",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000061",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_good",
+      "name": "Loại Tòng: dq_intact_pattern_good",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000062",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_excellent",
+      "name": "Loại Tòng: dq_intact_pattern_excellent",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000063",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_good",
+      "name": "Loại Tòng: dq_intact_pattern_good",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000064",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_excellent",
+      "name": "Loại Tòng: dq_intact_pattern_excellent",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000065",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_good",
+      "name": "Loại Tòng: dq_intact_pattern_good",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000066",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_intact_pattern_excellent",
+      "name": "Loại Tòng: dq_intact_pattern_excellent",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000067",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_16",
+      "name": "Loại Tòng: dq_ug_primary_16",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000068",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_17",
+      "name": "Loại Tòng: dq_ug_primary_17",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000069",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 42
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_18",
+      "name": "Loại Tòng: dq_ug_primary_18",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 42
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000070",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_19",
+      "name": "Loại Tòng: dq_ug_primary_19",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000071",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_20",
+      "name": "Loại Tòng: dq_ug_primary_20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000072",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_21",
+      "name": "Loại Tòng: dq_ug_primary_21",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000073",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_22",
+      "name": "Loại Tòng: dq_ug_primary_22",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000074",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_23",
+      "name": "Loại Tòng: dq_ug_primary_23",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000075",
+      "version": "1.0.0",
+      "category": "disqualification",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "disqualification",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 8,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+      "references": [
+        {
+          "target": "REF-FPC-disqualification",
+          "relation": "references"
+        }
+      ],
+      "code": "dq_ug_primary_24",
+      "name": "Loại Tòng: dq_ug_primary_24",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 8,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Thân còn lực, cách còn nguyên, hoặc Dụng thần đã vững thì không phải Tòng. Chỉ dùng output đã công bố.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "disqualification"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

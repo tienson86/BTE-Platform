@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TRC-PARTIAL-001",
+      "source": "RN-TRC-PARTIAL-OBS-001",
+      "target": "RN-TRC-PARTIAL-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-PARTIAL-002",
+      "source": "RN-TRC-PARTIAL-EVD-001",
+      "target": "RN-TRC-PARTIAL-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-PARTIAL-003",
+      "source": "RN-TRC-PARTIAL-INF-001",
+      "target": "RN-TRC-PARTIAL-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-PARTIAL-004",
+      "source": "RN-TRC-PARTIAL-MID-001",
+      "target": "RN-TRC-PARTIAL-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-PARTIAL-005",
+      "source": "RN-TRC-PARTIAL-OBS-001",
+      "target": "RN-TRC-PARTIAL-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TRC-PARTIAL-006",
+      "source": "RN-TRC-PARTIAL-CON-001",
+      "target": "RN-TRC-PARTIAL-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

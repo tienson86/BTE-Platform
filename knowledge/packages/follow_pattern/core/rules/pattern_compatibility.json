@@ -1,0 +1,2468 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "pattern_compatibility",
+  "count": 20,
+  "objects": [
+    {
+      "id": "FPC-000136",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_0",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000137",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 26
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_1",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 26
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000138",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 27
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_2",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 27
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000139",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_3",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000140",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 29
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_4",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 29
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000141",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_5",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000142",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 31
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_broken_6",
+      "name": "Tương thích cách đã công bố: compatible_broken",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 31
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000143",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_7",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000144",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_8",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000145",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 37
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_9",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 37
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000146",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 38
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_10",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 38
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000147",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 39
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_11",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 39
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000148",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_12",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000149",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 41
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_weak_13",
+      "name": "Tương thích cách đã công bố: compatible_weak",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 41
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000150",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 30
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_low_score_14",
+      "name": "Tương thích cách đã công bố: compatible_low_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 30
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000151",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 29
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_low_score_15",
+      "name": "Tương thích cách đã công bố: compatible_low_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 29
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000152",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 28
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_low_score_16",
+      "name": "Tương thích cách đã công bố: compatible_low_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 28
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000153",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 27
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_low_score_17",
+      "name": "Tương thích cách đã công bố: compatible_low_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 27
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000154",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 26
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_low_score_18",
+      "name": "Tương thích cách đã công bố: compatible_low_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 26
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000155",
+      "version": "1.0.0",
+      "category": "pattern_compatibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "pattern_compatibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "lte",
+          "value": 25
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 7,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+      "references": [
+        {
+          "target": "REF-FPC-pattern_compatibility",
+          "relation": "references"
+        }
+      ],
+      "code": "pat_compat_compatible_low_score_19",
+      "name": "Tương thích cách đã công bố: compatible_low_score",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "lte",
+            "value": 25
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 7,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Tòng chỉ tương thích khi PEV công bố cách yếu/vỡ. Không nhận diện lại Ge Ju. Không sửa bz_04/bz_05.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "pattern_compatibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

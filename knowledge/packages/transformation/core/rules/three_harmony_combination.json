@@ -1,0 +1,4388 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "three_harmony_combination",
+  "count": 30,
+  "objects": [
+    {
+      "id": "TRC-000056",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_00",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000057",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_01",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000058",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_02",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000059",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_03",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000060",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_04",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000061",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_05",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000062",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 68
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_06",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 68
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000063",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 69
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_07",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 69
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000064",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_08",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000065",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_09",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000066",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_10",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000067",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_11",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000068",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_12",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000069",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_13",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000070",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 68
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_14",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 68
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000071",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 69
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_15",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 69
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000072",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_16",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000073",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_17",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000074",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_18",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000075",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_19",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000076",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_20",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000077",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_21",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000078",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 68
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_22",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 68
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000079",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 69
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_23",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 69
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000080",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_24",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000081",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_25",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000082",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "yin_wu_xu_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_yin_wu_xu_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_yin_wu_xu_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_yin_wu_xu_fire_26",
+      "name": "Tam hợp: yin_wu_xu_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_yin_wu_xu_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_yin_wu_xu_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000083",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "si_you_chou_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "borderline"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_si_you_chou_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_si_you_chou_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_si_you_chou_metal_27",
+      "name": "Tam hợp: si_you_chou_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "borderline"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_si_you_chou_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_si_you_chou_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000084",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "shen_zi_chen_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "true_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_shen_zi_chen_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_shen_zi_chen_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_shen_zi_chen_water_28",
+      "name": "Tam hợp: shen_zi_chen_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "true_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_shen_zi_chen_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_shen_zi_chen_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000085",
+      "version": "1.0.0",
+      "category": "three_harmony_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "three_harmony",
+        "hai_mao_wei_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "follow_pattern_type",
+          "operator": "equals",
+          "value": "false_follow"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=harmony_hai_mao_wei_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "harmony_hai_mao_wei_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+      "references": [
+        {
+          "target": "REF-TRC-three_harmony_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "harmony_hai_mao_wei_wood_29",
+      "name": "Tam hợp: hai_mao_wei_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "follow_pattern_type",
+            "operator": "equals",
+            "value": "false_follow"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=harmony_hai_mao_wei_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "harmony_hai_mao_wei_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Tam hợp từ điểm mùa/toàn vẹn cách đã công bố. Không tái dựng tam hợp từ chi.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "three_harmony_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

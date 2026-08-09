@@ -1,0 +1,4058 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "transformation_eligibility",
+  "count": 30,
+  "objects": [
+    {
+      "id": "TRC-000136",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_00",
+      "name": "Đủ điều kiện hóa #1",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000137",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_01",
+      "name": "Đủ điều kiện hóa #2",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000138",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_02",
+      "name": "Đủ điều kiện hóa #3",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000139",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_03",
+      "name": "Đủ điều kiện hóa #4",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000140",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_04",
+      "name": "Đủ điều kiện hóa #5",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000141",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_05",
+      "name": "Đủ điều kiện hóa #6",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000142",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 66
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_06",
+      "name": "Đủ điều kiện hóa #7",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 66
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000143",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_07",
+      "name": "Đủ điều kiện hóa #8",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000144",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 68
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_08",
+      "name": "Đủ điều kiện hóa #9",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 68
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000145",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 69
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_09",
+      "name": "Đủ điều kiện hóa #10",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 69
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000146",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_10",
+      "name": "Đủ điều kiện hóa #11",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000147",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_11",
+      "name": "Đủ điều kiện hóa #12",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000148",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_12",
+      "name": "Đủ điều kiện hóa #13",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000149",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_13",
+      "name": "Đủ điều kiện hóa #14",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000150",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_14",
+      "name": "Đủ điều kiện hóa #15",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000151",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_15",
+      "name": "Đủ điều kiện hóa #16",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000152",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_16",
+      "name": "Đủ điều kiện hóa #17",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000153",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_17",
+      "name": "Đủ điều kiện hóa #18",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000154",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_18",
+      "name": "Đủ điều kiện hóa #19",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000155",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_19",
+      "name": "Đủ điều kiện hóa #20",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000156",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_20",
+      "name": "Đủ điều kiện hóa #21",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000157",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_21",
+      "name": "Đủ điều kiện hóa #22",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000158",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "tertiary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_22",
+      "name": "Đủ điều kiện hóa #23",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "tertiary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000159",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_23",
+      "name": "Đủ điều kiện hóa #24",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000160",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_24",
+      "name": "Đủ điều kiện hóa #25",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000161",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_25",
+      "name": "Đủ điều kiện hóa #26",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000162",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "tertiary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_26",
+      "name": "Đủ điều kiện hóa #27",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "tertiary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000163",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_27",
+      "name": "Đủ điều kiện hóa #28",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000164",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_28",
+      "name": "Đủ điều kiện hóa #29",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000165",
+      "version": "1.0.0",
+      "category": "transformation_eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "eligibility",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=review",
+        "weight": 5,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "eligible",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_29",
+      "name": "Đủ điều kiện hóa #30",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=review",
+          "weight": 5,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "eligible",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

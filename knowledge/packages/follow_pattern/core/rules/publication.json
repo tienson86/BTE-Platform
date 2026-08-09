@@ -1,0 +1,3068 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "publication",
+  "count": 25,
+  "objects": [
+    {
+      "id": "FPC-000226",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 12
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=true",
+        "weight": 11,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_true",
+      "name": "Công bố follow_pattern=true",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 12
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=true",
+          "weight": 11,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000227",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 11,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_false",
+      "name": "Công bố follow_pattern=false",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 11,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000228",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=withheld",
+        "weight": 11,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "withheld",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_withheld",
+      "name": "Công bố follow_pattern=withheld",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=withheld",
+          "weight": 11,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "withheld",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000229",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=true_follow",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "true_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_true_follow",
+      "name": "Công bố follow_pattern_type=true_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=true_follow",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "true_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000230",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=false_follow",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_false_follow",
+      "name": "Công bố follow_pattern_type=false_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=false_follow",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000231",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=wealth_follow",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "wealth_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_wealth_follow",
+      "name": "Công bố follow_pattern_type=wealth_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=wealth_follow",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "wealth_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000232",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=officer_follow",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "officer_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_officer_follow",
+      "name": "Công bố follow_pattern_type=officer_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=officer_follow",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "officer_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000233",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=output_follow",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "output_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_output_follow",
+      "name": "Công bố follow_pattern_type=output_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=output_follow",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "output_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000234",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=mixed_follow",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "mixed_follow",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_mixed_follow",
+      "name": "Công bố follow_pattern_type=mixed_follow",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=mixed_follow",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "mixed_follow",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000235",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=borderline",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "borderline",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_borderline",
+      "name": "Công bố follow_pattern_type=borderline",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=borderline",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "borderline",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000236",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_type",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_type=none",
+        "weight": 11,
+        "signal": "follow_pattern_type",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "none",
+        "publishes": "follow_pattern_type"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_type_none",
+      "name": "Công bố follow_pattern_type=none",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_type=none",
+          "weight": 11,
+          "signal": "follow_pattern_type",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "none",
+          "publishes": "follow_pattern_type"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_type. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000237",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_confidence",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_confidence=high",
+        "weight": 11,
+        "signal": "follow_pattern_confidence",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "high",
+        "publishes": "follow_pattern_confidence"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_confidence_high",
+      "name": "Công bố follow_pattern_confidence=high",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_confidence=high",
+          "weight": 11,
+          "signal": "follow_pattern_confidence",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "high",
+          "publishes": "follow_pattern_confidence"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000238",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_confidence",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_confidence=medium",
+        "weight": 11,
+        "signal": "follow_pattern_confidence",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "medium",
+        "publishes": "follow_pattern_confidence"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_confidence_medium",
+      "name": "Công bố follow_pattern_confidence=medium",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_confidence=medium",
+          "weight": 11,
+          "signal": "follow_pattern_confidence",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "medium",
+          "publishes": "follow_pattern_confidence"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000239",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_confidence",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_confidence=low",
+        "weight": 11,
+        "signal": "follow_pattern_confidence",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "low",
+        "publishes": "follow_pattern_confidence"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_confidence_low",
+      "name": "Công bố follow_pattern_confidence=low",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_confidence=low",
+          "weight": 11,
+          "signal": "follow_pattern_confidence",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "low",
+          "publishes": "follow_pattern_confidence"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000240",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_confidence",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_confidence=none",
+        "weight": 11,
+        "signal": "follow_pattern_confidence",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "none",
+        "publishes": "follow_pattern_confidence"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_confidence_none",
+      "name": "Công bố follow_pattern_confidence=none",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_confidence=none",
+          "weight": 11,
+          "signal": "follow_pattern_confidence",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "none",
+          "publishes": "follow_pattern_confidence"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_confidence. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000241",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_reasoning",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_reasoning=RC-FPC-TRUE-001",
+        "weight": 11,
+        "signal": "follow_pattern_reasoning",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "RC-FPC-TRUE-001",
+        "publishes": "follow_pattern_reasoning"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_reasoning_RC-FPC-TRUE-001",
+      "name": "Công bố follow_pattern_reasoning=RC-FPC-TRUE-001",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_reasoning=RC-FPC-TRUE-001",
+          "weight": 11,
+          "signal": "follow_pattern_reasoning",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "RC-FPC-TRUE-001",
+          "publishes": "follow_pattern_reasoning"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000242",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_reasoning",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_reasoning=RC-FPC-FALSE-001",
+        "weight": 11,
+        "signal": "follow_pattern_reasoning",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "RC-FPC-FALSE-001",
+        "publishes": "follow_pattern_reasoning"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_reasoning_RC-FPC-FALSE-00",
+      "name": "Công bố follow_pattern_reasoning=RC-FPC-FALSE-001",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_reasoning=RC-FPC-FALSE-001",
+          "weight": 11,
+          "signal": "follow_pattern_reasoning",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "RC-FPC-FALSE-001",
+          "publishes": "follow_pattern_reasoning"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000243",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_reasoning",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_reasoning=RC-FPC-BORDER-001",
+        "weight": 11,
+        "signal": "follow_pattern_reasoning",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "RC-FPC-BORDER-001",
+        "publishes": "follow_pattern_reasoning"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_reasoning_RC-FPC-BORDER-0",
+      "name": "Công bố follow_pattern_reasoning=RC-FPC-BORDER-001",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_reasoning=RC-FPC-BORDER-001",
+          "weight": 11,
+          "signal": "follow_pattern_reasoning",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "RC-FPC-BORDER-001",
+          "publishes": "follow_pattern_reasoning"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000244",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_reasoning",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_reasoning=RC-FPC-CONTRA-001",
+        "weight": 11,
+        "signal": "follow_pattern_reasoning",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "RC-FPC-CONTRA-001",
+        "publishes": "follow_pattern_reasoning"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_reasoning_RC-FPC-CONTRA-0",
+      "name": "Công bố follow_pattern_reasoning=RC-FPC-CONTRA-001",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_reasoning=RC-FPC-CONTRA-001",
+          "weight": 11,
+          "signal": "follow_pattern_reasoning",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "RC-FPC-CONTRA-001",
+          "publishes": "follow_pattern_reasoning"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000245",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_reasoning",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_reasoning=RC-FPC-LOWCONF-001",
+        "weight": 11,
+        "signal": "follow_pattern_reasoning",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "RC-FPC-LOWCONF-001",
+        "publishes": "follow_pattern_reasoning"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_reasoning_RC-FPC-LOWCONF-",
+      "name": "Công bố follow_pattern_reasoning=RC-FPC-LOWCONF-001",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_reasoning=RC-FPC-LOWCONF-001",
+          "weight": 11,
+          "signal": "follow_pattern_reasoning",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "RC-FPC-LOWCONF-001",
+          "publishes": "follow_pattern_reasoning"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000246",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_reasoning",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_reasoning=RC-FPC-MIXED-001",
+        "weight": 11,
+        "signal": "follow_pattern_reasoning",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "RC-FPC-MIXED-001",
+        "publishes": "follow_pattern_reasoning"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_reasoning_RC-FPC-MIXED-00",
+      "name": "Công bố follow_pattern_reasoning=RC-FPC-MIXED-001",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_reasoning=RC-FPC-MIXED-001",
+          "weight": 11,
+          "signal": "follow_pattern_reasoning",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "RC-FPC-MIXED-001",
+          "publishes": "follow_pattern_reasoning"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_reasoning. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000247",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_diagnostics",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_diagnostics=FPC-TRUE",
+        "weight": 11,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "FPC-TRUE",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_diagnostics_FPC-TRUE",
+      "name": "Công bố follow_pattern_diagnostics=FPC-TRUE",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_diagnostics=FPC-TRUE",
+          "weight": 11,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "FPC-TRUE",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000248",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_diagnostics",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_diagnostics=FPC-FALSE",
+        "weight": 11,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "FPC-FALSE",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_diagnostics_FPC-FALSE",
+      "name": "Công bố follow_pattern_diagnostics=FPC-FALSE",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_diagnostics=FPC-FALSE",
+          "weight": 11,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "FPC-FALSE",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000249",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_diagnostics",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_diagnostics=FPC-WITHHOLD",
+        "weight": 11,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "FPC-WITHHOLD",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_diagnostics_FPC-WITHHOLD",
+      "name": "Công bố follow_pattern_diagnostics=FPC-WITHHOLD",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_diagnostics=FPC-WITHHOLD",
+          "weight": 11,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "FPC-WITHHOLD",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000250",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "publication",
+        "follow_pattern_diagnostics",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern_diagnostics=FPC-BORDER",
+        "weight": 11,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "FPC-BORDER",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+      "references": [
+        {
+          "target": "REF-FPC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "publish_follow_pattern_diagnostics_FPC-BORDER",
+      "name": "Công bố follow_pattern_diagnostics=FPC-BORDER",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern_diagnostics=FPC-BORDER",
+          "weight": 11,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "FPC-BORDER",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng follow_pattern_diagnostics. Chỉ sáu output chính thức. Không xuất chart thô.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

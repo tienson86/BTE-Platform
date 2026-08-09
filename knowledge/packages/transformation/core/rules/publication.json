@@ -1,0 +1,4128 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "publication",
+  "count": 30,
+  "objects": [
+    {
+      "id": "TRC-000251",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_detected",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=true",
+        "weight": 11,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "true",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_detected_true",
+      "name": "Công bố transformation_detected=true",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=true",
+          "weight": 11,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "true",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000252",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_detected",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=false",
+        "weight": 11,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "false",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_detected_false",
+      "name": "Công bố transformation_detected=false",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=false",
+          "weight": 11,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "false",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000253",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_detected",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=partial",
+        "weight": 11,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "partial",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_detected_partial",
+      "name": "Công bố transformation_detected=partial",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=partial",
+          "weight": 11,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "partial",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000254",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_detected",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_detected=withheld",
+        "weight": 11,
+        "signal": "transformation_detected",
+        "score_target": "day_master.transformation_score",
+        "outcome": "withheld",
+        "publishes": "transformation_detected"
+      },
+      "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_detected_withheld",
+      "name": "Công bố transformation_detected=withheld",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_detected=withheld",
+          "weight": 11,
+          "signal": "transformation_detected",
+          "score_target": "day_master.transformation_score",
+          "outcome": "withheld",
+          "publishes": "transformation_detected"
+        },
+        "explanation": "Công bố hợp đồng transformation_detected. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000255",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=stem_combination",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "stem_combination",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_stem_combination",
+      "name": "Công bố transformation_type=stem_combination",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=stem_combination",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "stem_combination",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000256",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_combination",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_combination",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_six_combination",
+      "name": "Công bố transformation_type=six_combination",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_combination",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_combination",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000257",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=three_harmony",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "three_harmony",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_three_harmony",
+      "name": "Công bố transformation_type=three_harmony",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=three_harmony",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "three_harmony",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000258",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=three_meeting",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "three_meeting",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_three_meeting",
+      "name": "Công bố transformation_type=three_meeting",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=three_meeting",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "three_meeting",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000259",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=half_combination",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "half_combination",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_half_combination",
+      "name": "Công bố transformation_type=half_combination",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=half_combination",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "half_combination",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000260",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=failed",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "failed",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_failed",
+      "name": "Công bố transformation_type=failed",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=failed",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "failed",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000261",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_type",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=none",
+        "weight": 11,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_type_none",
+      "name": "Công bố transformation_type=none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=none",
+          "weight": 11,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Công bố hợp đồng transformation_type. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000262",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_strength",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=none",
+        "weight": 11,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_strength_none",
+      "name": "Công bố transformation_strength=none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=none",
+          "weight": 11,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000263",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_strength",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=weak",
+        "weight": 11,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "weak",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_strength_weak",
+      "name": "Công bố transformation_strength=weak",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=weak",
+          "weight": 11,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "weak",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000264",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_strength",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=medium",
+        "weight": 11,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_strength_medium",
+      "name": "Công bố transformation_strength=medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=medium",
+          "weight": 11,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000265",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_strength",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=strong",
+        "weight": 11,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "strong",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_strength_strong",
+      "name": "Công bố transformation_strength=strong",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=strong",
+          "weight": 11,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "strong",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000266",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_strength",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=complete",
+        "weight": 11,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "complete",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_strength_complete",
+      "name": "Công bố transformation_strength=complete",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=complete",
+          "weight": 11,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "complete",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Công bố hợp đồng transformation_strength. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000267",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_confidence",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_confidence=high",
+        "weight": 11,
+        "signal": "transformation_confidence",
+        "score_target": "day_master.transformation_score",
+        "outcome": "high",
+        "publishes": "transformation_confidence"
+      },
+      "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_confidence_high",
+      "name": "Công bố transformation_confidence=high",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_confidence=high",
+          "weight": 11,
+          "signal": "transformation_confidence",
+          "score_target": "day_master.transformation_score",
+          "outcome": "high",
+          "publishes": "transformation_confidence"
+        },
+        "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000268",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_confidence",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_confidence=medium",
+        "weight": 11,
+        "signal": "transformation_confidence",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_confidence"
+      },
+      "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_confidence_medium",
+      "name": "Công bố transformation_confidence=medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_confidence=medium",
+          "weight": 11,
+          "signal": "transformation_confidence",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_confidence"
+        },
+        "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000269",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_confidence",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "transformation_confidence=low",
+        "weight": 11,
+        "signal": "transformation_confidence",
+        "score_target": "day_master.transformation_score",
+        "outcome": "low",
+        "publishes": "transformation_confidence"
+      },
+      "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_confidence_low",
+      "name": "Công bố transformation_confidence=low",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "transformation_confidence=low",
+          "weight": 11,
+          "signal": "transformation_confidence",
+          "score_target": "day_master.transformation_score",
+          "outcome": "low",
+          "publishes": "transformation_confidence"
+        },
+        "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000270",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_confidence",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_confidence=none",
+        "weight": 11,
+        "signal": "transformation_confidence",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_confidence"
+      },
+      "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_confidence_none",
+      "name": "Công bố transformation_confidence=none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_confidence=none",
+          "weight": 11,
+          "signal": "transformation_confidence",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_confidence"
+        },
+        "explanation": "Công bố hợp đồng transformation_confidence. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000271",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-SUCCESS-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-SUCCESS-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-SUCCESS-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-SUCCESS-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-SUCCESS-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-SUCCESS-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000272",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-FAILED-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-FAILED-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-FAILED-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-FAILED-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-FAILED-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-FAILED-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000273",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-PARTIAL-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-PARTIAL-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-PARTIAL-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-PARTIAL-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-PARTIAL-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-PARTIAL-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000274",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-CONFLICT-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-CONFLICT-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-CONFLICT-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-CONFLICT-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-CONFLICT-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-CONFLICT-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000275",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-BORDER-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-BORDER-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-BORDER-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-BORDER-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-BORDER-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-BORDER-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000276",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-LOWCONF-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-LOWCONF-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-LOWCONF-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-LOWCONF-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-LOWCONF-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-LOWCONF-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000277",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_reasoning",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_reasoning=RC-TRC-MIXED-001",
+        "weight": 11,
+        "signal": "transformation_reasoning",
+        "score_target": "day_master.transformation_score",
+        "outcome": "RC-TRC-MIXED-001",
+        "publishes": "transformation_reasoning"
+      },
+      "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_reasoning_RC-TRC-MIXED-001",
+      "name": "Công bố transformation_reasoning=RC-TRC-MIXED-001",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_reasoning=RC-TRC-MIXED-001",
+          "weight": 11,
+          "signal": "transformation_reasoning",
+          "score_target": "day_master.transformation_score",
+          "outcome": "RC-TRC-MIXED-001",
+          "publishes": "transformation_reasoning"
+        },
+        "explanation": "Công bố hợp đồng transformation_reasoning. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000278",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_diagnostics",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_diagnostics=TRC-OK",
+        "weight": 11,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "TRC-OK",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng transformation_diagnostics. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_diagnostics_TRC-OK",
+      "name": "Công bố transformation_diagnostics=TRC-OK",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_diagnostics=TRC-OK",
+          "weight": 11,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "TRC-OK",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng transformation_diagnostics. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000279",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_diagnostics",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_diagnostics=TRC-FAIL",
+        "weight": 11,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "TRC-FAIL",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng transformation_diagnostics. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_diagnostics_TRC-FAIL",
+      "name": "Công bố transformation_diagnostics=TRC-FAIL",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_diagnostics=TRC-FAIL",
+          "weight": 11,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "TRC-FAIL",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng transformation_diagnostics. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000280",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "publication",
+        "transformation_diagnostics",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "transformation_diagnostics=TRC-PARTIAL",
+        "weight": 11,
+        "signal": "transformation_diagnostics",
+        "score_target": "day_master.transformation_score",
+        "outcome": "TRC-PARTIAL",
+        "publishes": "transformation_diagnostics"
+      },
+      "explanation": "Công bố hợp đồng transformation_diagnostics. Chỉ bảy output chính thức.",
+      "references": [
+        {
+          "target": "REF-TRC-publication",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_transformation_diagnostics_TRC-PARTIAL",
+      "name": "Công bố transformation_diagnostics=TRC-PARTIAL",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "transformation_diagnostics=TRC-PARTIAL",
+          "weight": 11,
+          "signal": "transformation_diagnostics",
+          "score_target": "day_master.transformation_score",
+          "outcome": "TRC-PARTIAL",
+          "publishes": "transformation_diagnostics"
+        },
+        "explanation": "Công bố hợp đồng transformation_diagnostics. Chỉ bảy output chính thức.",
+        "evaluation": {
+          "weight": 11,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "publication"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

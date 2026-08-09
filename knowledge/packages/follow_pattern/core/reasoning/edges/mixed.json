@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-FPC-MIXED-001",
+      "source": "RN-FPC-MIXED-OBS-001",
+      "target": "RN-FPC-MIXED-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-MIXED-002",
+      "source": "RN-FPC-MIXED-EVD-001",
+      "target": "RN-FPC-MIXED-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-MIXED-003",
+      "source": "RN-FPC-MIXED-INF-001",
+      "target": "RN-FPC-MIXED-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-MIXED-004",
+      "source": "RN-FPC-MIXED-MID-001",
+      "target": "RN-FPC-MIXED-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-FPC-MIXED-005",
+      "source": "RN-FPC-MIXED-OBS-001",
+      "target": "RN-FPC-MIXED-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-FPC-MIXED-006",
+      "source": "RN-FPC-MIXED-CON-001",
+      "target": "RN-FPC-MIXED-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

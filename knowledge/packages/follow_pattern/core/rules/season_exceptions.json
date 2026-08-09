@@ -1,0 +1,2468 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "season_exceptions",
+  "count": 20,
+  "objects": [
+    {
+      "id": "FPC-000096",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_70",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_70",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000097",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 71
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_71",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_71",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 71
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000098",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 72
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_72",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_72",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 72
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000099",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 73
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_73",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_73",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 73
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000100",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 74
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_74",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_74",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 74
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000101",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 75
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_75",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_75",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 75
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000102",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 76
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_76",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_76",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 76
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000103",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 77
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_77",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_77",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 77
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000104",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 78
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_78",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_78",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 78
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000105",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 79
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_supports_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dominates_79",
+      "name": "Ngoại lệ mùa lệnh: season_dominates_79",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 79
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_supports_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000106",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 25
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_25",
+      "name": "Ngoại lệ mùa lệnh: season_weak_25",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 25
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000107",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 24
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_24",
+      "name": "Ngoại lệ mùa lệnh: season_weak_24",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 24
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000108",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 23
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_23",
+      "name": "Ngoại lệ mùa lệnh: season_weak_23",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 23
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000109",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 22
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_22",
+      "name": "Ngoại lệ mùa lệnh: season_weak_22",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 22
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000110",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 21
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_21",
+      "name": "Ngoại lệ mùa lệnh: season_weak_21",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 21
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000111",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 20
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_20",
+      "name": "Ngoại lệ mùa lệnh: season_weak_20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 20
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000112",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 19
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_19",
+      "name": "Ngoại lệ mùa lệnh: season_weak_19",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 19
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000113",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 18
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_18",
+      "name": "Ngoại lệ mùa lệnh: season_weak_18",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 18
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000114",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 17
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_17",
+      "name": "Ngoại lệ mùa lệnh: season_weak_17",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 17
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000115",
+      "version": "1.0.0",
+      "category": "season_exceptions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "season_exception",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 16
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "follow_exception=season",
+        "weight": 6,
+        "signal": "follow_pattern_diagnostics",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "season_does_not_force_follow",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+      "references": [
+        {
+          "target": "REF-FPC-season_exceptions",
+          "relation": "references"
+        }
+      ],
+      "code": "season_weak_16",
+      "name": "Ngoại lệ mùa lệnh: season_weak_16",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 16
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "follow_exception=season",
+          "weight": 6,
+          "signal": "follow_pattern_diagnostics",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "season_does_not_force_follow",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Ngoại lệ mùa chỉ đọc season_score đã công bố. Không đọc tháng lệnh hay tiết khí thô. Không sửa bz_02.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_exceptions"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

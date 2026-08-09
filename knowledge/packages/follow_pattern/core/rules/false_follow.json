@@ -1,0 +1,2668 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "false_follow",
+  "count": 20,
+  "objects": [
+    {
+      "id": "FPC-000181",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_00",
+      "name": "Tòng giả #1",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000182",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 23
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_01",
+      "name": "Tòng giả #2",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 23
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000183",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_02",
+      "name": "Tòng giả #3",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000184",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_03",
+      "name": "Tòng giả #4",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000185",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_04",
+      "name": "Tòng giả #5",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000186",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_05",
+      "name": "Tòng giả #6",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000187",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_06",
+      "name": "Tòng giả #7",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000188",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_07",
+      "name": "Tòng giả #8",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000189",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_08",
+      "name": "Tòng giả #9",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000190",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_09",
+      "name": "Tòng giả #10",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000191",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_10",
+      "name": "Tòng giả #11",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000192",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_11",
+      "name": "Tòng giả #12",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000193",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_12",
+      "name": "Tòng giả #13",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000194",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_13",
+      "name": "Tòng giả #14",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000195",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_14",
+      "name": "Tòng giả #15",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000196",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_15",
+      "name": "Tòng giả #16",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000197",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_16",
+      "name": "Tòng giả #17",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000198",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_17",
+      "name": "Tòng giả #18",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000199",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_18",
+      "name": "Tòng giả #19",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000200",
+      "version": "1.0.0",
+      "category": "false_follow",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "false_follow",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "good"
+        }
+      ],
+      "result": {
+        "effect": "follow_pattern=false",
+        "weight": 10,
+        "signal": "follow_pattern",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "false",
+        "publishes": "follow_pattern"
+      },
+      "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+      "references": [
+        {
+          "target": "REF-FPC-false_follow",
+          "relation": "references"
+        }
+      ],
+      "code": "false_follow_19",
+      "name": "Tòng giả #20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "good"
+          }
+        ],
+        "result": {
+          "effect": "follow_pattern=false",
+          "weight": 10,
+          "signal": "follow_pattern",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "false",
+          "publishes": "follow_pattern"
+        },
+        "explanation": "Tòng giả: còn lực thân hoặc cách còn dùng được trên PEV. Không được công bố Tòng chân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "false_follow"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

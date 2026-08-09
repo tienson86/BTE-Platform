@@ -1,0 +1,3408 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "transformation_strength",
+  "count": 25,
+  "objects": [
+    {
+      "id": "TRC-000191",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "none",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 10
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=none",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_none_00",
+      "name": "Lực hóa: none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 10
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=none",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000192",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "weak",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=weak",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "weak",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_weak_01",
+      "name": "Lực hóa: weak",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=weak",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "weak",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000193",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "medium",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=medium",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_medium_02",
+      "name": "Lực hóa: medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=medium",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000194",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "strong",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=strong",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "strong",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_strong_03",
+      "name": "Lực hóa: strong",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=strong",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "strong",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000195",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "complete",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=complete",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "complete",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_complete_04",
+      "name": "Lực hóa: complete",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=complete",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "complete",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000196",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "none",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 10
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=none",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_none_05",
+      "name": "Lực hóa: none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 10
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=none",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000197",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "weak",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=weak",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "weak",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_weak_06",
+      "name": "Lực hóa: weak",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=weak",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "weak",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000198",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "medium",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=medium",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_medium_07",
+      "name": "Lực hóa: medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=medium",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000199",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "strong",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=strong",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "strong",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_strong_08",
+      "name": "Lực hóa: strong",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=strong",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "strong",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000200",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "complete",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=complete",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "complete",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_complete_09",
+      "name": "Lực hóa: complete",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=complete",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "complete",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000201",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "none",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 10
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=none",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_none_10",
+      "name": "Lực hóa: none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 10
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=none",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000202",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "weak",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=weak",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "weak",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_weak_11",
+      "name": "Lực hóa: weak",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=weak",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "weak",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000203",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "medium",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=medium",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_medium_12",
+      "name": "Lực hóa: medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=medium",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000204",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "strong",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=strong",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "strong",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_strong_13",
+      "name": "Lực hóa: strong",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=strong",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "strong",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000205",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "complete",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=complete",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "complete",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_complete_14",
+      "name": "Lực hóa: complete",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=complete",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "complete",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000206",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "none",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 10
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=none",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_none_15",
+      "name": "Lực hóa: none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 10
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=none",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000207",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "weak",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=weak",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "weak",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_weak_16",
+      "name": "Lực hóa: weak",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=weak",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "weak",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000208",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "medium",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=medium",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_medium_17",
+      "name": "Lực hóa: medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=medium",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000209",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "strong",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=strong",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "strong",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_strong_18",
+      "name": "Lực hóa: strong",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=strong",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "strong",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000210",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "complete",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=complete",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "complete",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_complete_19",
+      "name": "Lực hóa: complete",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=complete",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "complete",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000211",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "none",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 10
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=none",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "none",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_none_20",
+      "name": "Lực hóa: none",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 10
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=none",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "none",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000212",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "weak",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=weak",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "weak",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_weak_21",
+      "name": "Lực hóa: weak",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=weak",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "weak",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000213",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "medium",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=medium",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "medium",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_medium_22",
+      "name": "Lực hóa: medium",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=medium",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "medium",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000214",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "strong",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=strong",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "strong",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_strong_23",
+      "name": "Lực hóa: strong",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=strong",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "strong",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000215",
+      "version": "1.0.0",
+      "category": "transformation_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "strength",
+        "complete",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "transformation_strength=complete",
+        "weight": 8,
+        "signal": "transformation_strength",
+        "score_target": "day_master.transformation_score",
+        "outcome": "complete",
+        "publishes": "transformation_strength"
+      },
+      "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+      "references": [
+        {
+          "target": "REF-TRC-transformation_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "strength_complete_24",
+      "name": "Lực hóa: complete",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "transformation_strength=complete",
+          "weight": 8,
+          "signal": "transformation_strength",
+          "score_target": "day_master.transformation_score",
+          "outcome": "complete",
+          "publishes": "transformation_strength"
+        },
+        "explanation": "Lực hóa suy từ season/temperature đã công bố. Không tính lại TEC/SEC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transformation_strength"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

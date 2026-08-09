@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TRC-SUCCESS-001",
+      "source": "RN-TRC-SUCCESS-OBS-001",
+      "target": "RN-TRC-SUCCESS-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-SUCCESS-002",
+      "source": "RN-TRC-SUCCESS-EVD-001",
+      "target": "RN-TRC-SUCCESS-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-SUCCESS-003",
+      "source": "RN-TRC-SUCCESS-INF-001",
+      "target": "RN-TRC-SUCCESS-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-SUCCESS-004",
+      "source": "RN-TRC-SUCCESS-MID-001",
+      "target": "RN-TRC-SUCCESS-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-SUCCESS-005",
+      "source": "RN-TRC-SUCCESS-OBS-001",
+      "target": "RN-TRC-SUCCESS-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TRC-SUCCESS-006",
+      "source": "RN-TRC-SUCCESS-CON-001",
+      "target": "RN-TRC-SUCCESS-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

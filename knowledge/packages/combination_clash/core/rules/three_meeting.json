@@ -1,0 +1,3218 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_12_combination_clash_core",
+  "category": "three_meeting",
+  "count": 30,
+  "objects": [
+    {
+      "id": "CBC-000111",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=hai_zi_chou_north",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "hai_zi_chou_north",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_00",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=hai_zi_chou_north",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "hai_zi_chou_north",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000112",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=yin_mao_chen_east",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "yin_mao_chen_east",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_01",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=yin_mao_chen_east",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "yin_mao_chen_east",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000113",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=si_wu_wei_south",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "si_wu_wei_south",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_02",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=si_wu_wei_south",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "si_wu_wei_south",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000114",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=shen_you_xu_west",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "shen_you_xu_west",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_03",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=shen_you_xu_west",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "shen_you_xu_west",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000115",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "mixed_meeting",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=mixed_meeting",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "mixed_meeting",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_mixed_meeting_04",
+      "name": "Tam hội: mixed_meeting",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=mixed_meeting",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "mixed_meeting",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000116",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=hai_zi_chou_north",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "hai_zi_chou_north",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_05",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=hai_zi_chou_north",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "hai_zi_chou_north",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000117",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=yin_mao_chen_east",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "yin_mao_chen_east",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_06",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=yin_mao_chen_east",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "yin_mao_chen_east",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000118",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=si_wu_wei_south",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "si_wu_wei_south",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_07",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=si_wu_wei_south",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "si_wu_wei_south",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000119",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=shen_you_xu_west",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "shen_you_xu_west",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_08",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=shen_you_xu_west",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "shen_you_xu_west",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000120",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "mixed_meeting",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=mixed_meeting",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "mixed_meeting",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_mixed_meeting_09",
+      "name": "Tam hội: mixed_meeting",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=mixed_meeting",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "mixed_meeting",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000121",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=hai_zi_chou_north",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "hai_zi_chou_north",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_10",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=hai_zi_chou_north",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "hai_zi_chou_north",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000122",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=yin_mao_chen_east",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "yin_mao_chen_east",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_11",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=yin_mao_chen_east",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "yin_mao_chen_east",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000123",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=si_wu_wei_south",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "si_wu_wei_south",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_12",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=si_wu_wei_south",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "si_wu_wei_south",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000124",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=shen_you_xu_west",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "shen_you_xu_west",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_13",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=shen_you_xu_west",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "shen_you_xu_west",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000125",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "mixed_meeting",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=mixed_meeting",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "mixed_meeting",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_mixed_meeting_14",
+      "name": "Tam hội: mixed_meeting",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=mixed_meeting",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "mixed_meeting",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000126",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=hai_zi_chou_north",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "hai_zi_chou_north",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_15",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=hai_zi_chou_north",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "hai_zi_chou_north",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000127",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=yin_mao_chen_east",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "yin_mao_chen_east",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_16",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=yin_mao_chen_east",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "yin_mao_chen_east",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000128",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=si_wu_wei_south",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "si_wu_wei_south",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_17",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=si_wu_wei_south",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "si_wu_wei_south",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000129",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=shen_you_xu_west",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "shen_you_xu_west",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_18",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=shen_you_xu_west",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "shen_you_xu_west",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000130",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "mixed_meeting",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=mixed_meeting",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "mixed_meeting",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_mixed_meeting_19",
+      "name": "Tam hội: mixed_meeting",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=mixed_meeting",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "mixed_meeting",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000131",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=hai_zi_chou_north",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "hai_zi_chou_north",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_20",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=hai_zi_chou_north",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "hai_zi_chou_north",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000132",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=yin_mao_chen_east",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "yin_mao_chen_east",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_21",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=yin_mao_chen_east",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "yin_mao_chen_east",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000133",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=si_wu_wei_south",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "si_wu_wei_south",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_22",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=si_wu_wei_south",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "si_wu_wei_south",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000134",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=shen_you_xu_west",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "shen_you_xu_west",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_23",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=shen_you_xu_west",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "shen_you_xu_west",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000135",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "mixed_meeting",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=mixed_meeting",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "mixed_meeting",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_mixed_meeting_24",
+      "name": "Tam hội: mixed_meeting",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=mixed_meeting",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "mixed_meeting",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000136",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "hai_zi_chou_north",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=hai_zi_chou_north",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "hai_zi_chou_north",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_hai_zi_chou_north_25",
+      "name": "Tam hội: hai_zi_chou_north",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=hai_zi_chou_north",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "hai_zi_chou_north",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000137",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "yin_mao_chen_east",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=yin_mao_chen_east",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "yin_mao_chen_east",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_yin_mao_chen_east_26",
+      "name": "Tam hội: yin_mao_chen_east",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=yin_mao_chen_east",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "yin_mao_chen_east",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000138",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "si_wu_wei_south",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=si_wu_wei_south",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "si_wu_wei_south",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_si_wu_wei_south_27",
+      "name": "Tam hội: si_wu_wei_south",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=si_wu_wei_south",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "si_wu_wei_south",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000139",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "shen_you_xu_west",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=shen_you_xu_west",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "shen_you_xu_west",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_shen_you_xu_west_28",
+      "name": "Tam hội: shen_you_xu_west",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=shen_you_xu_west",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "shen_you_xu_west",
+          "publishes": "combination_types"
+        }
+      }
+    },
+    {
+      "id": "CBC-000140",
+      "version": "1.0.0",
+      "category": "three_meeting",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "combination",
+        "three_meeting",
+        "mixed_meeting",
+        "kx5c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "combination_types=mixed_meeting",
+        "weight": 9,
+        "signal": "combination_types",
+        "score_target": "day_master.interaction_score",
+        "outcome": "mixed_meeting",
+        "publishes": "combination_types"
+      },
+      "explanation": "Tam hội phương vị là quan hệ. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-CBC-three_meeting",
+          "relation": "references"
+        }
+      ],
+      "code": "meeting_mixed_meeting_29",
+      "name": "Tam hội: mixed_meeting",
+      "metadata": {
+        "package_id": "bz_12_combination_clash_core",
+        "domain_id": "DOM-COMBINATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "combination_types=mixed_meeting",
+          "weight": 9,
+          "signal": "combination_types",
+          "score_target": "day_master.interaction_score",
+          "outcome": "mixed_meeting",
+          "publishes": "combination_types"
+        }
+      }
+    }
+  ]
+}

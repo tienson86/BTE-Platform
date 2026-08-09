@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-CBC-PURE-COMBO-001",
+      "source": "RN-CBC-PURE-COMBO-OBS-001",
+      "target": "RN-CBC-PURE-COMBO-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-COMBO-002",
+      "source": "RN-CBC-PURE-COMBO-EVD-001",
+      "target": "RN-CBC-PURE-COMBO-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-COMBO-003",
+      "source": "RN-CBC-PURE-COMBO-INF-001",
+      "target": "RN-CBC-PURE-COMBO-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-COMBO-004",
+      "source": "RN-CBC-PURE-COMBO-MID-001",
+      "target": "RN-CBC-PURE-COMBO-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-PURE-COMBO-005",
+      "source": "RN-CBC-PURE-COMBO-OBS-001",
+      "target": "RN-CBC-PURE-COMBO-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-CBC-PURE-COMBO-006",
+      "source": "RN-CBC-PURE-COMBO-CON-001",
+      "target": "RN-CBC-PURE-COMBO-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

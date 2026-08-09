@@ -1,0 +1,68 @@
+{
+  "rule_id": "TRC-000138",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Đủ điều kiện hóa #3",
+    "why": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart.",
+    "when": "Khi 15 output đã công bố khớp điều kiện.",
+    "when_not": "Khi thiếu input hợp đồng hoặc hóa bị chặn.",
+    "summary": "Hóa chỉ xét khi đủ 15 output đã công bố. Không nội suy chart."
+  },
+  "rationale": "Luật `eligible_02` xác định hợp/hóa từ output đã công bố. Không viết lại PAT/PEV/FPC/SKC/SEC/TEC/UG.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-5B: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-TRC-transformation_eligibility",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TRC-000138-01",
+      "rule_id": "TRC-000138",
+      "polarity": "positive",
+      "published_outputs": {
+        "temperature_score": 62,
+        "strength_score": 50
+      },
+      "note": "Thỏa điều kiện hóa."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TRC-000138-01",
+      "rule_id": "TRC-000138",
+      "polarity": "negative",
+      "published_outputs": {
+        "temperature_score": 27,
+        "strength_score": 50
+      },
+      "note": "Không hóa / hóa thất bại."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TRC-000138-01",
+      "rule_id": "TRC-000138",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "temperature_score": 62,
+        "strength_score": 50
+      },
+      "note": "Biên: đủ TRC nhưng thiếu một input hợp đồng thì không công bố hóa."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_11_transformation_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-5B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

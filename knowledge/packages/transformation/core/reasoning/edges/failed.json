@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TRC-FAILED-001",
+      "source": "RN-TRC-FAILED-OBS-001",
+      "target": "RN-TRC-FAILED-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-FAILED-002",
+      "source": "RN-TRC-FAILED-EVD-001",
+      "target": "RN-TRC-FAILED-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-FAILED-003",
+      "source": "RN-TRC-FAILED-INF-001",
+      "target": "RN-TRC-FAILED-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-FAILED-004",
+      "source": "RN-TRC-FAILED-MID-001",
+      "target": "RN-TRC-FAILED-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TRC-FAILED-005",
+      "source": "RN-TRC-FAILED-OBS-001",
+      "target": "RN-TRC-FAILED-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TRC-FAILED-006",
+      "source": "RN-TRC-FAILED-CON-001",
+      "target": "RN-TRC-FAILED-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

@@ -1,0 +1,4688 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "heavenly_stem_combination",
+  "count": 30,
+  "objects": [
+    {
+      "id": "TRC-000001",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "jia_ji_earth",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=jia_ji_earth",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "jia_ji_earth",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_jia_ji_earth_00",
+      "name": "Thiên can hợp hóa: jia_ji_earth",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=jia_ji_earth",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "jia_ji_earth",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000002",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "yi_geng_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=yi_geng_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "yi_geng_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_yi_geng_metal_01",
+      "name": "Thiên can hợp hóa: yi_geng_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=yi_geng_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "yi_geng_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000003",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "bing_xin_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=bing_xin_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "bing_xin_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_bing_xin_water_02",
+      "name": "Thiên can hợp hóa: bing_xin_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=bing_xin_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "bing_xin_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000004",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "ding_ren_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=ding_ren_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "ding_ren_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_ding_ren_wood_03",
+      "name": "Thiên can hợp hóa: ding_ren_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=ding_ren_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "ding_ren_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000005",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "wu_gui_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=wu_gui_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "wu_gui_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_wu_gui_fire_04",
+      "name": "Thiên can hợp hóa: wu_gui_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=wu_gui_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "wu_gui_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000006",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "jia_ji_earth",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=jia_ji_earth",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "jia_ji_earth",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_jia_ji_earth_05",
+      "name": "Thiên can hợp hóa: jia_ji_earth",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=jia_ji_earth",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "jia_ji_earth",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000007",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "yi_geng_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=yi_geng_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "yi_geng_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_yi_geng_metal_06",
+      "name": "Thiên can hợp hóa: yi_geng_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=yi_geng_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "yi_geng_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000008",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "bing_xin_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=bing_xin_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "bing_xin_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_bing_xin_water_07",
+      "name": "Thiên can hợp hóa: bing_xin_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=bing_xin_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "bing_xin_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000009",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "ding_ren_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=ding_ren_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "ding_ren_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_ding_ren_wood_08",
+      "name": "Thiên can hợp hóa: ding_ren_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=ding_ren_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "ding_ren_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000010",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "wu_gui_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=wu_gui_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "wu_gui_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_wu_gui_fire_09",
+      "name": "Thiên can hợp hóa: wu_gui_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=wu_gui_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "wu_gui_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000011",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "jia_ji_earth",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=jia_ji_earth",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "jia_ji_earth",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_jia_ji_earth_10",
+      "name": "Thiên can hợp hóa: jia_ji_earth",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=jia_ji_earth",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "jia_ji_earth",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000012",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "yi_geng_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=yi_geng_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "yi_geng_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_yi_geng_metal_11",
+      "name": "Thiên can hợp hóa: yi_geng_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=yi_geng_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "yi_geng_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000013",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "bing_xin_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=bing_xin_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "bing_xin_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_bing_xin_water_12",
+      "name": "Thiên can hợp hóa: bing_xin_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=bing_xin_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "bing_xin_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000014",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "ding_ren_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=ding_ren_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "ding_ren_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_ding_ren_wood_13",
+      "name": "Thiên can hợp hóa: ding_ren_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=ding_ren_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "ding_ren_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000015",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "wu_gui_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=wu_gui_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "wu_gui_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_wu_gui_fire_14",
+      "name": "Thiên can hợp hóa: wu_gui_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=wu_gui_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "wu_gui_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000016",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "jia_ji_earth",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=jia_ji_earth",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "jia_ji_earth",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_jia_ji_earth_15",
+      "name": "Thiên can hợp hóa: jia_ji_earth",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=jia_ji_earth",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "jia_ji_earth",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000017",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "yi_geng_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=yi_geng_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "yi_geng_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_yi_geng_metal_16",
+      "name": "Thiên can hợp hóa: yi_geng_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=yi_geng_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "yi_geng_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000018",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "bing_xin_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=bing_xin_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "bing_xin_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_bing_xin_water_17",
+      "name": "Thiên can hợp hóa: bing_xin_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=bing_xin_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "bing_xin_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000019",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "ding_ren_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=ding_ren_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "ding_ren_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_ding_ren_wood_18",
+      "name": "Thiên can hợp hóa: ding_ren_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=ding_ren_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "ding_ren_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000020",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "wu_gui_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=wu_gui_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "wu_gui_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_wu_gui_fire_19",
+      "name": "Thiên can hợp hóa: wu_gui_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=wu_gui_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "wu_gui_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000021",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "jia_ji_earth",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=jia_ji_earth",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "jia_ji_earth",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_jia_ji_earth_20",
+      "name": "Thiên can hợp hóa: jia_ji_earth",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=jia_ji_earth",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "jia_ji_earth",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000022",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "yi_geng_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=yi_geng_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "yi_geng_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_yi_geng_metal_21",
+      "name": "Thiên can hợp hóa: yi_geng_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=yi_geng_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "yi_geng_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000023",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "bing_xin_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=bing_xin_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "bing_xin_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_bing_xin_water_22",
+      "name": "Thiên can hợp hóa: bing_xin_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=bing_xin_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "bing_xin_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000024",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "ding_ren_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=ding_ren_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "ding_ren_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_ding_ren_wood_23",
+      "name": "Thiên can hợp hóa: ding_ren_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=ding_ren_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "ding_ren_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000025",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "wu_gui_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=wu_gui_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "wu_gui_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_wu_gui_fire_24",
+      "name": "Thiên can hợp hóa: wu_gui_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=wu_gui_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "wu_gui_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000026",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "jia_ji_earth",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=jia_ji_earth",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "jia_ji_earth",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_jia_ji_earth_25",
+      "name": "Thiên can hợp hóa: jia_ji_earth",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=jia_ji_earth",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "jia_ji_earth",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000027",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "yi_geng_metal",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=yi_geng_metal",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "yi_geng_metal",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_yi_geng_metal_26",
+      "name": "Thiên can hợp hóa: yi_geng_metal",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=yi_geng_metal",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "yi_geng_metal",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000028",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "bing_xin_water",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=bing_xin_water",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "bing_xin_water",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_bing_xin_water_27",
+      "name": "Thiên can hợp hóa: bing_xin_water",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=bing_xin_water",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "bing_xin_water",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000029",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "ding_ren_wood",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 63
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=ding_ren_wood",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "ding_ren_wood",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_ding_ren_wood_28",
+      "name": "Thiên can hợp hóa: ding_ren_wood",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 63
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=ding_ren_wood",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "ding_ren_wood",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000030",
+      "version": "1.0.0",
+      "category": "heavenly_stem_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "stem_combination",
+        "wu_gui_fire",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=wu_gui_fire",
+        "weight": 8,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "wu_gui_fire",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+      "references": [
+        {
+          "target": "REF-TRC-heavenly_stem_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_wu_gui_fire_29",
+      "name": "Thiên can hợp hóa: wu_gui_fire",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=wu_gui_fire",
+          "weight": 8,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "wu_gui_fire",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Hợp hóa Thiên Can suy từ điểm khí hậu/sức thân đã công bố. Không đọc can thô. Không tính lại lá số.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "heavenly_stem_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

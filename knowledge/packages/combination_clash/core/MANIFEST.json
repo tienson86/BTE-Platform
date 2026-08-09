@@ -1,0 +1,3651 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_12_combination_clash_core",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "analytical",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-COMBINATION",
+    "category_id": "core",
+    "school": "bazi_default",
+    "tags": [
+      "analytical",
+      "gold",
+      "kx5c",
+      "combination",
+      "clash"
+    ],
+    "description": "Canonical combination / clash relationship core."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/heavenly_stem_combination.json",
+        "rules/heavenly_stem_clash.json",
+        "rules/earthly_branch_six_combination.json",
+        "rules/three_harmony.json",
+        "rules/three_meeting.json",
+        "rules/six_clash.json",
+        "rules/punishment.json",
+        "rules/harm.json",
+        "rules/break.json",
+        "rules/priority_publication.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/overview.md",
+        "documentation/philosophy.md",
+        "documentation/relationship_model.md",
+        "documentation/priority_model.md",
+        "documentation/input_output_contracts.md",
+        "documentation/limitations.md",
+        "documentation/WAVE2_ROADMAP.md",
+        "documentation/confidence_model.md",
+        "documentation/reasoning_model.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/published_inputs.json",
+        "assets/published_outputs.json",
+        "assets/relationship_axes.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_02_seasonal_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "season_score",
+        "signals": [
+          "season_score"
+        ]
+      },
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "strength_score",
+        "signals": [
+          "strength_score"
+        ]
+      },
+      {
+        "package_id": "bz_03_temperature_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "temperature_score",
+        "signals": [
+          "temperature_score"
+        ]
+      },
+      {
+        "package_id": "bz_05_pattern_evaluation",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "pattern outputs",
+        "signals": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      },
+      {
+        "package_id": "bz_10_follow_pattern_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "follow outputs",
+        "signals": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_score"
+        ]
+      },
+      {
+        "package_id": "bz_11_transformation_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "transformation outputs",
+        "signals": [
+          "transformation_detected",
+          "transformation_type",
+          "transformation_strength",
+          "transformation_score"
+        ]
+      },
+      {
+        "package_id": "bz_07_useful_god_priority",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "UGP outputs",
+        "signals": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "CBC-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_combination.json"
+    },
+    {
+      "id": "CBC-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/heavenly_stem_clash.json"
+    },
+    {
+      "id": "CBC-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/earthly_branch_six_combination.json"
+    },
+    {
+      "id": "CBC-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_harmony.json"
+    },
+    {
+      "id": "CBC-000111",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000112",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000113",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000114",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000115",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000116",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000117",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000118",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000119",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000120",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000121",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000122",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000123",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000124",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000125",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000126",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000127",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000128",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000129",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000130",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000131",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000132",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000133",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000134",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000135",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000136",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000137",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000138",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000139",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000140",
+      "entity_type": "ENT-RULE",
+      "path": "rules/three_meeting.json"
+    },
+    {
+      "id": "CBC-000141",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000142",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000143",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000144",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000145",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000146",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000147",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000148",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000149",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000150",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000151",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000152",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000153",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000154",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000155",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000156",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000157",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000158",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000159",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000160",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000161",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000162",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000163",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000164",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000165",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000166",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000167",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000168",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000169",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000170",
+      "entity_type": "ENT-RULE",
+      "path": "rules/six_clash.json"
+    },
+    {
+      "id": "CBC-000171",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000172",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000173",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000174",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000175",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000176",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000177",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000178",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000179",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000180",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000181",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000182",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000183",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000184",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000185",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000186",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000187",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000188",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000189",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000190",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000191",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000192",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000193",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000194",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000195",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000196",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000197",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000198",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000199",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000200",
+      "entity_type": "ENT-RULE",
+      "path": "rules/punishment.json"
+    },
+    {
+      "id": "CBC-000201",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000202",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000203",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000204",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000205",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000206",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000207",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000208",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000209",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000210",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000211",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000212",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000213",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000214",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000215",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000216",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000217",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000218",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000219",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000220",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000221",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000222",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000223",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000224",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000225",
+      "entity_type": "ENT-RULE",
+      "path": "rules/harm.json"
+    },
+    {
+      "id": "CBC-000226",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000227",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000228",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000229",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000230",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000231",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000232",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000233",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000234",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000235",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000236",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000237",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000238",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000239",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000240",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000241",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000242",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000243",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000244",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000245",
+      "entity_type": "ENT-RULE",
+      "path": "rules/break.json"
+    },
+    {
+      "id": "CBC-000246",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000247",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000248",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000249",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000250",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000251",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000252",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000253",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000254",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000255",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000256",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000257",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000258",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000259",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000260",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000261",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000262",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000263",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000264",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000265",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000266",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000267",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000268",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000269",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000270",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000271",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000272",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000273",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000274",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000275",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000276",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000277",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000278",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000279",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000280",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000281",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000282",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000283",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000284",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000285",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000286",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000287",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000288",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000289",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000290",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000291",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000292",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000293",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000294",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000295",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000296",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000297",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000298",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000299",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    },
+    {
+      "id": "CBC-000300",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_publication.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_02_seasonal_core",
+    "bz_01_strength_core",
+    "bz_03_temperature_core",
+    "bz_05_pattern_evaluation",
+    "bz_10_follow_pattern_core",
+    "bz_11_transformation_core",
+    "bz_07_useful_god_priority"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_inputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/relationship_axes.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/confidence_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/input_output_contracts.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/priority_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/reasoning_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/relationship_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000111.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000112.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000113.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000114.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000115.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000116.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000117.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000118.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000119.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000120.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000121.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000122.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000123.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000124.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000125.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000126.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000127.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000128.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000129.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000130.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000131.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000132.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000133.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000134.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000135.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000136.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000137.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000138.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000139.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000140.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000141.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000142.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000143.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000144.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000145.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000146.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000147.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000148.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000149.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000150.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000151.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000152.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000153.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000154.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000155.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000156.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000157.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000158.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000159.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000160.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000161.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000162.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000163.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000164.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000165.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000166.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000167.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000168.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000169.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000170.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000171.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000172.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000173.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000174.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000175.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000176.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000177.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000178.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000179.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000180.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000181.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000182.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000183.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000184.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000185.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000186.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000187.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000188.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000189.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000190.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000191.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000192.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000193.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000194.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000195.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000196.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000197.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000198.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000199.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000200.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000201.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000202.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000203.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000204.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000205.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000206.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000207.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000208.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000209.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000210.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000211.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000212.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000213.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000214.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000215.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000216.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000217.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000218.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000219.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000220.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000221.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000222.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000223.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000224.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000225.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000226.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000227.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000228.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000229.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000230.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000231.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000232.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000233.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000234.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000235.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000236.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000237.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000238.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000239.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000240.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000241.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000242.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000243.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000244.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000245.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000246.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000247.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000248.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000249.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000250.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000251.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000252.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000253.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000254.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000255.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000256.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000257.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000258.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000259.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000260.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000261.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000262.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000263.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000264.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000265.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000266.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000267.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000268.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000269.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000270.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000271.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000272.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000273.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000274.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000275.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000276.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000277.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000278.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000279.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000280.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000281.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000282.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000283.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000284.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000285.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000286.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000287.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000288.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000289.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000290.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000291.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000292.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000293.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000294.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000295.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000296.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000297.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000298.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000299.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/CBC-000300.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/cascade.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/priority.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/pure_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/pure_combo.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/cascade.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/priority.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/pure_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/pure_combo.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/border.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/cascade.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/cascade.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/conflict.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/mixed.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/priority.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/priority.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/pure_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/pure_clash.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/pure_combo.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/pure_combo.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/cascade.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/priority.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/pure_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/pure_combo.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/cascade.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/priority.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/pure_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/pure_combo.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/break.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/earthly_branch_six_combination.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/harm.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/heavenly_stem_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/heavenly_stem_combination.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/priority_publication.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/punishment.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/six_clash.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/three_harmony.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/three_meeting.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

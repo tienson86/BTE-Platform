@@ -1,0 +1,3003 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_10_follow_pattern_core",
+  "category": "eligibility",
+  "count": 25,
+  "objects": [
+    {
+      "id": "FPC-000001",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 10
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_10",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_10",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 10
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000002",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 11
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_11",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_11",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 11
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000003",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 12
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_12",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_12",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 12
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000004",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 13
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_13",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_13",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 13
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000005",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 14
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_14",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_14",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 14
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000006",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 15
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_15",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_15",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 15
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000007",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 16
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_16",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_16",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 16
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000008",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 17
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_strength_lte_17",
+      "name": "Đủ điều kiện xét Tòng: eligible_strength_lte_17",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 17
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000009",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_broken_8",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_broken_8",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000010",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_weak_9",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_weak_9",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000011",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_average_10",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_average_10",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000012",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_broken_11",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_broken_11",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000013",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_weak_12",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_weak_12",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000014",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_average_13",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_average_13",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000015",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_broken_14",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_broken_14",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000016",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_quality_weak_15",
+      "name": "Đủ điều kiện xét Tòng: eligible_quality_weak_15",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000017",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 20
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_20",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_20",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 20
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000018",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 23
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_23",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_23",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 23
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000019",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 26
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_26",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_26",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 26
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000020",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 29
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_29",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_29",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 29
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000021",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 32
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_32",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_32",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 32
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000022",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_35",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_35",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000023",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_38",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_38",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000024",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_41",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_41",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "FPC-000025",
+      "version": "1.0.0",
+      "category": "eligibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "follow",
+        "eligibility",
+        "kx5a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "lte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "follow_review=eligible",
+        "weight": 4,
+        "signal": "follow_eligibility",
+        "score_target": "day_master.follow_pattern_score",
+        "outcome": "eligible",
+        "publishes": "follow_pattern_diagnostics"
+      },
+      "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+      "references": [
+        {
+          "target": "REF-FPC-eligibility",
+          "relation": "references"
+        }
+      ],
+      "code": "eligible_integrity_44",
+      "name": "Đủ điều kiện xét Tòng: eligible_integrity_44",
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "lte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "follow_review=eligible",
+          "weight": 4,
+          "signal": "follow_eligibility",
+          "score_target": "day_master.follow_pattern_score",
+          "outcome": "eligible",
+          "publishes": "follow_pattern_diagnostics"
+        },
+        "explanation": "Thân cực nhược hoặc cách đã vỡ trên output đã công bố mới được xét Tòng. Chỉ đọc season/strength/temperature/pattern/UGP scores. Không đọc lá số thô. Không sửa PAT/PEV/UG.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "eligibility"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "follow_pattern_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}

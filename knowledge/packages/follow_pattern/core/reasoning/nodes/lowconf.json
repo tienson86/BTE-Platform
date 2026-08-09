@@ -1,0 +1,310 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-FPC-LOWCONF-OBS-001",
+      "node_type": "observation",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "observation_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-FPC-LOWCONF-EVD-001",
+      "node_type": "evidence",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": "FPC-000238",
+      "source_evidence": "evidence/bundles/FPC-000238.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-FPC-LOWCONF-INF-001",
+      "node_type": "inference",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": "FPC-000238",
+      "source_evidence": "evidence/bundles/FPC-000238.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-FPC-LOWCONF-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": "FPC-000238",
+      "source_evidence": "evidence/bundles/FPC-000238.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "intermediate_conclusion_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-FPC-LOWCONF-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": "FPC-000238",
+      "source_evidence": "evidence/bundles/FPC-000238.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "final_conclusion_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-FPC-LOWCONF-ALT-001",
+      "node_type": "alternative",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": "FPC-000238",
+      "source_evidence": "evidence/bundles/FPC-000238.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "alternative_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-FPC-LOWCONF-CON-001",
+      "node_type": "conflict",
+      "title": "Độ tin thấp",
+      "description": "Độ tin thấp: đọc FPC + PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream.",
+      "source_rule": "FPC-000238",
+      "source_evidence": "evidence/bundles/FPC-000238.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "conflict_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_10_follow_pattern_core",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    }
+  ]
+}

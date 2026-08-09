@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-CBC-CONFLICT-001",
+      "source": "RN-CBC-CONFLICT-OBS-001",
+      "target": "RN-CBC-CONFLICT-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-CONFLICT-002",
+      "source": "RN-CBC-CONFLICT-EVD-001",
+      "target": "RN-CBC-CONFLICT-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-CONFLICT-003",
+      "source": "RN-CBC-CONFLICT-INF-001",
+      "target": "RN-CBC-CONFLICT-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-CONFLICT-004",
+      "source": "RN-CBC-CONFLICT-MID-001",
+      "target": "RN-CBC-CONFLICT-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-CBC-CONFLICT-005",
+      "source": "RN-CBC-CONFLICT-OBS-001",
+      "target": "RN-CBC-CONFLICT-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-CBC-CONFLICT-006",
+      "source": "RN-CBC-CONFLICT-CON-001",
+      "target": "RN-CBC-CONFLICT-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

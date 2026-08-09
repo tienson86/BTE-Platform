@@ -1,0 +1,3658 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_11_transformation_core",
+  "category": "earthly_branch_six_combination",
+  "count": 25,
+  "objects": [
+    {
+      "id": "TRC-000031",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "zi_chou",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_zi_chou",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_zi_chou",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_zi_chou_00",
+      "name": "Lục hợp Địa chi: zi_chou",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_zi_chou",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_zi_chou",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000032",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "yin_hai",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_yin_hai",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_yin_hai",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_yin_hai_01",
+      "name": "Lục hợp Địa chi: yin_hai",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_yin_hai",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_yin_hai",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000033",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "mao_xu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_mao_xu",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_mao_xu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_mao_xu_02",
+      "name": "Lục hợp Địa chi: mao_xu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_mao_xu",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_mao_xu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000034",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "chen_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_chen_you",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_chen_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_chen_you_03",
+      "name": "Lục hợp Địa chi: chen_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_chen_you",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_chen_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000035",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "si_shen",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 54
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_si_shen",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_si_shen",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_si_shen_04",
+      "name": "Lục hợp Địa chi: si_shen",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 54
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_si_shen",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_si_shen",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000036",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "wu_wei",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_wu_wei",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_wu_wei",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_wu_wei_05",
+      "name": "Lục hợp Địa chi: wu_wei",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_wu_wei",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_wu_wei",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000037",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "zi_chou",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_zi_chou",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_zi_chou",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_zi_chou_06",
+      "name": "Lục hợp Địa chi: zi_chou",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_zi_chou",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_zi_chou",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000038",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "yin_hai",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_yin_hai",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_yin_hai",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_yin_hai_07",
+      "name": "Lục hợp Địa chi: yin_hai",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_yin_hai",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_yin_hai",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000039",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "mao_xu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_mao_xu",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_mao_xu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_mao_xu_08",
+      "name": "Lục hợp Địa chi: mao_xu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_mao_xu",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_mao_xu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000040",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "chen_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_chen_you",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_chen_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_chen_you_09",
+      "name": "Lục hợp Địa chi: chen_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_chen_you",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_chen_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000041",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "si_shen",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_si_shen",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_si_shen",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_si_shen_10",
+      "name": "Lục hợp Địa chi: si_shen",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_si_shen",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_si_shen",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000042",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "wu_wei",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_wu_wei",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_wu_wei",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_wu_wei_11",
+      "name": "Lục hợp Địa chi: wu_wei",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_wu_wei",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_wu_wei",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000043",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "zi_chou",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_zi_chou",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_zi_chou",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_zi_chou_12",
+      "name": "Lục hợp Địa chi: zi_chou",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_zi_chou",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_zi_chou",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000044",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "yin_hai",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_yin_hai",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_yin_hai",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_yin_hai_13",
+      "name": "Lục hợp Địa chi: yin_hai",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_yin_hai",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_yin_hai",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000045",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "mao_xu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_mao_xu",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_mao_xu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_mao_xu_14",
+      "name": "Lục hợp Địa chi: mao_xu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_mao_xu",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_mao_xu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000046",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "chen_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_chen_you",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_chen_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_chen_you_15",
+      "name": "Lục hợp Địa chi: chen_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_chen_you",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_chen_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000047",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "si_shen",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 54
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_si_shen",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_si_shen",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_si_shen_16",
+      "name": "Lục hợp Địa chi: si_shen",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 54
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_si_shen",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_si_shen",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000048",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "wu_wei",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_wu_wei",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_wu_wei",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_wu_wei_17",
+      "name": "Lục hợp Địa chi: wu_wei",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_wu_wei",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_wu_wei",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000049",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "zi_chou",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_zi_chou",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_zi_chou",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_zi_chou_18",
+      "name": "Lục hợp Địa chi: zi_chou",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_zi_chou",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_zi_chou",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000050",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "yin_hai",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_yin_hai",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_yin_hai",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_yin_hai_19",
+      "name": "Lục hợp Địa chi: yin_hai",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_yin_hai",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_yin_hai",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000051",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "mao_xu",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_mao_xu",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_mao_xu",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_mao_xu_20",
+      "name": "Lục hợp Địa chi: mao_xu",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_mao_xu",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_mao_xu",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000052",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "chen_you",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 59
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_chen_you",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_chen_you",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_chen_you_21",
+      "name": "Lục hợp Địa chi: chen_you",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 59
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_chen_you",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_chen_you",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000053",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "si_shen",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_si_shen",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_si_shen",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_si_shen_22",
+      "name": "Lục hợp Địa chi: si_shen",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_si_shen",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_si_shen",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000054",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "wu_wei",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_wu_wei",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_wu_wei",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_wu_wei_23",
+      "name": "Lục hợp Địa chi: wu_wei",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_wu_wei",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_wu_wei",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    },
+    {
+      "id": "TRC-000055",
+      "version": "1.0.0",
+      "category": "earthly_branch_six_combination",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "transformation",
+        "six_combination",
+        "zi_chou",
+        "kx5b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "transformation_type=six_zi_chou",
+        "weight": 7,
+        "signal": "transformation_type",
+        "score_target": "day_master.transformation_score",
+        "outcome": "six_zi_chou",
+        "publishes": "transformation_type"
+      },
+      "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+      "references": [
+        {
+          "target": "REF-TRC-earthly_branch_six_combination",
+          "relation": "references"
+        }
+      ],
+      "code": "six_zi_chou_24",
+      "name": "Lục hợp Địa chi: zi_chou",
+      "metadata": {
+        "package_id": "bz_11_transformation_core",
+        "domain_id": "DOM-TRANSFORMATION",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-5B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "transformation_type=six_zi_chou",
+          "weight": 7,
+          "signal": "transformation_type",
+          "score_target": "day_master.transformation_score",
+          "outcome": "six_zi_chou",
+          "publishes": "transformation_type"
+        },
+        "explanation": "Lục hợp mô hình hóa bằng season/pattern_stability đã công bố. Không đọc chi thô.",
+        "evaluation": {
+          "weight": 7,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "earthly_branch_six_combination"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "transformation_score"
+        },
+        "consumes": {
+          "season_score": [
+            "season_score"
+          ],
+          "strength_score": [
+            "strength_score"
+          ],
+          "temperature_score": [
+            "temperature_score"
+          ],
+          "pattern_score": [
+            "pattern_score"
+          ],
+          "pattern_quality": [
+            "pattern_quality"
+          ],
+          "pattern_confidence": [
+            "pattern_confidence"
+          ],
+          "pattern_integrity": [
+            "pattern_integrity"
+          ],
+          "pattern_stability": [
+            "pattern_stability"
+          ],
+          "follow_pattern": [
+            "follow_pattern"
+          ],
+          "follow_pattern_type": [
+            "follow_pattern_type"
+          ],
+          "follow_pattern_confidence": [
+            "follow_pattern_confidence"
+          ],
+          "follow_pattern_score": [
+            "follow_pattern_score"
+          ],
+          "resolved_useful_god": [
+            "resolved_useful_god"
+          ],
+          "decision_priority": [
+            "decision_priority"
+          ],
+          "resolution_confidence": [
+            "resolution_confidence"
+          ]
+        }
+      }
+    }
+  ]
+}
