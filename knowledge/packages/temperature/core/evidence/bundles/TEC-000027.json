@@ -1,0 +1,65 @@
+{
+  "rule_id": "TEC-000027",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Thủy ≥3 tăng hàn",
+    "why": "Thủy nhiều sinh hàn. Không tính strength_score.",
+    "when": "Khi water_count=3.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "Thủy nhiều sinh hàn. Không tính strength_score."
+  },
+  "rationale": "Luật `cold_water_count` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000003",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000027-01",
+      "rule_id": "TEC-000027",
+      "polarity": "positive",
+      "chart_facts": {
+        "water_count": 3
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000027-01",
+      "rule_id": "TEC-000027",
+      "polarity": "negative",
+      "chart_facts": {
+        "water_count": 0
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000027-01",
+      "rule_id": "TEC-000027",
+      "kind": "scope",
+      "chart_facts": {
+        "water_count": 3
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

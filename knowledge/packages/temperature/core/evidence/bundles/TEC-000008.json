@@ -1,0 +1,67 @@
+{
+  "rule_id": "TEC-000008",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Pha mid mùa winter: cold",
+    "why": "Pha mid của mùa đã biết (winter) tăng thiên cold. Không định nghĩa pha mùa (SEC).",
+    "when": "Khi season=winter, season_phase=mid.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "Pha mid của mùa đã biết (winter) tăng thiên cold. Không định nghĩa pha mùa (SEC)."
+  },
+  "rationale": "Luật `adj_phase_winter_mid` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000001",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000008-01",
+      "rule_id": "TEC-000008",
+      "polarity": "positive",
+      "chart_facts": {
+        "season": "winter",
+        "season_phase": "mid"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000008-01",
+      "rule_id": "TEC-000008",
+      "polarity": "negative",
+      "chart_facts": {
+        "season": "not_winter"
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000008-01",
+      "rule_id": "TEC-000008",
+      "kind": "scope",
+      "chart_facts": {
+        "season": "winter",
+        "season_phase": "mid"
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

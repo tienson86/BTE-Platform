@@ -1,0 +1,74 @@
+{
+  "rule_id": "TEC-000001",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Điều nhiệt mùa Xuân",
+    "why": "Mùa Xuân điều chỉnh khí hậu sang warm (+8 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_003.",
+    "when": "Khi season=spring.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "Mùa Xuân điều chỉnh khí hậu sang warm (+8 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_003."
+  },
+  "rationale": "Luật `adj_spring` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000001",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000001-01",
+      "rule_id": "TEC-000001",
+      "polarity": "positive",
+      "chart_facts": {
+        "season": "spring"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000001-01",
+      "rule_id": "TEC-000001",
+      "polarity": "negative",
+      "chart_facts": {
+        "season": "not_spring"
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000001-01",
+      "rule_id": "TEC-000001",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "season": "spring"
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "TEC-000002",
+    "TEC-000003",
+    "TEC-000004",
+    "TEC-000005",
+    "TEC-000006",
+    "TEC-000007",
+    "TEC-000008",
+    "TEC-000009"
+  ],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

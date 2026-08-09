@@ -1,0 +1,74 @@
+{
+  "rule_id": "TEC-000014",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Khí hậu tháng Mão: warm",
+    "why": "Địa chi tháng Mão mang khí hậu warm (+8 climate). Không ánh xạ chi→mùa (SEC month_branch).",
+    "when": "Khi month_branch=mao.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "Địa chi tháng Mão mang khí hậu warm (+8 climate). Không ánh xạ chi→mùa (SEC month_branch)."
+  },
+  "rationale": "Luật `br_mao` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000014-01",
+      "rule_id": "TEC-000014",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch": "mao"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000014-01",
+      "rule_id": "TEC-000014",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch": "not_mao"
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000014-01",
+      "rule_id": "TEC-000014",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "month_branch": "mao"
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "TEC-000013",
+    "TEC-000015",
+    "TEC-000016",
+    "TEC-000017",
+    "TEC-000018",
+    "TEC-000019",
+    "TEC-000020",
+    "TEC-000021"
+  ],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

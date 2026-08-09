@@ -1,0 +1,73 @@
+{
+  "rule_id": "TEC-000048",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Táo: dry_normal",
+    "why": "Không táo (dry_005). Trục táo–thấm, không phải sức thân.",
+    "when": "Khi dryness_level=normal.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "Không táo (dry_005). Trục táo–thấm, không phải sức thân."
+  },
+  "rationale": "Luật `dry_normal` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000005",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000048-01",
+      "rule_id": "TEC-000048",
+      "polarity": "positive",
+      "chart_facts": {
+        "dryness_level": "normal"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000048-01",
+      "rule_id": "TEC-000048",
+      "polarity": "negative",
+      "chart_facts": {
+        "dryness_level": "not_normal"
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000048-01",
+      "rule_id": "TEC-000048",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "dryness_level": "normal"
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "TEC-000041",
+    "TEC-000042",
+    "TEC-000043",
+    "TEC-000044",
+    "TEC-000045",
+    "TEC-000046",
+    "TEC-000047"
+  ],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

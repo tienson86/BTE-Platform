@@ -1,0 +1,67 @@
+{
+  "rule_id": "TEC-000030",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Nhật Mộc gặp hàn",
+    "why": "spc_004 Mộc đông tàn. Không tính strength_score.",
+    "when": "Khi day_master_element=wood, climate_type=cold.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "spc_004 Mộc đông tàn. Không tính strength_score."
+  },
+  "rationale": "Luật `cold_dm_wood_cold` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000003",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000030-01",
+      "rule_id": "TEC-000030",
+      "polarity": "positive",
+      "chart_facts": {
+        "day_master_element": "wood",
+        "climate_type": "cold"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000030-01",
+      "rule_id": "TEC-000030",
+      "polarity": "negative",
+      "chart_facts": {
+        "day_master_element": "not_wood"
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000030-01",
+      "rule_id": "TEC-000030",
+      "kind": "scope",
+      "chart_facts": {
+        "day_master_element": "wood",
+        "climate_type": "cold"
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}
