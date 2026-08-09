@@ -1,0 +1,67 @@
+{
+  "rule_id": "SEC-000006",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Tháng lệnh Dần",
+    "why": "Địa chi tháng Dần thuộc spring.",
+    "when": "Khi month_branch=dan.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật exclusive khác trong cùng nhóm được chọn.",
+    "summary": "Địa chi tháng Dần thuộc spring."
+  },
+  "rationale": "Luật `month_branch_dan` thuộc nhóm `month_branch_mapping`. Không thay Temperature / Useful God / Pattern; chỉ luận khí mùa.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000006-01",
+      "rule_id": "SEC-000006",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch": "dan"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000006-01",
+      "rule_id": "SEC-000006",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch": "not_dan"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000006-01",
+      "rule_id": "SEC-000006",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "month_branch": "dan"
+      },
+      "note": "Cạnh tranh exclusive cùng nhóm."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "generator_version": "1.0.0",
+    "profile_id": "GEN-INST-SEASONAL",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

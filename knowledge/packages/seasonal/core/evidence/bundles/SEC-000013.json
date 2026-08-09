@@ -1,0 +1,75 @@
+{
+  "rule_id": "SEC-000013",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Tháng lệnh Dậu",
+    "why": "Địa chi tháng Dậu thuộc autumn.",
+    "when": "Khi month_branch=dau.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật exclusive khác trong cùng nhóm được chọn.",
+    "summary": "Địa chi tháng Dậu thuộc autumn."
+  },
+  "rationale": "Luật `month_branch_dau` thuộc nhóm `month_branch_mapping`. Không thay Temperature / Useful God / Pattern; chỉ luận khí mùa.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000013-01",
+      "rule_id": "SEC-000013",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch": "dau"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000013-01",
+      "rule_id": "SEC-000013",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch": "not_dau"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000013-01",
+      "rule_id": "SEC-000013",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "month_branch": "dau"
+      },
+      "note": "Cạnh tranh exclusive cùng nhóm."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "SEC-000006",
+    "SEC-000007",
+    "SEC-000008",
+    "SEC-000009",
+    "SEC-000010",
+    "SEC-000011",
+    "SEC-000012"
+  ],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "generator_version": "1.0.0",
+    "profile_id": "GEN-INST-SEASONAL",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

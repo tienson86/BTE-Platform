@@ -1,0 +1,70 @@
+{
+  "rule_id": "SEC-000020",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Tháng âm 3 (Thìn)",
+    "why": "Tháng âm lịch 3 (Thìn) ánh xạ sang mùa spring.",
+    "when": "Khi lunar_month=3.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật exclusive khác trong cùng nhóm được chọn.",
+    "summary": "Tháng âm lịch 3 (Thìn) ánh xạ sang mùa spring."
+  },
+  "rationale": "Luật `lunar_month_03` thuộc nhóm `lunar_month_mapping`. Không thay Temperature / Useful God / Pattern; chỉ luận khí mùa.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000020-01",
+      "rule_id": "SEC-000020",
+      "polarity": "positive",
+      "chart_facts": {
+        "lunar_month": 3
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000020-01",
+      "rule_id": "SEC-000020",
+      "polarity": "negative",
+      "chart_facts": {
+        "lunar_month": "not_3"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000020-01",
+      "rule_id": "SEC-000020",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "lunar_month": 3
+      },
+      "note": "Cạnh tranh exclusive cùng nhóm."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "SEC-000018",
+    "SEC-000019"
+  ],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "generator_version": "1.0.0",
+    "profile_id": "GEN-INST-SEASONAL",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

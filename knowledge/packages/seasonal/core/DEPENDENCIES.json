@@ -1,0 +1,23 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_01_strength_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "Joint strength+season interpretation later; not required to load this package."
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independent. Optional Strength Core for joint interpretation later. Not a load requirement."
+}
