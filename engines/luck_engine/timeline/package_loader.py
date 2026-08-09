@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from engines.luck_engine.exceptions import LuckPackageLoadError
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     PACKAGE_ID,
     PACKAGE_VERSION_CONSTRAINT,
     REQUIRED_SCHEMA_VERSION,

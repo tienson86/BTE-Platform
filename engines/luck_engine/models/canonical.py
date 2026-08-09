@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any, Mapping
 
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     LAYER_ANNUAL,
     LAYER_DAILY,
     LAYER_HOURLY,

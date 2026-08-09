@@ -8,6 +8,57 @@ import pytest
 
 
 @pytest.fixture
+def analysis_snapshot() -> dict[str, Any]:
+    """Frozen AX-2 shaped snapshot. Not a live pipeline run."""
+    return {
+        "pipeline_id": "canonical_analysis_pipeline",
+        "pipeline_version": "2.0.0",
+        "success": True,
+        "seasonal": {"season": "Xuân", "season_phase": "mid", "month_branch": "Dần"},
+        "strength": {"day_master": "Mậu", "strength_level": "strong", "strength_score": 78},
+        "temperature": {
+            "temperature_level": "mild",
+            "day_master_element": "Thổ",
+            "temperature_score": 48,
+        },
+        "pattern": {"principal_pattern": "Kiến Lộc"},
+        "pattern_evaluation": {
+            "pattern_quality": "good",
+            "pattern_confidence": "high",
+            "pattern_score": 82,
+        },
+        "useful_god": {
+            "useful_god": "Giáp",
+            "favorable_gods": ["Giáp"],
+            "unfavorable_gods": ["Canh"],
+        },
+        "stage_order": [
+            "calendar",
+            "four_pillars",
+            "seasonal",
+            "strength",
+            "temperature",
+            "pattern",
+            "pattern_evaluation",
+            "useful_god",
+        ],
+    }
+
+
+@pytest.fixture
+def decision_snapshot() -> dict[str, Any]:
+    """Frozen AX-3 shaped snapshot. Not a live pipeline run."""
+    return {
+        "pipeline_id": "canonical_decision_pipeline",
+        "decision_pipeline_version": "1.0.0",
+        "success": True,
+        "final_useful_god": "Giáp",
+        "final_favorable_gods": ["Giáp"],
+        "final_unfavorable_gods": ["Canh"],
+    }
+
+
+@pytest.fixture
 def natal_payload() -> dict[str, Any]:
     """Deterministic natal identity."""
     return {

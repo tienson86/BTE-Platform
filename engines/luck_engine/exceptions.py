@@ -27,3 +27,23 @@ class TimelineContractError(TimelineError):
 
 class LuckPackageLoadError(TimelineError):
     """Raised when the Luck Foundation package cannot be admitted."""
+
+
+class LuckAnalysisError(LuckEngineError):
+    """Base error for LE-2 Luck Analysis failures."""
+
+
+class LuckAnalysisValidationError(LuckAnalysisError):
+    """Raised when Luck Analysis validation fails before publication."""
+
+
+class DuplicateImpactError(LuckAnalysisError):
+    """Raised when a stage republishes an existing impact output."""
+
+
+class ImpactDependencyError(LuckAnalysisError):
+    """Raised when impact stage order or inputs are violated."""
+
+
+class ImpactRegistryError(LuckAnalysisError):
+    """Raised when the impact registry catalog is invalid."""

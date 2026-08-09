@@ -7,7 +7,7 @@ from types import MappingProxyType
 from typing import Any, Mapping
 
 from engines.luck_engine.models.canonical import NatalChart
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     RESERVED_RESULT_STATUS,
     TIMELINE_VERSION,
 )

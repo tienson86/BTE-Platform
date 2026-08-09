@@ -9,7 +9,7 @@ from engines.luck_engine.contracts.luck_contracts import (
     LuckTimeline,
 )
 from engines.luck_engine.contracts.timeline_contract import timeline_contract
-from engines.luck_engine.timeline.constants import PUBLISHED_OUTPUTS as TIMELINE_PUBLISHED_OUTPUTS
+from engines.luck_engine.timeline_constants import PUBLISHED_OUTPUTS as TIMELINE_PUBLISHED_OUTPUTS
 
 __all__ = [
     "LuckTimeline",

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     FOUNDATION_VERSION,
     PACKAGE_ID,
     PUBLISHED_INPUTS,

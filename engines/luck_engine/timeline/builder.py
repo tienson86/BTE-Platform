@@ -11,7 +11,7 @@ from engines.luck_engine.contracts.luck_contracts import (
     LuckTimeline,
 )
 from engines.luck_engine.models.canonical import NatalChart
-from engines.luck_engine.timeline.constants import TIMELINE_VERSION
+from engines.luck_engine.timeline_constants import TIMELINE_VERSION
 from engines.luck_engine.timeline.validation import validate_timeline
 
 

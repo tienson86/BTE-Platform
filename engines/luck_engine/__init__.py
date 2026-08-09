@@ -98,6 +98,13 @@ from .models import (
     MonthlyLuck,
     NatalChart,
 )
+from .analysis import (
+    ANALYSIS_VERSION,
+    ImpactRegistry,
+    LuckAnalysisEngine,
+    LuckAnalysisResult,
+    luck_analysis_contract,
+)
 from .timeline import (
     TIMELINE_VERSION,
     TimelineRegistry,
@@ -131,6 +138,11 @@ __all__ = [
     "construct_timeline",
     "timeline_contract",
     "TIMELINE_VERSION",
+    "LuckAnalysisEngine",
+    "LuckAnalysisResult",
+    "ImpactRegistry",
+    "luck_analysis_contract",
+    "ANALYSIS_VERSION",
     "TimelineValidationError",
     "TimelineRegistryError",
     "TimelineContractError",

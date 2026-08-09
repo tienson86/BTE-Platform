@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Any, Iterable
 
 from engines.luck_engine.exceptions import TimelineRegistryError
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     LAYER_ANNUAL,
     LAYER_DAILY,
     LAYER_HOURLY,

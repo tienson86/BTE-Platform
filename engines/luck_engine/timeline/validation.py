@@ -6,7 +6,7 @@ from typing import Any, Iterable, Mapping
 
 from engines.luck_engine.contracts.luck_contracts import LuckCycle, LuckPeriod, LuckTimeline
 from engines.luck_engine.exceptions import TimelineValidationError
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     FORBIDDEN_TIMELINE_FIELDS,
     LAYER_ANNUAL,
     LAYER_DAILY,

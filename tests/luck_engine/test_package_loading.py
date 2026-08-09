@@ -8,7 +8,7 @@ import pytest
 
 from engines.luck_engine.exceptions import LuckPackageLoadError
 from engines.luck_engine.timeline import LuckPackageLoader
-from engines.luck_engine.timeline.constants import PACKAGE_ID, PUBLISHED_INPUTS, PUBLISHED_OUTPUTS
+from engines.luck_engine.timeline_constants import PACKAGE_ID, PUBLISHED_INPUTS, PUBLISHED_OUTPUTS
 
 
 def test_load_released_luck_foundation() -> None:

@@ -17,7 +17,7 @@ from engines.luck_engine.timeline.registry import TimelineLayerRecord
 def test_default_registry_order_and_status() -> None:
     """Registry lists natal through hourly with reserved daily/hourly."""
     registry = TimelineRegistry()
-    assert [item.layer_id for item in registry.to_list()] == list(CANONICAL_LAYER_ORDER)
+    assert [item["layer_id"] for item in registry.to_list()] == list(CANONICAL_LAYER_ORDER)
     assert tuple(item.layer_id for item in registry.active_layers()) == ACTIVE_TIMELINE_LAYERS
     assert tuple(item.layer_id for item in registry.reserved_layers()) == RESERVED_TIMELINE_LAYERS
     assert registry.is_active("major_luck") is True

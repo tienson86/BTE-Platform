@@ -9,7 +9,7 @@ import pytest
 from engines.luck_engine.contracts import timeline_contract
 from engines.luck_engine.exceptions import TimelineValidationError
 from engines.luck_engine.timeline import construct_timeline, validate_contract_integrity
-from engines.luck_engine.timeline.constants import PUBLISHED_OUTPUTS
+from engines.luck_engine.timeline_constants import PUBLISHED_OUTPUTS
 
 
 def test_timeline_contract_has_no_scores() -> None:

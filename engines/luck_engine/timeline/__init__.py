@@ -1,7 +1,7 @@
 """Luck Timeline Foundation (LE-1). Registry, construction, validation."""
 
 from engines.luck_engine.timeline.builder import construct_timeline
-from engines.luck_engine.timeline.constants import (
+from engines.luck_engine.timeline_constants import (
     PACKAGE_ID,
     PUBLISHED_OUTPUTS,
     TIMELINE_VERSION,
