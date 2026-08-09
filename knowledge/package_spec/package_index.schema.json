@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/package_spec/package_index.schema.json",
+  "title": "BTE Knowledge Package Index",
+  "description": "Deterministic catalog of Knowledge Packages for loading, validation, and offline distribution.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "index_version",
+    "schema_version",
+    "deterministic",
+    "sort",
+    "packages"
+  ],
+  "properties": {
+    "index_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "package_spec_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "knowledge_version": {
+      "type": "string"
+    },
+    "deterministic": {
+      "type": "boolean",
+      "const": true
+    },
+    "rebuildable": {
+      "type": "boolean",
+      "default": true
+    },
+    "sort": {
+      "type": "object",
+      "required": [
+        "keys",
+        "order",
+        "locale"
+      ],
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "order": {
+          "type": "string",
+          "const": "asc"
+        },
+        "locale": {
+          "type": "string",
+          "const": "C"
+        }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/index_entry"
+      }
+    }
+  },
+  "$defs": {
+    "index_entry": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "package_id",
+        "package_version",
+        "package_type",
+        "status",
+        "path",
+        "checksum"
+      ],
+      "properties": {
+        "package_id": {
+          "type": "string"
+        },
+        "package_name": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "package_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "domain_id": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path from knowledge root or distribution root."
+        },
+        "checksum": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required_packages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

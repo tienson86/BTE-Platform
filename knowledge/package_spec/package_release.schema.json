@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/package_spec/package_release.schema.json",
+  "title": "BTE Knowledge Package Release Record",
+  "description": "Immutable release metadata for a Knowledge Package version.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "release_id",
+    "package_id",
+    "package_version",
+    "release_date",
+    "release_author",
+    "release_notes",
+    "migration_notes",
+    "checksum",
+    "supported_platform_versions",
+    "immutability"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "package_spec_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^REL-[A-Z0-9_]+-[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "REL-<PACKAGE_ID_UPPER>-<package_version>"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "knowledge_version": {
+      "type": "string"
+    },
+    "schema_version_released": {
+      "type": "string"
+    },
+    "release_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "released_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "release_author": {
+      "type": "string"
+    },
+    "release_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "migration_notes": {
+      "type": "string",
+      "description": "Empty string allowed when the release is additive with no migration."
+    },
+    "checksum": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "supported_platform_versions": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "min_platform_version"
+      ],
+      "properties": {
+        "min_platform_version": {
+          "type": "string"
+        },
+        "max_platform_version": {
+          "type": "string"
+        },
+        "min_engine_version": {
+          "type": "string"
+        },
+        "min_api_version": {
+          "type": "string"
+        }
+      }
+    },
+    "immutability": {
+      "type": "object",
+      "required": [
+        "immutable"
+      ],
+      "properties": {
+        "immutable": {
+          "type": "boolean",
+          "const": true
+        },
+        "policy": {
+          "type": "string",
+          "const": "released_packages_are_immutable"
+        }
+      }
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Previous package_version superseded by this release."
+    },
+    "breaking_changes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

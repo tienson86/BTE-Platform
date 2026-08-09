@@ -1,0 +1,76 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "ex_03_report_demo",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "report",
+    "status": "validated",
+    "language": "en",
+    "languages": ["en"],
+    "author": "BTE Knowledge Architecture",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-REPORT",
+    "tags": ["example", "report", "kd3"],
+    "description": "Report block fixture consuming an interpretation package export."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": ["rules/report_blocks.json"]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": ["README.md"]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": ["CHANGELOG.md"]
+    }
+  },
+  "dependencies": {
+    "required": [
+      {
+        "package_id": "ex_02_interpretation_demo",
+        "version_constraint": "^1.0.0",
+        "kind": "required",
+        "reason": "Report fixtures consume interpretation section output.",
+        "signals": ["example_section"]
+      }
+    ],
+    "optional": [
+      {
+        "package_id": "ex_01_analytical_demo",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "Optional direct analytical signal for mixed report layouts.",
+        "signals": ["example_signal"]
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "EXR-000001",
+      "entity_type": "ENT-REPORT_BLOCK",
+      "path": "rules/report_blocks.json",
+      "version": "1.0.0"
+    }
+  ],
+  "required_packages": ["ex_02_interpretation_demo"],
+  "optional_packages": ["ex_01_analytical_demo"],
+  "validation_profile": "PVP-STANDARD",
+  "release_information": null,
+  "files": [
+    {"path": "PACKAGE.json", "type": "identity", "required": true},
+    {"path": "MANIFEST.json", "type": "manifest", "required": true},
+    {"path": "DEPENDENCIES.json", "type": "dependencies", "required": true},
+    {"path": "VALIDATION.json", "type": "validation", "required": true},
+    {"path": "README.md", "type": "documentation", "required": true},
+    {"path": "CHANGELOG.md", "type": "changelog", "required": true},
+    {"path": "rules/report_blocks.json", "type": "rules", "required": true, "object_count": 1}
+  ]
+}

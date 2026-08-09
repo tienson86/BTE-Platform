@@ -1,0 +1,28 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "ex_02_interpretation_demo",
+  "package_version": "1.0.0",
+  "profile": "PVP-STANDARD",
+  "validated_at": "2026-08-09T00:00:00Z",
+  "status": "pass",
+  "counts": {"errors": 0, "warnings": 0, "info": 1},
+  "checks": [
+    {"id": "schema_validation", "status": "pass", "severity_if_fail": "error"},
+    {"id": "metadata_validation", "status": "pass", "severity_if_fail": "error"},
+    {"id": "dependency_validation", "status": "pass", "severity_if_fail": "error"},
+    {"id": "reference_validation", "status": "pass", "severity_if_fail": "error"},
+    {"id": "package_integrity", "status": "pass", "severity_if_fail": "error"},
+    {"id": "checksum_validation", "status": "skipped", "severity_if_fail": "error"},
+    {"id": "compatibility_validation", "status": "pass", "severity_if_fail": "error"}
+  ],
+  "diagnostics": [
+    {
+      "code": "PKG-INFO-FIXTURE",
+      "severity": "info",
+      "message": "Specification fixture. Not production interpretation knowledge.",
+      "record_id": "EXI-000001",
+      "path": "rules/sentence_templates.json"
+    }
+  ]
+}

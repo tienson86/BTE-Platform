@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/package_spec/package.schema.json",
+  "title": "BTE Knowledge Package Identity",
+  "description": "Canonical identity envelope for a Knowledge Package. The package is the smallest independently versioned, validated, and deployable knowledge unit.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "package_id",
+    "package_name",
+    "package_type",
+    "package_version",
+    "schema_version",
+    "knowledge_version",
+    "author",
+    "owner",
+    "status",
+    "language",
+    "created_at",
+    "updated_at",
+    "compatibility",
+    "checksum",
+    "license",
+    "description"
+  ],
+  "properties": {
+    "package_spec_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Knowledge Package Specification generation (KD-3)."
+    },
+    "package_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9][a-z0-9_]*[a-z0-9]$",
+      "description": "Immutable lowercase path-safe identifier. Do not encode version."
+    },
+    "package_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display name. May be localized in metadata."
+    },
+    "package_type": {
+      "type": "string",
+      "enum": [
+        "minimal",
+        "analytical",
+        "interpretation",
+        "report",
+        "metadata",
+        "sentence",
+        "reference",
+        "mixed",
+        "feng_shui",
+        "qi_men",
+        "i_ching"
+      ]
+    },
+    "package_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "SemVer of this package distribution."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0",
+      "description": "Knowledge Database V2 envelope schema generation."
+    },
+    "knowledge_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Knowledge corpus generation this package targets."
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Governance owner responsible for release and deprecation."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "validated",
+        "released",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Primary BCP 47 language tag. Use mul for mixed-language packages."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      },
+      "description": "All languages shipped in this package."
+    },
+    "domain_id": {
+      "type": "string",
+      "description": "Primary taxonomy domain, e.g. DOM-STRENGTH."
+    },
+    "category_id": {
+      "type": "string",
+      "description": "Optional taxonomy category under the primary domain."
+    },
+    "school": {
+      "type": "string",
+      "description": "Optional BaZi or future-discipline school identifier."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "compatibility": {
+      "$ref": "#/$defs/compatibility"
+    },
+    "checksum": {
+      "$ref": "#/$defs/checksum"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "compatible_with_v1",
+        "min_schema_version"
+      ],
+      "properties": {
+        "compatible_with_v1": {
+          "type": "boolean"
+        },
+        "compatibility_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "Declared compatibility generation used by resolvers."
+        },
+        "min_schema_version": {
+          "type": "string"
+        },
+        "max_schema_version": {
+          "type": "string"
+        },
+        "min_knowledge_version": {
+          "type": "string"
+        },
+        "max_knowledge_version": {
+          "type": "string"
+        },
+        "min_platform_version": {
+          "type": "string"
+        },
+        "max_platform_version": {
+          "type": "string"
+        },
+        "supported_schools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supported_languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checksum": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Lowercase hex SHA-256. Null allowed only before released status."
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Relative paths included in the digest, sorted ascending (C locale)."
+        }
+      }
+    }
+  }
+}

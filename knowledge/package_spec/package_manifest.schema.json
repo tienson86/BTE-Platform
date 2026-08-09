@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/package_spec/package_manifest.schema.json",
+  "title": "BTE Knowledge Package Manifest",
+  "description": "Canonical manifest for a Knowledge Package: metadata, contents, exports, dependencies, validation, and release pointers.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "manifest_version",
+    "package_id",
+    "package_version",
+    "metadata",
+    "components",
+    "dependencies",
+    "exported_objects",
+    "required_packages",
+    "optional_packages",
+    "validation_profile",
+    "release_information"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "package_type",
+        "status",
+        "language",
+        "author",
+        "owner",
+        "domain_id"
+      ],
+      "properties": {
+        "package_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "author": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "domain_id": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": "string"
+        },
+        "school": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentation"
+      ],
+      "properties": {
+        "rules": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "metadata": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "references": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "examples": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "tests": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "documentation": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "assets": {
+          "$ref": "#/$defs/component_ref"
+        },
+        "changelog": {
+          "$ref": "#/$defs/component_ref"
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "required",
+        "optional",
+        "conflicts"
+      ],
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "$ref": "package_dependency.schema.json#/$defs/dependency_entry"
+          }
+        },
+        "optional": {
+          "type": "array",
+          "items": {
+            "$ref": "package_dependency.schema.json#/$defs/dependency_entry"
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "$ref": "package_dependency.schema.json#/$defs/conflict_entry"
+          }
+        }
+      }
+    },
+    "exported_objects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/exported_object"
+      }
+    },
+    "required_packages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered unique package_id list mirroring dependencies.required."
+    },
+    "optional_packages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered unique package_id list mirroring dependencies.optional."
+    },
+    "validation_profile": {
+      "type": "string",
+      "enum": [
+        "PVP-MINIMAL",
+        "PVP-STANDARD",
+        "PVP-RELEASE"
+      ]
+    },
+    "release_information": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Inline release summary or null before release. Full record lives in RELEASE.json.",
+      "additionalProperties": true,
+      "properties": {
+        "release_id": {
+          "type": "string"
+        },
+        "release_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "release_author": {
+          "type": "string"
+        },
+        "release_notes_path": {
+          "type": "string"
+        },
+        "migration_notes_path": {
+          "type": "string"
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "type"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "object_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "$defs": {
+    "component_ref": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "present",
+        "required",
+        "paths"
+      ],
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "exported_object": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "entity_type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entity_type": {
+          "type": "string",
+          "description": "Taxonomy entity id or short type, e.g. ENT-RULE or rule."
+        },
+        "path": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

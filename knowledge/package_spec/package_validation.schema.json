@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/package_spec/package_validation.schema.json",
+  "title": "BTE Knowledge Package Validation",
+  "description": "Validation profiles and report envelope for Knowledge Packages. Specification only; no runtime implementation in KD-3.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "package_id",
+    "package_version",
+    "profile",
+    "status",
+    "checks",
+    "diagnostics"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "package_spec_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string"
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "PVP-MINIMAL",
+        "PVP-STANDARD",
+        "PVP-RELEASE"
+      ]
+    },
+    "validated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "pass_with_warnings",
+        "fail",
+        "not_run"
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "info": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/check_result"
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    }
+  },
+  "$defs": {
+    "check_id": {
+      "type": "string",
+      "enum": [
+        "schema_validation",
+        "metadata_validation",
+        "dependency_validation",
+        "reference_validation",
+        "package_integrity",
+        "checksum_validation",
+        "compatibility_validation"
+      ]
+    },
+    "check_result": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/check_id"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "pass_with_warnings",
+            "fail",
+            "skipped"
+          ]
+        },
+        "severity_if_fail": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning"
+          ]
+        }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "record_id": {
+          "type": "string"
+        }
+      }
+    },
+    "profiles": {
+      "description": "Canonical profile definitions referenced by documentation.",
+      "type": "object",
+      "properties": {
+        "PVP-MINIMAL": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/check_id"
+          }
+        },
+        "PVP-STANDARD": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/check_id"
+          }
+        },
+        "PVP-RELEASE": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/check_id"
+          }
+        }
+      }
+    }
+  }
+}

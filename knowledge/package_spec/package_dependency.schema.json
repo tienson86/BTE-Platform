@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/package_spec/package_dependency.schema.json",
+  "title": "BTE Knowledge Package Dependency Declaration",
+  "description": "Deterministic dependency model for Knowledge Packages. Circular required dependencies are prohibited.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "package_id",
+    "package_version",
+    "required",
+    "optional",
+    "conflicts"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "package_spec_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "required": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency_entry"
+      }
+    },
+    "optional": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency_entry"
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/conflict_entry"
+      }
+    },
+    "resolution": {
+      "$ref": "#/$defs/resolution_policy"
+    }
+  },
+  "$defs": {
+    "version_constraint": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Exact SemVer, range, caret, tilde, or wildcard. See PACKAGE_SPECIFICATION.md."
+    },
+    "dependency_entry": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "package_id",
+        "version_constraint",
+        "kind"
+      ],
+      "properties": {
+        "package_id": {
+          "type": "string"
+        },
+        "version_constraint": {
+          "$ref": "#/$defs/version_constraint"
+        },
+        "compatibility_range": {
+          "type": "string",
+          "description": "Optional compatibility_version range for the target package."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "required",
+            "optional"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Named outputs consumed from the target package."
+        }
+      }
+    },
+    "conflict_entry": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "package_id",
+        "reason"
+      ],
+      "properties": {
+        "package_id": {
+          "type": "string"
+        },
+        "version_constraint": {
+          "$ref": "#/$defs/version_constraint"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "resolution_policy": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "circular_dependencies": {
+          "type": "string",
+          "const": "prohibited"
+        },
+        "optional_inclusion": {
+          "type": "string",
+          "enum": [
+            "explicit_only",
+            "default_include_if_present"
+          ],
+          "description": "Optional packages are included only when explicitly selected unless policy says otherwise."
+        },
+        "version_selection": {
+          "type": "string",
+          "const": "highest_satisfying_released"
+        },
+        "tie_breaker": {
+          "type": "string",
+          "const": "package_id_asc"
+        }
+      }
+    }
+  }
+}

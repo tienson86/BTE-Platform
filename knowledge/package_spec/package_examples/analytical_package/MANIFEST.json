@@ -1,0 +1,92 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "ex_01_analytical_demo",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "analytical",
+    "status": "validated",
+    "language": "en",
+    "languages": ["en"],
+    "author": "BTE Knowledge Architecture",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-STRENGTH",
+    "category_id": "example",
+    "school": "bazi_default",
+    "tags": ["example", "analytical", "kd3"],
+    "description": "Demonstrates rules, metadata, references, examples, tests, and documentation components."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": ["rules/example_rules.json"]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": ["metadata/package_metadata.json"]
+    },
+    "references": {
+      "present": true,
+      "required": false,
+      "paths": ["references/references.json"]
+    },
+    "examples": {
+      "present": true,
+      "required": false,
+      "paths": ["examples/example_cases.json"]
+    },
+    "tests": {
+      "present": true,
+      "required": false,
+      "paths": ["tests/example_assertions.json"]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": ["README.md", "documentation/overview.md"]
+    },
+    "assets": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": ["CHANGELOG.md"]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "EXA-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/example_rules.json",
+      "version": "1.0.0"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [],
+  "validation_profile": "PVP-STANDARD",
+  "release_information": null,
+  "files": [
+    {"path": "PACKAGE.json", "type": "identity", "required": true},
+    {"path": "MANIFEST.json", "type": "manifest", "required": true},
+    {"path": "DEPENDENCIES.json", "type": "dependencies", "required": false},
+    {"path": "VALIDATION.json", "type": "validation", "required": true},
+    {"path": "README.md", "type": "documentation", "required": true},
+    {"path": "CHANGELOG.md", "type": "changelog", "required": true},
+    {"path": "documentation/overview.md", "type": "documentation", "required": false},
+    {"path": "rules/example_rules.json", "type": "rules", "required": true, "object_count": 1},
+    {"path": "metadata/package_metadata.json", "type": "metadata", "required": false},
+    {"path": "references/references.json", "type": "references", "required": false},
+    {"path": "examples/example_cases.json", "type": "examples", "required": false},
+    {"path": "tests/example_assertions.json", "type": "tests", "required": false}
+  ]
+}

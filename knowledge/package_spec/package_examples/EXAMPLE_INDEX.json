@@ -1,0 +1,64 @@
+{
+  "index_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "generated_at": "2026-08-09T00:00:00Z",
+  "knowledge_version": "1.0.0",
+  "deterministic": true,
+  "rebuildable": true,
+  "sort": {
+    "keys": ["package_id", "package_version"],
+    "order": "asc",
+    "locale": "C"
+  },
+  "packages": [
+    {
+      "package_id": "ex_00_minimal",
+      "package_name": "Example Minimal Package",
+      "package_version": "1.0.0",
+      "package_type": "minimal",
+      "status": "draft",
+      "domain_id": "DOM-METADATA",
+      "language": "en",
+      "path": "knowledge/package_spec/package_examples/minimal_package",
+      "checksum": null,
+      "required_packages": []
+    },
+    {
+      "package_id": "ex_01_analytical_demo",
+      "package_name": "Example Analytical Package",
+      "package_version": "1.0.0",
+      "package_type": "analytical",
+      "status": "validated",
+      "domain_id": "DOM-STRENGTH",
+      "language": "en",
+      "path": "knowledge/package_spec/package_examples/analytical_package",
+      "checksum": null,
+      "required_packages": []
+    },
+    {
+      "package_id": "ex_02_interpretation_demo",
+      "package_name": "Example Interpretation Package",
+      "package_version": "1.0.0",
+      "package_type": "interpretation",
+      "status": "validated",
+      "domain_id": "DOM-INTERPRETATION",
+      "language": "en",
+      "path": "knowledge/package_spec/package_examples/interpretation_package",
+      "checksum": null,
+      "required_packages": ["ex_01_analytical_demo"]
+    },
+    {
+      "package_id": "ex_03_report_demo",
+      "package_name": "Example Report Package",
+      "package_version": "1.0.0",
+      "package_type": "report",
+      "status": "validated",
+      "domain_id": "DOM-REPORT",
+      "language": "en",
+      "path": "knowledge/package_spec/package_examples/report_package",
+      "checksum": null,
+      "required_packages": ["ex_02_interpretation_demo"]
+    }
+  ]
+}

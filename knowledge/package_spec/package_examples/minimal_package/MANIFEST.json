@@ -1,0 +1,45 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "ex_00_minimal",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "minimal",
+    "status": "draft",
+    "language": "en",
+    "languages": ["en"],
+    "author": "BTE Knowledge Architecture",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-METADATA",
+    "tags": ["example", "minimal", "kd3"],
+    "description": "Minimal identity + manifest + documentation."
+  },
+  "components": {
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": ["README.md"]
+    },
+    "changelog": {
+      "present": true,
+      "required": false,
+      "paths": ["CHANGELOG.md"]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [],
+    "conflicts": []
+  },
+  "exported_objects": [],
+  "required_packages": [],
+  "optional_packages": [],
+  "validation_profile": "PVP-MINIMAL",
+  "release_information": null,
+  "files": [
+    {"path": "PACKAGE.json", "type": "identity", "required": true},
+    {"path": "MANIFEST.json", "type": "manifest", "required": true},
+    {"path": "README.md", "type": "documentation", "required": true},
+    {"path": "CHANGELOG.md", "type": "changelog", "required": false}
+  ]
+}

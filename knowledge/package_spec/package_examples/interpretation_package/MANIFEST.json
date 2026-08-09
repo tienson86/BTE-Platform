@@ -1,0 +1,68 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "ex_02_interpretation_demo",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "interpretation",
+    "status": "validated",
+    "language": "en",
+    "languages": ["en"],
+    "author": "BTE Knowledge Architecture",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-INTERPRETATION",
+    "tags": ["example", "interpretation", "kd3"],
+    "description": "Sentence template fixture consuming an analytical package signal."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": ["rules/sentence_templates.json"]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": ["README.md"]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": ["CHANGELOG.md"]
+    }
+  },
+  "dependencies": {
+    "required": [
+      {
+        "package_id": "ex_01_analytical_demo",
+        "version_constraint": "^1.0.0",
+        "kind": "required",
+        "reason": "Interpretation fixtures consume the example analytical export.",
+        "signals": ["example_signal"]
+      }
+    ],
+    "optional": [],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "EXI-000001",
+      "entity_type": "ENT-SENTENCE_TEMPLATE",
+      "path": "rules/sentence_templates.json",
+      "version": "1.0.0"
+    }
+  ],
+  "required_packages": ["ex_01_analytical_demo"],
+  "optional_packages": [],
+  "validation_profile": "PVP-STANDARD",
+  "release_information": null,
+  "files": [
+    {"path": "PACKAGE.json", "type": "identity", "required": true},
+    {"path": "MANIFEST.json", "type": "manifest", "required": true},
+    {"path": "DEPENDENCIES.json", "type": "dependencies", "required": true},
+    {"path": "VALIDATION.json", "type": "validation", "required": true},
+    {"path": "README.md", "type": "documentation", "required": true},
+    {"path": "CHANGELOG.md", "type": "changelog", "required": true},
+    {"path": "rules/sentence_templates.json", "type": "rules", "required": true, "object_count": 1}
+  ]
+}
