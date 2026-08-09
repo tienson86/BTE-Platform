@@ -1,0 +1,313 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_05_pattern_evaluation",
+  "examples": [
+    {
+      "example_id": "EX-PEV-EXCELLENT-001",
+      "title": "Cách xuất sắc",
+      "quality": "excellent",
+      "chart_facts": {
+        "principal_pattern": "chinh_quan",
+        "pattern_confirmed": true,
+        "pattern_conflict": false,
+        "pattern_suppressed": false,
+        "strength_level": "strong",
+        "season_phase": "wang",
+        "temperature_level": "warm",
+        "evaluation_score_raw": 90
+      },
+      "consumed_package_outputs": {
+        "bz_04_pattern_core": [
+          "principal_pattern",
+          "pattern_confirmed",
+          "pattern_conflict",
+          "pattern_suppressed",
+          "pattern_stability",
+          "core_pattern_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "climate_type"
+        ]
+      },
+      "activates_rules": [
+        "PEV-000089",
+        "PEV-000038",
+        "PEV-000078",
+        "PEV-000101"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PEV-000089.json",
+        "evidence/bundles/PEV-000038.json",
+        "evidence/bundles/PEV-000078.json",
+        "evidence/bundles/PEV-000101.json"
+      ],
+      "reasoning_path": "RC-PEV-HIGH-001",
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000065"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-PEV-GOOD-001",
+      "title": "Cách tốt",
+      "quality": "good",
+      "chart_facts": {
+        "principal_pattern": "that_sat",
+        "pattern_confirmed": true,
+        "chart_has_thuc_than": true,
+        "evaluation_score_raw": 75,
+        "strength_level": "balanced"
+      },
+      "consumed_package_outputs": {
+        "bz_04_pattern_core": [
+          "principal_pattern",
+          "pattern_confirmed",
+          "pattern_conflict",
+          "pattern_suppressed",
+          "pattern_stability",
+          "core_pattern_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "climate_type"
+        ]
+      },
+      "activates_rules": [
+        "PEV-000090",
+        "PEV-000095",
+        "PEV-000042",
+        "PEV-000101"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PEV-000090.json",
+        "evidence/bundles/PEV-000095.json",
+        "evidence/bundles/PEV-000042.json",
+        "evidence/bundles/PEV-000101.json"
+      ],
+      "reasoning_path": "RC-PEV-HIGH-001",
+      "upstream_pattern_rules": [
+        "PAT-000024",
+        "PAT-000065"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000026"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000100"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-PEV-AVERAGE-001",
+      "title": "Cách trung bình",
+      "quality": "average",
+      "chart_facts": {
+        "principal_pattern": "chinh_tai",
+        "pattern_confirmed": false,
+        "pattern_suppressed": false,
+        "evaluation_score_raw": 55,
+        "strength_level": "balanced"
+      },
+      "consumed_package_outputs": {
+        "bz_04_pattern_core": [
+          "principal_pattern",
+          "pattern_confirmed",
+          "pattern_conflict",
+          "pattern_suppressed",
+          "pattern_stability",
+          "core_pattern_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "climate_type"
+        ]
+      },
+      "activates_rules": [
+        "PEV-000091",
+        "PEV-000096",
+        "PEV-000080",
+        "PEV-000100"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PEV-000091.json",
+        "evidence/bundles/PEV-000096.json",
+        "evidence/bundles/PEV-000080.json",
+        "evidence/bundles/PEV-000100.json"
+      ],
+      "reasoning_path": "RC-PEV-WEAK-001",
+      "upstream_pattern_rules": [
+        "PAT-000023"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000025"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000100"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000001"
+      ]
+    },
+    {
+      "example_id": "EX-PEV-WEAK-001",
+      "title": "Cách yếu",
+      "quality": "weak",
+      "chart_facts": {
+        "principal_pattern": "ty_kien",
+        "strength_level": "weak",
+        "season_phase": "si",
+        "evaluation_score_raw": 38,
+        "pattern_confirmed": false
+      },
+      "consumed_package_outputs": {
+        "bz_04_pattern_core": [
+          "principal_pattern",
+          "pattern_confirmed",
+          "pattern_conflict",
+          "pattern_suppressed",
+          "pattern_stability",
+          "core_pattern_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "climate_type"
+        ]
+      },
+      "activates_rules": [
+        "PEV-000092",
+        "PEV-000045",
+        "PEV-000046",
+        "PEV-000107"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PEV-000092.json",
+        "evidence/bundles/PEV-000045.json",
+        "evidence/bundles/PEV-000046.json",
+        "evidence/bundles/PEV-000107.json"
+      ],
+      "reasoning_path": "RC-PEV-WEAK-001",
+      "upstream_pattern_rules": [
+        "PAT-000092"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000028",
+        "SEC-000105"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000099"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000025"
+      ]
+    },
+    {
+      "example_id": "EX-PEV-BROKEN-001",
+      "title": "Cách phá",
+      "quality": "broken",
+      "chart_facts": {
+        "principal_pattern": "chinh_quan",
+        "pattern_suppressed": true,
+        "chart_has_thuong_quan": true,
+        "evaluation_broken": true,
+        "evaluation_score_raw": 18
+      },
+      "consumed_package_outputs": {
+        "bz_04_pattern_core": [
+          "principal_pattern",
+          "pattern_confirmed",
+          "pattern_conflict",
+          "pattern_suppressed",
+          "pattern_stability",
+          "core_pattern_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "climate_type"
+        ]
+      },
+      "activates_rules": [
+        "PEV-000093",
+        "PEV-000068",
+        "PEV-000106",
+        "PEV-000087"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PEV-000093.json",
+        "evidence/bundles/PEV-000068.json",
+        "evidence/bundles/PEV-000106.json",
+        "evidence/bundles/PEV-000087.json"
+      ],
+      "reasoning_path": "RC-PEV-BROKEN-001",
+      "upstream_pattern_rules": [
+        "PAT-000023",
+        "PAT-000055"
+      ],
+      "upstream_seasonal_rules": [
+        "SEC-000028"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000099"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000025"
+      ]
+    }
+  ]
+}

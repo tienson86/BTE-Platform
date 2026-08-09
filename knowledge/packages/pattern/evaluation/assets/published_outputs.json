@@ -1,0 +1,62 @@
+{
+  "package_id": "bz_05_pattern_evaluation",
+  "package_version": "1.0.0",
+  "consumer": "future Useful God package",
+  "outputs": [
+    {
+      "name": "pattern_quality",
+      "type": "enum",
+      "values": [
+        "excellent",
+        "good",
+        "average",
+        "weak",
+        "broken"
+      ],
+      "description": "Canonical quality band."
+    },
+    {
+      "name": "pattern_confidence",
+      "type": "enum",
+      "values": [
+        "high",
+        "medium",
+        "low",
+        "none"
+      ],
+      "description": "Confidence that the published principal remains usable."
+    },
+    {
+      "name": "pattern_integrity",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ],
+      "description": "Integrity of the published pattern (conflict/suppression)."
+    },
+    {
+      "name": "pattern_stability",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ],
+      "description": "Evaluated stability; may refine Core stability using SEC/SKC/TEC context without rewriting Core."
+    },
+    {
+      "name": "pattern_score",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ],
+      "description": "Evaluation composite score for Useful God. Distinct from Pattern Core identification score (consumed as core_pattern_score)."
+    },
+    {
+      "name": "evaluation_diagnostics",
+      "type": "list",
+      "description": "Structured evaluation diagnostics (completeness, rescue, destruction codes)."
+    }
+  ]
+}

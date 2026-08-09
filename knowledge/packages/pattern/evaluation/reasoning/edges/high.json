@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-PEV-HIGH-001",
+      "source": "RN-PEV-HIGH-OBS-001",
+      "target": "RN-PEV-HIGH-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-002",
+      "source": "RN-PEV-HIGH-EVD-001",
+      "target": "RN-PEV-HIGH-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-003",
+      "source": "RN-PEV-HIGH-INF-001",
+      "target": "RN-PEV-HIGH-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-004",
+      "source": "RN-PEV-HIGH-MID-001",
+      "target": "RN-PEV-HIGH-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-005",
+      "source": "RN-PEV-HIGH-OBS-001",
+      "target": "RN-PEV-HIGH-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-006",
+      "source": "RN-PEV-HIGH-CON-001",
+      "target": "RN-PEV-HIGH-FIN-001",
+      "relationship": "constrains",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-007",
+      "source": "RN-PEV-HIGH-MID-001",
+      "target": "RN-PEV-HIGH-CON-001",
+      "relationship": "supports",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-HIGH-008",
+      "source": "RN-PEV-HIGH-ALT-001",
+      "target": "RN-PEV-HIGH-CON-001",
+      "relationship": "derives",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "trace_id": "RT-PEV-HIGH-001",
+  "chain_id": "RC-PEV-HIGH-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "PEV-000001",
+    "PEV-000014",
+    "PEV-000038",
+    "PEV-000078",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/PEV-000001.json",
+    "evidence/bundles/PEV-000014.json",
+    "evidence/bundles/PEV-000038.json",
+    "evidence/bundles/PEV-000078.json",
+    "evidence/bundles/PEV-000089.json",
+    "evidence/bundles/PEV-000101.json"
+  ],
+  "activated_upstream_pattern": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "activated_upstream_temperature": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "decision_path": [
+    "RN-PEV-HIGH-OBS-001",
+    "RN-PEV-HIGH-EVD-001",
+    "RN-PEV-HIGH-INF-001",
+    "RN-PEV-HIGH-MID-001",
+    "RN-PEV-HIGH-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-PEV-HIGH-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-PEV-HIGH-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-PEV-HIGH-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

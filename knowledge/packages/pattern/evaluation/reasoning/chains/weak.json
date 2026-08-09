@@ -1,0 +1,90 @@
+{
+  "chain_id": "RC-PEV-WEAK-001",
+  "title": "Cách yếu — thân nhược, lệnh tử, chưa xác nhận",
+  "package_id": "bz_05_pattern_evaluation",
+  "package_version": "1.0.0",
+  "example_id": "EX-PEV-WEAK-001",
+  "evaluation_theme": "weak",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-PEV-WEAK-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-PEV-WEAK-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-PEV-WEAK-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-PEV-WEAK-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-PEV-WEAK-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "PEV-000001",
+    "PEV-000045",
+    "PEV-000046",
+    "PEV-000085",
+    "PEV-000092",
+    "PEV-000107"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000092"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000028",
+    "SEC-000105"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000005",
+    "SKC-000099"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000025",
+    "TEC-000096"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/PEV-000001.json",
+    "evidence/bundles/PEV-000045.json",
+    "evidence/bundles/PEV-000046.json",
+    "evidence/bundles/PEV-000085.json",
+    "evidence/bundles/PEV-000092.json",
+    "evidence/bundles/PEV-000107.json"
+  ],
+  "node_ids": [
+    "RN-PEV-WEAK-OBS-001",
+    "RN-PEV-WEAK-EVD-001",
+    "RN-PEV-WEAK-INF-001",
+    "RN-PEV-WEAK-MID-001",
+    "RN-PEV-WEAK-FIN-001",
+    "RN-PEV-WEAK-ALT-001",
+    "RN-PEV-WEAK-CON-001"
+  ],
+  "edge_ids": [
+    "RE-PEV-WEAK-001",
+    "RE-PEV-WEAK-002",
+    "RE-PEV-WEAK-003",
+    "RE-PEV-WEAK-004",
+    "RE-PEV-WEAK-005",
+    "RE-PEV-WEAK-006",
+    "RE-PEV-WEAK-007",
+    "RE-PEV-WEAK-008"
+  ]
+}

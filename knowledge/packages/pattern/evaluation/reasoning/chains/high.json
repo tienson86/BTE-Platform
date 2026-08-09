@@ -1,0 +1,91 @@
+{
+  "chain_id": "RC-PEV-HIGH-001",
+  "title": "Cách chất lượng cao — Quan xác nhận, thân vượng",
+  "package_id": "bz_05_pattern_evaluation",
+  "package_version": "1.0.0",
+  "example_id": "EX-PEV-EXCELLENT-001",
+  "evaluation_theme": "high",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-PEV-HIGH-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-PEV-HIGH-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-PEV-HIGH-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-PEV-HIGH-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-PEV-HIGH-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "PEV-000001",
+    "PEV-000014",
+    "PEV-000038",
+    "PEV-000078",
+    "PEV-000089",
+    "PEV-000101"
+  ],
+  "upstream_pattern_rules": [
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000089"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000001",
+    "TEC-000057"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/PEV-000001.json",
+    "evidence/bundles/PEV-000014.json",
+    "evidence/bundles/PEV-000038.json",
+    "evidence/bundles/PEV-000078.json",
+    "evidence/bundles/PEV-000089.json",
+    "evidence/bundles/PEV-000101.json"
+  ],
+  "node_ids": [
+    "RN-PEV-HIGH-OBS-001",
+    "RN-PEV-HIGH-EVD-001",
+    "RN-PEV-HIGH-INF-001",
+    "RN-PEV-HIGH-MID-001",
+    "RN-PEV-HIGH-FIN-001",
+    "RN-PEV-HIGH-ALT-001",
+    "RN-PEV-HIGH-CON-001"
+  ],
+  "edge_ids": [
+    "RE-PEV-HIGH-001",
+    "RE-PEV-HIGH-002",
+    "RE-PEV-HIGH-003",
+    "RE-PEV-HIGH-004",
+    "RE-PEV-HIGH-005",
+    "RE-PEV-HIGH-006",
+    "RE-PEV-HIGH-007",
+    "RE-PEV-HIGH-008"
+  ]
+}

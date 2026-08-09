@@ -1,0 +1,1226 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_05_pattern_evaluation",
+  "category": "pattern_confidence",
+  "count": 11,
+  "objects": [
+    {
+      "id": "PEV-000078",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "high"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "confidence=high",
+        "weight": 12,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "high",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Tin cậy cao khi xác nhận sạch. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_high_confirmed_clean",
+      "name": "Tin cậy: conf_high_confirmed_clean",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "confidence=high",
+          "weight": 12,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "high",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Tin cậy cao khi xác nhận sạch. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000079",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "high"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "wang"
+        },
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=high",
+        "weight": 10,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "high",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Thân vượng + lệnh Vượng + xác nhận. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_high_strong_wang",
+      "name": "Tin cậy: conf_high_strong_wang",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "wang"
+          },
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=high",
+          "weight": 10,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "high",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Thân vượng + lệnh Vượng + xác nhận. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000080",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "medium"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=medium",
+        "weight": 6,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "medium",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Tin cậy trung khi thân hòa. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_mid_balanced",
+      "name": "Tin cậy: conf_mid_balanced",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=medium",
+          "weight": 6,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "medium",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Tin cậy trung khi thân hòa. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000081",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "medium"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "cool",
+            "warm"
+          ]
+        },
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=medium",
+        "weight": 5,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "medium",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Khí hậu ôn hòa, đã xác nhận. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_mid_mild_temp",
+      "name": "Tin cậy: conf_mid_mild_temp",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "cool",
+              "warm"
+            ]
+          },
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=medium",
+          "weight": 5,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "medium",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Khí hậu ôn hòa, đã xác nhận. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000082",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "low"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=low",
+        "weight": -10,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "low",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Xung đột làm giảm tin cậy. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_low_conflict",
+      "name": "Tin cậy: conf_low_conflict",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=low",
+          "weight": -10,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "low",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Xung đột làm giảm tin cậy. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000083",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "low"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=low",
+        "weight": -12,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "low",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Ức chế làm giảm tin cậy. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_low_suppressed",
+      "name": "Tin cậy: conf_low_suppressed",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=low",
+          "weight": -12,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "low",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Ức chế làm giảm tin cậy. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -12,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000084",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "low"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "confidence=low",
+        "weight": -8,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "low",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Chưa xác nhận — tin cậy thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_low_unconfirmed",
+      "name": "Tin cậy: conf_low_unconfirmed",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "confidence=low",
+          "weight": -8,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "low",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Chưa xác nhận — tin cậy thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000085",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "low"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "si"
+        }
+      ],
+      "result": {
+        "effect": "confidence=low",
+        "weight": -10,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "low",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Thân nhược + lệnh tử. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_low_weak",
+      "name": "Tin cậy: conf_low_weak",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "si"
+          }
+        ],
+        "result": {
+          "effect": "confidence=low",
+          "weight": -10,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "low",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Thân nhược + lệnh tử. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000086",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "none"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "equals",
+          "value": "unset"
+        }
+      ],
+      "result": {
+        "effect": "confidence=none",
+        "weight": -20,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "none",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Không có principal — không tin cậy. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_none_unset",
+      "name": "Tin cậy: conf_none_unset",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "equals",
+            "value": "unset"
+          }
+        ],
+        "result": {
+          "effect": "confidence=none",
+          "weight": -20,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "none",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Không có principal — không tin cậy. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000087",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "none"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "evaluation_broken",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=none",
+        "weight": -20,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "none",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Đã phá cách — tin cậy không dùng cho UG. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_none_broken",
+      "name": "Tin cậy: conf_none_broken",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "evaluation_broken",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=none",
+          "weight": -20,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "none",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Đã phá cách — tin cậy không dùng cho UG. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000088",
+      "version": "1.0.0",
+      "category": "pattern_confidence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "confidence",
+        "medium"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "strength_level",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "temperature_level",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "confidence=medium",
+        "weight": 4,
+        "signal": "pattern_confidence",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "medium",
+        "publishes": "pattern_confidence"
+      },
+      "explanation": "Đủ input thượng nguồn tăng tin cậy quy trình. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_complete_inputs",
+      "name": "Tin cậy: conf_complete_inputs",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "strength_level",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "temperature_level",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "confidence=medium",
+          "weight": 4,
+          "signal": "pattern_confidence",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "medium",
+          "publishes": "pattern_confidence"
+        },
+        "explanation": "Đủ input thượng nguồn tăng tin cậy quy trình. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "rule_id": "PEV-000080",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Tin cậy: conf_mid_balanced",
+    "why": "Tin cậy trung khi thân hòa. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+    "when": "Khi Pattern Core (và SEC/SKC/TEC nếu có) đã công bố tín hiệu khớp.",
+    "when_not": "Khi thiếu principal_pattern hoặc điều kiện đánh giá không khớp.",
+    "summary": "Tin cậy trung khi thân hòa. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature."
+  },
+  "rationale": "Luật `conf_mid_balanced` đánh giá chất lượng cách. Không nhận diện Ge Ju.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/15_score_engine/05_pattern success/failure; Score Engine không xác định lại cách.",
+  "references": [
+    {
+      "target": "REF-PEV-000008",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-PEV-000080-01",
+      "rule_id": "PEV-000080",
+      "polarity": "positive",
+      "chart_facts": {
+        "strength_level": "balanced",
+        "pattern_confirmed": true
+      },
+      "note": "Thỏa điều kiện đánh giá."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-PEV-000080-01",
+      "rule_id": "PEV-000080",
+      "polarity": "negative",
+      "chart_facts": {
+        "strength_level": "not_balanced",
+        "pattern_confirmed": true
+      },
+      "note": "Phá điều kiện hoặc thiếu output Core."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-PEV-000080-01",
+      "rule_id": "PEV-000080",
+      "kind": "upstream_boundary",
+      "chart_facts": {
+        "strength_level": "balanced",
+        "pattern_confirmed": true
+      },
+      "note": "Biên: đủ điều kiện PEV nhưng principal_pattern unset thì không xuất quality cho UG."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_05_pattern_evaluation",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-3B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

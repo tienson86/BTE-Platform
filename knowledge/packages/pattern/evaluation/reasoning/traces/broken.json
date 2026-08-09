@@ -1,0 +1,55 @@
+{
+  "trace_id": "RT-PEV-BROKEN-001",
+  "chain_id": "RC-PEV-BROKEN-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "PEV-000001",
+    "PEV-000068",
+    "PEV-000016",
+    "PEV-000093",
+    "PEV-000106"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/PEV-000001.json",
+    "evidence/bundles/PEV-000068.json",
+    "evidence/bundles/PEV-000016.json",
+    "evidence/bundles/PEV-000093.json",
+    "evidence/bundles/PEV-000106.json"
+  ],
+  "activated_upstream_pattern": [
+    "PAT-000023",
+    "PAT-000055",
+    "PAT-000045"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000028",
+    "SEC-000105"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000099"
+  ],
+  "activated_upstream_temperature": [
+    "TEC-000025"
+  ],
+  "decision_path": [
+    "RN-PEV-BROKEN-OBS-001",
+    "RN-PEV-BROKEN-EVD-001",
+    "RN-PEV-BROKEN-INF-001",
+    "RN-PEV-BROKEN-MID-001",
+    "RN-PEV-BROKEN-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-PEV-BROKEN-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-PEV-BROKEN-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-PEV-BROKEN-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

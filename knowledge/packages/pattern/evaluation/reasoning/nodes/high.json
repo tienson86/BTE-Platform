@@ -1,0 +1,177 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-PEV-HIGH-OBS-001",
+      "node_type": "observation",
+      "title": "Principal Chính Quan đã công bố; thân vượng; khí ôn hòa.",
+      "description": "Principal Chính Quan đã công bố; thân vượng; khí ôn hòa.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "chart_facts"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-HIGH-EVD-001",
+      "node_type": "evidence",
+      "title": "Cách chất lượng cao — Quan xác nhận, thân vượng",
+      "description": "Đọc PEV + PAT/SEC/SKC/TEC đã công bố.",
+      "source_rule": "PEV-000001",
+      "source_evidence": "evidence/bundles/PEV-000001.json",
+      "inputs": [
+        "chart_facts",
+        "pattern_outputs",
+        "seasonal_signals",
+        "strength_signals",
+        "temperature_signals"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-PEV-HIGH-INF-001",
+      "node_type": "inference",
+      "title": "Cách chất lượng cao — Quan xác nhận, thân vượng",
+      "description": "Suy chất lượng cách; không đổi principal.",
+      "source_rule": "PEV-000001",
+      "source_evidence": "evidence/bundles/PEV-000001.json",
+      "inputs": [
+        "evidence_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-HIGH-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Kết luận trung gian chất lượng",
+      "description": "Ghép integrity / stability / quality.",
+      "source_rule": "PEV-000014",
+      "source_evidence": "evidence/bundles/PEV-000014.json",
+      "inputs": [
+        "inference_signal"
+      ],
+      "outputs": [
+        "mid_conclusion"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-HIGH-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Kết luận đánh giá cách",
+      "description": "Cách chất lượng cao — Quan xác nhận, thân vượng",
+      "source_rule": "PEV-000101",
+      "source_evidence": "evidence/bundles/PEV-000101.json",
+      "inputs": [
+        "mid_conclusion"
+      ],
+      "outputs": [
+        "pattern_evaluation_result"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-HIGH-ALT-001",
+      "node_type": "alternative",
+      "title": "Không nhận diện lại cách",
+      "description": "Cấm gán principal mới.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "chart_facts"
+      ],
+      "outputs": [
+        "no_reidentify"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-HIGH-CON-001",
+      "node_type": "constraint",
+      "title": "Ràng buộc không ghi đè stage trước",
+      "description": "Cấm ghi strength/season/temperature/pattern identification scores.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "pattern_evaluation_result"
+      ],
+      "outputs": [
+        "constraint_ok"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    }
+  ]
+}

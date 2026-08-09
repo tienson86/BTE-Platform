@@ -1,0 +1,176 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-PEV-WEAK-OBS-001",
+      "node_type": "observation",
+      "title": "Principal đã có nhưng Strength yếu và Seasonal Tử.",
+      "description": "Principal đã có nhưng Strength yếu và Seasonal Tử.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "chart_facts"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-WEAK-EVD-001",
+      "node_type": "evidence",
+      "title": "Cách yếu — thân nhược, lệnh tử, chưa xác nhận",
+      "description": "Đọc PEV + PAT/SEC/SKC/TEC đã công bố.",
+      "source_rule": "PEV-000001",
+      "source_evidence": "evidence/bundles/PEV-000001.json",
+      "inputs": [
+        "chart_facts",
+        "pattern_outputs",
+        "seasonal_signals",
+        "strength_signals",
+        "temperature_signals"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi",
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000092"
+        ],
+        "upstream_seasonal": [
+          "SEC-000028",
+          "SEC-000105"
+        ],
+        "upstream_strength": [
+          "SKC-000005",
+          "SKC-000099"
+        ],
+        "upstream_temperature": [
+          "TEC-000025",
+          "TEC-000096"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-PEV-WEAK-INF-001",
+      "node_type": "inference",
+      "title": "Cách yếu — thân nhược, lệnh tử, chưa xác nhận",
+      "description": "Suy chất lượng cách; không đổi principal.",
+      "source_rule": "PEV-000001",
+      "source_evidence": "evidence/bundles/PEV-000001.json",
+      "inputs": [
+        "evidence_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-WEAK-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Kết luận trung gian chất lượng",
+      "description": "Ghép integrity / stability / quality.",
+      "source_rule": "PEV-000045",
+      "source_evidence": "evidence/bundles/PEV-000045.json",
+      "inputs": [
+        "inference_signal"
+      ],
+      "outputs": [
+        "mid_conclusion"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-WEAK-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Kết luận đánh giá cách",
+      "description": "Cách yếu — thân nhược, lệnh tử, chưa xác nhận",
+      "source_rule": "PEV-000107",
+      "source_evidence": "evidence/bundles/PEV-000107.json",
+      "inputs": [
+        "mid_conclusion"
+      ],
+      "outputs": [
+        "pattern_evaluation_result"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-WEAK-ALT-001",
+      "node_type": "alternative",
+      "title": "Không nhận diện lại cách",
+      "description": "Cấm gán principal mới.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "chart_facts"
+      ],
+      "outputs": [
+        "no_reidentify"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PEV-WEAK-CON-001",
+      "node_type": "constraint",
+      "title": "Ràng buộc không ghi đè stage trước",
+      "description": "Cấm ghi strength/season/temperature/pattern identification scores.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "pattern_evaluation_result"
+      ],
+      "outputs": [
+        "constraint_ok"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "language": "vi"
+      }
+    }
+  ]
+}

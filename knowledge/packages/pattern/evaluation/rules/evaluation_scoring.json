@@ -1,0 +1,1135 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_05_pattern_evaluation",
+  "category": "evaluation_scoring",
+  "count": 11,
+  "objects": [
+    {
+      "id": "PEV-000100",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_result_status",
+          "operator": "equals",
+          "value": "bound"
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": 40,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Baseline evaluation_score = 40. Không ghi strength/season/temperature/pattern identification score. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_baseline",
+      "name": "Điểm đánh giá: eval_score_baseline",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_result_status",
+            "operator": "equals",
+            "value": "bound"
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": 40,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Baseline evaluation_score = 40. Không ghi strength/season/temperature/pattern identification score. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 40,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000101",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": 15,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Thưởng xác nhận Core. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_confirm_bonus",
+      "name": "Điểm đánh giá: eval_score_confirm_bonus",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": 15,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Thưởng xác nhận Core. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000102",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "evaluation_reinforced",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": 12,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Thưởng tăng cường. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_reinforce_bonus",
+      "name": "Điểm đánh giá: eval_score_reinforce_bonus",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "evaluation_reinforced",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": 12,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Thưởng tăng cường. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000103",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "evaluation_rescued",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": 8,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Thưởng cứu cách. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_rescue_bonus",
+      "name": "Điểm đánh giá: eval_score_rescue_bonus",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "evaluation_rescued",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": 8,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Thưởng cứu cách. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000104",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": -15,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Phạt xung đột. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_conflict_penalty",
+      "name": "Điểm đánh giá: eval_score_conflict_penalty",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": -15,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Phạt xung đột. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -15,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000105",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": -18,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Phạt ức chế. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_suppress_penalty",
+      "name": "Điểm đánh giá: eval_score_suppress_penalty",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": -18,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Phạt ức chế. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -18,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000106",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "evaluation_broken",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": -30,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Phạt phá cách (PF001). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_destroy_penalty",
+      "name": "Điểm đánh giá: eval_score_destroy_penalty",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "evaluation_broken",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": -30,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Phạt phá cách (PF001). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -30,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000107",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": -10,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Phạt thân nhược — đọc Strength. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_weak_strength",
+      "name": "Điểm đánh giá: eval_score_weak_strength",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": -10,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Phạt thân nhược — đọc Strength. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000108",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "hot",
+            "cold"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": -6,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Phạt khí hậu cực — đọc Temperature. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_extreme_temp",
+      "name": "Điểm đánh giá: eval_score_extreme_temp",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "hot",
+              "cold"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": -6,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Phạt khí hậu cực — đọc Temperature. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000109",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "evaluation_score_raw",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "evaluation_score_raw",
+          "operator": "lte",
+          "value": 100
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": 0,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Kẹp pattern_score đánh giá 0–100 (output contract). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_clamp",
+      "name": "Điểm đánh giá: eval_score_clamp",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "evaluation_score_raw",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "evaluation_score_raw",
+            "operator": "lte",
+            "value": 100
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": 0,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Kẹp pattern_score đánh giá 0–100 (output contract). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000110",
+      "version": "1.0.0",
+      "category": "evaluation_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "evaluation_score_raw",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "evaluation_score_delta",
+        "weight": 0,
+        "signal": "evaluation_scoring",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "scored",
+        "publishes": "pattern_score"
+      },
+      "explanation": "Xuất bản pattern_score := evaluation composite cho Useful God. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "eval_score_publish",
+      "name": "Điểm đánh giá: eval_score_publish",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "evaluation_score_raw",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "evaluation_score_delta",
+          "weight": 0,
+          "signal": "evaluation_scoring",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "scored",
+          "publishes": "pattern_score"
+        },
+        "explanation": "Xuất bản pattern_score := evaluation composite cho Useful God. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

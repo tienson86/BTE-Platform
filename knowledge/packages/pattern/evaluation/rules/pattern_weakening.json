@@ -1,0 +1,1161 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_05_pattern_evaluation",
+  "category": "pattern_weakening",
+  "count": 11,
+  "objects": [
+    {
+      "id": "PEV-000045",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Thân nhược làm yếu chất lượng cách (PF002 ngữ cảnh). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_strength_weak",
+      "name": "Suy yếu: weaken_strength_weak",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Thân nhược làm yếu chất lượng cách (PF002 ngữ cảnh). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000046",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "si"
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Lệnh Tử làm yếu cách. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_season_si",
+      "name": "Suy yếu: weaken_season_si",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "si"
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Lệnh Tử làm yếu cách. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000047",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "hot",
+            "cold"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Khí hậu cực làm yếu cách. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_temp_extreme",
+      "name": "Suy yếu: weaken_temp_extreme",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "hot",
+              "cold"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Khí hậu cực làm yếu cách. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000048",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Xung đột Core làm yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_conflict",
+      "name": "Suy yếu: weaken_conflict",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Xung đột Core làm yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000049",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Ức chế Core làm yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_suppressed",
+      "name": "Suy yếu: weaken_suppressed",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Ức chế Core làm yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000050",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Chưa xác nhận — chất lượng yếu hơn. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_unconfirmed",
+      "name": "Suy yếu: weaken_unconfirmed",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Chưa xác nhận — chất lượng yếu hơn. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000051",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "ty_kien",
+            "kiep_tai"
+          ]
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Tỷ/Kiếp + thân nhược — cách yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_peer_pattern",
+      "name": "Suy yếu: weaken_peer_pattern",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "ty_kien",
+              "kiep_tai"
+            ]
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Tỷ/Kiếp + thân nhược — cách yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000052",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "core_pattern_score",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "core_pattern_score thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_low_core_score",
+      "name": "Suy yếu: weaken_low_core_score",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "core_pattern_score",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "core_pattern_score thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000053",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "pattern_stability Core thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_low_stability",
+      "name": "Suy yếu: weaken_low_stability",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "pattern_stability Core thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000054",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "equals",
+          "value": "chinh_quan"
+        },
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Quan chưa xác nhận — yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_officer_unconfirmed",
+      "name": "Suy yếu: weaken_officer_unconfirmed",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "equals",
+            "value": "chinh_quan"
+          },
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Quan chưa xác nhận — yếu. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000055",
+      "version": "1.0.0",
+      "category": "pattern_weakening",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "weakening"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "cold"
+        },
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        }
+      ],
+      "result": {
+        "effect": "quality_penalty",
+        "weight": -10,
+        "signal": "pattern_weakening",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "weakened",
+        "publishes": "pattern_quality"
+      },
+      "explanation": "Hàn thấp làm yếu cách (đọc Temperature). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weaken_climate_damp_cold",
+      "name": "Suy yếu: weaken_climate_damp_cold",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "cold"
+          },
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          }
+        ],
+        "result": {
+          "effect": "quality_penalty",
+          "weight": -10,
+          "signal": "pattern_weakening",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "weakened",
+          "publishes": "pattern_quality"
+        },
+        "explanation": "Hàn thấp làm yếu cách (đọc Temperature). Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

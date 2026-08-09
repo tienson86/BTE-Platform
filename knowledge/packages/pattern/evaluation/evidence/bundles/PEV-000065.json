@@ -1,0 +1,65 @@
+{
+  "rule_id": "PEV-000065",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Cứu cách: rescue_requires_principal",
+    "why": "Cứu cách chỉ khi đã có principal từ Core. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+    "when": "Khi Pattern Core (và SEC/SKC/TEC nếu có) đã công bố tín hiệu khớp.",
+    "when_not": "Khi thiếu principal_pattern hoặc điều kiện đánh giá không khớp.",
+    "summary": "Cứu cách chỉ khi đã có principal từ Core. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature."
+  },
+  "rationale": "Luật `rescue_requires_principal` đánh giá chất lượng cách. Không nhận diện Ge Ju.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/15_score_engine/05_pattern success/failure; Score Engine không xác định lại cách.",
+  "references": [
+    {
+      "target": "REF-PEV-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-PEV-000065-01",
+      "rule_id": "PEV-000065",
+      "polarity": "positive",
+      "chart_facts": {
+        "principal_pattern": true
+      },
+      "note": "Thỏa điều kiện đánh giá."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-PEV-000065-01",
+      "rule_id": "PEV-000065",
+      "polarity": "negative",
+      "chart_facts": {
+        "principal_pattern": null
+      },
+      "note": "Phá điều kiện hoặc thiếu output Core."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-PEV-000065-01",
+      "rule_id": "PEV-000065",
+      "kind": "upstream_boundary",
+      "chart_facts": {
+        "principal_pattern": true
+      },
+      "note": "Biên: đủ điều kiện PEV nhưng principal_pattern unset thì không xuất quality cho UG."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_05_pattern_evaluation",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-3B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

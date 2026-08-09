@@ -1,0 +1,1151 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_05_pattern_evaluation",
+  "category": "pattern_stability",
+  "count": 11,
+  "objects": [
+    {
+      "id": "PEV-000023",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 70
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 10,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Đọc pattern_stability Core ≥70. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_read_core_high",
+      "name": "Ổn định: stab_read_core_high",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 70
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 10,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Đọc pattern_stability Core ≥70. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000024",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 69
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 4,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Đọc pattern_stability trung. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_read_core_mid",
+      "name": "Ổn định: stab_read_core_mid",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 69
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 4,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Đọc pattern_stability trung. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000025",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 39
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": -10,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Đọc pattern_stability thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_read_core_low",
+      "name": "Ổn định: stab_read_core_low",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 39
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": -10,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Đọc pattern_stability thấp. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000026",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Thân trung hòa (Strength) hỗ trợ ổn định đánh giá. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_strength_balanced",
+      "name": "Ổn định: stab_strength_balanced",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Thân trung hòa (Strength) hỗ trợ ổn định đánh giá. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000027",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": -8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Thân nhược giảm ổn định đánh giá. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_strength_weak",
+      "name": "Ổn định: stab_strength_weak",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": -8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Thân nhược giảm ổn định đánh giá. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000028",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "wang"
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Lệnh Vượng (Seasonal) hỗ trợ ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_season_wang",
+      "name": "Ổn định: stab_season_wang",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "wang"
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Lệnh Vượng (Seasonal) hỗ trợ ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000029",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "si"
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": -8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Lệnh Tử (Seasonal) giảm ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_season_si",
+      "name": "Ổn định: stab_season_si",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "si"
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": -8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Lệnh Tử (Seasonal) giảm ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000030",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "cool",
+            "warm"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 6,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Khí hậu ôn hòa hỗ trợ ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_temp_mild",
+      "name": "Ổn định: stab_temp_mild",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "cool",
+              "warm"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 6,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Khí hậu ôn hòa hỗ trợ ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000031",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "hot",
+            "cold"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": -6,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Khí hậu cực giảm ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_temp_extreme",
+      "name": "Ổn định: stab_temp_extreme",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "hot",
+              "cold"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": -6,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Khí hậu cực giảm ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000032",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 10,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Xác nhận sạch từ Core tăng ổn định đánh giá. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_confirmed_clean",
+      "name": "Ổn định: stab_confirmed_clean",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 10,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Xác nhận sạch từ Core tăng ổn định đánh giá. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PEV-000033",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "evaluation",
+        "stability"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "stability_delta",
+        "weight": 6,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_evaluation_score",
+        "outcome": "stability",
+        "publishes": "pattern_stability"
+      },
+      "explanation": "Khí hậu cân (Temperature) hỗ trợ ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+      "references": [
+        {
+          "target": "REF-PEV-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "stab_climate_balanced",
+      "name": "Ổn định: stab_climate_balanced",
+      "metadata": {
+        "package_id": "bz_05_pattern_evaluation",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "stability_delta",
+          "weight": 6,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_evaluation_score",
+          "outcome": "stability",
+          "publishes": "pattern_stability"
+        },
+        "explanation": "Khí hậu cân (Temperature) hỗ trợ ổn định. Chỉ đánh giá output Pattern Core đã công bố. Không nhận diện lại cách. Không tính lại Seasonal/Strength/Temperature.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_evaluation_score"
+        },
+        "consumes": {
+          "pattern_core": [
+            "principal_pattern",
+            "pattern_confirmed",
+            "pattern_conflict",
+            "pattern_suppressed",
+            "pattern_stability",
+            "core_pattern_score"
+          ],
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

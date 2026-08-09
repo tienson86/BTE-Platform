@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-PEV-WEAK-001",
+      "source": "RN-PEV-WEAK-OBS-001",
+      "target": "RN-PEV-WEAK-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-002",
+      "source": "RN-PEV-WEAK-EVD-001",
+      "target": "RN-PEV-WEAK-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-003",
+      "source": "RN-PEV-WEAK-INF-001",
+      "target": "RN-PEV-WEAK-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-004",
+      "source": "RN-PEV-WEAK-MID-001",
+      "target": "RN-PEV-WEAK-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-005",
+      "source": "RN-PEV-WEAK-OBS-001",
+      "target": "RN-PEV-WEAK-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-006",
+      "source": "RN-PEV-WEAK-CON-001",
+      "target": "RN-PEV-WEAK-FIN-001",
+      "relationship": "constrains",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-007",
+      "source": "RN-PEV-WEAK-MID-001",
+      "target": "RN-PEV-WEAK-CON-001",
+      "relationship": "supports",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-WEAK-008",
+      "source": "RN-PEV-WEAK-ALT-001",
+      "target": "RN-PEV-WEAK-CON-001",
+      "relationship": "derives",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    }
+  ]
+}

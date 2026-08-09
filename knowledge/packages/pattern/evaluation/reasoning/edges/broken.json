@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-PEV-BROKEN-001",
+      "source": "RN-PEV-BROKEN-OBS-001",
+      "target": "RN-PEV-BROKEN-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-002",
+      "source": "RN-PEV-BROKEN-EVD-001",
+      "target": "RN-PEV-BROKEN-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-003",
+      "source": "RN-PEV-BROKEN-INF-001",
+      "target": "RN-PEV-BROKEN-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-004",
+      "source": "RN-PEV-BROKEN-MID-001",
+      "target": "RN-PEV-BROKEN-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-005",
+      "source": "RN-PEV-BROKEN-OBS-001",
+      "target": "RN-PEV-BROKEN-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-006",
+      "source": "RN-PEV-BROKEN-CON-001",
+      "target": "RN-PEV-BROKEN-FIN-001",
+      "relationship": "constrains",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-007",
+      "source": "RN-PEV-BROKEN-MID-001",
+      "target": "RN-PEV-BROKEN-CON-001",
+      "relationship": "supports",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PEV-BROKEN-008",
+      "source": "RN-PEV-BROKEN-ALT-001",
+      "target": "RN-PEV-BROKEN-CON-001",
+      "relationship": "derives",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    }
+  ]
+}

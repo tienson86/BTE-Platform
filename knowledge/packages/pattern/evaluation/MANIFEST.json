@@ -1,0 +1,1544 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_05_pattern_evaluation",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "analytical",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-PATTERN",
+    "category_id": "evaluation",
+    "school": "bazi_default",
+    "tags": [
+      "evaluation",
+      "kx3b",
+      "pattern"
+    ],
+    "description": "Pattern quality evaluation. Does not identify Ge Ju."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/evaluation_scoring.json",
+        "rules/pattern_completeness.json",
+        "rules/pattern_confidence.json",
+        "rules/pattern_destruction.json",
+        "rules/pattern_integrity.json",
+        "rules/pattern_quality_levels.json",
+        "rules/pattern_reinforcement.json",
+        "rules/pattern_rescue.json",
+        "rules/pattern_stability.json",
+        "rules/pattern_weakening.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/evaluation_philosophy.md",
+        "documentation/quality_model.md",
+        "documentation/confidence_model.md",
+        "documentation/interaction_pattern_core.md",
+        "documentation/interaction_useful_god.md",
+        "documentation/WAVE2_ROADMAP.md",
+        "documentation/published_outputs.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/published_outputs.json",
+        "assets/quality_axes.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_04_pattern_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_02_seasonal_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_03_temperature_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "PEV-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_completeness.json"
+    },
+    {
+      "id": "PEV-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_integrity.json"
+    },
+    {
+      "id": "PEV-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_stability.json"
+    },
+    {
+      "id": "PEV-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_reinforcement.json"
+    },
+    {
+      "id": "PEV-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_weakening.json"
+    },
+    {
+      "id": "PEV-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_rescue.json"
+    },
+    {
+      "id": "PEV-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_destruction.json"
+    },
+    {
+      "id": "PEV-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_confidence.json"
+    },
+    {
+      "id": "PEV-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/pattern_quality_levels.json"
+    },
+    {
+      "id": "PEV-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    },
+    {
+      "id": "PEV-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/evaluation_scoring.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_01_strength_core",
+    "bz_02_seasonal_core",
+    "bz_03_temperature_core",
+    "bz_04_pattern_core"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/quality_axes.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/analytical_scope.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/assumptions_and_limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/confidence_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/evaluation_philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/interaction_pattern_core.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/interaction_useful_god.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/published_outputs.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/quality_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/PEV-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/broken.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/high.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/broken.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/high.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/broken.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/broken.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/high.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/high.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/weak.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/broken.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/high.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/broken.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/high.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/evaluation_scoring.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_completeness.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_confidence.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_destruction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_integrity.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_quality_levels.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_reinforcement.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_rescue.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_stability.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/pattern_weakening.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

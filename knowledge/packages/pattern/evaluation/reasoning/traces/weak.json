@@ -1,0 +1,58 @@
+{
+  "trace_id": "RT-PEV-WEAK-001",
+  "chain_id": "RC-PEV-WEAK-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "PEV-000001",
+    "PEV-000045",
+    "PEV-000046",
+    "PEV-000085",
+    "PEV-000092",
+    "PEV-000107"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/PEV-000001.json",
+    "evidence/bundles/PEV-000045.json",
+    "evidence/bundles/PEV-000046.json",
+    "evidence/bundles/PEV-000085.json",
+    "evidence/bundles/PEV-000092.json",
+    "evidence/bundles/PEV-000107.json"
+  ],
+  "activated_upstream_pattern": [
+    "PAT-000023",
+    "PAT-000092"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000028",
+    "SEC-000105"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000005",
+    "SKC-000099"
+  ],
+  "activated_upstream_temperature": [
+    "TEC-000025",
+    "TEC-000096"
+  ],
+  "decision_path": [
+    "RN-PEV-WEAK-OBS-001",
+    "RN-PEV-WEAK-EVD-001",
+    "RN-PEV-WEAK-INF-001",
+    "RN-PEV-WEAK-MID-001",
+    "RN-PEV-WEAK-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-PEV-WEAK-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-PEV-WEAK-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-PEV-WEAK-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}
