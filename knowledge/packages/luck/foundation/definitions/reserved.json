@@ -1,0 +1,28 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_09_luck_foundation",
+  "objects": [
+    {
+      "id": "LTF-000011",
+      "category": "timeline_reserved",
+      "priority": 10,
+      "enabled": true,
+      "tags": ["daily_luck", "reserved", "le1"],
+      "explanation": "Daily luck is reserved and empty in LE-1.",
+      "references": [{"target": "REF-LTF-000007"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "daily_luck"}],
+      "result": {"layer_status": "reserved", "periods": []}
+    },
+    {
+      "id": "LTF-000012",
+      "category": "timeline_reserved",
+      "priority": 20,
+      "enabled": true,
+      "tags": ["hourly_luck", "reserved", "le1"],
+      "explanation": "Hourly luck is reserved and empty in LE-1.",
+      "references": [{"target": "REF-LTF-000007"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "hourly_luck"}],
+      "result": {"layer_status": "reserved", "periods": []}
+    }
+  ]
+}

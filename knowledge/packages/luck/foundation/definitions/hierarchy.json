@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_09_luck_foundation",
+  "objects": [
+    {
+      "id": "LTF-000005",
+      "category": "timeline_hierarchy",
+      "priority": 10,
+      "enabled": true,
+      "tags": ["hierarchy", "le1"],
+      "explanation": "Major luck nests under natal chart.",
+      "references": [{"target": "REF-LTF-000005"}],
+      "conditions": [{"field": "child_layer", "op": "eq", "value": "major_luck"}],
+      "result": {"parent_layer": "natal_chart"}
+    },
+    {
+      "id": "LTF-000006",
+      "category": "timeline_hierarchy",
+      "priority": 20,
+      "enabled": true,
+      "tags": ["hierarchy", "le1"],
+      "explanation": "Annual luck nests under major luck.",
+      "references": [{"target": "REF-LTF-000005"}],
+      "conditions": [{"field": "child_layer", "op": "eq", "value": "annual_luck"}],
+      "result": {"parent_layer": "major_luck"}
+    },
+    {
+      "id": "LTF-000007",
+      "category": "timeline_hierarchy",
+      "priority": 30,
+      "enabled": true,
+      "tags": ["hierarchy", "le1"],
+      "explanation": "Monthly luck nests under annual luck.",
+      "references": [{"target": "REF-LTF-000005"}],
+      "conditions": [{"field": "child_layer", "op": "eq", "value": "monthly_luck"}],
+      "result": {"parent_layer": "annual_luck"}
+    }
+  ]
+}

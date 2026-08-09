@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_09_luck_foundation",
+  "objects": [
+    {
+      "id": "LTF-000008",
+      "category": "timeline_continuity",
+      "priority": 10,
+      "enabled": true,
+      "tags": ["continuity", "le1"],
+      "explanation": "Major periods in one cycle must abut by year.",
+      "references": [{"target": "REF-LTF-000006"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "major_luck"}],
+      "result": {"continuity": "year_abut"}
+    },
+    {
+      "id": "LTF-000009",
+      "category": "timeline_continuity",
+      "priority": 20,
+      "enabled": true,
+      "tags": ["continuity", "le1"],
+      "explanation": "Annual periods in one cycle must abut by year.",
+      "references": [{"target": "REF-LTF-000006"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "annual_luck"}],
+      "result": {"continuity": "year_abut"}
+    },
+    {
+      "id": "LTF-000010",
+      "category": "timeline_continuity",
+      "priority": 30,
+      "enabled": true,
+      "tags": ["continuity", "le1"],
+      "explanation": "Monthly periods in one cycle must abut by calendar month.",
+      "references": [{"target": "REF-LTF-000006"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "monthly_luck"}],
+      "result": {"continuity": "month_abut"}
+    }
+  ]
+}

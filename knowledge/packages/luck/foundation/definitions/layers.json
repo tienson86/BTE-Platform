@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_09_luck_foundation",
+  "objects": [
+    {
+      "id": "LTF-000001",
+      "category": "timeline_layer",
+      "priority": 10,
+      "enabled": true,
+      "tags": ["natal", "le1"],
+      "explanation": "Natal chart is the timeline origin.",
+      "references": [{"target": "REF-LTF-000001"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "natal_chart"}],
+      "result": {"layer_status": "active", "published_output": "natal_chart"}
+    },
+    {
+      "id": "LTF-000002",
+      "category": "timeline_layer",
+      "priority": 20,
+      "enabled": true,
+      "tags": ["major_luck", "le1"],
+      "explanation": "Đại Vận is an active timeline layer.",
+      "references": [{"target": "REF-LTF-000002"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "major_luck"}],
+      "result": {"layer_status": "active", "published_output": "major_cycles"}
+    },
+    {
+      "id": "LTF-000003",
+      "category": "timeline_layer",
+      "priority": 30,
+      "enabled": true,
+      "tags": ["annual_luck", "le1"],
+      "explanation": "Lưu Niên is an active timeline layer.",
+      "references": [{"target": "REF-LTF-000003"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "annual_luck"}],
+      "result": {"layer_status": "active", "published_output": "annual_cycles"}
+    },
+    {
+      "id": "LTF-000004",
+      "category": "timeline_layer",
+      "priority": 40,
+      "enabled": true,
+      "tags": ["monthly_luck", "le1"],
+      "explanation": "Lưu Nguyệt is an active timeline layer.",
+      "references": [{"target": "REF-LTF-000004"}],
+      "conditions": [{"field": "layer_id", "op": "eq", "value": "monthly_luck"}],
+      "result": {"layer_status": "active", "published_output": "monthly_cycles"}
+    }
+  ]
+}
