@@ -1,0 +1,145 @@
+{
+  "$comment": "KX-1C reasoning envelope template. Expand into reasoning/nodes|edges|chains|traces|confidence. Schemas: knowledge/reasoning/*.schema.json.",
+  "graph_id": "RG-{{PACKAGE_TOKEN}}-001",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_version": "{{PACKAGE_VERSION}}",
+  "generator_version": "1.0.0",
+  "profile_id": "{{PROFILE_ID}}",
+  "language": "{{LANGUAGE}}",
+  "nodes": [
+    {
+      "node_id": "RN-{{PACKAGE_TOKEN}}-OBS-001",
+      "node_type": "observation",
+      "title": "{{OBS_TITLE}}",
+      "description": "{{OBS_DESCRIPTION}}",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": ["{{FACT_KEY}}"],
+      "confidence": {"level": "high", "mode": "declared"},
+      "metadata": {"package_id": "{{PACKAGE_ID}}", "language": "{{LANGUAGE}}"}
+    },
+    {
+      "node_id": "RN-{{PACKAGE_TOKEN}}-EVD-001",
+      "node_type": "evidence",
+      "title": "{{EVD_TITLE}}",
+      "description": "{{EVD_DESCRIPTION}}",
+      "source_rule": "{{RULE_ID}}",
+      "source_evidence": "evidence/bundles/{{RULE_ID}}.json",
+      "inputs": ["{{FACT_KEY}}"],
+      "outputs": ["{{EVIDENCE_SIGNAL}}"],
+      "confidence": {"level": "high", "mode": "inherited"},
+      "metadata": {"package_id": "{{PACKAGE_ID}}", "language": "{{LANGUAGE}}"}
+    },
+    {
+      "node_id": "RN-{{PACKAGE_TOKEN}}-INF-001",
+      "node_type": "inference",
+      "title": "{{INF_TITLE}}",
+      "description": "{{INF_DESCRIPTION}}",
+      "source_rule": "{{RULE_ID}}",
+      "source_evidence": "evidence/bundles/{{RULE_ID}}.json",
+      "inputs": ["{{EVIDENCE_SIGNAL}}"],
+      "outputs": ["{{INFERENCE_SIGNAL}}"],
+      "confidence": {"level": "high", "mode": "inherited"},
+      "metadata": {"package_id": "{{PACKAGE_ID}}", "language": "{{LANGUAGE}}"}
+    },
+    {
+      "node_id": "RN-{{PACKAGE_TOKEN}}-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "{{MID_TITLE}}",
+      "description": "{{MID_DESCRIPTION}}",
+      "source_rule": "{{MID_RULE_ID}}",
+      "source_evidence": "evidence/bundles/{{MID_RULE_ID}}.json",
+      "inputs": ["{{INFERENCE_SIGNAL}}"],
+      "outputs": ["{{MID_SIGNAL}}"],
+      "confidence": {"level": "medium", "mode": "combined"},
+      "metadata": {"package_id": "{{PACKAGE_ID}}", "language": "{{LANGUAGE}}"}
+    },
+    {
+      "node_id": "RN-{{PACKAGE_TOKEN}}-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "{{FIN_TITLE}}",
+      "description": "{{FIN_DESCRIPTION}}",
+      "source_rule": "{{FIN_RULE_ID}}",
+      "source_evidence": "evidence/bundles/{{FIN_RULE_ID}}.json",
+      "inputs": ["{{MID_SIGNAL}}"],
+      "outputs": ["{{CONCLUSION_KEY}}"],
+      "confidence": {"level": "medium", "mode": "combined"},
+      "metadata": {"package_id": "{{PACKAGE_ID}}", "language": "{{LANGUAGE}}"}
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "RE-{{PACKAGE_TOKEN}}-001",
+      "source": "RN-{{PACKAGE_TOKEN}}-OBS-001",
+      "target": "RN-{{PACKAGE_TOKEN}}-EVD-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-{{PACKAGE_TOKEN}}-002",
+      "source": "RN-{{PACKAGE_TOKEN}}-EVD-001",
+      "target": "RN-{{PACKAGE_TOKEN}}-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-{{PACKAGE_TOKEN}}-003",
+      "source": "RN-{{PACKAGE_TOKEN}}-INF-001",
+      "target": "RN-{{PACKAGE_TOKEN}}-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-{{PACKAGE_TOKEN}}-004",
+      "source": "RN-{{PACKAGE_TOKEN}}-MID-001",
+      "target": "RN-{{PACKAGE_TOKEN}}-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    }
+  ],
+  "chain": {
+    "chain_id": "RC-{{PACKAGE_TOKEN}}-001",
+    "title": "{{CHAIN_TITLE}}",
+    "stages": [
+      {"kind": "observation", "node_id": "RN-{{PACKAGE_TOKEN}}-OBS-001"},
+      {"kind": "evidence", "node_id": "RN-{{PACKAGE_TOKEN}}-EVD-001"},
+      {"kind": "inference", "node_id": "RN-{{PACKAGE_TOKEN}}-INF-001"},
+      {"kind": "intermediate_conclusion", "node_id": "RN-{{PACKAGE_TOKEN}}-MID-001"},
+      {"kind": "final_conclusion", "node_id": "RN-{{PACKAGE_TOKEN}}-FIN-001"}
+    ]
+  },
+  "trace": {
+    "trace_id": "RT-{{PACKAGE_TOKEN}}-001",
+    "chain_id": "RC-{{PACKAGE_TOKEN}}-001",
+    "package_version": "{{PACKAGE_VERSION}}",
+    "activated_rules": ["{{RULE_ID}}", "{{MID_RULE_ID}}", "{{FIN_RULE_ID}}"],
+    "activated_evidence": [
+      "evidence/bundles/{{RULE_ID}}.json",
+      "evidence/bundles/{{MID_RULE_ID}}.json",
+      "evidence/bundles/{{FIN_RULE_ID}}.json"
+    ],
+    "decision_path": [
+      "RN-{{PACKAGE_TOKEN}}-OBS-001",
+      "RN-{{PACKAGE_TOKEN}}-EVD-001",
+      "RN-{{PACKAGE_TOKEN}}-INF-001",
+      "RN-{{PACKAGE_TOKEN}}-MID-001",
+      "RN-{{PACKAGE_TOKEN}}-FIN-001"
+    ],
+    "confidence_propagation": [
+      {"node_id": "RN-{{PACKAGE_TOKEN}}-OBS-001", "mode": "declared"},
+      {"node_id": "RN-{{PACKAGE_TOKEN}}-EVD-001", "mode": "inherited"},
+      {"node_id": "RN-{{PACKAGE_TOKEN}}-INF-001", "mode": "inherited"},
+      {"node_id": "RN-{{PACKAGE_TOKEN}}-MID-001", "mode": "combined"},
+      {"node_id": "RN-{{PACKAGE_TOKEN}}-FIN-001", "mode": "combined"}
+    ]
+  }
+}

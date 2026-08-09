@@ -1,0 +1,49 @@
+{
+  "$comment": "Instance profile template. Validate against ../package_profile.schema.json after substitution. Generator v1.0.0.",
+  "profile_id": "GEN-INST-{{PROFILE_TOKEN}}",
+  "profile_kind": "instance",
+  "inherits": "GEN-TYPE-{{TYPE_TOKEN}}",
+  "inherit_arrays": "replace",
+  "generator_version": "1.0.0",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_name": "{{PACKAGE_NAME}}",
+  "package_type": "{{PACKAGE_TYPE}}",
+  "package_version": "0.1.0",
+  "domain": {
+    "domain_id": "{{DOMAIN_ID}}",
+    "parent_domain": "{{PARENT_DOMAIN_OR_NULL}}"
+  },
+  "taxonomy": {
+    "taxonomy_version": "1.0.0",
+    "source": "knowledge/taxonomy/",
+    "classifications": []
+  },
+  "ontology": {
+    "ontology_version": "1.0.0",
+    "source": "knowledge/taxonomy/",
+    "concepts": []
+  },
+  "target_rule_count": {
+    "minimum": 1,
+    "recommended": 80,
+    "maximum": null,
+    "target": null
+  },
+  "evidence_required": true,
+  "reasoning_required": true,
+  "example_required": true,
+  "validation_profile": "PVP-MINIMAL",
+  "quality_target": "gold",
+  "rule_id_prefix": "{{RULE_PREFIX}}",
+  "language": "vi",
+  "languages": ["vi"],
+  "school": "bazi_default",
+  "category_id": "core",
+  "components": {},
+  "dependencies": {
+    "required": [],
+    "optional": [],
+    "conflicts": []
+  },
+  "notes": "Replace placeholders. Do not emit until package_id and rule_id_prefix are reserved."
+}

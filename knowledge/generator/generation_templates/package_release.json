@@ -1,0 +1,37 @@
+{
+  "$comment": "RELEASE.json template — KD-3 package_release.schema.json. Fill only at release_candidate / released_package stages.",
+  "release_schema_version": "1.0.0",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_version": "{{PACKAGE_VERSION}}",
+  "status": "validated",
+  "released_at": null,
+  "released_by": null,
+  "release_manager": "{{RELEASE_MANAGER}}",
+  "domain_reviewer": "{{DOMAIN_REVIEWER}}",
+  "technical_reviewer": "{{TECHNICAL_REVIEWER}}",
+  "generator": {
+    "generator_id": "bte_knowledge_package_generator",
+    "generator_version": "1.0.0",
+    "profile_id": "{{PROFILE_ID}}"
+  },
+  "quality_gate": "{{QUALITY_TARGET}}",
+  "validation_profile": "PVP-RELEASE",
+  "checksum": {
+    "algorithm": "sha256",
+    "value": null,
+    "scope": []
+  },
+  "compatibility": {
+    "min_schema_version": "2.0.0",
+    "max_schema_version": "2.0.0",
+    "min_knowledge_version": "1.0.0",
+    "min_platform_version": "1.0.0",
+    "compatible_with_v1": true
+  },
+  "notes": "{{RELEASE_NOTES_SUMMARY}}",
+  "migration_notes": "{{MIGRATION_OR_NONE}}",
+  "immutability": {
+    "immutable": false,
+    "statement": "Becomes immutable when status=released and checksum is sealed."
+  }
+}

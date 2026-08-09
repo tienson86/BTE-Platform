@@ -1,0 +1,87 @@
+{
+  "$comment": "KD-3 MANIFEST.json template emitted at pipeline stage manifest. Conforms to knowledge/package_spec/package_manifest.schema.json after substitution.",
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_version": "{{PACKAGE_VERSION}}",
+  "metadata": {
+    "package_type": "{{PACKAGE_TYPE}}",
+    "status": "draft",
+    "language": "{{LANGUAGE}}",
+    "languages": ["{{LANGUAGE}}"],
+    "author": "{{AUTHOR}}",
+    "owner": "{{OWNER}}",
+    "domain_id": "{{DOMAIN_ID}}",
+    "tags": [],
+    "description": "{{DESCRIPTION}}",
+    "generator": {
+      "generator_id": "bte_knowledge_package_generator",
+      "generator_version": "1.0.0",
+      "profile_id": "{{PROFILE_ID}}"
+    }
+  },
+  "components": {
+    "rules": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "evidence": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "reasoning": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": ["metadata/package_metadata.json"]
+    },
+    "references": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "examples": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "tests": {
+      "present": false,
+      "required": false,
+      "paths": []
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": ["README.md"]
+    },
+    "changelog": {
+      "present": true,
+      "required": false,
+      "paths": ["CHANGELOG.md"]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [],
+    "conflicts": []
+  },
+  "exported_objects": [],
+  "required_packages": [],
+  "optional_packages": [],
+  "validation_profile": "PVP-MINIMAL",
+  "release_information": null,
+  "files": [
+    {"path": "PACKAGE.json", "type": "identity", "required": true},
+    {"path": "MANIFEST.json", "type": "manifest", "required": true},
+    {"path": "README.md", "type": "documentation", "required": true},
+    {"path": "CHANGELOG.md", "type": "changelog", "required": false},
+    {"path": "metadata/package_metadata.json", "type": "metadata", "required": false}
+  ]
+}

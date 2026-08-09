@@ -1,0 +1,35 @@
+{
+  "$comment": "Copy into rules/*.json objects array. KD-1 knowledge object + KD-4 RULE_TEMPLATE. Not a production analytical rule until Domain Review. Generator v1.0.0.",
+  "id": "{{RULE_PREFIX}}-{{SEQ6}}",
+  "version": "0.1.0",
+  "category": "{{CATEGORY}}",
+  "type": "rule",
+  "status": "draft",
+  "enabled": false,
+  "language": "{{LANGUAGE}}",
+  "tags": [],
+  "priority": {
+    "level": "normal",
+    "order": 0
+  },
+  "source": "{{SOURCE_OR_TODO_REVIEW}}",
+  "created_at": "{{CREATED_AT_ISO8601}}",
+  "updated_at": "{{UPDATED_AT_ISO8601}}",
+  "references": [],
+  "metadata": {
+    "package_id": "{{PACKAGE_ID}}",
+    "domain_id": "{{DOMAIN_ID}}",
+    "author": "{{AUTHOR}}",
+    "generator_version": "1.0.0",
+    "profile_id": "{{PROFILE_ID}}",
+    "todo_review": []
+  },
+  "payload": {
+    "condition": {
+      "$comment": "Declare match conditions. Do not embed engine business logic."
+    },
+    "result": {
+      "$comment": "Declare result signals only. No new unpublished theory (GC-NO-NEW-THEORY)."
+    }
+  }
+}
