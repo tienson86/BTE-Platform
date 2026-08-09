@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Approval responsibilities and gates for the Knowledge Authoring Pipeline. Specification only.",
+  "roles": [
+    {
+      "id": "ROLE-AUTHOR",
+      "name": "Knowledge Author",
+      "responsibilities": [
+        "Create draft packages from templates",
+        "Complete draft checklist",
+        "Respond to review findings",
+        "Must not invent classical sources"
+      ]
+    },
+    {
+      "id": "ROLE-TECH",
+      "name": "Technical Reviewer",
+      "responsibilities": [
+        "Verify KD-3 schema and naming",
+        "Verify dependencies, references, integrity, compatibility",
+        "Confirm deterministic file lists and id uniqueness",
+        "Record VALIDATION.json technical stages"
+      ]
+    },
+    {
+      "id": "ROLE-DOMAIN",
+      "name": "Domain Reviewer",
+      "responsibilities": [
+        "Verify academic/school correctness",
+        "Verify reference and terminology quality",
+        "Confirm multilingual labels do not change id meaning",
+        "Approve intended quality level"
+      ],
+      "maps_to_foundation_role": "Academic Reviewer"
+    },
+    {
+      "id": "ROLE-RELEASE",
+      "name": "Release Manager",
+      "responsibilities": [
+        "Run release pipeline stages",
+        "Generate/verify checksum",
+        "Verify version and compatibility",
+        "Publish index entry",
+        "Ensure released artifact immutability"
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "id": "GATE-SUBMIT",
+      "transition_id": "TR-DRAFT-INTERNAL",
+      "required_approvers": ["Knowledge Author"],
+      "optional_approvers": [],
+      "separation_of_duties": false
+    },
+    {
+      "id": "GATE-INTERNAL",
+      "transition_id": "TR-INTERNAL-TECH",
+      "required_approvers": ["Knowledge Author"],
+      "notes": "Internal reviewer may be a second author or authoring lead. SHOULD not be the sole Domain Reviewer later.",
+      "separation_of_duties": false
+    },
+    {
+      "id": "GATE-TECHNICAL",
+      "transition_id": "TR-TECH-DOMAIN",
+      "required_approvers": ["Technical Reviewer"],
+      "optional_approvers": [],
+      "separation_of_duties": true,
+      "author_may_not_sole_approve": true
+    },
+    {
+      "id": "GATE-KNOWLEDGE",
+      "transition_id": "TR-DOMAIN-RC",
+      "required_approvers": ["Domain Reviewer"],
+      "optional_approvers": [],
+      "separation_of_duties": true,
+      "author_may_not_sole_approve": true
+    },
+    {
+      "id": "GATE-RELEASE",
+      "transition_id": "TR-RC-RELEASED",
+      "required_approvers": ["Release Manager"],
+      "optional_approvers": ["Domain Reviewer"],
+      "prerequisites": [
+        "GATE-TECHNICAL passed",
+        "GATE-KNOWLEDGE passed",
+        "PVP-RELEASE pass"
+      ],
+      "separation_of_duties": true,
+      "author_may_not_sole_approve": true
+    },
+    {
+      "id": "GATE-DEPRECATE",
+      "transition_id": "TR-RELEASED-DEPRECATED",
+      "required_approvers": ["Release Manager", "Domain Reviewer"],
+      "separation_of_duties": true
+    },
+    {
+      "id": "GATE-ARCHIVE",
+      "transition_id": "TR-DEPRECATED-ARCHIVED",
+      "required_approvers": ["Release Manager"],
+      "optional_approvers": ["Domain Reviewer"],
+      "separation_of_duties": true
+    }
+  ],
+  "rules": [
+    "Official release requires Technical Reviewer, Domain Reviewer, and Release Manager.",
+    "Author must not be the sole approver at GATE-TECHNICAL, GATE-KNOWLEDGE, or GATE-RELEASE.",
+    "Failed gates return the package to draft (or knowledge_review from RC) with recorded findings.",
+    "Approvals are records; they do not mutate sealed released bytes."
+  ]
+}

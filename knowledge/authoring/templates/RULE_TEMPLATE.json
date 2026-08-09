@@ -1,0 +1,33 @@
+{
+  "$comment": "Copy into a package rules/*.json objects array. Conforms to knowledge/schema/v2/knowledge_object.schema.json after substitution. Not a production analytical rule.",
+  "id": "{{RULE_ID}}",
+  "version": "0.1.0",
+  "category": "{{CATEGORY}}",
+  "type": "rule",
+  "status": "draft",
+  "enabled": false,
+  "language": "{{LANGUAGE}}",
+  "tags": [],
+  "priority": {
+    "level": "normal",
+    "order": 0
+  },
+  "source": "{{SOURCE_OR_TODO_REVIEW}}",
+  "created_at": "{{CREATED_AT_ISO8601}}",
+  "updated_at": "{{UPDATED_AT_ISO8601}}",
+  "references": [],
+  "metadata": {
+    "package_id": "{{PACKAGE_ID}}",
+    "domain_id": "{{DOMAIN_ID}}",
+    "author": "{{AUTHOR}}",
+    "todo_review": []
+  },
+  "payload": {
+    "condition": {
+      "$comment": "Declare match conditions. Do not embed engine business logic."
+    },
+    "result": {
+      "$comment": "Declare result signals only."
+    }
+  }
+}

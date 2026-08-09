@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Measurable quality rules for Knowledge Packages. Specification only.",
+  "rules": [
+    {
+      "id": "QR-META-COMPLETE",
+      "name": "required_metadata_completeness",
+      "dimension": "metadata",
+      "statement": "PACKAGE.json required identity fields and manifest metadata must be non-empty and consistent.",
+      "metric": "QM-META-COMPLETE",
+      "severity": "error"
+    },
+    {
+      "id": "QR-ID-QUALITY",
+      "name": "identifier_quality",
+      "dimension": "identifiers",
+      "statement": "package_id, exported ids, and metadata ids must match naming rules, contain no version numbers, and be unique in the working corpus.",
+      "metric": "QM-ID-QUALITY",
+      "severity": "error"
+    },
+    {
+      "id": "QR-REF-QUALITY",
+      "name": "reference_quality",
+      "dimension": "references",
+      "statement": "Non-trivial claims reference resolvable knowledge ids or SRC-* / document paths; TODO_REVIEW is explicit when unknown.",
+      "metric": "QM-REF-QUALITY",
+      "severity": "warning"
+    },
+    {
+      "id": "QR-DEP-QUALITY",
+      "name": "dependency_quality",
+      "dimension": "dependencies",
+      "statement": "Dependencies are acyclic, version-constrained, justified with reason, and required/optional lists match entries.",
+      "metric": "QM-DEP-QUALITY",
+      "severity": "error"
+    },
+    {
+      "id": "QR-DOC-COMPLETE",
+      "name": "documentation_completeness",
+      "dimension": "documentation",
+      "statement": "README states purpose and out of scope; CHANGELOG describes the current version from validated onward.",
+      "metric": "QM-DOC-COMPLETE",
+      "severity": "warning"
+    },
+    {
+      "id": "QR-PKG-COMPLETE",
+      "name": "package_completeness",
+      "dimension": "package",
+      "statement": "Required components for package_type are present (e.g. rules/ for analytical); exported_objects cover public ids.",
+      "metric": "QM-PKG-COMPLETE",
+      "severity": "error"
+    },
+    {
+      "id": "QR-LANG-CONSISTENCY",
+      "name": "language_consistency",
+      "dimension": "multilingual",
+      "statement": "language is in languages[]; object languages are subsets of package languages or mul.",
+      "metric": "QM-LANG-CONSISTENCY",
+      "severity": "warning"
+    },
+    {
+      "id": "QR-EXAMPLE-BOUND",
+      "name": "example_boundary",
+      "dimension": "examples",
+      "statement": "Package examples must not be Golden Dataset expected outputs or snapshots.",
+      "metric": "QM-EXAMPLE-BOUND",
+      "severity": "error"
+    }
+  ]
+}

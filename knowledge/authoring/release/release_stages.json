@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "stages": [
+    {
+      "order": 1,
+      "id": "package_validation",
+      "name": "Package validation",
+      "profile": "PVP-RELEASE",
+      "failure": "Any required validation stage fails."
+    },
+    {
+      "order": 2,
+      "id": "checksum_generation",
+      "name": "Checksum generation",
+      "algorithm": "sha256",
+      "rule": "KD-3 two-pass placeholder substitution",
+      "failure": "Checksum null, non-hex, or non-reproducible."
+    },
+    {
+      "order": 3,
+      "id": "version_verification",
+      "name": "Version verification",
+      "checks": ["package_version", "schema_version", "knowledge_version", "object versions", "breaking_changes if MAJOR"],
+      "failure": "Invalid SemVer or undeclared breaking MAJOR."
+    },
+    {
+      "order": 4,
+      "id": "release_notes",
+      "name": "Release notes",
+      "artifacts": ["RELEASE.json", "CHANGELOG.md"],
+      "failure": "Missing release notes or required migration notes."
+    },
+    {
+      "order": 5,
+      "id": "compatibility_verification",
+      "name": "Compatibility verification",
+      "checks": ["platform range", "schema range", "language", "school", "compatible_with_v1"],
+      "failure": "Release bounds disagree with identity compatibility."
+    },
+    {
+      "order": 6,
+      "id": "publication_readiness",
+      "name": "Publication readiness",
+      "checks": ["index entry", "license", "released dependencies", "release checklist"],
+      "failure": "Index incomplete or required dependency not released."
+    },
+    {
+      "order": 7,
+      "id": "seal_and_publish",
+      "name": "Seal and publish",
+      "effects": ["status=released", "checksum written", "index published", "immutability enforced"],
+      "failure": "Any prior stage incomplete."
+    }
+  ]
+}

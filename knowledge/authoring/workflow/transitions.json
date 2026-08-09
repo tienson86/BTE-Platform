@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Allowed authoring workflow transitions. Circular content edits after release_candidate are forbidden.",
+  "transitions": [
+    {
+      "id": "TR-IDEA-DRAFT",
+      "from": "idea",
+      "to": "draft",
+      "actor": "Knowledge Author",
+      "requires": [
+        "package_id reserved and unique",
+        "package_template copied to folder named package_id",
+        "PACKAGE.json and MANIFEST.json created from templates"
+      ]
+    },
+    {
+      "id": "TR-DRAFT-INTERNAL",
+      "from": "draft",
+      "to": "internal_review",
+      "actor": "Knowledge Author",
+      "requires": [
+        "checklists/draft_checklist.md complete",
+        "README.md present",
+        "validation profile PVP-MINIMAL specified",
+        "no unpublished identifier collisions declared"
+      ]
+    },
+    {
+      "id": "TR-INTERNAL-REJECT",
+      "from": "internal_review",
+      "to": "draft",
+      "actor": "Internal reviewer or Knowledge Author lead",
+      "requires": [
+        "written findings recorded"
+      ]
+    },
+    {
+      "id": "TR-INTERNAL-TECH",
+      "from": "internal_review",
+      "to": "technical_validation",
+      "actor": "Internal reviewer",
+      "requires": [
+        "checklists/review_checklist.md section Internal complete",
+        "style and completeness accepted"
+      ]
+    },
+    {
+      "id": "TR-TECH-REJECT",
+      "from": "technical_validation",
+      "to": "draft",
+      "actor": "Technical Reviewer",
+      "requires": [
+        "failed validation stages listed",
+        "diagnostics recorded in VALIDATION.json or review note"
+      ]
+    },
+    {
+      "id": "TR-TECH-DOMAIN",
+      "from": "technical_validation",
+      "to": "knowledge_review",
+      "actor": "Technical Reviewer",
+      "requires": [
+        "schema, metadata, dependency, reference, integrity, compatibility stages pass",
+        "quality technical metrics meet Bronze floor"
+      ]
+    },
+    {
+      "id": "TR-DOMAIN-REJECT",
+      "from": "knowledge_review",
+      "to": "draft",
+      "actor": "Domain Reviewer",
+      "requires": [
+        "domain findings recorded",
+        "TODO_REVIEW items not silently deleted"
+      ]
+    },
+    {
+      "id": "TR-DOMAIN-RC",
+      "from": "knowledge_review",
+      "to": "release_candidate",
+      "actor": "Domain Reviewer",
+      "requires": [
+        "knowledge review approved",
+        "quality stage meets intended level floor",
+        "CHANGELOG.md present",
+        "KD-3 status set to validated"
+      ]
+    },
+    {
+      "id": "TR-RC-DOMAIN",
+      "from": "release_candidate",
+      "to": "knowledge_review",
+      "actor": "Release Manager",
+      "requires": [
+        "pre-release regression or late domain defect",
+        "candidate not yet checksum-sealed"
+      ]
+    },
+    {
+      "id": "TR-RC-RELEASED",
+      "from": "release_candidate",
+      "to": "released",
+      "actor": "Release Manager",
+      "requires": [
+        "checklists/release_checklist.md complete",
+        "PVP-RELEASE all required stages pass",
+        "RELEASE.json complete",
+        "checksum non-null",
+        "required dependencies released",
+        "immutability declared"
+      ]
+    },
+    {
+      "id": "TR-RELEASED-DEPRECATED",
+      "from": "released",
+      "to": "deprecated",
+      "actor": "Release Manager",
+      "requires": [
+        "Domain Reviewer concurrence",
+        "successor package_id/version or written rationale"
+      ],
+      "mutates_artifact": false,
+      "notes": "Status change is index/registry only."
+    },
+    {
+      "id": "TR-DEPRECATED-ARCHIVED",
+      "from": "deprecated",
+      "to": "archived",
+      "actor": "Release Manager",
+      "requires": [
+        "consumers migrated or explicit archive waiver",
+        "identifiers remain reserved"
+      ],
+      "mutates_artifact": false
+    }
+  ],
+  "forbidden": [
+    "released -> draft",
+    "released -> internal_review",
+    "released -> technical_validation",
+    "released -> knowledge_review",
+    "released -> release_candidate",
+    "released -> archived (must pass deprecated)",
+    "skipping any forward state",
+    "mutating sealed released bytes"
+  ]
+}

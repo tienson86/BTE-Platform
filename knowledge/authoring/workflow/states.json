@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Fine-grained authoring workflow states. Sealed packages still use KD-3 status values.",
+  "states": [
+    {
+      "id": "idea",
+      "name": "Idea",
+      "kd3_status": null,
+      "editable": true,
+      "deployable": false,
+      "immutable": false,
+      "description": "Problem or knowledge gap identified. No official package identity required yet."
+    },
+    {
+      "id": "draft",
+      "name": "Draft",
+      "kd3_status": "draft",
+      "editable": true,
+      "deployable": false,
+      "immutable": false,
+      "description": "Package skeleton and content authoring in a working copy."
+    },
+    {
+      "id": "internal_review",
+      "name": "Internal Review",
+      "kd3_status": "review",
+      "editable": false,
+      "deployable": false,
+      "immutable": false,
+      "description": "Completeness, style, and checklist review by a peer or authoring lead."
+    },
+    {
+      "id": "technical_validation",
+      "name": "Technical Validation",
+      "kd3_status": "review",
+      "editable": false,
+      "deployable": false,
+      "immutable": false,
+      "description": "Schema, metadata, dependency, reference, integrity, and compatibility checks."
+    },
+    {
+      "id": "knowledge_review",
+      "name": "Knowledge Review",
+      "kd3_status": "review",
+      "editable": false,
+      "deployable": false,
+      "immutable": false,
+      "description": "Domain/academic review of meaning, school consistency, and reference quality."
+    },
+    {
+      "id": "release_candidate",
+      "name": "Release Candidate",
+      "kd3_status": "validated",
+      "editable": false,
+      "deployable": false,
+      "immutable": true,
+      "description": "Content frozen. Ready for release pipeline (checksum, notes, publication)."
+    },
+    {
+      "id": "released",
+      "name": "Released",
+      "kd3_status": "released",
+      "editable": false,
+      "deployable": true,
+      "immutable": true,
+      "description": "Official Knowledge Database member. Artifact bytes frozen."
+    },
+    {
+      "id": "deprecated",
+      "name": "Deprecated",
+      "kd3_status": "deprecated",
+      "editable": false,
+      "deployable": true,
+      "immutable": true,
+      "description": "Still resolvable; successor preferred."
+    },
+    {
+      "id": "archived",
+      "name": "Archived",
+      "kd3_status": "archived",
+      "editable": false,
+      "deployable": false,
+      "immutable": true,
+      "description": "Not loaded by default. Identifiers remain reserved."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Validation profiles for the authoring pipeline. Extends KD-3 PVP-* with quality, golden, and release stages.",
+  "profiles": [
+    {
+      "id": "PVP-MINIMAL",
+      "when": ["draft", "idea"],
+      "required_stages": [
+        "schema_validation",
+        "metadata_validation"
+      ],
+      "optional_stages": [],
+      "blocks_on": "error"
+    },
+    {
+      "id": "PVP-STANDARD",
+      "when": ["internal_review", "technical_validation", "knowledge_review"],
+      "required_stages": [
+        "schema_validation",
+        "metadata_validation",
+        "dependency_validation",
+        "reference_validation",
+        "integrity_validation",
+        "compatibility_validation",
+        "quality_validation"
+      ],
+      "optional_stages": [
+        "golden_dataset_validation"
+      ],
+      "blocks_on": "error"
+    },
+    {
+      "id": "PVP-RELEASE",
+      "when": ["release_candidate", "released"],
+      "required_stages": [
+        "schema_validation",
+        "metadata_validation",
+        "dependency_validation",
+        "reference_validation",
+        "integrity_validation",
+        "compatibility_validation",
+        "quality_validation",
+        "golden_dataset_validation",
+        "release_validation"
+      ],
+      "optional_stages": [],
+      "blocks_on": "error",
+      "warnings": "must_acknowledge"
+    }
+  ]
+}

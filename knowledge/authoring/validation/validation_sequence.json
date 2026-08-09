@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "deterministic": true,
+  "sort_locale": "C",
+  "stages": [
+    {
+      "order": 1,
+      "id": "schema_validation",
+      "name": "Schema Validation",
+      "inputs": ["PACKAGE.json", "MANIFEST.json", "DEPENDENCIES.json", "exported object files", "RELEASE.json"],
+      "outputs": ["per-file schema diagnostics"],
+      "failure": "Any required artifact fails its canonical JSON Schema."
+    },
+    {
+      "order": 2,
+      "id": "metadata_validation",
+      "name": "Metadata Validation",
+      "inputs": ["PACKAGE.json", "MANIFEST.json metadata", "taxonomy domains"],
+      "outputs": ["consistency report"],
+      "failure": "Required metadata missing, inconsistent, or domain_id unknown."
+    },
+    {
+      "order": 3,
+      "id": "dependency_validation",
+      "name": "Dependency Validation",
+      "inputs": ["manifest dependencies", "DEPENDENCIES.json", "package index"],
+      "outputs": ["resolved graph", "load order"],
+      "failure": "Missing required dependency, cycle, conflict, or list mismatch."
+    },
+    {
+      "order": 4,
+      "id": "reference_validation",
+      "name": "Reference Validation",
+      "inputs": ["object references", "exported ids", "dependency exports"],
+      "outputs": ["resolved and unresolved reference lists"],
+      "failure": "Knowledge-id reference does not resolve."
+    },
+    {
+      "order": 5,
+      "id": "integrity_validation",
+      "name": "Integrity Validation",
+      "inputs": ["component paths", "files[]", "package tree"],
+      "outputs": ["missing paths", "duplicate ids"],
+      "failure": "Declared file missing, folder/id mismatch, or duplicate identifier."
+    },
+    {
+      "order": 6,
+      "id": "compatibility_validation",
+      "name": "Compatibility Validation",
+      "inputs": ["compatibility object", "active schema/knowledge/platform versions"],
+      "outputs": ["range matrix"],
+      "failure": "Active versions or language/school outside declared compatibility."
+    },
+    {
+      "order": 7,
+      "id": "quality_validation",
+      "name": "Quality Validation",
+      "inputs": ["package tree", "quality_rules.json", "intended quality level"],
+      "outputs": ["metric scores", "achieved level"],
+      "failure": "Achieved quality level below gate requirement."
+    },
+    {
+      "order": 8,
+      "id": "golden_dataset_validation",
+      "name": "Golden Dataset Validation",
+      "inputs": ["existing golden tests (read-only)", "package exports"],
+      "outputs": ["pass", "fail", "not_applicable"],
+      "failure": "Any golden test fails. Golden/snapshot/expected files must not be edited."
+    },
+    {
+      "order": 9,
+      "id": "release_validation",
+      "name": "Release Validation",
+      "inputs": ["RELEASE.json", "checksum scope", "release checklist"],
+      "outputs": ["publication readiness report"],
+      "failure": "Incomplete release metadata, null checksum, or unmet immutability/dependency rules."
+    }
+  ]
+}

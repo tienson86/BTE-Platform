@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Quality levels for Knowledge Packages. Official release SHOULD declare a target level.",
+  "levels": [
+    {
+      "id": "bronze",
+      "name": "Bronze",
+      "order": 1,
+      "may_release": true,
+      "summary": "Structurally valid package with complete required metadata and identifiers.",
+      "requires": [
+        "PVP-STANDARD technical stages pass",
+        "QM-META-COMPLETE = 1.0",
+        "QM-ID-QUALITY = 1.0",
+        "QM-DEP-QUALITY = 1.0",
+        "QM-PKG-COMPLETE = 1.0",
+        "QM-EXAMPLE-BOUND = 1.0"
+      ]
+    },
+    {
+      "id": "silver",
+      "name": "Silver",
+      "order": 2,
+      "may_release": true,
+      "summary": "Bronze plus complete documentation and strong reference coverage.",
+      "requires": [
+        "all Bronze requirements",
+        "QM-DOC-COMPLETE = 1.0",
+        "QM-REF-QUALITY >= 0.8",
+        "QM-LANG-CONSISTENCY >= 0.95"
+      ]
+    },
+    {
+      "id": "gold",
+      "name": "Gold",
+      "order": 3,
+      "may_release": true,
+      "summary": "Silver plus examples/tests for the package type and near-complete references.",
+      "requires": [
+        "all Silver requirements",
+        "QM-REF-QUALITY >= 0.95",
+        "QM-LANG-CONSISTENCY = 1.0",
+        "examples or tests present when package_type is analytical, interpretation, or report"
+      ]
+    },
+    {
+      "id": "platinum",
+      "name": "Platinum",
+      "order": 4,
+      "may_release": true,
+      "summary": "Gold plus Golden Dataset stage pass (or recorded N/A) and zero unacknowledged release warnings.",
+      "requires": [
+        "all Gold requirements",
+        "QM-REF-QUALITY = 1.0",
+        "golden_dataset_validation is pass or not_applicable with waiver",
+        "PVP-RELEASE pass with zero unacknowledged warnings"
+      ]
+    }
+  ],
+  "default_target_for_official": "silver",
+  "minimum_for_release_candidate": "bronze"
+}

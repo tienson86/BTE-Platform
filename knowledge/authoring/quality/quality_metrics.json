@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "description": "Quality metrics. Scores are 0.0–1.0. Future tools compute them; KD-4 defines the contract only.",
+  "scoring": {
+    "range": [0.0, 1.0],
+    "aggregation": "min_of_required_then_weighted_mean_of_optional",
+    "determinism": "sorted rule evaluation, locale C"
+  },
+  "metrics": [
+    {
+      "id": "QM-META-COMPLETE",
+      "rule_id": "QR-META-COMPLETE",
+      "unit": "ratio",
+      "formula": "filled_required_metadata_fields / required_metadata_fields",
+      "bronze_min": 1.0,
+      "silver_min": 1.0,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-ID-QUALITY",
+      "rule_id": "QR-ID-QUALITY",
+      "unit": "ratio",
+      "formula": "valid_unique_ids / total_ids",
+      "bronze_min": 1.0,
+      "silver_min": 1.0,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-REF-QUALITY",
+      "rule_id": "QR-REF-QUALITY",
+      "unit": "ratio",
+      "formula": "sourced_or_todo_review_claims / non_trivial_claims",
+      "bronze_min": 0.5,
+      "silver_min": 0.8,
+      "gold_min": 0.95,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-DEP-QUALITY",
+      "rule_id": "QR-DEP-QUALITY",
+      "unit": "ratio",
+      "formula": "1.0 if graph valid else 0.0",
+      "bronze_min": 1.0,
+      "silver_min": 1.0,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-DOC-COMPLETE",
+      "rule_id": "QR-DOC-COMPLETE",
+      "unit": "ratio",
+      "formula": "present_doc_items / required_doc_items_for_state",
+      "bronze_min": 0.5,
+      "silver_min": 1.0,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-PKG-COMPLETE",
+      "rule_id": "QR-PKG-COMPLETE",
+      "unit": "ratio",
+      "formula": "present_required_components / required_components_for_type",
+      "bronze_min": 1.0,
+      "silver_min": 1.0,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-LANG-CONSISTENCY",
+      "rule_id": "QR-LANG-CONSISTENCY",
+      "unit": "ratio",
+      "formula": "language_consistent_objects / objects_with_language",
+      "bronze_min": 0.8,
+      "silver_min": 0.95,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    },
+    {
+      "id": "QM-EXAMPLE-BOUND",
+      "rule_id": "QR-EXAMPLE-BOUND",
+      "unit": "ratio",
+      "formula": "1.0 if no golden/snapshot leakage else 0.0",
+      "bronze_min": 1.0,
+      "silver_min": 1.0,
+      "gold_min": 1.0,
+      "platinum_min": 1.0
+    }
+  ]
+}

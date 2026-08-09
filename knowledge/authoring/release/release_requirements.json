@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "authoring_pipeline_version": "1.0.0",
+  "requirements": [
+    {
+      "id": "RR-STATE",
+      "statement": "Package workflow state must be release_candidate (KD-3 validated)."
+    },
+    {
+      "id": "RR-GATES",
+      "statement": "GATE-TECHNICAL and GATE-KNOWLEDGE must be recorded with separation of duties."
+    },
+    {
+      "id": "RR-PVP-RELEASE",
+      "statement": "PVP-RELEASE validation profile must pass."
+    },
+    {
+      "id": "RR-CHECKSUM",
+      "statement": "SHA-256 checksum must be non-null and reproducible via the two-pass rule."
+    },
+    {
+      "id": "RR-RELEASE-JSON",
+      "statement": "RELEASE.json must include release notes, migration notes, date, author, platform bounds, and immutability.immutable=true."
+    },
+    {
+      "id": "RR-DEPS-RELEASED",
+      "statement": "Every required dependency must already be released at a satisfying version."
+    },
+    {
+      "id": "RR-QUALITY-FLOOR",
+      "statement": "Achieved quality level must be at least Bronze; target level should be declared."
+    },
+    {
+      "id": "RR-GOLDEN-READONLY",
+      "statement": "Golden Dataset, snapshots, and expected outputs must not be modified to obtain a pass."
+    },
+    {
+      "id": "RR-IMMUTABLE",
+      "statement": "After seal_and_publish, artifact bytes must not change."
+    },
+    {
+      "id": "RR-NO-ENGINE-API",
+      "statement": "Release must not require Rule/Analysis/Interpretation/Report Engine or API modifications."
+    }
+  ]
+}

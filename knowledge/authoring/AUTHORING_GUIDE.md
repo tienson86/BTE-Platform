@@ -1,17 +1,99 @@
 # Authoring Guide
 
 **Document:** AUTHORING_GUIDE  
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Status:** Specification  
-**Audience:** Knowledge Authors
+**Audience:** Knowledge Authors, Technical Reviewers, Domain Reviewers, Release Managers
+
+This guide covers:
+
+- **Part A** — Knowledge Package authoring (Sprint KD-4)
+- **Part B** — Knowledge Record authoring (Sprint 4B, unchanged in intent)
 
 ---
+
+# Part A — Knowledge Package authoring (KD-4)
+
+## A1. Authoring philosophy
+
+Knowledge is a **governed product**, not a dump of notes.
+
+1. **Package first** — the deployable unit is a KD-3 Knowledge Package, not a loose file.
+2. **Honesty over completeness** — unknown classical claims stay `TODO_REVIEW`; never invent sources.
+3. **Determinism** — the same package bytes always validate and release the same way.
+4. **Separation of duties** — authors draft; they do not sole-approve official release.
+5. **Immutability after release** — fixes are new versions.
+6. **Scale** — process must work for 100,000+ objects, parallel authors, multilingual and multi-school packages, and future AI-assisted tools.
+7. **Additive compatibility** — existing Rule Database and Knowledge Records remain valid; this pipeline is the path for *new* official packages.
+
+## A2. Validation philosophy
+
+Validation is a **specified sequence**, not a single boolean.
+
+- Run stages in declared order (`validation/validation_sequence.json`).
+- Fail closed on errors; warnings require acknowledgment at release.
+- No runtime validators are implemented in KD-4; future tools MUST follow this spec.
+- Golden Dataset validation consumes existing golden tests; it MUST NOT modify golden files.
+
+## A3. Review philosophy
+
+Reviews protect readers and downstream engines.
+
+- **Internal review** checks completeness and style.
+- **Technical validation** checks schema, ids, dependencies, integrity.
+- **Knowledge / domain review** checks academic meaning and school consistency.
+- Reviewers record findings; they do not silently rewrite released meaning.
+- AI-assisted drafts are allowed; human Domain Reviewer remains accountable for classical content.
+
+## A4. Release philosophy
+
+Release is a **publication event**.
+
+- Only `release_candidate` (KD-3 `validated`) packages may enter the release pipeline.
+- Checksum, notes, compatibility, and immutability are mandatory.
+- Publication updates indexes/registries; it does not mutate sealed artifacts afterward.
+
+## A5. How to start a package
+
+1. Copy `package_template/` to a new folder named exactly `package_id`.
+2. Replace placeholders using `templates/PACKAGE_TEMPLATE.json` and `MANIFEST_TEMPLATE.json`.
+3. Add objects from `RULE_TEMPLATE.json` / `METADATA_TEMPLATE.json` (or KR templates from Part B).
+4. Complete [checklists/draft_checklist.md](checklists/draft_checklist.md).
+5. Follow [authoring_pipeline.md](authoring_pipeline.md) states through release.
+
+Do not edit template files in place to store real knowledge.
+
+## A6. Package authoring sequence
+
+```text
+idea → draft → internal_review → technical_validation
+     → knowledge_review → release_candidate → released
+     → deprecated → archived
+```
+
+Map to KD-3 `PACKAGE.json` `status` in `workflow/states.json`.
+
+## A7. Done means (package draft)
+
+A draft is ready for internal review when:
+
+- `PACKAGE.json` + `MANIFEST.json` + `README.md` exist and match KD-3 schemas (after placeholder substitution)
+- `domain_id` exists in taxonomy
+- identifiers follow naming rules
+- [checklists/draft_checklist.md](checklists/draft_checklist.md) completed
+- status remains `draft` until submit
+
+---
+
+# Part B — Knowledge Record authoring (Sprint 4B)
+
+**Audience:** Knowledge Authors writing KR markdown records.
 
 ## 1. Goal
 
 Write Knowledge Records that are academically honest, machine-mappable, reviewable, and publishable under BTE governance.
 
----
+When a KR ships inside a Knowledge Package, Part A gates still apply to the package.
 
 ## 2. Choose the right template
 
@@ -20,13 +102,12 @@ Write Knowledge Records that are academically honest, machine-mappable, reviewab
 | Generic KR shell | `knowledge/templates/knowledge_record_template.md` |
 | Foundational Concept | `foundational_concept_template.md` |
 | Entity / catalog | `entity_template.md` |
-| Rule | `rule_template.md` |
+| Rule (KR markdown) | `rule_template.md` |
+| Rule (KD-3 JSON object) | `knowledge/authoring/templates/RULE_TEMPLATE.json` |
 | Example only | `example_template.md` |
 | Golden candidate overlay | `golden_record_template.md` |
 
 Copy the template; do not edit the template file in place for content authoring.
-
----
 
 ## 3. Authoring sequence
 
@@ -44,8 +125,6 @@ Copy the template; do not edit the template file in place for content authoring.
 ```
 
 Do not skip to “official” language before review.
-
----
 
 ## 4. How to write a Knowledge Record
 
@@ -122,9 +201,11 @@ draft → (submit) → review
               → freeze candidate → frozen → released/official
 ```
 
+For **packages**, use the KD-4 workflow in [authoring_pipeline.md](authoring_pipeline.md) instead of this KR-only path.
+
 Authors prepare content and self-checklist; they do not self-approve official promotion.
 
-Details: [REVIEW_GUIDE.md](REVIEW_GUIDE.md), `knowledge/governance/review_workflow.json`.
+Details: [REVIEW_GUIDE.md](REVIEW_GUIDE.md), `knowledge/governance/review_workflow.json`, `workflow/approvals.json`.
 
 ---
 
@@ -136,11 +217,11 @@ Authors SHOULD note intended:
 - aliases
 - keywords / topics
 
-Index files are updated at publication (`PB-03`), not by inventing parallel IDs during draft.
+Index files are updated at publication, not by inventing parallel IDs during draft.
 
 ---
 
-## 6. Done means
+## 6. Done means (KR draft)
 
 A draft is ready for review when:
 
