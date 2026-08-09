@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "framework_version": "1.0.0",
+  "levels": [
+    {
+      "id": "experimental",
+      "rank": 0
+    },
+    {
+      "id": "low",
+      "rank": 1
+    },
+    {
+      "id": "medium",
+      "rank": 2
+    },
+    {
+      "id": "high",
+      "rank": 3
+    },
+    {
+      "id": "canonical",
+      "rank": 4
+    }
+  ],
+  "modes": [
+    {
+      "id": "declared",
+      "semantics": "Copied from the cited evidence bundle or rule metadata."
+    },
+    {
+      "id": "inherited",
+      "semantics": "Same level as the required predecessor node."
+    },
+    {
+      "id": "reduced",
+      "semantics": "Strictly weaker than supporting predecessors."
+    },
+    {
+      "id": "conflicting",
+      "semantics": "Opposing branch retains its own level; no silent winner."
+    },
+    {
+      "id": "combined",
+      "semantics": "Conservative meet: minimum rank among supporting predecessors."
+    }
+  ],
+  "propagation_rules": [
+    {
+      "id": "CP-001",
+      "statement": "Observation nodes use declared confidence (usually high) for chart facts assumed given."
+    },
+    {
+      "id": "CP-002",
+      "statement": "Evidence nodes inherit or declare the Evidence Bundle confidence_level."
+    },
+    {
+      "id": "CP-003",
+      "statement": "Inference nodes inherit from the evidence they require unless marked reduced."
+    },
+    {
+      "id": "CP-004",
+      "statement": "Final conclusions use combined mode over supporting intermediate nodes."
+    },
+    {
+      "id": "CP-005",
+      "statement": "Alternative nodes that did not activate use reduced mode."
+    },
+    {
+      "id": "CP-006",
+      "statement": "Contradiction nodes use conflicting mode and must not overwrite the taken path level."
+    }
+  ],
+  "package_id": "bz_01_strength_core",
+  "package_version": "1.2.0",
+  "chains": [
+    "RC-STR-STRONG-001",
+    "RC-STR-WEAK-001",
+    "RC-STR-BALANCED-001"
+  ]
+}

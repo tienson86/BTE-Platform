@@ -1,0 +1,301 @@
+{
+  "count": 13,
+  "nodes": [
+    {
+      "node_id": "RN-STR-WEAK-OBS-001",
+      "node_type": "observation",
+      "title": "Quan sát: Canh Kim sinh tháng Ngọ",
+      "description": "Nhật Chủ Canh, chi tháng Ngọ (Hỏa), vô căn, có Sát.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "chart"
+      ],
+      "outputs": [
+        "day_master_element=metal",
+        "month_branch=ngo",
+        "season=summer"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "example_id": "EX-SKC-WEAK-001"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-EVD-029",
+      "node_type": "evidence",
+      "title": "Bằng chứng: tháng Ngọ hành lệnh Hỏa",
+      "description": "Chi tháng Ngọ lấy Hỏa làm lệnh.",
+      "source_rule": "SKC-000029",
+      "source_evidence": "evidence/bundles/SKC-000029.json",
+      "inputs": [
+        "month_branch=ngo"
+      ],
+      "outputs": [
+        "month_command_element=fire"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-INF-019",
+      "node_type": "inference",
+      "title": "Suy: Kim hạ → tù",
+      "description": "Kim mùa Hỏa ở trạng thái tù.",
+      "source_rule": "SKC-000019",
+      "source_evidence": "evidence/bundles/SKC-000019.json",
+      "inputs": [
+        "day_master_element=metal",
+        "season=summer"
+      ],
+      "outputs": [
+        "inferred_month_status=imprison"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-INF-004",
+      "node_type": "inference",
+      "title": "Suy: tháng lệnh tù (−10)",
+      "description": "Áp trọng số tù.",
+      "source_rule": "SKC-000004",
+      "source_evidence": "evidence/bundles/SKC-000004.json",
+      "inputs": [
+        "month_status=imprison"
+      ],
+      "outputs": [
+        "month_command_score"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-INF-045",
+      "node_type": "inference",
+      "title": "Suy: vô căn (−20)",
+      "description": "root_level=no_root.",
+      "source_rule": "SKC-000045",
+      "source_evidence": "evidence/bundles/SKC-000045.json",
+      "inputs": [
+        "root_level=no_root"
+      ],
+      "outputs": [
+        "root_score"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-INF-071",
+      "node_type": "inference",
+      "title": "Suy: không can trợ",
+      "description": "Không Tỷ/Ấn lộ can.",
+      "source_rule": "SKC-000071",
+      "source_evidence": "evidence/bundles/SKC-000071.json",
+      "inputs": [
+        "visible_companion_count=0"
+      ],
+      "outputs": [
+        "stem_support"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-INF-080",
+      "node_type": "inference",
+      "title": "Suy: không Ấn không tỷ",
+      "description": "Thiếu nguồn sinh và đồng hành.",
+      "source_rule": "SKC-000080",
+      "source_evidence": "evidence/bundles/SKC-000080.json",
+      "inputs": [
+        "resource_count=0",
+        "companion_count=0"
+      ],
+      "outputs": [
+        "element_support"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-INF-082",
+      "node_type": "inference",
+      "title": "Suy: Thất Sát khắc thân",
+      "description": "officer_type=qi_sha.",
+      "source_rule": "SKC-000082",
+      "source_evidence": "evidence/bundles/SKC-000082.json",
+      "inputs": [
+        "officer_type_present=qi_sha"
+      ],
+      "outputs": [
+        "restriction_score"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-MID-096",
+      "node_type": "intermediate_conclusion",
+      "title": "Kết luận giữa: tháng tù bị khắc → thân nhược",
+      "description": "Imprison + Quan Sát.",
+      "source_rule": "SKC-000096",
+      "source_evidence": "evidence/bundles/SKC-000096.json",
+      "inputs": [
+        "month_status=imprison",
+        "officer_count>=1"
+      ],
+      "outputs": [
+        "tendency=weak"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-SHARED-INF-103",
+      "node_type": "inference",
+      "title": "Suy: điểm nền 50",
+      "description": "Mọi cục hợp lệ khởi điểm 50/100.",
+      "source_rule": "SKC-000103",
+      "source_evidence": "evidence/bundles/SKC-000103.json",
+      "inputs": [
+        "chart_valid=true"
+      ],
+      "outputs": [
+        "baseline"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-FIN-099",
+      "node_type": "final_conclusion",
+      "title": "Kết luận cuối: thân nhược (<= 0.35)",
+      "description": "Ngưỡng weak của Strength Core.",
+      "source_rule": "SKC-000099",
+      "source_evidence": "evidence/bundles/SKC-000099.json",
+      "inputs": [
+        "tendency=weak",
+        "baseline"
+      ],
+      "outputs": [
+        "strength_level=weak"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-ALT-102",
+      "node_type": "alternative",
+      "title": "Nhánh thay thế: giả nhược (không kích hoạt)",
+      "description": "Tháng tử nhưng căn sâu + Ấn — không đúng cục vô căn này.",
+      "source_rule": "SKC-000102",
+      "source_evidence": "evidence/bundles/SKC-000102.json",
+      "inputs": [
+        "month_status=dead",
+        "root_two+"
+      ],
+      "outputs": [
+        "tendency=false_weak"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "reduced"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "activated": false
+      }
+    },
+    {
+      "node_id": "RN-STR-WEAK-CON-098",
+      "node_type": "contradiction",
+      "title": "Mâu thuẫn tiềm năng: ngưỡng thân vượng",
+      "description": "SKC-000098 đối lập nếu điểm >= 0.65.",
+      "source_rule": "SKC-000098",
+      "source_evidence": "evidence/bundles/SKC-000098.json",
+      "inputs": [
+        "strength_score_normalized>=0.65"
+      ],
+      "outputs": [
+        "strength_level=strong"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "conflicting"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "activated": false
+      }
+    }
+  ]
+}

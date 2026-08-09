@@ -1,0 +1,277 @@
+{
+  "count": 12,
+  "nodes": [
+    {
+      "node_id": "RN-STR-BAL-OBS-001",
+      "node_type": "observation",
+      "title": "Quan sát: Ất Mộc sinh tháng Mùi",
+      "description": "Nhật Chủ Ất, tháng Mùi, mùa hạ hưu, căn tàng can, có Ấn.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "chart"
+      ],
+      "outputs": [
+        "day_master_element=wood",
+        "month_branch=mui",
+        "season=summer"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "example_id": "EX-SKC-BALANCED-001"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-EVD-036",
+      "node_type": "evidence",
+      "title": "Bằng chứng: tháng Mùi hành lệnh Thổ",
+      "description": "Chi tháng Mùi lấy Thổ làm lệnh.",
+      "source_rule": "SKC-000036",
+      "source_evidence": "evidence/bundles/SKC-000036.json",
+      "inputs": [
+        "month_branch=mui"
+      ],
+      "outputs": [
+        "month_command_element=earth"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-INF-007",
+      "node_type": "inference",
+      "title": "Suy: Mộc hạ → hưu",
+      "description": "Mộc mùa hạ hưu vì sinh Hỏa.",
+      "source_rule": "SKC-000007",
+      "source_evidence": "evidence/bundles/SKC-000007.json",
+      "inputs": [
+        "day_master_element=wood",
+        "season=summer"
+      ],
+      "outputs": [
+        "inferred_month_status=rest"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-INF-003",
+      "node_type": "inference",
+      "title": "Suy: tháng lệnh hưu (+10)",
+      "description": "Áp trọng số hưu.",
+      "source_rule": "SKC-000003",
+      "source_evidence": "evidence/bundles/SKC-000003.json",
+      "inputs": [
+        "month_status=rest"
+      ],
+      "outputs": [
+        "month_command_score"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-INF-044",
+      "node_type": "inference",
+      "title": "Suy: thông căn tàng can",
+      "description": "root_level=hidden_root.",
+      "source_rule": "SKC-000044",
+      "source_evidence": "evidence/bundles/SKC-000044.json",
+      "inputs": [
+        "root_level=hidden_root"
+      ],
+      "outputs": [
+        "root_score"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-INF-055",
+      "node_type": "inference",
+      "title": "Suy: dư khí tàng can trùng Nhật Chủ",
+      "description": "Căn tàng mỏng.",
+      "source_rule": "SKC-000055",
+      "source_evidence": "evidence/bundles/SKC-000055.json",
+      "inputs": [
+        "hidden_residual_qi_is_dm=true"
+      ],
+      "outputs": [
+        "hidden_stem_score"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-INF-076",
+      "node_type": "inference",
+      "title": "Suy: có hành Ấn",
+      "description": "Nguồn sinh hiện diện.",
+      "source_rule": "SKC-000076",
+      "source_evidence": "evidence/bundles/SKC-000076.json",
+      "inputs": [
+        "resource_element_present=true"
+      ],
+      "outputs": [
+        "element_support"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-MID-097",
+      "node_type": "intermediate_conclusion",
+      "title": "Kết luận giữa: hưu khí một căn → trung hòa",
+      "description": "Rest + căn (tàng) → balanced tendency.",
+      "source_rule": "SKC-000097",
+      "source_evidence": "evidence/bundles/SKC-000097.json",
+      "inputs": [
+        "month_status=rest",
+        "root_level=root_one_or_hidden"
+      ],
+      "outputs": [
+        "tendency=balanced"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-SHARED-INF-103",
+      "node_type": "inference",
+      "title": "Suy: điểm nền 50",
+      "description": "Mọi cục hợp lệ khởi điểm 50/100.",
+      "source_rule": "SKC-000103",
+      "source_evidence": "evidence/bundles/SKC-000103.json",
+      "inputs": [
+        "chart_valid=true"
+      ],
+      "outputs": [
+        "baseline"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-FIN-100",
+      "node_type": "final_conclusion",
+      "title": "Kết luận cuối: trung hòa (0.35–0.65)",
+      "description": "Ngưỡng balanced của Strength Core.",
+      "source_rule": "SKC-000100",
+      "source_evidence": "evidence/bundles/SKC-000100.json",
+      "inputs": [
+        "tendency=balanced",
+        "baseline"
+      ],
+      "outputs": [
+        "strength_level=balanced"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-ALT-098",
+      "node_type": "alternative",
+      "title": "Nhánh thay thế: thân vượng (không kích hoạt)",
+      "description": "Điểm chưa đạt ngưỡng 0.65 trên cục hưu + căn tàng.",
+      "source_rule": "SKC-000098",
+      "source_evidence": "evidence/bundles/SKC-000098.json",
+      "inputs": [
+        "strength_score_normalized>=0.65"
+      ],
+      "outputs": [
+        "strength_level=strong"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "reduced"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "activated": false
+      }
+    },
+    {
+      "node_id": "RN-STR-BAL-CON-099",
+      "node_type": "contradiction",
+      "title": "Mâu thuẫn tiềm năng: thân nhược",
+      "description": "SKC-000099 đối lập nếu điểm <= 0.35.",
+      "source_rule": "SKC-000099",
+      "source_evidence": "evidence/bundles/SKC-000099.json",
+      "inputs": [
+        "strength_score_normalized<=0.35"
+      ],
+      "outputs": [
+        "strength_level=weak"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "conflicting"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "activated": false
+      }
+    }
+  ]
+}

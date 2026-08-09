@@ -1,0 +1,305 @@
+{
+  "count": 13,
+  "nodes": [
+    {
+      "node_id": "RN-STR-STRONG-OBS-001",
+      "node_type": "observation",
+      "title": "Quan sát: Giáp Mộc sinh tháng Dần",
+      "description": "Nhật Chủ Giáp, chi tháng Dần, mùa xuân, có căn nhật/tháng.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "chart"
+      ],
+      "outputs": [
+        "day_master_element=wood",
+        "month_branch=dan",
+        "season=spring"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "example_id": "EX-SKC-STRONG-001",
+        "chart_facts": {
+          "day_master": "giap",
+          "month_branch": "dan"
+        }
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-EVD-026",
+      "node_type": "evidence",
+      "title": "Bằng chứng: tháng Dần hành lệnh Mộc",
+      "description": "Chi tháng Dần lấy Mộc làm tháng lệnh.",
+      "source_rule": "SKC-000026",
+      "source_evidence": "evidence/bundles/SKC-000026.json",
+      "inputs": [
+        "month_branch=dan"
+      ],
+      "outputs": [
+        "month_command_element=wood"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-INF-006",
+      "node_type": "inference",
+      "title": "Suy: Mộc xuân → đắc lệnh",
+      "description": "Nhật Chủ Mộc mùa xuân suy ra month_status prosperous.",
+      "source_rule": "SKC-000006",
+      "source_evidence": "evidence/bundles/SKC-000006.json",
+      "inputs": [
+        "day_master_element=wood",
+        "season=spring"
+      ],
+      "outputs": [
+        "inferred_month_status=prosperous"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-INF-001",
+      "node_type": "inference",
+      "title": "Suy: tháng lệnh đắc lệnh (+35)",
+      "description": "Áp trọng số đắc lệnh khi month_status=prosperous.",
+      "source_rule": "SKC-000001",
+      "source_evidence": "evidence/bundles/SKC-000001.json",
+      "inputs": [
+        "month_status=prosperous"
+      ],
+      "outputs": [
+        "month_command_score"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-INF-038",
+      "node_type": "inference",
+      "title": "Suy: chi tháng đồng hành",
+      "description": "Chi tháng cùng hành Nhật Chủ vừa lệnh vừa căn tháng.",
+      "source_rule": "SKC-000038",
+      "source_evidence": "evidence/bundles/SKC-000038.json",
+      "inputs": [
+        "month_branch_element=wood",
+        "day_master_element=wood"
+      ],
+      "outputs": [
+        "month_branch_support"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-INF-043",
+      "node_type": "inference",
+      "title": "Suy: thông căn một chi",
+      "description": "root_level=root_one.",
+      "source_rule": "SKC-000043",
+      "source_evidence": "evidence/bundles/SKC-000043.json",
+      "inputs": [
+        "root_level=root_one"
+      ],
+      "outputs": [
+        "root_score"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-INF-046",
+      "node_type": "inference",
+      "title": "Suy: thông căn nhật chi",
+      "description": "Nhật chi là chỗ ngồi căn.",
+      "source_rule": "SKC-000046",
+      "source_evidence": "evidence/bundles/SKC-000046.json",
+      "inputs": [
+        "day_branch_is_root=true"
+      ],
+      "outputs": [
+        "root_seat"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-INF-049",
+      "node_type": "inference",
+      "title": "Suy: thông căn tháng chi",
+      "description": "Tháng chi vừa lệnh vừa căn.",
+      "source_rule": "SKC-000049",
+      "source_evidence": "evidence/bundles/SKC-000049.json",
+      "inputs": [
+        "month_branch_is_root=true"
+      ],
+      "outputs": [
+        "root_seat"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-MID-093",
+      "node_type": "intermediate_conclusion",
+      "title": "Kết luận giữa: đắc lệnh có căn → thân vượng",
+      "description": "Tổ hợp prosperous + has_dm_root.",
+      "source_rule": "SKC-000093",
+      "source_evidence": "evidence/bundles/SKC-000093.json",
+      "inputs": [
+        "month_status=prosperous",
+        "has_dm_root=true"
+      ],
+      "outputs": [
+        "tendency=strong"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-SHARED-INF-103",
+      "node_type": "inference",
+      "title": "Suy: điểm nền 50",
+      "description": "Mọi cục hợp lệ khởi điểm 50/100.",
+      "source_rule": "SKC-000103",
+      "source_evidence": "evidence/bundles/SKC-000103.json",
+      "inputs": [
+        "chart_valid=true"
+      ],
+      "outputs": [
+        "baseline"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-FIN-098",
+      "node_type": "final_conclusion",
+      "title": "Kết luận cuối: thân vượng (>= 0.65)",
+      "description": "Ngưỡng strong của Strength Core.",
+      "source_rule": "SKC-000098",
+      "source_evidence": "evidence/bundles/SKC-000098.json",
+      "inputs": [
+        "tendency=strong",
+        "baseline"
+      ],
+      "outputs": [
+        "strength_level=strong"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-ALT-094",
+      "node_type": "alternative",
+      "title": "Nhánh thay thế: giả vượng (không kích hoạt)",
+      "description": "Đắc lệnh vô căn bị tiết — không đúng cục này.",
+      "source_rule": "SKC-000094",
+      "source_evidence": "evidence/bundles/SKC-000094.json",
+      "inputs": [
+        "month_status=prosperous",
+        "root_level=no_root"
+      ],
+      "outputs": [
+        "tendency=false_strong"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "reduced"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "activated": false
+      }
+    },
+    {
+      "node_id": "RN-STR-STRONG-CON-099",
+      "node_type": "contradiction",
+      "title": "Mâu thuẫn tiềm năng: ngưỡng thân nhược",
+      "description": "SKC-000099 sẽ đối lập nếu điểm <= 0.35. Không kích hoạt trên cục này.",
+      "source_rule": "SKC-000099",
+      "source_evidence": "evidence/bundles/SKC-000099.json",
+      "inputs": [
+        "strength_score_normalized<=0.35"
+      ],
+      "outputs": [
+        "strength_level=weak"
+      ],
+      "confidence": {
+        "level": "canonical",
+        "mode": "conflicting"
+      },
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "language": "vi",
+        "activated": false
+      }
+    }
+  ]
+}
