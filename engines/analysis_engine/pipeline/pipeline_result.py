@@ -35,3 +35,33 @@ class PipelineResult:
             if outcome.stage_id == stage_id:
                 return outcome
         return None
+
+
+@dataclass(slots=True)
+class AnalysisPipelineResult:
+    """Structured result of a knowledge-package analysis pipeline run."""
+
+    pipeline_id: str
+    pipeline_version: str
+    success: bool
+    stage_order: tuple[str, ...] = ()
+    outcomes: tuple[StageOutcome, ...] = ()
+    diagnostics: tuple[Any, ...] = ()
+    errors: tuple[str, ...] = ()
+    seasonal_result: dict[str, Any] | None = None
+    strength_result: dict[str, Any] | None = None
+    temperature_result: dict[str, Any] | None = None
+    pattern_result: dict[str, Any] | None = None
+    useful_god_result: dict[str, Any] | None = None
+    luck_cycle_result: dict[str, Any] | None = None
+
+    def stage_ids(self) -> tuple[str, ...]:
+        """Return executed stage identifiers in order."""
+        return self.stage_order
+
+    def outcome_for(self, stage_id: str) -> StageOutcome | None:
+        """Return the outcome for a specific stage identifier."""
+        for outcome in self.outcomes:
+            if outcome.stage_id == stage_id:
+                return outcome
+        return None

@@ -27,5 +27,10 @@ Pipeline orchestration runtime and contracts.
 | `stage_loader.py` | `StageLoader` |
 | `stage_validator.py` | `StageValidator` |
 | `contracts.py` | Stage/Context/Result/Policy contracts |
+| `analysis_pipeline.py` | `AnalysisPipeline` (AX-1 knowledge orchestration) |
+| `package_loader.py` | `PackageLoader`, `LoadedPackage` |
+| `dependency_resolver.py` | Knowledge Dependency Map resolver |
+
+See `engines/analysis_engine/ANALYSIS_PIPELINE.md`.
 
 Orchestration only. No rule evaluation, BaZi logic, or scoring algorithms.

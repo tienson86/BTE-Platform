@@ -7,7 +7,13 @@ from engines.analysis_engine.exceptions.cache_error import CacheError
 from engines.analysis_engine.exceptions.conflict_error import ConflictError
 from engines.analysis_engine.exceptions.context_error import ContextError
 from engines.analysis_engine.exceptions.decision_error import DecisionError
-from engines.analysis_engine.exceptions.pipeline_error import PipelineError
+from engines.analysis_engine.exceptions.pipeline_error import (
+    DependencyViolationError,
+    DuplicateExecutionError,
+    IncompatiblePackageError,
+    PackageLoadError,
+    PipelineError,
+)
 from engines.analysis_engine.exceptions.registry_error import RegistryError
 from engines.analysis_engine.exceptions.result_error import ResultError
 from engines.analysis_engine.exceptions.rule_error import RuleError
@@ -22,6 +28,10 @@ __all__ = [
     "ConflictError",
     "ContextError",
     "DecisionError",
+    "DependencyViolationError",
+    "DuplicateExecutionError",
+    "IncompatiblePackageError",
+    "PackageLoadError",
     "PipelineError",
     "RegistryError",
     "ResultError",

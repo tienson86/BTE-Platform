@@ -11,6 +11,10 @@ AnalysisError
 ├── CacheError
 ├── RuleError
 ├── PipelineError
+│   ├── PackageLoadError
+│   ├── IncompatiblePackageError
+│   ├── DependencyViolationError
+│   └── DuplicateExecutionError
 ├── RegistryError
 ├── ValidationError
 ├── DecisionError

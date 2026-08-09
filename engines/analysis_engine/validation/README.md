@@ -14,6 +14,7 @@ Expanded validator framework for Analysis Engine contracts.
 | `decision_validator.py` | `DecisionValidator` |
 | `score_validator.py` | `ScoreValidator` |
 | `pipeline_validator.py` | `PipelineValidator` |
+| `pipeline_validation.py` | `PipelineValidation` (AX-1 concrete checks) |
 | `schema_validator.py` | `SchemaValidator` |
 | `metadata_validator.py` | `MetadataValidator` |
 

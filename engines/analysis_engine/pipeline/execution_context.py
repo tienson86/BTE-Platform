@@ -67,3 +67,93 @@ class ExecutionContext:
             stage_outputs=outputs,
             trace=self.trace + (stage_id,),
         )
+
+
+@dataclass(slots=True)
+class PipelineDiagnostic:
+    """Structured diagnostic emitted by the knowledge analysis pipeline."""
+
+    code: str
+    message: str
+    severity: str = "info"
+    stage_id: str | None = None
+    details: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        """Serialize the diagnostic for results and tests."""
+        return {
+            "code": self.code,
+            "message": self.message,
+            "severity": self.severity,
+            "stage_id": self.stage_id,
+            "details": dict(self.details),
+        }
+
+
+@dataclass(slots=True)
+class AnalysisExecutionContext:
+    """Shared AX-1 context. Stages append results and never overwrite."""
+
+    chart: Mapping[str, Any]
+    diagnostics: list[PipelineDiagnostic] = field(default_factory=list)
+    _results: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "chart", dict(self.chart))
+
+    def add_diagnostic(self, diagnostic: PipelineDiagnostic) -> None:
+        """Append a structured diagnostic entry."""
+        self.diagnostics.append(diagnostic)
+
+    def publish(self, stage_id: str, payload: Mapping[str, Any]) -> None:
+        """Publish a stage result. Duplicate execution is rejected."""
+        from engines.analysis_engine.exceptions.pipeline_error import (
+            DuplicateExecutionError,
+        )
+
+        if stage_id in self._results:
+            raise DuplicateExecutionError(f"duplicate_execution:{stage_id}")
+        self._results[stage_id] = dict(payload)
+
+    def get_result(self, stage_id: str) -> dict[str, Any] | None:
+        """Return a published stage result, if present."""
+        payload = self._results.get(stage_id)
+        return None if payload is None else dict(payload)
+
+    def has_result(self, stage_id: str) -> bool:
+        """Return True when the stage has already published."""
+        return stage_id in self._results
+
+    def published_stage_ids(self) -> tuple[str, ...]:
+        """Return published stage identifiers in insertion order."""
+        return tuple(self._results)
+
+    @property
+    def seasonal_result(self) -> dict[str, Any] | None:
+        """Seasonal stage output, or None before execution."""
+        return self.get_result("seasonal")
+
+    @property
+    def strength_result(self) -> dict[str, Any] | None:
+        """Strength stage output, or None before execution."""
+        return self.get_result("strength")
+
+    @property
+    def temperature_result(self) -> dict[str, Any] | None:
+        """Temperature stage output, or None before execution."""
+        return self.get_result("temperature")
+
+    @property
+    def pattern_result(self) -> dict[str, Any] | None:
+        """Future Pattern stage placeholder."""
+        return self.get_result("pattern")
+
+    @property
+    def useful_god_result(self) -> dict[str, Any] | None:
+        """Future Useful God stage placeholder."""
+        return self.get_result("useful_god")
+
+    @property
+    def luck_cycle_result(self) -> dict[str, Any] | None:
+        """Future Luck Cycle stage placeholder."""
+        return self.get_result("luck_cycle")
