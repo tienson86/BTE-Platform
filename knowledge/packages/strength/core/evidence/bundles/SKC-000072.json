@@ -1,0 +1,69 @@
+{
+  "rule_id": "SKC-000072",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thiên can lộ là bằng chứng trợ/sinh nhìn thấy trực tiếp.",
+    "when": "Khi visible_companion_count greater_or_equal 3.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Nhiều Tỷ Kiếp lộ can: khuynh hướng thân vượng, cần xem tiết chế.",
+    "title": "Ba can đồng hành trở lên"
+  },
+  "rationale": "Luật `three_companion_stems` thuộc nhóm `visible_stem_support`. Đóng góp trọng số 6 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000004",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000005",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000072-01",
+      "rule_id": "SKC-000072",
+      "polarity": "positive",
+      "chart_facts": {
+        "visible_companion_count": 3
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000072-01",
+      "rule_id": "SKC-000072",
+      "polarity": "negative",
+      "chart_facts": {
+        "visible_companion_count": 2
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SKC-000072-01",
+      "rule_id": "SKC-000072",
+      "kind": "threshold",
+      "chart_facts": {
+        "visible_companion_count": 3
+      },
+      "note": "Đúng tại ngưỡng số của điều kiện."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

@@ -1,0 +1,55 @@
+{
+  "rule_id": "SKC-000107",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+    "when": "Khi rule_group equals control.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Quan/Thực/Tài stackable tối đa 4 đơn vị.",
+    "title": "Khắc tiết cộng dồn tối đa 4"
+  },
+  "rationale": "Luật `control_max_stack_4` thuộc nhóm `basic_scoring`. Chủ yếu phát tín hiệu `priority`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000107-01",
+      "rule_id": "SKC-000107",
+      "polarity": "positive",
+      "chart_facts": {
+        "rule_group": "control"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000107-01",
+      "rule_id": "SKC-000107",
+      "polarity": "negative",
+      "chart_facts": {
+        "rule_group": "not_control"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

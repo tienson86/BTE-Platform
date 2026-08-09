@@ -1,0 +1,59 @@
+{
+  "rule_id": "SKC-000079",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thế ngũ hành và Ấn/Tỷ trong cục quyết định nguồn sinh của thân.",
+    "when": "Khi branch_combination_produces_dm_element equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Tam hợp/tam hội hóa thành hành Nhật Chủ gia tăng thế cục trợ thân.",
+    "title": "Tam hội/tam hợp thành hành Nhật Chủ"
+  },
+  "rationale": "Luật `combination_produces_dm` thuộc nhóm `element_support`. Đóng góp trọng số 10 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000079-01",
+      "rule_id": "SKC-000079",
+      "polarity": "positive",
+      "chart_facts": {
+        "branch_combination_produces_dm_element": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000079-01",
+      "rule_id": "SKC-000079",
+      "polarity": "negative",
+      "chart_facts": {
+        "branch_combination_produces_dm_element": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

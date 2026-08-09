@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/generator/package_profile.schema.json",
+  "title": "BTE Knowledge Package Generation Profile",
+  "description": "Reusable type profile or concrete instance profile used to generate a KD-3 Knowledge Package. Specification only.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "profile_id",
+    "profile_kind",
+    "generator_version",
+    "package_id",
+    "package_name",
+    "package_type",
+    "domain",
+    "taxonomy",
+    "ontology",
+    "target_rule_count",
+    "evidence_required",
+    "reasoning_required",
+    "example_required",
+    "validation_profile",
+    "quality_target",
+    "package_version"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string",
+      "pattern": "^GEN-(TYPE|INST|PROFILE)-[A-Z0-9_]+$",
+      "description": "Immutable generator profile identity. Distinct from package_id."
+    },
+    "profile_kind": {
+      "type": "string",
+      "enum": ["common", "type", "instance"]
+    },
+    "inherits": {
+      "type": "string",
+      "description": "Parent profile_id. Merge: child overrides scalar/object keys; arrays replace unless inherit_arrays=append."
+    },
+    "inherit_arrays": {
+      "type": "string",
+      "enum": ["replace", "append"],
+      "default": "replace"
+    },
+    "generator_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "package_id": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Concrete package_id or {{PACKAGE_ID}} placeholder. Must match KD-3 pattern after substitution."
+    },
+    "package_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_type": {
+      "type": "string",
+      "enum": [
+        "minimal",
+        "analytical",
+        "interpretation",
+        "report",
+        "metadata",
+        "sentence",
+        "reference",
+        "mixed",
+        "feng_shui",
+        "qi_men",
+        "i_ching"
+      ]
+    },
+    "domain": {
+      "$ref": "#/$defs/domain_ref"
+    },
+    "taxonomy": {
+      "$ref": "#/$defs/taxonomy_ref"
+    },
+    "ontology": {
+      "$ref": "#/$defs/ontology_ref"
+    },
+    "target_rule_count": {
+      "$ref": "#/$defs/count_range"
+    },
+    "evidence_required": {
+      "type": "boolean"
+    },
+    "reasoning_required": {
+      "type": "boolean"
+    },
+    "example_required": {
+      "type": "boolean"
+    },
+    "validation_profile": {
+      "type": "string",
+      "enum": ["PVP-MINIMAL", "PVP-STANDARD", "PVP-RELEASE"]
+    },
+    "quality_target": {
+      "type": "string",
+      "enum": ["bronze", "silver", "gold", "platinum"]
+    },
+    "package_version": {
+      "type": "string",
+      "description": "Initial SemVer or {{PACKAGE_VERSION}}. Generated packages start at 0.1.0 unless instance profile declares otherwise."
+    },
+    "rule_id_prefix": {
+      "type": "string",
+      "description": "Reserved rule prefix, e.g. SKC, SEA, PAT. Must not collide with published prefixes without a reservation record."
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
+    "school": {
+      "type": "string"
+    },
+    "category_id": {
+      "type": "string"
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/component_policy"
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optional": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "quality_overrides": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional metric floors beyond the named quality_target."
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "domain_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain_id"],
+      "properties": {
+        "domain_id": {
+          "type": "string",
+          "pattern": "^DOM-[A-Z0-9_]+$",
+          "description": "Must exist in knowledge/taxonomy/domains.json after substitution."
+        },
+        "parent_domain": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "taxonomy_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taxonomy_version", "source"],
+      "properties": {
+        "taxonomy_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "source": {
+          "type": "string",
+          "const": "knowledge/taxonomy/"
+        },
+        "classifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ontology_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ontology_version", "source"],
+      "properties": {
+        "ontology_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "source": {
+          "type": "string",
+          "const": "knowledge/taxonomy/"
+        },
+        "concepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ONT-[A-Z0-9_]+$"
+          }
+        }
+      }
+    },
+    "count_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "recommended"],
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recommended": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "null means unbounded (platform scale 100,000+ records)."
+        },
+        "target": {
+          "type": ["integer", "null"],
+          "description": "Concrete target for instance profiles."
+        }
+      }
+    },
+    "component_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "folder"],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "folder": {
+          "type": "string"
+        },
+        "standard": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

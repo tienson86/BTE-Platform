@@ -1,0 +1,57 @@
+{
+  "rule_id": "SKC-000068",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thiên can lộ là bằng chứng trợ/sinh nhìn thấy trực tiếp.",
+    "when": "Khi year_stem_supports_dm equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Can niên trợ thân nhưng lực xa, không bằng can tháng/thời.",
+    "title": "Can niên trợ xa"
+  },
+  "rationale": "Luật `year_stem_support_weak` thuộc nhóm `visible_stem_support`. Đóng góp trọng số 2 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "low",
+  "confidence_reason": "Tín hiệu phụ hoặc trọng số 0 — dùng để giữ vệ sinh luận giải, không quyết định cấp thân.",
+  "references": [
+    {
+      "id": "REF-SKC-000004",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000068-01",
+      "rule_id": "SKC-000068",
+      "polarity": "positive",
+      "chart_facts": {
+        "year_stem_supports_dm": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000068-01",
+      "rule_id": "SKC-000068",
+      "polarity": "negative",
+      "chart_facts": {
+        "year_stem_supports_dm": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000076"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

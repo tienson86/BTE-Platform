@@ -1,0 +1,55 @@
+{
+  "rule_id": "SKC-000109",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+    "when": "Khi same_pillar_evidence equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Một trụ chỉ đóng góp một lần cho cùng nhóm (căn hoặc trợ), tránh cộng kép.",
+    "title": "Không đếm trùng cùng một trụ"
+  },
+  "rationale": "Luật `no_double_count_pillar` thuộc nhóm `basic_scoring`. Chủ yếu phát tín hiệu `integrity`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000109-01",
+      "rule_id": "SKC-000109",
+      "polarity": "positive",
+      "chart_facts": {
+        "same_pillar_evidence": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000109-01",
+      "rule_id": "SKC-000109",
+      "polarity": "negative",
+      "chart_facts": {
+        "same_pillar_evidence": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

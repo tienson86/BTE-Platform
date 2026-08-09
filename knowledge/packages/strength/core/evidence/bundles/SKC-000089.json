@@ -1,0 +1,71 @@
+{
+  "rule_id": "SKC-000089",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quan khắc, Thực tiết, Tài hao và xung căn làm giảm sức Nhật Chủ.",
+    "when": "Khi officer_count greater_or_equal 2.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Hai Quan Sát trở lên: khắc chế chồng.",
+    "title": "two officers"
+  },
+  "rationale": "Luật `two_officers` thuộc nhóm `element_restriction`. Đóng góp trọng số -8 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000005",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000089-01",
+      "rule_id": "SKC-000089",
+      "polarity": "positive",
+      "chart_facts": {
+        "officer_count": 2
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000089-01",
+      "rule_id": "SKC-000089",
+      "polarity": "negative",
+      "chart_facts": {
+        "officer_count": 1
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SKC-000089-01",
+      "rule_id": "SKC-000089",
+      "kind": "threshold",
+      "chart_facts": {
+        "officer_count": 2
+      },
+      "note": "Đúng tại ngưỡng số của điều kiện."
+    }
+  ],
+  "related_rules": [
+    "SKC-000096"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

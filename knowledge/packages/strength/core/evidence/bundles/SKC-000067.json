@@ -1,0 +1,57 @@
+{
+  "rule_id": "SKC-000067",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thiên can lộ là bằng chứng trợ/sinh nhìn thấy trực tiếp.",
+    "when": "Khi adjacent_stem_supports_dm equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Can tháng hoặc can thời kề Nhật Chủ trợ lực rõ hơn can niên.",
+    "title": "Can trợ sát Nhật Chủ"
+  },
+  "rationale": "Luật `adjacent_stem_support` thuộc nhóm `visible_stem_support`. Đóng góp trọng số 3 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000004",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000067-01",
+      "rule_id": "SKC-000067",
+      "polarity": "positive",
+      "chart_facts": {
+        "adjacent_stem_supports_dm": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000067-01",
+      "rule_id": "SKC-000067",
+      "polarity": "negative",
+      "chart_facts": {
+        "adjacent_stem_supports_dm": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000076"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

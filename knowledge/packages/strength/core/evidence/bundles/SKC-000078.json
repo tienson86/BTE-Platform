@@ -1,0 +1,57 @@
+{
+  "rule_id": "SKC-000078",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thế ngũ hành và Ấn/Tỷ trong cục quyết định nguồn sinh của thân.",
+    "when": "Khi season_element equals_field day_master_element.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Hành lệnh trùng Nhật Chủ củng cố đắc lệnh; không cộng trùng weight month_status.",
+    "title": "Hành tháng trùng Nhật Chủ"
+  },
+  "rationale": "Luật `season_element_is_dm` thuộc nhóm `element_support`. Đóng góp trọng số 6 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000078-01",
+      "rule_id": "SKC-000078",
+      "polarity": "positive",
+      "chart_facts": {
+        "season_element": "wood",
+        "day_master_element": "wood"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000078-01",
+      "rule_id": "SKC-000078",
+      "polarity": "negative",
+      "chart_facts": {
+        "season_element": "wood",
+        "day_master_element": "fire"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

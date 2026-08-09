@@ -1,0 +1,61 @@
+{
+  "rule_id": "SKC-000070",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thiên can lộ là bằng chứng trợ/sinh nhìn thấy trực tiếp.",
+    "when": "Khi stem_combination_transforms_dm_away equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Nhật Chủ hoặc căn can bị hợp hóa sang hành khác thì mất lực.",
+    "title": "Hợp hóa mất hành Nhật Chủ"
+  },
+  "rationale": "Luật `stem_combo_away_dm` thuộc nhóm `visible_stem_support`. Đóng góp trọng số -10 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000004",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000070-01",
+      "rule_id": "SKC-000070",
+      "polarity": "positive",
+      "chart_facts": {
+        "stem_combination_transforms_dm_away": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000070-01",
+      "rule_id": "SKC-000070",
+      "polarity": "negative",
+      "chart_facts": {
+        "stem_combination_transforms_dm_away": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000076"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

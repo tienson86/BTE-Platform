@@ -1,0 +1,67 @@
+{
+  "rule_id": "SKC-000093",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+    "when": "Khi month_status equals prosperous; has_dm_root equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Đắc lệnh kèm thông căn là tổ hợp thân vượng cốt lõi.",
+    "title": "Đắc lệnh có căn → thân vượng"
+  },
+  "rationale": "Luật `strong_prosperous_with_root` thuộc nhóm `day_master_tendency`. Chủ yếu phát tín hiệu `strength_tendency`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000008",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000093-01",
+      "rule_id": "SKC-000093",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_status": "prosperous",
+        "has_dm_root": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000093-01",
+      "rule_id": "SKC-000093",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_status": "not_prosperous",
+        "has_dm_root": true
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000098"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

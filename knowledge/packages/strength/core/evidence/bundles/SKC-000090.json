@@ -1,0 +1,61 @@
+{
+  "rule_id": "SKC-000090",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quan khắc, Thực tiết, Tài hao và xung căn làm giảm sức Nhật Chủ.",
+    "when": "Khi has_officer_and_output equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Quan khắc và Thực tiết cùng lúc hại thân.",
+    "title": "officer plus output"
+  },
+  "rationale": "Luật `officer_plus_output` thuộc nhóm `element_restriction`. Đóng góp trọng số -12 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000005",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000090-01",
+      "rule_id": "SKC-000090",
+      "polarity": "positive",
+      "chart_facts": {
+        "has_officer_and_output": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000090-01",
+      "rule_id": "SKC-000090",
+      "polarity": "negative",
+      "chart_facts": {
+        "has_officer_and_output": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000096"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

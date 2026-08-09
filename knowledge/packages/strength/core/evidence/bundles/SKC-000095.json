@@ -1,0 +1,67 @@
+{
+  "rule_id": "SKC-000095",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+    "when": "Khi month_status equals dead; root_level equals no_root.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Mất lệnh và vô căn: khuynh hướng thân nhược rõ.",
+    "title": "Tháng tử vô căn → thân nhược"
+  },
+  "rationale": "Luật `weak_dead_no_root` thuộc nhóm `day_master_tendency`. Chủ yếu phát tín hiệu `strength_tendency`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000008",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000095-01",
+      "rule_id": "SKC-000095",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_status": "dead",
+        "root_level": "no_root"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000095-01",
+      "rule_id": "SKC-000095",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_status": "not_dead",
+        "root_level": "no_root"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000099"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

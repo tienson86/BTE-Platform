@@ -1,0 +1,55 @@
+{
+  "rule_id": "SKC-000103",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+    "when": "Khi chart_valid equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Mọi cục hợp lệ khởi điểm 50/100 trước khi cộng trừ nhân tố.",
+    "title": "Điểm nền 50"
+  },
+  "rationale": "Luật `baseline_score` thuộc nhóm `basic_scoring`. Đóng góp trọng số 50 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp bảng trọng số / ngưỡng truyền thống BTE (database/12_strength và 15_score_engine/03_strength).",
+  "references": [
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000103-01",
+      "rule_id": "SKC-000103",
+      "polarity": "positive",
+      "chart_facts": {
+        "chart_valid": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000103-01",
+      "rule_id": "SKC-000103",
+      "polarity": "negative",
+      "chart_facts": {
+        "chart_valid": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

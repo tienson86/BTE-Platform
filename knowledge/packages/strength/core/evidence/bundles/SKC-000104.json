@@ -1,0 +1,55 @@
+{
+  "rule_id": "SKC-000104",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+    "when": "Khi raw_strength_total exists True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Tổng thô được kẹp và quy về 0–100 rồi chia 100 thành điểm chuẩn hóa.",
+    "title": "Chuẩn hóa thang 0–100"
+  },
+  "rationale": "Luật `normalize_0_100` thuộc nhóm `basic_scoring`. Chủ yếu phát tín hiệu `normalize`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp bảng trọng số / ngưỡng truyền thống BTE (database/12_strength và 15_score_engine/03_strength).",
+  "references": [
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000104-01",
+      "rule_id": "SKC-000104",
+      "polarity": "positive",
+      "chart_facts": {
+        "raw_strength_total": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000104-01",
+      "rule_id": "SKC-000104",
+      "polarity": "negative",
+      "chart_facts": {
+        "raw_strength_total": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}
