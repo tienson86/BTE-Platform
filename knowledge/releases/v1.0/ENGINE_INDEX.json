@@ -1,0 +1,55 @@
+{
+  "index_id": "bte.platform.engines.v1.0",
+  "platform_version": "1.0.0",
+  "canonical_engines": [
+    {"engine_id": "calendar_engine", "version": "1.0.0", "responsibility": "calendar_only"},
+    {"engine_id": "bazi_engine", "version": "1.0.0", "responsibility": "chart_only"},
+    {"engine_id": "rule_engine", "version": "1.0.0", "responsibility": "rule_evaluation_only"},
+    {"engine_id": "score_engine", "version": "1.0.0", "responsibility": "scoring_only"},
+    {"engine_id": "pattern_engine", "version": "1.0.0", "responsibility": "pattern_only"},
+    {"engine_id": "analysis_engine", "version": "2.0.0", "responsibility": "analysis_orchestration"},
+    {"engine_id": "decision_engine", "version": "1.0.0", "responsibility": "decision_orchestration"},
+    {
+      "engine_id": "luck_engine",
+      "version": "1.0.0",
+      "responsibility": "luck_only",
+      "components": {
+        "luck_timeline_foundation": "1.0.0",
+        "luck_analysis_engine": "1.0.0",
+        "luck_decision_engine": "1.0.0"
+      }
+    },
+    {
+      "engine_id": "interpretation_engine",
+      "version": "1.0.0",
+      "responsibility": "interpretation_only",
+      "components": {
+        "interpretation_foundation": "1.0.0",
+        "knowledge_selection_engine": "1.0.0",
+        "interpretation_composition_engine": "1.0.0"
+      }
+    },
+    {
+      "engine_id": "report_engine",
+      "version": "1.0.0",
+      "responsibility": "report_formatting_only",
+      "components": {
+        "report_foundation": "1.0.0",
+        "report_layout_engine": "1.0.0",
+        "report_rendering_engine": "1.0.0",
+        "canonical_report_pipeline": "1.0.0"
+      }
+    }
+  ],
+  "supporting_engines_present_not_reopened": [
+    "context_engine",
+    "knowledge_engine",
+    "narrative_engine",
+    "strength_engine",
+    "temperature_engine",
+    "useful_god_engine",
+    "feng_shui_engine",
+    "priority_engine",
+    "commercial_knowledge"
+  ]
+}

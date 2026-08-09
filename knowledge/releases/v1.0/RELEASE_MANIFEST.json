@@ -1,0 +1,59 @@
+{
+  "manifest_id": "bte.platform.release.v1.0",
+  "platform_version": "1.0.0",
+  "foundation_version": "1.0.0",
+  "knowledge_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "knowledge_generator_version": "1.0.0",
+  "sprint": "AF-1",
+  "status": "architecture_frozen",
+  "freeze_date": "2026-08-09",
+  "release_type": "architecture_freeze",
+  "runtime_changes": false,
+  "owner": "BTE Architecture Board",
+  "release_manager": "pending_commercial_seal",
+  "engines": [
+    {"engine_id": "calendar_engine", "version": "1.0.0"},
+    {"engine_id": "bazi_engine", "version": "1.0.0"},
+    {"engine_id": "rule_engine", "version": "1.0.0"},
+    {"engine_id": "score_engine", "version": "1.0.0"},
+    {"engine_id": "pattern_engine", "version": "1.0.0"},
+    {"engine_id": "analysis_engine", "version": "2.0.0", "legacy_pipeline": "1.0.0"},
+    {"engine_id": "decision_engine", "version": "1.0.0"},
+    {"engine_id": "luck_engine", "version": "1.0.0", "components": ["timeline", "analysis", "decision"]},
+    {"engine_id": "interpretation_engine", "version": "1.0.0", "components": ["foundation", "knowledge_selection", "composition"]},
+    {"engine_id": "report_engine", "version": "1.0.0", "components": ["foundation", "layout", "rendering", "pipeline"]}
+  ],
+  "pipelines": [
+    {"pipeline_id": "canonical_analysis_pipeline", "version": "2.0.0"},
+    {"pipeline_id": "canonical_decision_pipeline", "version": "1.0.0"},
+    {"pipeline_id": "canonical_luck_pipeline", "version": "1.0.0"},
+    {"pipeline_id": "canonical_interpretation_pipeline", "version": "1.0.0"},
+    {"pipeline_id": "canonical_report_pipeline", "version": "1.0.0"}
+  ],
+  "packages": [
+    {"package_id": "bz_01_strength_core", "package_version": "1.2.0"},
+    {"package_id": "bz_02_seasonal_core", "package_version": "1.0.0"},
+    {"package_id": "bz_03_temperature_core", "package_version": "1.0.0"},
+    {"package_id": "bz_04_pattern_core", "package_version": "1.0.0"},
+    {"package_id": "bz_05_pattern_evaluation", "package_version": "1.0.0"},
+    {"package_id": "bz_06_useful_god_foundation", "package_version": "1.0.0"},
+    {"package_id": "bz_07_useful_god_priority", "package_version": "1.0.0"},
+    {"package_id": "bz_08_useful_god_override", "package_version": "1.0.0"},
+    {"package_id": "bz_09_luck_foundation", "package_version": "1.0.0"}
+  ],
+  "indexes": {
+    "component_checksums": "COMPONENT_CHECKSUMS.json",
+    "package_index": "PACKAGE_INDEX.json",
+    "pipeline_index": "PIPELINE_INDEX.json",
+    "engine_index": "ENGINE_INDEX.json",
+    "contract_index": "CONTRACT_INDEX.json",
+    "version_matrix": "VERSION_MATRIX.json"
+  },
+  "documentation": {
+    "architecture_freeze": "knowledge/docs/platform/ARCHITECTURE_FREEZE.md",
+    "acceptance": "knowledge/docs/platform/PLATFORM_ACCEPTANCE_CHECKLIST.md",
+    "adr_index": "knowledge/governance/architecture/ADR/ADR_INDEX.md"
+  }
+}

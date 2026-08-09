@@ -1,0 +1,66 @@
+{
+  "index_id": "bte.platform.pipelines.v1.0",
+  "platform_version": "1.0.0",
+  "pipelines": [
+    {
+      "pipeline_id": "canonical_analysis_pipeline",
+      "version": "2.0.0",
+      "engine": "analysis_engine",
+      "active_stages": [
+        "calendar",
+        "four_pillars",
+        "seasonal",
+        "strength",
+        "temperature",
+        "pattern",
+        "pattern_evaluation",
+        "useful_god"
+      ],
+      "inactive_stages": ["luck_cycle", "interpretation", "report"],
+      "only_supported_execution_model": true
+    },
+    {
+      "pipeline_id": "canonical_decision_pipeline",
+      "version": "1.0.0",
+      "engine": "decision_engine",
+      "active_stages": [
+        "useful_god_foundation",
+        "useful_god_priority",
+        "useful_god_override"
+      ],
+      "inactive_stages": ["luck_cycle", "annual_luck", "monthly_luck", "interpretation"],
+      "only_supported_execution_model": true
+    },
+    {
+      "pipeline_id": "canonical_luck_pipeline",
+      "version": "1.0.0",
+      "engine": "luck_engine",
+      "active_stages": ["timeline", "analysis", "decision"],
+      "inactive_stages": ["interpretation", "report"],
+      "only_supported_execution_model": true
+    },
+    {
+      "pipeline_id": "canonical_interpretation_pipeline",
+      "version": "1.0.0",
+      "engine": "interpretation_engine",
+      "active_stages": ["foundation", "knowledge_selection", "composition"],
+      "inactive_stages": ["report", "ai_rewrite"],
+      "only_supported_execution_model": true
+    },
+    {
+      "pipeline_id": "canonical_report_pipeline",
+      "version": "1.0.0",
+      "engine": "report_engine",
+      "active_stages": ["foundation", "layout", "rendering"],
+      "inactive_stages": ["publisher", "delivery", "print"],
+      "only_supported_execution_model": true
+    }
+  ],
+  "legacy_compatible": [
+    {
+      "pipeline_id": "analysis_pipeline_v0",
+      "version": "1.0.0",
+      "note": "AX-1 remains importable; new Analysis Knowledge work binds AX-2."
+    }
+  ]
+}
