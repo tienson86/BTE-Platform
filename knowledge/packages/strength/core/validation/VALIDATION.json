@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_01_strength_core",
+  "package_version": "1.2.0",
+  "profile": "PVP-RELEASE",
+  "validated_at": "2026-08-09T15:00:00Z",
+  "status": "pass_with_warnings",
+  "counts": {
+    "errors": 0,
+    "warnings": 1,
+    "info": 2
+  },
+  "checks": [
+    {
+      "id": "schema_validation",
+      "status": "pass",
+      "severity_if_fail": "error"
+    },
+    {
+      "id": "metadata_validation",
+      "status": "pass",
+      "severity_if_fail": "error"
+    },
+    {
+      "id": "dependency_validation",
+      "status": "pass",
+      "severity_if_fail": "error"
+    },
+    {
+      "id": "reference_validation",
+      "status": "pass",
+      "severity_if_fail": "error"
+    },
+    {
+      "id": "package_integrity",
+      "status": "pass",
+      "severity_if_fail": "error"
+    },
+    {
+      "id": "checksum_validation",
+      "status": "pass",
+      "severity_if_fail": "error"
+    },
+    {
+      "id": "compatibility_validation",
+      "status": "pass",
+      "severity_if_fail": "error"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "VAL-GOLDEN",
+      "severity": "warning",
+      "message": "Golden Dataset stage not_applicable: package not wired to Analysis Engine; V1 golden tests unchanged.",
+      "path": "validation/profile.json"
+    },
+    {
+      "code": "VAL-QUALITY",
+      "severity": "info",
+      "message": "Intended quality level gold: complete metadata, unique ids, references, documentation, examples, and tests present.",
+      "path": "quality"
+    },
+    {
+      "code": "VAL-EVIDENCE",
+      "severity": "info",
+      "message": "KX-1B Evidence Layer: 110 bundles present. Spec checks EV-001–EV-010 documented in evidence/validation/.",
+      "path": "evidence/index.json"
+    }
+  ]
+}
