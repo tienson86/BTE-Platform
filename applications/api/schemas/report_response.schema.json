@@ -1,0 +1,1312 @@
+{
+  "$defs": {
+    "AnalysisPayload": {
+      "additionalProperties": false,
+      "description": "Analysis section contract.",
+      "properties": {
+        "scores": {
+          "$ref": "#/$defs/ScoreInfo",
+          "description": "Score analysis payload."
+        },
+        "strength": {
+          "$ref": "#/$defs/StrengthInfo",
+          "description": "Strength analysis payload."
+        },
+        "useful_god": {
+          "$ref": "#/$defs/UsefulGodInfo",
+          "description": "Useful god analysis payload."
+        },
+        "pattern": {
+          "$ref": "#/$defs/PatternInfo",
+          "description": "Pattern analysis payload."
+        },
+        "relationships": {
+          "$ref": "#/$defs/RelationshipInfo",
+          "description": "Relationship analysis payload."
+        },
+        "summary": {
+          "$ref": "#/$defs/SummaryInfo",
+          "description": "Analysis summary payload."
+        }
+      },
+      "required": [
+        "scores",
+        "strength",
+        "useful_god",
+        "pattern",
+        "relationships",
+        "summary"
+      ],
+      "title": "AnalysisPayload",
+      "type": "object"
+    },
+    "BasicInformationInfo": {
+      "additionalProperties": false,
+      "description": "Basic chart information contract.",
+      "properties": {
+        "gender": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Gender identifier.",
+          "title": "Gender"
+        },
+        "calendar_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Calendar type identifier.",
+          "title": "Calendar Type"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Timezone identifier.",
+          "title": "Timezone"
+        },
+        "notes": {
+          "description": "Optional notes.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "title": "BasicInformationInfo",
+      "type": "object"
+    },
+    "ChartPayload": {
+      "additionalProperties": false,
+      "description": "Chart section contract.",
+      "properties": {
+        "four_pillars": {
+          "$ref": "#/$defs/FourPillarsInfo",
+          "description": "Four pillars chart payload."
+        },
+        "hidden_stems": {
+          "$ref": "#/$defs/HiddenStemsInfo",
+          "description": "Hidden stems payload."
+        },
+        "luck_cycles": {
+          "description": "Luck cycle entries.",
+          "items": {
+            "$ref": "#/$defs/LuckCycleInfo"
+          },
+          "title": "Luck Cycles",
+          "type": "array"
+        },
+        "basic_information": {
+          "$ref": "#/$defs/BasicInformationInfo",
+          "description": "Basic chart information."
+        }
+      },
+      "required": [
+        "four_pillars",
+        "hidden_stems",
+        "luck_cycles",
+        "basic_information"
+      ],
+      "title": "ChartPayload",
+      "type": "object"
+    },
+    "DebugInfo": {
+      "additionalProperties": false,
+      "description": "Debug diagnostic contract.",
+      "properties": {
+        "messages": {
+          "description": "Debug messages.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Messages",
+          "type": "array"
+        },
+        "context": {
+          "description": "Debug context entries.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Context",
+          "type": "array"
+        }
+      },
+      "title": "DebugInfo",
+      "type": "object"
+    },
+    "DiagnosticsPayload": {
+      "additionalProperties": false,
+      "description": "Diagnostics section contract.",
+      "properties": {
+        "warnings": {
+          "description": "Non-fatal diagnostic warnings.",
+          "items": {
+            "$ref": "#/$defs/WarningInfo"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "validation_errors": {
+          "description": "Validation diagnostic errors.",
+          "items": {
+            "$ref": "#/$defs/ValidationInfo"
+          },
+          "title": "Validation Errors",
+          "type": "array"
+        },
+        "runtime_messages": {
+          "description": "Runtime diagnostic messages.",
+          "items": {
+            "$ref": "#/$defs/RuntimeMessageInfo"
+          },
+          "title": "Runtime Messages",
+          "type": "array"
+        },
+        "debug_info": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DebugInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional debug diagnostic payload."
+        }
+      },
+      "required": [
+        "warnings",
+        "validation_errors",
+        "runtime_messages"
+      ],
+      "title": "DiagnosticsPayload",
+      "type": "object"
+    },
+    "FourPillarsInfo": {
+      "additionalProperties": false,
+      "description": "Four pillars chart contract.",
+      "properties": {
+        "year": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PillarInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Year pillar."
+        },
+        "month": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PillarInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Month pillar."
+        },
+        "day": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PillarInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Day pillar."
+        },
+        "hour": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PillarInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Hour pillar."
+        }
+      },
+      "title": "FourPillarsInfo",
+      "type": "object"
+    },
+    "HiddenStemsInfo": {
+      "additionalProperties": false,
+      "description": "Hidden stems chart contract.",
+      "properties": {
+        "year": {
+          "description": "Year pillar hidden stems.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Year",
+          "type": "array"
+        },
+        "month": {
+          "description": "Month pillar hidden stems.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Month",
+          "type": "array"
+        },
+        "day": {
+          "description": "Day pillar hidden stems.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Day",
+          "type": "array"
+        },
+        "hour": {
+          "description": "Hour pillar hidden stems.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Hour",
+          "type": "array"
+        }
+      },
+      "title": "HiddenStemsInfo",
+      "type": "object"
+    },
+    "InterpretationPayload": {
+      "additionalProperties": false,
+      "description": "Interpretation section contract.",
+      "properties": {
+        "sections": {
+          "description": "Interpretation section entries.",
+          "items": {
+            "$ref": "#/$defs/SectionInfo"
+          },
+          "title": "Sections",
+          "type": "array"
+        },
+        "sentences": {
+          "description": "Interpretation sentence entries.",
+          "items": {
+            "$ref": "#/$defs/SentenceInfo"
+          },
+          "title": "Sentences",
+          "type": "array"
+        },
+        "references": {
+          "description": "Interpretation reference entries.",
+          "items": {
+            "$ref": "#/$defs/ReferenceInfo"
+          },
+          "title": "References",
+          "type": "array"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional overall interpretation confidence score.",
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "sections",
+        "sentences",
+        "references"
+      ],
+      "title": "InterpretationPayload",
+      "type": "object"
+    },
+    "LayoutInfo": {
+      "additionalProperties": false,
+      "description": "Report layout contract.",
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Layout name.",
+          "title": "Name"
+        },
+        "variant": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Layout variant.",
+          "title": "Variant"
+        }
+      },
+      "title": "LayoutInfo",
+      "type": "object"
+    },
+    "LuckCycleInfo": {
+      "additionalProperties": false,
+      "description": "Luck cycle entry contract.",
+      "properties": {
+        "index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cycle index.",
+          "title": "Index"
+        },
+        "stem": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cycle stem identifier.",
+          "title": "Stem"
+        },
+        "branch": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cycle branch identifier.",
+          "title": "Branch"
+        },
+        "start_age": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cycle start age.",
+          "title": "Start Age"
+        },
+        "end_age": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Cycle end age.",
+          "title": "End Age"
+        }
+      },
+      "title": "LuckCycleInfo",
+      "type": "object"
+    },
+    "Metadata": {
+      "additionalProperties": false,
+      "description": "Response metadata contract.",
+      "properties": {
+        "request_id": {
+          "description": "Correlation identifier for the request.",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "UTC timestamp when the response was produced.",
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "api_version": {
+          "description": "API contract version used to produce the response.",
+          "title": "Api Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "description": "ReportResponse schema version.",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "engine_version": {
+          "description": "Engine version used during processing.",
+          "title": "Engine Version",
+          "type": "string"
+        },
+        "knowledge_version": {
+          "description": "Knowledge layer version used during processing.",
+          "title": "Knowledge Version",
+          "type": "string"
+        },
+        "processing_time_ms": {
+          "description": "End-to-end processing duration in milliseconds.",
+          "title": "Processing Time Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "request_id",
+        "timestamp",
+        "api_version",
+        "engine_version",
+        "knowledge_version",
+        "processing_time_ms"
+      ],
+      "title": "Metadata",
+      "type": "object"
+    },
+    "PatternInfo": {
+      "additionalProperties": false,
+      "description": "Pattern analysis contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Pattern identifier.",
+          "title": "Code"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Pattern label.",
+          "title": "Label"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short pattern summary.",
+          "title": "Summary"
+        }
+      },
+      "title": "PatternInfo",
+      "type": "object"
+    },
+    "PillarInfo": {
+      "additionalProperties": false,
+      "description": "Single pillar contract.",
+      "properties": {
+        "stem": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Heavenly stem identifier.",
+          "title": "Stem"
+        },
+        "branch": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Earthly branch identifier.",
+          "title": "Branch"
+        }
+      },
+      "title": "PillarInfo",
+      "type": "object"
+    },
+    "ReferenceInfo": {
+      "additionalProperties": false,
+      "description": "Interpretation reference contract.",
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Reference identifier.",
+          "title": "Id"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Reference source.",
+          "title": "Source"
+        },
+        "locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Reference locator.",
+          "title": "Locator"
+        }
+      },
+      "title": "ReferenceInfo",
+      "type": "object"
+    },
+    "RelationshipInfo": {
+      "additionalProperties": false,
+      "description": "Relationship analysis contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Relationship identifier.",
+          "title": "Code"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Relationship label.",
+          "title": "Label"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short relationship summary.",
+          "title": "Summary"
+        }
+      },
+      "title": "RelationshipInfo",
+      "type": "object"
+    },
+    "RenderOptionsInfo": {
+      "additionalProperties": false,
+      "description": "Report render options contract.",
+      "properties": {
+        "format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Render format.",
+          "title": "Format"
+        },
+        "locale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Render locale.",
+          "title": "Locale"
+        }
+      },
+      "title": "RenderOptionsInfo",
+      "type": "object"
+    },
+    "ReportBlock": {
+      "additionalProperties": false,
+      "description": "Report content block contract.",
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Block identifier.",
+          "title": "Id"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Block type.",
+          "title": "Type"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Block title.",
+          "title": "Title"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Block content.",
+          "title": "Content"
+        }
+      },
+      "title": "ReportBlock",
+      "type": "object"
+    },
+    "ReportPayload": {
+      "additionalProperties": false,
+      "description": "Report section contract.",
+      "properties": {
+        "title": {
+          "description": "Report title.",
+          "title": "Title",
+          "type": "string"
+        },
+        "blocks": {
+          "description": "Ordered report content blocks.",
+          "items": {
+            "$ref": "#/$defs/ReportBlock"
+          },
+          "title": "Blocks",
+          "type": "array"
+        },
+        "theme": {
+          "$ref": "#/$defs/ThemeInfo",
+          "description": "Report theme payload."
+        },
+        "layout": {
+          "$ref": "#/$defs/LayoutInfo",
+          "description": "Report layout payload."
+        },
+        "render_options": {
+          "$ref": "#/$defs/RenderOptionsInfo",
+          "description": "Render options payload."
+        }
+      },
+      "required": [
+        "title",
+        "blocks",
+        "theme",
+        "layout",
+        "render_options"
+      ],
+      "title": "ReportPayload",
+      "type": "object"
+    },
+    "RuntimeMessageInfo": {
+      "additionalProperties": false,
+      "description": "Runtime diagnostic message contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Runtime message code.",
+          "title": "Code"
+        },
+        "message": {
+          "description": "Runtime message text.",
+          "title": "Message",
+          "type": "string"
+        },
+        "level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Message severity level.",
+          "title": "Level"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "RuntimeMessageInfo",
+      "type": "object"
+    },
+    "ScoreInfo": {
+      "additionalProperties": false,
+      "description": "Score analysis contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Score identifier.",
+          "title": "Code"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Score label.",
+          "title": "Label"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Numeric score value.",
+          "title": "Value"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short score summary.",
+          "title": "Summary"
+        }
+      },
+      "title": "ScoreInfo",
+      "type": "object"
+    },
+    "SectionInfo": {
+      "additionalProperties": false,
+      "description": "Interpretation section contract.",
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Section identifier.",
+          "title": "Id"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Section title.",
+          "title": "Title"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Section content.",
+          "title": "Content"
+        }
+      },
+      "title": "SectionInfo",
+      "type": "object"
+    },
+    "SentenceInfo": {
+      "additionalProperties": false,
+      "description": "Interpretation sentence contract.",
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Sentence identifier.",
+          "title": "Id"
+        },
+        "text": {
+          "description": "Sentence text.",
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "SentenceInfo",
+      "type": "object"
+    },
+    "StrengthInfo": {
+      "additionalProperties": false,
+      "description": "Strength analysis contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Strength identifier.",
+          "title": "Code"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Strength label.",
+          "title": "Label"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Numeric strength value.",
+          "title": "Value"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short strength summary.",
+          "title": "Summary"
+        }
+      },
+      "title": "StrengthInfo",
+      "type": "object"
+    },
+    "SummaryInfo": {
+      "additionalProperties": false,
+      "description": "Analysis summary contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Summary identifier.",
+          "title": "Code"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Summary label.",
+          "title": "Label"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Summary text.",
+          "title": "Text"
+        }
+      },
+      "title": "SummaryInfo",
+      "type": "object"
+    },
+    "ThemeInfo": {
+      "additionalProperties": false,
+      "description": "Report theme contract.",
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Theme name.",
+          "title": "Name"
+        },
+        "variant": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Theme variant.",
+          "title": "Variant"
+        }
+      },
+      "title": "ThemeInfo",
+      "type": "object"
+    },
+    "UsefulGodInfo": {
+      "additionalProperties": false,
+      "description": "Useful god analysis contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Useful god identifier.",
+          "title": "Code"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Useful god label.",
+          "title": "Label"
+        },
+        "elements": {
+          "description": "Useful god elements.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Elements",
+          "type": "array"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short useful god summary.",
+          "title": "Summary"
+        }
+      },
+      "title": "UsefulGodInfo",
+      "type": "object"
+    },
+    "ValidationInfo": {
+      "additionalProperties": false,
+      "description": "Validation diagnostic contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Validation error code.",
+          "title": "Code"
+        },
+        "message": {
+          "description": "Validation error message.",
+          "title": "Message",
+          "type": "string"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Related field name.",
+          "title": "Field"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "ValidationInfo",
+      "type": "object"
+    },
+    "WarningInfo": {
+      "additionalProperties": false,
+      "description": "Diagnostic warning contract.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Warning code.",
+          "title": "Code"
+        },
+        "message": {
+          "description": "Warning message.",
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "WarningInfo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Canonical nested ReportResponse contract for the BTE Platform Integration Layer.",
+  "properties": {
+    "success": {
+      "default": true,
+      "description": "Whether the request completed successfully.",
+      "title": "Success",
+      "type": "boolean"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata",
+      "description": "Response metadata."
+    },
+    "chart": {
+      "$ref": "#/$defs/ChartPayload",
+      "description": "Chart payload section."
+    },
+    "analysis": {
+      "$ref": "#/$defs/AnalysisPayload",
+      "description": "Analysis payload section."
+    },
+    "interpretation": {
+      "$ref": "#/$defs/InterpretationPayload",
+      "description": "Interpretation payload section."
+    },
+    "report": {
+      "$ref": "#/$defs/ReportPayload",
+      "description": "Report payload section."
+    },
+    "diagnostics": {
+      "$ref": "#/$defs/DiagnosticsPayload",
+      "description": "Diagnostics payload section."
+    }
+  },
+  "required": [
+    "metadata",
+    "chart",
+    "analysis",
+    "interpretation",
+    "report",
+    "diagnostics"
+  ],
+  "title": "BTE ReportResponse",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform/schema/report_response.schema.json"
+}

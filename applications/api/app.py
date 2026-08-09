@@ -15,8 +15,12 @@ import logging
 from fastapi import FastAPI
 
 from applications.api.config import settings
+from applications.api.contracts.version import API_VERSION
 from applications.api.exceptions import register_exception_handlers
 from applications.api.middleware import register_middleware
+from applications.api.routers import analysis as public_analysis_router
+from applications.api.routers import health as public_health_router
+from applications.api.routers import version as public_version_router
 from applications.api.routes import admin as admin_router
 from applications.api.routes import auth as auth_router
 from applications.api.routes import cases as cases_router
@@ -39,19 +43,21 @@ def create_app() -> FastAPI:
     """Create Applications API V1 FastAPI application."""
     _configure_logging()
     app = FastAPI(
-        title=settings.app_name,
+        title="BTE Platform API",
         description=(
-            "BTE Platform Applications API V1 — orchestration + security foundation. "
-            "Primary endpoint: POST /api/v1/analyze. "
-            "Auth: POST /api/v1/auth/login "
-            "(dev users: admin/admin123, consultant/consultant123, customer/customer123)."
+            "Public REST API layer for the BTE Platform. "
+            "Frozen contract endpoints: GET /health, GET /version, POST /analysis. "
+            "Legacy Applications API V1 remains available under /api/v1."
         ),
-        version=settings.app_version,
+        version=API_VERSION,
         docs_url=settings.docs_url,
         redoc_url=settings.redoc_url,
         openapi_url=settings.openapi_url,
     )
     app.openapi_tags = [
+        {"name": "health", "description": "Public liveness"},
+        {"name": "version", "description": "Public API and schema versions"},
+        {"name": "analysis", "description": "Public analysis endpoint"},
         {"name": "Auth", "description": "JWT / API Key authentication"},
         {"name": "Users", "description": "Current user profile & RBAC demos"},
         {"name": "Customers", "description": "Customer management (WP11)"},
@@ -59,11 +65,13 @@ def create_app() -> FastAPI:
         {"name": "Admin", "description": "Administration & operations (WP13)"},
         {"name": "License", "description": "Licensing & product editions (WP14)"},
         {"name": "engines", "description": "Engine orchestration endpoints"},
-        {"name": "health", "description": "Liveness"},
     ]
     register_middleware(app)
     register_ops_middleware(app)
     register_exception_handlers(app)
+    app.include_router(public_health_router.router)
+    app.include_router(public_version_router.router)
+    app.include_router(public_analysis_router.router)
     app.include_router(health_router.router)
     app.include_router(auth_router.router, prefix=settings.api_prefix)
     app.include_router(user_router.router, prefix=settings.api_prefix)
