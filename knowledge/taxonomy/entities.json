@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "description": "Canonical BTE knowledge entities.",
+  "entities": [
+    {
+      "identifier": "ENT-RULE",
+      "name": "Rule",
+      "attributes": ["id", "version", "category", "type", "conditions", "result", "priority", "enabled", "tags", "references"],
+      "responsibilities": [
+        "Express one atomic analytical decision unit",
+        "Remain immutable after release",
+        "Declare conditions and results without engine logic"
+      ],
+      "relationships": ["belongs_to", "depends_on", "conflicts_with", "overrides", "validated_by", "references"]
+    },
+    {
+      "identifier": "ENT-KNOWLEDGE_PACKAGE",
+      "name": "Knowledge Package",
+      "attributes": ["package_id", "schema_version", "package_version", "category", "language", "compatibility", "objects"],
+      "responsibilities": [
+        "Group related knowledge objects for deployment",
+        "Declare package-level compatibility and checksum metadata"
+      ],
+      "relationships": ["contains", "depends_on", "extends", "belongs_to"]
+    },
+    {
+      "identifier": "ENT-KNOWLEDGE_RECORD",
+      "name": "Knowledge Record",
+      "attributes": ["id", "version", "category", "type", "status", "enabled", "language", "metadata"],
+      "responsibilities": [
+        "Serve as the generic Knowledge Database V2 envelope",
+        "Carry identity and classification for any knowledge kind"
+      ],
+      "relationships": ["belongs_to", "references", "validated_by", "generated_from"]
+    },
+    {
+      "identifier": "ENT-PATTERN",
+      "name": "Pattern",
+      "attributes": ["id", "code", "name", "pattern_family", "quality", "eligibility"],
+      "responsibilities": [
+        "Represent a named chart structure (Cach Cuc)",
+        "Link to eligibility and conflict rules"
+      ],
+      "relationships": ["belongs_to", "requires", "conflicts_with", "extends"]
+    },
+    {
+      "identifier": "ENT-ELEMENT",
+      "name": "Element",
+      "attributes": ["id", "code", "name", "yin_yang", "season_affinity"],
+      "responsibilities": [
+        "Represent one of the Five Elements",
+        "Anchor generation and control relationships"
+      ],
+      "relationships": ["references", "belongs_to"]
+    },
+    {
+      "identifier": "ENT-STEM",
+      "name": "Stem",
+      "attributes": ["id", "code", "name", "element", "yin_yang"],
+      "responsibilities": [
+        "Represent a Heavenly Stem",
+        "Participate in ten-god and combination knowledge"
+      ],
+      "relationships": ["belongs_to", "references"]
+    },
+    {
+      "identifier": "ENT-BRANCH",
+      "name": "Branch",
+      "attributes": ["id", "code", "name", "element", "hidden_stems", "animal"],
+      "responsibilities": [
+        "Represent an Earthly Branch",
+        "Host hidden stems and branch relations"
+      ],
+      "relationships": ["contains", "belongs_to", "references"]
+    },
+    {
+      "identifier": "ENT-SEASON",
+      "name": "Season",
+      "attributes": ["id", "code", "name", "command_element", "phases"],
+      "responsibilities": [
+        "Represent seasonal command context",
+        "Drive strength and temperature seasonal rules"
+      ],
+      "relationships": ["belongs_to", "references"]
+    },
+    {
+      "identifier": "ENT-RELATIONSHIP",
+      "name": "Relationship",
+      "attributes": ["id", "relation_type", "source", "target", "cardinality", "direction"],
+      "responsibilities": [
+        "Declare a typed link between knowledge objects",
+        "Support structural and semantic graphs"
+      ],
+      "relationships": ["references", "belongs_to"]
+    },
+    {
+      "identifier": "ENT-INTERPRETATION_SECTION",
+      "name": "Interpretation Section",
+      "attributes": ["id", "title", "content", "confidence", "domain"],
+      "responsibilities": [
+        "Hold commercial interpretation content units",
+        "Reference evidence and rule outcomes"
+      ],
+      "relationships": ["generated_from", "references", "belongs_to", "contains"]
+    },
+    {
+      "identifier": "ENT-SENTENCE_TEMPLATE",
+      "name": "Sentence Template",
+      "attributes": ["id", "language", "template", "placeholders", "tone"],
+      "responsibilities": [
+        "Provide reusable multilingual sentence forms",
+        "Bind to interpretation sections without embedding engine logic"
+      ],
+      "relationships": ["belongs_to", "references", "requires"]
+    },
+    {
+      "identifier": "ENT-REPORT_BLOCK",
+      "name": "Report Block",
+      "attributes": ["id", "block_type", "title", "content", "layout_hint"],
+      "responsibilities": [
+        "Represent a report presentation unit",
+        "Consume interpretation/report knowledge only"
+      ],
+      "relationships": ["belongs_to", "generated_from", "references"]
+    },
+    {
+      "identifier": "ENT-REFERENCE",
+      "name": "Reference",
+      "attributes": ["id", "target", "relation", "version", "locator"],
+      "responsibilities": [
+        "Point to documents, packages, or knowledge IDs",
+        "Preserve traceability and explainability"
+      ],
+      "relationships": ["references", "belongs_to"]
+    },
+    {
+      "identifier": "ENT-VERSION",
+      "name": "Version",
+      "attributes": ["id", "semver", "scope", "released_at", "immutable"],
+      "responsibilities": [
+        "Track schema, package, and object versions",
+        "Support compatibility and rollback metadata"
+      ],
+      "relationships": ["belongs_to", "references"]
+    },
+    {
+      "identifier": "ENT-VALIDATION_RESULT",
+      "name": "Validation Result",
+      "attributes": ["id", "status", "diagnostics", "schema_version", "counts"],
+      "responsibilities": [
+        "Capture independent validation outcomes",
+        "Never mutate source knowledge"
+      ],
+      "relationships": ["validated_by", "references", "generated_from"]
+    },
+    {
+      "identifier": "ENT-METADATA",
+      "name": "Metadata",
+      "attributes": ["schema_version", "knowledge_version", "package_version", "author", "checksum", "compatibility"],
+      "responsibilities": [
+        "Describe packages and the knowledge base itself",
+        "Carry release and compatibility descriptors"
+      ],
+      "relationships": ["belongs_to", "references"]
+    },
+    {
+      "identifier": "ENT-CONDITION",
+      "name": "Condition",
+      "attributes": ["condition_id", "field", "operator", "value", "group"],
+      "responsibilities": [
+        "Express activation predicates for rules",
+        "Remain data-only without executable code"
+      ],
+      "relationships": ["belongs_to", "requires"]
+    },
+    {
+      "identifier": "ENT-RESULT",
+      "name": "Result",
+      "attributes": ["effect", "weight", "outcome_type", "target_role", "target_attribute"],
+      "responsibilities": [
+        "Declare the intended outcome of a matched rule",
+        "Remain independent of presentation engines"
+      ],
+      "relationships": ["belongs_to", "generated_from"]
+    },
+    {
+      "identifier": "ENT-DOMAIN",
+      "name": "Domain",
+      "attributes": ["id", "name", "description", "parent_domain"],
+      "responsibilities": [
+        "Anchor taxonomy classification",
+        "Support future school expansions"
+      ],
+      "relationships": ["contains", "extends", "belongs_to"]
+    },
+    {
+      "identifier": "ENT-CATEGORY",
+      "name": "Category",
+      "attributes": ["id", "name", "domain_id", "description"],
+      "responsibilities": [
+        "Subdivide domains for packaging and indexing",
+        "Remain stable across package versions"
+      ],
+      "relationships": ["belongs_to", "contains"]
+    }
+  ]
+}

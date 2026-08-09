@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "description": "Deterministic semantic hierarchy for Knowledge Database V2.",
+  "order": "strict",
+  "levels": [
+    {
+      "level": 1,
+      "name": "Domain",
+      "entity": "ENT-DOMAIN",
+      "description": "Top-level semantic field such as BaZi, Interpretation, or Report."
+    },
+    {
+      "level": 2,
+      "name": "Category",
+      "entity": "ENT-CATEGORY",
+      "description": "Stable subdivision within a domain used for packaging and indexing."
+    },
+    {
+      "level": 3,
+      "name": "Knowledge Package",
+      "entity": "ENT-KNOWLEDGE_PACKAGE",
+      "description": "Deployable unit of related knowledge objects."
+    },
+    {
+      "level": 4,
+      "name": "Knowledge Record",
+      "entity": "ENT-KNOWLEDGE_RECORD",
+      "description": "Canonical V2 envelope for one knowledge object."
+    },
+    {
+      "level": 5,
+      "name": "Rule",
+      "entity": "ENT-RULE",
+      "description": "Atomic analytical knowledge unit when the record type is rule."
+    },
+    {
+      "level": 6,
+      "name": "Condition",
+      "entity": "ENT-CONDITION",
+      "description": "Activation predicate belonging to a rule."
+    },
+    {
+      "level": 7,
+      "name": "Result",
+      "entity": "ENT-RESULT",
+      "description": "Declared outcome of a matched rule."
+    }
+  ],
+  "path_template": "Domain > Category > Knowledge Package > Knowledge Record > Rule > Condition > Result",
+  "determinism_rules": [
+    "Every record declares exactly one primary domain.",
+    "Every rule belongs to exactly one package.",
+    "Conditions and results never exist outside a parent rule.",
+    "Traversal order is level-ascending by hierarchy.json level numbers.",
+    "Sibling ordering within a level uses stable id ascending sort."
+  ]
+}

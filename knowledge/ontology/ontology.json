@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "ontology_version": "1.0.0",
+  "description": "Core ontology concepts for BTE Knowledge Database V2.",
+  "concepts": [
+    {
+      "id": "ONT-KNOWLEDGE_OBJECT",
+      "name": "KnowledgeObject",
+      "kind": "class",
+      "description": "Root concept for any addressable knowledge unit."
+    },
+    {
+      "id": "ONT-ANALYTICAL_KNOWLEDGE",
+      "name": "AnalyticalKnowledge",
+      "kind": "class",
+      "parent": "ONT-KNOWLEDGE_OBJECT",
+      "description": "Knowledge used by analytical engines (rules, patterns, gods, luck)."
+    },
+    {
+      "id": "ONT-PRESENTATION_KNOWLEDGE",
+      "name": "PresentationKnowledge",
+      "kind": "class",
+      "parent": "ONT-KNOWLEDGE_OBJECT",
+      "description": "Knowledge used for interpretation prose and report presentation."
+    },
+    {
+      "id": "ONT-GOVERNANCE_KNOWLEDGE",
+      "name": "GovernanceKnowledge",
+      "kind": "class",
+      "parent": "ONT-KNOWLEDGE_OBJECT",
+      "description": "Metadata, validation, versioning, and release knowledge."
+    },
+    {
+      "id": "ONT-RULE",
+      "name": "Rule",
+      "kind": "class",
+      "parent": "ONT-ANALYTICAL_KNOWLEDGE",
+      "description": "Atomic analytical decision knowledge."
+    },
+    {
+      "id": "ONT-PATTERN",
+      "name": "Pattern",
+      "kind": "class",
+      "parent": "ONT-ANALYTICAL_KNOWLEDGE",
+      "description": "Named chart structure knowledge."
+    },
+    {
+      "id": "ONT-ELEMENTAL_ENTITY",
+      "name": "ElementalEntity",
+      "kind": "class",
+      "parent": "ONT-ANALYTICAL_KNOWLEDGE",
+      "description": "Stems, branches, elements, and related primitives."
+    },
+    {
+      "id": "ONT-INTERPRETATION_UNIT",
+      "name": "InterpretationUnit",
+      "kind": "class",
+      "parent": "ONT-PRESENTATION_KNOWLEDGE",
+      "description": "Sections and sentence templates."
+    },
+    {
+      "id": "ONT-REPORT_UNIT",
+      "name": "ReportUnit",
+      "kind": "class",
+      "parent": "ONT-PRESENTATION_KNOWLEDGE",
+      "description": "Report blocks and templates."
+    },
+    {
+      "id": "ONT-SCHOOL_VARIANT",
+      "name": "SchoolVariant",
+      "kind": "class",
+      "parent": "ONT-ANALYTICAL_KNOWLEDGE",
+      "description": "School-specific overlay that specializes base knowledge."
+    },
+    {
+      "id": "ONT-LANGUAGE_VARIANT",
+      "name": "LanguageVariant",
+      "kind": "class",
+      "parent": "ONT-PRESENTATION_KNOWLEDGE",
+      "description": "Localized equivalent of a base knowledge object."
+    }
+  ],
+  "distinctions": {
+    "structural_relationships": [
+      "contains",
+      "belongs_to",
+      "depends_on",
+      "generated_from",
+      "validated_by"
+    ],
+    "semantic_relationships": [
+      "inherits",
+      "specializes",
+      "generalizes",
+      "equivalent_to",
+      "aggregates",
+      "composes",
+      "overrides",
+      "conflicts_with"
+    ]
+  }
+}

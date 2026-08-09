@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/v2/knowledge_object.schema.json",
+  "title": "BTE Knowledge Object V2",
+  "description": "Canonical extensible schema for Knowledge Database V2 records. Existing V1 nested records remain valid via compatibility mapping.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "version",
+    "category",
+    "type",
+    "status",
+    "enabled"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Immutable knowledge object identifier.",
+      "examples": ["STR-000001", "KR-000001", "RUL-000001"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of this knowledge object."
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary category used for indexing and packaging."
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Object type within category (rule, sentence, term, template, reference, ...)."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "priority": {
+      "description": "Optional priority. Accepts numeric order or structured priority object.",
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "type": "string"
+            },
+            "order": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2,
+      "description": "BCP 47 language tag. Optional for multilingual packages.",
+      "examples": ["vi", "en", "zh-Hans"]
+    },
+    "source": {
+      "description": "Provenance source. String path/name or structured object.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "active",
+        "approved",
+        "official",
+        "deprecated",
+        "archived",
+        "disabled"
+      ]
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Runtime eligibility flag. Disabled records remain stored but excluded from default indexes."
+    },
+    "references": {
+      "type": "array",
+      "description": "Opaque references to documents, modules, or other knowledge IDs.",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "required": [
+              "target"
+            ],
+            "properties": {
+              "target": {
+                "type": "string"
+              },
+              "relation": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      },
+      "default": []
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Extensible metadata bag. Must not redefine top-level identity fields.",
+      "additionalProperties": true,
+      "default": {}
+    },
+    "payload": {
+      "type": "object",
+      "description": "Type-specific body. Rules, sentences, and templates extend here without breaking the canonical envelope.",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "migration_id": "MIG-YYYY-MM-DD-001",
+  "kind": "schema_upgrade",
+  "from_version": "1.0.0",
+  "to_version": "2.0.0",
+  "status": "draft",
+  "description": "Template only. Replace placeholders before approval.",
+  "affected_paths": [
+    "knowledge/schema/v2/",
+    "knowledge/rule_database/"
+  ],
+  "compatibility": {
+    "compatible_with_v1": true,
+    "dual_read": true,
+    "min_platform_version": "1.0.0"
+  },
+  "rollback": {
+    "strategy": "dual_read_fallback",
+    "last_known_good": "1.0.0",
+    "notes": "Keep V1 packages readable; do not delete source packages."
+  },
+  "checksum": {
+    "algorithm": "sha256",
+    "before": null,
+    "after": null
+  }
+}

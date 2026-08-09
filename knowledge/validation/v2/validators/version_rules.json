@@ -1,0 +1,22 @@
+{
+  "suite": "version_compatibility",
+  "version": "2.0.0",
+  "mode": "specification",
+  "rules": [
+    {
+      "code": "incompatible_schema_range",
+      "severity": "error",
+      "description": "Package compatibility range must include the active schema version."
+    },
+    {
+      "code": "v1_dual_read_required",
+      "severity": "warning",
+      "description": "Until migration completes, loaders should remain able to project V1 packages."
+    },
+    {
+      "code": "matrix_alignment",
+      "severity": "warning",
+      "description": "Breaking pairs should be reflected in knowledge_compatibility_matrix."
+    }
+  ]
+}

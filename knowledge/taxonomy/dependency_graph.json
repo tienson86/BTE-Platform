@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "description": "Dependency graph rules for packages, domains, rules, and metadata.",
+  "circular_dependencies": {
+    "default_policy": "prohibited",
+    "explicit_allowlist": [],
+    "notes": "Cycles are forbidden unless a future migration adds an explicit allowlist entry with rationale."
+  },
+  "dependency_kinds": [
+    {
+      "id": "DEP-PACKAGE",
+      "name": "package_dependency",
+      "source": "knowledge_package",
+      "target": "knowledge_package",
+      "semantics": "Package A requires Package B to be loadable first.",
+      "resolution_order": "topological_sort_by_package_id"
+    },
+    {
+      "id": "DEP-DOMAIN",
+      "name": "domain_dependency",
+      "source": "domain",
+      "target": "domain",
+      "semantics": "Domain A conceptually requires Domain B signals.",
+      "resolution_order": "parent_before_child_then_declared_depends_on"
+    },
+    {
+      "id": "DEP-RULE",
+      "name": "rule_dependency",
+      "source": "rule",
+      "target": "rule|record",
+      "semantics": "Rule A references or requires Rule/Record B.",
+      "resolution_order": "dependency_first_then_priority"
+    },
+    {
+      "id": "DEP-METADATA",
+      "name": "metadata_dependency",
+      "source": "package|record",
+      "target": "metadata|schema|index",
+      "semantics": "Content depends on schema/metadata/index contracts.",
+      "resolution_order": "schema_metadata_before_content"
+    }
+  ],
+  "canonical_pipeline_dependencies": [
+    {
+      "from": "DOM-CALENDAR",
+      "to": null,
+      "reason": "Root temporal context"
+    },
+    {
+      "from": "DOM-BAZI",
+      "to": "DOM-CALENDAR",
+      "reason": "Chart construction requires calendar"
+    },
+    {
+      "from": "DOM-STRENGTH",
+      "to": "DOM-BAZI",
+      "reason": "Strength evaluates chart pillars"
+    },
+    {
+      "from": "DOM-SEASONAL",
+      "to": "DOM-STRENGTH",
+      "reason": "Season feeds strength"
+    },
+    {
+      "from": "DOM-TEMPERATURE",
+      "to": "DOM-BAZI",
+      "reason": "Temperature reads chart and season"
+    },
+    {
+      "from": "DOM-PATTERN",
+      "to": "DOM-STRENGTH",
+      "reason": "Pattern eligibility consumes strength"
+    },
+    {
+      "from": "DOM-USEFUL_GOD",
+      "to": "DOM-PATTERN",
+      "reason": "Useful god selection follows pattern/strength context"
+    },
+    {
+      "from": "DOM-LUCK_CYCLE",
+      "to": "DOM-BAZI",
+      "reason": "Luck cycles extend natal chart"
+    },
+    {
+      "from": "DOM-INTERPRETATION",
+      "to": "DOM-PATTERN",
+      "reason": "Interpretation consumes analytical conclusions"
+    },
+    {
+      "from": "DOM-REPORT",
+      "to": "DOM-INTERPRETATION",
+      "reason": "Report presents interpretation outputs"
+    }
+  ],
+  "validation_rules": [
+    "Missing dependency targets are errors.",
+    "Self-dependencies are errors.",
+    "Circular package or rule dependencies are errors by default.",
+    "Deterministic topological ordering must be reproducible."
+  ]
+}

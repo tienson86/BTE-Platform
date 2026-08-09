@@ -1,0 +1,27 @@
+{
+  "suite": "references",
+  "version": "2.0.0",
+  "mode": "specification",
+  "rules": [
+    {
+      "code": "broken_reference",
+      "severity": "error",
+      "description": "Knowledge ID references must resolve within the release corpus."
+    },
+    {
+      "code": "external_document_reference",
+      "severity": "info",
+      "description": "Document path references are allowed without ID resolution."
+    },
+    {
+      "code": "circular_reference",
+      "severity": "error",
+      "description": "Directed ID reference graphs must be acyclic."
+    },
+    {
+      "code": "orphan_record",
+      "severity": "warning",
+      "description": "Unreferenced records may be reported as orphans."
+    }
+  ]
+}

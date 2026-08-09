@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/v2/knowledge_package.schema.json",
+  "title": "BTE Knowledge Package V2",
+  "description": "Package envelope for grouped knowledge objects (rules, sentences, templates).",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "package_id",
+    "schema_version",
+    "package_version",
+    "objects"
+  ],
+  "properties": {
+    "package_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "package_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "category": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "min_schema_version": {
+          "type": "string"
+        },
+        "max_schema_version": {
+          "type": "string"
+        },
+        "compatible_with_v1": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "$ref": "knowledge_object.schema.json"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

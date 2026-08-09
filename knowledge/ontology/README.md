@@ -1,126 +1,50 @@
-# BTE Knowledge Ontology Infrastructure
+# BTE Knowledge Ontology
 
-**Sprint:** 5B  
-**Location:** `knowledge/ontology/`  
-**Version:** 1.0.0  
-**Status:** Official (specification)  
-**Runtime:** Not included
+| Field | Value |
+|-------|-------|
+| **Status** | Canonical architecture |
+| **Sprint** | KD-2 |
+| **Version** | 1.0.0 |
+| **Scope** | Semantic ontology for Knowledge Database V2 |
 
 ---
 
 ## Purpose
 
-Provide the **global ontology SSOT** for the entire BTE Knowledge Canon.
+Define semantic inheritance, links, constraints, and override behavior for BTE knowledge.
 
-Every future Knowledge Record SHALL reference this ontology for:
+The ontology complements the taxonomy:
 
-- ontology classes
-- entity types
-- relationship types
-- node / edge categories
-- namespaces
-- semantic levels
-- property definitions
-
-Records MUST NOT invent private ontology vocabularies that conflict with this registry.
+- **Taxonomy** answers “where does this belong?”
+- **Ontology** answers “what does this mean, and how does it specialize or override?”
 
 ---
 
-## Architecture
+## Files
 
-```text
-knowledge/ontology/
-        │
-        ├── ontology_schema.json          ← Draft 2020-12 master schema
-        ├── ontology_classes.json         ← classes (OCL-*)
-        ├── entity_types.json             ← entity types (ENTT-*)
-        ├── relationship_types.json       ← relationships (RELTYPE-*)
-        ├── relationship_constraints.json
-        ├── property_definitions.json
-        ├── node_types.json               ← graph node categories (NODE-*)
-        ├── edge_types.json               ← graph edge categories (EDGECAT-*)
-        ├── semantic_levels.json
-        ├── namespace_registry.json        ← NS-*
-        ├── ONTOLOGY_SPEC.md
-        └── examples/
-```
-
-Compatibility bridges:
-
-- `compatible_graph_node` / `compatible_graph_edge` map to `knowledge/graph/` vocabularies.
-- Relationship types include graph edges (`FOUNDATIONAL_FOR`, `DEPENDS_ON`, …) plus expanded ontology relations.
+| File | Responsibility |
+|------|----------------|
+| `ontology.json` | Core concepts and class graph |
+| `semantic_links.json` | Semantic (non-structural) relations |
+| `inheritance.json` | Specialization / generalization model |
+| `constraints.json` | Semantic constraints |
+| `override_rules.json` | Deterministic override resolution |
+| `reference_model.md` | Ontology reference narrative |
+| `examples.md` | Illustrative examples |
 
 ---
 
-## Design Principles
+## Philosophy
 
-1. **Single vocabulary** — one canonical name per class/type/relationship.
-2. **Immutable IDs** — `OCL-*`, `ENTT-*`, `RELTYPE-*`, `NODE-*`, `EDGECAT-*`, `NS-*` do not remap meaning after official.
-3. **Explicit inheritance** — classes declare `parent_class`; cycles forbidden.
-4. **Typed relationships** — direction, inverse, allowed source/target.
-5. **Graph compatibility** — ontology extends, does not break, Sprint 3B graph types.
-6. **Specification first** — no runtime ontology engine in this sprint.
-
----
-
-## Scope
-
-In scope: declarative ontology registries and documentation.  
-Out of scope: Python, compiler, validator engine, knowledge-graph runtime, analysis/rule engines.
-
-Does **not** modify: governance, validation, consistency, manifest, templates, or Golden Knowledge Records.
+1. Distinguish **structural** relationships (contains, belongs_to) from **semantic** relationships (inherits, equivalent_to).
+2. Prefer explicit specialization over hidden side effects.
+3. Keep released knowledge immutable; overrides create layered resolutions, not silent mutation.
+4. Remain compatible with Knowledge Database V2 dual-read of V1 packages.
+5. Specification only — no runtime engine code in this sprint.
 
 ---
 
-## Coverage (v1.0.0)
+## Related documents
 
-| Registry | Count (approx.) |
-|----------|-----------------|
-| Ontology classes | 50 |
-| Entity types | 36 |
-| Relationship types | 101 |
-| Properties | 129 |
-| Node types | 18 |
-| Edge categories | 10 |
-| Semantic levels | 8 |
-| Namespaces | 20 |
-
----
-
-## Dependencies
-
-Consumes concepts from (read-only compatibility):
-
-- `knowledge/graph/`
-- `knowledge/validation/`
-- `knowledge/consistency/`
-- `knowledge/manifest/`
-- `knowledge/package/`
-- `knowledge/dependency/`
-
----
-
-## Compatibility
-
-Compatible with Golden Records KR-000001…KR-000005 and Pack 01 packaging/manifests.  
-Future KR authoring SHALL bind `ontology_class` / `entity_type` / relationship names from this folder.
-
----
-
-## Future Usage
-
-- KR templates reference ontology class & entity type IDs
-- Compiler resolves relationship types via `relationship_types.json`
-- Graph projection uses `node_types` / `edge_types` categories
-- Validation engine checks `relationship_constraints.json` (ONT-C-*)
-- Search/docs use namespaces and semantic levels for browse facets
-
----
-
-## Documents
-
-| File | Role |
-|------|------|
-| [ONTOLOGY_SPEC.md](ONTOLOGY_SPEC.md) | Philosophy, naming, policies, expectations |
-| [ontology_schema.json](ontology_schema.json) | Schema for all registry (+ example) JSON |
-| [examples/](examples/) | Binding / relationship / graph illustrations |
+- `knowledge/taxonomy/README.md`
+- `knowledge/docs/architecture/KNOWLEDGE_TAXONOMY_ONTOLOGY.md`

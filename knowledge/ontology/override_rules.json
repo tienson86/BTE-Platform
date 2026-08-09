@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "ontology_version": "1.0.0",
+  "description": "Deterministic override resolution model.",
+  "override_classes": [
+    {
+      "id": "OVR-PRIORITY",
+      "name": "priority_override",
+      "precedence": 100,
+      "semantics": "Higher explicit priority replaces lower priority conflicting rules."
+    },
+    {
+      "id": "OVR-PACKAGE",
+      "name": "package_override",
+      "precedence": 80,
+      "semantics": "A later package in the deployment set may override earlier package content when declared."
+    },
+    {
+      "id": "OVR-VERSION",
+      "name": "version_override",
+      "precedence": 60,
+      "semantics": "Newer compatible object version supersedes older version of the same id."
+    },
+    {
+      "id": "OVR-PROJECT",
+      "name": "project_override",
+      "precedence": 40,
+      "semantics": "Project/tenant overlay may override shared knowledge when explicitly enabled."
+    }
+  ],
+  "resolution_algorithm": [
+    "Collect all candidates that conflict_with or override the same target.",
+    "Filter to enabled + compatible version/language/school.",
+    "Sort by override class precedence descending.",
+    "Within the same class, sort by priority.order descending, then specificity descending, then id ascending.",
+    "Select the first candidate as winner; record losers as overridden.",
+    "Never mutate the overridden object; emit resolution metadata only."
+  ],
+  "determinism_guarantees": [
+    "Same candidate set always yields the same winner.",
+    "Id ascending is the final tie-breaker.",
+    "Disabled or incompatible candidates never win."
+  ]
+}

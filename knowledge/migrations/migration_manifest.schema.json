@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/v2/migration_manifest.schema.json",
+  "title": "BTE Knowledge Migration Manifest V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "migration_id",
+    "kind",
+    "from_version",
+    "to_version",
+    "status",
+    "compatibility",
+    "rollback"
+  ],
+  "properties": {
+    "migration_id": {
+      "type": "string",
+      "pattern": "^MIG-\\d{4}-\\d{2}-\\d{2}-[0-9]{3}$",
+      "description": "Unique migration identifier."
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "schema_upgrade",
+        "package_upgrade",
+        "compatibility_annotation",
+        "rollback_marker"
+      ]
+    },
+    "from_version": {
+      "type": "string"
+    },
+    "to_version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "reviewed",
+        "approved",
+        "applied",
+        "verified",
+        "archived",
+        "rolled_back"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "affected_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "required": [
+        "compatible_with_v1",
+        "dual_read"
+      ],
+      "properties": {
+        "compatible_with_v1": {
+          "type": "boolean"
+        },
+        "dual_read": {
+          "type": "boolean"
+        },
+        "min_platform_version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "rollback": {
+      "type": "object",
+      "required": [
+        "strategy",
+        "last_known_good"
+      ],
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "restore_previous_release",
+            "dual_read_fallback",
+            "manual"
+          ]
+        },
+        "last_known_good": {
+          "type": "string",
+          "description": "Knowledge or package version to restore."
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "checksum": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "before": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "after": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

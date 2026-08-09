@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "ontology_version": "1.0.0",
+  "description": "Semantic links distinct from structural taxonomy relationships.",
+  "links": [
+    {
+      "id": "SEM-SPECIALIZES",
+      "name": "specializes",
+      "source": "concept|record|rule",
+      "target": "concept|record|rule",
+      "semantics": "Source is a more specific form of target."
+    },
+    {
+      "id": "SEM-GENERALIZES",
+      "name": "generalizes",
+      "source": "concept|record|rule",
+      "target": "concept|record|rule",
+      "semantics": "Source is a broader abstraction of target."
+    },
+    {
+      "id": "SEM-EQUIVALENT_TO",
+      "name": "equivalent_to",
+      "source": "record|term|language_variant",
+      "target": "record|term|language_variant",
+      "semantics": "Same meaning across language or school labeling."
+    },
+    {
+      "id": "SEM-AGGREGATES",
+      "name": "aggregates",
+      "source": "package|section|pattern",
+      "target": "record|rule|sentence",
+      "semantics": "Loose collection without exclusive ownership transfer."
+    },
+    {
+      "id": "SEM-COMPOSES",
+      "name": "composes",
+      "source": "pattern|package|report",
+      "target": "rule|block|section",
+      "semantics": "Strong part-whole composition; parts are meaningless outside the whole in context."
+    },
+    {
+      "id": "SEM-SAME_AS_SCHOOL",
+      "name": "same_as_school",
+      "source": "school_variant",
+      "target": "base_record",
+      "semantics": "School overlay maps to a canonical base concept."
+    },
+    {
+      "id": "SEM-TRANSLATION_OF",
+      "name": "translation_of",
+      "source": "language_variant",
+      "target": "base_record",
+      "semantics": "Localized presentation of the same knowledge identity."
+    }
+  ]
+}

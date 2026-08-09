@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "description": "Lifecycle states for knowledge objects and packages.",
+  "states": [
+    {
+      "id": "draft",
+      "editable": true,
+      "releasable": false,
+      "immutable": false
+    },
+    {
+      "id": "review",
+      "editable": true,
+      "releasable": false,
+      "immutable": false
+    },
+    {
+      "id": "approved",
+      "editable": false,
+      "releasable": true,
+      "immutable": false
+    },
+    {
+      "id": "active",
+      "editable": false,
+      "releasable": true,
+      "immutable": true
+    },
+    {
+      "id": "official",
+      "editable": false,
+      "releasable": true,
+      "immutable": true
+    },
+    {
+      "id": "deprecated",
+      "editable": false,
+      "releasable": false,
+      "immutable": true
+    },
+    {
+      "id": "archived",
+      "editable": false,
+      "releasable": false,
+      "immutable": true
+    },
+    {
+      "id": "disabled",
+      "editable": false,
+      "releasable": false,
+      "immutable": true
+    }
+  ],
+  "transitions": [
+    "draft -> review",
+    "review -> approved",
+    "approved -> active",
+    "active -> official",
+    "active -> deprecated",
+    "official -> deprecated",
+    "deprecated -> archived",
+    "any_releasable -> disabled"
+  ],
+  "rules": [
+    "Released (active/official) knowledge is immutable.",
+    "Disabled knowledge remains stored but excluded from default indexes.",
+    "Lifecycle changes after release require a new version or migration entry."
+  ]
+}

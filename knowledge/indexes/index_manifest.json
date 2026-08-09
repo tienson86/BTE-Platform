@@ -1,0 +1,74 @@
+{
+  "schema_version": "2.0.0",
+  "index_version": "2.0.0",
+  "generated_at": null,
+  "deterministic": true,
+  "rebuildable": true,
+  "sort": {
+    "keys": ["id"],
+    "order": "asc",
+    "locale": "C"
+  },
+  "indexes": [
+    {
+      "name": "by_id",
+      "path": "definitions/by_id.json",
+      "key": "id",
+      "unique": true,
+      "include_disabled": true
+    },
+    {
+      "name": "by_category",
+      "path": "definitions/by_category.json",
+      "key": "category",
+      "unique": false,
+      "include_disabled": false
+    },
+    {
+      "name": "by_type",
+      "path": "definitions/by_type.json",
+      "key": "type",
+      "unique": false,
+      "include_disabled": false
+    },
+    {
+      "name": "by_tag",
+      "path": "definitions/by_tag.json",
+      "key": "tags[]",
+      "unique": false,
+      "include_disabled": false
+    },
+    {
+      "name": "by_priority",
+      "path": "definitions/by_priority.json",
+      "key": "priority.order|priority",
+      "unique": false,
+      "include_disabled": false
+    },
+    {
+      "name": "by_language",
+      "path": "definitions/by_language.json",
+      "key": "language",
+      "unique": false,
+      "include_disabled": false
+    },
+    {
+      "name": "by_status",
+      "path": "definitions/by_status.json",
+      "key": "status",
+      "unique": false,
+      "include_disabled": true
+    }
+  ],
+  "rebuild_policy": {
+    "command": "knowledge-index rebuild --schema 2.0.0",
+    "inputs": [
+      "knowledge/rule_database/",
+      "knowledge/sentence_library/",
+      "knowledge/terminology/",
+      "knowledge/report_templates/"
+    ],
+    "output_root": "knowledge/indexes/",
+    "checksum_field": "content_sha256"
+  }
+}

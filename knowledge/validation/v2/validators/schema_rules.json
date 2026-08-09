@@ -1,0 +1,27 @@
+{
+  "suite": "schema",
+  "version": "2.0.0",
+  "mode": "specification",
+  "rules": [
+    {
+      "code": "schema_required_fields",
+      "severity": "error",
+      "description": "id, version, category, type, status, enabled must be present after V2 projection."
+    },
+    {
+      "code": "schema_semver",
+      "severity": "error",
+      "description": "version must match MAJOR.MINOR.PATCH."
+    },
+    {
+      "code": "schema_status_enum",
+      "severity": "error",
+      "description": "status must be one of the V2 enum values."
+    },
+    {
+      "code": "schema_additional_payload_allowed",
+      "severity": "info",
+      "description": "Type-specific payload fields are allowed via extensibility."
+    }
+  ]
+}

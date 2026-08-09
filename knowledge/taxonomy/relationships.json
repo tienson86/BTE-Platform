@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "description": "Canonical structural relationship model for BTE knowledge.",
+  "relationships": [
+    {
+      "id": "REL-CONTAINS",
+      "name": "contains",
+      "source": "package|record|branch|section|domain",
+      "target": "record|rule|condition|hidden_stem|sentence|block",
+      "cardinality": "1:N",
+      "direction": "outbound",
+      "semantics": "Structural ownership of child objects within a parent container."
+    },
+    {
+      "id": "REL-REFERENCES",
+      "name": "references",
+      "source": "any",
+      "target": "any",
+      "cardinality": "N:M",
+      "direction": "outbound",
+      "semantics": "Non-owning citation to another knowledge object or document."
+    },
+    {
+      "id": "REL-DEPENDS_ON",
+      "name": "depends_on",
+      "source": "package|rule|domain",
+      "target": "package|rule|domain|metadata",
+      "cardinality": "N:M",
+      "direction": "outbound",
+      "semantics": "Load-time or evaluation-time prerequisite. Cycles are prohibited unless explicitly allowed."
+    },
+    {
+      "id": "REL-EXTENDS",
+      "name": "extends",
+      "source": "package|record|rule|domain",
+      "target": "package|record|rule|domain",
+      "cardinality": "N:1",
+      "direction": "outbound",
+      "semantics": "Additive specialization that preserves the base identity."
+    },
+    {
+      "id": "REL-INHERITS",
+      "name": "inherits",
+      "source": "record|rule|entity",
+      "target": "record|rule|entity",
+      "cardinality": "N:1",
+      "direction": "outbound",
+      "semantics": "Semantic inheritance of attributes/constraints from a more general concept."
+    },
+    {
+      "id": "REL-OVERRIDES",
+      "name": "overrides",
+      "source": "rule|package|version|project_overlay",
+      "target": "rule|package|version",
+      "cardinality": "N:1",
+      "direction": "outbound",
+      "semantics": "Deterministic replacement under the override model."
+    },
+    {
+      "id": "REL-CONFLICTS_WITH",
+      "name": "conflicts_with",
+      "source": "rule|pattern|package",
+      "target": "rule|pattern|package",
+      "cardinality": "N:M",
+      "direction": "bidirectional",
+      "semantics": "Mutual exclusion or priority contest resolved by priority/override rules."
+    },
+    {
+      "id": "REL-REQUIRES",
+      "name": "requires",
+      "source": "rule|pattern|template",
+      "target": "condition|record|domain|signal",
+      "cardinality": "N:M",
+      "direction": "outbound",
+      "semantics": "Hard prerequisite that must be satisfied for validity."
+    },
+    {
+      "id": "REL-BELONGS_TO",
+      "name": "belongs_to",
+      "source": "record|rule|category|package",
+      "target": "domain|category|package",
+      "cardinality": "N:1",
+      "direction": "outbound",
+      "semantics": "Primary taxonomic membership."
+    },
+    {
+      "id": "REL-GENERATED_FROM",
+      "name": "generated_from",
+      "source": "interpretation_section|report_block|validation_result|index",
+      "target": "rule|record|package|engine_output",
+      "cardinality": "N:M",
+      "direction": "outbound",
+      "semantics": "Traceable derivation from upstream knowledge or analysis outputs."
+    },
+    {
+      "id": "REL-VALIDATED_BY",
+      "name": "validated_by",
+      "source": "record|package|rule",
+      "target": "validation_result|validator_suite",
+      "cardinality": "N:M",
+      "direction": "outbound",
+      "semantics": "Link to independent validation evidence."
+    }
+  ]
+}

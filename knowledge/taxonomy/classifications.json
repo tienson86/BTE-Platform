@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "description": "Classification axes used across knowledge packages.",
+  "axes": {
+    "domain": {
+      "description": "Primary domain id from domains.json",
+      "required": true
+    },
+    "category": {
+      "description": "Package/index category label",
+      "required": true
+    },
+    "family": {
+      "description": "Optional family within category",
+      "required": false
+    },
+    "type": {
+      "description": "Specific object/rule type",
+      "required": true
+    },
+    "school": {
+      "description": "Optional BaZi/Feng Shui/Qi Men/I Ching school overlay",
+      "required": false
+    },
+    "language": {
+      "description": "BCP 47 language tag",
+      "required": false,
+      "default": "vi"
+    }
+  },
+  "examples": [
+    {
+      "domain": "DOM-STRENGTH",
+      "category": "season",
+      "family": "season_score",
+      "type": "season_prosperous",
+      "school": null,
+      "language": "vi"
+    },
+    {
+      "domain": "DOM-PATTERN",
+      "category": "follow",
+      "family": "follow_pattern",
+      "type": "follow_wealth",
+      "school": "classical",
+      "language": "vi"
+    }
+  ]
+}

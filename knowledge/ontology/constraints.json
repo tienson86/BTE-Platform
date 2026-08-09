@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "ontology_version": "1.0.0",
+  "description": "Semantic constraints for Knowledge Database V2. Specification only.",
+  "constraints": [
+    {
+      "id": "CON-UNIQUE-ID",
+      "name": "unique_identifiers",
+      "severity": "error",
+      "statement": "Every knowledge object id must be unique within a release corpus."
+    },
+    {
+      "id": "CON-IMMUTABLE-RELEASE",
+      "name": "immutable_released_knowledge",
+      "severity": "error",
+      "statement": "Active/official released knowledge objects are immutable; changes require a new version."
+    },
+    {
+      "id": "CON-VERSION-COMPAT",
+      "name": "version_compatibility",
+      "severity": "error",
+      "statement": "Package compatibility ranges must include the active schema version for deployment."
+    },
+    {
+      "id": "CON-LANGUAGE-COMPAT",
+      "name": "language_compatibility",
+      "severity": "warning",
+      "statement": "Language variants must declare translation_of to a base object or shared id."
+    },
+    {
+      "id": "CON-PARENT-EXISTS",
+      "name": "parent_existence",
+      "severity": "error",
+      "statement": "parent_domain, package membership, and inheritance parents must resolve."
+    },
+    {
+      "id": "CON-REF-INTEGRITY",
+      "name": "reference_integrity",
+      "severity": "error",
+      "statement": "Knowledge ID references must resolve; document path references may warn."
+    },
+    {
+      "id": "CON-NO-CYCLE-DEFAULT",
+      "name": "no_circular_dependencies",
+      "severity": "error",
+      "statement": "Dependency graphs are acyclic unless explicitly allowlisted."
+    },
+    {
+      "id": "CON-HIERARCHY-PATH",
+      "name": "hierarchy_path_integrity",
+      "severity": "error",
+      "statement": "Objects must be placeable on the Domain>...>Result hierarchy without skipping required parents for their type."
+    },
+    {
+      "id": "CON-OVERRIDE-TRACE",
+      "name": "override_traceability",
+      "severity": "error",
+      "statement": "Overrides must declare source, target, and precedence class."
+    },
+    {
+      "id": "CON-SCALE",
+      "name": "scale_readiness",
+      "severity": "info",
+      "statement": "Design must remain valid for 100,000+ records via indexes and package deployment."
+    }
+  ]
+}

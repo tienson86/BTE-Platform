@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/v2/package.metadata.schema.json",
+  "title": "BTE Knowledge Package Metadata V2",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "knowledge_version",
+    "package_version",
+    "author",
+    "generated_at",
+    "compatibility"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "knowledge_version": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "compatibility": {
+      "type": "object",
+      "required": [
+        "compatible_with_v1"
+      ],
+      "properties": {
+        "min_platform_version": {
+          "type": "string"
+        },
+        "compatible_with_v1": {
+          "type": "boolean"
+        },
+        "min_schema_version": {
+          "type": "string"
+        },
+        "max_schema_version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "checksum": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

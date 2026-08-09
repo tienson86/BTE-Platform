@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "ontology_version": "1.0.0",
+  "description": "Inheritance model for specialization and generalization.",
+  "modes": [
+    {
+      "id": "specialization",
+      "direction": "child_to_parent",
+      "semantics": "Child inherits constraints and may add narrower conditions.",
+      "example": "FollowWealthRule specializes FollowPatternRule"
+    },
+    {
+      "id": "generalization",
+      "direction": "parent_to_children",
+      "semantics": "Parent defines shared attributes reused by children.",
+      "example": "ElementalEntity generalizes Stem and Branch"
+    },
+    {
+      "id": "equivalence",
+      "direction": "symmetric",
+      "semantics": "Two concepts denote the same meaning under mapping.",
+      "example": "vi label equivalent_to en label for the same KR id"
+    },
+    {
+      "id": "aggregation",
+      "direction": "whole_to_parts",
+      "semantics": "Whole groups parts without exclusive ownership.",
+      "example": "Interpretation package aggregates sentence templates"
+    },
+    {
+      "id": "composition",
+      "direction": "whole_to_parts",
+      "semantics": "Whole is composed of essential parts.",
+      "example": "Rule composes Conditions and Result"
+    }
+  ],
+  "rules": [
+    "Inheritance never mutates the parent object.",
+    "Children may narrow but not silently contradict immutable parent identity.",
+    "Multiple inheritance is discouraged; if used, override_rules.json decides precedence.",
+    "Structural contains/belongs_to must not be confused with semantic inherits/specializes."
+  ]
+}
