@@ -1,0 +1,4964 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_19_composition_library_core",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "interpretation",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-INTERPRETATION",
+    "category_id": "composition_library",
+    "school": "bazi_default",
+    "tags": [
+      "interpretation",
+      "composition_library",
+      "gold",
+      "ik4"
+    ],
+    "description": "Canonical Composition and Placeholder Knowledge. Assembly metadata only."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "composition/career.json",
+        "composition/children.json",
+        "composition/general.json",
+        "composition/health.json",
+        "composition/index.json",
+        "composition/luck.json",
+        "composition/overview.json",
+        "composition/personality.json",
+        "composition/relationship.json",
+        "composition/summary.json",
+        "composition/wealth.json",
+        "placeholders/index.json",
+        "placeholders/placeholders.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/no_render.json",
+        "examples/selection_samples.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/package_assertions.json",
+        "tests/test_package.py"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/overview.md",
+        "documentation/composition_philosophy.md",
+        "documentation/placeholder_philosophy.md",
+        "documentation/assembly_model.md",
+        "documentation/dependency_model.md",
+        "documentation/contracts.md",
+        "documentation/limitations.md",
+        "documentation/wave2_roadmap.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/assembly_contract.json",
+        "assets/placeholder_catalog.json",
+        "assets/published_inputs.json",
+        "assets/published_outputs.json",
+        "assets/reference_map.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_18_narrative_library_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "narrative_template_ids assembled by composition rules",
+        "signals": [
+          "narrative_templates",
+          "narrative_index"
+        ]
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "CMP-000001",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000002",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000003",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000004",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000005",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000006",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000007",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000008",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000009",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000010",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000011",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000012",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000013",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000014",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000015",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000016",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000017",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000018",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000019",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000020",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000021",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000022",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000023",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000024",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000025",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000026",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000027",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000028",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000029",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000030",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000031",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000032",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000033",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000034",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000035",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000036",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000037",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000038",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000039",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000040",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000041",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000042",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000043",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000044",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000045",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000046",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000047",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000048",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000049",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000050",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000051",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000052",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000053",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000054",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000055",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000056",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000057",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000058",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000059",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000060",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000061",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000062",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000063",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000064",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000065",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000066",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000067",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000068",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000069",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000070",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000071",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000072",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000073",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000074",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000075",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000076",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000077",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000078",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000079",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000080",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/overview.json"
+    },
+    {
+      "id": "CMP-000081",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000082",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000083",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000084",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000085",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000086",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000087",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000088",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000089",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000090",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000091",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000092",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000093",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000094",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000095",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000096",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000097",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000098",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000099",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000100",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000101",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000102",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000103",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000104",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000105",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000106",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000107",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000108",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000109",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000110",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000111",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000112",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000113",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000114",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000115",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000116",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000117",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000118",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000119",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000120",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000121",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000122",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000123",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000124",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000125",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000126",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000127",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000128",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000129",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000130",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000131",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000132",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000133",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000134",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000135",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000136",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000137",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000138",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000139",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000140",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000141",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000142",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000143",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000144",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000145",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000146",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000147",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000148",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000149",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000150",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000151",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000152",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000153",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000154",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000155",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000156",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000157",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000158",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000159",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000160",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/personality.json"
+    },
+    {
+      "id": "CMP-000161",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000162",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000163",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000164",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000165",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000166",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000167",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000168",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000169",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000170",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000171",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000172",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000173",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000174",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000175",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000176",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000177",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000178",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000179",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000180",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000181",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000182",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000183",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000184",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000185",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000186",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000187",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000188",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000189",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000190",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000191",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000192",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000193",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000194",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000195",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000196",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000197",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000198",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000199",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000200",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000201",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000202",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000203",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000204",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000205",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000206",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000207",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000208",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000209",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000210",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000211",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000212",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000213",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000214",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000215",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000216",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000217",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000218",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000219",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000220",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000221",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000222",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000223",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000224",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000225",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000226",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000227",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000228",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000229",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000230",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000231",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000232",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000233",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000234",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000235",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000236",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000237",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000238",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000239",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000240",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/career.json"
+    },
+    {
+      "id": "CMP-000241",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000242",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000243",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000244",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000245",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000246",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000247",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000248",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000249",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000250",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000251",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000252",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000253",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000254",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000255",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000256",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000257",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000258",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000259",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000260",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000261",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000262",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000263",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000264",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000265",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000266",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000267",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000268",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000269",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000270",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000271",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000272",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000273",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000274",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000275",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000276",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000277",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000278",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000279",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000280",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000281",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000282",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000283",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000284",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000285",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000286",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000287",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000288",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000289",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000290",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000291",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000292",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000293",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000294",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000295",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000296",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000297",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000298",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000299",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000300",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000301",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000302",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000303",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000304",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000305",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000306",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000307",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000308",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000309",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000310",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000311",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000312",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000313",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000314",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000315",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000316",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000317",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000318",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000319",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000320",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/wealth.json"
+    },
+    {
+      "id": "CMP-000321",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000322",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000323",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000324",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000325",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000326",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000327",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000328",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000329",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000330",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000331",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000332",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000333",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000334",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000335",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000336",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000337",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000338",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000339",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000340",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000341",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000342",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000343",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000344",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000345",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000346",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000347",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000348",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000349",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000350",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000351",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000352",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000353",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000354",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000355",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000356",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000357",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000358",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000359",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000360",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000361",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000362",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000363",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000364",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000365",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000366",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000367",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000368",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000369",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000370",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000371",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000372",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000373",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000374",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000375",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000376",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000377",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000378",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000379",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000380",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000381",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000382",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000383",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000384",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000385",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000386",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000387",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000388",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000389",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000390",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000391",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000392",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000393",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000394",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000395",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000396",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000397",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000398",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000399",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000400",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/relationship.json"
+    },
+    {
+      "id": "CMP-000401",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000402",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000403",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000404",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000405",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000406",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000407",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000408",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000409",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000410",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000411",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000412",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000413",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000414",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000415",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000416",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000417",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000418",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000419",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000420",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000421",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000422",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000423",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000424",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000425",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000426",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000427",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000428",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000429",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000430",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000431",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000432",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000433",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000434",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000435",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000436",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000437",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000438",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000439",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000440",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000441",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000442",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000443",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000444",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000445",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000446",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000447",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000448",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000449",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000450",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000451",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000452",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000453",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000454",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000455",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000456",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000457",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000458",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000459",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000460",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000461",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000462",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000463",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000464",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000465",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000466",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000467",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000468",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000469",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000470",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000471",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000472",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000473",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000474",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000475",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000476",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000477",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000478",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000479",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000480",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/health.json"
+    },
+    {
+      "id": "CMP-000481",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000482",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000483",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000484",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000485",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000486",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000487",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000488",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000489",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000490",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000491",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000492",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000493",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000494",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000495",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000496",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000497",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000498",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000499",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000500",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000501",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000502",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000503",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000504",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000505",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000506",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000507",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000508",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000509",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000510",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000511",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000512",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000513",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000514",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000515",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000516",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000517",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000518",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000519",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000520",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000521",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000522",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000523",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000524",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000525",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000526",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000527",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000528",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000529",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000530",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000531",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000532",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000533",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000534",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000535",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000536",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000537",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000538",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000539",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000540",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000541",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000542",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000543",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000544",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000545",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000546",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000547",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000548",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000549",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000550",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000551",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000552",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000553",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000554",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000555",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000556",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000557",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000558",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000559",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000560",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/children.json"
+    },
+    {
+      "id": "CMP-000561",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000562",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000563",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000564",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000565",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000566",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000567",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000568",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000569",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000570",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000571",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000572",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000573",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000574",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000575",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000576",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000577",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000578",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000579",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000580",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000581",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000582",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000583",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000584",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000585",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000586",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000587",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000588",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000589",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000590",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000591",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000592",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000593",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000594",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000595",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000596",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000597",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000598",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000599",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000600",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000601",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000602",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000603",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000604",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000605",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000606",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000607",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000608",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000609",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000610",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000611",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000612",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000613",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000614",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000615",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000616",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000617",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000618",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000619",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000620",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000621",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000622",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000623",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000624",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000625",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000626",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000627",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000628",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000629",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000630",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000631",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000632",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000633",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000634",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000635",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000636",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000637",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000638",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000639",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000640",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/luck.json"
+    },
+    {
+      "id": "CMP-000641",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000642",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000643",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000644",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000645",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000646",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000647",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000648",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000649",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000650",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000651",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000652",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000653",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000654",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000655",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000656",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000657",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000658",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000659",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000660",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000661",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000662",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000663",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000664",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000665",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000666",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000667",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000668",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000669",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000670",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000671",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000672",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000673",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000674",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000675",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000676",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000677",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000678",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000679",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000680",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000681",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000682",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000683",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000684",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000685",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000686",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000687",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000688",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000689",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000690",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000691",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000692",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000693",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000694",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000695",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000696",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000697",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000698",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000699",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000700",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000701",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000702",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000703",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000704",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000705",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000706",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000707",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000708",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000709",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000710",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000711",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000712",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000713",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000714",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000715",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000716",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000717",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000718",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000719",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000720",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/summary.json"
+    },
+    {
+      "id": "CMP-000721",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000722",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000723",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000724",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000725",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000726",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000727",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000728",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000729",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000730",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000731",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000732",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000733",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000734",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000735",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000736",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000737",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000738",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000739",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000740",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000741",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000742",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000743",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000744",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000745",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000746",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000747",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000748",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000749",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000750",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000751",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000752",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000753",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000754",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000755",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000756",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000757",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000758",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000759",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000760",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000761",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000762",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000763",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000764",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000765",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000766",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000767",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000768",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000769",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000770",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000771",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000772",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000773",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000774",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000775",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000776",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000777",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000778",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000779",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000780",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000781",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000782",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000783",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000784",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000785",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000786",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000787",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000788",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000789",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000790",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000791",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000792",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000793",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000794",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000795",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000796",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000797",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000798",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000799",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "CMP-000800",
+      "entity_type": "ENT-COMPOSITION",
+      "path": "composition/general.json"
+    },
+    {
+      "id": "PH-000001",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000002",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000003",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000004",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000005",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000006",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000007",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000008",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000009",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000010",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000011",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000012",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000013",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000014",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000015",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000016",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000017",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000018",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000019",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000020",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000021",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000022",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000023",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000024",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000025",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000026",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000027",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000028",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000029",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000030",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000031",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000032",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000033",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000034",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000035",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000036",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000037",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000038",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000039",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000040",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000041",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000042",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000043",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000044",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000045",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000046",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000047",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000048",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000049",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000050",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000051",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000052",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000053",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000054",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000055",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000056",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000057",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000058",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000059",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000060",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000061",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000062",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000063",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000064",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000065",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000066",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000067",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000068",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000069",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000070",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000071",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000072",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000073",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000074",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000075",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000076",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000077",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000078",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000079",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000080",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000081",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000082",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000083",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000084",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000085",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000086",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000087",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000088",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000089",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000090",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000091",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000092",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000093",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000094",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000095",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000096",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000097",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000098",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000099",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000100",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000101",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000102",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000103",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000104",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000105",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000106",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000107",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000108",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000109",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000110",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000111",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000112",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000113",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000114",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000115",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000116",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000117",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000118",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000119",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    },
+    {
+      "id": "PH-000120",
+      "entity_type": "ENT-PLACEHOLDER",
+      "path": "placeholders/placeholders.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_18_narrative_library_core"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_id": "REL-BZ_19_COMPOSITION_LIBRARY_CORE-1.0.0",
+    "release_date": "2026-08-09",
+    "release_author": "BTE Knowledge Board",
+    "release_notes_path": "RELEASE_NOTES.md",
+    "migration_notes_path": "CHANGELOG.md"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/assembly_contract.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/placeholder_catalog.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_inputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/reference_map.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/career.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/children.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/general.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/health.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/luck.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/overview.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/personality.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/relationship.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/summary.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "composition/wealth.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/assembly_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/composition_philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/contracts.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/dependency_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/placeholder_philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/wave2_roadmap.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/no_render.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/selection_samples.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "placeholders/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "placeholders/placeholders.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/category_map.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/evidence_catalog.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

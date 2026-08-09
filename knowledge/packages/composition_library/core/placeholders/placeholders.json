@@ -1,0 +1,1938 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_19_composition_library_core",
+  "count": 120,
+  "objects": [
+    {
+      "placeholder_id": "PH-000001",
+      "placeholder_path": "analysis.strength_score",
+      "value_type": "number",
+      "required": true,
+      "fallback": null,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_01_strength_core",
+        "signal": "strength_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000002",
+      "placeholder_path": "analysis.season_score",
+      "value_type": "number",
+      "required": true,
+      "fallback": null,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_02_seasonal_core",
+        "signal": "season_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000003",
+      "placeholder_path": "analysis.temperature_score",
+      "value_type": "number",
+      "required": true,
+      "fallback": null,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_03_temperature_core",
+        "signal": "temperature_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000004",
+      "placeholder_path": "analysis.pattern_score",
+      "value_type": "number",
+      "required": true,
+      "fallback": null,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_05_pattern_evaluation",
+        "signal": "pattern_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000005",
+      "placeholder_path": "analysis.pattern_quality",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_05_pattern_evaluation",
+        "signal": "pattern_quality"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000006",
+      "placeholder_path": "analysis.pattern_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_05_pattern_evaluation",
+        "signal": "pattern_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000007",
+      "placeholder_path": "analysis.pattern_integrity",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_05_pattern_evaluation",
+        "signal": "pattern_integrity"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000008",
+      "placeholder_path": "analysis.pattern_stability",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_04_pattern_core",
+        "signal": "pattern_stability"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000009",
+      "placeholder_path": "analysis.follow_pattern",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_10_follow_pattern_core",
+        "signal": "follow_pattern"
+      },
+      "validation": {
+        "values": [
+          "true",
+          "false",
+          "border",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000010",
+      "placeholder_path": "analysis.follow_pattern_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_10_follow_pattern_core",
+        "signal": "follow_pattern_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000011",
+      "placeholder_path": "analysis.follow_pattern_type",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_10_follow_pattern_core",
+        "signal": "follow_pattern_type"
+      },
+      "validation": {
+        "values": [
+          "true_follow",
+          "false_follow",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000012",
+      "placeholder_path": "analysis.follow_pattern_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_10_follow_pattern_core",
+        "signal": "follow_pattern_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000013",
+      "placeholder_path": "analysis.transformation_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000014",
+      "placeholder_path": "analysis.transformation_detected",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_detected"
+      },
+      "validation": {
+        "values": [
+          "true",
+          "false",
+          "partial",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000015",
+      "placeholder_path": "analysis.transformation_type",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_type"
+      },
+      "validation": {
+        "values": [
+          "hua",
+          "failed",
+          "partial",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000016",
+      "placeholder_path": "analysis.transformation_strength",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_strength"
+      },
+      "validation": {
+        "values": [
+          "strong",
+          "medium",
+          "weak",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000017",
+      "placeholder_path": "analysis.transformation_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000018",
+      "placeholder_path": "analysis.interaction_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "interaction_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000019",
+      "placeholder_path": "analysis.interaction_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "interaction_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000020",
+      "placeholder_path": "analysis.combination_detected",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "combination_detected"
+      },
+      "validation": {
+        "values": [
+          "true",
+          "false",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000021",
+      "placeholder_path": "analysis.combination_types",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "combination_types"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000022",
+      "placeholder_path": "analysis.clash_detected",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "clash_detected"
+      },
+      "validation": {
+        "values": [
+          "true",
+          "false",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000023",
+      "placeholder_path": "analysis.interaction_strength",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "interaction_strength"
+      },
+      "validation": {
+        "values": [
+          "strong",
+          "medium",
+          "weak",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000024",
+      "placeholder_path": "analysis.ten_gods_profile",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_profile"
+      },
+      "validation": {
+        "values": [
+          "balanced",
+          "dominant",
+          "weak",
+          "mixed",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000025",
+      "placeholder_path": "analysis.ten_gods_balance",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_balance"
+      },
+      "validation": {
+        "values": [
+          "balanced",
+          "tilted",
+          "unstable",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000026",
+      "placeholder_path": "analysis.ten_gods_dominance",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_dominance"
+      },
+      "validation": {
+        "values": [
+          "mixed",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000027",
+      "placeholder_path": "analysis.ten_gods_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000028",
+      "placeholder_path": "analysis.ten_gods_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000029",
+      "placeholder_path": "analysis.growth_phase",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_phase"
+      },
+      "validation": {
+        "values": [
+          "changsheng",
+          "diwang",
+          "si",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000030",
+      "placeholder_path": "analysis.growth_profile",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_profile"
+      },
+      "validation": {
+        "values": [
+          "prosperous",
+          "declining",
+          "balanced",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000031",
+      "placeholder_path": "analysis.growth_balance",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_balance"
+      },
+      "validation": {
+        "values": [
+          "balanced",
+          "tilted",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000032",
+      "placeholder_path": "analysis.growth_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000033",
+      "placeholder_path": "analysis.growth_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000034",
+      "placeholder_path": "analysis.hidden_stems_profile",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_profile"
+      },
+      "validation": {
+        "values": [
+          "main_qi",
+          "mixed",
+          "buried",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000035",
+      "placeholder_path": "analysis.hidden_stems_balance",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_balance"
+      },
+      "validation": {
+        "values": [
+          "balanced",
+          "rooted",
+          "floating",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000036",
+      "placeholder_path": "analysis.hidden_stems_dominance",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_dominance"
+      },
+      "validation": {
+        "values": [
+          "mixed",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000037",
+      "placeholder_path": "analysis.hidden_stems_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000038",
+      "placeholder_path": "analysis.hidden_stems_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000039",
+      "placeholder_path": "analysis.evaluation_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_05_pattern_evaluation",
+        "signal": "evaluation_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000040",
+      "placeholder_path": "analysis.follow_pattern_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_10_follow_pattern_core",
+        "signal": "follow_pattern_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000041",
+      "placeholder_path": "analysis.transformation_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000042",
+      "placeholder_path": "analysis.interaction_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "interaction_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000043",
+      "placeholder_path": "analysis.ten_gods_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000044",
+      "placeholder_path": "analysis.growth_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000045",
+      "placeholder_path": "analysis.hidden_stems_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000046",
+      "placeholder_path": "analysis.follow_pattern_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_10_follow_pattern_core",
+        "signal": "follow_pattern_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000047",
+      "placeholder_path": "analysis.transformation_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_11_transformation_core",
+        "signal": "transformation_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000048",
+      "placeholder_path": "analysis.interaction_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_12_combination_clash_core",
+        "signal": "interaction_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000049",
+      "placeholder_path": "analysis.ten_gods_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_13_ten_gods_advanced",
+        "signal": "ten_gods_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000050",
+      "placeholder_path": "analysis.growth_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_14_twelve_growth_advanced",
+        "signal": "growth_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000051",
+      "placeholder_path": "analysis.hidden_stems_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_15_hidden_stems_advanced",
+        "signal": "hidden_stems_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000052",
+      "placeholder_path": "analysis.pattern_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_05_pattern_evaluation",
+        "signal": "pattern_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000053",
+      "placeholder_path": "analysis.resolution_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "analysis",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "resolution_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000054",
+      "placeholder_path": "decision.useful_god",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "useful_god"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000055",
+      "placeholder_path": "decision.favorable_gods",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "favorable_gods"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000056",
+      "placeholder_path": "decision.unfavorable_gods",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "unfavorable_gods"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000057",
+      "placeholder_path": "decision.decision_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "decision_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000058",
+      "placeholder_path": "decision.decision_score",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "decision_score"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000059",
+      "placeholder_path": "decision.decision_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "decision_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000060",
+      "placeholder_path": "decision.decision_diagnostics",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_06_useful_god_foundation",
+        "signal": "decision_diagnostics"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000061",
+      "placeholder_path": "decision.resolved_useful_god",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "resolved_useful_god"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000062",
+      "placeholder_path": "decision.resolved_favorable_gods",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "resolved_favorable_gods"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000063",
+      "placeholder_path": "decision.resolved_unfavorable_gods",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "resolved_unfavorable_gods"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000064",
+      "placeholder_path": "decision.decision_priority",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "decision_priority"
+      },
+      "validation": {
+        "values": [
+          "primary",
+          "secondary",
+          "tie",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000065",
+      "placeholder_path": "decision.conflict_resolution",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "conflict_resolution"
+      },
+      "validation": {
+        "values": [
+          "single",
+          "multiple",
+          "conflict",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000066",
+      "placeholder_path": "decision.resolution_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "resolution_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000067",
+      "placeholder_path": "decision.resolution_reasoning",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_07_useful_god_priority",
+        "signal": "resolution_reasoning"
+      },
+      "validation": {
+        "max_length": 0
+      }
+    },
+    {
+      "placeholder_id": "PH-000068",
+      "placeholder_path": "decision.final_useful_god",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "final_useful_god"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000069",
+      "placeholder_path": "decision.final_favorable_gods",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "final_favorable_gods"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000070",
+      "placeholder_path": "decision.final_unfavorable_gods",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "final_unfavorable_gods"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000071",
+      "placeholder_path": "decision.override_applied",
+      "value_type": "boolean",
+      "required": false,
+      "fallback": false,
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "override_applied"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000072",
+      "placeholder_path": "decision.override_reason",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "override_reason"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000073",
+      "placeholder_path": "decision.override_confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "override_confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000074",
+      "placeholder_path": "decision.decision_trace",
+      "value_type": "object",
+      "required": false,
+      "fallback": {},
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "decision_trace"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000075",
+      "placeholder_path": "decision.decision_audit",
+      "value_type": "object",
+      "required": false,
+      "fallback": {},
+      "scope": "decision",
+      "published_contract": {
+        "source": "bz_08_useful_god_override",
+        "signal": "decision_audit"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000076",
+      "placeholder_path": "luck.natal_chart",
+      "value_type": "object",
+      "required": false,
+      "fallback": {},
+      "scope": "luck",
+      "published_contract": {
+        "source": "bz_09_luck_foundation",
+        "signal": "natal_chart"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000077",
+      "placeholder_path": "luck.major_cycles",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "luck",
+      "published_contract": {
+        "source": "bz_09_luck_foundation",
+        "signal": "major_cycles"
+      },
+      "validation": {
+        "item_type": "object"
+      }
+    },
+    {
+      "placeholder_id": "PH-000078",
+      "placeholder_path": "luck.annual_cycles",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "luck",
+      "published_contract": {
+        "source": "bz_09_luck_foundation",
+        "signal": "annual_cycles"
+      },
+      "validation": {
+        "item_type": "object"
+      }
+    },
+    {
+      "placeholder_id": "PH-000079",
+      "placeholder_path": "luck.monthly_cycles",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "luck",
+      "published_contract": {
+        "source": "bz_09_luck_foundation",
+        "signal": "monthly_cycles"
+      },
+      "validation": {
+        "item_type": "object"
+      }
+    },
+    {
+      "placeholder_id": "PH-000080",
+      "placeholder_path": "luck.timeline_metadata",
+      "value_type": "object",
+      "required": false,
+      "fallback": {},
+      "scope": "luck",
+      "published_contract": {
+        "source": "bz_09_luck_foundation",
+        "signal": "timeline_metadata"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000081",
+      "placeholder_path": "luck.timeline_version",
+      "value_type": "string",
+      "required": false,
+      "fallback": "1.0.0",
+      "scope": "luck",
+      "published_contract": {
+        "source": "bz_09_luck_foundation",
+        "signal": "timeline_version"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000082",
+      "placeholder_path": "interpretation.section",
+      "value_type": "string",
+      "required": true,
+      "fallback": null,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "section"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000083",
+      "placeholder_path": "interpretation.confidence",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "confidence"
+      },
+      "validation": {
+        "values": [
+          "high",
+          "medium",
+          "low",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000084",
+      "placeholder_path": "interpretation.audience",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "general",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "audience"
+      },
+      "validation": {
+        "values": [
+          "general",
+          "professional",
+          "academic"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000085",
+      "placeholder_path": "interpretation.module_id",
+      "value_type": "string",
+      "required": true,
+      "fallback": null,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "module_id"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000086",
+      "placeholder_path": "interpretation.category",
+      "value_type": "string",
+      "required": true,
+      "fallback": null,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "category"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000087",
+      "placeholder_path": "interpretation.language",
+      "value_type": "string",
+      "required": true,
+      "fallback": "vi",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "language"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000088",
+      "placeholder_path": "interpretation.template_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_18_narrative_library_core",
+        "signal": "template_id"
+      },
+      "validation": {
+        "pattern": "^NAR-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000089",
+      "placeholder_path": "interpretation.composition_id",
+      "value_type": "string",
+      "required": true,
+      "fallback": null,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_19_composition_library_core",
+        "signal": "composition_id"
+      },
+      "validation": {
+        "pattern": "^CMP-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000090",
+      "placeholder_path": "interpretation.chapter",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "chapter"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000091",
+      "placeholder_path": "interpretation.visibility",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "published",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "visibility"
+      },
+      "validation": {
+        "values": [
+          "published",
+          "internal",
+          "withheld"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000092",
+      "placeholder_path": "interpretation.priority",
+      "value_type": "number",
+      "required": false,
+      "fallback": 50,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "priority"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000093",
+      "placeholder_path": "interpretation.narrative_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_18_narrative_library_core",
+        "signal": "narrative_id"
+      },
+      "validation": {
+        "pattern": "^NAR-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000094",
+      "placeholder_path": "interpretation.explanation_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_17_explanation_library_core",
+        "signal": "explanation_id"
+      },
+      "validation": {
+        "pattern": "^EXP-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000095",
+      "placeholder_path": "interpretation.sentence_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_16_sentence_library_core",
+        "signal": "sentence_id"
+      },
+      "validation": {
+        "pattern": "^SEN-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000096",
+      "placeholder_path": "interpretation.opening_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_17_explanation_library_core",
+        "signal": "opening_id"
+      },
+      "validation": {
+        "pattern": "^EXP-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000097",
+      "placeholder_path": "interpretation.body_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_17_explanation_library_core",
+        "signal": "body_id"
+      },
+      "validation": {
+        "pattern": "^EXP-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000098",
+      "placeholder_path": "interpretation.closing_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_17_explanation_library_core",
+        "signal": "closing_id"
+      },
+      "validation": {
+        "pattern": "^EXP-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000099",
+      "placeholder_path": "interpretation.summary_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_17_explanation_library_core",
+        "signal": "summary_id"
+      },
+      "validation": {
+        "pattern": "^EXP-[0-9]{6}$"
+      }
+    },
+    {
+      "placeholder_id": "PH-000100",
+      "placeholder_path": "interpretation.fallback_mode",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "withheld",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "fallback_mode"
+      },
+      "validation": {
+        "values": [
+          "published",
+          "withheld"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000101",
+      "placeholder_path": "interpretation.published_only",
+      "value_type": "boolean",
+      "required": true,
+      "fallback": true,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "published_only"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000102",
+      "placeholder_path": "interpretation.withheld",
+      "value_type": "boolean",
+      "required": false,
+      "fallback": false,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "withheld"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000103",
+      "placeholder_path": "interpretation.school",
+      "value_type": "string",
+      "required": false,
+      "fallback": "bazi_default",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "school"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000104",
+      "placeholder_path": "interpretation.domain_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "DOM-INTERPRETATION",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "domain_id"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000105",
+      "placeholder_path": "interpretation.package_id",
+      "value_type": "string",
+      "required": false,
+      "fallback": "bz_19_composition_library_core",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "package_id"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000106",
+      "placeholder_path": "interpretation.flow_slot",
+      "value_type": "enum",
+      "required": false,
+      "fallback": "none",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_18_narrative_library_core",
+        "signal": "flow_slot"
+      },
+      "validation": {
+        "values": [
+          "opening",
+          "body",
+          "closing",
+          "summary",
+          "none"
+        ]
+      }
+    },
+    {
+      "placeholder_id": "PH-000107",
+      "placeholder_path": "interpretation.section_index",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "section_index"
+      },
+      "validation": {
+        "min": 0,
+        "max": 99
+      }
+    },
+    {
+      "placeholder_id": "PH-000108",
+      "placeholder_path": "interpretation.chapter_index",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "chapter_index"
+      },
+      "validation": {
+        "min": 0,
+        "max": 99
+      }
+    },
+    {
+      "placeholder_id": "PH-000109",
+      "placeholder_path": "interpretation.selection_rank",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "selection_rank"
+      },
+      "validation": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    {
+      "placeholder_id": "PH-000110",
+      "placeholder_path": "interpretation.locale",
+      "value_type": "string",
+      "required": false,
+      "fallback": "vi",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "locale"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000111",
+      "placeholder_path": "interpretation.placeholder_set",
+      "value_type": "list",
+      "required": false,
+      "fallback": [],
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_19_composition_library_core",
+        "signal": "placeholder_set"
+      },
+      "validation": {
+        "item_type": "string"
+      }
+    },
+    {
+      "placeholder_id": "PH-000112",
+      "placeholder_path": "interpretation.narrative_count",
+      "value_type": "number",
+      "required": false,
+      "fallback": 1,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_18_narrative_library_core",
+        "signal": "narrative_count"
+      },
+      "validation": {
+        "min": 1,
+        "max": 3
+      }
+    },
+    {
+      "placeholder_id": "PH-000113",
+      "placeholder_path": "interpretation.explanation_count",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_17_explanation_library_core",
+        "signal": "explanation_count"
+      },
+      "validation": {
+        "min": 0,
+        "max": 20
+      }
+    },
+    {
+      "placeholder_id": "PH-000114",
+      "placeholder_path": "interpretation.sentence_count",
+      "value_type": "number",
+      "required": false,
+      "fallback": 0,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_16_sentence_library_core",
+        "signal": "sentence_count"
+      },
+      "validation": {
+        "min": 0,
+        "max": 40
+      }
+    },
+    {
+      "placeholder_id": "PH-000115",
+      "placeholder_path": "interpretation.assembly_version",
+      "value_type": "string",
+      "required": false,
+      "fallback": "1.0.0",
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "bz_19_composition_library_core",
+        "signal": "assembly_version"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000116",
+      "placeholder_path": "interpretation.no_render",
+      "value_type": "boolean",
+      "required": true,
+      "fallback": true,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "no_render"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000117",
+      "placeholder_path": "interpretation.no_ai",
+      "value_type": "boolean",
+      "required": true,
+      "fallback": true,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "no_ai"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000118",
+      "placeholder_path": "interpretation.no_rewrite",
+      "value_type": "boolean",
+      "required": true,
+      "fallback": true,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "no_rewrite"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000119",
+      "placeholder_path": "interpretation.no_summary",
+      "value_type": "boolean",
+      "required": true,
+      "fallback": true,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "no_summary"
+      },
+      "validation": {}
+    },
+    {
+      "placeholder_id": "PH-000120",
+      "placeholder_path": "interpretation.ids_only",
+      "value_type": "boolean",
+      "required": true,
+      "fallback": true,
+      "scope": "interpretation",
+      "published_contract": {
+        "source": "interpretation_context",
+        "signal": "ids_only"
+      },
+      "validation": {}
+    }
+  ]
+}
