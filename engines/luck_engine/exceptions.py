@@ -67,3 +67,27 @@ class LuckDecisionDependencyError(LuckDecisionError):
 
 class LuckDecisionRegistryError(LuckDecisionError):
     """Raised when the luck decision registry catalog is invalid."""
+
+
+class LuckPipelineError(LuckEngineError):
+    """Base error for AX-4 Canonical Luck Pipeline failures."""
+
+
+class LuckContractViolationError(LuckPipelineError):
+    """Raised when a luck pipeline contract check fails."""
+
+
+class LuckDependencyViolationError(LuckPipelineError):
+    """Raised when luck pipeline stage order or inputs are violated."""
+
+
+class LuckDuplicatePublicationError(LuckPipelineError):
+    """Raised when a luck pipeline stage republishes an existing output."""
+
+
+class LuckMissingInputError(LuckPipelineError):
+    """Raised when a required luck pipeline input is absent."""
+
+    def __init__(self, diagnostic_code: str, message: str) -> None:
+        super().__init__(message)
+        self.diagnostic_code = diagnostic_code

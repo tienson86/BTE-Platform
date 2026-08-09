@@ -117,6 +117,12 @@ from .timeline import (
     TimelineRegistry,
     construct_timeline,
 )
+from .pipeline import (
+    PIPELINE_VERSION,
+    CanonicalLuckPipeline,
+    CanonicalLuckResult,
+)
+from .contracts.luck_contract import luck_pipeline_contract
 from .providers import (
     DefaultDayunProvider,
     DefaultLiunianProvider,
@@ -155,6 +161,10 @@ __all__ = [
     "LuckDecisionRegistry",
     "luck_decision_contract",
     "DECISION_VERSION",
+    "CanonicalLuckPipeline",
+    "CanonicalLuckResult",
+    "luck_pipeline_contract",
+    "PIPELINE_VERSION",
     "TimelineValidationError",
     "TimelineRegistryError",
     "TimelineContractError",
