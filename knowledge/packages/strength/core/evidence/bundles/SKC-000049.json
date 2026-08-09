@@ -1,0 +1,61 @@
+{
+  "rule_id": "SKC-000049",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thông căn cho biết Nhật Chủ có chỗ dựa trên địa chi hay không.",
+    "when": "Khi month_branch_is_root equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Tháng chi vừa lệnh vừa căn thì thân dễ vượng; không cộng trùng month_status.",
+    "title": "Thông căn tháng chi"
+  },
+  "rationale": "Luật `month_branch_root` thuộc nhóm `root_support`. Đóng góp trọng số 5 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000049-01",
+      "rule_id": "SKC-000049",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch_is_root": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000049-01",
+      "rule_id": "SKC-000049",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch_is_root": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000043"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

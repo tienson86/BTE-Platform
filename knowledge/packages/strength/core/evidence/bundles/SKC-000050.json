@@ -1,0 +1,63 @@
+{
+  "rule_id": "SKC-000050",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thông căn cho biết Nhật Chủ có chỗ dựa trên địa chi hay không.",
+    "when": "Khi root_branch_type equals storage; has_dm_root equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Căn ở Thìn Tuất Sửu Mùi là căn kho, khí yếu hơn căn vượng/trưởng sinh.",
+    "title": "Căn tại chi kho"
+  },
+  "rationale": "Luật `storage_branch_root` thuộc nhóm `root_support`. Đóng góp trọng số -2 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000003",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000050-01",
+      "rule_id": "SKC-000050",
+      "polarity": "positive",
+      "chart_facts": {
+        "root_branch_type": "storage",
+        "has_dm_root": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000050-01",
+      "rule_id": "SKC-000050",
+      "polarity": "negative",
+      "chart_facts": {
+        "root_branch_type": "not_storage",
+        "has_dm_root": true
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000043"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

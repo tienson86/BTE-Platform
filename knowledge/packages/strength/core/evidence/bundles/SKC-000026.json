@@ -1,0 +1,83 @@
+{
+  "rule_id": "SKC-000026",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Địa chi tháng vừa mang hành lệnh vừa mang quan hệ thập thần với Nhật Chủ.",
+    "when": "Khi month_branch equals dan.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `month_command_element` được chọn.",
+    "summary": "Địa chi tháng Dần lấy hành wood làm tháng lệnh (chính khí).",
+    "title": "Tháng Dần hành lệnh wood"
+  },
+  "rationale": "Luật `month_command_dan` thuộc nhóm `month_branch_influence`. Chủ yếu phát tín hiệu `month_command_element`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000003",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000026-01",
+      "rule_id": "SKC-000026",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch": "dan"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000026-01",
+      "rule_id": "SKC-000026",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch": "not_dan"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SKC-000026-01",
+      "rule_id": "SKC-000026",
+      "kind": "adjacent_branch",
+      "chart_facts": {
+        "month_branch": "adjacent_same_season_other_branch"
+      },
+      "note": "Chi tháng kề cùng mùa nhưng khác địa chi — không kích hoạt lệnh của chi này."
+    }
+  ],
+  "related_rules": [
+    "SKC-000038"
+  ],
+  "conflicting_rules": [
+    "SKC-000027",
+    "SKC-000028",
+    "SKC-000029",
+    "SKC-000030",
+    "SKC-000031",
+    "SKC-000032",
+    "SKC-000033",
+    "SKC-000034",
+    "SKC-000035",
+    "SKC-000036",
+    "SKC-000037"
+  ],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

@@ -1,0 +1,77 @@
+{
+  "rule_id": "SKC-000013",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Tháng lệnh là nhân tố mạnh nhất khi xét thân vượng/nhược.",
+    "when": "Khi day_master_element equals fire; season equals winter.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `element_season_fire` được chọn.",
+    "summary": "Hỏa tù mùa đông vì Thủy khắc Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+    "title": "Nhật Chủ fire mùa winter → imprison"
+  },
+  "rationale": "Luật `dm_fire_winter_imprison` thuộc nhóm `seasonal_influence`. Chủ yếu phát tín hiệu `month_status`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000007",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000013-01",
+      "rule_id": "SKC-000013",
+      "polarity": "positive",
+      "chart_facts": {
+        "day_master_element": "fire",
+        "season": "winter"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000013-01",
+      "rule_id": "SKC-000013",
+      "polarity": "negative",
+      "chart_facts": {
+        "day_master_element": "not_fire",
+        "season": "winter"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SKC-000013-01",
+      "rule_id": "SKC-000013",
+      "kind": "season_edge",
+      "chart_facts": {
+        "season": "earth_month_transition"
+      },
+      "note": "Tháng thổ thư (Thìn Tuất Sửu Mùi) là biên giữa bốn mùa; không dùng luật mùa này nếu season không khớp."
+    }
+  ],
+  "related_rules": [
+    "SKC-000004"
+  ],
+  "conflicting_rules": [
+    "SKC-000010",
+    "SKC-000011",
+    "SKC-000012"
+  ],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

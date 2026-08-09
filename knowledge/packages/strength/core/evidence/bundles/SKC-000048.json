@@ -1,0 +1,57 @@
+{
+  "rule_id": "SKC-000048",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thông căn cho biết Nhật Chủ có chỗ dựa trên địa chi hay không.",
+    "when": "Khi hour_branch_is_root equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Thời chi thông căn trợ căn gần, không thay thế nhật chi.",
+    "title": "Thông căn thời chi"
+  },
+  "rationale": "Luật `hour_branch_root` thuộc nhóm `root_support`. Đóng góp trọng số 3 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000048-01",
+      "rule_id": "SKC-000048",
+      "polarity": "positive",
+      "chart_facts": {
+        "hour_branch_is_root": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000048-01",
+      "rule_id": "SKC-000048",
+      "polarity": "negative",
+      "chart_facts": {
+        "hour_branch_is_root": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000043"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

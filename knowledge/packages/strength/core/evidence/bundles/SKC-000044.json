@@ -1,0 +1,76 @@
+{
+  "rule_id": "SKC-000044",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Thông căn cho biết Nhật Chủ có chỗ dựa trên địa chi hay không.",
+    "when": "Khi root_level equals hidden_root.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `root_level` được chọn.",
+    "summary": "Chỉ thông căn tàng can, căn khí mỏng.",
+    "title": "hidden root"
+  },
+  "rationale": "Luật `hidden_root` thuộc nhóm `root_support`. Đóng góp trọng số 6 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp bảng trọng số / ngưỡng truyền thống BTE (database/12_strength và 15_score_engine/03_strength).",
+  "references": [
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000044-01",
+      "rule_id": "SKC-000044",
+      "polarity": "positive",
+      "chart_facts": {
+        "root_level": "hidden_root"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000044-01",
+      "rule_id": "SKC-000044",
+      "polarity": "negative",
+      "chart_facts": {
+        "root_level": "not_hidden_root"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SKC-000044-01",
+      "rule_id": "SKC-000044",
+      "kind": "adjacent_root",
+      "chart_facts": {
+        "root_level": "root_one"
+      },
+      "note": "Cấp căn kề nhau; chỉ một luật root_level được chọn."
+    }
+  ],
+  "related_rules": [
+    "SKC-000053"
+  ],
+  "conflicting_rules": [
+    "SKC-000041",
+    "SKC-000042",
+    "SKC-000043",
+    "SKC-000045"
+  ],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

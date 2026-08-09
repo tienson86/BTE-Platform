@@ -1,0 +1,64 @@
+{
+  "rule_id": "SKC-000038",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Địa chi tháng vừa mang hành lệnh vừa mang quan hệ thập thần với Nhật Chủ.",
+    "when": "Khi month_branch_element equals_field day_master_element.",
+    "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `month_branch_relation` được chọn.",
+    "summary": "Chi tháng cùng ngũ hành Nhật Chủ vừa đắc lệnh vừa thông căn tháng.",
+    "title": "Chi tháng đồng hành Nhật Chủ"
+  },
+  "rationale": "Luật `month_branch_same_element` thuộc nhóm `month_branch_influence`. Đóng góp trọng số 8 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "high",
+  "confidence_reason": "Ánh xạ truyền thống ổn định trong trường phái bazi_default của BTE (tháng lệnh, thập thần, khắc tiết).",
+  "references": [
+    {
+      "id": "REF-SKC-000001",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000002",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000038-01",
+      "rule_id": "SKC-000038",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch_element": "wood",
+        "day_master_element": "wood"
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000038-01",
+      "rule_id": "SKC-000038",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch_element": "wood",
+        "day_master_element": "fire"
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [],
+  "conflicting_rules": [
+    "SKC-000039",
+    "SKC-000040"
+  ],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

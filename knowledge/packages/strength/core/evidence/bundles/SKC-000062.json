@@ -1,0 +1,65 @@
+{
+  "rule_id": "SKC-000062",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Tàng can cho thấy khí Nhật Chủ ẩn trong chi, kể cả khi không lộ can.",
+    "when": "Khi hidden_dm_qi_count greater_or_equal 2.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Hai vị trí tàng can trở lên trùng Nhật Chủ gia tăng căn khí tàng.",
+    "title": "Nhiều tàng can Nhật Chủ"
+  },
+  "rationale": "Luật `multiple_hidden_dm` thuộc nhóm `hidden_stem_support`. Đóng góp trọng số 4 vào điểm sức Nhật Chủ. Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000003",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000062-01",
+      "rule_id": "SKC-000062",
+      "polarity": "positive",
+      "chart_facts": {
+        "hidden_dm_qi_count": 2
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000062-01",
+      "rule_id": "SKC-000062",
+      "polarity": "negative",
+      "chart_facts": {
+        "hidden_dm_qi_count": 1
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SKC-000062-01",
+      "rule_id": "SKC-000062",
+      "kind": "threshold",
+      "chart_facts": {
+        "hidden_dm_qi_count": 2
+      },
+      "note": "Đúng tại ngưỡng số của điều kiện."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}
