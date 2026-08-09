@@ -23,6 +23,9 @@ from engines.interpretation_engine.pipeline.hooks import (
     ExecutionHooks,
     NoOpExecutionHooks,
 )
+from engines.interpretation_engine.pipeline.canonical_interpretation_pipeline import (
+    CanonicalInterpretationPipeline,
+)
 from engines.interpretation_engine.pipeline.pipeline import Pipeline
 from engines.interpretation_engine.pipeline.pipeline_executor import PipelineExecutor
 from engines.interpretation_engine.pipeline.pipeline_interface import (
@@ -34,6 +37,7 @@ from engines.interpretation_engine.pipeline.stage_executor import StageExecutor
 from engines.interpretation_engine.pipeline.stage_interface import InterpretationStageInterface
 
 __all__ = [
+    "CanonicalInterpretationPipeline",
     "ExecutionContext",
     "ExecutionHooks",
     "ExecutionPolicy",
