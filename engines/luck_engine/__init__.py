@@ -105,6 +105,13 @@ from .analysis import (
     LuckAnalysisResult,
     luck_analysis_contract,
 )
+from .decision import (
+    DECISION_VERSION,
+    LuckDecisionEngine,
+    LuckDecisionRegistry,
+    LuckDecisionResult,
+    luck_decision_contract,
+)
 from .timeline import (
     TIMELINE_VERSION,
     TimelineRegistry,
@@ -143,6 +150,11 @@ __all__ = [
     "ImpactRegistry",
     "luck_analysis_contract",
     "ANALYSIS_VERSION",
+    "LuckDecisionEngine",
+    "LuckDecisionResult",
+    "LuckDecisionRegistry",
+    "luck_decision_contract",
+    "DECISION_VERSION",
     "TimelineValidationError",
     "TimelineRegistryError",
     "TimelineContractError",

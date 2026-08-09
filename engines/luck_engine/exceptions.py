@@ -47,3 +47,23 @@ class ImpactDependencyError(LuckAnalysisError):
 
 class ImpactRegistryError(LuckAnalysisError):
     """Raised when the impact registry catalog is invalid."""
+
+
+class LuckDecisionError(LuckEngineError):
+    """Base error for LE-3 Luck Decision failures."""
+
+
+class LuckDecisionValidationError(LuckDecisionError):
+    """Raised when Luck Decision validation fails before publication."""
+
+
+class DuplicateDecisionError(LuckDecisionError):
+    """Raised when a stage republishes an existing decision output."""
+
+
+class LuckDecisionDependencyError(LuckDecisionError):
+    """Raised when luck decision stage order or inputs are violated."""
+
+
+class LuckDecisionRegistryError(LuckDecisionError):
+    """Raised when the luck decision registry catalog is invalid."""
