@@ -1,0 +1,104 @@
+# BTE Platform — beta
+# docker compose -f deployment/docker/docker-compose.beta.yml --env-file /secure/bte-beta.env up -d --build
+
+name: bte-beta
+
+networks:
+  bte-edge:
+  bte-app:
+  bte-data:
+
+volumes:
+  bte-data:
+  bte-logs:
+  bte-reports:
+
+services:
+  nginx:
+    profiles: ["edge", "full"]
+    image: nginx:1.27-alpine
+    ports:
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/gzip.conf:/etc/nginx/gzip.conf:ro
+      - ../nginx/cache.conf:/etc/nginx/cache.conf:ro
+      - ../nginx/security.conf:/etc/nginx/security.conf:ro
+      - ../nginx/api.conf:/etc/nginx/conf.d/00-upstreams.conf:ro
+      - ../nginx/portal.conf:/etc/nginx/conf.d/portal.conf:ro
+      - bte-logs:/var/log/nginx
+    depends_on:
+      portal:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks: [bte-edge, bte-app]
+    restart: unless-stopped
+
+  api:
+    profiles: ["core", "full"]
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.api
+    image: bte-api:${BTE_IMAGE_TAG:-beta}
+    environment:
+      BTE_ENV: beta
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      BTE_API_BASE_URL: http://api:8000
+      BTE_STORAGE_BACKEND: ${BTE_STORAGE_BACKEND:-json}
+      BTE_DATA_DIR: /app/applications/data
+      BTE_REPORT_PATH: /app/reports
+      BTE_LOG_LEVEL: ${BTE_LOG_LEVEL:-INFO}
+      BTE_JWT_SECRET: ${BTE_JWT_SECRET:?set-BTE_JWT_SECRET}
+    volumes:
+      - ../../engines:/app/engines:ro
+      - bte-data:/app/applications/data
+      - bte-logs:/app/logs
+      - bte-reports:/app/reports
+    networks: [bte-app, bte-data]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    restart: unless-stopped
+
+  portal:
+    profiles: ["core", "full"]
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.portal
+    image: bte-portal:${BTE_IMAGE_TAG:-beta}
+    environment:
+      BTE_ENV: beta
+      HOST: "0.0.0.0"
+      PORT: "8081"
+      BTE_API_BASE_URL: http://api:8000
+      BTE_LOG_LEVEL: ${BTE_LOG_LEVEL:-INFO}
+    volumes:
+      - bte-logs:/app/logs
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [bte-app]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8081/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+  worker:
+    profiles: ["workers", "full"]
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.worker
+    image: bte-worker:${BTE_IMAGE_TAG:-beta}
+    environment:
+      BTE_ENV: beta
+    networks: [bte-data]
+    restart: unless-stopped

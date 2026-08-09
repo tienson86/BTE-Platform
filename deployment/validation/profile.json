@@ -1,0 +1,10 @@
+{
+  "compose_profiles": {
+    "core": ["api", "portal"],
+    "edge": ["nginx"],
+    "workers": ["worker"],
+    "full": ["nginx", "api", "portal", "worker"]
+  },
+  "environments": ["development", "beta", "production"],
+  "default_dev_profile": "core"
+}

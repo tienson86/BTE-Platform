@@ -1,0 +1,25 @@
+{
+  "title": "BTE Platform Overview",
+  "uid": "bte-overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "tags": ["bte", "beta-1"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "API health probe",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "bte-prom" },
+      "targets": [{ "expr": "probe_success{instance=\"http://api:8000/health\"}" }]
+    },
+    {
+      "type": "stat",
+      "title": "Portal health probe",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "bte-prom" },
+      "targets": [{ "expr": "probe_success{instance=\"http://portal:8081/healthz\"}" }]
+    }
+  ]
+}

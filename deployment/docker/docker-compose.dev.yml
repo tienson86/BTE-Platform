@@ -1,0 +1,79 @@
+# BTE Platform — development
+# docker compose -f deployment/docker/docker-compose.dev.yml --env-file deployment/docker/.env.example up --build
+
+name: bte-dev
+
+networks:
+  bte-app:
+    driver: bridge
+
+volumes:
+  bte-data:
+  bte-logs:
+  bte-reports:
+
+services:
+  api:
+    profiles: ["core", "full"]
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.api
+    image: bte-api:${BTE_IMAGE_TAG:-local}
+    env_file:
+      - .env.example
+    environment:
+      BTE_ENV: development
+      BTE_API_BASE_URL: http://api:8000
+      HOST: "0.0.0.0"
+      PORT: "8000"
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ../../engines:/app/engines:ro
+      - ../../applications/data:/app/applications/data
+      - bte-logs:/app/logs
+      - bte-reports:/app/reports
+    networks: [bte-app]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    restart: unless-stopped
+
+  portal:
+    profiles: ["core", "full"]
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.portal
+    image: bte-portal:${BTE_IMAGE_TAG:-local}
+    environment:
+      BTE_ENV: development
+      BTE_API_BASE_URL: http://api:8000
+      HOST: "0.0.0.0"
+      PORT: "8081"
+    ports:
+      - "${PORTAL_PORT:-8081}:8081"
+    volumes:
+      - bte-logs:/app/logs
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [bte-app]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8081/healthz"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+  worker:
+    profiles: ["workers", "full"]
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.worker
+    image: bte-worker:${BTE_IMAGE_TAG:-local}
+    networks: [bte-app]
+    restart: unless-stopped

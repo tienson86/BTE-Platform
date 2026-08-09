@@ -1,0 +1,27 @@
+{
+  "sprint": "Beta-1",
+  "architecture_freeze": "AF-1 unchanged",
+  "no_hardcoded_secrets": true,
+  "checks": [
+    { "id": "DOCKER_API", "path": "deployment/docker/Dockerfile.api", "status": "pass" },
+    { "id": "DOCKER_PORTAL", "path": "deployment/docker/Dockerfile.portal", "status": "pass" },
+    { "id": "DOCKER_WORKER", "path": "deployment/docker/Dockerfile.worker", "status": "pass", "note": "reserved" },
+    { "id": "COMPOSE_DEV", "path": "deployment/docker/docker-compose.dev.yml", "status": "pass" },
+    { "id": "COMPOSE_BETA", "path": "deployment/docker/docker-compose.beta.yml", "status": "pass" },
+    { "id": "COMPOSE_PROD", "path": "deployment/docker/docker-compose.production.yml", "status": "pass" },
+    { "id": "ENV_EXAMPLE", "path": "deployment/docker/.env.example", "status": "pass" },
+    { "id": "ENV_PROD_EXAMPLE", "path": "deployment/docker/.env.production.example", "status": "pass", "secrets": "placeholders_only" },
+    { "id": "NGINX", "path": "deployment/nginx/", "status": "pass", "hardcoded_domain": false },
+    { "id": "HEALTH_CONTRACT", "doc": "HEALTHCHECK_SPEC.md", "status": "pass", "app_routes_changed": false },
+    { "id": "MONITORING", "path": "deployment/monitoring/", "status": "pass", "instrumentation_changed": false },
+    { "id": "BACKUP_DR", "path": "deployment/backup/", "status": "pass" },
+    { "id": "SECURITY", "doc": "SECURITY_BASELINE.md", "status": "pass" },
+    { "id": "CICD", "path": "deployment/ci/", "status": "pass" },
+    { "id": "ENGINES", "status": "unchanged" },
+    { "id": "PIPELINES", "status": "unchanged" },
+    { "id": "API_CONTRACTS", "status": "unchanged" },
+    { "id": "KNOWLEDGE", "status": "unchanged" },
+    { "id": "FOUNDATION", "status": "unchanged" },
+    { "id": "PRODUCT_UI", "status": "unchanged" }
+  ]
+}

@@ -1,6 +1,6 @@
-# BTE Applications API — production image
+# BTE Customer Portal — production image
 # Build from repository root:
-#   docker build -f deployment/docker/Dockerfile.api -t bte-api:1.0.0 .
+#   docker build -f deployment/docker/Dockerfile.portal -t bte-portal:1.0.0 .
 
 FROM python:3.12-slim
 
@@ -10,10 +10,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     HOST=0.0.0.0 \
-    PORT=8000 \
-    BTE_LOG_LEVEL=INFO \
-    BTE_STORAGE_BACKEND=json \
-    BTE_DATA_DIR=/app/applications/data
+    PORT=8081 \
+    BTE_API_BASE_URL=http://api:8000 \
+    BTE_LOG_LEVEL=INFO
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl \
@@ -25,17 +24,16 @@ COPY requirements.txt /app/requirements.txt
 COPY applications/requirements.txt /app/applications/requirements.txt
 RUN pip install -r /app/requirements.txt -r /app/applications/requirements.txt
 
-COPY engines /app/engines
 COPY applications /app/applications
 
-RUN mkdir -p /app/applications/data /app/logs /app/reports \
-    && chown -R bte:bte /app/applications/data /app/logs /app/reports
+RUN mkdir -p /app/logs \
+    && chown -R bte:bte /app/logs
 
 USER bte
 
-EXPOSE 8000
+EXPOSE 8081
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-  CMD curl -fsS "http://127.0.0.1:${PORT}/health" || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD curl -fsS "http://127.0.0.1:${PORT}/healthz" || exit 1
 
-CMD ["sh", "-c", "uvicorn applications.api.app:app --host ${HOST} --port ${PORT}"]
+CMD ["sh", "-c", "uvicorn applications.customer_portal.app:app --host ${HOST} --port ${PORT}"]
