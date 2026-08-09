@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/generator/generator.schema.json",
+  "title": "BTE Knowledge Package Generator",
+  "description": "Foundation envelope for the Knowledge Package Generator. Specification only — no runtime implementation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "generator_id",
+    "generator_name",
+    "generator_version",
+    "status",
+    "package_spec_version",
+    "schema_version",
+    "knowledge_version",
+    "pipeline_id",
+    "pipeline_stages",
+    "profile_base",
+    "supported_package_types",
+    "constraints",
+    "quality_gates",
+    "validation_profiles",
+    "ai_policy",
+    "standards"
+  ],
+  "properties": {
+    "generator_id": {
+      "type": "string",
+      "const": "bte_knowledge_package_generator"
+    },
+    "generator_name": {
+      "type": "string",
+      "const": "BTE Knowledge Package Generator"
+    },
+    "generator_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "SemVer of this Foundation generator specification."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["canonical"]
+    },
+    "package_spec_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "KD-3 package spec generation this generator emits."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "2.0.0",
+      "description": "Knowledge Database V2 envelope generation."
+    },
+    "knowledge_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "pipeline_id": {
+      "type": "string",
+      "const": "GEN-PIPELINE-V1"
+    },
+    "pipeline_stages": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "string",
+        "enum": [
+          "profile",
+          "package_skeleton",
+          "metadata",
+          "manifest",
+          "rules",
+          "evidence",
+          "reasoning",
+          "examples",
+          "tests",
+          "validation",
+          "documentation",
+          "release_candidate",
+          "released_package"
+        ]
+      }
+    },
+    "profile_base": {
+      "type": "string",
+      "const": "GEN-PROFILE-COMMON",
+      "description": "All type and instance profiles inherit this base."
+    },
+    "supported_package_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "minimal",
+          "analytical",
+          "interpretation",
+          "report",
+          "metadata",
+          "sentence",
+          "reference",
+          "mixed",
+          "feng_shui",
+          "qi_men",
+          "i_ching"
+        ]
+      },
+      "description": "Unlimited future types may be added by extending this enum in a new generator_version. v1.0.0 ships the KD-3 set."
+    },
+    "constraints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^GC-[A-Z0-9-]+$"
+      }
+    },
+    "quality_gates": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "enum": ["bronze", "silver", "gold", "platinum"]
+      }
+    },
+    "validation_profiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["PVP-MINIMAL", "PVP-STANDARD", "PVP-RELEASE"]
+      }
+    },
+    "ai_policy": {
+      "$ref": "#/$defs/ai_policy"
+    },
+    "standards": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kd1",
+        "kd2",
+        "kd3",
+        "kd4",
+        "kx1a",
+        "kx1b",
+        "kx1c"
+      ],
+      "properties": {
+        "kd1": {
+          "type": "string",
+          "const": "knowledge/docs/architecture/KNOWLEDGE_DATABASE_V2.md"
+        },
+        "kd2": {
+          "type": "string",
+          "const": "knowledge/taxonomy/"
+        },
+        "kd3": {
+          "type": "string",
+          "const": "knowledge/package_spec/"
+        },
+        "kd4": {
+          "type": "string",
+          "const": "knowledge/authoring/"
+        },
+        "kx1a": {
+          "type": "string",
+          "const": "knowledge/packages/strength/core/ (reference only — do not modify)"
+        },
+        "kx1b": {
+          "type": "string",
+          "const": "knowledge/packages/strength/core/evidence/ (reference only)"
+        },
+        "kx1c": {
+          "type": "string",
+          "const": "knowledge/reasoning/"
+        }
+      }
+    },
+    "scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_knowledge_records": {
+          "type": "integer",
+          "const": 100000
+        },
+        "max_package_types": {
+          "type": ["integer", "null"],
+          "description": "null means unlimited; new types require a generator_version bump."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "const": true
+        },
+        "multi_domain": {
+          "type": "boolean",
+          "const": true
+        },
+        "deterministic": {
+          "type": "boolean",
+          "const": true
+        },
+        "independent_releases": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "ai_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_status_ceiling",
+        "requires_human_review",
+        "requires_human_release_approval",
+        "may_modify_engines",
+        "may_modify_existing_packages",
+        "may_create_analytical_theory"
+      ],
+      "properties": {
+        "allowed_status_ceiling": {
+          "type": "string",
+          "const": "draft",
+          "description": "AI-generated artifacts MUST remain draft until human gates pass."
+        },
+        "requires_human_review": {
+          "type": "boolean",
+          "const": true
+        },
+        "requires_human_release_approval": {
+          "type": "boolean",
+          "const": true
+        },
+        "may_modify_engines": {
+          "type": "boolean",
+          "const": false
+        },
+        "may_modify_existing_packages": {
+          "type": "boolean",
+          "const": false
+        },
+        "may_create_analytical_theory": {
+          "type": "boolean",
+          "const": false,
+          "description": "AI may fill declared rule templates; it MUST NOT invent new analytical schools or unpublished theory."
+        }
+      }
+    }
+  }
+}

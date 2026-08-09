@@ -1,0 +1,62 @@
+{
+  "rule_id": "SKC-000110",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+    "when": "Khi season_root_polarity_disagree equals True.",
+    "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+    "summary": "Đắc lệnh nhưng vô căn (hoặc tử mà căn sâu) cần đánh dấu confidence thấp, không bịa kết luận tuyệt đối.",
+    "title": "Lệnh và căn trái dấu → độ tin cậy thấp"
+  },
+  "rationale": "Luật `season_root_disagreement_confidence` thuộc nhóm `basic_scoring`. Chủ yếu phát tín hiệu `confidence`, không cộng điểm (hoặc điểm 0). Không thay thế Useful God hay Pattern; chỉ phục vụ luận thân.",
+  "confidence_level": "medium",
+  "confidence_reason": "Đúng hướng học thuật nhưng phụ thuộc ngữ cảnh trụ/hợp hóa; cần đọc cùng luật lõi.",
+  "references": [
+    {
+      "id": "REF-SKC-000008",
+      "relation": "references"
+    },
+    {
+      "id": "REF-SKC-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SKC-000110-01",
+      "rule_id": "SKC-000110",
+      "polarity": "positive",
+      "chart_facts": {
+        "season_root_polarity_disagree": true
+      },
+      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SKC-000110-01",
+      "rule_id": "SKC-000110",
+      "polarity": "negative",
+      "chart_facts": {
+        "season_root_polarity_disagree": false
+      },
+      "note": "Phá điều kiện chính — luật không kích hoạt."
+    }
+  ],
+  "boundary_cases": [],
+  "related_rules": [
+    "SKC-000094",
+    "SKC-000102"
+  ],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_01_strength_core",
+    "package_version": "1.1.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}
