@@ -1,0 +1,344 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://bte-platform/schema/report_response.schema.json",
+    "title": "BTE ReportResponse",
+    "description": "Canonical customer-facing report contract for the BTE Platform.",
+    "type": "object",
+  
+    "required": [
+      "metadata",
+      "customer",
+      "chart",
+      "executive_summary",
+      "identity",
+      "recommendations"
+    ],
+  
+    "additionalProperties": false,
+  
+    "properties": {
+      "metadata": {
+        "$ref": "#/$defs/Metadata"
+      },
+  
+      "customer": {
+        "$ref": "#/$defs/Customer"
+      },
+  
+      "chart": {
+        "$ref": "#/$defs/Chart"
+      },
+  
+      "executive_summary": {
+        "$ref": "#/$defs/ExecutiveSummary"
+      },
+  
+      "identity": {
+        "$ref": "#/$defs/Identity"
+      },
+  
+      "strengths": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Strength"
+        },
+        "default": []
+      },
+  
+      "weaknesses": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Weakness"
+        },
+        "default": []
+      },
+  
+      "useful_god": {
+        "$ref": "#/$defs/UsefulGod"
+      },
+  
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Recommendation"
+        }
+      },
+  
+      "domains": {
+        "type": "object",
+        "default": {}
+      },
+  
+      "evidence": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "default": []
+      },
+  
+      "charts": {
+        "type": "object",
+        "default": {}
+      },
+  
+      "knowledge": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/KnowledgeReference"
+        },
+        "default": []
+      },
+  
+      "appendix": {
+        "type": "object",
+        "default": {}
+      },
+  
+      "diagnostics": {
+        "$ref": "#/$defs/Diagnostics"
+      }
+    },
+  
+    "$defs": {
+      "Metadata": {
+        "type": "object",
+        "required": [
+          "report_version",
+          "contract_version",
+          "generated_at"
+        ],
+        "properties": {
+          "report_version": {
+            "type": "string"
+          },
+          "contract_version": {
+            "type": "string"
+          },
+          "knowledge_version": {
+            "type": "string"
+          },
+          "pipeline_version": {
+            "type": "string"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "locale": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "request_id": {
+            "type": "string"
+          }
+        }
+      },
+  
+      "Customer": {
+        "type": "object",
+        "required": [
+          "full_name"
+        ],
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "birth_information": {
+            "type": "object"
+          }
+        }
+      },
+  
+      "Chart": {
+        "type": "object",
+        "properties": {
+          "pillars": {
+            "type": "object"
+          },
+          "hidden_stems": {
+            "type": "object"
+          },
+          "ten_gods": {
+            "type": "object"
+          },
+          "five_elements": {
+            "type": "object"
+          }
+        }
+      },
+  
+      "ExecutiveSummary": {
+        "type": "object",
+        "required": [
+          "headline",
+          "summary"
+        ],
+        "properties": {
+          "headline": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "knowledge_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+  
+      "Identity": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dominant_traits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+  
+      "Strength": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+  
+      "Weakness": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "risk": {
+            "type": "string"
+          },
+          "mitigation": {
+            "type": "string"
+          }
+        }
+      },
+  
+      "UsefulGod": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "practical_actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+  
+      "Recommendation": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "what": {
+            "type": "string"
+          },
+          "why": {
+            "type": "string"
+          },
+          "how": {
+            "type": "string"
+          },
+          "when": {
+            "type": "string"
+          },
+          "expected_outcome": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        }
+      },
+  
+      "Evidence": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      },
+  
+      "KnowledgeReference": {
+        "type": "object",
+        "properties": {
+          "knowledge_unit": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+  
+      "Diagnostics": {
+        "type": "object",
+        "properties": {
+          "validation_passed": {
+            "type": "boolean"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
