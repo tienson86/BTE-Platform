@@ -1,0 +1,27 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_20_theme_library_core",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_19_composition_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "composition_ids referenced by presentation themes",
+      "signals": [
+        "composition_rules",
+        "assembly_order"
+      ]
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independently deployable. References bz_19 composition ids when present. Does not modify bz_19."
+}
