@@ -1,0 +1,1520 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "analytical",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-SEASONAL",
+    "category_id": "core",
+    "school": "bazi_default",
+    "tags": [
+      "core",
+      "kx2a",
+      "seasonal"
+    ],
+    "description": "Month Branch and Seasonal Qi foundation package.",
+    "generator": {
+      "generator_id": "bte_knowledge_package_generator",
+      "generator_version": "1.0.0",
+      "profile_id": "GEN-INST-SEASONAL"
+    }
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/current_season.json",
+        "rules/lunar_month.json",
+        "rules/month_branch.json",
+        "rules/month_branch_weight.json",
+        "rules/season_phase.json",
+        "rules/seasonal_element_restriction.json",
+        "rules/seasonal_element_support.json",
+        "rules/seasonal_influence_level.json",
+        "rules/seasonal_qi_phase.json",
+        "rules/seasonal_scoring.json",
+        "rules/solar_term.json",
+        "rules/transition_month.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/overview.md",
+        "documentation/philosophy.md",
+        "documentation/seasonal_influence.md",
+        "documentation/assumptions_and_limitations.md",
+        "documentation/WAVE2_ROADMAP.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/season_phase_matrix.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "SEC-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch.json"
+    },
+    {
+      "id": "SEC-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/lunar_month.json"
+    },
+    {
+      "id": "SEC-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/current_season.json"
+    },
+    {
+      "id": "SEC-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/current_season.json"
+    },
+    {
+      "id": "SEC-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/current_season.json"
+    },
+    {
+      "id": "SEC-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/current_season.json"
+    },
+    {
+      "id": "SEC-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/current_season.json"
+    },
+    {
+      "id": "SEC-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/season_phase.json"
+    },
+    {
+      "id": "SEC-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transition_month.json"
+    },
+    {
+      "id": "SEC-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transition_month.json"
+    },
+    {
+      "id": "SEC-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transition_month.json"
+    },
+    {
+      "id": "SEC-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transition_month.json"
+    },
+    {
+      "id": "SEC-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_qi_phase.json"
+    },
+    {
+      "id": "SEC-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_support.json"
+    },
+    {
+      "id": "SEC-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_support.json"
+    },
+    {
+      "id": "SEC-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_support.json"
+    },
+    {
+      "id": "SEC-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_support.json"
+    },
+    {
+      "id": "SEC-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_support.json"
+    },
+    {
+      "id": "SEC-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_restriction.json"
+    },
+    {
+      "id": "SEC-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_restriction.json"
+    },
+    {
+      "id": "SEC-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_restriction.json"
+    },
+    {
+      "id": "SEC-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_restriction.json"
+    },
+    {
+      "id": "SEC-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_element_restriction.json"
+    },
+    {
+      "id": "SEC-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/month_branch_weight.json"
+    },
+    {
+      "id": "SEC-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/solar_term.json"
+    },
+    {
+      "id": "SEC-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    },
+    {
+      "id": "SEC-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    },
+    {
+      "id": "SEC-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_influence_level.json"
+    },
+    {
+      "id": "SEC-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_influence_level.json"
+    },
+    {
+      "id": "SEC-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_influence_level.json"
+    },
+    {
+      "id": "SEC-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    },
+    {
+      "id": "SEC-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    },
+    {
+      "id": "SEC-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    },
+    {
+      "id": "SEC-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    },
+    {
+      "id": "SEC-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_scoring.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_01_strength_core"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/season_phase_matrix.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/assumptions_and_limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/evidence_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/reasoning_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/seasonal_influence.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/SEC-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/strong.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/strong.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/balanced.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/strong.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/strong.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/weak.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/strong.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/strong.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/weak.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/current_season.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/lunar_month.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/month_branch.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/month_branch_weight.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/season_phase.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/seasonal_element_restriction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/seasonal_element_support.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/seasonal_influence_level.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/seasonal_qi_phase.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/seasonal_scoring.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/solar_term.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/transition_month.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

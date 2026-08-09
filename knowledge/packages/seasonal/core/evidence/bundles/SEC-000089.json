@@ -1,0 +1,75 @@
+{
+  "rule_id": "SEC-000089",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Trọng số tháng Tuất",
+    "why": "Trọng số khí tháng lệnh Tuất = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+    "when": "Khi month_branch=tuat.",
+    "when_not": "Khi điều kiện không khớp hoặc luật exclusive khác thắng.",
+    "summary": "Trọng số khí tháng lệnh Tuất = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25."
+  },
+  "rationale": "Luật `mbw_tuat` / `month_branch_weight`. Chỉ luận khí tháng lệnh và Seasonal Qi. Không trùng Strength / Temperature / Useful God / Pattern.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000007",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000089-01",
+      "rule_id": "SEC-000089",
+      "polarity": "positive",
+      "chart_facts": {
+        "month_branch": "tuat"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000089-01",
+      "rule_id": "SEC-000089",
+      "polarity": "negative",
+      "chart_facts": {
+        "month_branch": "not_tuat"
+      },
+      "note": "Phá điều kiện chính."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000089-01",
+      "rule_id": "SEC-000089",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "month_branch": "tuat"
+      },
+      "note": "Cạnh tranh exclusive."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "SEC-000081",
+    "SEC-000082",
+    "SEC-000083",
+    "SEC-000084",
+    "SEC-000085",
+    "SEC-000086",
+    "SEC-000087",
+    "SEC-000088"
+  ],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "sprint": "KX-2A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

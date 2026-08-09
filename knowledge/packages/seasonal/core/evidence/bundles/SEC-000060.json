@@ -1,0 +1,77 @@
+{
+  "rule_id": "SEC-000060",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Hỏa mùa Tứ quý: Hưu",
+    "why": "Hỏa trong mùa Tứ quý ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+    "when": "Khi season=late_summer, day_master_element=fire.",
+    "when_not": "Khi điều kiện không khớp hoặc luật exclusive khác thắng.",
+    "summary": "Hỏa trong mùa Tứ quý ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score."
+  },
+  "rationale": "Luật `qi_late_summer_fire` / `seasonal_qi_phase`. Chỉ luận khí tháng lệnh và Seasonal Qi. Không trùng Strength / Temperature / Useful God / Pattern.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000005",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000060-01",
+      "rule_id": "SEC-000060",
+      "polarity": "positive",
+      "chart_facts": {
+        "season": "late_summer",
+        "day_master_element": "fire"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000060-01",
+      "rule_id": "SEC-000060",
+      "polarity": "negative",
+      "chart_facts": {
+        "season": "not_late_summer"
+      },
+      "note": "Phá điều kiện chính."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000060-01",
+      "rule_id": "SEC-000060",
+      "kind": "exclusive_peer",
+      "chart_facts": {
+        "season": "late_summer",
+        "day_master_element": "fire"
+      },
+      "note": "Cạnh tranh exclusive."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [
+    "SEC-000046",
+    "SEC-000047",
+    "SEC-000048",
+    "SEC-000049",
+    "SEC-000050",
+    "SEC-000051",
+    "SEC-000052",
+    "SEC-000053"
+  ],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "sprint": "KX-2A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

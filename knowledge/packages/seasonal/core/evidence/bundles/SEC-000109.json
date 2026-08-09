@@ -1,0 +1,66 @@
+{
+  "rule_id": "SEC-000109",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Một luật mỗi nhóm exclusive",
+    "why": "Priority.order quyết định luật thắng trong nhóm.",
+    "when": "Khi exclusive_policy=True.",
+    "when_not": "Khi điều kiện không khớp hoặc luật exclusive khác thắng.",
+    "summary": "Priority.order quyết định luật thắng trong nhóm."
+  },
+  "rationale": "Luật `exclusive_one` / `seasonal_scoring`. Chỉ luận khí tháng lệnh và Seasonal Qi. Không trùng Strength / Temperature / Useful God / Pattern.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000009",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000109-01",
+      "rule_id": "SEC-000109",
+      "polarity": "positive",
+      "chart_facts": {
+        "exclusive_policy": true
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000109-01",
+      "rule_id": "SEC-000109",
+      "polarity": "negative",
+      "chart_facts": {
+        "exclusive_policy": false
+      },
+      "note": "Phá điều kiện chính."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000109-01",
+      "rule_id": "SEC-000109",
+      "kind": "scope",
+      "chart_facts": {
+        "exclusive_policy": true
+      },
+      "note": "Biên phạm vi khí mùa, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "sprint": "KX-2A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

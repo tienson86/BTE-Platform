@@ -7,7 +7,7 @@
   "package_id": "bz_02_seasonal_core",
   "package_name": "Seasonal Influence Knowledge Package — Core",
   "package_type": "analytical",
-  "package_version": "0.1.0",
+  "package_version": "1.0.0",
   "domain": {
     "domain_id": "DOM-SEASONAL",
     "parent_domain": "DOM-STRENGTH"
@@ -24,16 +24,16 @@
   },
   "target_rule_count": {
     "minimum": 40,
-    "recommended": 80,
-    "maximum": null,
-    "target": 80
+    "recommended": 100,
+    "maximum": 120,
+    "target": 110
   },
   "evidence_required": true,
   "reasoning_required": true,
   "example_required": true,
-  "validation_profile": "PVP-MINIMAL",
+  "validation_profile": "PVP-RELEASE",
   "quality_target": "gold",
-  "rule_id_prefix": "SEA",
+  "rule_id_prefix": "SEC",
   "language": "vi",
   "languages": ["vi"],
   "school": "bazi_default",
@@ -51,5 +51,5 @@
     "optional": ["bz_01_strength_core"],
     "conflicts": []
   },
-  "notes": "Future package profile only. This file does not create bz_02_seasonal_core. Prefix SEA must be reserved against V1 seasonal rules before emit. Do not copy Strength rule payloads."
+  "notes": "KX-2A emitted knowledge/packages/seasonal/core/ (released 1.0.0, Gold, 80–120 SEC rules). Prefix SEC reserved; V1 SEA-* unchanged. Do not copy Strength logic. Do not modify Strength Core."
 }

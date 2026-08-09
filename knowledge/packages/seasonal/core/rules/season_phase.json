@@ -1,0 +1,1052 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "season_phase",
+  "count": 12,
+  "objects": [
+    {
+      "id": "SEC-000030",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "spring",
+        "early"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "early"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=early",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "early"
+      },
+      "explanation": "Pha đầu mùa Xuân (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_early_spring",
+      "name": "Xuân đầu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "early"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=early",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "early"
+        },
+        "explanation": "Pha đầu mùa Xuân (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000031",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "spring",
+        "mid"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=mid",
+        "weight": 12,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "mid"
+      },
+      "explanation": "Pha giữa mùa Xuân (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_mid_spring",
+      "name": "Xuân giữa",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=mid",
+          "weight": 12,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "mid"
+        },
+        "explanation": "Pha giữa mùa Xuân (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000032",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "spring",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=late",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "late"
+      },
+      "explanation": "Pha cuối mùa Xuân (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_late_spring",
+      "name": "Xuân cuối",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=late",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "late"
+        },
+        "explanation": "Pha cuối mùa Xuân (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000033",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "summer",
+        "early"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "early"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=early",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "early"
+      },
+      "explanation": "Pha đầu mùa Hạ (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_early_summer",
+      "name": "Hạ đầu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "early"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=early",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "early"
+        },
+        "explanation": "Pha đầu mùa Hạ (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000034",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "summer",
+        "mid"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=mid",
+        "weight": 12,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "mid"
+      },
+      "explanation": "Pha giữa mùa Hạ (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_mid_summer",
+      "name": "Hạ giữa",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=mid",
+          "weight": 12,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "mid"
+        },
+        "explanation": "Pha giữa mùa Hạ (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000035",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "summer",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=late",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "late"
+      },
+      "explanation": "Pha cuối mùa Hạ (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_late_summer",
+      "name": "Hạ cuối",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=late",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "late"
+        },
+        "explanation": "Pha cuối mùa Hạ (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000036",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "autumn",
+        "early"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "early"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=early",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "early"
+      },
+      "explanation": "Pha đầu mùa Thu (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_early_autumn",
+      "name": "Thu đầu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "early"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=early",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "early"
+        },
+        "explanation": "Pha đầu mùa Thu (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000037",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "autumn",
+        "mid"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=mid",
+        "weight": 12,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "mid"
+      },
+      "explanation": "Pha giữa mùa Thu (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_mid_autumn",
+      "name": "Thu giữa",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=mid",
+          "weight": 12,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "mid"
+        },
+        "explanation": "Pha giữa mùa Thu (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000038",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "autumn",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=late",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "late"
+      },
+      "explanation": "Pha cuối mùa Thu (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_late_autumn",
+      "name": "Thu cuối",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=late",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "late"
+        },
+        "explanation": "Pha cuối mùa Thu (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000039",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "winter",
+        "early"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "early"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=early",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "early"
+      },
+      "explanation": "Pha đầu mùa Đông (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_early_winter",
+      "name": "Đông đầu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "early"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=early",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "early"
+        },
+        "explanation": "Pha đầu mùa Đông (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000040",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "winter",
+        "mid"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=mid",
+        "weight": 12,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "mid"
+      },
+      "explanation": "Pha giữa mùa Đông (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_mid_winter",
+      "name": "Đông giữa",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=mid",
+          "weight": 12,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "mid"
+        },
+        "explanation": "Pha giữa mùa Đông (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000041",
+      "version": "1.0.0",
+      "category": "season_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "season_phase",
+        "winter",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "season_phase=late",
+        "weight": 8,
+        "signal": "season_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "late"
+      },
+      "explanation": "Pha cuối mùa Đông (early/mid/late). Canon V1 SEA-000005–016.",
+      "references": [
+        {
+          "target": "REF-SEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "phase_late_winter",
+      "name": "Đông cuối",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "season_phase=late",
+          "weight": 8,
+          "signal": "season_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "late"
+        },
+        "explanation": "Pha cuối mùa Đông (early/mid/late). Canon V1 SEA-000005–016.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "season_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

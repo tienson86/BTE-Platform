@@ -1,0 +1,66 @@
+{
+  "rule_id": "SEC-000102",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Thang 100",
+    "why": "Thang khí mùa 0–100 (MODULE_SPEC).",
+    "when": "Khi score_scale=100.",
+    "when_not": "Khi điều kiện không khớp hoặc luật exclusive khác thắng.",
+    "summary": "Thang khí mùa 0–100 (MODULE_SPEC)."
+  },
+  "rationale": "Luật `scale` / `seasonal_scoring`. Chỉ luận khí tháng lệnh và Seasonal Qi. Không trùng Strength / Temperature / Useful God / Pattern.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
+  "references": [
+    {
+      "target": "REF-SEC-000009",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-SEC-000102-01",
+      "rule_id": "SEC-000102",
+      "polarity": "positive",
+      "chart_facts": {
+        "score_scale": 100
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-SEC-000102-01",
+      "rule_id": "SEC-000102",
+      "polarity": "negative",
+      "chart_facts": {
+        "score_scale": 0
+      },
+      "note": "Phá điều kiện chính."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-SEC-000102-01",
+      "rule_id": "SEC-000102",
+      "kind": "scope",
+      "chart_facts": {
+        "score_scale": 100
+      },
+      "note": "Biên phạm vi khí mùa, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_02_seasonal_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "evidence_version": "1.0.0",
+    "sprint": "KX-2A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}
