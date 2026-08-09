@@ -1,0 +1,1606 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_07_useful_god_priority",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "decision",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-USEFUL_GOD",
+    "category_id": "priority",
+    "school": "bazi_default",
+    "tags": [
+      "decision",
+      "kx4b",
+      "useful_god"
+    ],
+    "description": "Useful God priority and conflict resolution."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/candidate_ranking.json",
+        "rules/priority_ordering.json",
+        "rules/conflict_detection.json",
+        "rules/conflict_grouping.json",
+        "rules/tie_breaking.json",
+        "rules/exclusion.json",
+        "rules/reinforcement.json",
+        "rules/suppression.json",
+        "rules/final_decision.json",
+        "rules/publication.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/priority_philosophy.md",
+        "documentation/conflict_resolution_strategy.md",
+        "documentation/tie_break_policy.md",
+        "documentation/confidence_propagation.md",
+        "documentation/input_contract.md",
+        "documentation/output_contract.md",
+        "documentation/assumptions_and_limitations.md",
+        "documentation/WAVE2_ROADMAP.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/published_inputs.json",
+        "assets/published_outputs.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_02_seasonal_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_03_temperature_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_05_pattern_evaluation",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_06_useful_god_foundation",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "UGP-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/candidate_ranking.json"
+    },
+    {
+      "id": "UGP-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/priority_ordering.json"
+    },
+    {
+      "id": "UGP-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_detection.json"
+    },
+    {
+      "id": "UGP-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/conflict_grouping.json"
+    },
+    {
+      "id": "UGP-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/tie_breaking.json"
+    },
+    {
+      "id": "UGP-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exclusion.json"
+    },
+    {
+      "id": "UGP-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/reinforcement.json"
+    },
+    {
+      "id": "UGP-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/suppression.json"
+    },
+    {
+      "id": "UGP-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_decision.json"
+    },
+    {
+      "id": "UGP-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "UGP-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_01_strength_core",
+    "bz_02_seasonal_core",
+    "bz_03_temperature_core",
+    "bz_05_pattern_evaluation",
+    "bz_06_useful_god_foundation"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_inputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/assumptions_and_limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/confidence_propagation.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/conflict_resolution_strategy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/input_contract.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/output_contract.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/priority_philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/tie_break_policy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGP-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/multiple.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/single.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/tie.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/multiple.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/single.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/tie.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/conflict.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/multiple.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/multiple.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/single.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/single.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/tie.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/tie.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/multiple.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/single.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/tie.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/conflict.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/multiple.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/single.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/tie.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/candidate_ranking.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/conflict_detection.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/conflict_grouping.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/exclusion.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/final_decision.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/priority_ordering.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/publication.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/reinforcement.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/suppression.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/tie_breaking.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

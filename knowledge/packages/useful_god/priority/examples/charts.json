@@ -1,0 +1,239 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_07_useful_god_priority",
+  "examples": [
+    {
+      "example_id": "EX-UGP-SINGLE-001",
+      "title": "Thắng đơn",
+      "tendency": "single_winner",
+      "resolved_decision": "Chính Quan",
+      "decision_priority": "primary",
+      "conflict_resolution": "none",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 78,
+        "temperature_score": 48,
+        "pattern_score": 82,
+        "pattern_quality": "excellent",
+        "pattern_confidence": "high",
+        "pattern_integrity": 80,
+        "pattern_stability": 76,
+        "useful_god": "Chính Quan",
+        "favorable_gods": [
+          "Chính Quan",
+          "Chính Ấn"
+        ],
+        "unfavorable_gods": [
+          "Thất Sát",
+          "Thương Quan"
+        ],
+        "decision_confidence": "high",
+        "decision_score": 84,
+        "decision_reasoning": "Foundation published Chính Quan.",
+        "decision_diagnostics": [
+          "favorable_contains_useful",
+          "unfavorable_disjoint"
+        ]
+      },
+      "activates_rules": [
+        "UGP-000010",
+        "UGP-000020",
+        "UGP-000077",
+        "UGP-000089",
+        "UGP-000100"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGP-000010.json",
+        "evidence/bundles/UGP-000020.json",
+        "evidence/bundles/UGP-000077.json",
+        "evidence/bundles/UGP-000089.json",
+        "evidence/bundles/UGP-000100.json"
+      ],
+      "reasoning_path": "RC-UGP-SINGLE-001"
+    },
+    {
+      "example_id": "EX-UGP-MULTI-001",
+      "title": "Nhiều ứng viên",
+      "tendency": "multiple_candidates",
+      "resolved_decision": "Chính Tài",
+      "decision_priority": "secondary",
+      "conflict_resolution": "applied",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 50,
+        "temperature_score": 52,
+        "pattern_score": 58,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 60,
+        "pattern_stability": 58,
+        "useful_god": "Chính Tài",
+        "favorable_gods": [
+          "Chính Tài",
+          "Thực Thần",
+          "Chính Ấn"
+        ],
+        "unfavorable_gods": [
+          "Thất Sát"
+        ],
+        "decision_confidence": "medium",
+        "decision_score": 58,
+        "decision_reasoning": "Foundation published Chính Quan.",
+        "decision_diagnostics": [
+          "multiple_candidates"
+        ]
+      },
+      "activates_rules": [
+        "UGP-000002",
+        "UGP-000032",
+        "UGP-000015",
+        "UGP-000090",
+        "UGP-000103"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGP-000002.json",
+        "evidence/bundles/UGP-000032.json",
+        "evidence/bundles/UGP-000015.json",
+        "evidence/bundles/UGP-000090.json",
+        "evidence/bundles/UGP-000103.json"
+      ],
+      "reasoning_path": "RC-UGP-MULTI-001"
+    },
+    {
+      "example_id": "EX-UGP-CONFLICT-001",
+      "title": "Xung đột",
+      "tendency": "conflict",
+      "resolved_decision": "withheld",
+      "decision_priority": "deferred",
+      "conflict_resolution": "applied",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 78,
+        "temperature_score": 80,
+        "pattern_score": 55,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 48,
+        "useful_god": "Chính Quan",
+        "favorable_gods": [
+          "Thực Thần"
+        ],
+        "unfavorable_gods": [
+          "Chính Quan",
+          "Thất Sát"
+        ],
+        "decision_confidence": "medium",
+        "decision_score": 55,
+        "decision_reasoning": "Foundation published Chính Quan.",
+        "decision_diagnostics": [
+          "useful_in_unfavorable",
+          "multiple_candidates"
+        ]
+      },
+      "activates_rules": [
+        "UGP-000025",
+        "UGP-000023",
+        "UGP-000038",
+        "UGP-000079",
+        "UGP-000098"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGP-000025.json",
+        "evidence/bundles/UGP-000023.json",
+        "evidence/bundles/UGP-000038.json",
+        "evidence/bundles/UGP-000079.json",
+        "evidence/bundles/UGP-000098.json"
+      ],
+      "reasoning_path": "RC-UGP-CONFLICT-001"
+    },
+    {
+      "example_id": "EX-UGP-TIE-001",
+      "title": "Hòa",
+      "tendency": "tie",
+      "resolved_decision": "Chính Tài",
+      "decision_priority": "secondary",
+      "conflict_resolution": "applied",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 50,
+        "temperature_score": 50,
+        "pattern_score": 60,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 60,
+        "pattern_stability": 60,
+        "useful_god": "Chính Tài",
+        "favorable_gods": [
+          "Chính Tài",
+          "Chính Ấn"
+        ],
+        "unfavorable_gods": [
+          "Thất Sát"
+        ],
+        "decision_confidence": "medium",
+        "decision_score": 60,
+        "decision_reasoning": "Foundation published Chính Quan.",
+        "decision_diagnostics": [
+          "tie_candidates",
+          "multiple_candidates"
+        ]
+      },
+      "activates_rules": [
+        "UGP-000045",
+        "UGP-000053",
+        "UGP-000090",
+        "UGP-000100"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGP-000045.json",
+        "evidence/bundles/UGP-000053.json",
+        "evidence/bundles/UGP-000090.json",
+        "evidence/bundles/UGP-000100.json"
+      ],
+      "reasoning_path": "RC-UGP-TIE-001"
+    },
+    {
+      "example_id": "EX-UGP-LOWCONF-001",
+      "title": "Tin cậy thấp",
+      "tendency": "low_confidence",
+      "resolved_decision": "withheld",
+      "decision_priority": "deferred",
+      "conflict_resolution": "withheld",
+      "consumed_outputs": {
+        "season_score": 42,
+        "strength_score": 45,
+        "temperature_score": 47,
+        "pattern_score": 22,
+        "pattern_quality": "broken",
+        "pattern_confidence": "none",
+        "pattern_integrity": 18,
+        "pattern_stability": 20,
+        "useful_god": "withheld",
+        "favorable_gods": [],
+        "unfavorable_gods": [
+          "Thất Sát"
+        ],
+        "decision_confidence": "none",
+        "decision_score": 18,
+        "decision_reasoning": "Foundation published Chính Quan.",
+        "decision_diagnostics": [
+          "low_confidence"
+        ]
+      },
+      "activates_rules": [
+        "UGP-000005",
+        "UGP-000080",
+        "UGP-000091",
+        "UGP-000108"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGP-000005.json",
+        "evidence/bundles/UGP-000080.json",
+        "evidence/bundles/UGP-000091.json",
+        "evidence/bundles/UGP-000108.json"
+      ],
+      "reasoning_path": "RC-UGP-LOWCONF-001"
+    }
+  ]
+}

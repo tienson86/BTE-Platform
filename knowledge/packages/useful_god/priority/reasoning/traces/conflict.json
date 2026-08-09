@@ -1,0 +1,53 @@
+{
+  "trace_id": "RT-UGP-CONFLICT-001",
+  "chain_id": "RC-UGP-CONFLICT-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "UGP-000025",
+    "UGP-000023",
+    "UGP-000038",
+    "UGP-000079",
+    "UGP-000098"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/UGP-000025.json",
+    "evidence/bundles/UGP-000023.json",
+    "evidence/bundles/UGP-000038.json",
+    "evidence/bundles/UGP-000079.json",
+    "evidence/bundles/UGP-000098.json"
+  ],
+  "consumed_published_inputs": [
+    "season_score",
+    "strength_score",
+    "temperature_score",
+    "pattern_score",
+    "pattern_quality",
+    "pattern_confidence",
+    "pattern_integrity",
+    "pattern_stability",
+    "useful_god",
+    "favorable_gods",
+    "unfavorable_gods",
+    "decision_confidence",
+    "decision_score",
+    "decision_reasoning",
+    "decision_diagnostics"
+  ],
+  "decision_path": [
+    "RN-UGP-CONFLICT-OBS-001",
+    "RN-UGP-CONFLICT-EVD-001",
+    "RN-UGP-CONFLICT-INF-001",
+    "RN-UGP-CONFLICT-MID-001",
+    "RN-UGP-CONFLICT-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-UGP-CONFLICT-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

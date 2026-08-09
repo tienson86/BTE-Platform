@@ -1,0 +1,770 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_07_useful_god_priority",
+  "category": "conflict_detection",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGP-000023",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "decision_diagnostics",
+          "operator": "contains",
+          "value": "useful_in_unfavorable"
+        }
+      ],
+      "result": {
+        "effect": "conflict=god_set",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "god_set_conflict"
+      },
+      "explanation": "Phát hiện Dụng nằm trong Kỵ. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_useful_in_unfavorable",
+      "name": "Phát hiện Dụng nằm trong Kỵ",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_diagnostics",
+            "operator": "contains",
+            "value": "useful_in_unfavorable"
+          }
+        ],
+        "result": {
+          "effect": "conflict=god_set",
+          "outcome": "god_set_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000024",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "decision_diagnostics",
+          "operator": "contains",
+          "value": "useful_missing_favorable"
+        }
+      ],
+      "result": {
+        "effect": "conflict=set_gap",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "set_gap_conflict"
+      },
+      "explanation": "Phát hiện Dụng không nằm Hỷ. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_useful_not_in_favorable",
+      "name": "Phát hiện Dụng không nằm Hỷ",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_diagnostics",
+            "operator": "contains",
+            "value": "useful_missing_favorable"
+          }
+        ],
+        "result": {
+          "effect": "conflict=set_gap",
+          "outcome": "set_gap_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000025",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "greater_than_or_equal",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "greater_than_or_equal",
+          "value": 65
+        }
+      ],
+      "result": {
+        "effect": "conflict=score_band",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "band_conflict"
+      },
+      "explanation": "Phát hiện thân vượng + nóng. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_strong_hot",
+      "name": "Phát hiện thân vượng + nóng",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "greater_than_or_equal",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "greater_than_or_equal",
+            "value": 65
+          }
+        ],
+        "result": {
+          "effect": "conflict=score_band",
+          "outcome": "band_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000026",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        },
+        {
+          "field": "useful_god",
+          "operator": "not_equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "conflict=broken_publish",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "broken_conflict"
+      },
+      "explanation": "Cách vỡ nhưng vẫn công bố Dụng. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_broken_with_published_ug",
+      "name": "Cách vỡ nhưng vẫn công bố Dụng",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          },
+          {
+            "field": "useful_god",
+            "operator": "not_equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "conflict=broken_publish",
+          "outcome": "broken_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000027",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "less_than_or_equal",
+          "value": 35
+        },
+        {
+          "field": "decision_score",
+          "operator": "greater_than_or_equal",
+          "value": 70
+        }
+      ],
+      "result": {
+        "effect": "conflict=integrity_score",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "integrity_conflict"
+      },
+      "explanation": "Toàn vẹn thấp / điểm quyết định cao. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_low_integrity_high_score",
+      "name": "Toàn vẹn thấp / điểm quyết định cao",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "less_than_or_equal",
+            "value": 35
+          },
+          {
+            "field": "decision_score",
+            "operator": "greater_than_or_equal",
+            "value": 70
+          }
+        ],
+        "result": {
+          "effect": "conflict=integrity_score",
+          "outcome": "integrity_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000028",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "useful_god",
+          "operator": "not_equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "conflict=confidence_none",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "confidence_conflict"
+      },
+      "explanation": "Tin cậy none nhưng có Dụng. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_confidence_none_with_ug",
+      "name": "Tin cậy none nhưng có Dụng",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "useful_god",
+            "operator": "not_equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "conflict=confidence_none",
+          "outcome": "confidence_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000029",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "pattern_score",
+          "operator": "greater_than_or_equal",
+          "value": 70
+        }
+      ],
+      "result": {
+        "effect": "conflict=quality_score",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "quality_conflict"
+      },
+      "explanation": "Quality yếu / pattern_score cao. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_weak_quality_high_pattern_score",
+      "name": "Quality yếu / pattern_score cao",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "pattern_score",
+            "operator": "greater_than_or_equal",
+            "value": 70
+          }
+        ],
+        "result": {
+          "effect": "conflict=quality_score",
+          "outcome": "quality_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000030",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "less_than_or_equal",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "less_than_or_equal",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "conflict=dual_low",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "stability_conflict"
+      },
+      "explanation": "Toàn vẹn và ổn định cùng thấp. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_dual_low_integrity_stability",
+      "name": "Toàn vẹn và ổn định cùng thấp",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "less_than_or_equal",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "less_than_or_equal",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "conflict=dual_low",
+          "outcome": "stability_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000031",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "decision_diagnostics",
+          "operator": "contains",
+          "value": "score_divergence"
+        }
+      ],
+      "result": {
+        "effect": "conflict=divergence",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "divergence_conflict"
+      },
+      "explanation": "decision_score lệch pattern_score. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_score_divergence",
+      "name": "decision_score lệch pattern_score",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_diagnostics",
+            "operator": "contains",
+            "value": "score_divergence"
+          }
+        ],
+        "result": {
+          "effect": "conflict=divergence",
+          "outcome": "divergence_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000032",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "decision_diagnostics",
+          "operator": "contains",
+          "value": "multiple_candidates"
+        }
+      ],
+      "result": {
+        "effect": "conflict=multiple",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "multiple_conflict"
+      },
+      "explanation": "Nhiều ứng viên. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_multiple_candidates",
+      "name": "Nhiều ứng viên",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_diagnostics",
+            "operator": "contains",
+            "value": "multiple_candidates"
+          }
+        ],
+        "result": {
+          "effect": "conflict=multiple",
+          "outcome": "multiple_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGP-000033",
+      "version": "1.0.0",
+      "category": "conflict_detection",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "conflict_detection"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "not_equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "not_equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "conflict=none",
+        "weight": 4,
+        "signal": "conflict_detection",
+        "score_target": "day_master.resolution_score",
+        "outcome": "clean"
+      },
+      "explanation": "Không xung đột khi tín hiệu sạch. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "detect_no_conflict_clean",
+      "name": "Không xung đột khi tín hiệu sạch",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "not_equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "not_equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "conflict=none",
+          "outcome": "clean"
+        }
+      }
+    }
+  ]
+}

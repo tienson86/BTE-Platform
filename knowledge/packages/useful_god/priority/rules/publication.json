@@ -1,0 +1,700 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_07_useful_god_priority",
+  "category": "publication",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGP-000100",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "final_resolved",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=resolved_useful_god",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "resolved_useful_god"
+      },
+      "explanation": "Xuất bản resolved_useful_god. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolved_useful_god",
+      "name": "Xuất bản resolved_useful_god",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "final_resolved",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=resolved_useful_god",
+          "outcome": "resolved_useful_god"
+        }
+      }
+    },
+    {
+      "id": "UGP-000101",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "final_resolved",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=resolved_favorable_gods",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "resolved_favorable_gods"
+      },
+      "explanation": "Xuất bản resolved_favorable_gods. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolved_favorable_gods",
+      "name": "Xuất bản resolved_favorable_gods",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "final_resolved",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=resolved_favorable_gods",
+          "outcome": "resolved_favorable_gods"
+        }
+      }
+    },
+    {
+      "id": "UGP-000102",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "final_resolved",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=resolved_unfavorable_gods",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "resolved_unfavorable_gods"
+      },
+      "explanation": "Xuất bản resolved_unfavorable_gods. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolved_unfavorable_gods",
+      "name": "Xuất bản resolved_unfavorable_gods",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "final_resolved",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=resolved_unfavorable_gods",
+          "outcome": "resolved_unfavorable_gods"
+        }
+      }
+    },
+    {
+      "id": "UGP-000103",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "priority_level",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_priority",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "decision_priority"
+      },
+      "explanation": "Xuất bản decision_priority. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_decision_priority",
+      "name": "Xuất bản decision_priority",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "priority_level",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_priority",
+          "outcome": "decision_priority"
+        }
+      }
+    },
+    {
+      "id": "UGP-000104",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "conflict_resolution_status",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=conflict_resolution",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "conflict_resolution"
+      },
+      "explanation": "Xuất bản conflict_resolution. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_conflict_resolution",
+      "name": "Xuất bản conflict_resolution",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "conflict_resolution_status",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=conflict_resolution",
+          "outcome": "conflict_resolution"
+        }
+      }
+    },
+    {
+      "id": "UGP-000105",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "conflict_type",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "publish=resolution_confidence",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "high"
+      },
+      "explanation": "Xuất bản resolution_confidence=high. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolution_confidence_high",
+      "name": "Xuất bản resolution_confidence=high",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "conflict_type",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "publish=resolution_confidence",
+          "outcome": "high"
+        }
+      }
+    },
+    {
+      "id": "UGP-000106",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "publish=resolution_confidence",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "medium"
+      },
+      "explanation": "Xuất bản resolution_confidence=medium. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolution_confidence_medium",
+      "name": "Xuất bản resolution_confidence=medium",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "publish=resolution_confidence",
+          "outcome": "medium"
+        }
+      }
+    },
+    {
+      "id": "UGP-000107",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "publish=resolution_confidence",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "low"
+      },
+      "explanation": "Xuất bản resolution_confidence=low. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolution_confidence_low",
+      "name": "Xuất bản resolution_confidence=low",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "publish=resolution_confidence",
+          "outcome": "low"
+        }
+      }
+    },
+    {
+      "id": "UGP-000108",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "publish=resolution_confidence",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "none"
+      },
+      "explanation": "Xuất bản resolution_confidence=none. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolution_confidence_none",
+      "name": "Xuất bản resolution_confidence=none",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "publish=resolution_confidence",
+          "outcome": "none"
+        }
+      }
+    },
+    {
+      "id": "UGP-000109",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "final_resolved",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=resolution_reasoning",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "resolution_reasoning"
+      },
+      "explanation": "Xuất bản resolution_reasoning. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolution_reasoning",
+      "name": "Xuất bản resolution_reasoning",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "final_resolved",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=resolution_reasoning",
+          "outcome": "resolution_reasoning"
+        }
+      }
+    },
+    {
+      "id": "UGP-000110",
+      "version": "1.0.0",
+      "category": "publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "final_resolved",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=resolution_diagnostics",
+        "weight": 4,
+        "signal": "publication",
+        "score_target": "day_master.resolution_score",
+        "outcome": "resolution_diagnostics"
+      },
+      "explanation": "Xuất bản resolution_diagnostics. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_resolution_diagnostics",
+      "name": "Xuất bản resolution_diagnostics",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "final_resolved",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=resolution_diagnostics",
+          "outcome": "resolution_diagnostics"
+        }
+      }
+    }
+  ]
+}

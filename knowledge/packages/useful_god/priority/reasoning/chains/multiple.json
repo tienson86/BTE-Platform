@@ -1,0 +1,72 @@
+{
+  "chain_id": "RC-UGP-MULTIPLE-001",
+  "title": "Nhiều ứng viên",
+  "package_id": "bz_07_useful_god_priority",
+  "package_version": "1.0.0",
+  "example_id": "EX-UGP-MULTI-001",
+  "decision_theme": "multiple",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-UGP-MULTIPLE-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-UGP-MULTIPLE-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-UGP-MULTIPLE-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-UGP-MULTIPLE-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-UGP-MULTIPLE-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "UGP-000002",
+    "UGP-000032",
+    "UGP-000015",
+    "UGP-000090",
+    "UGP-000103"
+  ],
+  "consumed_published_inputs": [
+    "season_score",
+    "strength_score",
+    "temperature_score",
+    "pattern_score",
+    "pattern_quality",
+    "pattern_confidence",
+    "pattern_integrity",
+    "pattern_stability",
+    "useful_god",
+    "favorable_gods",
+    "unfavorable_gods",
+    "decision_confidence",
+    "decision_score",
+    "decision_reasoning",
+    "decision_diagnostics"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern",
+    "pattern_evaluation",
+    "useful_god",
+    "useful_god_priority"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/UGP-000002.json",
+    "evidence/bundles/UGP-000032.json",
+    "evidence/bundles/UGP-000015.json",
+    "evidence/bundles/UGP-000090.json",
+    "evidence/bundles/UGP-000103.json"
+  ]
+}

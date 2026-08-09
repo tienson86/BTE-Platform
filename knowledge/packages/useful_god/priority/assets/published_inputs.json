@@ -1,0 +1,88 @@
+{
+  "package_id": "bz_07_useful_god_priority",
+  "package_version": "1.0.0",
+  "inputs": [
+    {
+      "name": "season_score",
+      "source": "bz_02_seasonal_core",
+      "type": "number"
+    },
+    {
+      "name": "strength_score",
+      "source": "bz_01_strength_core",
+      "type": "number"
+    },
+    {
+      "name": "temperature_score",
+      "source": "bz_03_temperature_core",
+      "type": "number"
+    },
+    {
+      "name": "pattern_score",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "pattern_quality",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum"
+    },
+    {
+      "name": "pattern_confidence",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum"
+    },
+    {
+      "name": "pattern_integrity",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "pattern_stability",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "useful_god",
+      "source": "bz_06_useful_god_foundation",
+      "type": "string"
+    },
+    {
+      "name": "favorable_gods",
+      "source": "bz_06_useful_god_foundation",
+      "type": "list"
+    },
+    {
+      "name": "unfavorable_gods",
+      "source": "bz_06_useful_god_foundation",
+      "type": "list"
+    },
+    {
+      "name": "decision_confidence",
+      "source": "bz_06_useful_god_foundation",
+      "type": "enum"
+    },
+    {
+      "name": "decision_score",
+      "source": "bz_06_useful_god_foundation",
+      "type": "number"
+    },
+    {
+      "name": "decision_reasoning",
+      "source": "bz_06_useful_god_foundation",
+      "type": "string"
+    },
+    {
+      "name": "decision_diagnostics",
+      "source": "bz_06_useful_god_foundation",
+      "type": "list"
+    }
+  ],
+  "forbidden": [
+    "raw chart fields",
+    "SKC/SEC/TEC/PAT/PEV/UGD internals",
+    "strength_level",
+    "temperature_level",
+    "principal_pattern"
+  ]
+}

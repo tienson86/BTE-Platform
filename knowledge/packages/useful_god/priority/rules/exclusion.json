@@ -1,0 +1,720 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_07_useful_god_priority",
+  "category": "exclusion",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGP-000056",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "unfavorable_gods",
+          "operator": "not_empty",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "exclude=unfavorable_from_favorable",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_overlap"
+      },
+      "explanation": "Loại Kỵ khỏi Hỷ đã giải. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_unfavorable_from_favorable",
+      "name": "Loại Kỵ khỏi Hỷ đã giải",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "unfavorable_gods",
+            "operator": "not_empty",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "exclude=unfavorable_from_favorable",
+          "outcome": "exclude_overlap"
+        }
+      }
+    },
+    {
+      "id": "UGP-000057",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        }
+      ],
+      "result": {
+        "effect": "exclude=quality_boost",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_broken"
+      },
+      "explanation": "Không tăng hạng khi cách vỡ. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_broken_quality_boost",
+      "name": "Không tăng hạng khi cách vỡ",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          }
+        ],
+        "result": {
+          "effect": "exclude=quality_boost",
+          "outcome": "exclude_broken"
+        }
+      }
+    },
+    {
+      "id": "UGP-000058",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "exclude=winner",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_none"
+      },
+      "explanation": "Không chọn winner khi confidence=none. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_confidence_none_winner",
+      "name": "Không chọn winner khi confidence=none",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "exclude=winner",
+          "outcome": "exclude_none"
+        }
+      }
+    },
+    {
+      "id": "UGP-000059",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "less_than_or_equal",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "exclude=reinforcement",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_integrity"
+      },
+      "explanation": "Không củng cố khi integrity thấp. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_low_integrity_reinforce",
+      "name": "Không củng cố khi integrity thấp",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "less_than_or_equal",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "exclude=reinforcement",
+          "outcome": "exclude_integrity"
+        }
+      }
+    },
+    {
+      "id": "UGP-000060",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "conflict_type",
+          "operator": "equals",
+          "value": "god_set"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "broken"
+        }
+      ],
+      "result": {
+        "effect": "exclude=useful_god",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_god"
+      },
+      "explanation": "Loại Dụng nếu vừa Kỵ vừa cách vỡ. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_useful_if_unfavorable_broken",
+      "name": "Loại Dụng nếu vừa Kỵ vừa cách vỡ",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "conflict_type",
+            "operator": "equals",
+            "value": "god_set"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "broken"
+          }
+        ],
+        "result": {
+          "effect": "exclude=useful_god",
+          "outcome": "exclude_god"
+        }
+      }
+    },
+    {
+      "id": "UGP-000061",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "greater_than_or_equal",
+          "value": 85
+        },
+        {
+          "field": "decision_score",
+          "operator": "less_than",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "exclude=temp_extreme",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_temp"
+      },
+      "explanation": "Loại khi nhiệt cực và điểm thấp. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_extreme_temp_low_decision",
+      "name": "Loại khi nhiệt cực và điểm thấp",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "greater_than_or_equal",
+            "value": 85
+          },
+          {
+            "field": "decision_score",
+            "operator": "less_than",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "exclude=temp_extreme",
+          "outcome": "exclude_temp"
+        }
+      }
+    },
+    {
+      "id": "UGP-000062",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "less_than_or_equal",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "exclude=dead_strength",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_strength"
+      },
+      "explanation": "Loại khi strength_score rất thấp. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_very_weak_strength",
+      "name": "Loại khi strength_score rất thấp",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "less_than_or_equal",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "exclude=dead_strength",
+          "outcome": "exclude_strength"
+        }
+      }
+    },
+    {
+      "id": "UGP-000063",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "decision_diagnostics",
+          "operator": "contains",
+          "value": "god_in_both_sets"
+        }
+      ],
+      "result": {
+        "effect": "exclude=dual_set",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_dual"
+      },
+      "explanation": "Loại thần vừa Hỷ vừa Kỵ. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_god_in_both_sets",
+      "name": "Loại thần vừa Hỷ vừa Kỵ",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_diagnostics",
+            "operator": "contains",
+            "value": "god_in_both_sets"
+          }
+        ],
+        "result": {
+          "effect": "exclude=dual_set",
+          "outcome": "exclude_dual"
+        }
+      }
+    },
+    {
+      "id": "UGP-000064",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "decision_score",
+          "operator": "less_than",
+          "value": 25
+        }
+      ],
+      "result": {
+        "effect": "exclude=score_floor",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_floor"
+      },
+      "explanation": "Loại khi decision_score dưới sàn. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_decision_score_floor",
+      "name": "Loại khi decision_score dưới sàn",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_score",
+            "operator": "less_than",
+            "value": 25
+          }
+        ],
+        "result": {
+          "effect": "exclude=score_floor",
+          "outcome": "exclude_floor"
+        }
+      }
+    },
+    {
+      "id": "UGP-000065",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "exclude=pattern_none",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_pattern"
+      },
+      "explanation": "Loại khi pattern_confidence=none. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_pattern_confidence_none",
+      "name": "Loại khi pattern_confidence=none",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "exclude=pattern_none",
+          "outcome": "exclude_pattern"
+        }
+      }
+    },
+    {
+      "id": "UGP-000066",
+      "version": "1.0.0",
+      "category": "exclusion",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "exclusion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        }
+      ],
+      "result": {
+        "effect": "exclude=none",
+        "weight": 4,
+        "signal": "exclusion",
+        "score_target": "day_master.resolution_score",
+        "outcome": "exclude_skip"
+      },
+      "explanation": "Không loại khi tín hiệu sạch cao. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "exclude_skipped_when_clean_high",
+      "name": "Không loại khi tín hiệu sạch cao",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          }
+        ],
+        "result": {
+          "effect": "exclude=none",
+          "outcome": "exclude_skip"
+        }
+      }
+    }
+  ]
+}

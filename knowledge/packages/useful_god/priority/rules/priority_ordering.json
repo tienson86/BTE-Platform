@@ -1,0 +1,720 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_07_useful_god_priority",
+  "category": "priority_ordering",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGP-000012",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "candidate_rank",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "priority=primary",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "primary"
+      },
+      "explanation": "Ưu tiên bậc 1 khi hạng cao. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_primary_high_rank",
+      "name": "Ưu tiên bậc 1 khi hạng cao",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "candidate_rank",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "priority=primary",
+          "outcome": "primary"
+        }
+      }
+    },
+    {
+      "id": "UGP-000013",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "candidate_rank",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "priority=secondary",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "secondary"
+      },
+      "explanation": "Ưu tiên bậc 2 khi hạng trung. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_secondary_medium_rank",
+      "name": "Ưu tiên bậc 2 khi hạng trung",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "candidate_rank",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "priority=secondary",
+          "outcome": "secondary"
+        }
+      }
+    },
+    {
+      "id": "UGP-000014",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "candidate_rank",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "priority=tertiary",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "tertiary"
+      },
+      "explanation": "Ưu tiên bậc 3 khi hạng thấp. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_tertiary_low_rank",
+      "name": "Ưu tiên bậc 3 khi hạng thấp",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "candidate_rank",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "priority=tertiary",
+          "outcome": "tertiary"
+        }
+      }
+    },
+    {
+      "id": "UGP-000015",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "decision_score",
+          "operator": "greater_than_or_equal",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "order_key=decision_score",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "score_order"
+      },
+      "explanation": "Sắp theo decision_score giảm dần. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_by_decision_score",
+      "name": "Sắp theo decision_score giảm dần",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_score",
+            "operator": "greater_than_or_equal",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "order_key=decision_score",
+          "outcome": "score_order"
+        }
+      }
+    },
+    {
+      "id": "UGP-000016",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "priority_score_delta",
+          "operator": "less_than_or_equal",
+          "value": 5
+        }
+      ],
+      "result": {
+        "effect": "order_key=pattern_score",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "pattern_order"
+      },
+      "explanation": "Gần hòa thì dùng pattern_score. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_by_pattern_score_near_tie",
+      "name": "Gần hòa thì dùng pattern_score",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "priority_score_delta",
+            "operator": "less_than_or_equal",
+            "value": 5
+          }
+        ],
+        "result": {
+          "effect": "order_key=pattern_score",
+          "outcome": "pattern_order"
+        }
+      }
+    },
+    {
+      "id": "UGP-000017",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "greater_than_or_equal",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "greater_than_or_equal",
+          "value": 65
+        }
+      ],
+      "result": {
+        "effect": "order_context=strong_hot",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "conflict_context"
+      },
+      "explanation": "Bối cảnh thân vượng + nóng. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_strong_hot_context",
+      "name": "Bối cảnh thân vượng + nóng",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "greater_than_or_equal",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "greater_than_or_equal",
+            "value": 65
+          }
+        ],
+        "result": {
+          "effect": "order_context=strong_hot",
+          "outcome": "conflict_context"
+        }
+      }
+    },
+    {
+      "id": "UGP-000018",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "less_than_or_equal",
+          "value": 35
+        }
+      ],
+      "result": {
+        "effect": "order_context=weak",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "support_context"
+      },
+      "explanation": "Bối cảnh thân nhược. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_weak_context",
+      "name": "Bối cảnh thân nhược",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "less_than_or_equal",
+            "value": 35
+          }
+        ],
+        "result": {
+          "effect": "order_context=weak",
+          "outcome": "support_context"
+        }
+      }
+    },
+    {
+      "id": "UGP-000019",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "greater_than_or_equal",
+          "value": 36
+        },
+        {
+          "field": "strength_score",
+          "operator": "less_than_or_equal",
+          "value": 64
+        }
+      ],
+      "result": {
+        "effect": "order_context=balanced",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "wealth_context"
+      },
+      "explanation": "Bối cảnh thân cân. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_balanced_context",
+      "name": "Bối cảnh thân cân",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "greater_than_or_equal",
+            "value": 36
+          },
+          {
+            "field": "strength_score",
+            "operator": "less_than_or_equal",
+            "value": 64
+          }
+        ],
+        "result": {
+          "effect": "order_context=balanced",
+          "outcome": "wealth_context"
+        }
+      }
+    },
+    {
+      "id": "UGP-000020",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "useful_god",
+          "operator": "not_equals",
+          "value": "withheld"
+        },
+        {
+          "field": "decision_confidence",
+          "operator": "not_equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "order_anchor=useful_god",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "anchor_published"
+      },
+      "explanation": "Giữ thứ tự useful_god đã công bố. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_respect_published_useful",
+      "name": "Giữ thứ tự useful_god đã công bố",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "useful_god",
+            "operator": "not_equals",
+            "value": "withheld"
+          },
+          {
+            "field": "decision_confidence",
+            "operator": "not_equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "order_anchor=useful_god",
+          "outcome": "anchor_published"
+        }
+      }
+    },
+    {
+      "id": "UGP-000021",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "priority=deferred",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "deferred"
+      },
+      "explanation": "Hoãn khi decision_confidence=none. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_defer_confidence_none",
+      "name": "Hoãn khi decision_confidence=none",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "priority=deferred",
+          "outcome": "deferred"
+        }
+      }
+    },
+    {
+      "id": "UGP-000022",
+      "version": "1.0.0",
+      "category": "priority_ordering",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "priority",
+        "useful_god",
+        "priority_ordering"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "priority=deferred",
+        "weight": 4,
+        "signal": "priority_ordering",
+        "score_target": "day_master.resolution_score",
+        "outcome": "deferred_pattern"
+      },
+      "explanation": "Hoãn khi pattern_confidence=none. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+      "references": [
+        {
+          "target": "REF-UGP-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "order_defer_pattern_confidence_none",
+      "name": "Hoãn khi pattern_confidence=none",
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "priority=deferred",
+          "outcome": "deferred_pattern"
+        }
+      }
+    }
+  ]
+}

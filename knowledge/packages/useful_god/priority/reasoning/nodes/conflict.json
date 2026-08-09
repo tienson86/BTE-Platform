@@ -1,0 +1,165 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-UGP-CONFLICT-OBS-001",
+      "node_type": "observation",
+      "title": "Giải xung đột",
+      "description": "Quan sát 15 published outputs.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "published_inputs"
+      ],
+      "outputs": [
+        "published_inputs"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-EVD-001",
+      "node_type": "evidence",
+      "title": "Giải xung đột",
+      "description": "Bằng chứng ưu tiên/xung đột.",
+      "source_rule": "UGP-000025",
+      "source_evidence": "evidence/bundles/UGP-000025.json",
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "useful_god",
+        "favorable_gods",
+        "unfavorable_gods",
+        "decision_confidence",
+        "decision_score",
+        "decision_reasoning",
+        "decision_diagnostics"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-INF-001",
+      "node_type": "inference",
+      "title": "Giải xung đột",
+      "description": "Suy thứ tự và nhóm xung đột.",
+      "source_rule": "UGP-000025",
+      "source_evidence": "evidence/bundles/UGP-000025.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Giải xung đột",
+      "description": "Trung gian hòa/loại/củng cố.",
+      "source_rule": "UGP-000025",
+      "source_evidence": "evidence/bundles/UGP-000025.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "mid_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Giải xung đột",
+      "description": "Chốt Dụng đã giải và xuất bản.",
+      "source_rule": "UGP-000025",
+      "source_evidence": "evidence/bundles/UGP-000025.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "resolved_decision"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-ALT-001",
+      "node_type": "alternative",
+      "title": "Giải xung đột",
+      "description": "Nhánh ứng viên phụ.",
+      "source_rule": "UGP-000025",
+      "source_evidence": "evidence/bundles/UGP-000025.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "alt_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-CONFLICT-CON-001",
+      "node_type": "constraint",
+      "title": "Giải xung đột",
+      "description": "Ràng buộc ức chế/withhold.",
+      "source_rule": "UGP-000025",
+      "source_evidence": "evidence/bundles/UGP-000025.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "constraint_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-UGP-MULTIPLE-OBS-001",
+      "node_type": "observation",
+      "title": "Nhiều ứng viên",
+      "description": "Quan sát 15 published outputs.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "published_inputs"
+      ],
+      "outputs": [
+        "published_inputs"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-MULTIPLE-EVD-001",
+      "node_type": "evidence",
+      "title": "Nhiều ứng viên",
+      "description": "Bằng chứng ưu tiên/xung đột.",
+      "source_rule": "UGP-000002",
+      "source_evidence": "evidence/bundles/UGP-000002.json",
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "useful_god",
+        "favorable_gods",
+        "unfavorable_gods",
+        "decision_confidence",
+        "decision_score",
+        "decision_reasoning",
+        "decision_diagnostics"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-MULTIPLE-INF-001",
+      "node_type": "inference",
+      "title": "Nhiều ứng viên",
+      "description": "Suy thứ tự và nhóm xung đột.",
+      "source_rule": "UGP-000002",
+      "source_evidence": "evidence/bundles/UGP-000002.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-MULTIPLE-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Nhiều ứng viên",
+      "description": "Trung gian hòa/loại/củng cố.",
+      "source_rule": "UGP-000002",
+      "source_evidence": "evidence/bundles/UGP-000002.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "mid_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-MULTIPLE-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Nhiều ứng viên",
+      "description": "Chốt Dụng đã giải và xuất bản.",
+      "source_rule": "UGP-000002",
+      "source_evidence": "evidence/bundles/UGP-000002.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "resolved_decision"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-MULTIPLE-ALT-001",
+      "node_type": "alternative",
+      "title": "Nhiều ứng viên",
+      "description": "Nhánh ứng viên phụ.",
+      "source_rule": "UGP-000002",
+      "source_evidence": "evidence/bundles/UGP-000002.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "alt_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    },
+    {
+      "node_id": "RN-UGP-MULTIPLE-CON-001",
+      "node_type": "constraint",
+      "title": "Nhiều ứng viên",
+      "description": "Ràng buộc ức chế/withhold.",
+      "source_rule": "UGP-000002",
+      "source_evidence": "evidence/bundles/UGP-000002.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "constraint_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_07_useful_god_priority"
+      }
+    }
+  ]
+}

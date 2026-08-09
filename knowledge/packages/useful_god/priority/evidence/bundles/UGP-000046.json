@@ -1,0 +1,66 @@
+{
+  "rule_id": "UGP-000046",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Hòa: pattern_score cao hơn thắng",
+    "why": "Hòa: pattern_score cao hơn thắng. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền.",
+    "when": "Khi đủ 15 input đã công bố và điều kiện khớp.",
+    "when_not": "Khi thiếu hợp đồng, foundation withhold không hợp lệ, hoặc điểm ngoài dải.",
+    "summary": "Hòa: pattern_score cao hơn thắng. Chỉ đọc hợp đồng đã công bố (15 input Seasonal/Strength/Temperature/Pattern Evaluation/Useful God Foundation). Không tính lại sức thân, mùa, điều hậu, cách cục hay Dụng thần nền."
+  },
+  "rationale": "Luật `tie_higher_pattern_score` thuộc tie_breaking. Chỉ ưu tiên/giải xung đột trên output đã công bố, không gọi SKC/SEC/TEC/PAT/PEV/UGD nội bộ.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp hợp đồng published inputs của KX-4A và Pattern Evaluation.",
+  "references": [
+    {
+      "target": "REF-UGP-000005",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-UGP-000046-01",
+      "rule_id": "UGP-000046",
+      "polarity": "positive",
+      "chart_facts": {
+        "tie_present": true
+      },
+      "note": "Khớp điều kiện ưu tiên/xung đột."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-UGP-000046-01",
+      "rule_id": "UGP-000046",
+      "polarity": "negative",
+      "chart_facts": {
+        "tie_present": null
+      },
+      "note": "Thiếu hoặc lệch điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-UGP-000046-01",
+      "rule_id": "UGP-000046",
+      "kind": "contract_boundary",
+      "chart_facts": {
+        "tie_present": true,
+        "decision_confidence": "none"
+      },
+      "note": "Biên: đủ điều kiện hạng nhưng tin cậy none thì không xuất bản winner."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_07_useful_god_priority",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-4B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

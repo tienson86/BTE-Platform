@@ -1,0 +1,51 @@
+{
+  "trace_id": "RT-UGP-LOWCONF-001",
+  "chain_id": "RC-UGP-LOWCONF-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "UGP-000005",
+    "UGP-000080",
+    "UGP-000091",
+    "UGP-000108"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/UGP-000005.json",
+    "evidence/bundles/UGP-000080.json",
+    "evidence/bundles/UGP-000091.json",
+    "evidence/bundles/UGP-000108.json"
+  ],
+  "consumed_published_inputs": [
+    "season_score",
+    "strength_score",
+    "temperature_score",
+    "pattern_score",
+    "pattern_quality",
+    "pattern_confidence",
+    "pattern_integrity",
+    "pattern_stability",
+    "useful_god",
+    "favorable_gods",
+    "unfavorable_gods",
+    "decision_confidence",
+    "decision_score",
+    "decision_reasoning",
+    "decision_diagnostics"
+  ],
+  "decision_path": [
+    "RN-UGP-LOWCONF-OBS-001",
+    "RN-UGP-LOWCONF-EVD-001",
+    "RN-UGP-LOWCONF-INF-001",
+    "RN-UGP-LOWCONF-MID-001",
+    "RN-UGP-LOWCONF-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-UGP-LOWCONF-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-UGP-LOWCONF-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}
