@@ -1,0 +1,1135 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_06_useful_god_foundation",
+  "category": "decision_confirmation",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGD-000055",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "in",
+          "value": [
+            "excellent",
+            "good"
+          ]
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Xác nhận khi cách tốt và tin cậy cao. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_high_quality",
+      "name": "Xác nhận: confirm_high_quality",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "in",
+            "value": [
+              "excellent",
+              "good"
+            ]
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Xác nhận khi cách tốt và tin cậy cao. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000056",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Thân vượng + cách mạnh + toàn vẹn → xác nhận Quan/Thực. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_strong_aligned",
+      "name": "Xác nhận: confirm_strong_aligned",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Thân vượng + cách mạnh + toàn vẹn → xác nhận Quan/Thực. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000057",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 60
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Thân nhược + cách ổn → xác nhận Ấn. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_weak_aligned",
+      "name": "Xác nhận: confirm_weak_aligned",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 60
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Thân nhược + cách ổn → xác nhận Ấn. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000058",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 64
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "in",
+          "value": [
+            "average",
+            "good",
+            "excellent"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Thân hòa + cách không phá → xác nhận Tài. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_balanced_flow",
+      "name": "Xác nhận: confirm_balanced_flow",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 64
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "in",
+            "value": [
+              "average",
+              "good",
+              "excellent"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Thân hòa + cách không phá → xác nhận Tài. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000059",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "lte",
+          "value": 35
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Lạnh + thân không quá vượng → xác nhận ôn. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_climate_cold",
+      "name": "Xác nhận: confirm_climate_cold",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "lte",
+            "value": 35
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Lạnh + thân không quá vượng → xác nhận ôn. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000060",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Nóng + thân không quá nhược → xác nhận nhuận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_climate_hot",
+      "name": "Xác nhận: confirm_climate_hot",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Nóng + thân không quá nhược → xác nhận nhuận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000061",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Ba trục ổn định vừa phải → xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_all_mid_stable",
+      "name": "Xác nhận: confirm_all_mid_stable",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Ba trục ổn định vừa phải → xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000062",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 80
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Cách xuất sắc xác nhận quyết định. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_excellent_pattern",
+      "name": "Xác nhận: confirm_excellent_pattern",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 80
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Cách xuất sắc xác nhận quyết định. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000063",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 80
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "in",
+          "value": [
+            "high",
+            "medium"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Toàn vẹn rất cao xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_high_integrity_only",
+      "name": "Xác nhận: confirm_high_integrity_only",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 80
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "in",
+            "value": [
+              "high",
+              "medium"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Toàn vẹn rất cao xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000064",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "strength_score",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Mùa lệnh đủ mạnh hỗ trợ xác nhận theo thân. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_season_and_strength",
+      "name": "Xác nhận: confirm_season_and_strength",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "strength_score",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Mùa lệnh đủ mạnh hỗ trợ xác nhận theo thân. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000065",
+      "version": "1.0.0",
+      "category": "decision_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "not_equals",
+          "value": "broken"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "not_equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "decision_confirmed=true",
+        "weight": 10,
+        "signal": "decision_confirmation",
+        "score_target": "day_master.decision_score",
+        "outcome": "confirmed",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Không phá và không mất tin cậy → có thể xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_not_broken",
+      "name": "Xác nhận: confirm_not_broken",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "not_equals",
+            "value": "broken"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "not_equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "decision_confirmed=true",
+          "weight": 10,
+          "signal": "decision_confirmation",
+          "score_target": "day_master.decision_score",
+          "outcome": "confirmed",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Không phá và không mất tin cậy → có thể xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    }
+  ]
+}

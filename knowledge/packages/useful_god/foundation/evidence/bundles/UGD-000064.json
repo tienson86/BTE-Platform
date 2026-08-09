@@ -1,0 +1,68 @@
+{
+  "rule_id": "UGD-000064",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Xác nhận: confirm_season_and_strength",
+    "why": "Mùa lệnh đủ mạnh hỗ trợ xác nhận theo thân. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+    "when": "Khi đủ 8 input đã công bố và điều kiện khớp.",
+    "when_not": "Khi thiếu input hợp đồng hoặc điểm/nhãn ngoài dải.",
+    "summary": "Mùa lệnh đủ mạnh hỗ trợ xác nhận theo thân. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích."
+  },
+  "rationale": "Luật `confirm_season_and_strength` là quyết định Dụng thần từ published scores, không đọc luật SKC/SEC/TEC/PAT.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/13_useful_god strength/season/temperature ở mức điểm số đã chuẩn hóa.",
+  "references": [
+    {
+      "target": "REF-UGD-000006",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-UGD-000064-01",
+      "rule_id": "UGD-000064",
+      "polarity": "positive",
+      "chart_facts": {
+        "season_score": 60,
+        "strength_score": true
+      },
+      "note": "Khớp input contract."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-UGD-000064-01",
+      "rule_id": "UGD-000064",
+      "polarity": "negative",
+      "chart_facts": {
+        "season_score": null,
+        "strength_score": true
+      },
+      "note": "Thiếu hoặc lệch input."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-UGD-000064-01",
+      "rule_id": "UGD-000064",
+      "kind": "contract_boundary",
+      "chart_facts": {
+        "season_score": 60,
+        "strength_score": true
+      },
+      "note": "Biên: đủ điểm số nhưng pattern_confidence=none thì không xuất bản useful_god."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_06_useful_god_foundation",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-4A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

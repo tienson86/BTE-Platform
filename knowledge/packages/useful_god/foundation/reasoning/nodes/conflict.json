@@ -1,0 +1,156 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-UGD-CONFLICT-OBS-001",
+      "node_type": "observation",
+      "title": "strength_score và temperature_score cùng cao — xung đột chế/nhuận.",
+      "description": "strength_score và temperature_score cùng cao — xung đột chế/nhuận.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "published_inputs"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    },
+    {
+      "node_id": "RN-UGD-CONFLICT-EVD-001",
+      "node_type": "evidence",
+      "title": "Quyết định xung đột — thân vượng + khí nóng",
+      "description": "Chỉ đọc 8 published outputs.",
+      "source_rule": "UGD-000024",
+      "source_evidence": "evidence/bundles/UGD-000024.json",
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    },
+    {
+      "node_id": "RN-UGD-CONFLICT-INF-001",
+      "node_type": "inference",
+      "title": "Quyết định xung đột — thân vượng + khí nóng",
+      "description": "Suy Dụng/Hỷ/Kỵ từ điểm số, không gọi luật phân tích.",
+      "source_rule": "UGD-000024",
+      "source_evidence": "evidence/bundles/UGD-000024.json",
+      "inputs": [
+        "evidence_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    },
+    {
+      "node_id": "RN-UGD-CONFLICT-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Trung gian quyết định",
+      "description": "Ghép candidate + confirm/suppress.",
+      "source_rule": "UGD-000070",
+      "source_evidence": "evidence/bundles/UGD-000070.json",
+      "inputs": [
+        "inference_signal"
+      ],
+      "outputs": [
+        "mid_decision"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    },
+    {
+      "node_id": "RN-UGD-CONFLICT-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Quyết định Dụng thần",
+      "description": "Quyết định xung đột — thân vượng + khí nóng",
+      "source_rule": "UGD-000108",
+      "source_evidence": "evidence/bundles/UGD-000108.json",
+      "inputs": [
+        "mid_decision"
+      ],
+      "outputs": [
+        "useful_god_decision"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    },
+    {
+      "node_id": "RN-UGD-CONFLICT-ALT-001",
+      "node_type": "alternative",
+      "title": "Không đọc luật thượng nguồn",
+      "description": "Cấm mở SKC/SEC/TEC/PAT internals.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "published_inputs"
+      ],
+      "outputs": [
+        "no_bypass"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    },
+    {
+      "node_id": "RN-UGD-CONFLICT-CON-001",
+      "node_type": "constraint",
+      "title": "Hợp đồng I/O",
+      "description": "Chỉ 8 input; 7 output.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "useful_god_decision"
+      ],
+      "outputs": [
+        "contract_ok"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_06_useful_god_foundation",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_02_seasonal_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "season_score",
+      "signals": [
+        "season_score"
+      ]
+    },
+    {
+      "package_id": "bz_01_strength_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "strength_score",
+      "signals": [
+        "strength_score"
+      ]
+    },
+    {
+      "package_id": "bz_03_temperature_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "temperature_score",
+      "signals": [
+        "temperature_score"
+      ]
+    },
+    {
+      "package_id": "bz_05_pattern_evaluation",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "pattern evaluation contract",
+      "signals": [
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability"
+      ]
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independently deployable. Decision order: Pattern Evaluation → Useful God Foundation."
+}

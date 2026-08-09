@@ -1,0 +1,48 @@
+{
+  "trace_id": "RT-UGD-STRONG-001",
+  "chain_id": "RC-UGD-STRONG-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "UGD-000002",
+    "UGD-000015",
+    "UGD-000024",
+    "UGD-000056",
+    "UGD-000078",
+    "UGD-000100"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/UGD-000002.json",
+    "evidence/bundles/UGD-000015.json",
+    "evidence/bundles/UGD-000024.json",
+    "evidence/bundles/UGD-000056.json",
+    "evidence/bundles/UGD-000078.json",
+    "evidence/bundles/UGD-000100.json"
+  ],
+  "consumed_published_inputs": [
+    "season_score",
+    "strength_score",
+    "temperature_score",
+    "pattern_score",
+    "pattern_quality",
+    "pattern_confidence",
+    "pattern_integrity",
+    "pattern_stability"
+  ],
+  "decision_path": [
+    "RN-UGD-STRONG-OBS-001",
+    "RN-UGD-STRONG-EVD-001",
+    "RN-UGD-STRONG-INF-001",
+    "RN-UGD-STRONG-MID-001",
+    "RN-UGD-STRONG-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-UGD-STRONG-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-UGD-STRONG-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

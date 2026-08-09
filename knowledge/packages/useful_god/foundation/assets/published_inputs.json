@@ -1,0 +1,90 @@
+{
+  "package_id": "bz_06_useful_god_foundation",
+  "package_version": "1.0.0",
+  "inputs": [
+    {
+      "name": "season_score",
+      "source": "bz_02_seasonal_core",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ]
+    },
+    {
+      "name": "strength_score",
+      "source": "bz_01_strength_core",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ]
+    },
+    {
+      "name": "temperature_score",
+      "source": "bz_03_temperature_core",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ]
+    },
+    {
+      "name": "pattern_score",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ]
+    },
+    {
+      "name": "pattern_quality",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum",
+      "values": [
+        "excellent",
+        "good",
+        "average",
+        "weak",
+        "broken"
+      ]
+    },
+    {
+      "name": "pattern_confidence",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum",
+      "values": [
+        "high",
+        "medium",
+        "low",
+        "none"
+      ]
+    },
+    {
+      "name": "pattern_integrity",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ]
+    },
+    {
+      "name": "pattern_stability",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number",
+      "range": [
+        0,
+        100
+      ]
+    }
+  ],
+  "forbidden": [
+    "raw chart fields",
+    "SKC/SEC/TEC/PAT rule internals",
+    "month_branch_ten_god",
+    "strength_level",
+    "temperature_level"
+  ]
+}

@@ -1,0 +1,1006 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_06_useful_god_foundation",
+  "category": "decision_publication",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGD-000099",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "useful_god"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confirmed",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "decision_suppressed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "publish=useful_god",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "useful_god",
+        "publishes": "useful_god"
+      },
+      "explanation": "Xuất bản useful_god khi đã xác nhận và không ức chế. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_useful_confirmed",
+      "name": "Xuất bản: pub_useful_confirmed",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confirmed",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "decision_suppressed",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "publish=useful_god",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "useful_god",
+          "publishes": "useful_god"
+        },
+        "explanation": "Xuất bản useful_god khi đã xác nhận và không ức chế. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000100",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "useful_god"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "publish=useful_god",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "useful_god",
+        "publishes": "useful_god"
+      },
+      "explanation": "Xuất bản useful_god khi tin cậy cao. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_useful_high_conf",
+      "name": "Xuất bản: pub_useful_high_conf",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "publish=useful_god",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "useful_god",
+          "publishes": "useful_god"
+        },
+        "explanation": "Xuất bản useful_god khi tin cậy cao. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000101",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "favorable_gods"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=favorable_gods",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "favorable_gods",
+        "publishes": "favorable_gods"
+      },
+      "explanation": "Xuất bản favorable_gods cùng quyết định xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_favorable",
+      "name": "Xuất bản: pub_favorable",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=favorable_gods",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "favorable_gods",
+          "publishes": "favorable_gods"
+        },
+        "explanation": "Xuất bản favorable_gods cùng quyết định xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000102",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "unfavorable_gods"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=unfavorable_gods",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "unfavorable_gods",
+        "publishes": "unfavorable_gods"
+      },
+      "explanation": "Xuất bản unfavorable_gods cùng quyết định. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_unfavorable",
+      "name": "Xuất bản: pub_unfavorable",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=unfavorable_gods",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "unfavorable_gods",
+          "publishes": "unfavorable_gods"
+        },
+        "explanation": "Xuất bản unfavorable_gods cùng quyết định. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000103",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_confidence"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "in",
+          "value": [
+            "high",
+            "medium",
+            "low",
+            "none"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_confidence",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_confidence",
+        "publishes": "decision_confidence"
+      },
+      "explanation": "Xuất bản decision_confidence. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_confidence",
+      "name": "Xuất bản: pub_confidence",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "in",
+            "value": [
+              "high",
+              "medium",
+              "low",
+              "none"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_confidence",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_confidence",
+          "publishes": "decision_confidence"
+        },
+        "explanation": "Xuất bản decision_confidence. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000104",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_score"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_score_raw",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_score",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_score",
+        "publishes": "decision_score"
+      },
+      "explanation": "Xuất bản decision_score. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_score",
+      "name": "Xuất bản: pub_score",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_score_raw",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_score",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_score",
+          "publishes": "decision_score"
+        },
+        "explanation": "Xuất bản decision_score. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000105",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_reasoning"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_reasoning",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_reasoning",
+        "publishes": "decision_reasoning"
+      },
+      "explanation": "Xuất bản decision_reasoning khi có xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_reasoning",
+      "name": "Xuất bản: pub_reasoning",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_reasoning",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_reasoning",
+          "publishes": "decision_reasoning"
+        },
+        "explanation": "Xuất bản decision_reasoning khi có xác nhận. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000106",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_diagnostics"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_diagnostics",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_diagnostics",
+        "publishes": "decision_diagnostics"
+      },
+      "explanation": "Luôn có diagnostics khi đã đọc input. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_diagnostics",
+      "name": "Xuất bản: pub_diagnostics",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_diagnostics",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_diagnostics",
+          "publishes": "decision_diagnostics"
+        },
+        "explanation": "Luôn có diagnostics khi đã đọc input. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000107",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_diagnostics"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_diagnostics",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_diagnostics",
+        "publishes": "decision_diagnostics"
+      },
+      "explanation": "Tin cậy none → không khẳng định useful_god, chỉ diagnostics. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_withhold_if_none",
+      "name": "Xuất bản: pub_withhold_if_none",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_diagnostics",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_diagnostics",
+          "publishes": "decision_diagnostics"
+        },
+        "explanation": "Tin cậy none → không khẳng định useful_god, chỉ diagnostics. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000108",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_diagnostics"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_diagnostics",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_diagnostics",
+        "publishes": "decision_diagnostics"
+      },
+      "explanation": "Ức chế → giữ diagnostics, không chốt Dụng thần. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_withhold_if_suppressed",
+      "name": "Xuất bản: pub_withhold_if_suppressed",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_diagnostics",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_diagnostics",
+          "publishes": "decision_diagnostics"
+        },
+        "explanation": "Ức chế → giữ diagnostics, không chốt Dụng thần. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    },
+    {
+      "id": "UGD-000109",
+      "version": "1.0.0",
+      "category": "decision_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "publication",
+        "decision_diagnostics"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "decision_score_raw",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "decision_confidence",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_diagnostics",
+        "weight": 4,
+        "signal": "decision_publication",
+        "score_target": "day_master.decision_score",
+        "outcome": "decision_diagnostics",
+        "publishes": "decision_diagnostics"
+      },
+      "explanation": "Hợp đồng đầu ra tối thiểu: score + confidence. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+      "references": [
+        {
+          "target": "REF-UGD-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_contract_complete",
+      "name": "Xuất bản: pub_contract_complete",
+      "metadata": {
+        "package_id": "bz_06_useful_god_foundation",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_score_raw",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "decision_confidence",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_diagnostics",
+          "weight": 4,
+          "signal": "decision_publication",
+          "score_target": "day_master.decision_score",
+          "outcome": "decision_diagnostics",
+          "publishes": "decision_diagnostics"
+        },
+        "explanation": "Hợp đồng đầu ra tối thiểu: score + confidence. Chỉ đọc output đã công bố (season/strength/temperature/pattern scores + Pattern Evaluation). Không tính lại phân tích.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "decision_score"
+        },
+        "consumes_published_inputs": [
+          "season_score",
+          "strength_score",
+          "temperature_score",
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      }
+    }
+  ]
+}
