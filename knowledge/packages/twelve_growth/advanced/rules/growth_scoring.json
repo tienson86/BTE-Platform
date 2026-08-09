@@ -1,0 +1,4328 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "growth_scoring",
+  "count": 45,
+  "objects": [
+    {
+      "id": "TGP-000266",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=8",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "8",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_8_00",
+      "name": "Điểm Trường Sinh 8",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=8",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "8",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000267",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=15",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "15",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_15_01",
+      "name": "Điểm Trường Sinh 15",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=15",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "15",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000268",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=22",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "22",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_22_02",
+      "name": "Điểm Trường Sinh 22",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=22",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "22",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000269",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=29",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "29",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_29_03",
+      "name": "Điểm Trường Sinh 29",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=29",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "29",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000270",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=36",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "36",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_36_04",
+      "name": "Điểm Trường Sinh 36",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=36",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "36",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000271",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=43",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "43",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_43_05",
+      "name": "Điểm Trường Sinh 43",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=43",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "43",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000272",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=50",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "50",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_50_06",
+      "name": "Điểm Trường Sinh 50",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=50",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "50",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000273",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=57",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "57",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_57_07",
+      "name": "Điểm Trường Sinh 57",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=57",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "57",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000274",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=64",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "64",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_08",
+      "name": "Điểm Trường Sinh 64",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=64",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "64",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000275",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=71",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "71",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_71_09",
+      "name": "Điểm Trường Sinh 71",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=71",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "71",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000276",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=78",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "78",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_78_10",
+      "name": "Điểm Trường Sinh 78",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=78",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "78",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000277",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=85",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "85",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_85_11",
+      "name": "Điểm Trường Sinh 85",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=85",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "85",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000278",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=8",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "8",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_8_12",
+      "name": "Điểm Trường Sinh 8",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=8",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "8",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000279",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=15",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "15",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_15_13",
+      "name": "Điểm Trường Sinh 15",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=15",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "15",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000280",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=22",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "22",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_22_14",
+      "name": "Điểm Trường Sinh 22",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=22",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "22",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000281",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=29",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "29",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_29_15",
+      "name": "Điểm Trường Sinh 29",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=29",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "29",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000282",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=36",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "36",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_36_16",
+      "name": "Điểm Trường Sinh 36",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=36",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "36",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000283",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=43",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "43",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_43_17",
+      "name": "Điểm Trường Sinh 43",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=43",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "43",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000284",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=50",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "50",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_50_18",
+      "name": "Điểm Trường Sinh 50",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=50",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "50",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000285",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=57",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "57",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_57_19",
+      "name": "Điểm Trường Sinh 57",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=57",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "57",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000286",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=64",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "64",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_20",
+      "name": "Điểm Trường Sinh 64",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=64",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "64",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000287",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=71",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "71",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_71_21",
+      "name": "Điểm Trường Sinh 71",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=71",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "71",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000288",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=78",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "78",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_78_22",
+      "name": "Điểm Trường Sinh 78",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=78",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "78",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000289",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=85",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "85",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_85_23",
+      "name": "Điểm Trường Sinh 85",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=85",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "85",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000290",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=8",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "8",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_8_24",
+      "name": "Điểm Trường Sinh 8",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=8",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "8",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000291",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=15",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "15",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_15_25",
+      "name": "Điểm Trường Sinh 15",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=15",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "15",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000292",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=22",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "22",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_22_26",
+      "name": "Điểm Trường Sinh 22",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=22",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "22",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000293",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=29",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "29",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_29_27",
+      "name": "Điểm Trường Sinh 29",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=29",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "29",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000294",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=36",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "36",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_36_28",
+      "name": "Điểm Trường Sinh 36",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=36",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "36",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000295",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=43",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "43",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_43_29",
+      "name": "Điểm Trường Sinh 43",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=43",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "43",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000296",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=50",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "50",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_50_30",
+      "name": "Điểm Trường Sinh 50",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=50",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "50",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000297",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=57",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "57",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_57_31",
+      "name": "Điểm Trường Sinh 57",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=57",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "57",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000298",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=64",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "64",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_32",
+      "name": "Điểm Trường Sinh 64",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=64",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "64",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000299",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=71",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "71",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_71_33",
+      "name": "Điểm Trường Sinh 71",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=71",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "71",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000300",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=78",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "78",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_78_34",
+      "name": "Điểm Trường Sinh 78",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=78",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "78",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000301",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=85",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "85",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_85_35",
+      "name": "Điểm Trường Sinh 85",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=85",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "85",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000302",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=8",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "8",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_8_36",
+      "name": "Điểm Trường Sinh 8",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=8",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "8",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000303",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=15",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "15",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_15_37",
+      "name": "Điểm Trường Sinh 15",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=15",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "15",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000304",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=22",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "22",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_22_38",
+      "name": "Điểm Trường Sinh 22",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=22",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "22",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000305",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=29",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "29",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_29_39",
+      "name": "Điểm Trường Sinh 29",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=29",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "29",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000306",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=36",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "36",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_36_40",
+      "name": "Điểm Trường Sinh 36",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=36",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "36",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000307",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=43",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "43",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_43_41",
+      "name": "Điểm Trường Sinh 43",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=43",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "43",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000308",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 18
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=50",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "50",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_50_42",
+      "name": "Điểm Trường Sinh 50",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 18
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=50",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "50",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000309",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 44
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=57",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "57",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_57_43",
+      "name": "Điểm Trường Sinh 57",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=57",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "57",
+          "publishes": "growth_score"
+        }
+      }
+    },
+    {
+      "id": "TGP-000310",
+      "version": "1.0.0",
+      "category": "growth_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "scoring",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 45
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 26
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_score=64",
+        "weight": 9,
+        "signal": "growth_score",
+        "score_target": "day_master.growth_score",
+        "outcome": "64",
+        "publishes": "growth_score"
+      },
+      "explanation": "Composite growth_score. Không ghi đè strength_score / pattern_score / ten_gods outputs.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_44",
+      "name": "Điểm Trường Sinh 64",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 26
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_score=64",
+          "weight": 9,
+          "signal": "growth_score",
+          "score_target": "day_master.growth_score",
+          "outcome": "64",
+          "publishes": "growth_score"
+        }
+      }
+    }
+  ]
+}

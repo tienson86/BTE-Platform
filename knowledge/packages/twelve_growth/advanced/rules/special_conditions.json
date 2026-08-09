@@ -1,0 +1,2918 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "special_conditions",
+  "count": 30,
+  "objects": [
+    {
+      "id": "TGP-000236",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "follow_blocks_growth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=follow_blocks_growth",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "follow_blocks_growth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_blocks_growth_00",
+      "name": "Đặc biệt: follow_blocks_growth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=follow_blocks_growth",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "follow_blocks_growth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000237",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "ug_withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "ug_withheld",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_01",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "ug_withheld",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000238",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "extreme_season",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "extreme_season",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_02",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "extreme_season",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000239",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "low_integrity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "low_integrity",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_03",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "low_integrity",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000240",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "officer_suppresses",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=officer_suppresses",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "officer_suppresses",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_officer_suppresses_04",
+      "name": "Đặc biệt: officer_suppresses",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=officer_suppresses",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "officer_suppresses",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000241",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "follow_blocks_growth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=follow_blocks_growth",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "follow_blocks_growth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_blocks_growth_05",
+      "name": "Đặc biệt: follow_blocks_growth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=follow_blocks_growth",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "follow_blocks_growth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000242",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "ug_withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "ug_withheld",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_06",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "ug_withheld",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000243",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "extreme_season",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "extreme_season",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_07",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "extreme_season",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000244",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "low_integrity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "low_integrity",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_08",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "low_integrity",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000245",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "officer_suppresses",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=officer_suppresses",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "officer_suppresses",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_officer_suppresses_09",
+      "name": "Đặc biệt: officer_suppresses",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=officer_suppresses",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "officer_suppresses",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000246",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "follow_blocks_growth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=follow_blocks_growth",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "follow_blocks_growth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_blocks_growth_10",
+      "name": "Đặc biệt: follow_blocks_growth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=follow_blocks_growth",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "follow_blocks_growth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000247",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "ug_withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "ug_withheld",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_11",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "ug_withheld",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000248",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "extreme_season",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "extreme_season",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_12",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "extreme_season",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000249",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "low_integrity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "low_integrity",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_13",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "low_integrity",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000250",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "officer_suppresses",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=officer_suppresses",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "officer_suppresses",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_officer_suppresses_14",
+      "name": "Đặc biệt: officer_suppresses",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=officer_suppresses",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "officer_suppresses",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000251",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "follow_blocks_growth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=follow_blocks_growth",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "follow_blocks_growth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_blocks_growth_15",
+      "name": "Đặc biệt: follow_blocks_growth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=follow_blocks_growth",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "follow_blocks_growth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000252",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "ug_withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "ug_withheld",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_16",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "ug_withheld",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000253",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "extreme_season",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "extreme_season",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_17",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "extreme_season",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000254",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "low_integrity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "low_integrity",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_18",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "low_integrity",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000255",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "officer_suppresses",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=officer_suppresses",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "officer_suppresses",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_officer_suppresses_19",
+      "name": "Đặc biệt: officer_suppresses",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=officer_suppresses",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "officer_suppresses",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000256",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "follow_blocks_growth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=follow_blocks_growth",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "follow_blocks_growth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_blocks_growth_20",
+      "name": "Đặc biệt: follow_blocks_growth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=follow_blocks_growth",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "follow_blocks_growth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000257",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "ug_withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "ug_withheld",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_21",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "ug_withheld",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000258",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "extreme_season",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "extreme_season",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_22",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "extreme_season",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000259",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "low_integrity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "low_integrity",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_23",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "low_integrity",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000260",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "officer_suppresses",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=officer_suppresses",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "officer_suppresses",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_officer_suppresses_24",
+      "name": "Đặc biệt: officer_suppresses",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=officer_suppresses",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "officer_suppresses",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000261",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "follow_blocks_growth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=follow_blocks_growth",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "follow_blocks_growth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_blocks_growth_25",
+      "name": "Đặc biệt: follow_blocks_growth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=follow_blocks_growth",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "follow_blocks_growth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000262",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "ug_withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "ug_withheld",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_26",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "ug_withheld",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000263",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "extreme_season",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "extreme_season",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_27",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "extreme_season",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000264",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "low_integrity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "low_integrity",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_28",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "low_integrity",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000265",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "special",
+        "officer_suppresses",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=officer_suppresses",
+        "weight": 10,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "officer_suppresses",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-TGP-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_officer_suppresses_29",
+      "name": "Đặc biệt: officer_suppresses",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=officer_suppresses",
+          "weight": 10,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "officer_suppresses",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    }
+  ]
+}

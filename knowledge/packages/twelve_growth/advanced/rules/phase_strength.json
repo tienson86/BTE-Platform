@@ -1,0 +1,3928 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "phase_strength",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGP-000041",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "chang_sheng",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_chang_sheng_weak_00",
+      "name": "Sức giai đoạn Trường Sinh: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000042",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu_yu",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 42
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=mu_yu_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_yu_medium_01",
+      "name": "Sức giai đoạn Mộc Dục: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 42
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=mu_yu_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000043",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "guan_dai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=guan_dai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_guan_dai_strong_02",
+      "name": "Sức giai đoạn Quan Đới: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=guan_dai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000044",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "lin_guan",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=lin_guan_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_lin_guan_peak_03",
+      "name": "Sức giai đoạn Lâm Quan: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=lin_guan_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000045",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "di_wang",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=di_wang",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_di_wang_weak_04",
+      "name": "Sức giai đoạn Đế Vượng: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=di_wang",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000046",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "shuai",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=shuai_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_shuai_medium_05",
+      "name": "Sức giai đoạn Suy: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=shuai_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000047",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "bing",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=bing",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_bing_strong_06",
+      "name": "Sức giai đoạn Bệnh: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=bing",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000048",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "si",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 38
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=si_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_si_peak_07",
+      "name": "Sức giai đoạn Tử: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 38
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=si_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000049",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_weak_08",
+      "name": "Sức giai đoạn Mộ: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000050",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "jue",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=jue_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_jue_medium_09",
+      "name": "Sức giai đoạn Tuyệt: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=jue_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000051",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "tai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=tai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_tai_strong_10",
+      "name": "Sức giai đoạn Thai: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=tai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000052",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "yang",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=yang_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_yang_peak_11",
+      "name": "Sức giai đoạn Dưỡng: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=yang_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000053",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "chang_sheng",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_chang_sheng_weak_12",
+      "name": "Sức giai đoạn Trường Sinh: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000054",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu_yu",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=mu_yu_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_yu_medium_13",
+      "name": "Sức giai đoạn Mộc Dục: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=mu_yu_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000055",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "guan_dai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=guan_dai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_guan_dai_strong_14",
+      "name": "Sức giai đoạn Quan Đới: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=guan_dai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000056",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "lin_guan",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 42
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=lin_guan_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_lin_guan_peak_15",
+      "name": "Sức giai đoạn Lâm Quan: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 42
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=lin_guan_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000057",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "di_wang",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=di_wang",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_di_wang_weak_16",
+      "name": "Sức giai đoạn Đế Vượng: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=di_wang",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000058",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "shuai",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=shuai_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_shuai_medium_17",
+      "name": "Sức giai đoạn Suy: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=shuai_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000059",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "bing",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=bing",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_bing_strong_18",
+      "name": "Sức giai đoạn Bệnh: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=bing",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000060",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "si",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=si_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_si_peak_19",
+      "name": "Sức giai đoạn Tử: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=si_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000061",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_weak_20",
+      "name": "Sức giai đoạn Mộ: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000062",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "jue",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 38
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=jue_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_jue_medium_21",
+      "name": "Sức giai đoạn Tuyệt: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 38
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=jue_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000063",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "tai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=tai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_tai_strong_22",
+      "name": "Sức giai đoạn Thai: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=tai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000064",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "yang",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=yang_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_yang_peak_23",
+      "name": "Sức giai đoạn Dưỡng: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=yang_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000065",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "chang_sheng",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_chang_sheng_weak_24",
+      "name": "Sức giai đoạn Trường Sinh: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000066",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu_yu",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=mu_yu_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_yu_medium_25",
+      "name": "Sức giai đoạn Mộc Dục: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=mu_yu_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000067",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "guan_dai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=guan_dai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_guan_dai_strong_26",
+      "name": "Sức giai đoạn Quan Đới: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=guan_dai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000068",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "lin_guan",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 62
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=lin_guan_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_lin_guan_peak_27",
+      "name": "Sức giai đoạn Lâm Quan: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 62
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=lin_guan_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000069",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "di_wang",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=di_wang",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_di_wang_weak_28",
+      "name": "Sức giai đoạn Đế Vượng: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=di_wang",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000070",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "shuai",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 42
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=shuai_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_shuai_medium_29",
+      "name": "Sức giai đoạn Suy: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 42
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=shuai_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000071",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "bing",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=bing",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_bing_strong_30",
+      "name": "Sức giai đoạn Bệnh: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=bing",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000072",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "si",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=si_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_si_peak_31",
+      "name": "Sức giai đoạn Tử: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=si_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000073",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_weak_32",
+      "name": "Sức giai đoạn Mộ: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000074",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "jue",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 58
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=jue_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_jue_medium_33",
+      "name": "Sức giai đoạn Tuyệt: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 58
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=jue_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000075",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "tai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 62
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=tai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_tai_strong_34",
+      "name": "Sức giai đoạn Thai: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 62
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=tai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000076",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "yang",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 38
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=yang_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_yang_peak_35",
+      "name": "Sức giai đoạn Dưỡng: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 38
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=yang_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000077",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "chang_sheng",
+        "weak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_chang_sheng_weak_36",
+      "name": "Sức giai đoạn Trường Sinh: weak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000078",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "mu_yu",
+        "medium",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=mu_yu_medium",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_medium",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_mu_yu_medium_37",
+      "name": "Sức giai đoạn Mộc Dục: medium",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=mu_yu_medium",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_medium",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000079",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "guan_dai",
+        "strong",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=guan_dai",
+        "weight": 8,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_guan_dai_strong_38",
+      "name": "Sức giai đoạn Quan Đới: strong",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=guan_dai",
+          "weight": 8,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000080",
+      "version": "1.0.0",
+      "category": "phase_strength",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "strength",
+        "lin_guan",
+        "peak",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 54
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=lin_guan_peak",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_peak",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Đánh giá sức giai đoạn từ strength_score / season_score. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_strength",
+          "relation": "references"
+        }
+      ],
+      "code": "str_lin_guan_peak_39",
+      "name": "Sức giai đoạn Lâm Quan: peak",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 54
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=lin_guan_peak",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_peak",
+          "publishes": "growth_profile"
+        }
+      }
+    }
+  ]
+}

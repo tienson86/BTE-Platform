@@ -1,0 +1,3403 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "growth_dominance",
+  "count": 35,
+  "objects": [
+    {
+      "id": "TGP-000201",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mixed",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_00",
+      "name": "Chủ đạo giai đoạn: mixed",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000202",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mu_yu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu_yu",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mu_yu_01",
+      "name": "Chủ đạo giai đoạn: mu_yu",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu_yu",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000203",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "guan_dai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=guan_dai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_guan_dai_02",
+      "name": "Chủ đạo giai đoạn: guan_dai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=guan_dai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000204",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "lin_guan",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=lin_guan",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_lin_guan_03",
+      "name": "Chủ đạo giai đoạn: lin_guan",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=lin_guan",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000205",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=di_wang",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_di_wang_04",
+      "name": "Chủ đạo giai đoạn: di_wang",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=di_wang",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000206",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "shuai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=shuai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_shuai_05",
+      "name": "Chủ đạo giai đoạn: shuai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=shuai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000207",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "bing",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=bing",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_bing_06",
+      "name": "Chủ đạo giai đoạn: bing",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=bing",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000208",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "si",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=si",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "si",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_si_07",
+      "name": "Chủ đạo giai đoạn: si",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=si",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "si",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000209",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mu_08",
+      "name": "Chủ đạo giai đoạn: mu",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000210",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "jue",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=jue",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_jue_09",
+      "name": "Chủ đạo giai đoạn: jue",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=jue",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000211",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "tai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=tai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_tai_10",
+      "name": "Chủ đạo giai đoạn: tai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=tai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000212",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "yang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=yang",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_yang_11",
+      "name": "Chủ đạo giai đoạn: yang",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=yang",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000213",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "chang_sheng",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_chang_sheng_12",
+      "name": "Chủ đạo giai đoạn: chang_sheng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000214",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "none",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_13",
+      "name": "Chủ đạo giai đoạn: none",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000215",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "guan_dai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=guan_dai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_guan_dai_14",
+      "name": "Chủ đạo giai đoạn: guan_dai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=guan_dai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000216",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "lin_guan",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=lin_guan",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_lin_guan_15",
+      "name": "Chủ đạo giai đoạn: lin_guan",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=lin_guan",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000217",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=di_wang",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_di_wang_16",
+      "name": "Chủ đạo giai đoạn: di_wang",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=di_wang",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000218",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "shuai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=shuai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_shuai_17",
+      "name": "Chủ đạo giai đoạn: shuai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=shuai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000219",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "bing",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=bing",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_bing_18",
+      "name": "Chủ đạo giai đoạn: bing",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=bing",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000220",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "si",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=si",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "si",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_si_19",
+      "name": "Chủ đạo giai đoạn: si",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=si",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "si",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000221",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mu_20",
+      "name": "Chủ đạo giai đoạn: mu",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000222",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "jue",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=jue",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_jue_21",
+      "name": "Chủ đạo giai đoạn: jue",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=jue",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000223",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "tai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=tai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_tai_22",
+      "name": "Chủ đạo giai đoạn: tai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=tai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000224",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "yang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=yang",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_yang_23",
+      "name": "Chủ đạo giai đoạn: yang",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=yang",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000225",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "chang_sheng",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_chang_sheng_24",
+      "name": "Chủ đạo giai đoạn: chang_sheng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000226",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mu_yu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu_yu",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mu_yu_25",
+      "name": "Chủ đạo giai đoạn: mu_yu",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu_yu",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000227",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mixed",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "seven_killings"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_26",
+      "name": "Chủ đạo giai đoạn: mixed",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "seven_killings"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000228",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "none",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=chang_sheng",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_27",
+      "name": "Chủ đạo giai đoạn: none",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=chang_sheng",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000229",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=di_wang",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_di_wang_28",
+      "name": "Chủ đạo giai đoạn: di_wang",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=di_wang",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000230",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "shuai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "direct_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=shuai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_shuai_29",
+      "name": "Chủ đạo giai đoạn: shuai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "direct_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=shuai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000231",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "bing",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=bing",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_bing_30",
+      "name": "Chủ đạo giai đoạn: bing",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=bing",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000232",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "si",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=si",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "si",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_si_31",
+      "name": "Chủ đạo giai đoạn: si",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=si",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "si",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000233",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "mu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=mu",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mu_32",
+      "name": "Chủ đạo giai đoạn: mu",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=mu",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000234",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "jue",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=jue",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_jue_33",
+      "name": "Chủ đạo giai đoạn: jue",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=jue",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue",
+          "publishes": "growth_phase"
+        }
+      }
+    },
+    {
+      "id": "TGP-000235",
+      "version": "1.0.0",
+      "category": "growth_dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "dominance",
+        "tai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_dominance",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "growth_phase=tai",
+        "weight": 9,
+        "signal": "growth_phase",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai",
+        "publishes": "growth_phase"
+      },
+      "explanation": "Giai đoạn chủ đạo từ strength/pattern/TGA dominance đã công bố. Không ghi đè quyết định UGP.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_tai_34",
+      "name": "Chủ đạo giai đoạn: tai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_dominance",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "growth_phase=tai",
+          "weight": 9,
+          "signal": "growth_phase",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai",
+          "publishes": "growth_phase"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,3928 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "phase_transition",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGP-000081",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "chang_sheng",
+        "mu_yu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_chang_sheng_mu_yu_00",
+      "name": "Chuyển Trường Sinh → Mộc Dục",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000082",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu_yu",
+        "guan_dai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_yu_guan_dai_01",
+      "name": "Chuyển Mộc Dục → Quan Đới",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000083",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "guan_dai",
+        "lin_guan",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_guan_dai_lin_guan_02",
+      "name": "Chuyển Quan Đới → Lâm Quan",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000084",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "lin_guan",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_lin_guan_di_wang_03",
+      "name": "Chuyển Lâm Quan → Đế Vượng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000085",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "di_wang",
+        "shuai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_di_wang_shuai_04",
+      "name": "Chuyển Đế Vượng → Suy",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000086",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "shuai",
+        "bing",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_shuai_bing_05",
+      "name": "Chuyển Suy → Bệnh",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000087",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "bing",
+        "si",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_bing_si_06",
+      "name": "Chuyển Bệnh → Tử",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000088",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "si",
+        "mu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_si_mu_07",
+      "name": "Chuyển Tử → Mộ",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000089",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu",
+        "jue",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_jue_08",
+      "name": "Chuyển Mộ → Tuyệt",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000090",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "jue",
+        "tai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_jue_tai_09",
+      "name": "Chuyển Tuyệt → Thai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000091",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "tai",
+        "yang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_tai_yang_10",
+      "name": "Chuyển Thai → Dưỡng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000092",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "yang",
+        "chang_sheng",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_yang_chang_sheng_11",
+      "name": "Chuyển Dưỡng → Trường Sinh",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000093",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "chang_sheng",
+        "mu_yu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_chang_sheng_mu_yu_12",
+      "name": "Chuyển Trường Sinh → Mộc Dục",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000094",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu_yu",
+        "guan_dai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_yu_guan_dai_13",
+      "name": "Chuyển Mộc Dục → Quan Đới",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000095",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "guan_dai",
+        "lin_guan",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_guan_dai_lin_guan_14",
+      "name": "Chuyển Quan Đới → Lâm Quan",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000096",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "lin_guan",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_lin_guan_di_wang_15",
+      "name": "Chuyển Lâm Quan → Đế Vượng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000097",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "di_wang",
+        "shuai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_di_wang_shuai_16",
+      "name": "Chuyển Đế Vượng → Suy",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000098",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "shuai",
+        "bing",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_shuai_bing_17",
+      "name": "Chuyển Suy → Bệnh",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000099",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "bing",
+        "si",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_bing_si_18",
+      "name": "Chuyển Bệnh → Tử",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000100",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "si",
+        "mu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_si_mu_19",
+      "name": "Chuyển Tử → Mộ",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000101",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu",
+        "jue",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_jue_20",
+      "name": "Chuyển Mộ → Tuyệt",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000102",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "jue",
+        "tai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_jue_tai_21",
+      "name": "Chuyển Tuyệt → Thai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000103",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "tai",
+        "yang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_tai_yang_22",
+      "name": "Chuyển Thai → Dưỡng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000104",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "yang",
+        "chang_sheng",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_yang_chang_sheng_23",
+      "name": "Chuyển Dưỡng → Trường Sinh",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000105",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "chang_sheng",
+        "mu_yu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_chang_sheng_mu_yu_24",
+      "name": "Chuyển Trường Sinh → Mộc Dục",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000106",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu_yu",
+        "guan_dai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_yu_guan_dai_25",
+      "name": "Chuyển Mộc Dục → Quan Đới",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000107",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "guan_dai",
+        "lin_guan",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_guan_dai_lin_guan_26",
+      "name": "Chuyển Quan Đới → Lâm Quan",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000108",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "lin_guan",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_lin_guan_di_wang_27",
+      "name": "Chuyển Lâm Quan → Đế Vượng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000109",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "di_wang",
+        "shuai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_di_wang_shuai_28",
+      "name": "Chuyển Đế Vượng → Suy",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000110",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "shuai",
+        "bing",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_shuai_bing_29",
+      "name": "Chuyển Suy → Bệnh",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000111",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "bing",
+        "si",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_bing_si_30",
+      "name": "Chuyển Bệnh → Tử",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000112",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "si",
+        "mu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_si_mu_31",
+      "name": "Chuyển Tử → Mộ",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000113",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu",
+        "jue",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_jue_32",
+      "name": "Chuyển Mộ → Tuyệt",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000114",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "jue",
+        "tai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_jue_tai_33",
+      "name": "Chuyển Tuyệt → Thai",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000115",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "tai",
+        "yang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_tai_yang_34",
+      "name": "Chuyển Thai → Dưỡng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000116",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "yang",
+        "chang_sheng",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_yang_chang_sheng_35",
+      "name": "Chuyển Dưỡng → Trường Sinh",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000117",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "chang_sheng",
+        "mu_yu",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_chang_sheng_mu_yu_36",
+      "name": "Chuyển Trường Sinh → Mộc Dục",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000118",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "mu_yu",
+        "guan_dai",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mu_yu_guan_dai_37",
+      "name": "Chuyển Mộc Dục → Quan Đới",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000119",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "guan_dai",
+        "lin_guan",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_guan_dai_lin_guan_38",
+      "name": "Chuyển Quan Đới → Lâm Quan",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    },
+    {
+      "id": "TGP-000120",
+      "version": "1.0.0",
+      "category": "phase_transition",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "transition",
+        "lin_guan",
+        "di_wang",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "growth_profile=transitional",
+        "weight": 8,
+        "signal": "growth_profile",
+        "score_target": "day_master.growth_score",
+        "outcome": "transitional",
+        "publishes": "growth_profile"
+      },
+      "explanation": "Chuyển giai đoạn suy từ dải mùa/ổn định cách. Không tính lại Tứ trụ.",
+      "references": [
+        {
+          "target": "REF-TGP-phase_transition",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_lin_guan_di_wang_39",
+      "name": "Chuyển Lâm Quan → Đế Vượng",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "growth_profile=transitional",
+          "weight": 8,
+          "signal": "growth_profile",
+          "score_target": "day_master.growth_score",
+          "outcome": "transitional",
+          "publishes": "growth_profile"
+        }
+      }
+    }
+  ]
+}

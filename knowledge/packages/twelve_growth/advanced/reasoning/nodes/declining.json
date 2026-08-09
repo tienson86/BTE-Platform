@@ -1,0 +1,450 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-TGP-DECLINING-OBS-001",
+      "node_type": "observation",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "observation_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TGP-DECLINING-EVD-001",
+      "node_type": "evidence",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": "TGP-000006",
+      "source_evidence": "evidence/bundles/TGP-000006.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TGP-DECLINING-INF-001",
+      "node_type": "inference",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": "TGP-000006",
+      "source_evidence": "evidence/bundles/TGP-000006.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TGP-DECLINING-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": "TGP-000006",
+      "source_evidence": "evidence/bundles/TGP-000006.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "intermediate_conclusion_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TGP-DECLINING-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": "TGP-000006",
+      "source_evidence": "evidence/bundles/TGP-000006.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "final_conclusion_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TGP-DECLINING-ALT-001",
+      "node_type": "alternative",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": "TGP-000006",
+      "source_evidence": "evidence/bundles/TGP-000006.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "alternative_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TGP-DECLINING-CON-001",
+      "node_type": "conflict",
+      "title": "Trường Sinh suy",
+      "description": "Trường Sinh suy: đọc TGP + TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC đã công bố. Không viết lại luật upstream. Không sinh văn luận giải.",
+      "source_rule": "TGP-000006",
+      "source_evidence": "evidence/bundles/TGP-000006.json",
+      "inputs": [
+        "published_outputs"
+      ],
+      "outputs": [
+        "conflict_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "language": "vi",
+        "upstream_follow_pattern": [
+          "FPC-000001",
+          "FPC-000156",
+          "FPC-000181"
+        ],
+        "upstream_pattern": [
+          "PAT-000023",
+          "PAT-000065",
+          "PAT-000089"
+        ],
+        "upstream_pattern_evaluation": [
+          "PEV-000001",
+          "PEV-000089",
+          "PEV-000101"
+        ],
+        "upstream_seasonal": [
+          "SEC-000026",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000001",
+          "SKC-000098"
+        ],
+        "upstream_temperature": [
+          "TEC-000001",
+          "TEC-000057"
+        ],
+        "upstream_transformation": [
+          "TRC-000001",
+          "TRC-000136",
+          "TRC-000251"
+        ],
+        "upstream_combination_clash": [
+          "CBC-000001",
+          "CBC-000141",
+          "CBC-000246"
+        ],
+        "upstream_ten_gods": [
+          "TGA-000001",
+          "TGA-000241",
+          "TGA-000361"
+        ]
+      }
+    }
+  ]
+}

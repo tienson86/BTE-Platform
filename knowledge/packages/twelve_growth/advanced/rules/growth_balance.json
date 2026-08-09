@@ -1,0 +1,3403 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "growth_balance",
+  "count": 35,
+  "objects": [
+    {
+      "id": "TGP-000166",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "balanced",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=balanced",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "balanced",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_00",
+      "name": "Cân Trường Sinh: balanced",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=balanced",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "balanced",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000167",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "rising",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=rising",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "rising",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rising_01",
+      "name": "Cân Trường Sinh: rising",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=rising",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "rising",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000168",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "declining",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=declining",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "declining",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_declining_02",
+      "name": "Cân Trường Sinh: declining",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=declining",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "declining",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000169",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "storage",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=storage",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "storage",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_storage_03",
+      "name": "Cân Trường Sinh: storage",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=storage",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "storage",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000170",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "unstable",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=unstable",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "unstable",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_04",
+      "name": "Cân Trường Sinh: unstable",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=unstable",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "unstable",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000171",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=withheld",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "withheld",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_05",
+      "name": "Cân Trường Sinh: withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=withheld",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "withheld",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000172",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_prosperity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_prosperity",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_prosperity",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_prosperity_06",
+      "name": "Cân Trường Sinh: tilted_prosperity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_prosperity",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_prosperity",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000173",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_decline",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_decline",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_decline",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_decline_07",
+      "name": "Cân Trường Sinh: tilted_decline",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_decline",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_decline",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000174",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "balanced",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=balanced",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "balanced",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_08",
+      "name": "Cân Trường Sinh: balanced",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=balanced",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "balanced",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000175",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "rising",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=rising",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "rising",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rising_09",
+      "name": "Cân Trường Sinh: rising",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=rising",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "rising",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000176",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "declining",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=declining",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "declining",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_declining_10",
+      "name": "Cân Trường Sinh: declining",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=declining",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "declining",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000177",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "storage",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=storage",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "storage",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_storage_11",
+      "name": "Cân Trường Sinh: storage",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=storage",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "storage",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000178",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "unstable",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=unstable",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "unstable",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_12",
+      "name": "Cân Trường Sinh: unstable",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=unstable",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "unstable",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000179",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=withheld",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "withheld",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_13",
+      "name": "Cân Trường Sinh: withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=withheld",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "withheld",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000180",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_prosperity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_prosperity",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_prosperity",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_prosperity_14",
+      "name": "Cân Trường Sinh: tilted_prosperity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_prosperity",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_prosperity",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000181",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_decline",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_decline",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_decline",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_decline_15",
+      "name": "Cân Trường Sinh: tilted_decline",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_decline",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_decline",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000182",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "balanced",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=balanced",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "balanced",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_16",
+      "name": "Cân Trường Sinh: balanced",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=balanced",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "balanced",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000183",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "rising",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=rising",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "rising",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rising_17",
+      "name": "Cân Trường Sinh: rising",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=rising",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "rising",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000184",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "declining",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=declining",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "declining",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_declining_18",
+      "name": "Cân Trường Sinh: declining",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=declining",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "declining",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000185",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "storage",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=storage",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "storage",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_storage_19",
+      "name": "Cân Trường Sinh: storage",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=storage",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "storage",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000186",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "unstable",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=unstable",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "unstable",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_20",
+      "name": "Cân Trường Sinh: unstable",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=unstable",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "unstable",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000187",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=withheld",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "withheld",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_21",
+      "name": "Cân Trường Sinh: withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=withheld",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "withheld",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000188",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_prosperity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_prosperity",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_prosperity",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_prosperity_22",
+      "name": "Cân Trường Sinh: tilted_prosperity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_prosperity",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_prosperity",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000189",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_decline",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_decline",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_decline",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_decline_23",
+      "name": "Cân Trường Sinh: tilted_decline",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_decline",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_decline",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000190",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "balanced",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=balanced",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "balanced",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_24",
+      "name": "Cân Trường Sinh: balanced",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=balanced",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "balanced",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000191",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "rising",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=rising",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "rising",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rising_25",
+      "name": "Cân Trường Sinh: rising",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=rising",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "rising",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000192",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "declining",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=declining",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "declining",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_declining_26",
+      "name": "Cân Trường Sinh: declining",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=declining",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "declining",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000193",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "storage",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=storage",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "storage",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_storage_27",
+      "name": "Cân Trường Sinh: storage",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=storage",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "storage",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000194",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "unstable",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=unstable",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "unstable",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_28",
+      "name": "Cân Trường Sinh: unstable",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=unstable",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "unstable",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000195",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "withheld",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=withheld",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "withheld",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_29",
+      "name": "Cân Trường Sinh: withheld",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=withheld",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "withheld",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000196",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_prosperity",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_prosperity",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_prosperity",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_prosperity_30",
+      "name": "Cân Trường Sinh: tilted_prosperity",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_prosperity",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_prosperity",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000197",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "tilted_decline",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=tilted_decline",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "tilted_decline",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_decline_31",
+      "name": "Cân Trường Sinh: tilted_decline",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=tilted_decline",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "tilted_decline",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000198",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "balanced",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=balanced",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "balanced",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_32",
+      "name": "Cân Trường Sinh: balanced",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=balanced",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "balanced",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000199",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "rising",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=rising",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "rising",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rising_33",
+      "name": "Cân Trường Sinh: rising",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=rising",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "rising",
+          "publishes": "growth_balance"
+        }
+      }
+    },
+    {
+      "id": "TGP-000200",
+      "version": "1.0.0",
+      "category": "growth_balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "balance",
+        "declining",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "growth_balance=declining",
+        "weight": 9,
+        "signal": "growth_balance",
+        "score_target": "day_master.growth_score",
+        "outcome": "declining",
+        "publishes": "growth_balance"
+      },
+      "explanation": "Cân bằng Trường Sinh từ cụm sức/mùa/Thập Thần. Không ghi đè ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_declining_34",
+      "name": "Cân Trường Sinh: declining",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "growth_balance=declining",
+          "weight": 9,
+          "signal": "growth_balance",
+          "score_target": "day_master.growth_score",
+          "outcome": "declining",
+          "publishes": "growth_balance"
+        }
+      }
+    }
+  ]
+}

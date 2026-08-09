@@ -1,0 +1,119 @@
+{
+  "rule_id": "TGP-000245",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Đặc biệt: officer_suppresses",
+    "why": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn.",
+    "when": "Khi 19 output đã công bố khớp điều kiện Trường Sinh nâng cao.",
+    "when_not": "Khi thiếu input hợp đồng hoặc giai đoạn bị withhold.",
+    "summary": "Điều kiện đặc biệt Trường Sinh (tòng/UG withhold) từ hợp đồng đã phong ấn."
+  },
+  "rationale": "Luật `special_officer_suppresses_09` đánh giá Trường Sinh từ output đã công bố. Không tính lại Tứ trụ / Sức thân. Không viết lại TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC/UG. Không sinh văn luận giải.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-6B: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-TGP-special_conditions",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TGP-000245-01",
+      "rule_id": "TGP-000245",
+      "polarity": "positive",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 55,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "weak",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "true",
+        "follow_pattern_score": 42,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "ten_gods_dominance": "peer",
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Thỏa điều kiện giai đoạn."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TGP-000245-01",
+      "rule_id": "TGP-000245",
+      "polarity": "negative",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 55,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "weak",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "withheld",
+        "follow_pattern_score": 42,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "ten_gods_dominance": "peer",
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Không kích hoạt / giai đoạn khác."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TGP-000245-01",
+      "rule_id": "TGP-000245",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 55,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "weak",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "true",
+        "follow_pattern_score": 42,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "ten_gods_dominance": "peer",
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Biên: đủ TGP nhưng thiếu một input hợp đồng thì không công bố giai đoạn."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_14_twelve_growth_advanced",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-6B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

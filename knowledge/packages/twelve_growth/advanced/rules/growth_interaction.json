@@ -1,0 +1,4418 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_14_twelve_growth_advanced",
+  "category": "growth_interaction",
+  "count": 45,
+  "objects": [
+    {
+      "id": "TGP-000121",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "chang_sheng",
+        "peer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=chang_sheng_x_peer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng_x_peer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_chang_sheng_peer_00",
+      "name": "Tương tác Trường Sinh/peer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=chang_sheng_x_peer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng_x_peer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000122",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu_yu",
+        "rob_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_yu_x_rob_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_x_rob_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_yu_rob_wealth_01",
+      "name": "Tương tác Mộc Dục/rob_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_yu_x_rob_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_x_rob_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000123",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "guan_dai",
+        "eating_god",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=guan_dai_x_eating_god",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai_x_eating_god",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_guan_dai_eating_god_02",
+      "name": "Tương tác Quan Đới/eating_god",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=guan_dai_x_eating_god",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai_x_eating_god",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000124",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "lin_guan",
+        "hurling_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=lin_guan_x_hurling_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_x_hurling_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_lin_guan_hurling_officer_03",
+      "name": "Tương tác Lâm Quan/hurling_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=lin_guan_x_hurling_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_x_hurling_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000125",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "di_wang",
+        "indirect_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=di_wang_x_indirect_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang_x_indirect_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_di_wang_indirect_wealth_04",
+      "name": "Tương tác Đế Vượng/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=di_wang_x_indirect_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang_x_indirect_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000126",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "shuai",
+        "direct_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=shuai_x_direct_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_x_direct_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_shuai_direct_wealth_05",
+      "name": "Tương tác Suy/direct_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=shuai_x_direct_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_x_direct_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000127",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "bing",
+        "seven_killings",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=bing_x_seven_killings",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing_x_seven_killings",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_bing_seven_killings_06",
+      "name": "Tương tác Bệnh/seven_killings",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=bing_x_seven_killings",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing_x_seven_killings",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000128",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "si",
+        "direct_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=si_x_direct_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_x_direct_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_si_direct_officer_07",
+      "name": "Tương tác Tử/direct_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=si_x_direct_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_x_direct_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000129",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu",
+        "indirect_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_x_indirect_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_x_indirect_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_indirect_resource_08",
+      "name": "Tương tác Mộ/indirect_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_x_indirect_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_x_indirect_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000130",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "jue",
+        "direct_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=jue_x_direct_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue_x_direct_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_jue_direct_resource_09",
+      "name": "Tương tác Tuyệt/direct_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=jue_x_direct_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue_x_direct_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000131",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "tai",
+        "peer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=tai_x_peer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai_x_peer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_tai_peer_10",
+      "name": "Tương tác Thai/peer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=tai_x_peer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai_x_peer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000132",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "yang",
+        "rob_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=yang_x_rob_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang_x_rob_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_yang_rob_wealth_11",
+      "name": "Tương tác Dưỡng/rob_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=yang_x_rob_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang_x_rob_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000133",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "chang_sheng",
+        "eating_god",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=chang_sheng_x_eating_god",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng_x_eating_god",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_chang_sheng_eating_god_12",
+      "name": "Tương tác Trường Sinh/eating_god",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=chang_sheng_x_eating_god",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng_x_eating_god",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000134",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu_yu",
+        "hurling_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_yu_x_hurling_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_x_hurling_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_yu_hurling_officer_13",
+      "name": "Tương tác Mộc Dục/hurling_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_yu_x_hurling_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_x_hurling_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000135",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "guan_dai",
+        "indirect_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=guan_dai_x_indirect_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai_x_indirect_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_guan_dai_indirect_wealth_14",
+      "name": "Tương tác Quan Đới/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=guan_dai_x_indirect_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai_x_indirect_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000136",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "lin_guan",
+        "direct_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=lin_guan_x_direct_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_x_direct_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_lin_guan_direct_wealth_15",
+      "name": "Tương tác Lâm Quan/direct_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=lin_guan_x_direct_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_x_direct_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000137",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "di_wang",
+        "seven_killings",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=di_wang_x_seven_killings",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang_x_seven_killings",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_di_wang_seven_killings_16",
+      "name": "Tương tác Đế Vượng/seven_killings",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=di_wang_x_seven_killings",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang_x_seven_killings",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000138",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "shuai",
+        "direct_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=shuai_x_direct_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_x_direct_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_shuai_direct_officer_17",
+      "name": "Tương tác Suy/direct_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=shuai_x_direct_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_x_direct_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000139",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "bing",
+        "indirect_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=bing_x_indirect_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing_x_indirect_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_bing_indirect_resource_18",
+      "name": "Tương tác Bệnh/indirect_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=bing_x_indirect_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing_x_indirect_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000140",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "si",
+        "direct_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=si_x_direct_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_x_direct_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_si_direct_resource_19",
+      "name": "Tương tác Tử/direct_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=si_x_direct_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_x_direct_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000141",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu",
+        "peer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_x_peer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_x_peer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_peer_20",
+      "name": "Tương tác Mộ/peer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_x_peer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_x_peer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000142",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "jue",
+        "rob_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=jue_x_rob_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue_x_rob_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_jue_rob_wealth_21",
+      "name": "Tương tác Tuyệt/rob_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=jue_x_rob_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue_x_rob_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000143",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "tai",
+        "eating_god",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=tai_x_eating_god",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai_x_eating_god",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_tai_eating_god_22",
+      "name": "Tương tác Thai/eating_god",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=tai_x_eating_god",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai_x_eating_god",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000144",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "yang",
+        "hurling_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=yang_x_hurling_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang_x_hurling_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_yang_hurling_officer_23",
+      "name": "Tương tác Dưỡng/hurling_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=yang_x_hurling_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang_x_hurling_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000145",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "chang_sheng",
+        "indirect_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=chang_sheng_x_indirect_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng_x_indirect_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_chang_sheng_indirect_wealth_24",
+      "name": "Tương tác Trường Sinh/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=chang_sheng_x_indirect_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng_x_indirect_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000146",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu_yu",
+        "direct_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_yu_x_direct_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_x_direct_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_yu_direct_wealth_25",
+      "name": "Tương tác Mộc Dục/direct_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_yu_x_direct_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_x_direct_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000147",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "guan_dai",
+        "seven_killings",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=guan_dai_x_seven_killings",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai_x_seven_killings",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_guan_dai_seven_killings_26",
+      "name": "Tương tác Quan Đới/seven_killings",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=guan_dai_x_seven_killings",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai_x_seven_killings",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000148",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "lin_guan",
+        "direct_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=lin_guan_x_direct_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_x_direct_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_lin_guan_direct_officer_27",
+      "name": "Tương tác Lâm Quan/direct_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=lin_guan_x_direct_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_x_direct_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000149",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "di_wang",
+        "indirect_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=di_wang_x_indirect_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang_x_indirect_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_di_wang_indirect_resource_28",
+      "name": "Tương tác Đế Vượng/indirect_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=di_wang_x_indirect_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang_x_indirect_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000150",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "shuai",
+        "direct_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=shuai_x_direct_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_x_direct_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_shuai_direct_resource_29",
+      "name": "Tương tác Suy/direct_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=shuai_x_direct_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_x_direct_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000151",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "bing",
+        "peer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=bing_x_peer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing_x_peer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_bing_peer_30",
+      "name": "Tương tác Bệnh/peer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=bing_x_peer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing_x_peer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000152",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "si",
+        "rob_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=si_x_rob_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_x_rob_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_si_rob_wealth_31",
+      "name": "Tương tác Tử/rob_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=si_x_rob_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_x_rob_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000153",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu",
+        "eating_god",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_x_eating_god",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_x_eating_god",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_eating_god_32",
+      "name": "Tương tác Mộ/eating_god",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_x_eating_god",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_x_eating_god",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000154",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "jue",
+        "hurling_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=jue_x_hurling_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "jue_x_hurling_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_jue_hurling_officer_33",
+      "name": "Tương tác Tuyệt/hurling_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=jue_x_hurling_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "jue_x_hurling_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000155",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "tai",
+        "indirect_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=tai_x_indirect_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "tai_x_indirect_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_tai_indirect_wealth_34",
+      "name": "Tương tác Thai/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=tai_x_indirect_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "tai_x_indirect_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000156",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "yang",
+        "direct_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=yang_x_direct_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "yang_x_direct_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_yang_direct_wealth_35",
+      "name": "Tương tác Dưỡng/direct_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=yang_x_direct_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "yang_x_direct_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000157",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "chang_sheng",
+        "seven_killings",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=chang_sheng_x_seven_killings",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "chang_sheng_x_seven_killings",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_chang_sheng_seven_killings_36",
+      "name": "Tương tác Trường Sinh/seven_killings",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=chang_sheng_x_seven_killings",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "chang_sheng_x_seven_killings",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000158",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu_yu",
+        "direct_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_yu_x_direct_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_yu_x_direct_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_yu_direct_officer_37",
+      "name": "Tương tác Mộc Dục/direct_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_yu_x_direct_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_yu_x_direct_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000159",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "guan_dai",
+        "indirect_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=guan_dai_x_indirect_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "guan_dai_x_indirect_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_guan_dai_indirect_resource_38",
+      "name": "Tương tác Quan Đới/indirect_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=guan_dai_x_indirect_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "guan_dai_x_indirect_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000160",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "lin_guan",
+        "direct_resource",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 57
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=lin_guan_x_direct_resource",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "lin_guan_x_direct_resource",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_lin_guan_direct_resource_39",
+      "name": "Tương tác Lâm Quan/direct_resource",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 57
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=lin_guan_x_direct_resource",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "lin_guan_x_direct_resource",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000161",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "di_wang",
+        "peer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 22
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=di_wang_x_peer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "di_wang_x_peer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_di_wang_peer_40",
+      "name": "Tương tác Đế Vượng/peer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 22
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=di_wang_x_peer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "di_wang_x_peer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000162",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "shuai",
+        "rob_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 27
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=shuai_x_rob_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "shuai_x_rob_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_shuai_rob_wealth_41",
+      "name": "Tương tác Suy/rob_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 27
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=shuai_x_rob_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "shuai_x_rob_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000163",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "bing",
+        "eating_god",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=bing_x_eating_god",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "bing_x_eating_god",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_bing_eating_god_42",
+      "name": "Tương tác Bệnh/eating_god",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=bing_x_eating_god",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "bing_x_eating_god",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000164",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "si",
+        "hurling_officer",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 44
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=si_x_hurling_officer",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "si_x_hurling_officer",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_si_hurling_officer_43",
+      "name": "Tương tác Tử/hurling_officer",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=si_x_hurling_officer",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "si_x_hurling_officer",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGP-000165",
+      "version": "1.0.0",
+      "category": "growth_interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "twelve_growth",
+        "interaction",
+        "mu",
+        "indirect_wealth",
+        "kx6b"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 45
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 88
+        }
+      ],
+      "result": {
+        "effect": "growth_diagnostics=mu_x_indirect_wealth",
+        "weight": 8,
+        "signal": "growth_diagnostics",
+        "score_target": "day_master.growth_score",
+        "outcome": "mu_x_indirect_wealth",
+        "publishes": "growth_diagnostics"
+      },
+      "explanation": "Tương tác Trường Sinh–Thập Thần đọc ten_gods_* và interaction_score. Không viết lại TGA/CBC.",
+      "references": [
+        {
+          "target": "REF-TGP-growth_interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_mu_indirect_wealth_44",
+      "name": "Tương tác Mộ/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "domain_id": "DOM-TWELVE_GROWTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 88
+          }
+        ],
+        "result": {
+          "effect": "growth_diagnostics=mu_x_indirect_wealth",
+          "weight": 8,
+          "signal": "growth_diagnostics",
+          "score_target": "day_master.growth_score",
+          "outcome": "mu_x_indirect_wealth",
+          "publishes": "growth_diagnostics"
+        }
+      }
+    }
+  ]
+}

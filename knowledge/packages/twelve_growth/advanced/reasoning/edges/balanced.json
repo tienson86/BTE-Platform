@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TGP-BALANCED-001",
+      "source": "RN-TGP-BALANCED-OBS-001",
+      "target": "RN-TGP-BALANCED-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGP-BALANCED-002",
+      "source": "RN-TGP-BALANCED-EVD-001",
+      "target": "RN-TGP-BALANCED-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGP-BALANCED-003",
+      "source": "RN-TGP-BALANCED-INF-001",
+      "target": "RN-TGP-BALANCED-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGP-BALANCED-004",
+      "source": "RN-TGP-BALANCED-MID-001",
+      "target": "RN-TGP-BALANCED-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGP-BALANCED-005",
+      "source": "RN-TGP-BALANCED-OBS-001",
+      "target": "RN-TGP-BALANCED-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TGP-BALANCED-006",
+      "source": "RN-TGP-BALANCED-CON-001",
+      "target": "RN-TGP-BALANCED-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}
