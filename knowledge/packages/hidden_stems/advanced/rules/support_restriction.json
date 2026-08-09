@@ -1,0 +1,4418 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "category": "support_restriction",
+  "count": 45,
+  "objects": [
+    {
+      "id": "HSA-000171",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "jia",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_jia_support_00",
+      "name": "Sinh khắc tàng jia: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000172",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "yi",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_yi_restrict_01",
+      "name": "Sinh khắc tàng yi: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000173",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "bing",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_bing_drain_02",
+      "name": "Sinh khắc tàng bing: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000174",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ding",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ding_neutral_03",
+      "name": "Sinh khắc tàng ding: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000175",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "wu",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_wu_support_04",
+      "name": "Sinh khắc tàng wu: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000176",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ji",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ji_restrict_05",
+      "name": "Sinh khắc tàng ji: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000177",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "geng",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_geng_drain_06",
+      "name": "Sinh khắc tàng geng: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000178",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "xin",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_xin_neutral_07",
+      "name": "Sinh khắc tàng xin: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000179",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ren",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ren_support_08",
+      "name": "Sinh khắc tàng ren: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000180",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "gui",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_gui_restrict_09",
+      "name": "Sinh khắc tàng gui: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000181",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "jia",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_jia_drain_10",
+      "name": "Sinh khắc tàng jia: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000182",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "yi",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_yi_neutral_11",
+      "name": "Sinh khắc tàng yi: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000183",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "bing",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_bing_support_12",
+      "name": "Sinh khắc tàng bing: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000184",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ding",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ding_restrict_13",
+      "name": "Sinh khắc tàng ding: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000185",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "wu",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_wu_drain_14",
+      "name": "Sinh khắc tàng wu: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000186",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ji",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ji_neutral_15",
+      "name": "Sinh khắc tàng ji: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000187",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "geng",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_geng_support_16",
+      "name": "Sinh khắc tàng geng: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000188",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "xin",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_xin_restrict_17",
+      "name": "Sinh khắc tàng xin: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000189",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ren",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ren_drain_18",
+      "name": "Sinh khắc tàng ren: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000190",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "gui",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_gui_neutral_19",
+      "name": "Sinh khắc tàng gui: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000191",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "jia",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_jia_support_20",
+      "name": "Sinh khắc tàng jia: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000192",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "yi",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_yi_restrict_21",
+      "name": "Sinh khắc tàng yi: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000193",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "bing",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_bing_drain_22",
+      "name": "Sinh khắc tàng bing: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000194",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ding",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ding_neutral_23",
+      "name": "Sinh khắc tàng ding: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000195",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "wu",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_wu_support_24",
+      "name": "Sinh khắc tàng wu: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000196",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ji",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ji_restrict_25",
+      "name": "Sinh khắc tàng ji: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000197",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "geng",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_geng_drain_26",
+      "name": "Sinh khắc tàng geng: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000198",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "xin",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_xin_neutral_27",
+      "name": "Sinh khắc tàng xin: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000199",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ren",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ren_support_28",
+      "name": "Sinh khắc tàng ren: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000200",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "gui",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_gui_restrict_29",
+      "name": "Sinh khắc tàng gui: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000201",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "jia",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_jia_drain_30",
+      "name": "Sinh khắc tàng jia: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000202",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "yi",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_yi_neutral_31",
+      "name": "Sinh khắc tàng yi: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000203",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "bing",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_bing_support_32",
+      "name": "Sinh khắc tàng bing: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000204",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ding",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ding_restrict_33",
+      "name": "Sinh khắc tàng ding: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000205",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "wu",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_wu_drain_34",
+      "name": "Sinh khắc tàng wu: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000206",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ji",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ji_neutral_35",
+      "name": "Sinh khắc tàng ji: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000207",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "geng",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_geng_support_36",
+      "name": "Sinh khắc tàng geng: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000208",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "xin",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_xin_restrict_37",
+      "name": "Sinh khắc tàng xin: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000209",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ren",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ren_drain_38",
+      "name": "Sinh khắc tàng ren: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000210",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "gui",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_gui_neutral_39",
+      "name": "Sinh khắc tàng gui: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000211",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "jia",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_jia_support_40",
+      "name": "Sinh khắc tàng jia: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000212",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "yi",
+        "restrict",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_restrict",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_restrict",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_yi_restrict_41",
+      "name": "Sinh khắc tàng yi: restrict",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_restrict",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_restrict",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000213",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "bing",
+        "drain",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_drain",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_drain",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_bing_drain_42",
+      "name": "Sinh khắc tàng bing: drain",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_drain",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_drain",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000214",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "ding",
+        "neutral",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 44
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_officer"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_neutral",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_neutral",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_ding_neutral_43",
+      "name": "Sinh khắc tàng ding: neutral",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_officer"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_neutral",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_neutral",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000215",
+      "version": "1.0.0",
+      "category": "support_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "support_restriction",
+        "wu",
+        "support",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 45
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_resource"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_support",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_support",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Sinh/khắc Tàng Can từ sức/khí hậu/cách. Không ghi đè quyết định UGP / Pattern.",
+      "references": [
+        {
+          "target": "REF-HSA-support_restriction",
+          "relation": "references"
+        }
+      ],
+      "code": "sr_wu_support_44",
+      "name": "Sinh khắc tàng wu: support",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_resource"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_support",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_support",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    }
+  ]
+}

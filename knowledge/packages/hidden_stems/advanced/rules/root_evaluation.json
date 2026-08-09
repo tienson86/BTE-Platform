@@ -1,0 +1,4418 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "category": "root_evaluation",
+  "count": 45,
+  "objects": [
+    {
+      "id": "HSA-000081",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "jia",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=jia_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_jia_strong_00",
+      "name": "Rễ tàng jia: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=jia_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000082",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "yi",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=yi_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_yi_medium_01",
+      "name": "Rễ tàng yi: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=yi_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000083",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "bing",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=bing_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_bing_weak_02",
+      "name": "Rễ tàng bing: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=bing_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000084",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ding",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ding_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ding_floating_03",
+      "name": "Rễ tàng ding: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ding_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000085",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "wu",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=wu_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_wu_strong_04",
+      "name": "Rễ tàng wu: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=wu_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000086",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ji",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ji_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ji_medium_05",
+      "name": "Rễ tàng ji: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ji_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000087",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "geng",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=geng_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_geng_weak_06",
+      "name": "Rễ tàng geng: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=geng_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000088",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "xin",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=xin_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_xin_floating_07",
+      "name": "Rễ tàng xin: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=xin_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000089",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ren",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ren_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ren_strong_08",
+      "name": "Rễ tàng ren: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ren_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000090",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "gui",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=gui_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_gui_medium_09",
+      "name": "Rễ tàng gui: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=gui_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000091",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "jia",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=jia_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_jia_weak_10",
+      "name": "Rễ tàng jia: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=jia_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000092",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "yi",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=yi_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_yi_floating_11",
+      "name": "Rễ tàng yi: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=yi_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000093",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "bing",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=bing_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_bing_strong_12",
+      "name": "Rễ tàng bing: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=bing_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000094",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ding",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ding_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ding_medium_13",
+      "name": "Rễ tàng ding: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ding_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000095",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "wu",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=wu_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_wu_weak_14",
+      "name": "Rễ tàng wu: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=wu_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000096",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ji",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ji_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ji_floating_15",
+      "name": "Rễ tàng ji: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ji_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000097",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "geng",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=geng_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_geng_strong_16",
+      "name": "Rễ tàng geng: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=geng_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000098",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "xin",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=xin_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_xin_medium_17",
+      "name": "Rễ tàng xin: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=xin_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000099",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ren",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ren_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ren_weak_18",
+      "name": "Rễ tàng ren: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ren_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000100",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "gui",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=gui_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_gui_floating_19",
+      "name": "Rễ tàng gui: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=gui_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000101",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "jia",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=jia_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_jia_strong_20",
+      "name": "Rễ tàng jia: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=jia_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000102",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "yi",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=yi_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_yi_medium_21",
+      "name": "Rễ tàng yi: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=yi_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000103",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "bing",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=bing_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_bing_weak_22",
+      "name": "Rễ tàng bing: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=bing_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000104",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ding",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ding_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ding_floating_23",
+      "name": "Rễ tàng ding: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ding_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000105",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "wu",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=wu_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_wu_strong_24",
+      "name": "Rễ tàng wu: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=wu_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000106",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ji",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ji_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ji_medium_25",
+      "name": "Rễ tàng ji: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ji_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000107",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "geng",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=geng_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_geng_weak_26",
+      "name": "Rễ tàng geng: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=geng_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000108",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "xin",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=xin_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_xin_floating_27",
+      "name": "Rễ tàng xin: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=xin_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000109",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ren",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ren_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ren_strong_28",
+      "name": "Rễ tàng ren: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ren_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000110",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "gui",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=gui_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_gui_medium_29",
+      "name": "Rễ tàng gui: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=gui_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000111",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "jia",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=jia_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_jia_weak_30",
+      "name": "Rễ tàng jia: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=jia_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000112",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "yi",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=yi_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_yi_floating_31",
+      "name": "Rễ tàng yi: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=yi_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000113",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "bing",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=bing_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_bing_strong_32",
+      "name": "Rễ tàng bing: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=bing_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000114",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ding",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ding_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ding_medium_33",
+      "name": "Rễ tàng ding: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ding_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000115",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "wu",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=wu_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_wu_weak_34",
+      "name": "Rễ tàng wu: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=wu_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000116",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ji",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ji_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ji_floating_35",
+      "name": "Rễ tàng ji: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ji_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000117",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "geng",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=geng_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_geng_strong_36",
+      "name": "Rễ tàng geng: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=geng_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000118",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "xin",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=xin_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_xin_medium_37",
+      "name": "Rễ tàng xin: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=xin_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000119",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ren",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ren_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ren_weak_38",
+      "name": "Rễ tàng ren: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ren_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000120",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "gui",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 56
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=gui_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_gui_floating_39",
+      "name": "Rễ tàng gui: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 56
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=gui_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000121",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "jia",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=jia_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_jia_strong_40",
+      "name": "Rễ tàng jia: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=jia_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000122",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "yi",
+        "medium",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 64
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_output"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=yi_medium",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_medium",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_yi_medium_41",
+      "name": "Rễ tàng yi: medium",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 64
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_output"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=yi_medium",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_medium",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000123",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "bing",
+        "weak",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "tilted_wealth"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=bing_weak",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_weak",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_bing_weak_42",
+      "name": "Rễ tàng bing: weak",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "tilted_wealth"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=bing_weak",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_weak",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000124",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "ding",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 44
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 44
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=ding_floating",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_floating",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_ding_floating_43",
+      "name": "Rễ tàng ding: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 44
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=ding_floating",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_floating",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    },
+    {
+      "id": "HSA-000125",
+      "version": "1.0.0",
+      "category": "root_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "root",
+        "wu",
+        "strong",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 45
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "ten_gods_balance",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_profile=wu_strong",
+        "weight": 8,
+        "signal": "hidden_stems_profile",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_strong",
+        "publishes": "hidden_stems_profile"
+      },
+      "explanation": "Đánh giá rễ Tàng Can từ strength/season/TGA/TGP đã công bố. Không tính lại Sức thân.",
+      "references": [
+        {
+          "target": "REF-HSA-root_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "root_wu_strong_44",
+      "name": "Rễ tàng wu: strong",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "ten_gods_balance",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_profile=wu_strong",
+          "weight": 8,
+          "signal": "hidden_stems_profile",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_strong",
+          "publishes": "hidden_stems_profile"
+        }
+      }
+    }
+  ]
+}

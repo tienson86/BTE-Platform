@@ -1,0 +1,3888 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "category": "balance",
+  "count": 40,
+  "objects": [
+    {
+      "id": "HSA-000216",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "balanced",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=balanced",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "balanced",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_00",
+      "name": "Cân tàng: balanced",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=balanced",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "balanced",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000217",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "rooted",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=rooted",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "rooted",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rooted_01",
+      "name": "Cân tàng: rooted",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=rooted",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "rooted",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000218",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=floating",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "floating",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_floating_02",
+      "name": "Cân tàng: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=floating",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "floating",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000219",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "unstable",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=unstable",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "unstable",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_03",
+      "name": "Cân tàng: unstable",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=unstable",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "unstable",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000220",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=withheld",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "withheld",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_04",
+      "name": "Cân tàng: withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=withheld",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "withheld",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000221",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_main",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_main",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_main",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_main_05",
+      "name": "Cân tàng: tilted_main",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_main",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_main",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000222",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_residual",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_residual",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_residual_06",
+      "name": "Cân tàng: tilted_residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_residual",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_residual",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000223",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "balanced",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=balanced",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "balanced",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_07",
+      "name": "Cân tàng: balanced",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=balanced",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "balanced",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000224",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "rooted",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=rooted",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "rooted",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rooted_08",
+      "name": "Cân tàng: rooted",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=rooted",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "rooted",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000225",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=floating",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "floating",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_floating_09",
+      "name": "Cân tàng: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=floating",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "floating",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000226",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "unstable",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=unstable",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "unstable",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_10",
+      "name": "Cân tàng: unstable",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=unstable",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "unstable",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000227",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=withheld",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "withheld",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_11",
+      "name": "Cân tàng: withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=withheld",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "withheld",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000228",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_main",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_main",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_main",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_main_12",
+      "name": "Cân tàng: tilted_main",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_main",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_main",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000229",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_residual",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_residual",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_residual_13",
+      "name": "Cân tàng: tilted_residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_residual",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_residual",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000230",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "balanced",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=balanced",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "balanced",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_14",
+      "name": "Cân tàng: balanced",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=balanced",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "balanced",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000231",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "rooted",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=rooted",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "rooted",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rooted_15",
+      "name": "Cân tàng: rooted",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=rooted",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "rooted",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000232",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=floating",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "floating",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_floating_16",
+      "name": "Cân tàng: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=floating",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "floating",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000233",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "unstable",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=unstable",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "unstable",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_17",
+      "name": "Cân tàng: unstable",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=unstable",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "unstable",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000234",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=withheld",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "withheld",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_18",
+      "name": "Cân tàng: withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=withheld",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "withheld",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000235",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_main",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_main",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_main",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_main_19",
+      "name": "Cân tàng: tilted_main",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_main",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_main",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000236",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_residual",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_residual",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_residual_20",
+      "name": "Cân tàng: tilted_residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_residual",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_residual",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000237",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "balanced",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=balanced",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "balanced",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_21",
+      "name": "Cân tàng: balanced",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=balanced",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "balanced",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000238",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "rooted",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=rooted",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "rooted",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rooted_22",
+      "name": "Cân tàng: rooted",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=rooted",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "rooted",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000239",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=floating",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "floating",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_floating_23",
+      "name": "Cân tàng: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=floating",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "floating",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000240",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "unstable",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=unstable",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "unstable",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_24",
+      "name": "Cân tàng: unstable",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=unstable",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "unstable",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000241",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=withheld",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "withheld",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_25",
+      "name": "Cân tàng: withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=withheld",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "withheld",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000242",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_main",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_main",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_main",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_main_26",
+      "name": "Cân tàng: tilted_main",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_main",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_main",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000243",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_residual",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_residual",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_residual_27",
+      "name": "Cân tàng: tilted_residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_residual",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_residual",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000244",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "balanced",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=balanced",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "balanced",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_28",
+      "name": "Cân tàng: balanced",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=balanced",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "balanced",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000245",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "rooted",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=rooted",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "rooted",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rooted_29",
+      "name": "Cân tàng: rooted",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=rooted",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "rooted",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000246",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=floating",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "floating",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_floating_30",
+      "name": "Cân tàng: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=floating",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "floating",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000247",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "unstable",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=unstable",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "unstable",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_31",
+      "name": "Cân tàng: unstable",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=unstable",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "unstable",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000248",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=withheld",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "withheld",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_32",
+      "name": "Cân tàng: withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=withheld",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "withheld",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000249",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_main",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_main",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_main",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_main_33",
+      "name": "Cân tàng: tilted_main",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_main",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_main",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000250",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "tilted_residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=tilted_residual",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "tilted_residual",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_residual_34",
+      "name": "Cân tàng: tilted_residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=tilted_residual",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "tilted_residual",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000251",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "balanced",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=balanced",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "balanced",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_35",
+      "name": "Cân tàng: balanced",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=balanced",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "balanced",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000252",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "rooted",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=rooted",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "rooted",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_rooted_36",
+      "name": "Cân tàng: rooted",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=rooted",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "rooted",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000253",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "floating",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=floating",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "floating",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_floating_37",
+      "name": "Cân tàng: floating",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=floating",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "floating",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000254",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "unstable",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=unstable",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "unstable",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_38",
+      "name": "Cân tàng: unstable",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=unstable",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "unstable",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000255",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "balance",
+        "withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 72
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_balance=withheld",
+        "weight": 9,
+        "signal": "hidden_stems_balance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "withheld",
+        "publishes": "hidden_stems_balance"
+      },
+      "explanation": "Cân bằng Tàng Can từ cụm sức/Trường Sinh/cách. Không ghi đè growth_profile / ten_gods_balance.",
+      "references": [
+        {
+          "target": "REF-HSA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_39",
+      "name": "Cân tàng: withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 72
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_balance=withheld",
+          "weight": 9,
+          "signal": "hidden_stems_balance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "withheld",
+          "publishes": "hidden_stems_balance"
+        }
+      }
+    }
+  ]
+}

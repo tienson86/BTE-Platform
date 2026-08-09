@@ -1,0 +1,4485 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "analytical",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-HIDDEN_STEM",
+    "category_id": "advanced",
+    "school": "bazi_default",
+    "tags": [
+      "analytical",
+      "gold",
+      "kx6c",
+      "hidden_stems"
+    ],
+    "description": "Canonical Hidden Stems advanced analytical core."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/hidden_stem_identity.json",
+        "rules/stem_visibility.json",
+        "rules/root_evaluation.json",
+        "rules/stem_interaction.json",
+        "rules/support_restriction.json",
+        "rules/balance.json",
+        "rules/dominance.json",
+        "rules/special_conditions.json",
+        "rules/scoring.json",
+        "rules/publication.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/overview.md",
+        "documentation/philosophy.md",
+        "documentation/hidden_stems_model.md",
+        "documentation/root_model.md",
+        "documentation/balance_model.md",
+        "documentation/input_output_contracts.md",
+        "documentation/limitations.md",
+        "documentation/WAVE2_ROADMAP.md",
+        "documentation/confidence_model.md",
+        "documentation/reasoning_model.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/published_inputs.json",
+        "assets/published_outputs.json",
+        "assets/hidden_stems_axes.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_02_seasonal_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "season_score",
+        "signals": [
+          "season_score"
+        ]
+      },
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "strength_score",
+        "signals": [
+          "strength_score"
+        ]
+      },
+      {
+        "package_id": "bz_03_temperature_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "temperature_score",
+        "signals": [
+          "temperature_score"
+        ]
+      },
+      {
+        "package_id": "bz_05_pattern_evaluation",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "pattern outputs",
+        "signals": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      },
+      {
+        "package_id": "bz_10_follow_pattern_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "follow outputs",
+        "signals": [
+          "follow_pattern",
+          "follow_pattern_score"
+        ]
+      },
+      {
+        "package_id": "bz_11_transformation_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "transformation outputs",
+        "signals": [
+          "transformation_score"
+        ]
+      },
+      {
+        "package_id": "bz_12_combination_clash_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "interaction outputs",
+        "signals": [
+          "interaction_score",
+          "interaction_confidence"
+        ]
+      },
+      {
+        "package_id": "bz_13_ten_gods_advanced",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "ten gods outputs",
+        "signals": [
+          "ten_gods_profile",
+          "ten_gods_balance"
+        ]
+      },
+      {
+        "package_id": "bz_14_twelve_growth_advanced",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "growth outputs",
+        "signals": [
+          "growth_profile",
+          "growth_score"
+        ]
+      },
+      {
+        "package_id": "bz_07_useful_god_priority",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "UGP outputs",
+        "signals": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "HSA-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hidden_stem_identity.json"
+    },
+    {
+      "id": "HSA-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_visibility.json"
+    },
+    {
+      "id": "HSA-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000111",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000112",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000113",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000114",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000115",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000116",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000117",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000118",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000119",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000120",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000121",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000122",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000123",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000124",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000125",
+      "entity_type": "ENT-RULE",
+      "path": "rules/root_evaluation.json"
+    },
+    {
+      "id": "HSA-000126",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000127",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000128",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000129",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000130",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000131",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000132",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000133",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000134",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000135",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000136",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000137",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000138",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000139",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000140",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000141",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000142",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000143",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000144",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000145",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000146",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000147",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000148",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000149",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000150",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000151",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000152",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000153",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000154",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000155",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000156",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000157",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000158",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000159",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000160",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000161",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000162",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000163",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000164",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000165",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000166",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000167",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000168",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000169",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000170",
+      "entity_type": "ENT-RULE",
+      "path": "rules/stem_interaction.json"
+    },
+    {
+      "id": "HSA-000171",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000172",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000173",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000174",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000175",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000176",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000177",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000178",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000179",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000180",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000181",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000182",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000183",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000184",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000185",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000186",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000187",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000188",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000189",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000190",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000191",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000192",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000193",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000194",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000195",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000196",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000197",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000198",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000199",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000200",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000201",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000202",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000203",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000204",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000205",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000206",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000207",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000208",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000209",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000210",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000211",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000212",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000213",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000214",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000215",
+      "entity_type": "ENT-RULE",
+      "path": "rules/support_restriction.json"
+    },
+    {
+      "id": "HSA-000216",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000217",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000218",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000219",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000220",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000221",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000222",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000223",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000224",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000225",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000226",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000227",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000228",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000229",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000230",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000231",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000232",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000233",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000234",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000235",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000236",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000237",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000238",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000239",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000240",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000241",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000242",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000243",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000244",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000245",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000246",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000247",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000248",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000249",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000250",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000251",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000252",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000253",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000254",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000255",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balance.json"
+    },
+    {
+      "id": "HSA-000256",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000257",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000258",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000259",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000260",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000261",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000262",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000263",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000264",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000265",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000266",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000267",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000268",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000269",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000270",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000271",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000272",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000273",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000274",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000275",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000276",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000277",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000278",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000279",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000280",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000281",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000282",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000283",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000284",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000285",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000286",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000287",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000288",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000289",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000290",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominance.json"
+    },
+    {
+      "id": "HSA-000291",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000292",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000293",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000294",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000295",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000296",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000297",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000298",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000299",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000300",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000301",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000302",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000303",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000304",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000305",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000306",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000307",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000308",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000309",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000310",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000311",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000312",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000313",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000314",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000315",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000316",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000317",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000318",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000319",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000320",
+      "entity_type": "ENT-RULE",
+      "path": "rules/special_conditions.json"
+    },
+    {
+      "id": "HSA-000321",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000322",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000323",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000324",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000325",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000326",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000327",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000328",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000329",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000330",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000331",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000332",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000333",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000334",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000335",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000336",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000337",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000338",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000339",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000340",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000341",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000342",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000343",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000344",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000345",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000346",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000347",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000348",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000349",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000350",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000351",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000352",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000353",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000354",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000355",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000356",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000357",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000358",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000359",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000360",
+      "entity_type": "ENT-RULE",
+      "path": "rules/scoring.json"
+    },
+    {
+      "id": "HSA-000361",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000362",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000363",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000364",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000365",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000366",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000367",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000368",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000369",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000370",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000371",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000372",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000373",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000374",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000375",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000376",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000377",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000378",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000379",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    },
+    {
+      "id": "HSA-000380",
+      "entity_type": "ENT-RULE",
+      "path": "rules/publication.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_02_seasonal_core",
+    "bz_01_strength_core",
+    "bz_03_temperature_core",
+    "bz_05_pattern_evaluation",
+    "bz_10_follow_pattern_core",
+    "bz_11_transformation_core",
+    "bz_12_combination_clash_core",
+    "bz_13_ten_gods_advanced",
+    "bz_14_twelve_growth_advanced",
+    "bz_07_useful_god_priority"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/hidden_stems_axes.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_inputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/balance_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/confidence_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/hidden_stems_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/input_output_contracts.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/reasoning_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/root_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000111.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000112.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000113.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000114.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000115.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000116.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000117.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000118.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000119.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000120.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000121.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000122.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000123.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000124.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000125.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000126.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000127.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000128.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000129.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000130.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000131.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000132.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000133.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000134.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000135.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000136.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000137.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000138.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000139.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000140.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000141.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000142.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000143.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000144.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000145.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000146.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000147.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000148.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000149.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000150.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000151.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000152.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000153.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000154.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000155.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000156.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000157.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000158.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000159.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000160.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000161.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000162.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000163.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000164.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000165.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000166.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000167.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000168.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000169.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000170.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000171.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000172.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000173.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000174.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000175.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000176.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000177.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000178.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000179.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000180.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000181.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000182.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000183.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000184.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000185.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000186.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000187.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000188.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000189.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000190.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000191.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000192.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000193.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000194.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000195.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000196.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000197.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000198.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000199.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000200.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000201.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000202.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000203.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000204.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000205.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000206.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000207.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000208.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000209.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000210.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000211.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000212.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000213.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000214.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000215.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000216.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000217.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000218.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000219.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000220.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000221.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000222.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000223.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000224.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000225.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000226.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000227.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000228.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000229.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000230.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000231.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000232.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000233.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000234.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000235.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000236.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000237.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000238.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000239.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000240.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000241.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000242.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000243.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000244.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000245.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000246.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000247.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000248.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000249.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000250.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000251.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000252.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000253.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000254.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000255.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000256.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000257.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000258.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000259.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000260.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000261.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000262.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000263.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000264.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000265.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000266.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000267.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000268.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000269.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000270.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000271.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000272.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000273.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000274.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000275.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000276.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000277.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000278.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000279.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000280.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000281.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000282.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000283.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000284.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000285.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000286.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000287.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000288.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000289.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000290.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000291.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000292.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000293.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000294.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000295.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000296.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000297.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000298.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000299.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000300.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000301.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000302.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000303.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000304.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000305.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000306.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000307.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000308.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000309.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000310.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000311.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000312.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000313.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000314.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000315.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000316.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000317.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000318.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000319.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000320.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000321.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000322.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000323.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000324.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000325.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000326.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000327.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000328.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000329.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000330.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000331.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000332.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000333.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000334.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000335.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000336.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000337.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000338.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000339.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000340.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000341.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000342.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000343.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000344.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000345.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000346.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000347.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000348.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000349.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000350.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000351.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000352.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000353.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000354.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000355.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000356.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000357.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000358.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000359.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000360.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000361.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000362.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000363.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000364.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000365.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000366.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000367.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000368.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000369.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000370.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000371.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000372.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000373.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000374.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000375.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000376.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000377.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000378.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000379.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/HSA-000380.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/dominant.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/special.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/strong_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/weak_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/dominant.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/special.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/strong_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/weak_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/balanced.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/border.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/dominant.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/dominant.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/mixed.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/special.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/special.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/strong_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/strong_roots.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/weak_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/weak_roots.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/dominant.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/special.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/strong_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/weak_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/border.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/dominant.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/mixed.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/special.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/strong_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/weak_roots.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/balance.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/dominance.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/hidden_stem_identity.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/publication.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/root_evaluation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/scoring.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/special_conditions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/stem_interaction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/stem_visibility.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/support_restriction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

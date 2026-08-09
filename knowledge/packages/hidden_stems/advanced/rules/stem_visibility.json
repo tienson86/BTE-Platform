@@ -1,0 +1,3928 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "category": "stem_visibility",
+  "count": 40,
+  "objects": [
+    {
+      "id": "HSA-000041",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "jia",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_jia_visible_00",
+      "name": "Hiển thị tàng jia: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000042",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "yi",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_yi_partial_01",
+      "name": "Hiển thị tàng yi: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000043",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "bing",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_bing_buried_02",
+      "name": "Hiển thị tàng bing: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000044",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ding",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ding_residual_03",
+      "name": "Hiển thị tàng ding: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000045",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "wu",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_wu_visible_04",
+      "name": "Hiển thị tàng wu: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000046",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ji",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ji_partial_05",
+      "name": "Hiển thị tàng ji: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000047",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "geng",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_geng_buried_06",
+      "name": "Hiển thị tàng geng: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000048",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "xin",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_xin_residual_07",
+      "name": "Hiển thị tàng xin: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000049",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ren",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ren_visible_08",
+      "name": "Hiển thị tàng ren: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000050",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "gui",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_gui_partial_09",
+      "name": "Hiển thị tàng gui: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000051",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "jia",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_jia_buried_10",
+      "name": "Hiển thị tàng jia: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000052",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "yi",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_yi_residual_11",
+      "name": "Hiển thị tàng yi: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000053",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "bing",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_bing_visible_12",
+      "name": "Hiển thị tàng bing: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000054",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ding",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ding_partial_13",
+      "name": "Hiển thị tàng ding: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000055",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "wu",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_wu_buried_14",
+      "name": "Hiển thị tàng wu: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000056",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ji",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ji_residual_15",
+      "name": "Hiển thị tàng ji: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000057",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "geng",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_geng_visible_16",
+      "name": "Hiển thị tàng geng: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000058",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "xin",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_xin_partial_17",
+      "name": "Hiển thị tàng xin: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000059",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ren",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ren_buried_18",
+      "name": "Hiển thị tàng ren: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000060",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "gui",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_gui_residual_19",
+      "name": "Hiển thị tàng gui: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000061",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "jia",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_jia_visible_20",
+      "name": "Hiển thị tàng jia: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000062",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "yi",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_yi_partial_21",
+      "name": "Hiển thị tàng yi: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000063",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "bing",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_bing_buried_22",
+      "name": "Hiển thị tàng bing: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000064",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ding",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ding_residual_23",
+      "name": "Hiển thị tàng ding: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000065",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "wu",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_wu_visible_24",
+      "name": "Hiển thị tàng wu: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000066",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ji",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ji_partial_25",
+      "name": "Hiển thị tàng ji: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000067",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "geng",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_geng_buried_26",
+      "name": "Hiển thị tàng geng: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000068",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "xin",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_xin_residual_27",
+      "name": "Hiển thị tàng xin: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000069",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ren",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ren_visible_28",
+      "name": "Hiển thị tàng ren: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000070",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "gui",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_gui_partial_29",
+      "name": "Hiển thị tàng gui: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000071",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "jia",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=jia_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_jia_buried_30",
+      "name": "Hiển thị tàng jia: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=jia_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000072",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "yi",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=yi_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_yi_residual_31",
+      "name": "Hiển thị tàng yi: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=yi_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000073",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "bing",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=bing_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_bing_visible_32",
+      "name": "Hiển thị tàng bing: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=bing_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000074",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ding",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ding_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ding_partial_33",
+      "name": "Hiển thị tàng ding: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ding_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000075",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "wu",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 44
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=wu_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_wu_buried_34",
+      "name": "Hiển thị tàng wu: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 44
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=wu_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000076",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ji",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 20
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ji_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ji_residual_35",
+      "name": "Hiển thị tàng ji: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 20
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ji_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000077",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "geng",
+        "visible",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 24
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=geng_visible",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng_visible",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_geng_visible_36",
+      "name": "Hiển thị tàng geng: visible",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 24
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=geng_visible",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng_visible",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000078",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "xin",
+        "partial",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 28
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=xin_partial",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin_partial",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_xin_partial_37",
+      "name": "Hiển thị tàng xin: partial",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 28
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=xin_partial",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin_partial",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000079",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "ren",
+        "buried",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 32
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ren_buried",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren_buried",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_ren_buried_38",
+      "name": "Hiển thị tàng ren: buried",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 32
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ren_buried",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren_buried",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000080",
+      "version": "1.0.0",
+      "category": "stem_visibility",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "visibility",
+        "gui",
+        "residual",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 48
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "growth_score",
+          "operator": "gte",
+          "value": 36
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=gui_residual",
+        "weight": 8,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui_residual",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Độ lộ Tàng Can suy từ integrity/stability/growth_score. Không tính lại Tàng Can thô.",
+      "references": [
+        {
+          "target": "REF-HSA-stem_visibility",
+          "relation": "references"
+        }
+      ],
+      "code": "vis_gui_residual_39",
+      "name": "Hiển thị tàng gui: residual",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 48
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "growth_score",
+            "operator": "gte",
+            "value": 36
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=gui_residual",
+          "weight": 8,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui_residual",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    }
+  ]
+}

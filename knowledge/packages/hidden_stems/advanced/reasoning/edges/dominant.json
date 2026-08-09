@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-HSA-DOMINANT-001",
+      "source": "RN-HSA-DOMINANT-OBS-001",
+      "target": "RN-HSA-DOMINANT-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-DOMINANT-002",
+      "source": "RN-HSA-DOMINANT-EVD-001",
+      "target": "RN-HSA-DOMINANT-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-DOMINANT-003",
+      "source": "RN-HSA-DOMINANT-INF-001",
+      "target": "RN-HSA-DOMINANT-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-DOMINANT-004",
+      "source": "RN-HSA-DOMINANT-MID-001",
+      "target": "RN-HSA-DOMINANT-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-DOMINANT-005",
+      "source": "RN-HSA-DOMINANT-OBS-001",
+      "target": "RN-HSA-DOMINANT-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-HSA-DOMINANT-006",
+      "source": "RN-HSA-DOMINANT-CON-001",
+      "target": "RN-HSA-DOMINANT-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

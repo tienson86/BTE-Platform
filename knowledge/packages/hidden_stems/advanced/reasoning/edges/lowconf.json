@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-HSA-LOWCONF-001",
+      "source": "RN-HSA-LOWCONF-OBS-001",
+      "target": "RN-HSA-LOWCONF-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-LOWCONF-002",
+      "source": "RN-HSA-LOWCONF-EVD-001",
+      "target": "RN-HSA-LOWCONF-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-LOWCONF-003",
+      "source": "RN-HSA-LOWCONF-INF-001",
+      "target": "RN-HSA-LOWCONF-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-LOWCONF-004",
+      "source": "RN-HSA-LOWCONF-MID-001",
+      "target": "RN-HSA-LOWCONF-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-LOWCONF-005",
+      "source": "RN-HSA-LOWCONF-OBS-001",
+      "target": "RN-HSA-LOWCONF-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-HSA-LOWCONF-006",
+      "source": "RN-HSA-LOWCONF-CON-001",
+      "target": "RN-HSA-LOWCONF-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

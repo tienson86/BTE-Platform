@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-HSA-BORDER-001",
+      "source": "RN-HSA-BORDER-OBS-001",
+      "target": "RN-HSA-BORDER-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-BORDER-002",
+      "source": "RN-HSA-BORDER-EVD-001",
+      "target": "RN-HSA-BORDER-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-BORDER-003",
+      "source": "RN-HSA-BORDER-INF-001",
+      "target": "RN-HSA-BORDER-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-BORDER-004",
+      "source": "RN-HSA-BORDER-MID-001",
+      "target": "RN-HSA-BORDER-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-HSA-BORDER-005",
+      "source": "RN-HSA-BORDER-OBS-001",
+      "target": "RN-HSA-BORDER-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-HSA-BORDER-006",
+      "source": "RN-HSA-BORDER-CON-001",
+      "target": "RN-HSA-BORDER-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

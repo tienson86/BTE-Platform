@@ -1,0 +1,122 @@
+{
+  "rule_id": "HSA-000331",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Điểm Tàng Can 10",
+    "why": "Composite hidden_stems_score. Không ghi đè strength_score / growth_score / ten_gods outputs.",
+    "when": "Khi 20 output đã công bố khớp điều kiện Tàng Can nâng cao.",
+    "when_not": "Khi thiếu input hợp đồng hoặc hồ sơ bị withhold.",
+    "summary": "Composite hidden_stems_score. Không ghi đè strength_score / growth_score / ten_gods outputs."
+  },
+  "rationale": "Luật `score_10_10` đánh giá Tàng Can từ output đã công bố. Không tính lại Tứ trụ / Tàng Can thô. Không viết lại TGP/TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC/UG. Không sinh văn luận giải.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-6C: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-HSA-scoring",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-HSA-000331-01",
+      "rule_id": "HSA-000331",
+      "polarity": "positive",
+      "published_outputs": {
+        "season_score": 38,
+        "strength_score": 34,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 15,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "growth_profile": "balanced",
+        "growth_score": 32,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Thỏa điều kiện tàng can."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-HSA-000331-01",
+      "rule_id": "HSA-000331",
+      "polarity": "negative",
+      "published_outputs": {
+        "season_score": 38,
+        "strength_score": 12,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 15,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "growth_profile": "balanced",
+        "growth_score": 32,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Không kích hoạt / hồ sơ khác."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-HSA-000331-01",
+      "rule_id": "HSA-000331",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "season_score": 38,
+        "strength_score": 34,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 15,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "growth_profile": "balanced",
+        "growth_score": 32,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Biên: đủ HSA nhưng thiếu một input hợp đồng thì không công bố tàng."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_15_hidden_stems_advanced",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-6C",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

@@ -1,0 +1,3403 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "category": "dominance",
+  "count": 35,
+  "objects": [
+    {
+      "id": "HSA-000256",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "mixed",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=mixed",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "mixed",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_00",
+      "name": "Chủ đạo tàng: mixed",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=mixed",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "mixed",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000257",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "yi",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=yi",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_yi_01",
+      "name": "Chủ đạo tàng: yi",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=yi",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000258",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "bing",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=bing",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_bing_02",
+      "name": "Chủ đạo tàng: bing",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=bing",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000259",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ding",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ding",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ding_03",
+      "name": "Chủ đạo tàng: ding",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ding",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000260",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "wu",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=wu",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_wu_04",
+      "name": "Chủ đạo tàng: wu",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=wu",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000261",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ji",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ji",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ji_05",
+      "name": "Chủ đạo tàng: ji",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ji",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000262",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "geng",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=geng",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_geng_06",
+      "name": "Chủ đạo tàng: geng",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=geng",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000263",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "xin",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=xin",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_xin_07",
+      "name": "Chủ đạo tàng: xin",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=xin",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000264",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ren",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ren",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ren_08",
+      "name": "Chủ đạo tàng: ren",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ren",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000265",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "gui",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=gui",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_gui_09",
+      "name": "Chủ đạo tàng: gui",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=gui",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000266",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "jia",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=jia",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_jia_10",
+      "name": "Chủ đạo tàng: jia",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=jia",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000267",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "none",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=none",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "none",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_11",
+      "name": "Chủ đạo tàng: none",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=none",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "none",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000268",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "bing",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=bing",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_bing_12",
+      "name": "Chủ đạo tàng: bing",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=bing",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000269",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ding",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ding",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ding",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ding_13",
+      "name": "Chủ đạo tàng: ding",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ding",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ding",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000270",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "wu",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=wu",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_wu_14",
+      "name": "Chủ đạo tàng: wu",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=wu",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000271",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ji",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ji",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ji_15",
+      "name": "Chủ đạo tàng: ji",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ji",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000272",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "geng",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=geng",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_geng_16",
+      "name": "Chủ đạo tàng: geng",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=geng",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000273",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "xin",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=xin",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_xin_17",
+      "name": "Chủ đạo tàng: xin",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=xin",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000274",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ren",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ren",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ren_18",
+      "name": "Chủ đạo tàng: ren",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ren",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000275",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "gui",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=gui",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_gui_19",
+      "name": "Chủ đạo tàng: gui",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=gui",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000276",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "jia",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=jia",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_jia_20",
+      "name": "Chủ đạo tàng: jia",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=jia",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000277",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "yi",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=yi",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_yi_21",
+      "name": "Chủ đạo tàng: yi",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=yi",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000278",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "mixed",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=mixed",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "mixed",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_22",
+      "name": "Chủ đạo tàng: mixed",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=mixed",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "mixed",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000279",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "none",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=none",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "none",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_23",
+      "name": "Chủ đạo tàng: none",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=none",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "none",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000280",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "wu",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=wu",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_wu_24",
+      "name": "Chủ đạo tàng: wu",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=wu",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000281",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ji",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ji",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ji",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ji_25",
+      "name": "Chủ đạo tàng: ji",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ji",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ji",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000282",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "geng",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "seven_killings"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=geng",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "geng",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_geng_26",
+      "name": "Chủ đạo tàng: geng",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "seven_killings"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=geng",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "geng",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000283",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "xin",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=xin",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "xin",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_xin_27",
+      "name": "Chủ đạo tàng: xin",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=xin",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "xin",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000284",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "ren",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=ren",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ren",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_ren_28",
+      "name": "Chủ đạo tàng: ren",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=ren",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ren",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000285",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "gui",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "direct_resource"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=gui",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "gui",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_gui_29",
+      "name": "Chủ đạo tàng: gui",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "direct_resource"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=gui",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "gui",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000286",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "jia",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 52
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "peer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=jia",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "jia",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_jia_30",
+      "name": "Chủ đạo tàng: jia",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 52
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "peer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=jia",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "jia",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000287",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "yi",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "rob_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=yi",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "yi",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_yi_31",
+      "name": "Chủ đạo tàng: yi",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "rob_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=yi",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "yi",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000288",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "bing",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "eating_god"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=bing",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "bing",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_bing_32",
+      "name": "Chủ đạo tàng: bing",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "eating_god"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=bing",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "bing",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000289",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "mixed",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "hurling_officer"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=mixed",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "mixed",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_33",
+      "name": "Chủ đạo tàng: mixed",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "hurling_officer"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=mixed",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "mixed",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    },
+    {
+      "id": "HSA-000290",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "dominance",
+        "wu",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "ten_gods_profile",
+          "operator": "equals",
+          "value": "indirect_wealth"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_dominance=wu",
+        "weight": 9,
+        "signal": "hidden_stems_dominance",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "wu",
+        "publishes": "hidden_stems_dominance"
+      },
+      "explanation": "Tàng can chủ đạo từ strength/pattern/TGA profile. Không ghi đè quyết định gói trước.",
+      "references": [
+        {
+          "target": "REF-HSA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_wu_34",
+      "name": "Chủ đạo tàng: wu",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "ten_gods_profile",
+            "operator": "equals",
+            "value": "indirect_wealth"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_dominance=wu",
+          "weight": 9,
+          "signal": "hidden_stems_dominance",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "wu",
+          "publishes": "hidden_stems_dominance"
+        }
+      }
+    }
+  ]
+}

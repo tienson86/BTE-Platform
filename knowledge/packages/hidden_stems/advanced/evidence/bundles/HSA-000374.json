@@ -1,0 +1,122 @@
+{
+  "rule_id": "HSA-000374",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Công bố hidden_stems_score=20",
+    "why": "Công bố hợp đồng hidden_stems_score. Chỉ bảy output chính thức. Không sinh văn luận giải. Không ghi đè gói khác.",
+    "when": "Khi 20 output đã công bố khớp điều kiện Tàng Can nâng cao.",
+    "when_not": "Khi thiếu input hợp đồng hoặc hồ sơ bị withhold.",
+    "summary": "Công bố hợp đồng hidden_stems_score. Chỉ bảy output chính thức. Không sinh văn luận giải. Không ghi đè gói khác."
+  },
+  "rationale": "Luật `pub_hidden_stems_score_20_13` đánh giá Tàng Can từ output đã công bố. Không tính lại Tứ trụ / Tàng Can thô. Không viết lại TGP/TGA/CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC/UG. Không sinh văn luận giải.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-6C: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-HSA-publication",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-HSA-000374-01",
+      "rule_id": "HSA-000374",
+      "polarity": "positive",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 43,
+        "temperature_score": 50,
+        "pattern_score": 42,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 15,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "growth_profile": "balanced",
+        "growth_score": 93,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Thỏa điều kiện tàng can."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-HSA-000374-01",
+      "rule_id": "HSA-000374",
+      "polarity": "negative",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 21,
+        "temperature_score": 50,
+        "pattern_score": 42,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 15,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "growth_profile": "balanced",
+        "growth_score": 93,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Không kích hoạt / hồ sơ khác."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-HSA-000374-01",
+      "rule_id": "HSA-000374",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "season_score": 55,
+        "strength_score": 43,
+        "temperature_score": 50,
+        "pattern_score": 42,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 15,
+        "transformation_score": 20,
+        "interaction_score": 50,
+        "interaction_confidence": "medium",
+        "ten_gods_profile": "peer",
+        "ten_gods_balance": "balanced",
+        "growth_profile": "balanced",
+        "growth_score": 93,
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Biên: đủ HSA nhưng thiếu một input hợp đồng thì không công bố tàng."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_15_hidden_stems_advanced",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-6C",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

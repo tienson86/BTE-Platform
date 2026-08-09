@@ -1,0 +1,2918 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_15_hidden_stems_advanced",
+  "category": "special_conditions",
+  "count": 30,
+  "objects": [
+    {
+      "id": "HSA-000291",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "follow_buries_stems",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=follow_buries_stems",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "follow_buries_stems",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_buries_stems_00",
+      "name": "Đặc biệt: follow_buries_stems",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=follow_buries_stems",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "follow_buries_stems",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000292",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "ug_withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ug_withheld",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_01",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ug_withheld",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000293",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "storage_growth",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=storage_growth",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "storage_growth",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_storage_growth_02",
+      "name": "Đặc biệt: storage_growth",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=storage_growth",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "storage_growth",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000294",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "low_integrity",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "low_integrity",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_03",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "low_integrity",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000295",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "extreme_season",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "extreme_season",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_04",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "extreme_season",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000296",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "follow_buries_stems",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=follow_buries_stems",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "follow_buries_stems",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_buries_stems_05",
+      "name": "Đặc biệt: follow_buries_stems",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=follow_buries_stems",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "follow_buries_stems",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000297",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "ug_withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ug_withheld",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_06",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ug_withheld",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000298",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "storage_growth",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=storage_growth",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "storage_growth",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_storage_growth_07",
+      "name": "Đặc biệt: storage_growth",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=storage_growth",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "storage_growth",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000299",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "low_integrity",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "low_integrity",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_08",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "low_integrity",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000300",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "extreme_season",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "extreme_season",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_09",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "extreme_season",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000301",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "follow_buries_stems",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=follow_buries_stems",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "follow_buries_stems",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_buries_stems_10",
+      "name": "Đặc biệt: follow_buries_stems",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=follow_buries_stems",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "follow_buries_stems",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000302",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "ug_withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ug_withheld",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_11",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ug_withheld",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000303",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "storage_growth",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=storage_growth",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "storage_growth",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_storage_growth_12",
+      "name": "Đặc biệt: storage_growth",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=storage_growth",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "storage_growth",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000304",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "low_integrity",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "low_integrity",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_13",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "low_integrity",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000305",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "extreme_season",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "extreme_season",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_14",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "extreme_season",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000306",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "follow_buries_stems",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=follow_buries_stems",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "follow_buries_stems",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_buries_stems_15",
+      "name": "Đặc biệt: follow_buries_stems",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=follow_buries_stems",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "follow_buries_stems",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000307",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "ug_withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ug_withheld",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_16",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ug_withheld",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000308",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "storage_growth",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=storage_growth",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "storage_growth",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_storage_growth_17",
+      "name": "Đặc biệt: storage_growth",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=storage_growth",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "storage_growth",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000309",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "low_integrity",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "low_integrity",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_18",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "low_integrity",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000310",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "extreme_season",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "extreme_season",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_19",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "extreme_season",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000311",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "follow_buries_stems",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "prosperous"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=follow_buries_stems",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "follow_buries_stems",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_buries_stems_20",
+      "name": "Đặc biệt: follow_buries_stems",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "prosperous"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=follow_buries_stems",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "follow_buries_stems",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000312",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "ug_withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "declining"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ug_withheld",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_21",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "declining"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ug_withheld",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000313",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "storage_growth",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "storage"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=storage_growth",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "storage_growth",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_storage_growth_22",
+      "name": "Đặc biệt: storage_growth",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "storage"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=storage_growth",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "storage_growth",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000314",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "low_integrity",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "transitional"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "low_integrity",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_23",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "transitional"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "low_integrity",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000315",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "extreme_season",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "mixed"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "extreme_season",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_24",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "mixed"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "extreme_season",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000316",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "follow_buries_stems",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=follow_buries_stems",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "follow_buries_stems",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_follow_buries_stems_25",
+      "name": "Đặc biệt: follow_buries_stems",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=follow_buries_stems",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "follow_buries_stems",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000317",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "ug_withheld",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=ug_withheld",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "ug_withheld",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_ug_withheld_26",
+      "name": "Đặc biệt: ug_withheld",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=ug_withheld",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "ug_withheld",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000318",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "storage_growth",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "unstable"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=storage_growth",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "storage_growth",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_storage_growth_27",
+      "name": "Đặc biệt: storage_growth",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "unstable"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=storage_growth",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "storage_growth",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000319",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "low_integrity",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "published"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=low_integrity",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "low_integrity",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_low_integrity_28",
+      "name": "Đặc biệt: low_integrity",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "published"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=low_integrity",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "low_integrity",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "HSA-000320",
+      "version": "1.0.0",
+      "category": "special_conditions",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "hidden_stems",
+        "special",
+        "extreme_season",
+        "kx6c"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        },
+        {
+          "field": "resolved_useful_god",
+          "operator": "equals",
+          "value": "withheld"
+        },
+        {
+          "field": "growth_profile",
+          "operator": "equals",
+          "value": "balanced"
+        },
+        {
+          "field": "follow_pattern_score",
+          "operator": "lte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "hidden_stems_diagnostics=extreme_season",
+        "weight": 10,
+        "signal": "hidden_stems_diagnostics",
+        "score_target": "day_master.hidden_stems_score",
+        "outcome": "extreme_season",
+        "publishes": "hidden_stems_diagnostics"
+      },
+      "explanation": "Điều kiện đặc biệt Tàng Can (tòng/UG/Trường Sinh storage) từ hợp đồng đã phong ấn.",
+      "references": [
+        {
+          "target": "REF-HSA-special_conditions",
+          "relation": "references"
+        }
+      ],
+      "code": "special_extreme_season_29",
+      "name": "Đặc biệt: extreme_season",
+      "metadata": {
+        "package_id": "bz_15_hidden_stems_advanced",
+        "domain_id": "DOM-HIDDEN_STEM",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6C"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          },
+          {
+            "field": "resolved_useful_god",
+            "operator": "equals",
+            "value": "withheld"
+          },
+          {
+            "field": "growth_profile",
+            "operator": "equals",
+            "value": "balanced"
+          },
+          {
+            "field": "follow_pattern_score",
+            "operator": "lte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "hidden_stems_diagnostics=extreme_season",
+          "weight": 10,
+          "signal": "hidden_stems_diagnostics",
+          "score_target": "day_master.hidden_stems_score",
+          "outcome": "extreme_season",
+          "publishes": "hidden_stems_diagnostics"
+        }
+      }
+    }
+  ]
+}
