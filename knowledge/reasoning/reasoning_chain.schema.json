@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/reasoning/reasoning_chain.schema.json",
+  "title": "BTE Reasoning Chain",
+  "description": "Ordered Observation → Evidence → Inference → Intermediate → Final path.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "chain_id",
+    "title",
+    "package_id",
+    "package_version",
+    "stages",
+    "rule_ids",
+    "evidence_refs",
+    "node_ids",
+    "edge_ids"
+  ],
+  "properties": {
+    "chain_id": {
+      "type": "string",
+      "pattern": "^RC-[A-Z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string"
+    },
+    "example_id": {
+      "type": ["string", "null"]
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["stage", "node_id"],
+        "properties": {
+          "stage": {
+            "type": "string",
+            "enum": [
+              "observation",
+              "evidence",
+              "inference",
+              "intermediate_conclusion",
+              "final_conclusion"
+            ]
+          },
+          "node_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "node_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "edge_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "alternative_node_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradiction_node_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

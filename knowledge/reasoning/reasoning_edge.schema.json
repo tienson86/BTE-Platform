@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/reasoning/reasoning_edge.schema.json",
+  "title": "BTE Reasoning Edge",
+  "description": "Directed relationship between two reasoning nodes.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "edge_id",
+    "source",
+    "target",
+    "relationship",
+    "weight",
+    "direction",
+    "condition"
+  ],
+  "properties": {
+    "edge_id": {
+      "type": "string",
+      "pattern": "^RE-[A-Z0-9-]+$"
+    },
+    "source": {
+      "type": "string",
+      "description": "Source node_id."
+    },
+    "target": {
+      "type": "string",
+      "description": "Target node_id."
+    },
+    "relationship": {
+      "type": "string",
+      "enum": [
+        "supports",
+        "requires",
+        "contradicts",
+        "extends",
+        "derives",
+        "confirms",
+        "invalidates"
+      ]
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Relative strength of the link. Not an engine score."
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["forward", "bidirectional"],
+      "description": "Traversal direction. Default forward. Bidirectional only when explicitly justified."
+    },
+    "condition": {
+      "type": ["string", "null"],
+      "description": "Human-readable applicability condition. Not executable code."
+    }
+  }
+}

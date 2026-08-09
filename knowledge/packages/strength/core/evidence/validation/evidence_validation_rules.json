@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "evidence_version": "1.0.0",
+  "runtime": false,
+  "allowed_confidence": ["experimental", "low", "medium", "high", "canonical"],
+  "checks": [
+    {"id": "EV-001", "name": "every_rule_has_evidence", "severity": "error"},
+    {"id": "EV-002", "name": "explanation_exists", "severity": "error"},
+    {"id": "EV-003", "name": "confidence_exists", "severity": "error"},
+    {"id": "EV-004", "name": "confidence_reason_exists", "severity": "error"},
+    {"id": "EV-005", "name": "references_valid", "severity": "error"},
+    {"id": "EV-006", "name": "example_links_valid", "severity": "error"},
+    {"id": "EV-007", "name": "relationship_ids_valid", "severity": "error"},
+    {"id": "EV-008", "name": "related_rules_acyclic", "severity": "error"},
+    {"id": "EV-009", "name": "exclusive_conflict_completeness", "severity": "warning"},
+    {"id": "EV-010", "name": "traceability_complete", "severity": "error"}
+  ]
+}

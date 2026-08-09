@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/reasoning/reasoning_confidence.schema.json",
+  "title": "BTE Reasoning Confidence Propagation",
+  "description": "Declarative confidence movement along a chain. Specification only — no scoring algorithm.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "framework_version",
+    "levels",
+    "modes",
+    "propagation_rules"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "framework_version": {
+      "type": "string"
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rank"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": ["experimental", "low", "medium", "high", "canonical"]
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "modes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "semantics"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": ["inherited", "reduced", "conflicting", "combined", "declared"]
+          },
+          "semantics": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "propagation_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement"],
+        "properties": {
+          "id": {"type": "string"},
+          "statement": {"type": "string"}
+        }
+      }
+    }
+  }
+}
