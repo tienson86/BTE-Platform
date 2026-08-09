@@ -1,3 +1,5 @@
+import { ResultIcon } from "../Icon";
+
 export type ExpandProps = {
   expanded: boolean;
   expandLabel: string;
@@ -21,7 +23,8 @@ export function Expand({
       aria-controls={controlsId}
       onClick={onToggle}
     >
-      {expanded ? collapseLabel : expandLabel}
+      <ResultIcon name="expand" />
+      <span>{expanded ? collapseLabel : expandLabel}</span>
     </button>
   );
 }

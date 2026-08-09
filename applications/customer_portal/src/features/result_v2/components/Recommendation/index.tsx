@@ -9,6 +9,7 @@ import { groupRecommendations } from "../../utils/grouping";
 import { EmptyState } from "../EmptyState";
 import { RecommendationCard } from "../RecommendationCard";
 import { Button } from "../Shared/Button";
+import { ResultIcon } from "../Shared/Icon";
 import { SectionHeader } from "../Shared/SectionHeader";
 
 export type RecommendationRegionProps = {
@@ -42,12 +43,14 @@ export const Recommendation = memo(function Recommendation({
 
   return (
     <section
-      className="rv2-section"
+      className="rv2-section rv2-section--primary"
       id="rv2-Recommendation"
       tabIndex={-1}
       aria-labelledby="rv2-rec-title"
     >
-      <SectionHeader id="rv2-rec-title">{title}</SectionHeader>
+      <SectionHeader id="rv2-rec-title" icon="recommendation">
+        {title}
+      </SectionHeader>
       {items.length === 0 ? (
         <EmptyState
           title={title}
@@ -59,17 +62,23 @@ export const Recommendation = memo(function Recommendation({
         <div className="rv2-rec-grid">
           {groups.map((group) =>
             group.items.length === 0 ? null : (
-              <div key={group.domain} className="rv2-rec-group">
-                <h3 className="rv2-rec-group__title">{group.domainLabel}</h3>
-                {group.items.map((item) => (
-                  <RecommendationCard
-                    key={item.id}
-                    model={item}
-                    chrome={chrome}
-                    expanded={isExpanded(`rec:${item.id}`)}
-                    onToggle={() => onToggleItem(`rec:${item.id}`)}
-                  />
-                ))}
+              <div key={group.domain} className="rv2-rec-group" data-domain={group.domain}>
+                <h3 className="rv2-rec-group__title">
+                  <ResultIcon name={group.domain} />
+                  <span>{group.domainLabel}</span>
+                </h3>
+                <div className="rv2-rec-group__cards">
+                  {group.items.map((item) => (
+                    <RecommendationCard
+                      key={item.id}
+                      model={item}
+                      chrome={chrome}
+                      expanded={isExpanded(`rec:${item.id}`)}
+                      onToggle={() => onToggleItem(`rec:${item.id}`)}
+                      disabled={loading}
+                    />
+                  ))}
+                </div>
               </div>
             ),
           )}

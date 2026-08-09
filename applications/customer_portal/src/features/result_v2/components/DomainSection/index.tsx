@@ -47,12 +47,15 @@ export const DomainSection = memo(function DomainSection({
 
   return (
     <section
-      className="rv2-section"
+      className="rv2-section rv2-section--domain"
       id={sectionId}
       tabIndex={-1}
       aria-labelledby={`${sectionId}-title`}
+      data-domain={domain.key}
     >
-      <SectionHeader id={`${sectionId}-title`}>{domain.title}</SectionHeader>
+      <SectionHeader id={`${sectionId}-title`} icon={domain.key}>
+        {domain.title}
+      </SectionHeader>
       {!hasContent ? (
         <EmptyState
           title={domain.title}
@@ -62,7 +65,7 @@ export const DomainSection = memo(function DomainSection({
         />
       ) : (
         <>
-          {domain.intro ? <p className="rv2-prose">{domain.intro}</p> : null}
+          {domain.intro ? <p className="rv2-domain__intro">{domain.intro}</p> : null}
           {recommendations.map((item) => (
             <RecommendationCard
               key={item.id}
@@ -73,7 +76,7 @@ export const DomainSection = memo(function DomainSection({
             />
           ))}
           {domain.analysis_preview ? (
-            <div className="rv2-card">
+            <div className="rv2-card rv2-analysis-card">
               <p className="rv2-prose">{domain.analysis_preview}</p>
               {domain.analysis_detail ? (
                 <>
@@ -85,7 +88,7 @@ export const DomainSection = memo(function DomainSection({
                     onToggle={() => onToggleAnalysis(domain.key)}
                   />
                   {analysisExpanded ? (
-                    <p id={analysisId} className="rv2-prose">
+                    <p id={analysisId} className="rv2-prose rv2-expand-panel">
                       {domain.analysis_detail}
                     </p>
                   ) : (

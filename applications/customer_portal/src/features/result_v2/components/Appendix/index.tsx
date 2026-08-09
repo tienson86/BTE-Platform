@@ -13,15 +13,17 @@ export const Appendix = memo(function Appendix({
   if (!showAppendix(model) || !model) return null;
   return (
     <section
-      className="rv2-section"
+      className="rv2-section rv2-section--reference"
       id="rv2-Appendix"
       tabIndex={-1}
       aria-labelledby="rv2-appx-title"
     >
-      <SectionHeader id="rv2-appx-title">{title}</SectionHeader>
-      {model.scope ? <p className="rv2-prose">{model.scope}</p> : null}
-      {model.reread ? <p className="rv2-prose">{model.reread}</p> : null}
-      {model.limits ? <p className="rv2-prose">{model.limits}</p> : null}
+      <SectionHeader id="rv2-appx-title" icon="appendix">
+        {title}
+      </SectionHeader>
+      {model.scope ? <p className="rv2-prose rv2-type-note">{model.scope}</p> : null}
+      {model.reread ? <p className="rv2-prose rv2-type-note">{model.reread}</p> : null}
+      {model.limits ? <p className="rv2-prose rv2-type-note">{model.limits}</p> : null}
     </section>
   );
 });

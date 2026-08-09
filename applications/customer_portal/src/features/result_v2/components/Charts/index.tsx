@@ -21,13 +21,20 @@ export const Charts = memo(function Charts({
 }: ChartsProps) {
   if (items.length === 0) return null;
   return (
-    <section className="rv2-section" id="rv2-Charts" tabIndex={-1} aria-labelledby="rv2-charts-title">
-      <SectionHeader id="rv2-charts-title">{title}</SectionHeader>
+    <section
+      className="rv2-section rv2-section--evidence"
+      id="rv2-Charts"
+      tabIndex={-1}
+      aria-labelledby="rv2-charts-title"
+    >
+      <SectionHeader id="rv2-charts-title" icon="chart">
+        {title}
+      </SectionHeader>
       {items.map((item, index) => {
         const tableId = `rv2-chart-table-${index}`;
         const expanded = isExpanded(`chart:${index}`);
         return (
-          <Card key={`${item.asset_ref}-${index}`} title={item.title}>
+          <Card key={`${item.asset_ref}-${index}`} className="rv2-chart-card" title={item.title}>
             <figure className="rv2-chart" aria-label={item.title}>
               <figcaption className="rv2-chart-caption">{item.caption}</figcaption>
             </figure>
@@ -41,7 +48,7 @@ export const Charts = memo(function Charts({
                   onToggle={() => onToggleTable(index)}
                 />
                 {expanded ? (
-                  <div className="rv2-table-wrap">
+                  <div className="rv2-table-wrap rv2-expand-panel">
                     <table id={tableId} className="rv2-table">
                       <thead>
                         <tr>

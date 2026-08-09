@@ -22,12 +22,14 @@ export function TechnicalInfo({
   const panelId = "rv2-technical-panel";
   return (
     <section
-      className="rv2-section"
+      className="rv2-section rv2-section--reference"
       id="rv2-Technical"
       tabIndex={-1}
       aria-labelledby="rv2-tech-title"
     >
-      <SectionHeader id="rv2-tech-title">{title}</SectionHeader>
+      <SectionHeader id="rv2-tech-title" icon="technical">
+        {title}
+      </SectionHeader>
       <Expand
         expanded={!collapsed}
         expandLabel={chrome.expand_technical}
@@ -36,7 +38,7 @@ export function TechnicalInfo({
         onToggle={onToggle}
       />
       {!collapsed ? (
-        <div id={panelId} className="rv2-card">
+        <div id={panelId} className="rv2-card rv2-technical-card rv2-expand-panel">
           <dl className="rv2-dl">
             {model.calendar ? (
               <div>

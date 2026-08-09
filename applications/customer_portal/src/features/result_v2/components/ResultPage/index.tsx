@@ -104,7 +104,7 @@ export const ResultPage = memo(function ResultPage({
   const knowledgeCollapsed = !isExpanded("section:knowledge");
 
   return (
-    <div className="rv2-page" data-page="result-v2" data-state={pageState} data-contract={model.contract_id}>
+    <div className="rv2-page" data-page="result-v2" data-polish="px4" data-state={pageState} data-contract={model.contract_id}>
       <a className="rv2-skip" href="#rv2-main">
         {chrome.skip}
       </a>

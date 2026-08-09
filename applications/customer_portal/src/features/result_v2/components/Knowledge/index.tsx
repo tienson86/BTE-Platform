@@ -27,12 +27,14 @@ export function Knowledge({
   const panelId = "rv2-knowledge-panel";
   return (
     <section
-      className="rv2-section"
+      className="rv2-section rv2-section--reference rv2-section--knowledge"
       id="rv2-Knowledge"
       tabIndex={-1}
       aria-labelledby="rv2-know-title"
     >
-      <SectionHeader id="rv2-know-title">{title}</SectionHeader>
+      <SectionHeader id="rv2-know-title" icon="knowledge">
+        {title}
+      </SectionHeader>
       <Expand
         expanded={!sectionCollapsed}
         expandLabel={chrome.expand_knowledge}
@@ -41,13 +43,13 @@ export function Knowledge({
         onToggle={onToggleSection}
       />
       {!sectionCollapsed ? (
-        <div id={panelId}>
+        <div id={panelId} className="rv2-expand-panel">
           {items.map((item, index) => {
             const itemId = `rv2-know-item-${index}`;
             const expanded = isItemExpanded(index);
             return (
-              <Card key={`${item.title}-${index}`} title={item.title}>
-                <p className="rv2-prose">{item.teaser}</p>
+              <Card key={`${item.title}-${index}`} className="rv2-knowledge-card" title={item.title}>
+                <p className="rv2-prose rv2-knowledge-teaser">{item.teaser}</p>
                 {item.body ? (
                   <>
                     <Expand
@@ -58,9 +60,9 @@ export function Knowledge({
                       onToggle={() => onToggleItem(index)}
                     />
                     {expanded ? (
-                      <p id={itemId} className="rv2-prose">
-                        {item.body}
-                      </p>
+                      <div id={itemId} className="rv2-article rv2-expand-panel">
+                        <p>{item.body}</p>
+                      </div>
                     ) : (
                       <div id={itemId} hidden />
                     )}
