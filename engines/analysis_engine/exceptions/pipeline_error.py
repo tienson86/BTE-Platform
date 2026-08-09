@@ -23,3 +23,7 @@ class DependencyViolationError(PipelineError):
 
 class DuplicateExecutionError(PipelineError):
     """Raised when a stage attempts to overwrite a published result."""
+
+
+class ContractViolationError(PipelineError):
+    """Raised when a package or stage contract is violated before execution."""

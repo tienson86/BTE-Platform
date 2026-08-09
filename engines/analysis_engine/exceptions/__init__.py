@@ -8,6 +8,7 @@ from engines.analysis_engine.exceptions.conflict_error import ConflictError
 from engines.analysis_engine.exceptions.context_error import ContextError
 from engines.analysis_engine.exceptions.decision_error import DecisionError
 from engines.analysis_engine.exceptions.pipeline_error import (
+    ContractViolationError,
     DependencyViolationError,
     DuplicateExecutionError,
     IncompatiblePackageError,
@@ -27,6 +28,7 @@ __all__ = [
     "CacheError",
     "ConflictError",
     "ContextError",
+    "ContractViolationError",
     "DecisionError",
     "DependencyViolationError",
     "DuplicateExecutionError",

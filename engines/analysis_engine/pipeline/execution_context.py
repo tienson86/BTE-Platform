@@ -145,12 +145,17 @@ class AnalysisExecutionContext:
 
     @property
     def pattern_result(self) -> dict[str, Any] | None:
-        """Future Pattern stage placeholder."""
+        """Pattern Core stage output, or None before execution."""
         return self.get_result("pattern")
 
     @property
+    def pattern_evaluation_result(self) -> dict[str, Any] | None:
+        """Pattern Evaluation stage output, or None before execution."""
+        return self.get_result("pattern_evaluation")
+
+    @property
     def useful_god_result(self) -> dict[str, Any] | None:
-        """Future Useful God stage placeholder."""
+        """Useful God decision stage output, or None before execution."""
         return self.get_result("useful_god")
 
     @property

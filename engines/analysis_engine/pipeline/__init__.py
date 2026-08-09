@@ -14,6 +14,7 @@ from engines.analysis_engine.pipeline.contracts import (
     StageResultContract,
 )
 from engines.analysis_engine.pipeline.analysis_pipeline import AnalysisPipeline
+from engines.analysis_engine.pipeline.canonical_pipeline import CanonicalPipeline
 from engines.analysis_engine.pipeline.dependency_resolver import DependencyResolver
 from engines.analysis_engine.pipeline.execution_context import (
     AnalysisExecutionContext,
@@ -32,13 +33,25 @@ from engines.analysis_engine.pipeline.execution_state import ExecutionState
 from engines.analysis_engine.pipeline.executor import Executor
 from engines.analysis_engine.pipeline.pipeline import Pipeline
 from engines.analysis_engine.pipeline.pipeline_context import PipelineContext
-from engines.analysis_engine.pipeline.pipeline_executor import PipelineExecutor
+from engines.analysis_engine.pipeline.execution_report import (
+    CanonicalAnalysisResult,
+    ExecutionTrace,
+)
+from engines.analysis_engine.pipeline.package_contract import PackageContractVerifier
+from engines.analysis_engine.pipeline.pipeline_executor import (
+    CanonicalPipelineExecutor,
+    PipelineExecutor,
+)
 from engines.analysis_engine.pipeline.pipeline_result import (
     AnalysisPipelineResult,
     PipelineResult,
     StageOutcome,
 )
 from engines.analysis_engine.pipeline.registry import StageRegistry
+from engines.analysis_engine.pipeline.stage_registry import (
+    CanonicalStageRegistry,
+    StageRecord,
+)
 from engines.analysis_engine.pipeline.scheduler import Scheduler
 from engines.analysis_engine.pipeline.stage_base import StageBase
 from engines.analysis_engine.pipeline.stage_executor import StageExecutor
@@ -50,7 +63,14 @@ __all__ = [
     "AnalysisExecutionContext",
     "AnalysisPipeline",
     "AnalysisPipelineResult",
+    "CanonicalAnalysisResult",
+    "CanonicalPipeline",
+    "CanonicalPipelineExecutor",
+    "CanonicalStageRegistry",
     "DependencyResolver",
+    "ExecutionTrace",
+    "PackageContractVerifier",
+    "StageRecord",
     "ExecutionContext",
     "LoadedPackage",
     "PackageLoader",

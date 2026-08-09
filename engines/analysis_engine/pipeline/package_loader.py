@@ -25,6 +25,14 @@ _PACKAGE_RELATIVE_ROOTS: dict[str, tuple[str, ...]] = {
     "bz_01_strength_core": ("knowledge", "packages", "strength", "core"),
     "bz_02_seasonal_core": ("knowledge", "packages", "seasonal", "core"),
     "bz_03_temperature_core": ("knowledge", "packages", "temperature", "core"),
+    "bz_04_pattern_core": ("knowledge", "packages", "pattern", "core"),
+    "bz_05_pattern_evaluation": ("knowledge", "packages", "pattern", "evaluation"),
+    "bz_06_useful_god_foundation": (
+        "knowledge",
+        "packages",
+        "useful_god",
+        "foundation",
+    ),
 }
 
 
@@ -223,21 +231,23 @@ class PackageLoader:
         self,
         loaded: Mapping[str, LoadedPackage],
     ) -> None:
-        temperature = loaded.get("bz_03_temperature_core")
-        if temperature is None:
-            return
-        dependencies = _read_json(temperature.root / "DEPENDENCIES.json")
         by_id = {item.package_id: item for item in loaded.values()}
-        for entry in dependencies.get("optional") or []:
-            dep_id = str(entry.get("package_id", ""))
-            constraint = str(entry.get("version_constraint", ""))
-            present = by_id.get(dep_id)
-            if present is None or not constraint:
+        for package in loaded.values():
+            dep_path = package.root / "DEPENDENCIES.json"
+            if not dep_path.is_file():
                 continue
-            if not satisfies_version_constraint(present.package_version, constraint):
-                raise IncompatiblePackageError(
-                    f"optional_dependency_incompatible:{dep_id}:{present.package_version}"
-                )
+            dependencies = _read_json(dep_path)
+            for entry in dependencies.get("optional") or []:
+                dep_id = str(entry.get("package_id", ""))
+                constraint = str(entry.get("version_constraint", ""))
+                present = by_id.get(dep_id)
+                if present is None or not constraint:
+                    continue
+                if not satisfies_version_constraint(present.package_version, constraint):
+                    raise IncompatiblePackageError(
+                        f"optional_dependency_incompatible:{dep_id}:"
+                        f"{present.package_version}"
+                    )
 
 
 def _read_json(path: Path) -> dict[str, Any]:
