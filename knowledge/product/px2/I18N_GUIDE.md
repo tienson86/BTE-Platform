@@ -77,7 +77,7 @@ Locale: `vi` only for Result V2
 | i18n.technical.timezone | Múi giờ |
 | i18n.technical.schema | Phiên bản phân tích |
 | i18n.technical.ids | Mã hồ sơ |
-| i18n.technical.metadata | Metadata kỹ thuật |
+| i18n.technical.metadata | Thông tin kỹ thuật bổ sung |
 
 ---
 
