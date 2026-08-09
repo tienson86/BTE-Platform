@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-08-10T02:00:00Z",
+  "sprint": "QC-3",
+  "flow": [
+    {
+      "from": "AX-2",
+      "to": "AX-3",
+      "contracts": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence"
+      ],
+      "optional_contracts": [
+        "pattern_integrity",
+        "pattern_stability"
+      ],
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0"
+      },
+      "status": "pass"
+    },
+    {
+      "from": "AX-3",
+      "to": "AX-4",
+      "contracts": [
+        "final_useful_god"
+      ],
+      "optional_contracts": [
+        "resolved_useful_god",
+        "decision_priority"
+      ],
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0"
+      },
+      "status": "pass"
+    },
+    {
+      "from": "AX-4",
+      "to": "IX-1",
+      "contracts": [
+        "major_cycles",
+        "annual_cycles",
+        "timeline_metadata"
+      ],
+      "optional_contracts": [
+        "timeline_result",
+        "analysis_result",
+        "decision_result"
+      ],
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0",
+        "canonical_luck_pipeline": "==1.0.0"
+      },
+      "status": "pass_with_warnings"
+    },
+    {
+      "from": "IX-1",
+      "to": "RX-1",
+      "contracts": [
+        "sentence_candidates",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "optional_contracts": [
+        "explanation_index"
+      ],
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0",
+        "canonical_luck_pipeline": "==1.0.0",
+        "canonical_interpretation_pipeline": "==1.0.0"
+      },
+      "status": "pass_with_warnings"
+    }
+  ]
+}

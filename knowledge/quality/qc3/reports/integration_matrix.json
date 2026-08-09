@@ -1,0 +1,357 @@
+{
+  "generated_at": "2026-08-10T02:00:00Z",
+  "sprint": "QC-3",
+  "order": [
+    "AX-2",
+    "AX-3",
+    "AX-4",
+    "IX-1",
+    "RX-1"
+  ],
+  "pipelines": [
+    {
+      "sprint_id": "AX-2",
+      "pipeline_id": "canonical_analysis_pipeline",
+      "version": "2.0.0",
+      "engine": "analysis_engine",
+      "active_stages": [
+        "calendar",
+        "four_pillars",
+        "seasonal",
+        "strength",
+        "temperature",
+        "pattern",
+        "pattern_evaluation",
+        "useful_god"
+      ],
+      "inactive_stages": [
+        "luck_cycle",
+        "interpretation",
+        "report"
+      ],
+      "published_outputs": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "useful_god"
+      ],
+      "consumed_inputs": [
+        "birth_information",
+        "calendar_result",
+        "four_pillars"
+      ],
+      "trace_fields": [
+        "stage_execution",
+        "package_ids",
+        "published_outputs"
+      ],
+      "audit_fields": [
+        "diagnostics",
+        "disabled_stages",
+        "contract_checks"
+      ],
+      "schema_version": "2.0.0"
+    },
+    {
+      "sprint_id": "AX-3",
+      "pipeline_id": "canonical_decision_pipeline",
+      "version": "1.0.0",
+      "engine": "decision_engine",
+      "active_stages": [
+        "useful_god_foundation",
+        "useful_god_priority",
+        "useful_god_override"
+      ],
+      "inactive_stages": [
+        "luck_cycle",
+        "annual_luck",
+        "monthly_luck",
+        "interpretation"
+      ],
+      "published_outputs": [
+        "useful_god",
+        "resolved_useful_god",
+        "final_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "consumed_inputs": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence"
+      ],
+      "trace_fields": [
+        "foundation_execution",
+        "priority_execution",
+        "override_execution"
+      ],
+      "audit_fields": [
+        "diagnostics",
+        "override_applied",
+        "contract_checks"
+      ],
+      "schema_version": "2.0.0"
+    },
+    {
+      "sprint_id": "AX-4",
+      "pipeline_id": "canonical_luck_pipeline",
+      "version": "1.0.0",
+      "engine": "luck_engine",
+      "active_stages": [
+        "timeline",
+        "analysis",
+        "decision"
+      ],
+      "inactive_stages": [
+        "interpretation",
+        "report"
+      ],
+      "published_outputs": [
+        "timeline_result",
+        "analysis_result",
+        "decision_result",
+        "major_cycles",
+        "annual_cycles",
+        "timeline_metadata"
+      ],
+      "consumed_inputs": [
+        "final_useful_god",
+        "strength_score",
+        "pattern_score",
+        "timeline_metadata"
+      ],
+      "trace_fields": [
+        "timeline_execution",
+        "analysis_execution",
+        "decision_execution"
+      ],
+      "audit_fields": [
+        "diagnostics",
+        "contract_checks",
+        "ax2_snapshot_version",
+        "ax3_snapshot_version"
+      ],
+      "schema_version": "2.0.0"
+    },
+    {
+      "sprint_id": "IX-1",
+      "pipeline_id": "canonical_interpretation_pipeline",
+      "version": "1.0.0",
+      "engine": "interpretation_engine",
+      "active_stages": [
+        "foundation",
+        "knowledge_selection",
+        "composition"
+      ],
+      "inactive_stages": [
+        "report",
+        "ai_rewrite"
+      ],
+      "published_outputs": [
+        "sentence_candidates",
+        "explanation_index",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "consumed_inputs": [
+        "final_useful_god",
+        "strength_score",
+        "pattern_score",
+        "major_cycles",
+        "timeline_metadata"
+      ],
+      "trace_fields": [
+        "foundation_execution",
+        "selection_execution",
+        "composition_execution",
+        "sentence_ids"
+      ],
+      "audit_fields": [
+        "diagnostics",
+        "ai_rewrite_disabled",
+        "contract_checks"
+      ],
+      "schema_version": "2.0.0"
+    },
+    {
+      "sprint_id": "RX-1",
+      "pipeline_id": "canonical_report_pipeline",
+      "version": "1.0.0",
+      "engine": "report_engine",
+      "active_stages": [
+        "foundation",
+        "layout",
+        "rendering"
+      ],
+      "inactive_stages": [
+        "publisher",
+        "delivery",
+        "print"
+      ],
+      "published_outputs": [
+        "preset_catalog",
+        "theme_catalog",
+        "layout_catalog",
+        "widget_catalog",
+        "orchestration_contract"
+      ],
+      "consumed_inputs": [
+        "sentence_candidates",
+        "narrative_templates",
+        "composition_rules",
+        "final_useful_god"
+      ],
+      "trace_fields": [
+        "foundation_execution",
+        "layout_execution",
+        "rendering_execution",
+        "preset_id"
+      ],
+      "audit_fields": [
+        "diagnostics",
+        "publisher_disabled",
+        "no_filesystem_persist",
+        "contract_checks"
+      ],
+      "schema_version": "2.0.0"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EDGE-QC3-000001",
+      "producer": "AX-2",
+      "consumer": "AX-3",
+      "producer_pipeline_id": "canonical_analysis_pipeline",
+      "consumer_pipeline_id": "canonical_decision_pipeline",
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0"
+      },
+      "contracts": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence"
+      ],
+      "optional_contracts": [
+        "pattern_integrity",
+        "pattern_stability"
+      ],
+      "trace": [
+        "package_ids",
+        "published_outputs",
+        "stage_execution"
+      ],
+      "audit": [
+        "diagnostics",
+        "contract_checks"
+      ],
+      "status": "pass",
+      "notes": "Decision consumes published analysis fields only. Does not import Analysis Engine internals."
+    },
+    {
+      "edge_id": "EDGE-QC3-000002",
+      "producer": "AX-3",
+      "consumer": "AX-4",
+      "producer_pipeline_id": "canonical_decision_pipeline",
+      "consumer_pipeline_id": "canonical_luck_pipeline",
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0"
+      },
+      "contracts": [
+        "final_useful_god"
+      ],
+      "optional_contracts": [
+        "resolved_useful_god",
+        "decision_priority"
+      ],
+      "trace": [
+        "override_execution",
+        "final_useful_god"
+      ],
+      "audit": [
+        "diagnostics",
+        "ax3_snapshot_version"
+      ],
+      "status": "pass",
+      "notes": "AX-4 verifies AX-3 snapshot version 1.0.0. bz_09 does not enable AX-2 luck_cycle."
+    },
+    {
+      "edge_id": "EDGE-QC3-000003",
+      "producer": "AX-4",
+      "consumer": "IX-1",
+      "producer_pipeline_id": "canonical_luck_pipeline",
+      "consumer_pipeline_id": "canonical_interpretation_pipeline",
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0",
+        "canonical_luck_pipeline": "==1.0.0"
+      },
+      "contracts": [
+        "major_cycles",
+        "annual_cycles",
+        "timeline_metadata"
+      ],
+      "optional_contracts": [
+        "timeline_result",
+        "analysis_result",
+        "decision_result"
+      ],
+      "trace": [
+        "timeline_execution",
+        "analysis_execution",
+        "decision_execution"
+      ],
+      "audit": [
+        "diagnostics",
+        "contract_checks"
+      ],
+      "status": "pass_with_warnings",
+      "notes": "IX-1 declares ==1.0.0 on AX-4. Sealed bz_16–bz_19 are not yet engine-loaded (QC-1)."
+    },
+    {
+      "edge_id": "EDGE-QC3-000004",
+      "producer": "IX-1",
+      "consumer": "RX-1",
+      "producer_pipeline_id": "canonical_interpretation_pipeline",
+      "consumer_pipeline_id": "canonical_report_pipeline",
+      "version_constraint": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0",
+        "canonical_luck_pipeline": "==1.0.0",
+        "canonical_interpretation_pipeline": "==1.0.0"
+      },
+      "contracts": [
+        "sentence_candidates",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "optional_contracts": [
+        "explanation_index"
+      ],
+      "trace": [
+        "composition_execution",
+        "sentence_ids",
+        "preset_id"
+      ],
+      "audit": [
+        "diagnostics",
+        "publisher_disabled",
+        "no_filesystem_persist"
+      ],
+      "status": "pass_with_warnings",
+      "notes": "RX-1 declares ==1.0.0 on IX-1. Publisher/delivery/print remain disabled. bz_20–bz_23 not engine-loaded."
+    }
+  ],
+  "content_digest": "8f0bd1af920bd62165aa6ce6009b5c1be8566f9bb343073b30becf6115285e77"
+}

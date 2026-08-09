@@ -1,0 +1,157 @@
+{
+  "generated_at": "2026-08-10T02:00:00Z",
+  "sprint": "QC-3",
+  "edges": [
+    {
+      "edge_id": "EDGE-QC3-000001",
+      "producer": "AX-2",
+      "consumer": "AX-3",
+      "published_outputs": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "useful_god"
+      ],
+      "consumed_inputs": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence"
+      ],
+      "required_contracts": [
+        "strength_score",
+        "season_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence"
+      ],
+      "optional_contracts": [
+        "pattern_integrity",
+        "pattern_stability"
+      ],
+      "missing_contracts": [],
+      "duplicate_contracts": [],
+      "optional_unpublished": [],
+      "version_compatibility": {
+        "canonical_analysis_pipeline": "==2.0.0"
+      },
+      "status": "pass"
+    },
+    {
+      "edge_id": "EDGE-QC3-000002",
+      "producer": "AX-3",
+      "consumer": "AX-4",
+      "published_outputs": [
+        "useful_god",
+        "resolved_useful_god",
+        "final_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "consumed_inputs": [
+        "final_useful_god",
+        "strength_score",
+        "pattern_score",
+        "timeline_metadata"
+      ],
+      "required_contracts": [
+        "final_useful_god"
+      ],
+      "optional_contracts": [
+        "resolved_useful_god",
+        "decision_priority"
+      ],
+      "missing_contracts": [],
+      "duplicate_contracts": [],
+      "optional_unpublished": [],
+      "version_compatibility": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0"
+      },
+      "status": "pass"
+    },
+    {
+      "edge_id": "EDGE-QC3-000003",
+      "producer": "AX-4",
+      "consumer": "IX-1",
+      "published_outputs": [
+        "timeline_result",
+        "analysis_result",
+        "decision_result",
+        "major_cycles",
+        "annual_cycles",
+        "timeline_metadata"
+      ],
+      "consumed_inputs": [
+        "final_useful_god",
+        "strength_score",
+        "pattern_score",
+        "major_cycles",
+        "timeline_metadata"
+      ],
+      "required_contracts": [
+        "major_cycles",
+        "annual_cycles",
+        "timeline_metadata"
+      ],
+      "optional_contracts": [
+        "timeline_result",
+        "analysis_result",
+        "decision_result"
+      ],
+      "missing_contracts": [],
+      "duplicate_contracts": [],
+      "optional_unpublished": [],
+      "version_compatibility": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0",
+        "canonical_luck_pipeline": "==1.0.0"
+      },
+      "status": "pass_with_warnings"
+    },
+    {
+      "edge_id": "EDGE-QC3-000004",
+      "producer": "IX-1",
+      "consumer": "RX-1",
+      "published_outputs": [
+        "sentence_candidates",
+        "explanation_index",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "consumed_inputs": [
+        "sentence_candidates",
+        "narrative_templates",
+        "composition_rules",
+        "final_useful_god"
+      ],
+      "required_contracts": [
+        "sentence_candidates",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "optional_contracts": [
+        "explanation_index"
+      ],
+      "missing_contracts": [],
+      "duplicate_contracts": [],
+      "optional_unpublished": [],
+      "version_compatibility": {
+        "canonical_analysis_pipeline": "==2.0.0",
+        "canonical_decision_pipeline": "==1.0.0",
+        "canonical_luck_pipeline": "==1.0.0",
+        "canonical_interpretation_pipeline": "==1.0.0"
+      },
+      "status": "pass_with_warnings"
+    }
+  ],
+  "missing_contract_count": 0
+}

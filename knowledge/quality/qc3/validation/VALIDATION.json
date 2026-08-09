@@ -1,0 +1,68 @@
+{
+  "schema_version": "2.0.0",
+  "sprint": "QC-3",
+  "profile": "PVP-RELEASE",
+  "validated_at": "2026-08-10T02:00:00Z",
+  "status": "pass_with_warnings",
+  "counts": {
+    "errors": 0,
+    "warnings": 2,
+    "info": 2
+  },
+  "checks": [
+    {
+      "id": "schema_validation",
+      "status": "pass"
+    },
+    {
+      "id": "metadata_validation",
+      "status": "pass"
+    },
+    {
+      "id": "dependency_validation",
+      "status": "pass"
+    },
+    {
+      "id": "reference_validation",
+      "status": "pass"
+    },
+    {
+      "id": "package_integrity",
+      "status": "pass"
+    },
+    {
+      "id": "checksum_validation",
+      "status": "pass"
+    },
+    {
+      "id": "compatibility_validation",
+      "status": "pass"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "VAL-QC3-ENGINE",
+      "severity": "warning",
+      "message": "Cross-pipeline validation is orchestration-graph evidence. Engines were not executed.",
+      "path": "reports/pipeline_status.json"
+    },
+    {
+      "code": "VAL-QC3-KNOWLEDGE",
+      "severity": "warning",
+      "message": "IX-1/RX-1 version constraints pass; sealed bz_16–bz_23 are not engine-loaded.",
+      "path": "reports/handoff_matrix.json"
+    },
+    {
+      "code": "VAL-QC3-SCOPE",
+      "severity": "info",
+      "message": "Additive QC-3 only. QC-1, QC-2, packages, engines, pipelines, APIs unchanged.",
+      "path": "knowledge/quality/qc3"
+    },
+    {
+      "code": "VAL-QC3-ORDER",
+      "severity": "info",
+      "message": "Canonical order AX-2 → AX-3 → AX-4 → IX-1 → RX-1. AX-2 luck_cycle remains inactive.",
+      "path": "reports/integration_matrix.json"
+    }
+  ]
+}
