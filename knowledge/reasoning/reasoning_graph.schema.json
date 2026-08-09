@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/reasoning/reasoning_graph.schema.json",
+  "title": "BTE Reasoning Graph",
+  "description": "Deterministic graph of reasoning nodes and edges for one scenario or package view.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "graph_id",
+    "framework_version",
+    "package_id",
+    "package_version",
+    "deterministic",
+    "node_ids",
+    "edge_ids",
+    "chain_ids"
+  ],
+  "properties": {
+    "graph_id": {
+      "type": "string",
+      "pattern": "^RG-[A-Z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "framework_version": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string"
+    },
+    "deterministic": {
+      "type": "boolean",
+      "const": true
+    },
+    "sort": {
+      "type": "object",
+      "properties": {
+        "nodes": {"type": "string", "const": "node_id_asc"},
+        "edges": {"type": "string", "const": "edge_id_asc"},
+        "locale": {"type": "string", "const": "C"}
+      }
+    },
+    "node_ids": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "edge_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "chain_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "trace_ids": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "supports": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Capabilities: reasoning_nodes, inference_chains, decision_paths, explanation_paths, alternative_branches, contradiction_branches, confidence_propagation."
+    }
+  }
+}

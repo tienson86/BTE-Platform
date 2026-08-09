@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "basic_scoring",
+  "count": 8,
+  "items": [
+    {
+      "rule_id": "SKC-000103",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi chart_valid equals True.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Mọi cục hợp lệ khởi điểm 50/100 trước khi cộng trừ nhân tố.",
+        "title": "Điểm nền 50"
+      }
+    },
+    {
+      "rule_id": "SKC-000104",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi raw_strength_total exists True.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Tổng thô được kẹp và quy về 0–100 rồi chia 100 thành điểm chuẩn hóa.",
+        "title": "Chuẩn hóa thang 0–100"
+      }
+    },
+    {
+      "rule_id": "SKC-000105",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi rule_group equals month_status.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Chỉ một trạng thái tháng lệnh được áp dụng.",
+        "title": "Nhóm month_status loại trừ lẫn nhau"
+      }
+    },
+    {
+      "rule_id": "SKC-000106",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi rule_group equals support.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Các nhân tố trợ (can/chi/ấn/tỷ) stackable tối đa 4 lần theo CSV support.",
+        "title": "Trợ lực cộng dồn tối đa 4"
+      }
+    },
+    {
+      "rule_id": "SKC-000107",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi rule_group equals control.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Quan/Thực/Tài stackable tối đa 4 đơn vị.",
+        "title": "Khắc tiết cộng dồn tối đa 4"
+      }
+    },
+    {
+      "rule_id": "SKC-000108",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi resolve_priorities equals True.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Ưu tiên: đặc biệt > tháng lệnh > căn > trợ > khắc > tiết > hợp. Không đảo ngược pipeline.",
+        "title": "Thứ tự ưu tiên nhóm luật"
+      }
+    },
+    {
+      "rule_id": "SKC-000109",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi same_pillar_evidence equals True.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Một trụ chỉ đóng góp một lần cho cùng nhóm (căn hoặc trợ), tránh cộng kép.",
+        "title": "Không đếm trùng cùng một trụ"
+      }
+    },
+    {
+      "rule_id": "SKC-000110",
+      "explanation": {
+        "language": "vi",
+        "why": "Quy ước tính điểm phải nhất quán để mọi cục so sánh được với nhau.",
+        "when": "Khi season_root_polarity_disagree equals True.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Đắc lệnh nhưng vô căn (hoặc tử mà căn sâu) cần đánh dấu confidence thấp, không bịa kết luận tuyệt đối.",
+        "title": "Lệnh và căn trái dấu → độ tin cậy thấp"
+      }
+    }
+  ]
+}

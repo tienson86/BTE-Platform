@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "day_master_tendency",
+  "count": 10,
+  "items": [
+    {
+      "rule_id": "SKC-000093",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi month_status equals prosperous; has_dm_root equals True.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Đắc lệnh kèm thông căn là tổ hợp thân vượng cốt lõi.",
+        "title": "Đắc lệnh có căn → thân vượng"
+      }
+    },
+    {
+      "rule_id": "SKC-000094",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi month_status equals prosperous; root_level equals no_root; output_count greater_or_equal 1.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Chỉ dựa tháng lệnh mà vô căn lại bị Thực Thương thì dễ giả vượng.",
+        "title": "Đắc lệnh vô căn bị tiết → không tự động vượng"
+      }
+    },
+    {
+      "rule_id": "SKC-000095",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi month_status equals dead; root_level equals no_root.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Mất lệnh và vô căn: khuynh hướng thân nhược rõ.",
+        "title": "Tháng tử vô căn → thân nhược"
+      }
+    },
+    {
+      "rule_id": "SKC-000096",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi month_status equals imprison; officer_count greater_or_equal 1.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Tù khí cộng Quan Sát: thân bị chế.",
+        "title": "Tháng tù bị khắc → thân nhược"
+      }
+    },
+    {
+      "rule_id": "SKC-000097",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi month_status equals rest; root_level equals root_one.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Hưu kèm một căn thường trung hòa, cần xem Ấn/Tỷ và Quan/Thực.",
+        "title": "Hưu khí một căn → trung hòa"
+      }
+    },
+    {
+      "rule_id": "SKC-000098",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi strength_score_normalized greater_or_equal 0.65.",
+        "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `strength_level` được chọn.",
+        "summary": "Tổng điểm chuẩn hóa >= 0.65 xếp thân vượng (BTE strength config).",
+        "title": "Ngưỡng thân vượng >= 0.65"
+      }
+    },
+    {
+      "rule_id": "SKC-000099",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi strength_score_normalized less_or_equal 0.35.",
+        "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `strength_level` được chọn.",
+        "summary": "Tổng điểm chuẩn hóa <= 0.35 xếp thân nhược.",
+        "title": "Ngưỡng thân nhược <= 0.35"
+      }
+    },
+    {
+      "rule_id": "SKC-000100",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi strength_score_normalized greater_than 0.35; strength_score_normalized less_than 0.65.",
+        "when_not": "Khi điều kiện không khớp, hoặc luật khác trong nhóm exclusive `strength_level` được chọn.",
+        "summary": "Điểm nằm giữa 0.35 và 0.65 xếp trung hòa.",
+        "title": "Ngưỡng trung hòa 0.35–0.65"
+      }
+    },
+    {
+      "rule_id": "SKC-000101",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi strength_score_normalized greater_or_equal 0.75.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Điểm rất cao: cực vượng; xét cách Tòng chỉ ở gói Pattern, không kết luận Tòng tại đây.",
+        "title": "Khuynh hướng cực vượng >= 0.75"
+      }
+    },
+    {
+      "rule_id": "SKC-000102",
+      "explanation": {
+        "language": "vi",
+        "why": "Khuynh hướng và ngưỡng điểm giúp xếp thân vượng / nhược / trung hòa.",
+        "when": "Khi month_status equals dead; root_level in ['root_two', 'root_three_plus']; resource_count greater_or_equal 1.",
+        "when_not": "Khi thiếu bất kỳ điều kiện nào, hoặc một luật exclusive cùng nhóm đã thắng.",
+        "summary": "Mất lệnh nhưng thông căn sâu và có Ấn: thân không yếu như điểm mùa đơn lẻ.",
+        "title": "Tháng tử nhưng căn sâu + Ấn → không cực nhược"
+      }
+    }
+  ]
+}

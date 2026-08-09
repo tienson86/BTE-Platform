@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/reasoning/reasoning_node.schema.json",
+  "title": "BTE Reasoning Node",
+  "description": "One deterministic step in a knowledge reasoning graph.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "node_id",
+    "node_type",
+    "title",
+    "description",
+    "source_rule",
+    "source_evidence",
+    "inputs",
+    "outputs",
+    "confidence",
+    "metadata"
+  ],
+  "properties": {
+    "node_id": {
+      "type": "string",
+      "pattern": "^RN-[A-Z0-9-]+$",
+      "description": "Immutable reasoning node identifier."
+    },
+    "node_type": {
+      "type": "string",
+      "enum": [
+        "observation",
+        "evidence",
+        "inference",
+        "intermediate_conclusion",
+        "final_conclusion",
+        "alternative",
+        "contradiction"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_rule": {
+      "type": ["string", "null"],
+      "description": "Canonical rule id, e.g. SKC-000001. Null for pure observations."
+    },
+    "source_evidence": {
+      "type": ["string", "null"],
+      "description": "Path or evidence bundle id. Null when no evidence bundle applies."
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "required": ["level", "mode"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["experimental", "low", "medium", "high", "canonical"]
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["inherited", "reduced", "conflicting", "combined", "declared"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

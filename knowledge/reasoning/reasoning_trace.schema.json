@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/reasoning/reasoning_trace.schema.json",
+  "title": "BTE Reasoning Trace",
+  "description": "Traceability record for one reasoning chain. Specification only — not a runtime log.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "trace_id",
+    "chain_id",
+    "package_id",
+    "package_version",
+    "framework_version",
+    "activated_rules",
+    "activated_evidence",
+    "confidence_propagation",
+    "decision_path"
+  ],
+  "properties": {
+    "trace_id": {
+      "type": "string",
+      "pattern": "^RT-[A-Z0-9-]+$"
+    },
+    "chain_id": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "package_version": {
+      "type": "string"
+    },
+    "framework_version": {
+      "type": "string"
+    },
+    "example_id": {
+      "type": ["string", "null"]
+    },
+    "activated_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "activated_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence_propagation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "level", "mode"],
+        "properties": {
+          "node_id": {"type": "string"},
+          "level": {"type": "string"},
+          "mode": {"type": "string"},
+          "note": {"type": "string"}
+        }
+      }
+    },
+    "decision_path": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered node_ids of the taken path (excludes unused alternatives unless noted)."
+    },
+    "unused_alternatives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_contradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
