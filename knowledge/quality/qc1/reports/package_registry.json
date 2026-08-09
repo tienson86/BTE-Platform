@@ -1,0 +1,1902 @@
+{
+  "generated_at": "2026-08-10T01:20:00Z",
+  "sprint": "QC-1",
+  "package_count": 23,
+  "packages": [
+    {
+      "package_id": "bz_01_strength_core",
+      "path": "knowledge/packages/strength/core",
+      "package_name": "Strength Knowledge Package — Core Foundation",
+      "package_type": "analytical",
+      "package_version": "1.2.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-STRENGTH",
+      "category_id": "core",
+      "family": "analysis",
+      "quality_target": null,
+      "required_dependencies": [],
+      "optional_dependencies": [],
+      "optional_signals": {},
+      "published_outputs": [],
+      "published_inputs": [],
+      "has_published_outputs_asset": false,
+      "has_published_inputs_asset": false,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 186,
+      "reasoning_chains": 3,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "74fd4ac82af8c0693e5996536ad755dfc17e79a4e406de6b8d9136fada5f495b",
+        "computed_kd3": "0f740b4fd414649734b22b63ac3e8d50f42f211bd79aeee367b9e9fded597cb1",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 230,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_02_seasonal_core",
+      "path": "knowledge/packages/seasonal/core",
+      "package_name": "Seasonal Influence Knowledge Package — Core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-SEASONAL",
+      "category_id": "core",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_01_strength_core"
+      ],
+      "optional_signals": {
+        "bz_01_strength_core": []
+      },
+      "published_outputs": [],
+      "published_inputs": [],
+      "has_published_outputs_asset": false,
+      "has_published_inputs_asset": false,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 113,
+      "reasoning_chains": 3,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "f394ba18da3482c3b1708c3d9caa113a85587a46d16e5030938df4a4f26a786b",
+        "computed_kd3": "32093534fa629638da0b0f1c14f73da60c58e109898669aff2933fe074e8ad0d",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 168,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_03_temperature_core",
+      "path": "knowledge/packages/temperature/core",
+      "package_name": "Temperature Knowledge Package — Core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-TEMPERATURE",
+      "category_id": "core",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ]
+      },
+      "published_outputs": [],
+      "published_inputs": [],
+      "has_published_outputs_asset": false,
+      "has_published_inputs_asset": false,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 113,
+      "reasoning_chains": 3,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "a2e4826b6beec74c081ceb49fabecdd1fe2e942a000d837dcf1298a12c661427",
+        "computed_kd3": "75c813cc5fd29c373b006d257ff113ec04257962f2b6e73c3b569f6c03c88284",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 169,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_04_pattern_core",
+      "path": "knowledge/packages/pattern/core",
+      "package_name": "Pattern Knowledge Package — Core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-PATTERN",
+      "category_id": "core",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "temperature_score",
+          "climate_type"
+        ]
+      },
+      "published_outputs": [],
+      "published_inputs": [],
+      "has_published_outputs_asset": false,
+      "has_published_inputs_asset": false,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 113,
+      "reasoning_chains": 3,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "24911267dad714946b23733f38204efc7052a67d42ede1faec066b8fe073fc34",
+        "computed_kd3": "959b095592bb17297bda454793b6a3978e58b1656cf075d77fb368ed23059f42",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 168,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_05_pattern_evaluation",
+      "path": "knowledge/packages/pattern/evaluation",
+      "package_name": "Pattern Evaluation Knowledge Package",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-PATTERN",
+      "category_id": "evaluation",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_04_pattern_core",
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core"
+      ],
+      "optional_signals": {
+        "bz_04_pattern_core": [
+          "principal_pattern",
+          "pattern_confirmed",
+          "pattern_conflict",
+          "pattern_suppressed",
+          "pattern_stability",
+          "core_pattern_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season",
+          "season_phase",
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_level",
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_level",
+          "temperature_score",
+          "climate_type"
+        ]
+      },
+      "published_outputs": [
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "pattern_score",
+        "evaluation_diagnostics"
+      ],
+      "published_inputs": [],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": false,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 113,
+      "reasoning_chains": 3,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "c4fa911d45002cff65477d8096209834c582e71791dbd9e46d8d33346b92c901",
+        "computed_kd3": "c029c78b2f17510f039fe512d0bf54471c14bf4d443de769c66dba24c3fb9dd7",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 170,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_06_useful_god_foundation",
+      "path": "knowledge/packages/useful_god/foundation",
+      "package_name": "Useful God Decision Foundation",
+      "package_type": "decision",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-USEFUL_GOD",
+      "category_id": "foundation",
+      "family": "decision",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ]
+      },
+      "published_outputs": [
+        "useful_god",
+        "favorable_gods",
+        "unfavorable_gods",
+        "decision_confidence",
+        "decision_score",
+        "decision_reasoning",
+        "decision_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 109,
+      "evidence_count": 112,
+      "reasoning_chains": 3,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "78a6f7c8701db6d64171b2f13efb034aaec7f7f26e9f96487ba64055bae96dbd",
+        "computed_kd3": "1c58155fbcb5f705b39535e32d7c3f63827e40a3d7c7361e47043d6a5607a817",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 168,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_07_useful_god_priority",
+      "path": "knowledge/packages/useful_god/priority",
+      "package_name": "Useful God Priority & Conflict Resolution",
+      "package_type": "decision",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-USEFUL_GOD",
+      "category_id": "priority",
+      "family": "decision",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_01_strength_core",
+        "bz_02_seasonal_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_06_useful_god_foundation"
+      ],
+      "optional_signals": {
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_06_useful_god_foundation": [
+          "useful_god",
+          "favorable_gods",
+          "unfavorable_gods",
+          "decision_confidence",
+          "decision_score",
+          "decision_reasoning",
+          "decision_diagnostics"
+        ]
+      },
+      "published_outputs": [
+        "resolved_useful_god",
+        "resolved_favorable_gods",
+        "resolved_unfavorable_gods",
+        "decision_priority",
+        "conflict_resolution",
+        "resolution_confidence",
+        "resolution_reasoning",
+        "resolution_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "useful_god",
+        "favorable_gods",
+        "unfavorable_gods",
+        "decision_confidence",
+        "decision_score",
+        "decision_reasoning",
+        "decision_diagnostics"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 113,
+      "reasoning_chains": 5,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "0bd558416116f5267d0e0a4ae6c85316efa4b19bae34f85c0c4b53fc1c274789",
+        "computed_kd3": "762952ef4ce723e76d15bb2210b8ccc8d808e2f60dea110e86e641e9746e3de8",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 181,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_08_useful_god_override",
+      "path": "knowledge/packages/useful_god/override",
+      "package_name": "Useful God Decision Override & Advanced Cases",
+      "package_type": "decision",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-USEFUL_GOD",
+      "category_id": "override",
+      "family": "decision",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_01_strength_core",
+        "bz_02_seasonal_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence",
+          "resolution_reasoning",
+          "resolution_diagnostics"
+        ]
+      },
+      "published_outputs": [
+        "final_useful_god",
+        "final_favorable_gods",
+        "final_unfavorable_gods",
+        "override_applied",
+        "override_reason",
+        "override_confidence",
+        "decision_trace",
+        "decision_audit"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence",
+        "resolution_reasoning",
+        "resolution_diagnostics"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 110,
+      "evidence_count": 113,
+      "reasoning_chains": 5,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "ce73017c02f05cc5c0be37c09bf9dddf9b65cc00a74614c1d9637350e21c3093",
+        "computed_kd3": "dabdb19659feab0caea890eb78513a3c9c020b704b15c699f306e5bb26127382",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 184,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_09_luck_foundation",
+      "path": "knowledge/packages/luck/foundation",
+      "package_name": "Luck Timeline Foundation",
+      "package_type": "reference",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-LUCK_CYCLE",
+      "category_id": "foundation",
+      "family": "luck",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [],
+      "optional_signals": {},
+      "published_outputs": [
+        "natal_chart",
+        "major_cycles",
+        "annual_cycles",
+        "monthly_cycles",
+        "timeline_metadata",
+        "timeline_version"
+      ],
+      "published_inputs": [
+        "year_pillar",
+        "month_pillar",
+        "day_pillar",
+        "hour_pillar",
+        "gender",
+        "birth_year",
+        "birth_month",
+        "birth_day",
+        "birth_hour"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": false,
+      "has_evidence_catalog": false,
+      "rule_count": 0,
+      "evidence_count": 0,
+      "reasoning_chains": 0,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "57933cd47f469c283af88cbf8fa1f57877becc560b57400a5c26b80ac6aa41cd",
+        "computed_kd3": "664d5881a06f59a622b071d6cdd009f7c3fd93e28428bc3517e9ebe1849460dd",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 29,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_10_follow_pattern_core",
+      "path": "knowledge/packages/follow_pattern/core",
+      "package_name": "Follow Pattern Knowledge Package — Core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-PATTERN",
+      "category_id": "follow_core",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core",
+        "bz_05_pattern_evaluation",
+        "bz_06_useful_god_foundation",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_04_pattern_core": [
+          "pattern_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_06_useful_god_foundation": [
+          "resolved_useful_god"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "published_outputs": [
+        "follow_pattern",
+        "follow_pattern_type",
+        "follow_pattern_confidence",
+        "follow_pattern_score",
+        "follow_pattern_reasoning",
+        "follow_pattern_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 250,
+      "evidence_count": 253,
+      "reasoning_chains": 6,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "4fb16f4f9f705ac02722239ef6d2b86c0bedcef18d8a69327fcc0bee407bc37b",
+        "computed_kd3": "2faacb5d2746b30334fe68200f994f6235582d456a006184424e8fe27c9adac0",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 328,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_11_transformation_core",
+      "path": "knowledge/packages/transformation/core",
+      "package_name": "Transformation Knowledge Package — Core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-TRANSFORMATION",
+      "category_id": "core",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_10_follow_pattern_core",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_confidence",
+          "follow_pattern_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "published_outputs": [
+        "transformation_detected",
+        "transformation_type",
+        "transformation_strength",
+        "transformation_score",
+        "transformation_confidence",
+        "transformation_reasoning",
+        "transformation_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_type",
+        "follow_pattern_confidence",
+        "follow_pattern_score",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 280,
+      "evidence_count": 283,
+      "reasoning_chains": 7,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "948f8e3bb2f91128d66b5610b22464a236b2e422abaaa94e5cc0b13c8b8fd8e5",
+        "computed_kd3": "c57fda4b0860ad5142fee3f96644041c813b3e869fc67bf6a9a4494883ae800a",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 363,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_12_combination_clash_core",
+      "path": "knowledge/packages/combination_clash/core",
+      "package_name": "Combination & Clash Knowledge Package — Core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-COMBINATION",
+      "category_id": "core",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_10_follow_pattern_core",
+        "bz_11_transformation_core",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_type",
+          "follow_pattern_score"
+        ],
+        "bz_11_transformation_core": [
+          "transformation_detected",
+          "transformation_type",
+          "transformation_strength",
+          "transformation_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "published_outputs": [
+        "combination_detected",
+        "combination_types",
+        "clash_detected",
+        "interaction_strength",
+        "interaction_score",
+        "interaction_confidence",
+        "interaction_reasoning",
+        "interaction_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_type",
+        "follow_pattern_score",
+        "transformation_detected",
+        "transformation_type",
+        "transformation_strength",
+        "transformation_score",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 300,
+      "evidence_count": 303,
+      "reasoning_chains": 8,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "fbebdc9f12d5f6f60d4bf90901951b83436609434c433bbe53d1e0e851391201",
+        "computed_kd3": "89202d2e299560cc591485487d2c68b9a83c43b4c805df33bcf6302a8161fdcc",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 389,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_13_ten_gods_advanced",
+      "path": "knowledge/packages/ten_gods/advanced",
+      "package_name": "Ten Gods Knowledge Package — Advanced",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-TEN_GODS",
+      "category_id": "advanced",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_10_follow_pattern_core",
+        "bz_11_transformation_core",
+        "bz_12_combination_clash_core",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_score"
+        ],
+        "bz_11_transformation_core": [
+          "transformation_detected",
+          "transformation_score"
+        ],
+        "bz_12_combination_clash_core": [
+          "interaction_score",
+          "interaction_confidence"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "published_outputs": [
+        "ten_gods_profile",
+        "ten_gods_balance",
+        "ten_gods_dominance",
+        "ten_gods_score",
+        "ten_gods_confidence",
+        "ten_gods_reasoning",
+        "ten_gods_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_score",
+        "transformation_detected",
+        "transformation_score",
+        "interaction_score",
+        "interaction_confidence",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 400,
+      "evidence_count": 403,
+      "reasoning_chains": 8,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "d35dc2d69ee0ff727cb1535270e3f432237c6a4d29f1f69d906d2f7e4a7b831e",
+        "computed_kd3": "17791777f7729dc00e18dc8d24c8b575777c421c7069b8fe1923d935f5ece429",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 490,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_14_twelve_growth_advanced",
+      "path": "knowledge/packages/twelve_growth/advanced",
+      "package_name": "Twelve Growth Knowledge Package — Advanced",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-TWELVE_GROWTH",
+      "category_id": "advanced",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_10_follow_pattern_core",
+        "bz_11_transformation_core",
+        "bz_12_combination_clash_core",
+        "bz_13_ten_gods_advanced",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_score"
+        ],
+        "bz_11_transformation_core": [
+          "transformation_score"
+        ],
+        "bz_12_combination_clash_core": [
+          "interaction_score",
+          "interaction_confidence"
+        ],
+        "bz_13_ten_gods_advanced": [
+          "ten_gods_profile",
+          "ten_gods_balance",
+          "ten_gods_dominance"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "published_outputs": [
+        "growth_phase",
+        "growth_profile",
+        "growth_balance",
+        "growth_score",
+        "growth_confidence",
+        "growth_reasoning",
+        "growth_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_score",
+        "transformation_score",
+        "interaction_score",
+        "interaction_confidence",
+        "ten_gods_profile",
+        "ten_gods_balance",
+        "ten_gods_dominance",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 360,
+      "evidence_count": 363,
+      "reasoning_chains": 8,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "85690b48f00036578d983d4cde18d8a3e019759184876e64b070fc3deda953a4",
+        "computed_kd3": "56f0c9c7f50abf2c5374af5ded78d102a5132ee623a810f2697bab5299cd99e9",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 449,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_15_hidden_stems_advanced",
+      "path": "knowledge/packages/hidden_stems/advanced",
+      "package_name": "Hidden Stems Knowledge Package — Advanced",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-HIDDEN_STEM",
+      "category_id": "advanced",
+      "family": "analysis",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_05_pattern_evaluation",
+        "bz_10_follow_pattern_core",
+        "bz_11_transformation_core",
+        "bz_12_combination_clash_core",
+        "bz_13_ten_gods_advanced",
+        "bz_14_twelve_growth_advanced",
+        "bz_07_useful_god_priority"
+      ],
+      "optional_signals": {
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence",
+          "pattern_integrity",
+          "pattern_stability"
+        ],
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_score"
+        ],
+        "bz_11_transformation_core": [
+          "transformation_score"
+        ],
+        "bz_12_combination_clash_core": [
+          "interaction_score",
+          "interaction_confidence"
+        ],
+        "bz_13_ten_gods_advanced": [
+          "ten_gods_profile",
+          "ten_gods_balance"
+        ],
+        "bz_14_twelve_growth_advanced": [
+          "growth_profile",
+          "growth_score"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ]
+      },
+      "published_outputs": [
+        "hidden_stems_profile",
+        "hidden_stems_balance",
+        "hidden_stems_dominance",
+        "hidden_stems_score",
+        "hidden_stems_confidence",
+        "hidden_stems_reasoning",
+        "hidden_stems_diagnostics"
+      ],
+      "published_inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_score",
+        "transformation_score",
+        "interaction_score",
+        "interaction_confidence",
+        "ten_gods_profile",
+        "ten_gods_balance",
+        "growth_profile",
+        "growth_score",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 380,
+      "evidence_count": 383,
+      "reasoning_chains": 8,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "232c717ddf0642dc1a07a64a232a3c0fcd16c4f2b2b88a79bd3012fe9a1431c9",
+        "computed_kd3": "0158241e4170f91a4e28387e8e6de1a59dd5bbdd9f490a5c9377d6e173e5f609",
+        "checksum_present": true,
+        "kd3_match": false,
+        "wave": "wave1",
+        "scope_count": 470,
+        "missing_scope_files": [],
+        "note": "wave1_stored_digest_unverified_by_kd3_two_pass"
+      }
+    },
+    {
+      "package_id": "bz_16_sentence_library_core",
+      "path": "knowledge/packages/sentence_library/core",
+      "package_name": "Sentence Library Core",
+      "package_type": "sentence",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-INTERPRETATION",
+      "category_id": "sentence_library",
+      "family": "interpretation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_01_strength_core",
+        "bz_02_seasonal_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core",
+        "bz_05_pattern_evaluation",
+        "bz_06_useful_god_foundation",
+        "bz_07_useful_god_priority",
+        "bz_08_useful_god_override",
+        "bz_09_luck_foundation",
+        "bz_10_follow_pattern_core",
+        "bz_11_transformation_core",
+        "bz_12_combination_clash_core",
+        "bz_13_ten_gods_advanced",
+        "bz_14_twelve_growth_advanced",
+        "bz_15_hidden_stems_advanced"
+      ],
+      "optional_signals": {
+        "bz_01_strength_core": [
+          "strength_score"
+        ],
+        "bz_02_seasonal_core": [
+          "season_score"
+        ],
+        "bz_03_temperature_core": [
+          "temperature_score"
+        ],
+        "bz_04_pattern_core": [
+          "pattern_stability"
+        ],
+        "bz_05_pattern_evaluation": [
+          "pattern_score",
+          "pattern_quality",
+          "pattern_confidence"
+        ],
+        "bz_06_useful_god_foundation": [
+          "useful_god"
+        ],
+        "bz_07_useful_god_priority": [
+          "resolved_useful_god",
+          "decision_priority",
+          "resolution_confidence"
+        ],
+        "bz_08_useful_god_override": [
+          "final_useful_god"
+        ],
+        "bz_09_luck_foundation": [
+          "major_cycles",
+          "annual_cycles",
+          "timeline_metadata"
+        ],
+        "bz_10_follow_pattern_core": [
+          "follow_pattern",
+          "follow_pattern_score"
+        ],
+        "bz_11_transformation_core": [
+          "transformation_score"
+        ],
+        "bz_12_combination_clash_core": [
+          "interaction_score",
+          "interaction_confidence"
+        ],
+        "bz_13_ten_gods_advanced": [
+          "ten_gods_profile",
+          "ten_gods_balance"
+        ],
+        "bz_14_twelve_growth_advanced": [
+          "growth_profile",
+          "growth_score"
+        ],
+        "bz_15_hidden_stems_advanced": [
+          "hidden_stems_profile",
+          "hidden_stems_score"
+        ]
+      },
+      "published_outputs": [
+        "sentence_candidates",
+        "sentence_index",
+        "placeholder_catalog",
+        "template_catalog"
+      ],
+      "published_inputs": [
+        "analysis.strength_score",
+        "analysis.season_score",
+        "analysis.temperature_score",
+        "analysis.pattern_score",
+        "analysis.pattern_quality",
+        "analysis.pattern_confidence",
+        "analysis.pattern_stability",
+        "analysis.follow_pattern",
+        "analysis.follow_pattern_score",
+        "analysis.transformation_score",
+        "analysis.interaction_score",
+        "analysis.interaction_confidence",
+        "analysis.ten_gods_profile",
+        "analysis.ten_gods_balance",
+        "analysis.growth_profile",
+        "analysis.growth_score",
+        "analysis.hidden_stems_profile",
+        "analysis.hidden_stems_score",
+        "decision.resolved_useful_god",
+        "decision.decision_priority",
+        "decision.resolution_confidence",
+        "luck.major_cycles",
+        "luck.annual_cycles",
+        "luck.timeline_metadata",
+        "interpretation.section",
+        "interpretation.confidence",
+        "interpretation.audience"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 2200,
+      "reasoning_chains": 65,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "3e95a35576bdb63e9b43e3580f6adf80d06f056fe102399724a6ca11fd07c7b4",
+        "computed_kd3": "3e95a35576bdb63e9b43e3580f6adf80d06f056fe102399724a6ca11fd07c7b4",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 52,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_17_explanation_library_core",
+      "path": "knowledge/packages/explanation_library/core",
+      "package_name": "Explanation Library Core",
+      "package_type": "interpretation",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-INTERPRETATION",
+      "category_id": "explanation_library",
+      "family": "interpretation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_16_sentence_library_core"
+      ],
+      "optional_signals": {
+        "bz_16_sentence_library_core": [
+          "sentence_candidates",
+          "sentence_index"
+        ]
+      },
+      "published_outputs": [
+        "explanation_blocks",
+        "explanation_index",
+        "sentence_composition",
+        "placeholder_catalog"
+      ],
+      "published_inputs": [
+        "sentence_candidates",
+        "sentence_index",
+        "placeholder_catalog"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 2190,
+      "reasoning_chains": 65,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "3b6cbe9332888caeadc2cf81c325c1c1ad4b636316846023aea3366a58af7c56",
+        "computed_kd3": "3b6cbe9332888caeadc2cf81c325c1c1ad4b636316846023aea3366a58af7c56",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 52,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_18_narrative_library_core",
+      "path": "knowledge/packages/narrative_library/core",
+      "package_name": "Narrative Template Library Core",
+      "package_type": "interpretation",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-INTERPRETATION",
+      "category_id": "narrative_library",
+      "family": "interpretation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_17_explanation_library_core"
+      ],
+      "optional_signals": {
+        "bz_17_explanation_library_core": [
+          "explanation_blocks",
+          "explanation_index"
+        ]
+      },
+      "published_outputs": [
+        "narrative_templates",
+        "narrative_index",
+        "flow_contract",
+        "placeholder_catalog"
+      ],
+      "published_inputs": [
+        "explanation_blocks",
+        "explanation_index",
+        "sentence_composition"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 2161,
+      "reasoning_chains": 65,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "24a6af43917e8453de9a720f13eb3daf0f995c2062beb75674b1f71d467d10b4",
+        "computed_kd3": "24a6af43917e8453de9a720f13eb3daf0f995c2062beb75674b1f71d467d10b4",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 52,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_19_composition_library_core",
+      "path": "knowledge/packages/composition_library/core",
+      "package_name": "Composition and Placeholder Knowledge",
+      "package_type": "interpretation",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-INTERPRETATION",
+      "category_id": "composition_library",
+      "family": "interpretation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_18_narrative_library_core"
+      ],
+      "optional_signals": {
+        "bz_18_narrative_library_core": [
+          "narrative_templates",
+          "narrative_index"
+        ]
+      },
+      "published_outputs": [
+        "composition_rules",
+        "placeholder_catalog",
+        "assembly_order",
+        "dependency_graph"
+      ],
+      "published_inputs": [
+        "narrative_templates",
+        "narrative_index",
+        "flow_contract"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 1193,
+      "reasoning_chains": 38,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "bef366e5e9b01a8e3aa5fca1d6df2ae60696b89ebe8a9945010b445060bf2028",
+        "computed_kd3": "bef366e5e9b01a8e3aa5fca1d6df2ae60696b89ebe8a9945010b445060bf2028",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 44,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_20_theme_library_core",
+      "path": "knowledge/packages/theme_library/core",
+      "package_name": "Theme Library Core",
+      "package_type": "report",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-REPORT",
+      "category_id": "theme_library",
+      "family": "presentation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_19_composition_library_core"
+      ],
+      "optional_signals": {
+        "bz_19_composition_library_core": [
+          "composition_rules",
+          "assembly_order"
+        ]
+      },
+      "published_outputs": [
+        "theme_catalog",
+        "theme_index",
+        "component_catalog",
+        "layout_bindings"
+      ],
+      "published_inputs": [
+        "composition_rules",
+        "assembly_order"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 0,
+      "reasoning_chains": 0,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "bf544a7088d49ccd73ab91f6267191c7eca12e49fc59ecce7d309e972d138dfd",
+        "computed_kd3": "bf544a7088d49ccd73ab91f6267191c7eca12e49fc59ecce7d309e972d138dfd",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 41,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_21_layout_library_core",
+      "path": "knowledge/packages/layout_library/core",
+      "package_name": "Layout Library Core",
+      "package_type": "report",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-REPORT",
+      "category_id": "layout_library",
+      "family": "presentation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_20_theme_library_core"
+      ],
+      "optional_signals": {
+        "bz_20_theme_library_core": [
+          "theme_catalog",
+          "theme_index"
+        ]
+      },
+      "published_outputs": [
+        "layout_catalog",
+        "layout_index",
+        "section_order_contract",
+        "page_model"
+      ],
+      "published_inputs": [
+        "theme_catalog",
+        "theme_index",
+        "composition_rules"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 0,
+      "reasoning_chains": 0,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "8ab55e0a866199a388d8054e08146d8800ab5b8b77de4e70423c98459f5f7d05",
+        "computed_kd3": "8ab55e0a866199a388d8054e08146d8800ab5b8b77de4e70423c98459f5f7d05",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 42,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_22_widget_library_core",
+      "path": "knowledge/packages/widget_library/core",
+      "package_name": "Widget Library Core",
+      "package_type": "report",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-REPORT",
+      "category_id": "widget_library",
+      "family": "presentation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_21_layout_library_core",
+        "bz_20_theme_library_core"
+      ],
+      "optional_signals": {
+        "bz_21_layout_library_core": [
+          "layout_catalog",
+          "layout_index"
+        ],
+        "bz_20_theme_library_core": [
+          "theme_catalog",
+          "theme_index"
+        ]
+      },
+      "published_outputs": [
+        "widget_catalog",
+        "widget_index",
+        "placement_contract",
+        "renderer_compatibility"
+      ],
+      "published_inputs": [
+        "layout_catalog",
+        "layout_index",
+        "theme_catalog",
+        "composition_rules"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 0,
+      "reasoning_chains": 0,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "a944d89a0228abd58bb37b99ca1d2fabdb706d12b858b8fabc90ecf59a3d6d35",
+        "computed_kd3": "a944d89a0228abd58bb37b99ca1d2fabdb706d12b858b8fabc90ecf59a3d6d35",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 45,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    },
+    {
+      "package_id": "bz_23_report_presets_core",
+      "path": "knowledge/packages/report_presets/core",
+      "package_name": "Report Narrative Presets Core",
+      "package_type": "report",
+      "package_version": "1.0.0",
+      "schema_version": "2.0.0",
+      "knowledge_version": "1.0.0",
+      "compatibility_version": "1.0.0",
+      "status": "released",
+      "language": "vi",
+      "domain_id": "DOM-REPORT",
+      "category_id": "report_presets",
+      "family": "presentation_knowledge",
+      "quality_target": "gold",
+      "required_dependencies": [],
+      "optional_dependencies": [
+        "bz_18_narrative_library_core",
+        "bz_19_composition_library_core",
+        "bz_20_theme_library_core",
+        "bz_21_layout_library_core",
+        "bz_22_widget_library_core"
+      ],
+      "optional_signals": {
+        "bz_18_narrative_library_core": [
+          "narrative_templates"
+        ],
+        "bz_19_composition_library_core": [
+          "composition_rules"
+        ],
+        "bz_20_theme_library_core": [
+          "theme_catalog"
+        ],
+        "bz_21_layout_library_core": [
+          "layout_catalog",
+          "layout_index"
+        ],
+        "bz_22_widget_library_core": [
+          "widget_catalog"
+        ]
+      },
+      "published_outputs": [
+        "preset_catalog",
+        "preset_index",
+        "orchestration_contract",
+        "renderer_preferences"
+      ],
+      "published_inputs": [
+        "theme_catalog",
+        "layout_catalog",
+        "widget_catalog",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "has_published_outputs_asset": true,
+      "has_published_inputs_asset": true,
+      "has_tests": true,
+      "has_docs": true,
+      "has_reasoning_index": true,
+      "has_evidence_catalog": true,
+      "rule_count": 0,
+      "evidence_count": 0,
+      "reasoning_chains": 0,
+      "validation_status": "pass_with_warnings",
+      "validation_errors": 0,
+      "validation_warnings": 1,
+      "checksum": {
+        "algorithm": "sha256",
+        "stored": "638249c906425b45d0a400da1f551aab6902970d9b342931676259f683b15f37",
+        "computed_kd3": "638249c906425b45d0a400da1f551aab6902970d9b342931676259f683b15f37",
+        "checksum_present": true,
+        "kd3_match": true,
+        "wave": "ik_pk",
+        "scope_count": 41,
+        "missing_scope_files": [],
+        "note": "kd3_two_pass_match"
+      }
+    }
+  ]
+}

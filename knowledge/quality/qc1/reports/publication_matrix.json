@@ -1,0 +1,505 @@
+{
+  "generated_at": "2026-08-10T01:20:00Z",
+  "rows": [
+    {
+      "package_id": "bz_01_strength_core",
+      "outputs": [],
+      "inputs": [],
+      "has_output_asset": false,
+      "has_input_asset": false
+    },
+    {
+      "package_id": "bz_02_seasonal_core",
+      "outputs": [],
+      "inputs": [],
+      "has_output_asset": false,
+      "has_input_asset": false
+    },
+    {
+      "package_id": "bz_03_temperature_core",
+      "outputs": [],
+      "inputs": [],
+      "has_output_asset": false,
+      "has_input_asset": false
+    },
+    {
+      "package_id": "bz_04_pattern_core",
+      "outputs": [],
+      "inputs": [],
+      "has_output_asset": false,
+      "has_input_asset": false
+    },
+    {
+      "package_id": "bz_05_pattern_evaluation",
+      "outputs": [
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "pattern_score",
+        "evaluation_diagnostics"
+      ],
+      "inputs": [],
+      "has_output_asset": true,
+      "has_input_asset": false
+    },
+    {
+      "package_id": "bz_06_useful_god_foundation",
+      "outputs": [
+        "useful_god",
+        "favorable_gods",
+        "unfavorable_gods",
+        "decision_confidence",
+        "decision_score",
+        "decision_reasoning",
+        "decision_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_07_useful_god_priority",
+      "outputs": [
+        "resolved_useful_god",
+        "resolved_favorable_gods",
+        "resolved_unfavorable_gods",
+        "decision_priority",
+        "conflict_resolution",
+        "resolution_confidence",
+        "resolution_reasoning",
+        "resolution_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "useful_god",
+        "favorable_gods",
+        "unfavorable_gods",
+        "decision_confidence",
+        "decision_score",
+        "decision_reasoning",
+        "decision_diagnostics"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_08_useful_god_override",
+      "outputs": [
+        "final_useful_god",
+        "final_favorable_gods",
+        "final_unfavorable_gods",
+        "override_applied",
+        "override_reason",
+        "override_confidence",
+        "decision_trace",
+        "decision_audit"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence",
+        "resolution_reasoning",
+        "resolution_diagnostics"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_09_luck_foundation",
+      "outputs": [
+        "natal_chart",
+        "major_cycles",
+        "annual_cycles",
+        "monthly_cycles",
+        "timeline_metadata",
+        "timeline_version"
+      ],
+      "inputs": [
+        "year_pillar",
+        "month_pillar",
+        "day_pillar",
+        "hour_pillar",
+        "gender",
+        "birth_year",
+        "birth_month",
+        "birth_day",
+        "birth_hour"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_10_follow_pattern_core",
+      "outputs": [
+        "follow_pattern",
+        "follow_pattern_type",
+        "follow_pattern_confidence",
+        "follow_pattern_score",
+        "follow_pattern_reasoning",
+        "follow_pattern_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_11_transformation_core",
+      "outputs": [
+        "transformation_detected",
+        "transformation_type",
+        "transformation_strength",
+        "transformation_score",
+        "transformation_confidence",
+        "transformation_reasoning",
+        "transformation_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_type",
+        "follow_pattern_confidence",
+        "follow_pattern_score",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_12_combination_clash_core",
+      "outputs": [
+        "combination_detected",
+        "combination_types",
+        "clash_detected",
+        "interaction_strength",
+        "interaction_score",
+        "interaction_confidence",
+        "interaction_reasoning",
+        "interaction_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_type",
+        "follow_pattern_score",
+        "transformation_detected",
+        "transformation_type",
+        "transformation_strength",
+        "transformation_score",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_13_ten_gods_advanced",
+      "outputs": [
+        "ten_gods_profile",
+        "ten_gods_balance",
+        "ten_gods_dominance",
+        "ten_gods_score",
+        "ten_gods_confidence",
+        "ten_gods_reasoning",
+        "ten_gods_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_score",
+        "transformation_detected",
+        "transformation_score",
+        "interaction_score",
+        "interaction_confidence",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_14_twelve_growth_advanced",
+      "outputs": [
+        "growth_phase",
+        "growth_profile",
+        "growth_balance",
+        "growth_score",
+        "growth_confidence",
+        "growth_reasoning",
+        "growth_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_score",
+        "transformation_score",
+        "interaction_score",
+        "interaction_confidence",
+        "ten_gods_profile",
+        "ten_gods_balance",
+        "ten_gods_dominance",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_15_hidden_stems_advanced",
+      "outputs": [
+        "hidden_stems_profile",
+        "hidden_stems_balance",
+        "hidden_stems_dominance",
+        "hidden_stems_score",
+        "hidden_stems_confidence",
+        "hidden_stems_reasoning",
+        "hidden_stems_diagnostics"
+      ],
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "pattern_integrity",
+        "pattern_stability",
+        "follow_pattern",
+        "follow_pattern_score",
+        "transformation_score",
+        "interaction_score",
+        "interaction_confidence",
+        "ten_gods_profile",
+        "ten_gods_balance",
+        "growth_profile",
+        "growth_score",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_16_sentence_library_core",
+      "outputs": [
+        "sentence_candidates",
+        "sentence_index",
+        "placeholder_catalog",
+        "template_catalog"
+      ],
+      "inputs": [
+        "analysis.strength_score",
+        "analysis.season_score",
+        "analysis.temperature_score",
+        "analysis.pattern_score",
+        "analysis.pattern_quality",
+        "analysis.pattern_confidence",
+        "analysis.pattern_stability",
+        "analysis.follow_pattern",
+        "analysis.follow_pattern_score",
+        "analysis.transformation_score",
+        "analysis.interaction_score",
+        "analysis.interaction_confidence",
+        "analysis.ten_gods_profile",
+        "analysis.ten_gods_balance",
+        "analysis.growth_profile",
+        "analysis.growth_score",
+        "analysis.hidden_stems_profile",
+        "analysis.hidden_stems_score",
+        "decision.resolved_useful_god",
+        "decision.decision_priority",
+        "decision.resolution_confidence",
+        "luck.major_cycles",
+        "luck.annual_cycles",
+        "luck.timeline_metadata",
+        "interpretation.section",
+        "interpretation.confidence",
+        "interpretation.audience"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_17_explanation_library_core",
+      "outputs": [
+        "explanation_blocks",
+        "explanation_index",
+        "sentence_composition",
+        "placeholder_catalog"
+      ],
+      "inputs": [
+        "sentence_candidates",
+        "sentence_index",
+        "placeholder_catalog"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_18_narrative_library_core",
+      "outputs": [
+        "narrative_templates",
+        "narrative_index",
+        "flow_contract",
+        "placeholder_catalog"
+      ],
+      "inputs": [
+        "explanation_blocks",
+        "explanation_index",
+        "sentence_composition"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_19_composition_library_core",
+      "outputs": [
+        "composition_rules",
+        "placeholder_catalog",
+        "assembly_order",
+        "dependency_graph"
+      ],
+      "inputs": [
+        "narrative_templates",
+        "narrative_index",
+        "flow_contract"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_20_theme_library_core",
+      "outputs": [
+        "theme_catalog",
+        "theme_index",
+        "component_catalog",
+        "layout_bindings"
+      ],
+      "inputs": [
+        "composition_rules",
+        "assembly_order"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_21_layout_library_core",
+      "outputs": [
+        "layout_catalog",
+        "layout_index",
+        "section_order_contract",
+        "page_model"
+      ],
+      "inputs": [
+        "theme_catalog",
+        "theme_index",
+        "composition_rules"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_22_widget_library_core",
+      "outputs": [
+        "widget_catalog",
+        "widget_index",
+        "placement_contract",
+        "renderer_compatibility"
+      ],
+      "inputs": [
+        "layout_catalog",
+        "layout_index",
+        "theme_catalog",
+        "composition_rules"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    },
+    {
+      "package_id": "bz_23_report_presets_core",
+      "outputs": [
+        "preset_catalog",
+        "preset_index",
+        "orchestration_contract",
+        "renderer_preferences"
+      ],
+      "inputs": [
+        "theme_catalog",
+        "layout_catalog",
+        "widget_catalog",
+        "narrative_templates",
+        "composition_rules"
+      ],
+      "has_output_asset": true,
+      "has_input_asset": true
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-08-10T01:20:00Z",
+  "gates": [
+    {
+      "gate": "knowledge_packages_released",
+      "area": "Knowledge",
+      "pass": true,
+      "evidence": "PACKAGE.json status=released on 23/23"
+    },
+    {
+      "gate": "schema_2_0_0",
+      "area": "Knowledge",
+      "pass": true,
+      "evidence": "schema_version=2.0.0 on 23/23"
+    },
+    {
+      "gate": "pvp_zero_errors",
+      "area": "Validation",
+      "pass": true,
+      "evidence": "validation/VALIDATION.json counts.errors=0"
+    },
+    {
+      "gate": "no_dependency_cycles",
+      "area": "Knowledge",
+      "pass": true,
+      "evidence": "DEPENDENCIES.json optional edges acyclic"
+    },
+    {
+      "gate": "checksums_present",
+      "area": "Release",
+      "pass": true,
+      "evidence": "PACKAGE checksum.value 64 hex"
+    },
+    {
+      "gate": "checksum_byte_verify_ik_pk",
+      "area": "Release",
+      "pass": true,
+      "evidence": "KD-3 two-pass on bz_16–bz_23"
+    },
+    {
+      "gate": "checksum_wave1_stored",
+      "area": "Release",
+      "pass": true,
+      "evidence": "bz_01–bz_15 store 64-hex checksums; KD-3 two-pass does not reproduce Wave 1 serializer"
+    },
+    {
+      "gate": "interpretation_knowledge_present",
+      "area": "Interpretation",
+      "pass": true,
+      "evidence": "bz_16–bz_19 released"
+    },
+    {
+      "gate": "presentation_knowledge_present",
+      "area": "Presentation",
+      "pass": true,
+      "evidence": "bz_20–bz_23 released"
+    },
+    {
+      "gate": "package_tests_on_disk",
+      "area": "Tests",
+      "pass": true,
+      "evidence": "tests/ present on 23/23"
+    },
+    {
+      "gate": "package_docs_on_disk",
+      "area": "Documentation",
+      "pass": true,
+      "evidence": "documentation/ present on 23/23"
+    },
+    {
+      "gate": "engines_consume_sealed_v2",
+      "area": "Engines",
+      "pass": false,
+      "evidence": "engine import scan for packages/*_library and bz_16–bz_23"
+    },
+    {
+      "gate": "pipelines_cite_bz_16_23",
+      "area": "Pipelines",
+      "pass": false,
+      "evidence": "knowledge/10_integration_layer markdown scan"
+    },
+    {
+      "gate": "golden_dataset_wired",
+      "area": "Validation",
+      "pass": false,
+      "evidence": "PVP VAL-GOLDEN not_applicable fleet-wide"
+    },
+    {
+      "gate": "contracts_no_duplicate_outputs",
+      "area": "Contracts",
+      "pass": true,
+      "evidence": "published_outputs.name uniqueness"
+    }
+  ],
+  "passed": 12,
+  "failed": 3,
+  "knowledge_rm_reviewable": true,
+  "engine_complete": false,
+  "notes": "Evidence only. Failed engine/pipeline/golden gates do not mutate packages."
+}

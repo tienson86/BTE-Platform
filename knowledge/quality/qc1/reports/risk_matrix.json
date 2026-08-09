@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-08-10T01:20:00Z",
+  "scale": [
+    "Critical",
+    "High",
+    "Medium",
+    "Low",
+    "Informational"
+  ],
+  "findings": [
+    {
+      "risk_id": "RSK-QC1-001",
+      "severity": "Informational",
+      "component": "checksum",
+      "description": "bz_16–bz_23 match KD-3 two-pass placeholder digest. All 23 packages store 64-hex checksums. bz_01–bz_15 (15) do not reproduce under KD-3 two-pass; original Wave 1 serializer is unchanged and was not rewritten.",
+      "recommendation": "Keep checksums immutable. Do not regenerate Wave 1 digests in QC-1.",
+      "status": "accepted"
+    },
+    {
+      "risk_id": "RSK-QC1-002",
+      "severity": "Medium",
+      "component": "golden_dataset",
+      "description": "Fleet PVP-RELEASE records Golden Dataset as not_applicable until engine wiring.",
+      "recommendation": "Keep warning. Wire Golden Dataset in an engine sprint without mutating sealed packages.",
+      "status": "open"
+    },
+    {
+      "risk_id": "RSK-QC1-003",
+      "severity": "Medium",
+      "component": "engines",
+      "description": "Sealed bz_16–bz_23 paths are not imported by engines. Interpretation/narrative/report engines still reference legacy 07_sentence_library trees.",
+      "recommendation": "Add read-only adapters in a later engine sprint. Do not edit bz packages to match engines.",
+      "status": "open"
+    },
+    {
+      "risk_id": "RSK-QC1-004",
+      "severity": "Medium",
+      "component": "pipelines",
+      "description": "Integration layer pipelines exist (system_flow=True, report=True) but do not cite bz_16–bz_23 package ids (mentions_bz_16_23=False).",
+      "recommendation": "Document consumption in a later integration sprint. Do not edit RX freeze docs in QC-1 beyond this audit.",
+      "status": "open"
+    },
+    {
+      "risk_id": "RSK-QC1-005",
+      "severity": "Medium",
+      "component": "contracts",
+      "description": "Packages without assets/published_outputs.json: bz_01_strength_core, bz_02_seasonal_core, bz_03_temperature_core, bz_04_pattern_core. Downstream still names implicit scores via DEPENDENCIES signals.",
+      "recommendation": "Backfill publish assets only via new SemVer after RM policy. Do not mutate sealed 1.0.0/1.2.0 in QC-1.",
+      "status": "open"
+    },
+    {
+      "risk_id": "RSK-QC1-006",
+      "severity": "Low",
+      "component": "bz_01_strength_core",
+      "description": "bz_01 package_version is 1.2.0; peers are 1.0.0. Schema/knowledge/compatibility remain 2.0.0/1.0.0/1.0.0.",
+      "recommendation": "Record as known SemVer skew. Do not rebase bz_01 in this sprint.",
+      "status": "accepted"
+    },
+    {
+      "risk_id": "RSK-QC1-007",
+      "severity": "Low",
+      "component": "bz_09_luck_foundation",
+      "description": "Luck foundation has rule_count=0, evidence_count=0, reasoning_chains=0, no reasoning/index.json.",
+      "recommendation": "Ship luck analytical rules as a new package. Do not convert foundation into an analytical pack in place.",
+      "status": "open"
+    },
+    {
+      "risk_id": "RSK-QC1-008",
+      "severity": "Informational",
+      "component": "presentation_knowledge",
+      "description": "bz_20–bz_23 store identifier graphs only; evidence catalogs are empty by design.",
+      "recommendation": "Do not invent analytical evidence for presentation packs.",
+      "status": "accepted"
+    },
+    {
+      "risk_id": "RSK-QC1-009",
+      "severity": "Low",
+      "component": "taxonomy",
+      "description": "Primary domain_id count is 13/34 taxonomy domains. Calendar and Shen Sha packages are absent.",
+      "recommendation": "Open new packages for missing domains. Do not overload existing sealed packs.",
+      "status": "open"
+    },
+    {
+      "risk_id": "RSK-QC1-010",
+      "severity": "Informational",
+      "component": "dependencies",
+      "description": "No dependency cycles. All declared edges are optional. Unknown dependency targets: none.",
+      "recommendation": "Keep required arrays empty unless a later sprint owns a hard runtime coupling.",
+      "status": "accepted"
+    },
+    {
+      "risk_id": "RSK-QC1-011",
+      "severity": "Informational",
+      "component": "contracts",
+      "description": "No duplicate cross-package published signals. Repeated local catalog names (['placeholder_catalog']) are per-package catalogs.",
+      "recommendation": "Keep shared pipeline signal names unique. Local *_catalog names may repeat per pack.",
+      "status": "accepted"
+    }
+  ],
+  "counts": {
+    "Critical": 0,
+    "High": 0,
+    "Medium": 4,
+    "Low": 3,
+    "Informational": 4
+  }
+}

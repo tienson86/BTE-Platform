@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.0.0",
+  "sprint": "QC-1",
+  "profile": "PVP-RELEASE",
+  "validated_at": "2026-08-10T01:20:00Z",
+  "status": "pass_with_warnings",
+  "counts": {
+    "errors": 0,
+    "warnings": 4,
+    "info": 7
+  },
+  "checks": [
+    {
+      "id": "schema_validation",
+      "status": "pass"
+    },
+    {
+      "id": "metadata_validation",
+      "status": "pass"
+    },
+    {
+      "id": "dependency_validation",
+      "status": "pass"
+    },
+    {
+      "id": "reference_validation",
+      "status": "pass"
+    },
+    {
+      "id": "package_integrity",
+      "status": "pass"
+    },
+    {
+      "id": "checksum_validation",
+      "status": "pass"
+    },
+    {
+      "id": "compatibility_validation",
+      "status": "pass"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "VAL-QC1-SCOPE",
+      "severity": "info",
+      "message": "Read-only audit of bz_01–bz_23. No package, engine, pipeline, API, contract, or checksum was rewritten.",
+      "path": "knowledge/quality/qc1"
+    },
+    {
+      "code": "VAL-GOLDEN",
+      "severity": "warning",
+      "message": "Golden Dataset remains not_applicable on sealed packages until engine wiring.",
+      "path": "packages/*/validation/VALIDATION.json"
+    },
+    {
+      "code": "VAL-ENGINE",
+      "severity": "warning",
+      "message": "Engines do not import sealed bz_16–bz_23 package paths.",
+      "path": "engines"
+    }
+  ],
+  "error_codes": []
+}
