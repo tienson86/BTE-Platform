@@ -1,690 +1,1162 @@
 {
     "metadata": {
-        "schema_version": "1.0.0",
-        "version": "1.0.0",
-        "status": "active",
-        "origin": "rule_database",
-        "author": "BTE",
-        "reviewer": "BTE Knowledge Framework Review Board",
-        "created_at": "2026-07-29T17:00:00Z",
-        "updated_at": "2026-07-29T17:00:00Z",
-        "approved_at": "2026-07-29T17:00:00Z",
-        "deprecated_at": null,
-        "tags": [
-            "special_case",
-            "index"
-        ],
-        "source": "BTE Platform Special Case Rule Database",
-        "license": "BTE Internal Use"
+        "schema_version": "1.1.0",
+        "version": "1.1.0",
+        "updated_at": "2026-08-09T07:30:36Z",
+        "rule_count": 74
     },
-    "documentation": {
-        "summary": "Rule index for Special Case Rule Database module.",
-        "description": "Deterministic lookup index by rule id, code, category, and family.",
-        "references": [
-            "NAMING_CONVENTIONS.md",
-            "SPECIAL_CASE_TAXONOMY.md"
-        ]
-    },
-    "index": [
+    "rules": [
         {
             "id": "SPC-000001",
             "code": "str_spc_001",
             "name": "Thân nhược đặc biệt khi Kiếp Tài vô căn",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "spc_001",
-            "priority_order": 110,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 110
+            },
+            "tags": [
+                "pattern_breaking",
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000002",
             "code": "str_spc_002",
             "name": "Thân vượng khi Tỷ Kiên đắc lệnh",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "spc_002",
-            "priority_order": 105,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 105
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000003",
             "code": "str_spc_003",
             "name": "Thân nhược khi Thất Sát vô căn",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "spc_003",
-            "priority_order": 108,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 108
+            },
+            "tags": [
+                "pattern_breaking",
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000004",
             "code": "str_spc_004",
             "name": "Ấn sinh thân mùa lạnh",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "spc_004",
-            "priority_order": 102,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 102
+            },
+            "tags": [
+                "seasonal",
+                "seasonal_exception",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000005",
             "code": "str_cmb_001",
             "name": "Đồng hành và Ấn cùng trợ",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "cmb_001",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000006",
             "code": "str_cmb_002",
             "name": "Quan và Thực cùng hại thân",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "cmb_002",
-            "priority_order": 93,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 93
+            },
+            "tags": [
+                "pattern_breaking",
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000007",
             "code": "str_cmb_003",
             "name": "Tài nhiều nhưng vô căn",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "cmb_003",
-            "priority_order": 91,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 91
+            },
+            "tags": [
+                "pattern_breaking",
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000008",
             "code": "tmp_spc_001",
             "name": "Nhật chủ Hỏa mùa hè",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "spc_001",
-            "priority_order": 110,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 110
+            },
+            "tags": [
+                "seasonal",
+                "seasonal_exception",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000009",
             "code": "tmp_spc_002",
             "name": "Nhật chủ Thủy mùa đông",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "spc_002",
-            "priority_order": 110,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 110
+            },
+            "tags": [
+                "seasonal",
+                "seasonal_exception",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000010",
             "code": "tmp_spc_003",
             "name": "Kim nhật gặp khí nóng",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "spc_003",
-            "priority_order": 105,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 105
+            },
+            "tags": [
+                "seasonal",
+                "seasonal_exception",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000011",
             "code": "tmp_spc_004",
             "name": "Mộc nhật gặp khí lạnh",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "spc_004",
-            "priority_order": 105,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 105
+            },
+            "tags": [
+                "seasonal",
+                "seasonal_exception",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000012",
             "code": "tmp_flw_001",
             "name": "Điều hậu táo",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "flw_001",
-            "priority_order": 92,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "tags": [
+                "clash_combine",
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000013",
             "code": "tmp_flw_002",
             "name": "Điều hậu thấm",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "flw_002",
-            "priority_order": 92,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "tags": [
+                "clash_combine",
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000014",
             "code": "tmp_flw_003",
             "name": "Điều hậu ấm",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "flw_003",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "clash_combine",
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000015",
             "code": "tmp_flw_004",
             "name": "Điều hậu hàn",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "flw_004",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "clash_combine",
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000016",
             "code": "ug_spc_001",
             "name": "Tòng cách override",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "spc_001",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "pseudo_follow",
+                "override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000017",
             "code": "ug_spc_002",
             "name": "Tòng cách override",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "spc_002",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "pseudo_follow",
+                "override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000018",
             "code": "ug_spc_003",
             "name": "Tòng cách override",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "spc_003",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "pseudo_follow",
+                "override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000019",
             "code": "ug_spc_004",
             "name": "Dùng Ấn để định khí chuyên cách",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "spc_004",
-            "priority_order": 92,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "tags": [
+                "pseudo_follow",
+                "override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000020",
             "code": "sp001",
             "name": "Củng cục",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "cong_thanh",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000021",
             "code": "sp002",
             "name": "Hóa khí",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "hua_qi",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000022",
             "code": "sp003",
             "name": "Nhất khí",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "one_element",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000023",
             "code": "sp004",
             "name": "Tòng cách",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "follow_pattern",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "pseudo_follow",
+                "pseudo_follow_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000024",
             "code": "sp005",
             "name": "Tòng không thành",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "false_follow",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "pseudo_follow",
+                "pseudo_follow_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000025",
             "code": "sp006",
             "name": "Thân cực mạnh",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "extreme_strong",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000026",
             "code": "sp007",
             "name": "Thân cực yếu",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "extreme_weak",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000027",
             "code": "sp008",
             "name": "Cách cục thuần khiết",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "pure_pattern",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000028",
             "code": "mixed_structure",
             "name": "Cách cục lẫn tạp",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "mixed_structure",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000029",
             "code": "multi_root",
             "name": "Nhiều căn hỗ trợ",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "multi_root",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000030",
             "code": "cong_thanh",
             "name": "Củng Quan thành",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "cong_thanh",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000031",
             "code": "hoa_sat",
             "name": "Hóa Sát thành công",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "hoa_sat",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000032",
             "code": "an_hoa_quan",
             "name": "Quan được trợ",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "an_hoa_quan",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000033",
             "code": "song_tai",
             "name": "Hai Tài phối hợp",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "song_tai",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000034",
             "code": "song_an",
             "name": "Hai Ấn hỗ trợ",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "song_an",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000035",
             "code": "song_quan",
             "name": "Hai Quan đồng hiện",
             "category": "transformed_edge",
-            "family": "transformed_edge",
-            "type": "song_quan",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "transformed_edge",
+                "transformed_edge",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000036",
             "code": "sat_vo_che",
             "name": "Thất Sát không chế hóa",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "sat_vo_che",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "pattern_breaking",
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000037",
             "code": "cl001",
             "name": "Xung Can",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "tian_gan_chong",
-            "priority_order": 80,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 80
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000038",
             "code": "cl002",
             "name": "Lục Xung",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "liu_chong",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000039",
             "code": "cl003",
             "name": "Lục Hại",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "liu_hai",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000040",
             "code": "cl004",
             "name": "Lục Phá",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "liu_po",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000041",
             "code": "cl005",
             "name": "Tương Hình",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "xing",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000042",
             "code": "cl006",
             "name": "Tự Hình",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "zi_xing",
-            "priority_order": 90,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 90
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000043",
             "code": "cl007",
             "name": "Phá hợp hóa",
             "category": "clash_combine",
-            "family": "clash_combine",
-            "type": "chong_hua",
-            "priority_order": 100,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 100
+            },
+            "tags": [
+                "clash_combine",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000044",
             "code": "hidden_stem_reveal_officer",
             "name": "Hidden Stem Reveals Officer",
             "category": "hidden_stem",
-            "family": "hidden_stem_exception",
-            "type": "officer_reveal",
-            "priority_order": 85,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "tags": [
+                "hidden_stem",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000045",
             "code": "hidden_stem_reveal_wealth",
             "name": "Hidden Stem Reveals Wealth",
             "category": "hidden_stem",
-            "family": "hidden_stem_exception",
-            "type": "wealth_reveal",
-            "priority_order": 85,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 85
+            },
+            "tags": [
+                "hidden_stem",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000046",
             "code": "hidden_stem_clash_break",
             "name": "Hidden Stem Clash Break",
             "category": "hidden_stem",
-            "family": "hidden_stem_exception",
-            "type": "stem_clash_break",
-            "priority_order": 95,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 95
+            },
+            "tags": [
+                "hidden_stem",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000047",
             "code": "hidden_stem_combine_transform",
             "name": "Hidden Stem Combine Transform",
             "category": "hidden_stem",
-            "family": "hidden_stem_exception",
-            "type": "stem_combine_transform",
-            "priority_order": 92,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "tags": [
+                "hidden_stem",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000048",
             "code": "hidden_stem_empty_month",
             "name": "Hidden Stem Empty Month",
             "category": "hidden_stem",
-            "family": "hidden_stem_exception",
-            "type": "empty_month_stem",
-            "priority_order": 40,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "low",
+                "order": 40
+            },
+            "tags": [
+                "hidden_stem",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000049",
             "code": "tiebreak_higher_priority",
             "name": "Tiebreak Higher Priority",
             "category": "priority",
-            "family": "tie_breaking",
-            "type": "priority_wins",
-            "priority_order": 180,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 180
+            },
+            "tags": [
+                "tie_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000050",
             "code": "tiebreak_higher_weight",
             "name": "Tiebreak Higher Weight",
             "category": "priority",
-            "family": "tie_breaking",
-            "type": "weight_wins",
-            "priority_order": 175,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 175
+            },
+            "tags": [
+                "tie_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000051",
             "code": "tiebreak_first_match",
             "name": "Tiebreak First Match",
             "category": "priority",
-            "family": "tie_breaking",
-            "type": "first_match",
-            "priority_order": 170,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 170
+            },
+            "tags": [
+                "tie_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000052",
             "code": "tiebreak_special_over_standard",
             "name": "Tiebreak Special Over Standard",
             "category": "priority",
-            "family": "tie_breaking",
-            "type": "special_wins",
-            "priority_order": 185,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "tags": [
+                "tie_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000053",
             "code": "priority_special_case_group",
             "name": "Priority Special Case Group",
             "category": "priority",
-            "family": "priority_override",
-            "type": "priority_special_case_group",
-            "priority_order": 200,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 200
+            },
+            "tags": [
+                "priority_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000054",
             "code": "priority_pseudo_follow_group",
             "name": "Priority Pseudo Follow Group",
             "category": "priority",
-            "family": "priority_override",
-            "type": "priority_pseudo_follow_group",
-            "priority_order": 195,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 195
+            },
+            "tags": [
+                "priority_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000055",
             "code": "priority_pattern_breaking_group",
             "name": "Priority Pattern Breaking Group",
             "category": "priority",
-            "family": "priority_override",
-            "type": "priority_pattern_breaking_group",
-            "priority_order": 190,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 190
+            },
+            "tags": [
+                "priority_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000056",
             "code": "priority_seasonal_group",
             "name": "Priority Seasonal Group",
             "category": "priority",
-            "family": "priority_override",
-            "type": "priority_seasonal_group",
-            "priority_order": 185,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 185
+            },
+            "tags": [
+                "priority_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000057",
             "code": "priority_clash_combine_group",
             "name": "Priority Clash Combine Group",
             "category": "priority",
-            "family": "priority_override",
-            "type": "priority_clash_combine_group",
-            "priority_order": 180,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 180
+            },
+            "tags": [
+                "priority_override",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000058",
             "code": "fallback_no_special_case",
             "name": "Fallback No Special Case",
             "category": "fallback",
-            "family": "fallback_behavior",
-            "type": "no_match",
-            "priority_order": 1,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "low",
+                "order": 1
+            },
+            "tags": [
+                "fallback",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000059",
             "code": "fallback_ambiguous_pattern",
             "name": "Fallback Ambiguous Pattern",
             "category": "fallback",
-            "family": "fallback_behavior",
-            "type": "ambiguous_pattern",
-            "priority_order": 5,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "low",
+                "order": 5
+            },
+            "tags": [
+                "fallback",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000060",
             "code": "fallback_default_resolution",
             "name": "Fallback Default Resolution",
             "category": "fallback",
-            "family": "fallback_behavior",
-            "type": "default_resolution",
-            "priority_order": 2,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "low",
+                "order": 2
+            },
+            "tags": [
+                "fallback",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000061",
             "code": "season_spring_wood_exception",
             "name": "Spring Wood Season Exception",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "spring_wood",
-            "priority_order": 88,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "tags": [
+                "seasonal",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000062",
             "code": "season_winter_water_exception",
             "name": "Winter Water Season Exception",
             "category": "seasonal",
-            "family": "seasonal_exception",
-            "type": "winter_water",
-            "priority_order": 88,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 88
+            },
+            "tags": [
+                "seasonal",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000063",
             "code": "pseudo_follow_weak_strength",
             "name": "Pseudo Follow Weak Strength",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "weak_pseudo_follow",
-            "priority_order": 93,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 93
+            },
+            "tags": [
+                "pseudo_follow",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000064",
             "code": "pseudo_follow_officer_present",
             "name": "Pseudo Follow Officer Present",
             "category": "pseudo_follow",
-            "family": "pseudo_follow_override",
-            "type": "officer_blocks_follow",
-            "priority_order": 92,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 92
+            },
+            "tags": [
+                "pseudo_follow",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000065",
             "code": "pattern_break_officer_clash",
             "name": "Pattern Break Officer Clash",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "officer_clash_break",
-            "priority_order": 98,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 98
+            },
+            "tags": [
+                "pattern_breaking",
+                "special_case"
+            ]
         },
         {
             "id": "SPC-000066",
             "code": "pattern_break_wealth_rob",
             "name": "Pattern Break Wealth Robbed",
             "category": "pattern_breaking",
-            "family": "pattern_breaking",
-            "type": "wealth_rob_break",
-            "priority_order": 96,
-            "enabled": true
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 96
+            },
+            "tags": [
+                "pattern_breaking",
+                "special_case"
+            ]
+        },
+        {
+            "id": "SPC-000067",
+            "code": "spc_output_breaks_officer",
+            "name": "Output Breaks Officer",
+            "category": "pattern_breaking",
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 88
+            },
+            "tags": [
+                "special_case",
+                "pattern_breaking",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000068",
+            "code": "spc_transformed_incomplete",
+            "name": "Incomplete Transformation",
+            "category": "transformed_edge",
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 84
+            },
+            "tags": [
+                "special_case",
+                "transformed_edge",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000069",
+            "code": "spc_seasonal_fire_in_winter",
+            "name": "Fire In Winter Exception",
+            "category": "seasonal",
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 70
+            },
+            "tags": [
+                "special_case",
+                "seasonal",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000070",
+            "code": "spc_clash_then_combine",
+            "name": "Clash Then Combine",
+            "category": "clash_combine",
+            "enabled": true,
+            "priority": {
+                "level": "high",
+                "order": 86
+            },
+            "tags": [
+                "special_case",
+                "clash_combine",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000071",
+            "code": "spc_pseudo_follow_root",
+            "name": "Pseudo Follow By Root",
+            "category": "pseudo_follow",
+            "enabled": true,
+            "priority": {
+                "level": "critical",
+                "order": 96
+            },
+            "tags": [
+                "special_case",
+                "pseudo_follow",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000072",
+            "code": "spc_hidden_stem_rescue",
+            "name": "Hidden Stem Rescue",
+            "category": "hidden_stem",
+            "enabled": true,
+            "priority": {
+                "level": "medium",
+                "order": 64
+            },
+            "tags": [
+                "special_case",
+                "hidden_stem",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000073",
+            "code": "spc_tie_break_season",
+            "name": "Tie Break By Season",
+            "category": "priority",
+            "enabled": true,
+            "priority": {
+                "level": "critical",
+                "order": 99
+            },
+            "tags": [
+                "special_case",
+                "priority",
+                "k2_expansion"
+            ]
+        },
+        {
+            "id": "SPC-000074",
+            "code": "spc_fallback_neutral",
+            "name": "Neutral Fallback Case",
+            "category": "fallback",
+            "enabled": true,
+            "priority": {
+                "level": "low",
+                "order": 10
+            },
+            "tags": [
+                "special_case",
+                "fallback",
+                "k2_expansion"
+            ]
         }
     ]
 }
