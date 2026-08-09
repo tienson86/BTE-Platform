@@ -1,0 +1,722 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "category": "final_override_publication",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGO-000100",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=final_useful_god",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "final_useful_god",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản final_useful_god. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_final_useful_god",
+      "name": "Xuất bản final_useful_god",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=final_useful_god",
+          "outcome": "final_useful_god"
+        }
+      }
+    },
+    {
+      "id": "UGO-000101",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=final_favorable_gods",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "final_favorable_gods",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản final_favorable_gods. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_final_favorable_gods",
+      "name": "Xuất bản final_favorable_gods",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=final_favorable_gods",
+          "outcome": "final_favorable_gods"
+        }
+      }
+    },
+    {
+      "id": "UGO-000102",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=final_unfavorable_gods",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "final_unfavorable_gods",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản final_unfavorable_gods. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_final_unfavorable_gods",
+      "name": "Xuất bản final_unfavorable_gods",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=final_unfavorable_gods",
+          "outcome": "final_unfavorable_gods"
+        }
+      }
+    },
+    {
+      "id": "UGO-000103",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=override_applied",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "override_applied_true",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản override_applied=true. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_override_applied_true",
+      "name": "Xuất bản override_applied=true",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=override_applied",
+          "outcome": "override_applied_true"
+        }
+      }
+    },
+    {
+      "id": "UGO-000104",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "publish=override_applied",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "override_applied_false",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản override_applied=false. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_override_applied_false",
+      "name": "Xuất bản override_applied=false",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "publish=override_applied",
+          "outcome": "override_applied_false"
+        }
+      }
+    },
+    {
+      "id": "UGO-000105",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=override_reason",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "override_reason",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản override_reason. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_override_reason",
+      "name": "Xuất bản override_reason",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=override_reason",
+          "outcome": "override_reason"
+        }
+      }
+    },
+    {
+      "id": "UGO-000106",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=override_confidence",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "override_confidence",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản override_confidence. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_override_confidence",
+      "name": "Xuất bản override_confidence",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=override_confidence",
+          "outcome": "override_confidence"
+        }
+      }
+    },
+    {
+      "id": "UGO-000107",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_trace",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "decision_trace",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản decision_trace. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_decision_trace",
+      "name": "Xuất bản decision_trace",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_trace",
+          "outcome": "decision_trace"
+        }
+      }
+    },
+    {
+      "id": "UGO-000108",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=decision_audit",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "decision_audit",
+        "decision_role": "override"
+      },
+      "explanation": "Xuất bản decision_audit. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_decision_audit",
+      "name": "Xuất bản decision_audit",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=decision_audit",
+          "outcome": "decision_audit"
+        }
+      }
+    },
+    {
+      "id": "UGO-000109",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "final=passthrough_resolved",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "passthrough",
+        "decision_role": "override"
+      },
+      "explanation": "Không override: final = resolved đã công bố. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_passthrough_when_rejected",
+      "name": "Không override: final = resolved đã công bố",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "final=passthrough_resolved",
+          "outcome": "passthrough"
+        }
+      }
+    },
+    {
+      "id": "UGO-000110",
+      "version": "1.0.0",
+      "category": "final_override_publication",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "final_override_publication"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "override_decision_ready",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "publish=new_outputs_only",
+        "weight": 4,
+        "signal": "final_override_publication",
+        "score_target": "day_master.override_score",
+        "outcome": "no_upstream_mutate",
+        "decision_role": "override"
+      },
+      "explanation": "Chỉ xuất bản output mới, không ghi đè upstream. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "pub_never_mutate_upstream",
+      "name": "Chỉ xuất bản output mới, không ghi đè upstream",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_decision_ready",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "publish=new_outputs_only",
+          "outcome": "no_upstream_mutate"
+        }
+      }
+    }
+  ]
+}

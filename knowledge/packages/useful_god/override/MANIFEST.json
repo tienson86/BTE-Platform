@@ -1,0 +1,1626 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "decision",
+    "decision_role": "override",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-USEFUL_GOD",
+    "category_id": "override",
+    "school": "bazi_default",
+    "tags": [
+      "decision",
+      "kx4c",
+      "override",
+      "useful_god"
+    ],
+    "description": "Useful God decision override layer."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/override_eligibility.json",
+        "rules/override_prerequisites.json",
+        "rules/override_prohibition.json",
+        "rules/exceptional_conditions.json",
+        "rules/follow_pattern_override.json",
+        "rules/transformation_override.json",
+        "rules/dominant_element_override.json",
+        "rules/contradiction_override.json",
+        "rules/confidence_override.json",
+        "rules/final_override_publication.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/override_philosophy.md",
+        "documentation/override_model.md",
+        "documentation/decision_hierarchy.md",
+        "documentation/override_legality.md",
+        "documentation/decision_audit.md",
+        "documentation/input_contract.md",
+        "documentation/output_contract.md",
+        "documentation/assumptions_and_limitations.md",
+        "documentation/WAVE2_ROADMAP.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/published_inputs.json",
+        "assets/published_outputs.json",
+        "assets/decision_trace.contract.json",
+        "assets/decision_audit.contract.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_02_seasonal_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_03_temperature_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_05_pattern_evaluation",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_07_useful_god_priority",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "UGO-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_eligibility.json"
+    },
+    {
+      "id": "UGO-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prerequisites.json"
+    },
+    {
+      "id": "UGO-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/override_prohibition.json"
+    },
+    {
+      "id": "UGO-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/exceptional_conditions.json"
+    },
+    {
+      "id": "UGO-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/follow_pattern_override.json"
+    },
+    {
+      "id": "UGO-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/transformation_override.json"
+    },
+    {
+      "id": "UGO-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dominant_element_override.json"
+    },
+    {
+      "id": "UGO-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/contradiction_override.json"
+    },
+    {
+      "id": "UGO-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/confidence_override.json"
+    },
+    {
+      "id": "UGO-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    },
+    {
+      "id": "UGO-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/final_override_publication.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_01_strength_core",
+    "bz_02_seasonal_core",
+    "bz_03_temperature_core",
+    "bz_05_pattern_evaluation",
+    "bz_07_useful_god_priority"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/decision_audit.contract.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/decision_trace.contract.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_inputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/assumptions_and_limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/decision_audit.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/decision_hierarchy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/input_contract.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/output_contract.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/override_legality.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/override_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/override_philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/UGO-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/contradiction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/follow.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/nooverride.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/transform.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/contradiction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/follow.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/nooverride.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/transform.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/contradiction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/contradiction.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/follow.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/follow.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/lowconf.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/nooverride.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/nooverride.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/transform.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/transform.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/contradiction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/follow.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/nooverride.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/transform.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/contradiction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/follow.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/lowconf.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/nooverride.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/transform.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/confidence_override.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/contradiction_override.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/dominant_element_override.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/exceptional_conditions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/final_override_publication.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/follow_pattern_override.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/override_eligibility.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/override_prerequisites.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/override_prohibition.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/transformation_override.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,782 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "category": "contradiction_override",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGO-000078",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "override_exceptional_type",
+          "operator": "equals",
+          "value": "contradiction"
+        }
+      ],
+      "result": {
+        "effect": "override_type=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_ready",
+        "decision_role": "override"
+      },
+      "explanation": "Mâu thuẫn chỉ khi có diagnostics contradiction. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_requires_exception",
+      "name": "Mâu thuẫn chỉ khi có diagnostics contradiction",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_exceptional_type",
+            "operator": "equals",
+            "value": "contradiction"
+          }
+        ],
+        "result": {
+          "effect": "override_type=contradiction",
+          "outcome": "contra_ready"
+        }
+      }
+    },
+    {
+      "id": "UGO-000079",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "override=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_quality_conf",
+        "decision_role": "override"
+      },
+      "explanation": "Mâu thuẫn quality vs pattern_confidence. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_quality_vs_confidence",
+      "name": "Mâu thuẫn quality vs pattern_confidence",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "override=contradiction",
+          "outcome": "contra_quality_conf"
+        }
+      }
+    },
+    {
+      "id": "UGO-000080",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "override=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_priority_conf",
+        "decision_role": "override"
+      },
+      "explanation": "Mâu thuẫn priority primary vs confidence none. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_priority_vs_confidence",
+      "name": "Mâu thuẫn priority primary vs confidence none",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "override=contradiction",
+          "outcome": "contra_priority_conf"
+        }
+      }
+    },
+    {
+      "id": "UGO-000081",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "contradiction"
+        }
+      ],
+      "result": {
+        "effect": "override=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_diag",
+        "decision_role": "override"
+      },
+      "explanation": "Mâu thuẫn gắn cờ diagnostics. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_diag_flag",
+      "name": "Mâu thuẫn gắn cờ diagnostics",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "contradiction"
+          }
+        ],
+        "result": {
+          "effect": "override=contradiction",
+          "outcome": "contra_diag"
+        }
+      }
+    },
+    {
+      "id": "UGO-000082",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "contradiction"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_reject",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối contradiction-override nếu bị cấm. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_reject_if_prohibited",
+      "name": "Từ chối contradiction-override nếu bị cấm",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "contradiction"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "contra_reject"
+        }
+      }
+    },
+    {
+      "id": "UGO-000083",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "resolution_diagnostics",
+          "operator": "not_contains",
+          "value": "contradiction"
+        },
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_reject_clean",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối khi không còn mâu thuẫn. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_reject_if_clean",
+      "name": "Từ chối khi không còn mâu thuẫn",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_diagnostics",
+            "operator": "not_contains",
+            "value": "contradiction"
+          },
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "contra_reject_clean"
+        }
+      }
+    },
+    {
+      "id": "UGO-000084",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 44
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "contradiction"
+        },
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "final=withheld",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_apply",
+        "decision_role": "override"
+      },
+      "explanation": "Áp mâu thuẫn: withhold final. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_apply_withhold",
+      "name": "Áp mâu thuẫn: withhold final",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "contradiction"
+          },
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "final=withheld",
+          "outcome": "contra_apply"
+        }
+      }
+    },
+    {
+      "id": "UGO-000085",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 45
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "contradiction"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "reason=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_reason",
+        "decision_role": "override"
+      },
+      "explanation": "Lý do override=contradiction. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_reason_code",
+      "name": "Lý do override=contradiction",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "contradiction"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "reason=contradiction",
+          "outcome": "contra_reason"
+        }
+      }
+    },
+    {
+      "id": "UGO-000086",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 46
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "contradiction"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "override_confidence=low",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_conf",
+        "decision_role": "override"
+      },
+      "explanation": "Tin cậy contradiction-override = low. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_confidence_low",
+      "name": "Tin cậy contradiction-override = low",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "contradiction"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "override_confidence=low",
+          "outcome": "contra_conf"
+        }
+      }
+    },
+    {
+      "id": "UGO-000087",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 47
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "contradiction"
+        }
+      ],
+      "result": {
+        "effect": "trace=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_trace",
+        "decision_role": "override"
+      },
+      "explanation": "Mâu thuẫn bắt buộc decision_trace. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_trace_required",
+      "name": "Mâu thuẫn bắt buộc decision_trace",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "contradiction"
+          }
+        ],
+        "result": {
+          "effect": "trace=contradiction",
+          "outcome": "contra_trace"
+        }
+      }
+    },
+    {
+      "id": "UGO-000088",
+      "version": "1.0.0",
+      "category": "contradiction_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "contradiction_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 48
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "contradiction"
+        }
+      ],
+      "result": {
+        "effect": "audit=contradiction",
+        "weight": 4,
+        "signal": "contradiction_override",
+        "score_target": "day_master.override_score",
+        "outcome": "contra_audit",
+        "decision_role": "override"
+      },
+      "explanation": "Mâu thuẫn bắt buộc decision_audit. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "contra_audit_required",
+      "name": "Mâu thuẫn bắt buộc decision_audit",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "contradiction"
+          }
+        ],
+        "result": {
+          "effect": "audit=contradiction",
+          "outcome": "contra_audit"
+        }
+      }
+    }
+  ]
+}

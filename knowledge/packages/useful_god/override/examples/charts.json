@@ -1,0 +1,358 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "examples": [
+    {
+      "example_id": "EX-UGO-NORMAL-001",
+      "title": "Bình thường — không override",
+      "tendency": "normal_case",
+      "final_decision": "Chính Quan",
+      "override_applied": false,
+      "override_reason": "none",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 78,
+        "temperature_score": 48,
+        "pattern_score": 82,
+        "pattern_quality": "excellent",
+        "pattern_confidence": "high",
+        "resolved_useful_god": "Chính Quan",
+        "decision_priority": "primary",
+        "resolution_confidence": "high",
+        "resolution_reasoning": "Priority kept Chính Quan.",
+        "resolution_diagnostics": [
+          "unfavorable_disjoint"
+        ]
+      },
+      "activates_rules": [
+        "UGO-000001",
+        "UGO-000023",
+        "UGO-000104",
+        "UGO-000109"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGO-000001.json",
+        "evidence/bundles/UGO-000023.json",
+        "evidence/bundles/UGO-000104.json",
+        "evidence/bundles/UGO-000109.json"
+      ],
+      "reasoning_path": "RC-UGO-NOOVERRIDE-001",
+      "decision_trace": {
+        "trace_id": "DT-EX-UGO-NORMAL-001",
+        "pipeline_stage": "useful_god_override",
+        "upstream_decision": "Chính Quan",
+        "stages": [
+          "override_eligibility",
+          "override_prerequisites",
+          "override_prohibition",
+          "exceptional_conditions",
+          "typed_override",
+          "final_override_publication"
+        ],
+        "activated_rules": [
+          "UGO-000001",
+          "UGO-000023",
+          "UGO-000104",
+          "UGO-000109"
+        ],
+        "override_applied": false,
+        "override_reason": "none",
+        "final_useful_god": "Chính Quan"
+      },
+      "decision_audit": {
+        "audit_id": "DA-EX-UGO-NORMAL-001",
+        "legality": "rejected",
+        "upstream_untouched": true,
+        "new_outputs_only": true,
+        "prohibition_checked": true,
+        "exceptional_condition": null,
+        "override_applied": false,
+        "reason_codes": [
+          "prohibit_clean_high_excellent"
+        ]
+      }
+    },
+    {
+      "example_id": "EX-UGO-FOLLOW-001",
+      "title": "Tòng cách",
+      "tendency": "follow_pattern",
+      "final_decision": "Tài",
+      "override_applied": true,
+      "override_reason": "follow_pattern",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 22,
+        "temperature_score": 48,
+        "pattern_score": 88,
+        "pattern_quality": "excellent",
+        "pattern_confidence": "high",
+        "resolved_useful_god": "Chính Ấn",
+        "decision_priority": "secondary",
+        "resolution_confidence": "medium",
+        "resolution_reasoning": "Priority kept Chính Quan.",
+        "resolution_diagnostics": [
+          "follow_pattern",
+          "follow_conflicts_resolved"
+        ]
+      },
+      "activates_rules": [
+        "UGO-000034",
+        "UGO-000051",
+        "UGO-000052",
+        "UGO-000103"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGO-000034.json",
+        "evidence/bundles/UGO-000051.json",
+        "evidence/bundles/UGO-000052.json",
+        "evidence/bundles/UGO-000103.json"
+      ],
+      "reasoning_path": "RC-UGO-FOLLOW-001",
+      "decision_trace": {
+        "trace_id": "DT-EX-UGO-FOLLOW-001",
+        "pipeline_stage": "useful_god_override",
+        "upstream_decision": "Chính Ấn",
+        "stages": [
+          "override_eligibility",
+          "override_prerequisites",
+          "override_prohibition",
+          "exceptional_conditions",
+          "typed_override",
+          "final_override_publication"
+        ],
+        "activated_rules": [
+          "UGO-000034",
+          "UGO-000051",
+          "UGO-000052",
+          "UGO-000103"
+        ],
+        "override_applied": true,
+        "override_reason": "follow_pattern",
+        "final_useful_god": "Tài"
+      },
+      "decision_audit": {
+        "audit_id": "DA-EX-UGO-FOLLOW-001",
+        "legality": "applied",
+        "upstream_untouched": true,
+        "new_outputs_only": true,
+        "prohibition_checked": true,
+        "exceptional_condition": "follow_pattern",
+        "override_applied": true,
+        "reason_codes": [
+          "follow_pattern"
+        ]
+      }
+    },
+    {
+      "example_id": "EX-UGO-TRANSFORM-001",
+      "title": "Hóa khí",
+      "tendency": "transformation",
+      "final_decision": "Hóa Thổ",
+      "override_applied": true,
+      "override_reason": "transformation",
+      "consumed_outputs": {
+        "season_score": 70,
+        "strength_score": 78,
+        "temperature_score": 48,
+        "pattern_score": 72,
+        "pattern_quality": "good",
+        "pattern_confidence": "high",
+        "resolved_useful_god": "Chính Quan",
+        "decision_priority": "secondary",
+        "resolution_confidence": "medium",
+        "resolution_reasoning": "Priority kept Chính Quan.",
+        "resolution_diagnostics": [
+          "transformation",
+          "follow_pattern"
+        ]
+      },
+      "activates_rules": [
+        "UGO-000035",
+        "UGO-000062",
+        "UGO-000063",
+        "UGO-000108"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGO-000035.json",
+        "evidence/bundles/UGO-000062.json",
+        "evidence/bundles/UGO-000063.json",
+        "evidence/bundles/UGO-000108.json"
+      ],
+      "reasoning_path": "RC-UGO-TRANSFORM-001",
+      "decision_trace": {
+        "trace_id": "DT-EX-UGO-TRANSFORM-001",
+        "pipeline_stage": "useful_god_override",
+        "upstream_decision": "Chính Quan",
+        "stages": [
+          "override_eligibility",
+          "override_prerequisites",
+          "override_prohibition",
+          "exceptional_conditions",
+          "typed_override",
+          "final_override_publication"
+        ],
+        "activated_rules": [
+          "UGO-000035",
+          "UGO-000062",
+          "UGO-000063",
+          "UGO-000108"
+        ],
+        "override_applied": true,
+        "override_reason": "transformation",
+        "final_useful_god": "Hóa Thổ"
+      },
+      "decision_audit": {
+        "audit_id": "DA-EX-UGO-TRANSFORM-001",
+        "legality": "applied",
+        "upstream_untouched": true,
+        "new_outputs_only": true,
+        "prohibition_checked": true,
+        "exceptional_condition": "transformation",
+        "override_applied": true,
+        "reason_codes": [
+          "transformation"
+        ]
+      }
+    },
+    {
+      "example_id": "EX-UGO-CONTRA-001",
+      "title": "Mâu thuẫn hợp đồng",
+      "tendency": "contradiction",
+      "final_decision": "withheld",
+      "override_applied": true,
+      "override_reason": "contradiction",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 78,
+        "temperature_score": 48,
+        "pattern_score": 82,
+        "pattern_quality": "excellent",
+        "pattern_confidence": "none",
+        "resolved_useful_god": "Chính Quan",
+        "decision_priority": "primary",
+        "resolution_confidence": "none",
+        "resolution_reasoning": "Priority kept Chính Quan.",
+        "resolution_diagnostics": [
+          "contradiction"
+        ]
+      },
+      "activates_rules": [
+        "UGO-000037",
+        "UGO-000084",
+        "UGO-000085",
+        "UGO-000107"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGO-000037.json",
+        "evidence/bundles/UGO-000084.json",
+        "evidence/bundles/UGO-000085.json",
+        "evidence/bundles/UGO-000107.json"
+      ],
+      "reasoning_path": "RC-UGO-CONTRADICTION-001",
+      "decision_trace": {
+        "trace_id": "DT-EX-UGO-CONTRA-001",
+        "pipeline_stage": "useful_god_override",
+        "upstream_decision": "Chính Quan",
+        "stages": [
+          "override_eligibility",
+          "override_prerequisites",
+          "override_prohibition",
+          "exceptional_conditions",
+          "typed_override",
+          "final_override_publication"
+        ],
+        "activated_rules": [
+          "UGO-000037",
+          "UGO-000084",
+          "UGO-000085",
+          "UGO-000107"
+        ],
+        "override_applied": true,
+        "override_reason": "contradiction",
+        "final_useful_god": "withheld"
+      },
+      "decision_audit": {
+        "audit_id": "DA-EX-UGO-CONTRA-001",
+        "legality": "applied",
+        "upstream_untouched": true,
+        "new_outputs_only": true,
+        "prohibition_checked": true,
+        "exceptional_condition": "contradiction",
+        "override_applied": true,
+        "reason_codes": [
+          "contradiction"
+        ]
+      }
+    },
+    {
+      "example_id": "EX-UGO-REJECT-001",
+      "title": "Override bị từ chối",
+      "tendency": "override_rejected",
+      "final_decision": "Chính Tài",
+      "override_applied": false,
+      "override_reason": "none",
+      "consumed_outputs": {
+        "season_score": 62,
+        "strength_score": 50,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "resolved_useful_god": "Chính Tài",
+        "decision_priority": "secondary",
+        "resolution_confidence": "low",
+        "resolution_reasoning": "Priority kept Chính Quan.",
+        "resolution_diagnostics": [
+          "override_forbidden"
+        ]
+      },
+      "activates_rules": [
+        "UGO-000038",
+        "UGO-000094",
+        "UGO-000030",
+        "UGO-000104"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/UGO-000038.json",
+        "evidence/bundles/UGO-000094.json",
+        "evidence/bundles/UGO-000030.json",
+        "evidence/bundles/UGO-000104.json"
+      ],
+      "reasoning_path": "RC-UGO-LOWCONF-001",
+      "decision_trace": {
+        "trace_id": "DT-EX-UGO-REJECT-001",
+        "pipeline_stage": "useful_god_override",
+        "upstream_decision": "Chính Tài",
+        "stages": [
+          "override_eligibility",
+          "override_prerequisites",
+          "override_prohibition",
+          "exceptional_conditions",
+          "typed_override",
+          "final_override_publication"
+        ],
+        "activated_rules": [
+          "UGO-000038",
+          "UGO-000094",
+          "UGO-000030",
+          "UGO-000104"
+        ],
+        "override_applied": false,
+        "override_reason": "none",
+        "final_useful_god": "Chính Tài"
+      },
+      "decision_audit": {
+        "audit_id": "DA-EX-UGO-REJECT-001",
+        "legality": "rejected",
+        "upstream_untouched": true,
+        "new_outputs_only": true,
+        "prohibition_checked": true,
+        "exceptional_condition": "low_confidence",
+        "override_applied": false,
+        "reason_codes": [
+          "override_forbidden"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,812 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "category": "follow_pattern_override",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGO-000045",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 55
+      },
+      "conditions": [
+        {
+          "field": "override_exceptional_type",
+          "operator": "equals",
+          "value": "follow_pattern"
+        }
+      ],
+      "result": {
+        "effect": "override_type=follow_pattern",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_ready",
+        "decision_role": "override"
+      },
+      "explanation": "Tòng cách chỉ khi có ngoại lệ follow_pattern. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_requires_exception",
+      "name": "Tòng cách chỉ khi có ngoại lệ follow_pattern",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_exceptional_type",
+            "operator": "equals",
+            "value": "follow_pattern"
+          }
+        ],
+        "result": {
+          "effect": "override_type=follow_pattern",
+          "outcome": "follow_ready"
+        }
+      }
+    },
+    {
+      "id": "UGO-000046",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 56
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "excellent"
+        },
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "follow_pattern"
+        }
+      ],
+      "result": {
+        "effect": "override=follow_pattern",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_quality",
+        "decision_role": "override"
+      },
+      "explanation": "Tòng cách khi quality excellent + diagnostics. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_quality_excellent",
+      "name": "Tòng cách khi quality excellent + diagnostics",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "excellent"
+          },
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "follow_pattern"
+          }
+        ],
+        "result": {
+          "effect": "override=follow_pattern",
+          "outcome": "follow_quality"
+        }
+      }
+    },
+    {
+      "id": "UGO-000047",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 57
+      },
+      "conditions": [
+        {
+          "field": "pattern_score",
+          "operator": "greater_than_or_equal",
+          "value": 75
+        },
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "follow_pattern"
+        }
+      ],
+      "result": {
+        "effect": "override=follow_pattern",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_score",
+        "decision_role": "override"
+      },
+      "explanation": "Tòng cách khi pattern_score cao. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_pattern_score_high",
+      "name": "Tòng cách khi pattern_score cao",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score",
+            "operator": "greater_than_or_equal",
+            "value": 75
+          },
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "follow_pattern"
+          }
+        ],
+        "result": {
+          "effect": "override=follow_pattern",
+          "outcome": "follow_score"
+        }
+      }
+    },
+    {
+      "id": "UGO-000048",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 58
+      },
+      "conditions": [
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "follow_conflicts_resolved"
+        }
+      ],
+      "result": {
+        "effect": "override=follow_pattern",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_conflict",
+        "decision_role": "override"
+      },
+      "explanation": "Tòng khi resolved mâu thuẫn tòng cách. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_when_resolved_conflicts",
+      "name": "Tòng khi resolved mâu thuẫn tòng cách",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "follow_conflicts_resolved"
+          }
+        ],
+        "result": {
+          "effect": "override=follow_pattern",
+          "outcome": "follow_conflict"
+        }
+      }
+    },
+    {
+      "id": "UGO-000049",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 59
+      },
+      "conditions": [
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "follow_pattern"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_reject_prohibit",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối tòng nếu bị cấm. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_reject_if_prohibited",
+      "name": "Từ chối tòng nếu bị cấm",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "follow_pattern"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "follow_reject_prohibit"
+        }
+      }
+    },
+    {
+      "id": "UGO-000050",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "override_exceptional_type",
+          "operator": "not_equals",
+          "value": "follow_pattern"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_reject_clean",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối tòng khi sạch high. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_reject_clean_high",
+      "name": "Từ chối tòng khi sạch high",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "override_exceptional_type",
+            "operator": "not_equals",
+            "value": "follow_pattern"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "follow_reject_clean"
+        }
+      }
+    },
+    {
+      "id": "UGO-000051",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "follow_pattern"
+        },
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "final=follow_override",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_apply",
+        "decision_role": "override"
+      },
+      "explanation": "Áp tòng: ghi final_useful_god theo follow. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_apply_final",
+      "name": "Áp tòng: ghi final_useful_god theo follow",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "follow_pattern"
+          },
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "final=follow_override",
+          "outcome": "follow_apply"
+        }
+      }
+    },
+    {
+      "id": "UGO-000052",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "follow_pattern"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "reason=follow_pattern",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_reason",
+        "decision_role": "override"
+      },
+      "explanation": "Lý do override=follow_pattern. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_reason_code",
+      "name": "Lý do override=follow_pattern",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "follow_pattern"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "reason=follow_pattern",
+          "outcome": "follow_reason"
+        }
+      }
+    },
+    {
+      "id": "UGO-000053",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "follow_pattern"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "override_confidence=medium",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_conf",
+        "decision_role": "override"
+      },
+      "explanation": "Tin cậy override tòng = medium. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_confidence_medium",
+      "name": "Tin cậy override tòng = medium",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "follow_pattern"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "override_confidence=medium",
+          "outcome": "follow_conf"
+        }
+      }
+    },
+    {
+      "id": "UGO-000054",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "follow_pattern"
+        },
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "transformation"
+        }
+      ],
+      "result": {
+        "effect": "override_type=transformation",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_yield",
+        "decision_role": "override"
+      },
+      "explanation": "Tòng nhường hóa khí nếu cùng xuất hiện. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_blocked_by_transform",
+      "name": "Tòng nhường hóa khí nếu cùng xuất hiện",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "follow_pattern"
+          },
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "transformation"
+          }
+        ],
+        "result": {
+          "effect": "override_type=transformation",
+          "outcome": "follow_yield"
+        }
+      }
+    },
+    {
+      "id": "UGO-000055",
+      "version": "1.0.0",
+      "category": "follow_pattern_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "follow_pattern_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "follow_pattern"
+        },
+        {
+          "field": "resolution_reasoning",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "final_sets=from_reasoning",
+        "weight": 4,
+        "signal": "follow_pattern_override",
+        "score_target": "day_master.override_score",
+        "outcome": "follow_sets",
+        "decision_role": "override"
+      },
+      "explanation": "Tòng giữ Hỷ/Kỵ theo reasoning đã công bố. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "follow_keep_sets_from_reason",
+      "name": "Tòng giữ Hỷ/Kỵ theo reasoning đã công bố",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "follow_pattern"
+          },
+          {
+            "field": "resolution_reasoning",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "final_sets=from_reasoning",
+          "outcome": "follow_sets"
+        }
+      }
+    }
+  ]
+}

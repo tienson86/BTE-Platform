@@ -1,0 +1,752 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "category": "confidence_override",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGO-000089",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 49
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        }
+      ],
+      "result": {
+        "effect": "exceptional=low_confidence",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_low",
+        "decision_role": "override"
+      },
+      "explanation": "Tin cậy thấp là ngoại lệ. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_low_is_exception",
+      "name": "Tin cậy thấp là ngoại lệ",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          }
+        ],
+        "result": {
+          "effect": "exceptional=low_confidence",
+          "outcome": "conf_low"
+        }
+      }
+    },
+    {
+      "id": "UGO-000090",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "exceptional=none_confidence",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_none",
+        "decision_role": "override"
+      },
+      "explanation": "Tin cậy none là ngoại lệ. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_none_is_exception",
+      "name": "Tin cậy none là ngoại lệ",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "exceptional=none_confidence",
+          "outcome": "conf_none"
+        }
+      }
+    },
+    {
+      "id": "UGO-000091",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 51
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        },
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "final=withheld",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_withhold",
+        "decision_role": "override"
+      },
+      "explanation": "Override withhold khi confidence=none. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_override_withhold_none",
+      "name": "Override withhold khi confidence=none",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          },
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "final=withheld",
+          "outcome": "conf_withhold"
+        }
+      }
+    },
+    {
+      "id": "UGO-000092",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 52
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "override=confidence",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_flag_low",
+        "decision_role": "override"
+      },
+      "explanation": "Gắn cờ override khi confidence=low. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_override_flag_low",
+      "name": "Gắn cờ override khi confidence=low",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "override=confidence",
+          "outcome": "conf_flag_low"
+        }
+      }
+    },
+    {
+      "id": "UGO-000093",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 53
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "high"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_reject_high",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối confidence-override khi high. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_reject_if_high",
+      "name": "Từ chối confidence-override khi high",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "high"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "conf_reject_high"
+        }
+      }
+    },
+    {
+      "id": "UGO-000094",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 54
+      },
+      "conditions": [
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "confidence"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_reject_prohibit",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối confidence-override nếu bị cấm. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_reject_if_prohibited",
+      "name": "Từ chối confidence-override nếu bị cấm",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "confidence"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "conf_reject_prohibit"
+        }
+      }
+    },
+    {
+      "id": "UGO-000095",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 55
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "confidence"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "reason=low_confidence",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_reason",
+        "decision_role": "override"
+      },
+      "explanation": "Lý do override=low_confidence. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_reason_code",
+      "name": "Lý do override=low_confidence",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "confidence"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "reason=low_confidence",
+          "outcome": "conf_reason"
+        }
+      }
+    },
+    {
+      "id": "UGO-000096",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 56
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "override_confidence=none",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_out_none",
+        "decision_role": "override"
+      },
+      "explanation": "override_confidence=none khi nguồn none. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_override_confidence_none",
+      "name": "override_confidence=none khi nguồn none",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "override_confidence=none",
+          "outcome": "conf_out_none"
+        }
+      }
+    },
+    {
+      "id": "UGO-000097",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 57
+      },
+      "conditions": [
+        {
+          "field": "resolution_confidence",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "cap=resolution_confidence",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_cap",
+        "decision_role": "override"
+      },
+      "explanation": "Không được nâng tin cậy cao hơn resolution_confidence. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_cannot_raise_upstream",
+      "name": "Không được nâng tin cậy cao hơn resolution_confidence",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolution_confidence",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "cap=resolution_confidence",
+          "outcome": "conf_cap"
+        }
+      }
+    },
+    {
+      "id": "UGO-000098",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 58
+      },
+      "conditions": [
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "none"
+        }
+      ],
+      "result": {
+        "effect": "override_confidence=reduced",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_pattern_reduce",
+        "decision_role": "override"
+      },
+      "explanation": "pattern_confidence=none làm giảm override_confidence. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_pattern_none_reduces",
+      "name": "pattern_confidence=none làm giảm override_confidence",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "none"
+          }
+        ],
+        "result": {
+          "effect": "override_confidence=reduced",
+          "outcome": "conf_pattern_reduce"
+        }
+      }
+    },
+    {
+      "id": "UGO-000099",
+      "version": "1.0.0",
+      "category": "confidence_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "confidence_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 59
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "confidence"
+        }
+      ],
+      "result": {
+        "effect": "audit=confidence",
+        "weight": 4,
+        "signal": "confidence_override",
+        "score_target": "day_master.override_score",
+        "outcome": "conf_audit",
+        "decision_role": "override"
+      },
+      "explanation": "Confidence-override bắt buộc audit. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "conf_audit_required",
+      "name": "Confidence-override bắt buộc audit",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "confidence"
+          }
+        ],
+        "result": {
+          "effect": "audit=confidence",
+          "outcome": "conf_audit"
+        }
+      }
+    }
+  ]
+}

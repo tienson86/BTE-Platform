@@ -1,0 +1,168 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-OBS-001",
+      "node_type": "observation",
+      "title": "Không override",
+      "description": "Quan sát 11 published outputs.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "published_inputs"
+      ],
+      "outputs": [
+        "published_inputs"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    },
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-EVD-001",
+      "node_type": "evidence",
+      "title": "Không override",
+      "description": "Bằng chứng đủ điều kiện/cấm/ngoại lệ.",
+      "source_rule": "UGO-000001",
+      "source_evidence": "evidence/bundles/UGO-000001.json",
+      "inputs": [
+        "season_score",
+        "strength_score",
+        "temperature_score",
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence",
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence",
+        "resolution_reasoning",
+        "resolution_diagnostics"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    },
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-INF-001",
+      "node_type": "inference",
+      "title": "Không override",
+      "description": "Suy có được phép override hay không.",
+      "source_rule": "UGO-000001",
+      "source_evidence": "evidence/bundles/UGO-000001.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    },
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Không override",
+      "description": "Trung gian loại override và lý do.",
+      "source_rule": "UGO-000001",
+      "source_evidence": "evidence/bundles/UGO-000001.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "mid_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    },
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Không override",
+      "description": "Chốt final_useful_god + trace/audit.",
+      "source_rule": "UGO-000001",
+      "source_evidence": "evidence/bundles/UGO-000001.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "final_decision"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    },
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-ALT-001",
+      "node_type": "alternative",
+      "title": "Không override",
+      "description": "Nhánh giữ nguyên resolved.",
+      "source_rule": "UGO-000001",
+      "source_evidence": "evidence/bundles/UGO-000001.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "alt_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    },
+    {
+      "node_id": "RN-UGO-NOOVERRIDE-CON-001",
+      "node_type": "constraint",
+      "title": "Không override",
+      "description": "Ràng buộc cấm ghi đè upstream.",
+      "source_rule": "UGO-000001",
+      "source_evidence": "evidence/bundles/UGO-000001.json",
+      "inputs": [
+        "prior_signal"
+      ],
+      "outputs": [
+        "constraint_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "decision_role": "override"
+      }
+    }
+  ]
+}

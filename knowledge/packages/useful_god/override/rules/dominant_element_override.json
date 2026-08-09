@@ -1,0 +1,812 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "category": "dominant_element_override",
+  "count": 11,
+  "objects": [
+    {
+      "id": "UGO-000067",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "override_exceptional_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "override_type=dominant_element",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_ready",
+        "decision_role": "override"
+      },
+      "explanation": "Hành chiếm ưu chỉ khi có diagnostics. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_requires_exception",
+      "name": "Hành chiếm ưu chỉ khi có diagnostics",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_exceptional_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "override_type=dominant_element",
+          "outcome": "dominant_ready"
+        }
+      }
+    },
+    {
+      "id": "UGO-000068",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "greater_than_or_equal",
+          "value": 85
+        },
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "override=dominant_element",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_strength",
+        "decision_role": "override"
+      },
+      "explanation": "Chiếm ưu khi strength_score rất cao. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_high_strength",
+      "name": "Chiếm ưu khi strength_score rất cao",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "greater_than_or_equal",
+            "value": 85
+          },
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "override=dominant_element",
+          "outcome": "dominant_strength"
+        }
+      }
+    },
+    {
+      "id": "UGO-000069",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "override=dominant_element",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_weak_pat",
+        "decision_role": "override"
+      },
+      "explanation": "Chiếm ưu khi cách yếu/vỡ. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_weak_pattern",
+      "name": "Chiếm ưu khi cách yếu/vỡ",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "override=dominant_element",
+          "outcome": "dominant_weak_pat"
+        }
+      }
+    },
+    {
+      "id": "UGO-000070",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "season_score",
+          "operator": "greater_than_or_equal",
+          "value": 80
+        },
+        {
+          "field": "resolution_diagnostics",
+          "operator": "contains",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "override=dominant_element",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_season",
+        "decision_role": "override"
+      },
+      "explanation": "Chiếm ưu khi season_score cực. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_season_align",
+      "name": "Chiếm ưu khi season_score cực",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score",
+            "operator": "greater_than_or_equal",
+            "value": 80
+          },
+          {
+            "field": "resolution_diagnostics",
+            "operator": "contains",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "override=dominant_element",
+          "outcome": "dominant_season"
+        }
+      }
+    },
+    {
+      "id": "UGO-000071",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_reject",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối chiếm ưu nếu bị cấm. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_reject_if_prohibited",
+      "name": "Từ chối chiếm ưu nếu bị cấm",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "dominant_reject"
+        }
+      }
+    },
+    {
+      "id": "UGO-000072",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "greater_than_or_equal",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "less_than",
+          "value": 70
+        },
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "override=rejected",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_reject_mid",
+        "decision_role": "override"
+      },
+      "explanation": "Từ chối chiếm ưu khi thân trung. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_reject_mid_strength",
+      "name": "Từ chối chiếm ưu khi thân trung",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "greater_than_or_equal",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "less_than",
+            "value": 70
+          },
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "override=rejected",
+          "outcome": "dominant_reject_mid"
+        }
+      }
+    },
+    {
+      "id": "UGO-000073",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        },
+        {
+          "field": "override_prohibited",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "final=dominant_override",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_apply",
+        "decision_role": "override"
+      },
+      "explanation": "Áp chiếm ưu: ghi final_useful_god. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_apply_final",
+      "name": "Áp chiếm ưu: ghi final_useful_god",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          },
+          {
+            "field": "override_prohibited",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "final=dominant_override",
+          "outcome": "dominant_apply"
+        }
+      }
+    },
+    {
+      "id": "UGO-000074",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "reason=dominant_element",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_reason",
+        "decision_role": "override"
+      },
+      "explanation": "Lý do override=dominant_element. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_reason_code",
+      "name": "Lý do override=dominant_element",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "reason=dominant_element",
+          "outcome": "dominant_reason"
+        }
+      }
+    },
+    {
+      "id": "UGO-000075",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        },
+        {
+          "field": "override_applied",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "override_confidence=low",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_conf",
+        "decision_role": "override"
+      },
+      "explanation": "Tin cậy chiếm ưu = low. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_confidence_low",
+      "name": "Tin cậy chiếm ưu = low",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          },
+          {
+            "field": "override_applied",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "override_confidence=low",
+          "outcome": "dominant_conf"
+        }
+      }
+    },
+    {
+      "id": "UGO-000076",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "no_recompute=strength",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_no_recompute",
+        "decision_role": "override"
+      },
+      "explanation": "Không tính lại sức thân, chỉ đọc điểm. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_not_recompute_strength",
+      "name": "Không tính lại sức thân, chỉ đọc điểm",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "no_recompute=strength",
+          "outcome": "dominant_no_recompute"
+        }
+      }
+    },
+    {
+      "id": "UGO-000077",
+      "version": "1.0.0",
+      "category": "dominant_element_override",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "decision",
+        "override",
+        "useful_god",
+        "dominant_element_override"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "override_type",
+          "operator": "equals",
+          "value": "dominant_element"
+        }
+      ],
+      "result": {
+        "effect": "audit=dominant_element",
+        "weight": 4,
+        "signal": "dominant_element_override",
+        "score_target": "day_master.override_score",
+        "outcome": "dominant_audit",
+        "decision_role": "override"
+      },
+      "explanation": "Chiếm ưu bắt buộc audit. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+      "references": [
+        {
+          "target": "REF-UGO-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dominant_audit_required",
+      "name": "Chiếm ưu bắt buộc audit",
+      "metadata": {
+        "package_id": "bz_08_useful_god_override",
+        "domain_id": "DOM-USEFUL_GOD",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-4C",
+        "decision_role": "override"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "override_type",
+            "operator": "equals",
+            "value": "dominant_element"
+          }
+        ],
+        "result": {
+          "effect": "audit=dominant_element",
+          "outcome": "dominant_audit"
+        }
+      }
+    }
+  ]
+}

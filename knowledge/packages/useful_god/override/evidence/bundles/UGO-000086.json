@@ -1,0 +1,68 @@
+{
+  "rule_id": "UGO-000086",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Tin cậy contradiction-override = low",
+    "why": "Tin cậy contradiction-override = low. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng.",
+    "when": "Khi đã có quyết định Priority đã công bố và điều kiện ngoại lệ/cấm khớp.",
+    "when_not": "Khi thiếu hợp đồng, chưa có resolved_useful_god, hoặc bị cấm override.",
+    "summary": "Tin cậy contradiction-override = low. Chỉ được phép ghi đè quyết định đã công bố. Không tính lại mùa/sức thân/điều hậu/cách/PEV/Foundation/Priority. Chỉ đọc 11 input hợp đồng."
+  },
+  "rationale": "Luật `contra_confidence_low` thuộc contradiction_override. Lớp override không xác định và không xếp hạng Dụng thần; chỉ quyết định có ghi đè quyết định đã công bố hay không.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp hợp đồng published outputs của KX-4B và Pattern Evaluation.",
+  "references": [
+    {
+      "target": "REF-UGO-000008",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-UGO-000086-01",
+      "rule_id": "UGO-000086",
+      "polarity": "positive",
+      "chart_facts": {
+        "override_type": "contradiction"
+      },
+      "note": "Khớp điều kiện override/cấm/ngoại lệ."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-UGO-000086-01",
+      "rule_id": "UGO-000086",
+      "polarity": "negative",
+      "chart_facts": {
+        "override_type": null
+      },
+      "note": "Thiếu hoặc lệch điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-UGO-000086-01",
+      "rule_id": "UGO-000086",
+      "kind": "override_legality_boundary",
+      "chart_facts": {
+        "override_type": "contradiction",
+        "resolution_diagnostics": [
+          "override_forbidden"
+        ]
+      },
+      "note": "Biên: đủ ngoại lệ nhưng diagnostics cấm thì không áp override."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_08_useful_god_override",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-4C",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

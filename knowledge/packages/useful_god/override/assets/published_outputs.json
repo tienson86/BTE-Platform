@@ -1,0 +1,52 @@
+{
+  "package_id": "bz_08_useful_god_override",
+  "package_version": "1.0.0",
+  "consumer": "Luck Cycle / Interpretation / Report",
+  "outputs": [
+    {
+      "name": "final_useful_god",
+      "type": "string",
+      "description": "Canonical final Yong Shen or withheld."
+    },
+    {
+      "name": "final_favorable_gods",
+      "type": "list",
+      "description": "Final Xi Shen after legal override or passthrough."
+    },
+    {
+      "name": "final_unfavorable_gods",
+      "type": "list",
+      "description": "Final Ji Shen after legal override or passthrough."
+    },
+    {
+      "name": "override_applied",
+      "type": "boolean",
+      "description": "True only when a legal override replaced the published decision."
+    },
+    {
+      "name": "override_reason",
+      "type": "string",
+      "description": "Structured reason code or none."
+    },
+    {
+      "name": "override_confidence",
+      "type": "enum",
+      "values": [
+        "high",
+        "medium",
+        "low",
+        "none"
+      ]
+    },
+    {
+      "name": "decision_trace",
+      "type": "object",
+      "description": "Ordered override evaluation trace."
+    },
+    {
+      "name": "decision_audit",
+      "type": "object",
+      "description": "Legality audit: upstream untouched, new outputs only."
+    }
+  ]
+}

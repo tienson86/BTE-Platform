@@ -1,0 +1,68 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_08_useful_god_override",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_01_strength_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "published contract",
+      "signals": [
+        "strength_score"
+      ]
+    },
+    {
+      "package_id": "bz_02_seasonal_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "published contract",
+      "signals": [
+        "season_score"
+      ]
+    },
+    {
+      "package_id": "bz_03_temperature_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "published contract",
+      "signals": [
+        "temperature_score"
+      ]
+    },
+    {
+      "package_id": "bz_05_pattern_evaluation",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "published contract",
+      "signals": [
+        "pattern_score",
+        "pattern_quality",
+        "pattern_confidence"
+      ]
+    },
+    {
+      "package_id": "bz_07_useful_god_priority",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "published contract",
+      "signals": [
+        "resolved_useful_god",
+        "decision_priority",
+        "resolution_confidence",
+        "resolution_reasoning",
+        "resolution_diagnostics"
+      ]
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independently deployable. Order: Useful God Priority → Override."
+}

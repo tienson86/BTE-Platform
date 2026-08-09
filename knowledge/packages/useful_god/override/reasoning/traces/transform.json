@@ -1,0 +1,47 @@
+{
+  "trace_id": "RT-UGO-TRANSFORM-001",
+  "chain_id": "RC-UGO-TRANSFORM-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "UGO-000035",
+    "UGO-000062",
+    "UGO-000063",
+    "UGO-000108"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/UGO-000035.json",
+    "evidence/bundles/UGO-000062.json",
+    "evidence/bundles/UGO-000063.json",
+    "evidence/bundles/UGO-000108.json"
+  ],
+  "consumed_published_inputs": [
+    "season_score",
+    "strength_score",
+    "temperature_score",
+    "pattern_score",
+    "pattern_quality",
+    "pattern_confidence",
+    "resolved_useful_god",
+    "decision_priority",
+    "resolution_confidence",
+    "resolution_reasoning",
+    "resolution_diagnostics"
+  ],
+  "decision_path": [
+    "RN-UGO-TRANSFORM-OBS-001",
+    "RN-UGO-TRANSFORM-EVD-001",
+    "RN-UGO-TRANSFORM-INF-001",
+    "RN-UGO-TRANSFORM-MID-001",
+    "RN-UGO-TRANSFORM-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-UGO-TRANSFORM-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-UGO-TRANSFORM-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}
