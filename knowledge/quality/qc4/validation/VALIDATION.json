@@ -1,0 +1,74 @@
+{
+  "schema_version": "2.0.0",
+  "sprint": "QC-4",
+  "profile": "PVP-RELEASE",
+  "validated_at": "2026-08-10T02:20:00Z",
+  "status": "pass_with_warnings",
+  "counts": {
+    "errors": 0,
+    "warnings": 3,
+    "info": 2
+  },
+  "checks": [
+    {
+      "id": "schema_validation",
+      "status": "pass"
+    },
+    {
+      "id": "metadata_validation",
+      "status": "pass"
+    },
+    {
+      "id": "dependency_validation",
+      "status": "pass"
+    },
+    {
+      "id": "reference_validation",
+      "status": "pass"
+    },
+    {
+      "id": "package_integrity",
+      "status": "pass"
+    },
+    {
+      "id": "checksum_validation",
+      "status": "pass"
+    },
+    {
+      "id": "compatibility_validation",
+      "status": "pass"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "VAL-QC4-ENGINE",
+      "severity": "warning",
+      "message": "engine_complete is false. RC does not claim commercial engine publication.",
+      "path": "reports/platform_readiness.json"
+    },
+    {
+      "code": "VAL-QC4-MANIFEST",
+      "severity": "warning",
+      "message": "AF-1 PACKAGE_INDEX is bz_01–bz_09. QC-1 ecosystem is bz_01–bz_23. Manifest frozen.",
+      "path": "knowledge/releases/v1.0/PACKAGE_INDEX.json"
+    },
+    {
+      "code": "VAL-QC4-GOLDEN",
+      "severity": "warning",
+      "message": "Golden Dataset remains not engine-wired. QC-2 snapshots are contract-canonical.",
+      "path": "knowledge/quality/qc2"
+    },
+    {
+      "code": "VAL-QC4-SCOPE",
+      "severity": "info",
+      "message": "Additive QC-4 only. QC-1, QC-2, QC-3, packages, engines, pipelines, APIs, Foundation, manifests unchanged.",
+      "path": "knowledge/quality/qc4"
+    },
+    {
+      "code": "VAL-QC4-DECISION",
+      "severity": "info",
+      "message": "Certification decision: Certified with Warnings.",
+      "path": "reports/certification.json"
+    }
+  ]
+}

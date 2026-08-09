@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-08-10T02:20:00Z",
+  "sprint": "QC-4",
+  "scale": {
+    "min": 0,
+    "max": 100
+  },
+  "qc_sprints": {
+    "QC-1": {
+      "overall": 97,
+      "status": "pass_with_warnings",
+      "errors": 0,
+      "packages": 23
+    },
+    "QC-2": {
+      "overall_excluding_engine": 98,
+      "engine_score": 0,
+      "status": "pass_with_warnings",
+      "errors": 0,
+      "scenarios": 13,
+      "snapshots": 65
+    },
+    "QC-3": {
+      "overall": 94,
+      "status": "pass_with_warnings",
+      "errors": 0,
+      "missing_contracts": 0
+    }
+  },
+  "metrics": {
+    "overall_platform_score": 96,
+    "architecture_score": 100,
+    "knowledge_score": 97,
+    "integration_score": 94,
+    "documentation_score": 100,
+    "governance_score": 100,
+    "release_score": 85
+  },
+  "derivation": {
+    "architecture_score": "AF-1 freeze + indexes + certificate present = 100",
+    "knowledge_score": "QC-1 quality_scorecard.overall",
+    "integration_score": "QC-3 overall_integration_score",
+    "documentation_score": "QC-1 dimensions.documentation",
+    "governance_score": "QC-1 dimensions.governance",
+    "release_score": "QC-1 dimensions.compatibility",
+    "overall_platform_score": "round mean of six platform dimensions",
+    "qc2_overall_excluding_engine": "round mean of QC-2 metrics except engines"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-08-10T02:20:00Z",
+  "sprint": "QC-4",
+  "scale": [
+    "Critical",
+    "High",
+    "Medium",
+    "Low",
+    "Informational"
+  ],
+  "findings": [
+    {
+      "risk_id": "RSK-QC4-001",
+      "severity": "Medium",
+      "component": "engines",
+      "source": "RSK-QC1-003",
+      "description": "Sealed bz_16–bz_23 are not imported by engines. Interpretation/report still use legacy 07_sentence_library trees.",
+      "recommendation": "Add read-only adapters in an engine sprint. Do not mutate sealed packages.",
+      "status": "open",
+      "release_impact": "Blocks engine_complete and commercial publication. Does not invalidate architecture freeze or knowledge seals."
+    },
+    {
+      "risk_id": "RSK-QC4-002",
+      "severity": "Medium",
+      "component": "golden_dataset",
+      "source": "RSK-QC1-002 / QC-2 VAL-QC2-ENGINE",
+      "description": "PVP VAL-GOLDEN remains not_applicable. QC-2 snapshots are knowledge-contract canonical, not engine replay.",
+      "recommendation": "Wire Golden Dataset when engines consume sealed V2 packages. Keep QC-2 snapshots immutable.",
+      "status": "open",
+      "release_impact": "Runtime golden gate fails. Release Candidate may ship as knowledge/architecture RC only."
+    },
+    {
+      "risk_id": "RSK-QC4-003",
+      "severity": "Medium",
+      "component": "release_manifest",
+      "source": "AF-1 PACKAGE_INDEX vs QC-1 ecosystem",
+      "description": "AF-1 PACKAGE_INDEX lists 9 packages (bz_01–bz_09). QC-1 ecosystem inventory lists 23 released packages (bz_01–bz_23). Release manifests are frozen and were not updated.",
+      "recommendation": "Record bz_10–bz_23 in a later manifest SemVer after RM policy. Do not edit v1.0 indexes in QC-4.",
+      "status": "open",
+      "release_impact": "v1.0 architecture certificate remains valid for AF-1 scope. Knowledge RC scope is wider than the frozen package index."
+    },
+    {
+      "risk_id": "RSK-QC4-004",
+      "severity": "Medium",
+      "component": "contracts",
+      "source": "RSK-QC1-005",
+      "description": "bz_01–bz_04 lack assets/published_outputs.json. Downstream names implicit scores via DEPENDENCIES signals.",
+      "recommendation": "Backfill publish assets only via new SemVer. Do not mutate sealed 1.0.0/1.2.0.",
+      "status": "open",
+      "release_impact": "Contract coverage warning (QC-3 contract 92). Required handoff contracts still published by later analytical stages."
+    },
+    {
+      "risk_id": "RSK-QC4-005",
+      "severity": "Low",
+      "component": "checksum",
+      "source": "RSK-QC1-001",
+      "description": "All 23 packages store 64-hex checksums. IK/PK KD-3 match. Wave 1 stored digests unverified by KD-3 two-pass: 15.",
+      "recommendation": "Keep checksums immutable. Do not regenerate Wave 1 digests.",
+      "status": "accepted",
+      "release_impact": "Checksum gate passes as stored-digest present. Byte-verify limited to bz_16–bz_23."
+    },
+    {
+      "risk_id": "RSK-QC4-006",
+      "severity": "Low",
+      "component": "bz_01_strength_core",
+      "source": "RSK-QC1-006",
+      "description": "bz_01 package_version is 1.2.0; AF-1 peers are 1.0.0. Schema/knowledge/compatibility remain 2.0.0/1.0.0/1.0.0.",
+      "recommendation": "Record as known SemVer skew. Do not rebase bz_01 in QC-4.",
+      "status": "accepted",
+      "release_impact": "Version matrix already records 1.2.0. No compatibility break."
+    },
+    {
+      "risk_id": "RSK-QC4-007",
+      "severity": "Low",
+      "component": "bz_09_luck_foundation",
+      "source": "RSK-QC1-007",
+      "description": "Luck foundation has empty analytical counts by design of the foundation pack.",
+      "recommendation": "Ship luck analytical rules as a new package. Do not convert foundation in place.",
+      "status": "open",
+      "release_impact": "AX-4 pipeline remains released; luck analytical depth is a future package."
+    },
+    {
+      "risk_id": "RSK-QC4-008",
+      "severity": "Low",
+      "component": "taxonomy",
+      "source": "RSK-QC1-009",
+      "description": "Primary domain_id coverage is 13 taxonomy domains. Calendar and Shen Sha packages are absent.",
+      "recommendation": "Open new packages for missing domains.",
+      "status": "open",
+      "release_impact": "Knowledge coverage 88 in QC-1. Does not block v1.x RC for sealed domains."
+    },
+    {
+      "risk_id": "RSK-QC4-009",
+      "severity": "Informational",
+      "component": "presentation_knowledge",
+      "source": "RSK-QC1-008",
+      "description": "bz_20–bz_23 store identifier graphs only; evidence catalogs empty by design.",
+      "recommendation": "Do not invent analytical evidence for presentation packs.",
+      "status": "accepted",
+      "release_impact": "None. Presentation remains non-rendering."
+    },
+    {
+      "risk_id": "RSK-QC4-010",
+      "severity": "Informational",
+      "component": "quality_sprints",
+      "source": "QC-2 / QC-3",
+      "description": "QC-2 and QC-3 did not execute engines. Determinism is snapshot/orchestration reload.",
+      "recommendation": "Keep engine replay out of QC-4. Optional later runtime golden.",
+      "status": "accepted",
+      "release_impact": "Certification is evidence-of-record, not runtime proof."
+    },
+    {
+      "risk_id": "RSK-QC4-011",
+      "severity": "Informational",
+      "component": "report_pipeline",
+      "source": "QC-3 / AF-1",
+      "description": "RX-1 publisher, delivery, and print remain disabled. No filesystem persist.",
+      "recommendation": "Keep disabled until a publisher sprint owns the surface.",
+      "status": "accepted",
+      "release_impact": "In-memory report artifacts only. Matches AF-1 freeze."
+    },
+    {
+      "risk_id": "RSK-QC4-012",
+      "severity": "Informational",
+      "component": "architecture_freeze",
+      "source": "BTE-ARCH-CERT-1.0.0",
+      "description": "Architecture freeze certificate BTE-ARCH-CERT-1.0.0 remains in force. QC-4 does not replace it.",
+      "recommendation": "Do not reuse the architecture identity for a later major line.",
+      "status": "accepted",
+      "release_impact": "QC-4 RC is additive certification on top of AF-1, not a new architecture version."
+    }
+  ],
+  "counts": {
+    "Critical": 0,
+    "High": 0,
+    "Medium": 4,
+    "Low": 4,
+    "Informational": 4
+  },
+  "open_medium": 4,
+  "open_critical_high": 0,
+  "qc1_risk_counts": {
+    "Critical": 0,
+    "High": 0,
+    "Medium": 4,
+    "Low": 3,
+    "Informational": 4
+  }
+}

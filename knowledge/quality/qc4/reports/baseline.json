@@ -1,0 +1,254 @@
+{
+  "generated_at": "2026-08-10T02:20:00Z",
+  "sprint": "QC-4",
+  "baseline_id": "BSL-QC4-1.0.0",
+  "rc_id": "BTE-RC-1.0.0",
+  "platform_version": "1.0.0",
+  "foundation_version": "1.0.0",
+  "knowledge_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "knowledge_ecosystem_package_count": 23,
+  "inputs": {
+    "qc1": "knowledge/quality/qc1",
+    "qc2": "knowledge/quality/qc2",
+    "qc3": "knowledge/quality/qc3",
+    "foundation": "knowledge/docs/platform + Foundation v1.0.0 freeze",
+    "release_manifests": "knowledge/releases/v1.0",
+    "pipeline_index": "PIPELINE_INDEX.json",
+    "package_index": "PACKAGE_INDEX.json",
+    "engine_index": "ENGINE_INDEX.json",
+    "contract_index": "CONTRACT_INDEX.json"
+  },
+  "scope": {
+    "knowledge": true,
+    "pipelines": true,
+    "contracts": true,
+    "engines": true,
+    "interpretation": true,
+    "presentation": true,
+    "documentation": true,
+    "validation": true,
+    "testing": true,
+    "quality": true,
+    "governance": true,
+    "compatibility": true,
+    "versioning": true,
+    "checksums": true,
+    "release_readiness": true
+  },
+  "pipelines": [
+    {
+      "sprint_id": "AX-2",
+      "pipeline_id": "canonical_analysis_pipeline",
+      "version": "2.0.0",
+      "engine": "analysis_engine",
+      "active_stage_count": 8,
+      "inactive_stage_count": 3,
+      "index_match": true,
+      "status": "released"
+    },
+    {
+      "sprint_id": "AX-3",
+      "pipeline_id": "canonical_decision_pipeline",
+      "version": "1.0.0",
+      "engine": "decision_engine",
+      "active_stage_count": 3,
+      "inactive_stage_count": 4,
+      "index_match": true,
+      "status": "released"
+    },
+    {
+      "sprint_id": "AX-4",
+      "pipeline_id": "canonical_luck_pipeline",
+      "version": "1.0.0",
+      "engine": "luck_engine",
+      "active_stage_count": 3,
+      "inactive_stage_count": 2,
+      "index_match": true,
+      "status": "released"
+    },
+    {
+      "sprint_id": "IX-1",
+      "pipeline_id": "canonical_interpretation_pipeline",
+      "version": "1.0.0",
+      "engine": "interpretation_engine",
+      "active_stage_count": 3,
+      "inactive_stage_count": 2,
+      "index_match": true,
+      "status": "released"
+    },
+    {
+      "sprint_id": "RX-1",
+      "pipeline_id": "canonical_report_pipeline",
+      "version": "1.0.0",
+      "engine": "report_engine",
+      "active_stage_count": 3,
+      "inactive_stage_count": 3,
+      "index_match": true,
+      "status": "released"
+    }
+  ],
+  "af1_packages": [
+    {
+      "package_id": "bz_01_strength_core",
+      "package_type": "analytical",
+      "package_version": "1.2.0",
+      "status": "released",
+      "path": "knowledge/packages/strength/core",
+      "pipeline": "canonical_analysis_pipeline",
+      "stage": "strength"
+    },
+    {
+      "package_id": "bz_02_seasonal_core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/seasonal/core",
+      "pipeline": "canonical_analysis_pipeline",
+      "stage": "seasonal"
+    },
+    {
+      "package_id": "bz_03_temperature_core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/temperature/core",
+      "pipeline": "canonical_analysis_pipeline",
+      "stage": "temperature"
+    },
+    {
+      "package_id": "bz_04_pattern_core",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/pattern/core",
+      "pipeline": "canonical_analysis_pipeline",
+      "stage": "pattern"
+    },
+    {
+      "package_id": "bz_05_pattern_evaluation",
+      "package_type": "analytical",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/pattern/evaluation",
+      "pipeline": "canonical_analysis_pipeline",
+      "stage": "pattern_evaluation"
+    },
+    {
+      "package_id": "bz_06_useful_god_foundation",
+      "package_type": "decision",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/useful_god/foundation",
+      "pipeline": "canonical_decision_pipeline",
+      "stage": "useful_god_foundation"
+    },
+    {
+      "package_id": "bz_07_useful_god_priority",
+      "package_type": "decision",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/useful_god/priority",
+      "pipeline": "canonical_decision_pipeline",
+      "stage": "useful_god_priority"
+    },
+    {
+      "package_id": "bz_08_useful_god_override",
+      "package_type": "decision",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/useful_god/override",
+      "pipeline": "canonical_decision_pipeline",
+      "stage": "useful_god_override"
+    },
+    {
+      "package_id": "bz_09_luck_foundation",
+      "package_type": "reference",
+      "package_version": "1.0.0",
+      "status": "released",
+      "path": "knowledge/packages/luck/foundation",
+      "pipeline": "canonical_luck_pipeline",
+      "stage": "timeline"
+    }
+  ],
+  "ecosystem_package_ids": [
+    "bz_01_strength_core",
+    "bz_02_seasonal_core",
+    "bz_03_temperature_core",
+    "bz_04_pattern_core",
+    "bz_05_pattern_evaluation",
+    "bz_06_useful_god_foundation",
+    "bz_07_useful_god_priority",
+    "bz_08_useful_god_override",
+    "bz_09_luck_foundation",
+    "bz_10_follow_pattern_core",
+    "bz_11_transformation_core",
+    "bz_12_combination_clash_core",
+    "bz_13_ten_gods_advanced",
+    "bz_14_twelve_growth_advanced",
+    "bz_15_hidden_stems_advanced",
+    "bz_16_sentence_library_core",
+    "bz_17_explanation_library_core",
+    "bz_18_narrative_library_core",
+    "bz_19_composition_library_core",
+    "bz_20_theme_library_core",
+    "bz_21_layout_library_core",
+    "bz_22_widget_library_core",
+    "bz_23_report_presets_core"
+  ],
+  "contracts": [
+    {
+      "contract_id": "analysis_result_contract",
+      "version": "2.0.0"
+    },
+    {
+      "contract_id": "decision_result_contract",
+      "version": "1.0.0"
+    },
+    {
+      "contract_id": "timeline_contract",
+      "version": "1.0.0"
+    },
+    {
+      "contract_id": "luck_pipeline_contract",
+      "version": "1.0.0"
+    },
+    {
+      "contract_id": "interpretation_foundation_contract",
+      "version": "1.0.0"
+    },
+    {
+      "contract_id": "interpretation_pipeline_contract",
+      "version": "1.0.0"
+    },
+    {
+      "contract_id": "report_foundation_contract",
+      "version": "1.0.0"
+    },
+    {
+      "contract_id": "report_pipeline_contract",
+      "version": "1.0.0"
+    }
+  ],
+  "qc2": {
+    "scenarios": 13,
+    "snapshots": 65,
+    "engines_replayed": 0
+  },
+  "qc3": {
+    "pipeline_count": 5,
+    "missing_contracts": 0,
+    "engine_executed": false
+  },
+  "mutated": {
+    "packages": false,
+    "engines": false,
+    "pipelines": false,
+    "apis": false,
+    "foundation": false,
+    "qc1": false,
+    "qc2": false,
+    "qc3": false,
+    "release_manifests": false
+  }
+}

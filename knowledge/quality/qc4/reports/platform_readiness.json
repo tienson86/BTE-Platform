@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-08-10T02:20:00Z",
+  "sprint": "QC-4",
+  "rc_id": "BTE-RC-1.0.0",
+  "architecture_ready": true,
+  "knowledge_ready": true,
+  "integration_ready": true,
+  "engine_complete": false,
+  "commercial_publication_ready": false,
+  "release_candidate_ready": true,
+  "lts_eligible": true,
+  "gates": [
+    {
+      "gate": "architecture_freeze_intact",
+      "area": "Governance",
+      "pass": true,
+      "evidence": "BTE-ARCH-CERT-1.0.0 + platform freeze docs"
+    },
+    {
+      "gate": "qc1_zero_errors",
+      "area": "Quality",
+      "pass": true,
+      "evidence": "knowledge/quality/qc1/validation/VALIDATION.json"
+    },
+    {
+      "gate": "qc2_zero_errors",
+      "area": "Testing",
+      "pass": true,
+      "evidence": "knowledge/quality/qc2/validation/VALIDATION.json"
+    },
+    {
+      "gate": "qc3_zero_errors",
+      "area": "Integration",
+      "pass": true,
+      "evidence": "knowledge/quality/qc3/validation/VALIDATION.json"
+    },
+    {
+      "gate": "pipeline_index_consistent",
+      "area": "Pipelines",
+      "pass": true,
+      "evidence": "QC-3 pipeline_status vs PIPELINE_INDEX"
+    },
+    {
+      "gate": "contract_checksums_consistent",
+      "area": "Checksums",
+      "pass": true,
+      "evidence": "CONTRACT_INDEX vs COMPONENT_CHECKSUMS"
+    },
+    {
+      "gate": "no_critical_high_open",
+      "area": "Risk",
+      "pass": true,
+      "evidence": "reports/risk_baseline.json"
+    },
+    {
+      "gate": "engine_complete",
+      "area": "Engines",
+      "pass": false,
+      "evidence": "QC-1 release_readiness.engine_complete"
+    },
+    {
+      "gate": "golden_dataset_wired",
+      "area": "Validation",
+      "pass": false,
+      "evidence": "QC-1 golden_dataset_wired gate / QC-2 engines_replayed=0"
+    },
+    {
+      "gate": "af1_package_index_covers_ecosystem",
+      "area": "Release",
+      "pass": false,
+      "evidence": "PACKAGE_INDEX count vs QC-1 inventory"
+    },
+    {
+      "gate": "documentation_complete",
+      "area": "Documentation",
+      "pass": true,
+      "evidence": "knowledge/docs/platform freeze set"
+    },
+    {
+      "gate": "no_runtime_changes",
+      "area": "Release",
+      "pass": true,
+      "evidence": "RELEASE_MANIFEST.runtime_changes"
+    }
+  ],
+  "passed": 9,
+  "failed": 3,
+  "missing_platform_docs": []
+}
